@@ -97,6 +97,7 @@
   .section-heading p { margin: 0.3rem 0 0; font-size: 0.8rem; color: var(--ivory-dim); }
   .section-heading.crypto h2 { color: var(--gold-bright); }
   .section-heading.budget h2 { color: var(--cool-bright); }
+  .section-heading.learn h2 { color: var(--gold-bright); }
 
   .hub-grid {
     display: grid;
@@ -243,6 +244,56 @@
 
   .full-width { grid-column: 1 / -1; }
 
+  /* ---------- learn panel ---------- */
+  .learn-intro { margin: 0 0 1rem; font-size: 0.8rem; color: var(--ivory-dim); }
+  .learn-category { margin-bottom: 1.2rem; }
+  .learn-category:last-child { margin-bottom: 0; }
+  .learn-category h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    font-weight: normal;
+  }
+  .learn-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.6rem;
+  }
+  .learn-card {
+    display: block;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    text-decoration: none;
+    color: var(--ivory);
+  }
+  .learn-card:hover { border-color: rgba(212, 162, 76, 0.6); }
+  .learn-card-title { display: block; font-weight: bold; color: var(--gold-bright); font-size: 0.82rem; }
+  .learn-card-desc { display: block; margin-top: 0.25rem; font-size: 0.72rem; color: var(--ivory-dim); line-height: 1.4; }
+  .learn-card-url { display: block; margin-top: 0.3rem; font-size: 0.68rem; color: var(--gold); }
+
+  /* ---------- my questions ---------- */
+  .checkbox-row { flex-direction: row; align-items: center; gap: 0.4rem; font-size: 0.72rem; color: var(--ivory-dim); }
+  .checkbox-row input[type="checkbox"] { width: auto; }
+  .question-actions { display: flex; gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
+  .answer-editor { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.3rem; }
+
+  /* ---------- budget charts ---------- */
+  .chart-block { margin-bottom: 1.1rem; }
+  .chart-block h3 {
+    margin: 0 0 0.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cool-bright);
+    font-weight: normal;
+  }
+  .chart-wrap { background: rgba(0, 0, 0, 0.18); border-radius: 8px; padding: 0.6rem; }
+  .chart-wrap svg { display: block; width: 100%; height: auto; }
+
   footer {
     max-width: 1100px;
     margin: 2rem auto 0;
@@ -266,8 +317,90 @@
     </p>
   </header>
 
+  <div class="section-heading learn">
+    <h2>Learn: Financial Literacy First</h2>
+    <p>Start here — neutral resources to learn from, and a place to track your own questions as they come up. Not financial advice.</p>
+  </div>
+
+  <div class="hub-grid">
+
+    <section class="panel full-width" id="learnPanel">
+      <h2>Learn</h2>
+      <p class="learn-intro">A curated set of well-known, neutral resources. These are starting points, not endorsements of any one source — cross-check anything important.</p>
+
+      <div class="learn-category">
+        <h3>Investing &amp; Stocks Basics</h3>
+        <div class="learn-links">
+          <a class="learn-card" href="https://www.investopedia.com" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">Investopedia</span>
+            <span class="learn-card-desc">Plain-language definitions and explainers for almost any investing or finance term you run into.</span>
+            <span class="learn-card-url">investopedia.com</span>
+          </a>
+          <a class="learn-card" href="https://www.khanacademy.org/college-careers-more/personal-finance" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">Khan Academy — Personal Finance</span>
+            <span class="learn-card-desc">A free, structured video course covering investing, credit, taxes, and more from the ground up.</span>
+            <span class="learn-card-url">khanacademy.org</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="learn-category">
+        <h3>Staying Safe / Avoiding Scams</h3>
+        <div class="learn-links">
+          <a class="learn-card" href="https://www.investor.gov" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">Investor.gov</span>
+            <span class="learn-card-desc">The SEC's own investor-education site — how to spot fraud and check whether someone is a licensed advisor.</span>
+            <span class="learn-card-url">investor.gov</span>
+          </a>
+          <a class="learn-card" href="https://www.consumerfinance.gov" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">Consumer Financial Protection Bureau</span>
+            <span class="learn-card-desc">Guides on banking, credit, and loans, plus where to file a complaint if something goes wrong.</span>
+            <span class="learn-card-url">consumerfinance.gov</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="learn-category">
+        <h3>Saving, Credit &amp; Banking Basics</h3>
+        <div class="learn-links">
+          <a class="learn-card" href="https://www.nerdwallet.com" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">NerdWallet — Learning Guides</span>
+            <span class="learn-card-desc">Comparisons and how-tos for savings accounts, credit cards, and building credit history.</span>
+            <span class="learn-card-url">nerdwallet.com</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="learn-category">
+        <h3>Long-Term / Retirement Investing 101</h3>
+        <div class="learn-links">
+          <a class="learn-card" href="https://www.bogleheads.org/wiki/Main_Page" target="_blank" rel="noopener noreferrer">
+            <span class="learn-card-title">Bogleheads Wiki</span>
+            <span class="learn-card-desc">A well-regarded, non-commercial community reference focused on simple, low-cost index-fund investing.</span>
+            <span class="learn-card-url">bogleheads.org/wiki</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel full-width" id="questionsPanel">
+      <h2>My Questions</h2>
+      <form id="questionForm">
+        <input type="text" id="questionText" placeholder="e.g. How do I open a brokerage account here?" required>
+        <textarea id="questionAnswer" rows="2" placeholder="Answer / notes, if you already have them..."></textarea>
+        <label class="checkbox-row">
+          <input type="checkbox" id="questionResolved"> Already resolved
+        </label>
+        <button type="submit">Log Question</button>
+      </form>
+      <div class="filter-pills" id="questionFilters"></div>
+      <ul class="item-list" id="questionsList"></ul>
+    </section>
+
+  </div>
+
   <div class="section-heading crypto">
-    <h2>Solana Meme Coin Learning Space</h2>
+    <h2>Speculative Watching (Not Investing Advice)</h2>
     <p>Everything below is entered by hand — a place to watch, note, and learn, not a trading tool.</p>
   </div>
 
@@ -357,6 +490,15 @@
         <div><span class="stat-label">Net Saved</span><span class="stat-value" id="netSaved">$0</span></div>
       </div>
 
+      <div class="chart-block">
+        <h3>Income vs. Expenses by Month</h3>
+        <div class="chart-wrap" id="chartIncomeExpense"></div>
+      </div>
+      <div class="chart-block">
+        <h3>Net Savings Trend</h3>
+        <div class="chart-wrap" id="chartSavingsTrend"></div>
+      </div>
+
       <form id="txnForm">
         <div class="form-row">
           <select id="txnType">
@@ -418,6 +560,7 @@
           signals: Array.isArray(parsed.signals) ? parsed.signals : [],
           whales: Array.isArray(parsed.whales) ? parsed.whales : [],
           learningNotes: Array.isArray(parsed.learningNotes) ? parsed.learningNotes : [],
+          questions: Array.isArray(parsed.questions) ? parsed.questions : [],
           budget: {
             goalName: (parsed.budget && parsed.budget.goalName) || "",
             goalTarget: (parsed.budget && Number(parsed.budget.goalTarget)) || 0,
@@ -426,7 +569,7 @@
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { watchlist: [], signals: [], whales: [], learningNotes: [], budget: { goalName: "", goalTarget: 0, transactions: [] } };
+    return { watchlist: [], signals: [], whales: [], learningNotes: [], questions: [], budget: { goalName: "", goalTarget: 0, transactions: [] } };
   }
   const state = loadState();
   function saveState() {
@@ -640,7 +783,208 @@
     renderLearningNotes();
   });
 
+  // ---------- my questions ----------
+  let questionFilter = "all"; // all | open | resolved
+  function renderQuestionFilters() {
+    const wrap = document.getElementById("questionFilters");
+    wrap.innerHTML = "";
+    const makePill = (label, value) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "filter-pill" + (questionFilter === value ? " active" : "");
+      b.textContent = label;
+      b.addEventListener("click", () => { questionFilter = value; renderQuestionFilters(); renderQuestions(); });
+      return b;
+    };
+    wrap.appendChild(makePill("All", "all"));
+    wrap.appendChild(makePill("Open", "open"));
+    wrap.appendChild(makePill("Resolved", "resolved"));
+  }
+  function renderQuestions() {
+    const list = document.getElementById("questionsList");
+    list.innerHTML = "";
+    const items = state.questions.filter((q) => {
+      if (questionFilter === "open") return !q.resolved;
+      if (questionFilter === "resolved") return !!q.resolved;
+      return true;
+    });
+    if (!items.length) { list.innerHTML = '<li class="empty-note">No questions logged yet.</li>'; return; }
+    sortNewestFirst(items).forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const title = document.createElement("div");
+      title.className = "item-title";
+      title.textContent = item.question;
+      const meta = document.createElement("div");
+      meta.className = "item-meta";
+      meta.textContent = item.date + " — " + (item.resolved ? "Resolved" : "Open");
+      li.appendChild(title);
+      li.appendChild(meta);
+      if (item.answer) {
+        const notes = document.createElement("div");
+        notes.className = "item-notes";
+        notes.textContent = item.answer;
+        li.appendChild(notes);
+      }
+
+      const actions = document.createElement("div");
+      actions.className = "question-actions";
+
+      const toggleBtn = document.createElement("button");
+      toggleBtn.type = "button";
+      toggleBtn.textContent = item.resolved ? "Mark Open" : "Mark Resolved";
+      toggleBtn.addEventListener("click", () => {
+        item.resolved = !item.resolved;
+        saveState();
+        renderQuestions();
+      });
+      actions.appendChild(toggleBtn);
+
+      if (!item.answer) {
+        const answerBtn = document.createElement("button");
+        answerBtn.type = "button";
+        answerBtn.textContent = "Add Answer";
+        answerBtn.addEventListener("click", () => {
+          const editor = document.createElement("div");
+          editor.className = "answer-editor";
+          const ta = document.createElement("textarea");
+          ta.rows = 2;
+          ta.placeholder = "Paste what you found out...";
+          const saveBtn = document.createElement("button");
+          saveBtn.type = "button";
+          saveBtn.textContent = "Save Answer";
+          saveBtn.addEventListener("click", () => {
+            item.answer = ta.value.trim();
+            if (item.answer) item.resolved = true;
+            saveState();
+            renderQuestions();
+          });
+          editor.appendChild(ta);
+          editor.appendChild(saveBtn);
+          answerBtn.replaceWith(editor);
+        });
+        actions.appendChild(answerBtn);
+      }
+
+      li.appendChild(actions);
+      li.appendChild(makeDelBtn(() => {
+        state.questions = state.questions.filter((x) => x.id !== item.id);
+        saveState();
+        renderQuestions();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("questionForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const question = document.getElementById("questionText").value.trim();
+    const answer = document.getElementById("questionAnswer").value.trim();
+    const resolved = document.getElementById("questionResolved").checked;
+    if (!question) return;
+    state.questions.push({ id: genId(), question, answer, resolved, date: todayISODate() });
+    saveState();
+    e.target.reset();
+    renderQuestionFilters();
+    renderQuestions();
+  });
+
   // ---------- budget & savings ----------
+  function monthKey(dateStr) {
+    return (dateStr || "").slice(0, 7); // YYYY-MM
+  }
+  function buildMonthlyTotals() {
+    const map = {};
+    state.budget.transactions.forEach((t) => {
+      const key = monthKey(t.date);
+      if (!key) return;
+      if (!map[key]) map[key] = { income: 0, expense: 0 };
+      if (t.type === "income") map[key].income += t.amount;
+      else map[key].expense += t.amount;
+    });
+    return Object.keys(map).sort().map((k) => ({ month: k, income: map[k].income, expense: map[k].expense }));
+  }
+  function buildCumulativeSeries() {
+    const sorted = state.budget.transactions
+      .slice()
+      .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+    let running = 0;
+    return sorted.map((t) => {
+      running += t.type === "income" ? t.amount : -t.amount;
+      return { date: t.date, value: running };
+    });
+  }
+  function renderIncomeExpenseChart() {
+    const container = document.getElementById("chartIncomeExpense");
+    const data = buildMonthlyTotals();
+    if (data.length < 2) {
+      container.innerHTML = '<p class="empty-note">Add a few transactions across different months to see this.</p>';
+      return;
+    }
+    const width = 480, height = 180;
+    const padding = { top: 10, right: 10, bottom: 24, left: 10 };
+    const chartW = width - padding.left - padding.right;
+    const chartH = height - padding.top - padding.bottom;
+    const maxVal = Math.max(1, ...data.map((d) => Math.max(d.income, d.expense)));
+    const groupW = chartW / data.length;
+    const barW = Math.min(18, groupW / 3);
+
+    let bars = "";
+    let labels = "";
+    data.forEach((d, i) => {
+      const groupX = padding.left + i * groupW + groupW / 2;
+      const incomeH = (d.income / maxVal) * chartH;
+      const expenseH = (d.expense / maxVal) * chartH;
+      const incomeX = groupX - barW - 2;
+      const expenseX = groupX + 2;
+      bars += '<rect x="' + incomeX.toFixed(1) + '" y="' + (padding.top + chartH - incomeH).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + incomeH.toFixed(1) + '" rx="2" style="fill:var(--income)"></rect>';
+      bars += '<rect x="' + expenseX.toFixed(1) + '" y="' + (padding.top + chartH - expenseH).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + expenseH.toFixed(1) + '" rx="2" style="fill:var(--expense)"></rect>';
+      labels += '<text x="' + groupX.toFixed(1) + '" y="' + (height - 6) + '" text-anchor="middle" font-size="9" style="fill:var(--ivory-dim)">' + d.month + '</text>';
+    });
+
+    container.innerHTML =
+      '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Income vs expenses by month">' +
+      '<line x1="' + padding.left + '" y1="' + (padding.top + chartH) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + chartH) + '" stroke="rgba(244,232,208,0.25)"></line>' +
+      bars + labels +
+      '</svg>';
+  }
+  function renderSavingsTrendChart() {
+    const container = document.getElementById("chartSavingsTrend");
+    const series = buildCumulativeSeries();
+    if (series.length < 2) {
+      container.innerHTML = '<p class="empty-note">Add a few transactions to see this.</p>';
+      return;
+    }
+    const width = 480, height = 160;
+    const padding = { top: 16, right: 12, bottom: 12, left: 12 };
+    const chartW = width - padding.left - padding.right;
+    const chartH = height - padding.top - padding.bottom;
+
+    const values = series.map((p) => p.value);
+    const maxVal = Math.max(0, ...values);
+    const minVal = Math.min(0, ...values);
+    const range = (maxVal - minVal) || 1;
+
+    const stepX = chartW / (series.length - 1);
+    const points = series.map((p, i) => [
+      padding.left + i * stepX,
+      padding.top + chartH - ((p.value - minVal) / range) * chartH,
+    ]);
+    const zeroY = padding.top + chartH - ((0 - minVal) / range) * chartH;
+
+    const linePath = points.map((pt, i) => (i === 0 ? "M" : "L") + pt[0].toFixed(1) + "," + pt[1].toFixed(1)).join(" ");
+    const areaPath = linePath +
+      " L" + points[points.length - 1][0].toFixed(1) + "," + zeroY.toFixed(1) +
+      " L" + points[0][0].toFixed(1) + "," + zeroY.toFixed(1) + " Z";
+
+    container.innerHTML =
+      '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Net savings trend over time">' +
+      '<line x1="' + padding.left + '" y1="' + zeroY.toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + zeroY.toFixed(1) + '" stroke="rgba(244,232,208,0.25)"></line>' +
+      '<path d="' + areaPath + '" style="fill:var(--cool-bright); opacity:0.18; stroke:none;"></path>' +
+      '<path d="' + linePath + '" style="fill:none; stroke:var(--cool-bright); stroke-width:2;"></path>' +
+      '<text x="' + padding.left + '" y="12" font-size="9" style="fill:var(--ivory-dim)">' + formatMoney(maxVal) + '</text>' +
+      '<text x="' + padding.left + '" y="' + (height - 4) + '" font-size="9" style="fill:var(--ivory-dim)">' + formatMoney(minVal) + '</text>' +
+      '</svg>';
+  }
   function renderBudget() {
     const totalIncome = state.budget.transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
     const totalExpenses = state.budget.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
@@ -660,6 +1004,9 @@
 
     document.getElementById("goalName").value = state.budget.goalName;
     document.getElementById("goalTarget").value = state.budget.goalTarget || "";
+
+    renderIncomeExpenseChart();
+    renderSavingsTrendChart();
 
     const list = document.getElementById("txnList");
     list.innerHTML = "";
@@ -718,6 +1065,8 @@
   renderWhales();
   renderNoteFilters();
   renderLearningNotes();
+  renderQuestionFilters();
+  renderQuestions();
   renderBudget();
 })();
 </script>

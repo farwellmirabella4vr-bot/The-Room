@@ -1,0 +1,61 @@
+{
+  "beats": {
+    "6": [
+      { "title": "Late Night Drift", "url": "audio/jun-01.mp3" },
+      { "title": "Slow Burn", "url": "audio/jun-02.mp3" }
+    ],
+    "7": [
+      { "title": "Coastal Static", "url": "audio/jul-01.mp3" }
+    ]
+  },
+  "entries": {
+    "6": {
+      "1": {
+        "title": "First entry",
+        "media": [
+          { "type": "image", "url": "media/jun-01-a.jpg" }
+        ],
+        "did": "Set up the camera rig and filmed the first clip — mostly just testing the workflow end to end before the year really starts.",
+        "watched": [
+          { "title": "A documentary on long-term projects", "url": "" }
+        ],
+        "spoke": [
+          { "lang": "Spanish", "note": "Ran through today's vocab list out loud, twice." }
+        ],
+        "listened": [
+          { "title": "A podcast episode about starting things", "url": "" }
+        ],
+        "learned": "Placeholder — replace this from editor.html. This section should read like a short story: a little mystery at the start, an \"aha\" reveal at the end, 3-5 sentences."
+      },
+      "15": {
+        "title": "It's like ( ) already knew?",
+        "media": [
+          { "type": "image", "url": "media/jun-15-a.jpg" },
+          { "type": "video", "url": "media/jun-15-b.mp4" }
+        ],
+        "did": "Ran errands, dealt with the car, kept the streak going on filming even on a rough day.",
+        "watched": [],
+        "spoke": [
+          { "lang": "Farsi", "note": "Practiced a few new phrases with a native speaker." }
+        ],
+        "listened": [],
+        "learned": "Three weeks ago, for no clear reason, I started stacking money — no plan, just a pull toward somewhere far off, maybe three clicks east of Russia, maybe Spain next year, I couldn't even tell you why. Then my brakes started grinding, that metal-cage sound that makes your stomach drop before anyone tells you the damage. And the stack I'd built for nothing in particular covered it exactly, like it was never really for nothing. ( ) must've already knew. Al-hamdulillah."
+      }
+    },
+    "7": {
+      "4": {
+        "title": "Another day, another clip",
+        "media": [
+          { "type": "image", "url": "media/jul-04-a.jpg" }
+        ],
+        "did": "Quiet day. Filmed a short clip in the evening.",
+        "watched": [],
+        "spoke": [],
+        "listened": [
+          { "title": "New beat pool for July", "url": "" }
+        ],
+        "learned": ""
+      }
+    }
+  }
+}

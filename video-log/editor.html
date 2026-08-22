@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Log Editor</title>
+<!--
+  No-code entry form for the Video Log Calendar, meant to be used from a
+  phone. Everything typed here is saved to this browser's localStorage as
+  you go (nothing is lost if you close the tab). When ready, use Export
+  to download data.json and replace the hosted copy next to index.html.
+  Import lets you load an existing data.json back in — e.g. after
+  switching devices or clearing browser storage.
+
+  Visual system matches the rest of the site (room.html / home.html):
+  same mosque wall palette, wall-pattern panel texture, Segoe UI stack,
+  with this room's own teal accent (from its home.html card) on a couple
+  of signature elements (Add-row buttons, the status toast).
+-->
+<style>
+
+  :root {
+    --wall:        #3a1f2e;
+    --wall-dark:   #241220;
+    --wall-light:  #4d2a3c;
+    --gold:        #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory:       #f4e8d0;
+    --ivory-dim:   #cbb999;
+    --warn-bg:     #6b2a2a;
+    --warn-text:   #ffc9c9;
+    --teal:        #3fb6a8;
+    --teal-bright: #6cc9ba;
+
+    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  [hidden] { display: none !important; }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ivory);
+    background: linear-gradient(to bottom, #241031 0%, #4a1f47 30%, #8c3559 58%, #d9773f 80%, #7a3220 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+  h1, h2 { margin: 0; }
+
+  .page { max-width: 560px; margin: 0 auto; padding: 0 1rem; }
+
+  header.top {
+    text-align: center;
+    padding: 2rem 0 1rem;
+  }
+  .back-link {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--ivory-dim);
+    text-decoration: none;
+    margin-bottom: 0.8rem;
+  }
+  .back-link:hover { color: var(--gold-bright); }
+  .page-title {
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: var(--gold-bright);
+    text-shadow: 0 0 16px rgba(242, 200, 121, 0.45);
+  }
+
+  .panel {
+    background:
+      var(--wall-pattern),
+      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 64px 64px, auto;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
+    padding: 1.2rem 1.3rem 1.4rem;
+    margin-bottom: 1.3rem;
+  }
+  .panel h2 {
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin-bottom: 0.8rem;
+  }
+  .hint {
+    font-size: 0.72rem;
+    color: var(--ivory-dim);
+    line-height: 1.5;
+    margin: 0.3rem 0 0.8rem;
+  }
+
+  label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ivory-dim);
+    margin: 0.7rem 0 0.3rem;
+  }
+  label:first-of-type { margin-top: 0; }
+
+  input[type="text"], input[type="number"], select, textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+    resize: vertical;
+  }
+  input::placeholder, textarea::placeholder { color: rgba(203, 185, 153, 0.5); }
+  textarea { min-height: 4.5rem; }
+
+  .row-inline { display: flex; gap: 0.6rem; }
+  .row-inline > * { flex: 1; min-width: 0; }
+
+  button {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.85rem;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: #2a1a10;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0.8rem;
+  }
+  button.secondary {
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+  }
+
+  .repeat-group { margin-top: 0.3rem; }
+  .repeat-row {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .repeat-row select,
+  .repeat-row input { margin: 0; }
+  .row-remove {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory-dim);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .row-remove:hover { color: var(--warn-text); }
+  .add-row-btn {
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--teal-bright);
+    border: 1px dashed rgba(63, 182, 168, 0.5);
+    font-size: 0.78rem;
+  }
+
+  .day-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .day-chip {
+    width: auto;
+    display: inline-block;
+    font-size: 0.72rem;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    color: var(--ivory-dim);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    margin: 0;
+  }
+  .empty-note { font-size: 0.78rem; color: var(--ivory-dim); }
+
+  .status-msg {
+    position: fixed;
+    left: 1rem; right: 1rem; bottom: 1rem;
+    z-index: 50;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+  }
+  .status-msg.ok { background: rgba(63, 182, 168, 0.2); border: 1px solid var(--teal); color: var(--teal-bright); }
+  .status-msg.error { background: rgba(107, 42, 42, 0.5); border: 1px solid rgba(255, 201, 201, 0.4); color: var(--warn-text); }
+
+  .import-export { display: flex; flex-direction: column; gap: 0.6rem; }
+  input[type="file"] { font-size: 0.8rem; color: var(--ivory-dim); }
+
+</style>
+</head>
+<body>
+
+  <div class="page">
+    <header class="top">
+      <a class="back-link" href="index.html">&larr; View Site</a>
+      &nbsp;·&nbsp;
+      <a class="back-link" href="../room.html">Back to the Room</a>
+      <h1 class="page-title">Video Log Editor</h1>
+    </header>
+
+    <section class="panel">
+      <h2>Pick a Day</h2>
+      <div class="row-inline">
+        <div>
+          <label for="monthSelect">Month</label>
+          <select id="monthSelect"></select>
+        </div>
+        <div>
+          <label for="daySelect">Day</label>
+          <input type="number" id="daySelect" min="1" max="31" step="1">
+        </div>
+      </div>
+      <button type="button" id="loadDayBtn">Load Day</button>
+      <div class="day-chips" id="monthDayChips"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Entry</h2>
+
+      <label for="entryTitle">Title</label>
+      <input type="text" id="entryTitle" placeholder="A short title for this day">
+
+      <label>Media</label>
+      <p class="hint">Photos/videos for this day's carousel, in order.</p>
+      <div class="repeat-group" id="mediaRows"></div>
+      <button type="button" class="add-row-btn" id="mediaAddBtn">+ Add Media</button>
+
+      <label for="entryDid">Did</label>
+      <textarea id="entryDid" placeholder="What happened today, in plain language."></textarea>
+
+      <label>Watched</label>
+      <div class="repeat-group" id="watchedRows"></div>
+      <button type="button" class="add-row-btn" id="watchedAddBtn">+ Add Watched</button>
+
+      <label>Spoke</label>
+      <div class="repeat-group" id="spokeRows"></div>
+      <button type="button" class="add-row-btn" id="spokeAddBtn">+ Add Spoke</button>
+
+      <label>Listened</label>
+      <div class="repeat-group" id="listenedRows"></div>
+      <button type="button" class="add-row-btn" id="listenedAddBtn">+ Add Listened</button>
+
+      <label for="entryLearned">Learned</label>
+      <p class="hint">
+        This one reads like a short story, not a log entry — build a small
+        mystery, land an "aha" by the end, 3–5 sentences. Tie it to the title.
+      </p>
+      <textarea id="entryLearned" placeholder="Start withheld, end with the reveal..."></textarea>
+
+      <button type="button" id="saveDayBtn">Save Day</button>
+    </section>
+
+    <section class="panel">
+      <h2>Beat Pool</h2>
+      <p class="hint">Each month has its own pool. Day N auto-plays pool[(N-1) % pool.length] — no manual per-day assignment.</p>
+      <label for="beatsMonthSelect">Month</label>
+      <select id="beatsMonthSelect"></select>
+      <label>Beats</label>
+      <div class="repeat-group" id="beatsRows"></div>
+      <button type="button" class="add-row-btn" id="beatsAddBtn">+ Add Beat</button>
+      <button type="button" id="saveBeatsBtn">Save Beat Pool</button>
+    </section>
+
+    <section class="panel import-export">
+      <h2>Import / Export</h2>
+      <p class="hint">Export downloads everything saved here as data.json — replace the hosted file with it. Import loads a data.json back into this editor (overwrites what's currently here).</p>
+      <button type="button" class="secondary" id="exportBtn">Export data.json</button>
+      <input type="file" id="importInput" accept="application/json,.json">
+    </section>
+  </div>
+
+  <p class="status-msg" id="statusMsg" hidden></p>
+
+<script>
+(() => {
+  const STORAGE_KEY = "video-log-editor-v1";
+  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  function loadEditorState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          beats: parsed.beats && typeof parsed.beats === "object" ? parsed.beats : {},
+          entries: parsed.entries && typeof parsed.entries === "object" ? parsed.entries : {},
+        };
+      }
+    } catch (e) { /* corrupt storage, fall through to defaults */ }
+    return { beats: {}, entries: {} };
+  }
+  let editorState = loadEditorState();
+  function saveEditorState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(editorState)); } catch (e) { /* storage unavailable */ }
+  }
+
+  let statusTimeout = null;
+  function showStatus(msg, isError) {
+    const el = document.getElementById("statusMsg");
+    el.textContent = msg;
+    el.className = "status-msg " + (isError ? "error" : "ok");
+    el.hidden = false;
+    clearTimeout(statusTimeout);
+    statusTimeout = setTimeout(() => { el.hidden = true; }, 3000);
+  }
+
+  // ---------- generic repeating row group ----------
+  function createRepeatingGroup(containerId, fields, initialItems) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = "";
+
+    function addRow(values) {
+      const row = document.createElement("div");
+      row.className = "repeat-row";
+      fields.forEach((f) => {
+        let el;
+        if (f.type === "select") {
+          el = document.createElement("select");
+          f.options.forEach((opt) => {
+            const o = document.createElement("option");
+            o.value = opt;
+            o.textContent = opt;
+            el.appendChild(o);
+          });
+        } else {
+          el = document.createElement("input");
+          el.type = "text";
+          el.placeholder = f.placeholder || "";
+        }
+        el.dataset.field = f.name;
+        if (values && values[f.name] !== undefined) el.value = values[f.name];
+        row.appendChild(el);
+      });
+      const rm = document.createElement("button");
+      rm.type = "button";
+      rm.className = "row-remove";
+      rm.textContent = "×";
+      rm.addEventListener("click", () => row.remove());
+      row.appendChild(rm);
+      container.appendChild(row);
+    }
+
+    (initialItems || []).forEach((item) => addRow(item));
+
+    return {
+      addRow: () => addRow(null),
+      getValues: () => Array.from(container.children).map((row) => {
+        const obj = {};
+        fields.forEach((f) => {
+          const input = row.querySelector('[data-field="' + f.name + '"]');
+          obj[f.name] = input ? input.value.trim() : "";
+        });
+        return obj;
+      }).filter((obj) => Object.values(obj).some((v) => v)),
+    };
+  }
+
+  // ---------- day entry form ----------
+  let mediaGroup, watchedGroup, spokeGroup, listenedGroup;
+
+  function populateForm(entry) {
+    document.getElementById("entryTitle").value = entry ? (entry.title || "") : "";
+    document.getElementById("entryDid").value = entry ? (entry.did || "") : "";
+    document.getElementById("entryLearned").value = entry ? (entry.learned || "") : "";
+
+    mediaGroup = createRepeatingGroup("mediaRows",
+      [{ name: "type", type: "select", options: ["image", "video"] }, { name: "url", type: "text", placeholder: "media/filename.jpg" }],
+      entry ? entry.media : []);
+    watchedGroup = createRepeatingGroup("watchedRows",
+      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional)" }],
+      entry ? entry.watched : []);
+    spokeGroup = createRepeatingGroup("spokeRows",
+      [{ name: "lang", type: "text", placeholder: "Language" }, { name: "note", type: "text", placeholder: "Note" }],
+      entry ? entry.spoke : []);
+    listenedGroup = createRepeatingGroup("listenedRows",
+      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional)" }],
+      entry ? entry.listened : []);
+  }
+
+  document.getElementById("mediaAddBtn").addEventListener("click", () => mediaGroup.addRow());
+  document.getElementById("watchedAddBtn").addEventListener("click", () => watchedGroup.addRow());
+  document.getElementById("spokeAddBtn").addEventListener("click", () => spokeGroup.addRow());
+  document.getElementById("listenedAddBtn").addEventListener("click", () => listenedGroup.addRow());
+
+  function renderMonthDayChips(month) {
+    const wrap = document.getElementById("monthDayChips");
+    wrap.innerHTML = "";
+    const monthEntries = editorState.entries[month] || {};
+    const days = Object.keys(monthEntries).map(Number).sort((a, b) => a - b);
+    if (!days.length) {
+      wrap.innerHTML = '<span class="empty-note">No days saved yet this month.</span>';
+      return;
+    }
+    days.forEach((d) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "day-chip";
+      chip.textContent = d;
+      chip.addEventListener("click", () => {
+        document.getElementById("daySelect").value = d;
+        document.getElementById("loadDayBtn").click();
+      });
+      wrap.appendChild(chip);
+    });
+  }
+
+  document.getElementById("loadDayBtn").addEventListener("click", () => {
+    const month = document.getElementById("monthSelect").value;
+    const day = document.getElementById("daySelect").value;
+    if (!month || !day) { showStatus("Pick a month and day first.", true); return; }
+    const entry = (editorState.entries[month] && editorState.entries[month][day]) || null;
+    populateForm(entry);
+    renderMonthDayChips(month);
+  });
+
+  document.getElementById("saveDayBtn").addEventListener("click", () => {
+    const month = document.getElementById("monthSelect").value;
+    const day = document.getElementById("daySelect").value;
+    if (!month || !day) { showStatus("Pick a month and day first.", true); return; }
+
+    const entry = {
+      title: document.getElementById("entryTitle").value.trim(),
+      media: mediaGroup ? mediaGroup.getValues() : [],
+      did: document.getElementById("entryDid").value.trim(),
+      watched: watchedGroup ? watchedGroup.getValues() : [],
+      spoke: spokeGroup ? spokeGroup.getValues() : [],
+      listened: listenedGroup ? listenedGroup.getValues() : [],
+      learned: document.getElementById("entryLearned").value.trim(),
+    };
+
+    if (!editorState.entries[month]) editorState.entries[month] = {};
+    editorState.entries[month][day] = entry;
+    saveEditorState();
+    renderMonthDayChips(month);
+    showStatus("Saved " + MONTH_NAMES[Number(month) - 1] + " " + day + " ✓", false);
+  });
+
+  // ---------- beat pool ----------
+  let beatsGroupCurrent = null;
+  function loadBeatsForMonth() {
+    const month = document.getElementById("beatsMonthSelect").value;
+    beatsGroupCurrent = createRepeatingGroup("beatsRows",
+      [{ name: "title", type: "text", placeholder: "Beat title" }, { name: "url", type: "text", placeholder: "audio/filename.mp3" }],
+      editorState.beats[month] || []);
+  }
+  document.getElementById("beatsMonthSelect").addEventListener("change", loadBeatsForMonth);
+  document.getElementById("beatsAddBtn").addEventListener("click", () => { if (beatsGroupCurrent) beatsGroupCurrent.addRow(); });
+  document.getElementById("saveBeatsBtn").addEventListener("click", () => {
+    const month = document.getElementById("beatsMonthSelect").value;
+    if (!month || !beatsGroupCurrent) return;
+    editorState.beats[month] = beatsGroupCurrent.getValues();
+    saveEditorState();
+    showStatus("Saved beat pool for " + MONTH_NAMES[Number(month) - 1] + " ✓", false);
+  });
+
+  // ---------- import / export ----------
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    const blob = new Blob([JSON.stringify(editorState, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "data.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showStatus("Exported data.json ✓", false);
+  });
+
+  document.getElementById("importInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!confirm("This replaces everything currently in the editor with this file's contents. Continue?")) {
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        editorState = {
+          beats: parsed.beats && typeof parsed.beats === "object" ? parsed.beats : {},
+          entries: parsed.entries && typeof parsed.entries === "object" ? parsed.entries : {},
+        };
+        saveEditorState();
+        document.getElementById("loadDayBtn").click();
+        loadBeatsForMonth();
+        showStatus("Imported data.json ✓", false);
+      } catch (err) {
+        showStatus("Could not parse that file as JSON.", true);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  });
+
+  // ---------- init ----------
+  MONTH_NAMES.forEach((name, i) => {
+    const month = i + 1;
+    const opt1 = document.createElement("option");
+    opt1.value = month;
+    opt1.textContent = name;
+    document.getElementById("monthSelect").appendChild(opt1);
+    const opt2 = document.createElement("option");
+    opt2.value = month;
+    opt2.textContent = name;
+    document.getElementById("beatsMonthSelect").appendChild(opt2);
+  });
+
+  const today = new Date();
+  document.getElementById("monthSelect").value = String(today.getMonth() + 1);
+  document.getElementById("daySelect").value = String(today.getDate());
+  document.getElementById("beatsMonthSelect").value = String(today.getMonth() + 1);
+
+  populateForm(null);
+  renderMonthDayChips(document.getElementById("monthSelect").value);
+  loadBeatsForMonth();
+})();
+</script>
+
+</body>
+</html>

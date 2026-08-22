@@ -1,1 +1,12 @@
 node_modules/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# local env/secrets, if any ever get added
+.env
+.env.local
