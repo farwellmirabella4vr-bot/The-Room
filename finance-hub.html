@@ -199,6 +199,46 @@
   .gauge-sub { font-size: 0.6rem; fill: var(--ivory-dim); text-transform: uppercase; letter-spacing: 0.04em; }
   .gauge-caption { max-width: 320px; text-align: center; font-size: 0.72rem; color: var(--ivory-dim); }
 
+  /* ---------- log a thought to Obsidian ---------- */
+  .obsidian-log-block { margin-top: 0.9rem; text-align: center; }
+  .obsidian-log-toggle {
+    background: none;
+    box-shadow: none;
+    border: 1px solid var(--gold);
+    color: var(--gold-bright);
+    padding: 0.3rem 0.7rem;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .obsidian-log-toggle:hover { background: rgba(212, 162, 76, 0.12); }
+  .obsidian-log-form { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.4rem; align-items: center; }
+  .obsidian-log-form textarea {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(244, 232, 208, 0.15);
+    border-radius: 8px;
+    color: var(--ivory);
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    resize: vertical;
+  }
+  .obsidian-log-actions { display: flex; align-items: center; gap: 0.6rem; }
+  .obsidian-log-save {
+    background: none;
+    box-shadow: none;
+    border: 1px solid var(--gold);
+    color: var(--gold-bright);
+    padding: 0.25rem 0.6rem;
+    font-size: 0.72rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .obsidian-log-save:hover { background: rgba(212, 162, 76, 0.12); }
+  .obsidian-log-status { font-size: 0.7rem; color: var(--ivory-dim); }
+
   /* ---------- summary stats ---------- */
   .budget-summary {
     display: grid;
@@ -303,6 +343,17 @@
         <p class="gauge-caption" id="gaugeCaption">Set a target amount and date above to see your monthly pace.</p>
       </div>
       <p class="tip">This gauge compares what you've saved <em>this month</em> to the pace you'd need to hit your goal by the target date — a quick "am I on track right now" check.</p>
+
+      <div class="obsidian-log-block">
+        <button type="button" class="obsidian-log-toggle" id="thoughtToggleBtn">Log a thought to Obsidian</button>
+        <div class="obsidian-log-form" id="thoughtForm" hidden>
+          <textarea id="thoughtText" rows="3" placeholder="Any reflection on your money, goals, or spending right now..."></textarea>
+          <div class="obsidian-log-actions">
+            <button type="button" class="obsidian-log-save" id="thoughtSaveBtn">Save to Obsidian</button>
+            <span class="obsidian-log-status" id="thoughtStatus"></span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="panel reveal">
@@ -354,6 +405,108 @@
   function genId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   }
+
+  // ============================================================
+  // OBSIDIAN LOGGING — writes a note directly into the connected vault's
+  // Rough Notes folder (readwrite), via the File System Access API.
+  // Manual, general reflections only — not tied to individual
+  // transactions. The granted handle is stored in the same shared
+  // IndexedDB database Video Log/Nest of Knowledge/Beat Maker/Knowledge
+  // Center/Language Hub use for their own folder connections, under its
+  // own key, so connecting once anywhere carries over.
+  // ============================================================
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; }
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; }
+  }
+  function sanitizeNoteFilename(name) {
+    return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
+  function logThoughtToObsidian(text) {
+    const totalIncome = state.budget.transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+    const totalExpenses = state.budget.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+    const net = totalIncome - totalExpenses;
+    const rate = totalIncome > 0 ? Math.round((net / totalIncome) * 100) + "%" : "—";
+    const now = new Date();
+    const lines = [
+      "#baby", "",
+      "# Finance thought — " + todayISODate(), "",
+      text, "",
+      "## Snapshot", "",
+      "- Net saved: " + formatMoney(net),
+      "- Savings rate: " + rate,
+    ];
+    if (state.budget.goalName) {
+      lines.push("- Goal: " + state.budget.goalName + " (" + formatMoney(state.budget.goalTarget || 0) +
+        (state.budget.goalTargetDate ? " by " + state.budget.goalTargetDate : "") + ")");
+    }
+    lines.push("", "## References", "- ");
+    const filename = sanitizeNoteFilename("Finance thought " + todayISODate() + " " + now.getTime().toString(36).slice(-6));
+    return writeNoteToVault(filename, lines.join("\n"));
+  }
+
   function todayISODate() {
     const d = new Date();
     const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
@@ -624,6 +777,28 @@
     e.target.reset();
     document.getElementById("txnDate").value = todayISODate();
     renderBudget();
+  });
+
+  document.getElementById("thoughtToggleBtn").addEventListener("click", () => {
+    const form = document.getElementById("thoughtForm");
+    form.hidden = !form.hidden;
+    if (!form.hidden) document.getElementById("thoughtText").focus();
+  });
+  document.getElementById("thoughtSaveBtn").addEventListener("click", async () => {
+    const textEl = document.getElementById("thoughtText");
+    const statusEl = document.getElementById("thoughtStatus");
+    const text = textEl.value.trim();
+    if (!text) { statusEl.textContent = "Write something first."; return; }
+    const btn = document.getElementById("thoughtSaveBtn");
+    btn.disabled = true;
+    statusEl.textContent = "Logging…";
+    const ok = await logThoughtToObsidian(text);
+    statusEl.textContent = ok ? "Logged ✓" : "Couldn't log";
+    btn.disabled = false;
+    if (ok) {
+      textEl.value = "";
+      setTimeout(() => { statusEl.textContent = ""; document.getElementById("thoughtForm").hidden = true; }, 1500);
+    }
   });
 
   // ---------- init ----------
