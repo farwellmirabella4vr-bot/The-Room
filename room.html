@@ -549,6 +549,21 @@
     letter-spacing: 0.02em;
   }
 
+  /* ---------- scroll reveal: fade/slide content in once, as it enters view ----------
+     .in-view has NO rule of its own on purpose — once added, the element
+     just falls back to its normal opacity/transform, which lets existing
+     :hover transforms (e.g. .mat:hover) keep working afterward instead of
+     fighting a same-specificity ".reveal.in-view" rule. */
+  .reveal { transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal:not(.in-view) { opacity: 0; transform: translateY(14px); }
+  .mat.reveal:nth-of-type(1) { transition-delay: 0s; }
+  .mat.reveal:nth-of-type(2) { transition-delay: 0.1s; }
+  .mat.reveal:nth-of-type(3) { transition-delay: 0.2s; }
+  .mat.reveal:nth-of-type(4) { transition-delay: 0.3s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -644,7 +659,7 @@
       <div class="knowledge-label">Shared&nbsp;Knowledge</div>
     </div>
 
-    <div class="plaque">
+    <div class="plaque reveal">
       <svg class="plaque-icon" viewBox="0 0 40 40" aria-hidden="true">
         <circle cx="20" cy="20" r="6" fill="currentColor"/>
         <line x1="20" y1="2" x2="20" y2="8" stroke="currentColor" stroke-width="2"/>
@@ -670,7 +685,7 @@
     </div>
 
     <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
-    <button class="mat" data-agent="planner" data-pos="top">
+    <button class="mat reveal" data-agent="planner" data-pos="top">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
         <g clip-path="url(#rug-clip)">
           <rect x="4" y="4" width="192" height="132" rx="10" fill="#1f4a44"/>
@@ -721,7 +736,7 @@
     </button>
 
     <!-- Coder: deep crimson rug, octagon medallion, sandals -->
-    <button class="mat" data-agent="coder" data-pos="right">
+    <button class="mat reveal" data-agent="coder" data-pos="right">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
         <g clip-path="url(#rug-clip)">
           <rect x="4" y="4" width="192" height="132" rx="10" fill="#5c1f2b"/>
@@ -757,7 +772,7 @@
     </button>
 
     <!-- Tester: deep navy rug, lobed floral medallion, small lantern -->
-    <button class="mat" data-agent="tester" data-pos="bottom">
+    <button class="mat reveal" data-agent="tester" data-pos="bottom">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
         <g clip-path="url(#rug-clip)">
           <rect x="4" y="4" width="192" height="132" rx="10" fill="#6b1420"/>
@@ -800,7 +815,7 @@
     </button>
 
     <!-- Reviewer: deep olive rug, hexagon medallion, wax seal -->
-    <button class="mat" data-agent="reviewer" data-pos="left">
+    <button class="mat reveal" data-agent="reviewer" data-pos="left">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
         <g clip-path="url(#rug-clip)">
           <rect x="4" y="4" width="192" height="132" rx="10" fill="#2e1614"/>
@@ -1092,6 +1107,22 @@
   }
   document.addEventListener("visibilitychange", updateAnimationPauseState);
   updateAnimationPauseState();
+
+  // ---------- scroll reveal: fade/slide each .reveal element in once, the
+  // first time it enters view, then stop watching it (no ongoing cost) ----------
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+  }
 })();
 </script>
 

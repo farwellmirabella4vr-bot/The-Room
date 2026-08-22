@@ -113,7 +113,7 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
   }
   .room-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.015);
     background: rgba(0, 0, 0, 0.32);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
   }
@@ -140,6 +140,24 @@
     color: var(--ivory-dim);
   }
 
+  /* ---------- scroll reveal: fade/slide content in once, as it enters view ----------
+     .in-view has NO rule of its own on purpose — once added, the element
+     just falls back to its normal opacity/transform, which lets existing
+     :hover transforms (e.g. .room-card:hover) keep working afterward
+     instead of fighting a same-specificity ".reveal.in-view" rule. */
+  .reveal { transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal:not(.in-view) { opacity: 0; transform: translateY(18px); }
+  .room-grid .reveal:nth-child(1) { transition-delay: 0s; }
+  .room-grid .reveal:nth-child(2) { transition-delay: 0.06s; }
+  .room-grid .reveal:nth-child(3) { transition-delay: 0.12s; }
+  .room-grid .reveal:nth-child(4) { transition-delay: 0.18s; }
+  .room-grid .reveal:nth-child(5) { transition-delay: 0.24s; }
+  .room-grid .reveal:nth-child(6) { transition-delay: 0.3s; }
+  .room-grid .reveal:nth-child(7) { transition-delay: 0.36s; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -150,7 +168,7 @@
   </header>
 
   <main>
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Today at a Glance</h2>
       <div class="glance-row">
         <div class="glance-chip">
@@ -174,11 +192,11 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Your Rooms</h2>
       <div class="room-grid">
 
-        <a class="room-card" href="room.html" style="--room-accent:#d4a24c;">
+        <a class="room-card reveal" href="room.html" style="--room-accent:#d4a24c;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <path d="M8 34 L8 20 A12 12 0 0 1 32 20 L32 34 Z" fill="none" stroke="currentColor" stroke-width="2"/>
             <line x1="4" y1="34" x2="36" y2="34" stroke="currentColor" stroke-width="2"/>
@@ -187,7 +205,7 @@
           <div class="room-card-stat">Mosque courtyard &amp; prayer times</div>
         </a>
 
-        <a class="room-card" href="language-hub.html" style="--room-accent:#c1440e;">
+        <a class="room-card reveal" href="language-hub.html" style="--room-accent:#c1440e;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
             <ellipse cx="20" cy="20" rx="6" ry="14" fill="none" stroke="currentColor" stroke-width="1.5"/>
@@ -197,7 +215,7 @@
           <div class="room-card-stat" id="statLanguageHub">Get started</div>
         </a>
 
-        <a class="room-card" href="knowledge-center.html" style="--room-accent:#f2c879;">
+        <a class="room-card reveal" href="knowledge-center.html" style="--room-accent:#f2c879;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <path d="M24 8 A12 12 0 1 0 24 32 A9 9 0 1 1 24 8 Z" fill="currentColor"/>
           </svg>
@@ -205,7 +223,7 @@
           <div class="room-card-stat" id="statKnowledgeCenter">Get started</div>
         </a>
 
-        <a class="room-card" href="content-hub.html" style="--room-accent:#c9689a;">
+        <a class="room-card reveal" href="content-hub.html" style="--room-accent:#c9689a;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <rect x="6" y="8" width="28" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
             <circle cx="14" cy="16" r="3" fill="currentColor"/>
@@ -215,7 +233,7 @@
           <div class="room-card-stat" id="statContentHub">Get started</div>
         </a>
 
-        <a class="room-card" href="beat-maker.html" style="--room-accent:#7fae52;">
+        <a class="room-card reveal" href="beat-maker.html" style="--room-accent:#7fae52;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
             <rect x="22" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -226,7 +244,7 @@
           <div class="room-card-stat" id="statBeatMaker">Get started</div>
         </a>
 
-        <a class="room-card" href="finance-hub.html" style="--room-accent:#4a9b8e;">
+        <a class="room-card reveal" href="finance-hub.html" style="--room-accent:#4a9b8e;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <line x1="10" y1="8" x2="10" y2="32" stroke="currentColor" stroke-width="1.5"/>
             <rect x="7" y="14" width="6" height="10" fill="currentColor"/>
@@ -239,7 +257,7 @@
           <div class="room-card-stat" id="statFinanceHub">Get started</div>
         </a>
 
-        <a class="room-card" href="video-log/index.html" style="--room-accent:#3fb6a8;">
+        <a class="room-card reveal" href="video-log/index.html" style="--room-accent:#3fb6a8;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <rect x="5" y="11" width="22" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
             <path d="M27 17 L35 13 L35 27 L27 23 Z" fill="currentColor"/>
@@ -511,6 +529,22 @@
   renderFinanceStat();
   renderContentHubStat();
   renderBeatMakerStat();
+
+  // ---------- scroll reveal: fade/slide each .reveal element in once, the
+  // first time it enters view, then stop watching it (no ongoing cost) ----------
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+  }
 })();
 </script>
 

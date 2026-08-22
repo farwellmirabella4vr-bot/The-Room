@@ -494,6 +494,13 @@
   }
   .chop-controls { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
 
+  /* ---------- scroll reveal: fade/slide content in once, as it enters view ---------- */
+  .reveal { transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal:not(.in-view) { opacity: 0; transform: translateY(14px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -558,7 +565,7 @@
   </header>
 
   <main>
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Sampler</h2>
       <div class="pad-grid" id="padGrid"></div>
       <p class="sample-note">
@@ -570,7 +577,7 @@
       </p>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Visualizer</h2>
       <div class="viz-canvas-wrap">
         <canvas id="vizCanvas"></canvas>
@@ -578,7 +585,7 @@
       <p class="sample-note">Reacts to everything passing through the master output — pads, the sequencer, saved-beat playback, and radio capture.</p>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>FX Rack</h2>
       <p class="sample-note">Click the &#9881; gear icon on a pad to edit its filter, delay, and reverb sends. Changes apply live and are baked into exports.</p>
       <div class="fx-target-label" id="fxTargetLabel">No pad selected</div>
@@ -597,7 +604,7 @@
       <label class="fx-row"><input type="checkbox" id="fxReverse" disabled> Reverse sample</label>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>World Radio</h2>
       <p class="sample-note">For personal, non-commercial sampling and practice only.</p>
       <div class="radio-controls">
@@ -616,7 +623,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Sequencer</h2>
       <div class="seq-controls">
         <label>BPM <input type="number" id="seqBpm" min="40" max="240" value="100"></label>
@@ -639,7 +646,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Record &amp; Play</h2>
       <div class="transport-row">
         <button type="button" id="recordBtn">&#9679; Record</button>
@@ -652,7 +659,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Gamepad</h2>
       <div class="gamepad-status" id="gamepadStatus">No controller connected</div>
       <ul class="gamepad-legend">
@@ -663,7 +670,7 @@
       </ul>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Saved Beats</h2>
       <ul class="item-list" id="beatsList"></ul>
     </section>
@@ -2203,6 +2210,22 @@
   restoreAllPadSamples();
   renderSavedBeats();
   loadCountries();
+
+  // ---------- scroll reveal: fade/slide each .reveal element in once, the
+  // first time it enters view, then stop watching it (no ongoing cost) ----------
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+  }
 })();
 </script>
 

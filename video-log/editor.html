@@ -204,6 +204,13 @@
   .import-export { display: flex; flex-direction: column; gap: 0.6rem; }
   input[type="file"] { font-size: 0.8rem; color: var(--ivory-dim); }
 
+  /* ---------- scroll reveal: fade/slide content in once, as it enters view ---------- */
+  .reveal { transition: opacity 0.45s ease, transform 0.45s ease; }
+  .reveal:not(.in-view) { opacity: 0; transform: translateY(12px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
 </style>
 </head>
 <body>
@@ -218,7 +225,7 @@
       <h1 class="page-title">Video Log Editor</h1>
     </header>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Pick a Day</h2>
       <div class="row-inline">
         <div>
@@ -234,7 +241,7 @@
       <div class="day-chips" id="monthDayChips"></div>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Entry</h2>
 
       <label for="entryTitle">Title</label>
@@ -270,7 +277,7 @@
       <button type="button" id="saveDayBtn">Save Day</button>
     </section>
 
-    <section class="panel">
+    <section class="panel reveal">
       <h2>Beat Pool</h2>
       <p class="hint">Each month has its own pool. Day N auto-plays pool[(N-1) % pool.length] — no manual per-day assignment.</p>
       <label for="beatsMonthSelect">Month</label>
@@ -281,7 +288,7 @@
       <button type="button" id="saveBeatsBtn">Save Beat Pool</button>
     </section>
 
-    <section class="panel import-export">
+    <section class="panel import-export reveal">
       <h2>Import / Export</h2>
       <p class="hint">Export downloads everything saved here as data.json — replace the hosted file with it. Import loads a data.json back into this editor (overwrites what's currently here).</p>
       <button type="button" class="secondary" id="exportBtn">Export data.json</button>
@@ -535,6 +542,22 @@
   populateForm(null);
   renderMonthDayChips(document.getElementById("monthSelect").value);
   loadBeatsForMonth();
+
+  // ---------- scroll reveal: fade/slide each .reveal element in once, the
+  // first time it enters view, then stop watching it (no ongoing cost) ----------
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  } else {
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+  }
 })();
 </script>
 
