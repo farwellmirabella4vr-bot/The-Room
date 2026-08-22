@@ -246,6 +246,18 @@
     line-height: 1.3;
     color: var(--gold-bright);
   }
+  .log-day-btn {
+    display: block;
+    margin-bottom: 0.9rem;
+    background: none;
+    border: 1px solid rgba(63, 182, 168, 0.4);
+    color: var(--teal-bright);
+    border-radius: 6px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
 
   /* ---------- carousel ---------- */
   .carousel { margin: 0; }
@@ -465,6 +477,7 @@
 
       <div class="day-view-inner">
         <h2 class="day-title" id="dayTitle"></h2>
+        <button type="button" class="log-day-btn" id="logDayBtn">Log this day to Obsidian</button>
 
         <div class="carousel" id="carousel" hidden>
           <div class="carousel-track" id="carouselTrack"></div>
@@ -643,6 +656,78 @@
     return Object.values(notesIndex).filter((n) => n.date === iso);
   }
 
+  // ============================================================
+  // LOG DAY TO OBSIDIAN — the reverse direction: writes a real dated
+  // note (YYYY-MM-DD.md) into the vault's Rough Notes folder. Since
+  // that filename matches the sync plugin's own date pattern, the note
+  // loops back through the existing sync next time it runs and shows
+  // up right back in this same day's Notes section above — deliberate,
+  // not a coincidence. A different, readwrite folder connection than
+  // notesDirHandle above (which is read-only and points at the sync
+  // plugin's bridge folder, not the vault itself), stored under its
+  // own key in the same shared handle database.
+  // ============================================================
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; }
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; }
+  }
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
+  function dayEntryToNoteContent(entry, iso) {
+    const lines = ["#baby", "", "# " + (entry.title || iso), ""];
+    if (entry.did) { lines.push("## Did", "", entry.did, ""); }
+    if (Array.isArray(entry.watched) && entry.watched.length) {
+      lines.push("## Watched", "");
+      entry.watched.forEach((w) => lines.push("- " + (w.url ? "[" + (w.title || w.url) + "](" + w.url + ")" : (w.title || ""))));
+      lines.push("");
+    }
+    if (Array.isArray(entry.spoke) && entry.spoke.length) {
+      lines.push("## Spoke", "");
+      entry.spoke.forEach((s) => lines.push("- " + (s.lang ? s.lang + " — " : "") + (s.note || "")));
+      lines.push("");
+    }
+    if (Array.isArray(entry.listened) && entry.listened.length) {
+      lines.push("## Listened", "");
+      entry.listened.forEach((l) => lines.push("- " + (l.url ? "[" + (l.title || l.url) + "](" + l.url + ")" : (l.title || ""))));
+      lines.push("");
+    }
+    if (entry.learned) { lines.push("## Learned", "", entry.learned, ""); }
+    lines.push("## References", "- ");
+    return lines.join("\n");
+  }
+
   // ---------- entrance gate ----------
   // Entering the site (hiding the gate, showing the calendar) must never be
   // blocked by anything else — not the iOS audio-unlock trick, not the
@@ -762,6 +847,9 @@
   // ---------- day view ----------
   function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
+  let currentDayEntry = null;
+  let currentDayIso = null;
+
   function openDay(month, day) {
     const entry = state.data.entries[String(month)][String(day)];
     if (!entry) return;
@@ -775,10 +863,25 @@
     renderNotesSection(iso);
     playBeatForDay(month, day);
 
+    currentDayEntry = entry;
+    currentDayIso = iso;
+
     const view = document.getElementById("dayView");
     view.hidden = false;
     view.scrollTop = 0;
   }
+
+  document.getElementById("logDayBtn").addEventListener("click", async () => {
+    if (!currentDayEntry || !currentDayIso) return;
+    const btn = document.getElementById("logDayBtn");
+    const original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "Logging…";
+    const content = dayEntryToNoteContent(currentDayEntry, currentDayIso);
+    const ok = await writeNoteToVault(currentDayIso + ".md", content);
+    btn.textContent = ok ? "Logged ✓ (will show up here once synced back)" : "Couldn't log";
+    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 2500);
+  });
 
   // Independent of categoriesForEntry/renderSections on purpose — notes
   // come from the connected local folder, not from entry itself, so this
