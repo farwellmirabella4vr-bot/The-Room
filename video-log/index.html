@@ -12,10 +12,12 @@
   (e.g. GitHub Pages) — opening it directly as a local file:// URL will
   fail the fetch and show an in-page error instead of the calendar.
 
-  Visual system matches the rest of the site (room.html / home.html):
-  same mosque wall palette, wall-pattern panel texture, Segoe UI stack,
-  and hub-header/back-link conventions, with its own teal accent (the
-  same one used for this room's card on home.html) layered on top.
+  Visual system: same mosque-wall gold/ivory palette and teal accent as
+  the rest of the site, but deliberately plainer than room.html/home.html
+  -- a flat backdrop instead of a painted sunset scene, panels without a
+  tiled texture or stacked shadows, and a contained "screen" around the
+  calendar grid -- aiming for a simple, low-chrome, pocket-tracker feel
+  rather than an ornamented one.
 -->
 <style>
 
@@ -29,11 +31,6 @@
     --ivory-dim:   #cbb999;
     --ember:       #ff9d4d;
 
-    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
-    --sky-lower: #d9773f; --sky-ground: #7a3220;
-
-    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
-
     --teal:        #3fb6a8;
     --teal-bright: #6cc9ba;
 
@@ -42,6 +39,16 @@
     --cat-spoke:    #d97a6a;
     --cat-listened: #9a7fd4;
     --cat-learned:  var(--gold-bright);
+
+    /* One flat backdrop reused everywhere (was a 5-stop "sunset scene"
+       gradient repeated on body/gate/day-view) and one soft shadow reused
+       on every panel (was a heavier double-shadow + inset-border combo
+       per panel) -- part of trimming this page down to a plainer,
+       pocket-device feel instead of a painted backdrop with ornamented
+       panels on top of it. */
+    --bg:          linear-gradient(180deg, var(--wall-dark) 0%, #170d14 100%);
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.28);
+    --mono: "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
   }
 
   * { box-sizing: border-box; }
@@ -53,7 +60,7 @@
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--ivory);
-    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background: var(--bg);
     background-attachment: fixed;
     min-height: 100vh;
     padding-bottom: 4rem;
@@ -70,19 +77,19 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background: var(--bg);
     z-index: 200;
   }
   .gate-btn {
     font-size: 0.95rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: bold;
     background: linear-gradient(180deg, var(--teal-bright), var(--teal));
     color: #04211d;
     border: none;
-    border-radius: 999px;
-    padding: 0.9rem 2.1rem;
+    border-radius: 10px;
+    padding: 0.85rem 2rem;
     cursor: pointer;
   }
   .gate-btn:active { background: var(--teal-bright); }
@@ -103,69 +110,78 @@
   .site-header {
     max-width: 900px;
     margin: 0 auto;
-    padding: 1.3rem 1.25rem 0.7rem;
+    padding: 1.1rem 1.25rem 0.6rem;
     text-align: center;
   }
   .back-link {
     display: inline-block;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--ivory-dim);
     text-decoration: none;
   }
   .back-link:hover { color: var(--gold-bright); }
   .site-title {
-    margin: 0.6rem 0 0;
-    letter-spacing: 0.2em;
+    margin: 0.5rem 0 0;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-weight: 300;
-    font-size: clamp(1.3rem, 4vw, 1.9rem);
+    font-weight: 700;
+    font-family: var(--mono);
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
     color: var(--gold-bright);
-    text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
+  }
+
+  /* ---------- calendar screen: a plain contained "device screen" holding
+     the month tabs + day grid, instead of them floating loose over the
+     page backdrop ---------- */
+  .calendar-screen {
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    padding: 0.6rem 0.25rem 0.8rem;
+    background: var(--wall-dark);
+    border: 1px solid rgba(63, 182, 168, 0.3);
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
   }
 
   /* ---------- month tabs ---------- */
   .month-tabs {
     display: flex;
-    gap: 0.4rem;
+    gap: 0.35rem;
     overflow-x: auto;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0.3rem 1.25rem 0.8rem;
+    padding: 0 1rem 0.7rem;
     scrollbar-width: thin;
   }
   .month-tab {
     flex: 0 0 auto;
-    font-family: inherit;
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(212, 162, 76, 0.4);
+    background: transparent;
+    border: 1px solid rgba(212, 162, 76, 0.3);
     color: var(--ivory-dim);
-    border-radius: 999px;
-    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    padding: 0.35rem 0.7rem;
     cursor: pointer;
   }
-  .month-tab.active { color: var(--gold-bright); background: rgba(0, 0, 0, 0.4); border-color: var(--gold-bright); }
+  .month-tab.active { color: #04211d; background: var(--teal-bright); border-color: var(--teal-bright); }
 
   /* ---------- day grid ---------- */
   .day-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 0.4rem;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.25rem 1.3rem;
+    gap: 0.3rem;
+    padding: 0 1rem;
   }
   .day-cell {
     position: relative;
     aspect-ratio: 1 / 1;
-    border-radius: 10px;
+    border-radius: 6px;
     background-color: rgba(0, 0, 0, 0.24);
     background-size: cover;
     background-position: center;
-    border: 1px solid rgba(212, 162, 76, 0.25);
-    padding: 0.4rem;
+    border: 1px solid rgba(212, 162, 76, 0.2);
+    padding: 0.3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -175,13 +191,13 @@
   button.day-cell { text-align: left; font-family: inherit; }
   button.day-cell.has-entry {
     color: var(--ivory);
-    border-color: rgba(212, 162, 76, 0.45);
+    border-color: rgba(212, 162, 76, 0.4);
     cursor: pointer;
   }
-  button.day-cell.has-entry:hover { border-color: var(--gold-bright); }
-  .day-num { font-size: 0.72rem; font-weight: bold; }
+  button.day-cell.has-entry:hover { border-color: var(--teal-bright); }
+  .day-num { font-family: var(--mono); font-size: 0.72rem; font-weight: bold; }
   .day-dots { display: flex; gap: 0.2rem; flex-wrap: wrap; }
-  .day-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .day-dot { width: 5px; height: 5px; border-radius: 50%; }
   .day-dot.cat-did { background: var(--cat-did); }
   .day-dot.cat-watched { background: var(--cat-watched); }
   .day-dot.cat-spoke { background: var(--cat-spoke); }
@@ -200,7 +216,7 @@
   .day-view {
     position: fixed;
     inset: 0;
-    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background: var(--bg);
     background-attachment: fixed;
     z-index: 100;
     overflow-y: auto;
@@ -214,10 +230,10 @@
     display: inline-block;
     margin: 0.6rem 0 0 1rem;
     background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(212, 162, 76, 0.4);
+    border: 1px solid rgba(212, 162, 76, 0.35);
     color: var(--ivory-dim);
-    border-radius: 999px;
-    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
     font-size: 0.75rem;
     cursor: pointer;
   }
@@ -225,7 +241,7 @@
   .day-title {
     margin: 0.6rem 0 0.5rem;
     font-weight: bold;
-    font-size: clamp(1.1rem, 3.5vw, 1.6rem);
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem);
     line-height: 1.3;
     color: var(--gold-bright);
   }
@@ -236,17 +252,17 @@
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 0.6rem;
-    border-radius: 12px;
+    gap: 0.5rem;
+    border-radius: 8px;
   }
   .carousel-slide {
     flex: 0 0 100%;
     scroll-snap-align: center;
     aspect-ratio: 4 / 5;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(212, 162, 76, 0.25);
+    border: 1px solid rgba(212, 162, 76, 0.2);
   }
   .carousel-slide img, .carousel-slide video {
     width: 100%;
@@ -286,10 +302,10 @@
     font-family: inherit;
     font-size: 0.72rem;
     letter-spacing: 0.03em;
-    background: rgba(0, 0, 0, 0.25);
+    background: transparent;
     border: 1px solid rgba(212, 162, 76, 0.3);
-    border-radius: 999px;
-    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    padding: 0.32rem 0.7rem;
     cursor: pointer;
   }
   .section-pill.cat-did { color: var(--cat-did); border-color: var(--cat-did); }
@@ -300,24 +316,22 @@
 
   /* ---------- day sections ---------- */
   .day-section {
-    margin: 0.7rem 0 0;
-    padding: 0.75rem 1.1rem 0.85rem;
-    background:
-      var(--wall-pattern),
-      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
-    background-size: 64px 64px, auto;
-    border: 1px solid rgba(212, 162, 76, 0.35);
-    border-radius: 12px;
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.32), inset 0 0 0 2px rgba(212, 162, 76, 0.1);
+    margin: 0.6rem 0 0;
+    padding: 0.7rem 0.9rem 0.8rem;
+    background: var(--wall);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+    box-shadow: var(--shadow-soft);
     scroll-margin-top: 3.2rem;
   }
   .day-section h3 {
-    font-size: 0.76rem;
-    letter-spacing: 0.1em;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--gold-bright);
     margin-bottom: 0.4rem;
-    padding-left: 0.6rem;
+    padding-left: 0.55rem;
     border-left: 3px solid rgba(212, 162, 76, 0.3);
   }
   #secDid h3 { border-color: var(--cat-did); }
@@ -329,17 +343,14 @@
   .day-section p { line-height: 1.5; font-size: 0.9rem; color: var(--ivory); }
   .day-section ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
   .day-section li {
-    background: rgba(0, 0, 0, 0.22);
-    border: 1px solid rgba(212, 162, 76, 0.25);
-    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 162, 76, 0.2);
+    border-radius: 6px;
     padding: 0.45rem 0.65rem;
     font-size: 0.82rem;
   }
 
-  #secLearned {
-    border-color: rgba(242, 200, 121, 0.45);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35), inset 0 0 0 2px rgba(242, 200, 121, 0.16);
-  }
+  #secLearned { border-color: rgba(242, 200, 121, 0.4); }
   #secLearned p {
     font-size: 0.95rem;
     line-height: 1.75;
@@ -416,8 +427,10 @@
       <h1 class="site-title">Video Log</h1>
     </header>
 
-    <nav class="month-tabs" id="monthTabs"></nav>
-    <div class="day-grid" id="dayGrid"></div>
+    <div class="calendar-screen">
+      <nav class="month-tabs" id="monthTabs"></nav>
+      <div class="day-grid" id="dayGrid"></div>
+    </div>
 
     <div class="day-view" id="dayView" hidden>
       <button type="button" class="day-close" id="dayClose">&times; Close</button>
