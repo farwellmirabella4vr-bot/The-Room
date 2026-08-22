@@ -452,6 +452,37 @@
     box-shadow: 0 0 0 var(--ink);
   }
 
+  /* ---------- bank selector + lock (temporary styling — full hardware
+     re-skin lands in the same pass as the rest of the visual overhaul) ---------- */
+  .bank-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+  }
+  .bank-selector { display: flex; gap: 0.4rem; }
+  .bank-btn { padding: 0.4rem 0.9rem; font-size: 0.78rem; }
+  .bank-btn.active { background: var(--green); color: var(--cream); }
+  .bank-lock-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+  }
+  .bank-lock-led {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--ink);
+    opacity: 0.35;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+  }
+  .bank-lock-btn.engaged { background: var(--afghan-red); color: var(--cream); }
+  .bank-lock-btn.engaged .bank-lock-led { background: var(--yellow-bright); opacity: 1; box-shadow: 0 0 6px var(--yellow-bright); }
+
   /* ---------- audio-reactive visualizer ---------- */
   .viz-canvas-wrap {
     border: 3px solid var(--ink);
@@ -631,6 +662,12 @@
     <section class="tab-panel" id="tabPads" data-tab-panel="pads">
       <section class="panel reveal">
         <h2>Sampler</h2>
+        <div class="bank-row">
+          <div class="bank-selector" id="bankSelector"></div>
+          <button type="button" class="bank-lock-btn" id="bankLockBtn" aria-pressed="false" title="Lock bank switching">
+            <span class="bank-lock-led"></span> Lock
+          </button>
+        </div>
         <div class="pad-grid" id="padGrid"></div>
         <p class="sample-note">
           Each pad is its own category — drag or upload several files onto one pad (e.g. all your
@@ -811,7 +848,10 @@
   // nothing audibly loaded in the UI can go silent from being evicted.
   const MAX_CACHED_BUFFERS = 48;
   function isSampleIdAssignedToAnyPad(sampleId) {
-    return pads.some((pad) => pad.samples.some((s) => s.sampleId === sampleId));
+    // Checks every bank, not just the active one — a sample sitting on a
+    // pad in a bank you're not currently looking at is still "in use" and
+    // must never be evicted out from under it.
+    return banksState.banks.some((bank) => bank.pads.some((pad) => pad.samples.some((s) => s.sampleId === sampleId)));
   }
   function cacheBufferWithEviction(cache, key, value) {
     cache.delete(key);
@@ -931,15 +971,71 @@
 
     return Array.from({ length: PAD_COUNT }, () => ({ name: "", samples: [], currentIndex: 0 }));
   }
-  let pads = loadPadsState();
-  // every pad gets an FX state { cutoff, delay, reverb } — normalized here
-  // (rather than in each loadPadsState() branch) so it's filled in
-  // regardless of which storage format/migration path was loaded.
-  pads.forEach((p) => {
-    if (!p.fx) p.fx = { cutoff: 20000, delay: 0, reverb: 0 };
-  });
-  function savePadsState() {
-    try { localStorage.setItem(PADS_KEY, JSON.stringify(pads)); } catch (e) { /* storage unavailable */ }
+  function normalizePadFx(padArray) {
+    // every pad gets an FX state { cutoff, delay, reverb } — normalized here
+    // (rather than in each loadPadsState() branch) so it's filled in
+    // regardless of which storage format/migration path was loaded.
+    padArray.forEach((p) => {
+      if (!p.fx) p.fx = { cutoff: 20000, delay: 0, reverb: 0 };
+    });
+    return padArray;
+  }
+  function freshPadArray() {
+    return Array.from({ length: PAD_COUNT }, () => ({ name: "", samples: [], currentIndex: 0, fx: { cutoff: 20000, delay: 0, reverb: 0 } }));
+  }
+
+  // ---------- banks: real switchable sets of 8 pads (Bank A, Bank B, ...),
+  // separate from a single pad's own multi-sample cycling. ----------
+  const BANK_COUNT = 2;
+  const BANK_LETTERS = ["A", "B", "C", "D", "E", "F", "G", "H"].slice(0, BANK_COUNT);
+  const BANKS_KEY = "beat-maker-banks-v2"; // NOT the same key as the old, abandoned OLD_BANKS_KEY format above
+  const LOCK_KEY = "beat-maker-bank-lock-v1";
+
+  function loadBanksState() {
+    try {
+      const raw = localStorage.getItem(BANKS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.banks) && parsed.banks.length === BANK_COUNT) {
+          parsed.banks.forEach((b) => normalizePadFx(b.pads));
+          if (typeof parsed.activeBankIndex !== "number" || parsed.activeBankIndex < 0 || parsed.activeBankIndex >= BANK_COUNT) {
+            parsed.activeBankIndex = 0;
+          }
+          return parsed;
+        }
+      }
+    } catch (e) { /* corrupt storage, fall through to a fresh migration below */ }
+
+    // No v2 banks file yet — loadPadsState() above already migrates through
+    // every older format (the abandoned banks format, and the single-pads
+    // format before that) into today's pad-collections shape. Reuse that
+    // untouched, and become Bank A; any other bank starts empty.
+    const migratedPads = normalizePadFx(loadPadsState());
+    const banks = [{ name: BANK_LETTERS[0], pads: migratedPads }];
+    for (let i = 1; i < BANK_COUNT; i++) banks.push({ name: BANK_LETTERS[i], pads: freshPadArray() });
+    return { banks, activeBankIndex: 0 };
+  }
+  let banksState = loadBanksState();
+  let pads = banksState.banks[banksState.activeBankIndex].pads; // live pointer to the active bank's 8 pads
+  function saveBanksState() {
+    try { localStorage.setItem(BANKS_KEY, JSON.stringify(banksState)); } catch (e) { /* storage unavailable */ }
+  }
+  // Kept as the name every existing call site already uses (~30 places) —
+  // `pads` always points at the active bank, so saving pads state IS
+  // saving banks state now.
+  function savePadsState() { saveBanksState(); }
+  // Persist the migration result immediately, rather than leaving it only
+  // in memory until some unrelated edit happens to trigger the first
+  // save — otherwise a load-then-close-without-editing would silently
+  // redo the same migration again next time instead of it being final.
+  saveBanksState();
+
+  function loadBankLock() {
+    try { return localStorage.getItem(LOCK_KEY) === "1"; } catch (e) { return false; }
+  }
+  let bankLocked = loadBankLock();
+  function saveBankLock() {
+    try { localStorage.setItem(LOCK_KEY, bankLocked ? "1" : "0"); } catch (e) { /* storage unavailable */ }
   }
 
   function currentSampleFor(padIndex) {
@@ -1443,6 +1539,63 @@
 
     if (index === fxSelectedPad) syncFxRackUI();
   }
+
+  // ---------- bank switching ----------
+  const bankSelectorEl = document.getElementById("bankSelector");
+  const bankLockBtn = document.getElementById("bankLockBtn");
+
+  function renderBankSelector() {
+    bankSelectorEl.innerHTML = "";
+    banksState.banks.forEach((bank, i) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "bank-btn" + (i === banksState.activeBankIndex ? " active" : "");
+      btn.textContent = bank.name;
+      btn.disabled = bankLocked;
+      btn.addEventListener("click", () => switchBank(i));
+      bankSelectorEl.appendChild(btn);
+    });
+  }
+
+  function renderBankLock() {
+    bankLockBtn.classList.toggle("engaged", bankLocked);
+    bankLockBtn.setAttribute("aria-pressed", String(bankLocked));
+    bankLockBtn.title = bankLocked ? "Bank locked — click to unlock switching" : "Bank unlocked — click to lock switching";
+  }
+
+  // Switches the active bank in place (pads keeps pointing at whichever
+  // bank is now active, so every existing pads[i]-reading function below
+  // — FX rack, sequencer, saved-beat playback — needs no bank-awareness
+  // of its own). Refuses while locked or mid-chop, so nothing can change
+  // banks out from under an in-progress trim.
+  function switchBank(newIndex) {
+    if (bankLocked || chopModalOpen) return false;
+    if (newIndex < 0 || newIndex >= BANK_COUNT || newIndex === banksState.activeBankIndex) return false;
+    banksState.activeBankIndex = newIndex;
+    pads = banksState.banks[newIndex].pads;
+    saveBanksState();
+    for (let i = 0; i < PAD_COUNT; i++) renderPad(i);
+    syncFxRackUI();
+    renderSeqGrid();
+    renderBankSelector();
+    return true;
+  }
+
+  bankLockBtn.addEventListener("click", () => {
+    bankLocked = !bankLocked;
+    saveBankLock();
+    renderBankLock();
+    renderBankSelector(); // re-render so the per-bank buttons pick up the new disabled state
+  });
+
+  document.addEventListener("keydown", (e) => {
+    // Ignore while typing in a text field/textarea so bracket keys in a
+    // beat/pad name don't accidentally flip banks.
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    if (e.key === "[") switchBank(banksState.activeBankIndex - 1);
+    else if (e.key === "]") switchBank(banksState.activeBankIndex + 1);
+  });
 
   // ---------- FX rack: one shared UI editing whichever pad's gear icon
   // was last clicked ----------
@@ -2247,14 +2400,17 @@
 
   // ---------- init: decode every sample already on a pad, render everything ----------
   async function restoreAllPadSamples() {
-    // Decode every distinct sample used across all pads in parallel — a
-    // pad bank with many samples assigned used to decode one at a time
-    // (pad 8 wouldn't even start until pads 1-7 finished); now every
-    // sample decodes concurrently and the pads render once they're ready.
+    // Decode every distinct sample used across all pads in EVERY bank in
+    // parallel — not just the active bank, otherwise switching to a bank
+    // that wasn't active on load would show pads as assigned but play
+    // nothing, since nothing decoded them yet. A pad bank with many
+    // samples assigned used to decode one at a time (pad 8 wouldn't even
+    // start until pads 1-7 finished); now every sample decodes
+    // concurrently and the pads render once they're ready.
     const uniqueSampleIds = new Set();
-    for (let i = 0; i < PAD_COUNT; i++) {
-      for (const sample of pads[i].samples) uniqueSampleIds.add(sample.sampleId);
-    }
+    banksState.banks.forEach((bank) => {
+      bank.pads.forEach((pad) => pad.samples.forEach((sample) => uniqueSampleIds.add(sample.sampleId)));
+    });
     await Promise.all(Array.from(uniqueSampleIds).map(async (sampleId) => {
       if (bufferCache.has(sampleId)) return;
       try {
@@ -2275,6 +2431,8 @@
   renderSavedBeats();
   loadCountries();
   updateGamepadStatus();
+  renderBankSelector();
+  renderBankLock();
 
   // ---------- mode tabs (Pads / Pattern / FX / Library) ----------
   const TAB_PANEL_IDS = { pads: "tabPads", pattern: "tabPattern", fx: "tabFx", library: "tabLibrary" };
