@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="en" data-time="dusk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Room</title>
+<style>
+
+  /* ============================================================
+     THE ROOM — tweakable variables
+     - Colors, sizes live here. Time-of-day palettes below are
+       overridden live by the JS engine at the bottom of the file
+       (real Date()-driven, continuously interpolated) — the
+       [data-time="..."] blocks are just the no-JS fallback / the
+       four reference palettes the JS blends between.
+     ============================================================ */
+  :root {
+    /* room / architecture palette */
+    --wall:        #3a1f2e;
+    --wall-dark:   #241220;
+    --wall-light:  #4d2a3c;
+    --gold:        #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory:       #f4e8d0;
+    --ivory-dim:   #cbb999;
+    --ember:       #ff9d4d;
+
+    /* layout */
+    --room-size: min(92vmin, 920px);
+    --niche-radius: 65%;
+
+    /* Islamic geometric star-lattice tile — courtyard wall screen.
+       Edit the stroke='%23......' hex to change the pattern color. */
+    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* -------- time-of-day reference palettes (JS blends between these) -------- */
+  [data-time="night"] {
+    --sky-top: #05040c; --sky-upper: #0d0f24; --sky-mid: #14183a;
+    --sky-lower: #1f1a3d; --sky-ground: #160f22;
+    --mountain-far: #241c3a; --mountain-near: #150f24; --mosque-tint: #3a3260;
+    --star-opacity: 1;
+  }
+  [data-time="dawn"] {
+    --sky-top: #3a3540; --sky-upper: #8a7a85; --sky-mid: #d9b8bf;
+    --sky-lower: #f2d9c8; --sky-ground: #c9a98f;
+    --mountain-far: #8a7686; --mountain-near: #5c4a56; --mosque-tint: #6b5a68;
+    --star-opacity: 0.15;
+  }
+  [data-time="day"] {
+    --sky-top: #3d84c9; --sky-upper: #6fb1e0; --sky-mid: #bfe0f2;
+    --sky-lower: #f3e6c4; --sky-ground: #d8c58f;
+    --mountain-far: #a9906b; --mountain-near: #7a6644; --mosque-tint: #8a7350;
+    --star-opacity: 0;
+  }
+  /* dusk — the original warm sunset palette, kept as-is */
+  [data-time="dusk"] {
+    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
+    --sky-lower: #d9773f; --sky-ground: #7a3220;
+    --mountain-far: #4a2a3a; --mountain-near: #2c1622; --mosque-tint: #3a2436;
+    --star-opacity: 0.25;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; margin: 0; }
+
+  body {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1rem;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ivory);
+    background: linear-gradient(
+      to bottom,
+      var(--sky-top) 0%,
+      var(--sky-upper) 35%,
+      var(--sky-mid) 62%,
+      var(--sky-lower) 82%,
+      var(--sky-ground) 100%
+    );
+    transition: background 2s ease;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--gold-bright);
+    text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
+  }
+
+  /* ============================================================
+     SCENE — fixed backdrop behind the courtyard: stars, a distant
+     mosque silhouette, and layered mountain/horizon silhouettes.
+     Sits behind the room grid's empty corner cells and edges, so
+     the courtyard reads as open to a landscape, not sealed indoors.
+     ============================================================ */
+  .scene {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1.6px 1.6px at 8% 15%, #fff, transparent 100%),
+      radial-gradient(1.2px 1.2px at 18% 28%, #fff, transparent 100%),
+      radial-gradient(1.4px 1.4px at 28% 10%, #fff, transparent 100%),
+      radial-gradient(1px 1px at 35% 22%, #fff, transparent 100%),
+      radial-gradient(1.6px 1.6px at 46% 6%, #fff, transparent 100%),
+      radial-gradient(1.2px 1.2px at 54% 18%, #fff, transparent 100%),
+      radial-gradient(1.4px 1.4px at 63% 9%, #fff, transparent 100%),
+      radial-gradient(1px 1px at 72% 24%, #fff, transparent 100%),
+      radial-gradient(1.6px 1.6px at 80% 13%, #fff, transparent 100%),
+      radial-gradient(1.2px 1.2px at 90% 20%, #fff, transparent 100%),
+      radial-gradient(1.4px 1.4px at 5% 35%, #fff, transparent 100%),
+      radial-gradient(1px 1px at 15% 42%, #fff, transparent 100%),
+      radial-gradient(1.6px 1.6px at 25% 38%, #fff, transparent 100%),
+      radial-gradient(1.2px 1.2px at 40% 33%, #fff, transparent 100%),
+      radial-gradient(1.4px 1.4px at 58% 30%, #fff, transparent 100%),
+      radial-gradient(1px 1px at 68% 36%, #fff, transparent 100%),
+      radial-gradient(1.6px 1.6px at 85% 32%, #fff, transparent 100%),
+      radial-gradient(1.2px 1.2px at 95% 40%, #fff, transparent 100%),
+      radial-gradient(1.4px 1.4px at 12% 5%, #fff, transparent 100%),
+      radial-gradient(1px 1px at 50% 3%, #fff, transparent 100%);
+    opacity: var(--star-opacity, 0);
+    transition: opacity 2.5s ease;
+    animation: star-twinkle 6s ease-in-out infinite;
+  }
+  @keyframes star-twinkle {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.35); }
+  }
+
+  /* small distant mosque + minaret silhouette, upper background, off-center */
+  .mosque-distant {
+    position: absolute;
+    top: 8%;
+    right: 14%;
+    width: min(16vw, 170px);
+    height: auto;
+    color: var(--mosque-tint, #3a2436);
+    opacity: 0.4;
+    filter: blur(0.6px);
+    transition: color 2.5s ease;
+  }
+
+  .mountains-far,
+  .mountains-near {
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    transition: background-color 2.5s ease;
+  }
+  .mountains-far {
+    bottom: 30%;
+    height: 20%;
+    background: var(--mountain-far, #3a2a3a);
+    opacity: 0.55;
+    filter: blur(0.5px);
+    clip-path: polygon(0% 100%, 0% 55%, 7% 30%, 14% 50%, 22% 20%, 30% 45%, 38% 15%, 46% 42%, 55% 12%, 63% 40%, 72% 22%, 80% 46%, 88% 18%, 96% 44%, 100% 28%, 100% 100%);
+  }
+  .mountains-near {
+    bottom: 22%;
+    height: 24%;
+    background: var(--mountain-near, #201525);
+    opacity: 0.75;
+    clip-path: polygon(0% 100%, 0% 62%, 10% 38%, 18% 58%, 28% 28%, 38% 55%, 48% 22%, 58% 52%, 68% 30%, 78% 58%, 88% 34%, 100% 50%, 100% 100%);
+  }
+
+  /* ============================================================
+     ROOM — 3x3 grid: four arch niches (courtyard walls opening to
+     sky) + rug "mats" around a glowing center. Rearranging is just
+     editing grid-template-areas.
+     ============================================================ */
+  .room {
+    position: relative;
+    z-index: 1;
+    width: var(--room-size);
+    height: var(--room-size);
+    display: grid;
+    grid-template-columns: 1fr 1.35fr 1fr;
+    grid-template-rows: 1fr 1.35fr 1fr;
+    grid-template-areas:
+      ".    top    ."
+      "left center right"
+      ".    bottom .";
+    gap: clamp(10px, 2vmin, 24px);
+  }
+
+  /* ---------- arch niches: wall at the base, blending to sky above,
+     like a doorway framing a view out of the courtyard ---------- */
+  .arch-niche {
+    position: relative;
+    background:
+      var(--wall-pattern),
+      linear-gradient(to top, var(--wall) 0%, var(--wall) 36%, var(--sky-lower) 82%, var(--sky-mid) 100%);
+    background-size: 64px 64px, auto;
+    transition: background 2s ease;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: var(--niche-radius) var(--niche-radius) 6px 6px / 80% 80% 6px 6px;
+    box-shadow:
+      inset 0 0 40px rgba(0, 0, 0, 0.45),
+      0 0 30px rgba(0, 0, 0, 0.35);
+  }
+  .arch-niche[data-pos="top"]    { grid-area: top; }
+  .arch-niche[data-pos="right"]  { grid-area: right; }
+  .arch-niche[data-pos="bottom"] { grid-area: bottom; }
+  .arch-niche[data-pos="left"]   { grid-area: left; }
+
+  /* lantern hanging inside each niche */
+  .lantern {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 20px;
+    border-radius: 3px;
+    background: linear-gradient(var(--gold-bright), var(--ember));
+    box-shadow:
+      0 0 12px 4px rgba(255, 179, 71, 0.8),
+      0 0 40px 14px rgba(255, 157, 77, 0.45);
+    animation: flicker 3.6s ease-in-out infinite;
+  }
+  .arch-niche[data-pos="top"] .lantern    { animation-delay: 0s; }
+  .arch-niche[data-pos="right"] .lantern  { animation-delay: 0.6s; }
+  .arch-niche[data-pos="bottom"] .lantern { animation-delay: 1.2s; }
+  .arch-niche[data-pos="left"] .lantern   { animation-delay: 1.8s; }
+
+  .arch-niche.lit .lantern {
+    box-shadow:
+      0 0 18px 6px rgba(255, 200, 130, 0.95),
+      0 0 60px 22px rgba(255, 157, 77, 0.6);
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+    45%      { opacity: 0.82; transform: translateX(-50%) scale(0.94); }
+    60%      { opacity: 1; }
+    75%      { opacity: 0.9; transform: translateX(-50%) scale(1.03); }
+  }
+
+  /* ---------- rug / mat (each represents one agent) ---------- */
+  .mat {
+    position: relative;
+    grid-area: var(--pos);
+    align-self: end;
+    justify-self: center;
+    width: 90%;
+    height: 68%;
+    margin-bottom: 6%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+    color: var(--ivory);
+    cursor: pointer;
+    font: inherit;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .mat[data-pos="top"]    { --pos: top; }
+  .mat[data-pos="right"]  { --pos: right; }
+  .mat[data-pos="bottom"] { --pos: bottom; }
+  .mat[data-pos="left"]   { --pos: left; }
+
+  .mat:hover { transform: translateY(-2px); }
+
+  /* the woven rug artwork fills the mat */
+  .rug {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+  }
+
+  /* a shoe / personal object resting just off the rug's edge */
+  .presence {
+    position: absolute;
+    left: 10%;
+    bottom: -14px;
+    width: 15%;
+    min-width: 32px;
+    max-width: 52px;
+    height: auto;
+    z-index: 1;
+    opacity: 0.92;
+    filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.55));
+  }
+
+  /* legible label chip, floating over the rug artwork */
+  .mat-label {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(20, 10, 15, 0.55);
+    border-radius: 8px;
+    backdrop-filter: blur(1px);
+  }
+
+  .mat .glyph {
+    font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+    line-height: 1;
+  }
+  .mat .name {
+    font-size: clamp(0.72rem, 1.5vw, 0.9rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  .mat .status {
+    font-size: 0.63rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+  }
+  .status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 0.4em;
+    background: var(--ivory-dim);
+  }
+
+  /* idle mats: static, dimmer */
+  .mat:not(.active) {
+    opacity: 0.85;
+    filter: saturate(0.85);
+  }
+
+  /* active mat: shimmering sweep + pulsing glow */
+  .mat.active {
+    animation: mat-pulse 2.6s ease-in-out infinite;
+  }
+  .mat.active .rug {
+    filter: drop-shadow(0 0 10px rgba(242, 200, 121, 0.5));
+  }
+  .mat.active::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    background: linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 235, 190, 0.28) 45%,
+      transparent 70%
+    );
+    background-size: 220% 220%;
+    animation: shimmer-sweep 3.4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .mat.active .status-dot {
+    background: var(--ember);
+    box-shadow: 0 0 8px 2px rgba(255, 157, 77, 0.9);
+    animation: dot-blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes mat-pulse {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.12); }
+  }
+  @keyframes shimmer-sweep {
+    0%   { background-position: -40% -40%; }
+    50%  { background-position: 140% 140%; }
+    100% { background-position: -40% -40%; }
+  }
+  @keyframes dot-blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+  }
+
+  /* ---------- central glowing point: shared knowledge ---------- */
+  .knowledge {
+    grid-area: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .knowledge-core {
+    width: clamp(46px, 9vmin, 90px);
+    height: clamp(46px, 9vmin, 90px);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff6dd 0%, #ffcf6b 35%, #d68a2e 65%, transparent 78%);
+    box-shadow:
+      0 0 30px 10px rgba(255, 207, 107, 0.55),
+      0 0 80px 30px rgba(255, 157, 77, 0.3);
+    animation: breathe 4.2s ease-in-out infinite;
+  }
+  .knowledge-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    text-align: center;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.92; }
+    50%      { transform: scale(1.12); opacity: 1; }
+  }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--ivory-dim);
+    letter-spacing: 0.02em;
+  }
+
+</style>
+</head>
+<body>
+
+  <!-- reusable rug ornament symbols, referenced by <use> below -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <g id="corner-motif">
+        <circle cx="0" cy="-6" r="3" fill="currentColor"/>
+        <circle cx="6" cy="0" r="3" fill="currentColor"/>
+        <circle cx="0" cy="6" r="3" fill="currentColor"/>
+        <circle cx="-6" cy="0" r="3" fill="currentColor"/>
+        <circle cx="0" cy="0" r="2.4" fill="currentColor"/>
+      </g>
+      <g id="dot-motif">
+        <polygon points="0,-4 4,0 0,4 -4,0" fill="currentColor"/>
+      </g>
+    </defs>
+  </svg>
+
+  <div class="scene" aria-hidden="true">
+    <div class="stars"></div>
+    <svg class="mosque-distant" viewBox="0 0 160 100" aria-hidden="true">
+      <rect x="10" y="66" width="26" height="24" fill="currentColor"/>
+      <path d="M10 66 A13 13 0 0 1 36 66 Z" fill="currentColor"/>
+      <rect x="34" y="58" width="70" height="32" fill="currentColor"/>
+      <path d="M46 58 A23 23 0 0 1 92 58 Z" fill="currentColor"/>
+      <circle cx="69" cy="30" r="2.2" fill="currentColor"/>
+      <rect x="118" y="34" width="9" height="56" fill="currentColor"/>
+      <path d="M118 34 L127 34 L122.5 18 Z" fill="currentColor"/>
+      <circle cx="122.5" cy="14" r="2.2" fill="currentColor"/>
+    </svg>
+    <div class="mountains-far"></div>
+    <div class="mountains-near"></div>
+  </div>
+
+  <h1>The Room</h1>
+
+  <div class="room">
+    <div class="arch-niche" data-pos="top"><div class="lantern"></div></div>
+    <div class="arch-niche" data-pos="right"><div class="lantern"></div></div>
+    <div class="arch-niche" data-pos="bottom"><div class="lantern"></div></div>
+    <div class="arch-niche" data-pos="left"><div class="lantern"></div></div>
+
+    <div class="knowledge">
+      <div class="knowledge-core"></div>
+      <div class="knowledge-label">Shared&nbsp;Knowledge</div>
+    </div>
+
+    <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
+    <button class="mat" data-agent="planner" data-pos="top">
+      <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="4" y="4" width="192" height="132" rx="10" fill="#1f4a44"/>
+        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#2f7a6d" stroke-width="2"/>
+        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#2f7a6d" stroke-width="1" stroke-dasharray="4 3"/>
+        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#2f7a6d"/>
+        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#2f7a6d"/>
+        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#2f7a6d"/>
+        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#2f7a6d"/>
+        <g transform="translate(100,70)">
+          <polygon points="0,-26 12,-12 26,0 12,12 0,26 -12,12 -26,0 -12,-12" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+          <polygon points="0,-14 14,0 0,14 -14,0" fill="#2f7a6d" stroke="#f2c879" stroke-width="1"/>
+          <circle r="3.5" fill="#f2c879"/>
+        </g>
+      </svg>
+      <svg class="presence" viewBox="0 0 60 30" aria-hidden="true">
+        <circle cx="10" cy="15" r="6" fill="#e8cf9a"/>
+        <circle cx="50" cy="15" r="6" fill="#e8cf9a"/>
+        <line x1="12" y1="15" x2="48" y2="15" stroke="#c9a15a" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+        <line x1="20" y1="15" x2="40" y2="15" stroke="#7a4a2a" stroke-width="1.5"/>
+      </svg>
+      <div class="mat-label">
+        <span class="glyph">&#9784;</span>
+        <span class="name">Planner</span>
+        <span class="status"><span class="status-dot"></span>idle</span>
+      </div>
+    </button>
+
+    <!-- Coder: deep crimson rug, octagon medallion, sandals -->
+    <button class="mat" data-agent="coder" data-pos="right">
+      <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="4" y="4" width="192" height="132" rx="10" fill="#5c1f2b"/>
+        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#8a3345" stroke-width="2"/>
+        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#8a3345" stroke-width="1" stroke-dasharray="4 3"/>
+        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#8a3345"/>
+        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#8a3345"/>
+        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#8a3345"/>
+        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#8a3345"/>
+        <g transform="translate(100,70)">
+          <polygon points="-10,-24 10,-24 24,-10 24,10 10,24 -10,24 -24,10 -24,-10" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+          <polygon points="-6,-14 6,-14 14,-6 14,6 6,14 -6,14 -14,6 -14,-6" fill="#8a3345" stroke="#f2c879" stroke-width="1"/>
+          <circle r="3.5" fill="#f2c879"/>
+        </g>
+      </svg>
+      <svg class="presence" viewBox="0 0 60 30" aria-hidden="true">
+        <ellipse cx="16" cy="16" rx="12" ry="6" fill="#5a3620" transform="rotate(-8 16 16)"/>
+        <ellipse cx="42" cy="15" rx="12" ry="6" fill="#5a3620" transform="rotate(8 42 15)"/>
+        <line x1="10" y1="10" x2="10" y2="20" stroke="#c9a15a" stroke-width="2" transform="rotate(-8 16 16)"/>
+        <line x1="36" y1="9" x2="36" y2="19" stroke="#c9a15a" stroke-width="2" transform="rotate(8 42 15)"/>
+      </svg>
+      <div class="mat-label">
+        <span class="glyph">&#9880;</span>
+        <span class="name">Coder</span>
+        <span class="status"><span class="status-dot"></span>idle</span>
+      </div>
+    </button>
+
+    <!-- Tester: deep navy rug, lobed floral medallion, small lantern -->
+    <button class="mat" data-agent="tester" data-pos="bottom">
+      <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="4" y="4" width="192" height="132" rx="10" fill="#1c2b52"/>
+        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#35508c" stroke-width="2"/>
+        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#35508c" stroke-width="1" stroke-dasharray="4 3"/>
+        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#35508c"/>
+        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#35508c"/>
+        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#35508c"/>
+        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#35508c"/>
+        <g transform="translate(100,70)">
+          <circle r="24" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+          <circle cx="0" cy="-18" r="8" fill="#35508c"/>
+          <circle cx="17" cy="-9" r="8" fill="#35508c"/>
+          <circle cx="17" cy="9" r="8" fill="#35508c"/>
+          <circle cx="0" cy="18" r="8" fill="#35508c"/>
+          <circle cx="-17" cy="9" r="8" fill="#35508c"/>
+          <circle cx="-17" cy="-9" r="8" fill="#35508c"/>
+          <circle r="10" fill="#1c2b52" stroke="#f2c879" stroke-width="1"/>
+          <circle r="3.5" fill="#f2c879"/>
+        </g>
+      </svg>
+      <svg class="presence" viewBox="0 0 30 40" aria-hidden="true">
+        <rect x="13" y="0" width="4" height="5" fill="#8a6a3a"/>
+        <polygon points="15,4 22,14 8,14" fill="#8a6a3a"/>
+        <rect x="10" y="14" width="10" height="16" rx="2" fill="#c9a15a"/>
+        <circle cx="15" cy="34" r="2.5" fill="#8a6a3a"/>
+      </svg>
+      <div class="mat-label">
+        <span class="glyph">&#9878;</span>
+        <span class="name">Tester</span>
+        <span class="status"><span class="status-dot"></span>idle</span>
+      </div>
+    </button>
+
+    <!-- Reviewer: deep olive rug, hexagon medallion, wax seal -->
+    <button class="mat" data-agent="reviewer" data-pos="left">
+      <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="4" y="4" width="192" height="132" rx="10" fill="#33401c"/>
+        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#5c7a2f" stroke-width="2"/>
+        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#5c7a2f" stroke-width="1" stroke-dasharray="4 3"/>
+        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#5c7a2f"/>
+        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#5c7a2f"/>
+        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#5c7a2f"/>
+        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#5c7a2f"/>
+        <g transform="translate(100,70)">
+          <polygon points="0,-26 22,-13 22,13 0,26 -22,13 -22,-13" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+          <polygon points="0,-15 13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5" fill="#5c7a2f" stroke="#f2c879" stroke-width="1"/>
+          <circle r="3.5" fill="#f2c879"/>
+        </g>
+      </svg>
+      <svg class="presence" viewBox="0 0 30 30" aria-hidden="true">
+        <rect x="11" y="2" width="8" height="12" rx="2" fill="#7a4a2a"/>
+        <circle cx="15" cy="20" r="9" fill="#8a2a2a"/>
+        <circle cx="15" cy="20" r="9" fill="none" stroke="#c9a15a" stroke-width="1"/>
+        <path d="M10,20 a5,5 0 0,1 10,0" fill="none" stroke="#c9a15a" stroke-width="1"/>
+      </svg>
+      <div class="mat-label">
+        <span class="glyph">&#9737;</span>
+        <span class="name">Reviewer</span>
+        <span class="status"><span class="status-dot"></span>idle</span>
+      </div>
+    </button>
+  </div>
+
+  <footer>
+    Click a mat to mark that agent as active/working. The sky, mountains
+    and mosque silhouette shift with your system clock in real time.
+    Palette, layout and rug art are plain CSS/SVG at the top of this file —
+    tweak freely.
+  </footer>
+
+<script>
+(() => {
+  const mats = Array.from(document.querySelectorAll(".mat"));
+  const niches = Array.from(document.querySelectorAll(".arch-niche"));
+
+  function setActive(mat) {
+    mats.forEach((m) => {
+      const isActive = m === mat;
+      m.classList.toggle("active", isActive);
+      m.querySelector(".status").innerHTML =
+        '<span class="status-dot"></span>' + (isActive ? "working" : "idle");
+    });
+    niches.forEach((n) => {
+      n.classList.toggle("lit", n.dataset.pos === mat.dataset.pos);
+    });
+  }
+
+  mats.forEach((mat) => mat.addEventListener("click", () => setActive(mat)));
+
+  // Default: coder starts as the active/working agent.
+  setActive(document.querySelector('.mat[data-agent="coder"]'));
+
+  // ------------------------------------------------------------
+  // DYNAMIC TIME OF DAY — real Date()-driven, continuously blended.
+  // Four reference palettes anchored at points in the 24h clock;
+  // colors are linearly interpolated between whichever two anchors
+  // bracket the current time, so the sky/mountains/mosque drift
+  // smoothly rather than snapping between buckets.
+  // ------------------------------------------------------------
+  const NIGHT = {
+    "sky-top": "#05040c", "sky-upper": "#0d0f24", "sky-mid": "#14183a",
+    "sky-lower": "#1f1a3d", "sky-ground": "#160f22",
+    "mountain-far": "#241c3a", "mountain-near": "#150f24", "mosque-tint": "#3a3260",
+    star: 1,
+  };
+  const DAWN = {
+    "sky-top": "#3a3540", "sky-upper": "#8a7a85", "sky-mid": "#d9b8bf",
+    "sky-lower": "#f2d9c8", "sky-ground": "#c9a98f",
+    "mountain-far": "#8a7686", "mountain-near": "#5c4a56", "mosque-tint": "#6b5a68",
+    star: 0.15,
+  };
+  const DAY = {
+    "sky-top": "#3d84c9", "sky-upper": "#6fb1e0", "sky-mid": "#bfe0f2",
+    "sky-lower": "#f3e6c4", "sky-ground": "#d8c58f",
+    "mountain-far": "#a9906b", "mountain-near": "#7a6644", "mosque-tint": "#8a7350",
+    star: 0,
+  };
+  const DUSK = {
+    "sky-top": "#241031", "sky-upper": "#4a1f47", "sky-mid": "#8c3559",
+    "sky-lower": "#d9773f", "sky-ground": "#7a3220",
+    "mountain-far": "#4a2a3a", "mountain-near": "#2c1622", "mosque-tint": "#3a2436",
+    star: 0.25,
+  };
+
+  const anchors = [
+    { h: 0,  ...NIGHT },
+    { h: 5,  ...NIGHT },
+    { h: 7,  ...DAWN },
+    { h: 9,  ...DAY },
+    { h: 16, ...DAY },
+    { h: 18, ...DUSK },
+    { h: 20, ...NIGHT },
+    { h: 24, ...NIGHT },
+  ];
+
+  const COLOR_KEYS = [
+    "sky-top", "sky-upper", "sky-mid", "sky-lower", "sky-ground",
+    "mountain-far", "mountain-near", "mosque-tint",
+  ];
+
+  function hexToRgb(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+  function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
+  function lerpColor(hexA, hexB, t) {
+    const a = hexToRgb(hexA), b = hexToRgb(hexB);
+    return "rgb(" + lerp(a[0], b[0], t) + ", " + lerp(a[1], b[1], t) + ", " + lerp(a[2], b[2], t) + ")";
+  }
+  function bucketName(h) {
+    if (h < 5 || h >= 20) return "night";
+    if (h < 9) return "dawn";
+    if (h < 16) return "day";
+    return "dusk";
+  }
+
+  function applyTimeOfDay() {
+    const now = new Date();
+    const h = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+
+    let i = 0;
+    while (i < anchors.length - 2 && h >= anchors[i + 1].h) i++;
+    const a = anchors[i], b = anchors[i + 1];
+    const span = b.h - a.h;
+    const t = span > 0 ? (h - a.h) / span : 0;
+
+    const root = document.documentElement.style;
+    COLOR_KEYS.forEach((key) => root.setProperty("--" + key, lerpColor(a[key], b[key], t)));
+    root.setProperty("--star-opacity", String(a.star + (b.star - a.star) * t));
+    document.documentElement.dataset.time = bucketName(h);
+  }
+
+  applyTimeOfDay();
+  setInterval(applyTimeOfDay, 60000);
+})();
+</script>
+
+</body>
+</html>
