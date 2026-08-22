@@ -67,6 +67,10 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; }
+  /* The hidden attribute must always win, even over elements whose own
+     class sets display:flex/grid (author CSS otherwise beats the
+     browser's built-in [hidden] rule at equal specificity). */
+  [hidden] { display: none !important; }
 
   body {
     font-family: var(--font-body);
@@ -166,7 +170,7 @@
     outline-offset: 2px;
   }
 
-  input, select {
+  input, select, textarea {
     font-family: var(--font-body);
     font-size: 0.85rem;
     padding: 0.45rem 0.7rem;
@@ -176,6 +180,7 @@
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
     color: var(--text);
   }
+  textarea { width: 100%; resize: vertical; }
 
   /* ---------- layout ---------- */
   main {
@@ -254,6 +259,21 @@
 
   .detail-view { display: flex; flex-direction: column; gap: 1.2rem; }
   .back-btn { align-self: flex-start; font-size: 0.78rem; padding: 0.4rem 0.8rem; }
+
+  .affirmation-card {
+    text-align: center;
+    padding: 0.7rem 1rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .affirmation-native {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--secondary);
+  }
+  .affirmation-native[dir="rtl"] { direction: rtl; }
+  .affirmation-gloss { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.2rem; }
 
   .mini-strip { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .mini-tile {
@@ -339,6 +359,30 @@
   }
   .vd-prompt-controls { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
 
+  .vd-helpers { margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px dashed rgba(0, 0, 0, 0.12); }
+  .vd-helpers-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+  .vd-helper-chip {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.76rem;
+    color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .vd-privacy-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+
   .vd-recorder { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; margin-bottom: 1.4rem; }
   #vdPreview {
     width: 100%;
@@ -383,6 +427,20 @@
   .journal-prompt { color: var(--secondary); font-weight: bold; margin-bottom: 0.2rem; }
   .journal-note { color: var(--text); white-space: pre-wrap; }
   .journal-row .card-del { position: absolute; top: 0.5rem; right: 0.6rem; }
+  .journal-actions { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
+  .star-toggle {
+    background: none;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--text-dim);
+    padding: 0.15rem 0.55rem;
+    font-size: 0.7rem;
+    border-radius: 999px;
+  }
+  .star-toggle.starred { color: var(--gold); border-color: var(--gold); background: rgba(0, 0, 0, 0.03); }
+  .star-toggle:hover { transform: none; }
+  .journal-header-row { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; }
+  .export-shareable-btn { font-size: 0.75rem; }
 
   /* ---------- content library ---------- */
   .library-form {
@@ -401,12 +459,6 @@
   .library-form label:nth-child(4) { grid-column: span 2; }
   .library-form button { grid-column: span 2; justify-self: start; margin-top: 0.2rem; }
 
-  .library-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 1rem 0 0.8rem;
-  }
   .filter-pill {
     font-size: 0.72rem;
     padding: 0.35rem 0.85rem;
@@ -457,6 +509,47 @@
   }
   .quick-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   a.lang-pill { display: inline-block; text-decoration: none; }
+
+  /* ---------- groups (people you're helping learn, per language) ---------- */
+  .groups-intro { font-size: 0.85rem; color: var(--text-dim); margin: 0 0 1rem; }
+  .group-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.2rem;
+  }
+  .group-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .group-form label.full { grid-column: span 2; }
+  .group-form button { grid-column: span 2; justify-self: start; margin-top: 0.2rem; }
+
+  .group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.7rem;
+  }
+  .group-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .group-card-name { font-weight: bold; color: var(--secondary); font-size: 0.9rem; }
+  .group-card-level {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+  }
+  .group-card-notes { font-size: 0.78rem; color: var(--text); white-space: pre-wrap; }
 
   /* ---------- calendar tab ---------- */
   .cal-toolbar {
@@ -599,6 +692,7 @@
     <button type="button" class="lang-pill tab-btn" data-tab="study">Study Modes</button>
     <button type="button" class="lang-pill tab-btn" data-tab="resources">Resources</button>
     <button type="button" class="lang-pill tab-btn" data-tab="video">Video Diary</button>
+    <button type="button" class="lang-pill tab-btn" data-tab="groups">Groups</button>
   </nav>
 
   <main>
@@ -661,8 +755,7 @@
           <button type="submit">Pin It</button>
         </form>
 
-        <div class="library-filters" id="libraryFilters"></div>
-        <div class="library-grid" id="libraryGrid"></div>
+        <div id="libraryGroups"></div>
       </section>
     </section>
 
@@ -674,6 +767,13 @@
           A rough transcript is shown for self-check only — see the note below.
         </p>
 
+        <p class="vd-privacy-note">
+          🔒 Your recording stays on this device only. It is never uploaded or auto-saved anywhere —
+          it exists only in this tab's memory until you download it yourself, and disappears the
+          moment you close or reload the page. Only the practice journal below (your written notes,
+          never the video) is saved locally in this browser.
+        </p>
+
         <div class="vd-prompt-box">
           <span class="vd-label">Prompt</span>
           <div class="vd-prompt-text" id="vdPromptText"></div>
@@ -683,6 +783,10 @@
               <option value="intermediate">Intermediate</option>
             </select>
             <button type="button" id="vdNewPromptBtn">New Prompt</button>
+          </div>
+          <div class="vd-helpers" id="vdHelpers" hidden>
+            <span class="vd-label">Helper phrases &amp; vocab for this prompt</span>
+            <div class="vd-helpers-list" id="vdHelpersList"></div>
           </div>
         </div>
 
@@ -706,8 +810,41 @@
           <button type="button" id="vdSaveLogBtn">Save to Journal</button>
         </div>
 
-        <h3>Practice Journal</h3>
+        <div class="journal-header-row">
+          <h3>Practice Journal</h3>
+          <button type="button" class="export-shareable-btn" id="exportShareableBtn">Export ⭐ shareable insights</button>
+        </div>
+        <p class="vd-intro" style="margin-top:-0.6rem;">
+          Everything here is private by default. Star an entry if it's something you'd consider
+          sharing later, then use the export button to get just those, as plain text — never video.
+        </p>
         <ul class="journal-list" id="journalList"></ul>
+      </section>
+    </section>
+
+    <section class="tab-panel" id="tabGroups" data-tab-panel="groups" hidden>
+      <section class="panel groups-panel reveal">
+        <h2>Groups</h2>
+        <p class="groups-intro">
+          People you're helping learn — family, friends, study partners. A simple roster and
+          notes per language, nothing more (no accounts, no sharing — just your own tracking).
+        </p>
+        <form id="groupForm" class="group-form">
+          <label>Language
+            <select id="groupLanguage"></select>
+          </label>
+          <label>Name
+            <input type="text" id="groupName" required placeholder="e.g. Mom">
+          </label>
+          <label class="full">Level / notes
+            <input type="text" id="groupLevel" placeholder="e.g. Beginner — working on greetings">
+          </label>
+          <label class="full">Progress notes
+            <textarea id="groupNotes" rows="2" placeholder="What are you working on with them?"></textarea>
+          </label>
+          <button type="submit">Add Person</button>
+        </form>
+        <div id="groupsGroups"></div>
       </section>
     </section>
 
@@ -759,45 +896,92 @@
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   }
 
+  // Short in-language affirmations, keyed by language id then skill id —
+  // shown once per skill's detail view. A starting set meant to be edited/
+  // expanded like the other banks below; the Farsi set is deliberately
+  // kept to simple, common constructions — worth double-checking against
+  // a native speaker before relying on it to teach someone else.
+  const AFFIRMATION_BANK = {
+    es: {
+      reading: [
+        { native: "Cada página te acerca más.", gloss: "Every page brings you closer." },
+        { native: "Leer un poco cada día suma mucho.", gloss: "Reading a little each day adds up." },
+      ],
+      writing: [
+        { native: "Escribe sin miedo a los errores.", gloss: "Write without fear of mistakes." },
+        { native: "Cada palabra cuenta.", gloss: "Every word counts." },
+      ],
+      listening: [
+        { native: "Tu oído mejora cada día.", gloss: "Your ear improves every day." },
+        { native: "No necesitas entenderlo todo.", gloss: "You don't need to understand everything." },
+      ],
+      speaking: [
+        { native: "Habla, aunque no sea perfecto.", gloss: "Speak, even if it's not perfect." },
+        { native: "Los errores son parte de aprender.", gloss: "Mistakes are part of learning." },
+      ],
+      comprehension: [
+        { native: "Entender más cada vez es progreso.", gloss: "Understanding more each time is progress." },
+        { native: "Vas mejorando poco a poco.", gloss: "You're improving little by little." },
+      ],
+    },
+    fa: {
+      reading: [{ native: "هر روز کمی بخوان.", gloss: "Read a little every day." }],
+      writing: [{ native: "بدون ترس بنویس.", gloss: "Write without fear." }],
+      listening: [{ native: "گوش تو هر روز بهتر می‌شود.", gloss: "Your ear gets better every day." }],
+      speaking: [{ native: "صحبت کن، حتی اگر کامل نباشد.", gloss: "Speak, even if it's not perfect." }],
+      comprehension: [{ native: "هر روز بهتر می‌فهمی.", gloss: "You understand better every day." }],
+    },
+  };
+  function affirmationFor(langId, skillId) {
+    const pool = (AFFIRMATION_BANK[langId] && AFFIRMATION_BANK[langId][skillId]) || [];
+    if (!pool.length) return null;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
   // Speaking-prompt bank for the Video Diary, keyed by language id then
-  // level. Add more by pushing strings into the matching array — each
-  // language's lists are independent, so they can diverge over time
-  // (e.g. culture-specific topics) even though they start identical.
+  // level. Each prompt is { text, helpers } — helpers are short phrases/
+  // vocab in the target language to lean on if you get stuck mid-recording,
+  // shown alongside the prompt. Add more by pushing objects into the
+  // matching array; helpers: [] is fine for a prompt with none yet — each
+  // language's lists are independent, so they can diverge over time (e.g.
+  // culture-specific topics) even though they start with the same prompts.
+  // The Farsi helper phrases are kept deliberately short/simple for the
+  // same reason as the affirmations above.
   const PROMPT_BANK = {
     es: {
       beginner: [
-        "Describe your day so far.",
-        "Talk about your favorite food and why you like it.",
-        "Describe your family in a few sentences.",
-        "Talk about the weather today.",
-        "Describe your home or room.",
-        "Talk about what you usually do on weekends.",
+        { text: "Describe your day so far.", helpers: ["me desperté — I woke up", "por la mañana — in the morning", "hasta ahora — until now", "todavía tengo que... — I still have to..."] },
+        { text: "Talk about your favorite food and why you like it.", helpers: ["mi comida favorita es... — my favorite food is...", "sabe a... — it tastes like...", "me encanta porque... — I love it because..."] },
+        { text: "Describe your family in a few sentences.", helpers: ["tengo... hermanos — I have... siblings", "mis padres — my parents", "nos llevamos bien — we get along well"] },
+        { text: "Talk about the weather today.", helpers: ["hace sol/calor/frío — it's sunny/hot/cold", "está lloviendo — it's raining", "el cielo está nublado — the sky is cloudy"] },
+        { text: "Describe your home or room.", helpers: ["mi cuarto tiene... — my room has...", "hay una ventana — there's a window", "me gusta porque... — I like it because..."] },
+        { text: "Talk about what you usually do on weekends.", helpers: ["los fines de semana — on weekends", "suelo... — I usually...", "a veces... — sometimes..."] },
       ],
       intermediate: [
-        "Explain your plans for tomorrow.",
-        "Talk about a memorable trip you've taken.",
-        "Describe a challenge you faced recently and how you handled it.",
-        "Give your opinion on a movie or show you've watched recently.",
-        "Explain how to cook your favorite dish, step by step.",
-        "Talk about a goal you're working toward and why it matters to you.",
+        { text: "Explain your plans for tomorrow.", helpers: ["mañana voy a... — tomorrow I'm going to...", "tengo pensado... — I'm planning to..."] },
+        { text: "Talk about a memorable trip you've taken.", helpers: ["el viaje más memorable fue... — the most memorable trip was...", "lo que más me gustó fue... — what I liked most was..."] },
+        { text: "Describe a challenge you faced recently and how you handled it.", helpers: [] },
+        { text: "Give your opinion on a movie or show you've watched recently.", helpers: [] },
+        { text: "Explain how to cook your favorite dish, step by step.", helpers: [] },
+        { text: "Talk about a goal you're working toward and why it matters to you.", helpers: [] },
       ],
     },
     fa: {
       beginner: [
-        "Describe your day so far.",
-        "Talk about your favorite food and why you like it.",
-        "Describe your family in a few sentences.",
-        "Talk about the weather today.",
-        "Describe your home or room.",
-        "Talk about what you usually do on weekends.",
+        { text: "Describe your day so far.", helpers: ["امروز — today", "صبح — morning", "تا الان — until now"] },
+        { text: "Talk about your favorite food and why you like it.", helpers: ["غذای مورد علاقه‌ام — my favorite food", "خوشمزه — delicious"] },
+        { text: "Describe your family in a few sentences.", helpers: ["خانواده‌ام — my family", "مادر — mother", "پدر — father"] },
+        { text: "Talk about the weather today.", helpers: ["هوا — weather", "آفتابی — sunny", "بارانی — rainy"] },
+        { text: "Describe your home or room.", helpers: ["اتاق من — my room", "خانه — home"] },
+        { text: "Talk about what you usually do on weekends.", helpers: ["آخر هفته — weekend", "معمولاً — usually"] },
       ],
       intermediate: [
-        "Explain your plans for tomorrow.",
-        "Talk about a memorable trip you've taken.",
-        "Describe a challenge you faced recently and how you handled it.",
-        "Give your opinion on a movie or show you've watched recently.",
-        "Explain how to cook your favorite dish, step by step.",
-        "Talk about a goal you're working toward and why it matters to you.",
+        { text: "Explain your plans for tomorrow.", helpers: [] },
+        { text: "Talk about a memorable trip you've taken.", helpers: [] },
+        { text: "Describe a challenge you faced recently and how you handled it.", helpers: [] },
+        { text: "Give your opinion on a movie or show you've watched recently.", helpers: [] },
+        { text: "Explain how to cook your favorite dish, step by step.", helpers: [] },
+        { text: "Talk about a goal you're working toward and why it matters to you.", helpers: [] },
       ],
     },
   };
@@ -826,11 +1010,12 @@
           activeTimer: parsed.activeTimer || null,
           library: Array.isArray(parsed.library) ? parsed.library : [],
           videoJournal: Array.isArray(parsed.videoJournal) ? parsed.videoJournal : [],
+          groups: Array.isArray(parsed.groups) ? parsed.groups : [],
           override: parsed.override || null,
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { sessions: [], activeTimer: null, library: [], videoJournal: [], override: null };
+    return { sessions: [], activeTimer: null, library: [], videoJournal: [], groups: [], override: null };
   }
 
   const state = loadState();
@@ -909,7 +1094,7 @@
   }
 
   function populateLangSelects(forceDefault) {
-    ["libLanguage"].forEach((id) => {
+    ["libLanguage", "groupLanguage"].forEach((id) => {
       const sel = document.getElementById(id);
       if (!sel.dataset.populated) {
         sel.innerHTML = LANGUAGES.map((l) => '<option value="' + l.id + '">' + escapeHtml(l.name) + "</option>").join("");
@@ -1041,6 +1226,22 @@
     heading.innerHTML = '<span class="skill-icon-lg">' + skill.icon + "</span><h2>" + skill.name + "</h2>";
     focus.appendChild(heading);
 
+    const affirmation = affirmationFor(activeLanguage().id, skillId);
+    if (affirmation) {
+      const card = document.createElement("div");
+      card.className = "affirmation-card";
+      const native = document.createElement("div");
+      native.className = "affirmation-native";
+      native.textContent = affirmation.native;
+      if (activeLanguage().id === "fa") native.dir = "rtl";
+      const gloss = document.createElement("div");
+      gloss.className = "affirmation-gloss";
+      gloss.textContent = affirmation.gloss;
+      card.appendChild(native);
+      card.appendChild(gloss);
+      focus.appendChild(card);
+    }
+
     const timerDisplay = document.createElement("div");
     timerDisplay.className = "timer-display";
     timerDisplay.id = "timerDisplay";
@@ -1104,58 +1305,56 @@
     if (weekEl) weekEl.textContent = formatDuration(secondsThisWeek(skillId) + liveSecondsFor(skillId));
   }, 1000);
 
-  // ---------- content library ----------
-  let libraryFilter = "all";
+  // ---------- content library — grouped by language (like Quick Links
+  // below) instead of one mixed grid behind a filter, so each language's
+  // pinned content stays visually separate at a glance. ----------
   const TYPE_ICONS = { youtube: "▶", podcast: "🎙", show: "📺", other: "🔗" };
 
-  function makeFilterPill(label, active, onClick) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "filter-pill" + (active ? " active" : "");
-    b.textContent = label;
-    b.addEventListener("click", onClick);
-    return b;
-  }
-
-  function renderLibraryFilters() {
-    const wrap = document.getElementById("libraryFilters");
-    wrap.innerHTML = "";
-    wrap.appendChild(makeFilterPill("All", libraryFilter === "all", () => { libraryFilter = "all"; renderLibraryFilters(); renderLibrary(); }));
-    LANGUAGES.forEach((l) => {
-      wrap.appendChild(makeFilterPill(l.flag + " " + l.name, libraryFilter === l.id, () => { libraryFilter = l.id; renderLibraryFilters(); renderLibrary(); }));
-    });
-  }
-
   function renderLibrary() {
-    const grid = document.getElementById("libraryGrid");
-    grid.innerHTML = "";
-    const items = state.library.filter((item) => libraryFilter === "all" || item.languageId === libraryFilter);
-    if (!items.length) {
-      grid.innerHTML = '<p class="empty-note">Nothing pinned yet' + (libraryFilter === "all" ? "" : " for this language") + ".</p>";
+    const wrap = document.getElementById("libraryGroups");
+    wrap.innerHTML = "";
+    if (!state.library.length) {
+      wrap.innerHTML = '<p class="empty-note">Nothing pinned yet.</p>';
       return;
     }
-    items.slice().reverse().forEach((item) => {
-      const lang = LANGUAGES.find((l) => l.id === item.languageId);
-      const card = document.createElement("div");
-      card.className = "library-card";
-      card.innerHTML =
-        '<div class="card-top"><span>' + (TYPE_ICONS[item.type] || "🔗") + " " + escapeHtml(item.type) + "</span>" +
-        "<span>" + (lang ? lang.flag : "") + "</span></div>" +
-        '<div class="card-title">' + escapeHtml(item.title) + "</div>" +
-        (item.url ? '<a class="card-link" href="' + encodeURI(item.url) + '" target="_blank" rel="noopener noreferrer">Open →</a>' : "");
-      const delBtn = document.createElement("button");
-      delBtn.type = "button";
-      delBtn.className = "card-del";
-      delBtn.textContent = "Remove";
-      delBtn.addEventListener("click", () => {
-        state.library = state.library.filter((x) => x.id !== item.id);
-        saveState();
-        renderLibrary();
-        renderQuickLinks();
+    LANGUAGES.forEach((lang) => {
+      const items = state.library.filter((item) => item.languageId === lang.id);
+      if (!items.length) return;
+      const group = document.createElement("div");
+      group.className = "quick-links-group";
+      const heading = document.createElement("div");
+      heading.className = "quick-links-lang";
+      heading.textContent = lang.flag + " " + lang.name;
+      group.appendChild(heading);
+
+      const grid = document.createElement("div");
+      grid.className = "library-grid";
+      items.slice().reverse().forEach((item) => {
+        const card = document.createElement("div");
+        card.className = "library-card";
+        card.innerHTML =
+          '<div class="card-top"><span>' + (TYPE_ICONS[item.type] || "🔗") + " " + escapeHtml(item.type) + "</span></div>" +
+          '<div class="card-title">' + escapeHtml(item.title) + "</div>" +
+          (item.url ? '<a class="card-link" href="' + encodeURI(item.url) + '" target="_blank" rel="noopener noreferrer">Open →</a>' : "");
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "card-del";
+        delBtn.textContent = "Remove";
+        delBtn.addEventListener("click", () => {
+          state.library = state.library.filter((x) => x.id !== item.id);
+          saveState();
+          renderLibrary();
+          renderQuickLinks();
+        });
+        card.appendChild(delBtn);
+        grid.appendChild(card);
       });
-      card.appendChild(delBtn);
-      grid.appendChild(card);
+      group.appendChild(grid);
+      wrap.appendChild(group);
     });
+    if (!wrap.children.length) {
+      wrap.innerHTML = '<p class="empty-note">Nothing pinned yet.</p>';
+    }
   }
 
   function renderQuickLinks() {
@@ -1213,6 +1412,81 @@
     document.getElementById("libUrl").value = "";
     renderLibrary();
     renderQuickLinks();
+  });
+
+  // ---------- groups: people you're helping learn, grouped by language
+  // (same visual pattern as Quick Links / the Content Library above) ----------
+  function renderGroups() {
+    const wrap = document.getElementById("groupsGroups");
+    wrap.innerHTML = "";
+    if (!state.groups.length) {
+      wrap.innerHTML = '<p class="empty-note">No one added yet.</p>';
+      return;
+    }
+    LANGUAGES.forEach((lang) => {
+      const people = state.groups.filter((p) => p.languageId === lang.id);
+      if (!people.length) return;
+      const group = document.createElement("div");
+      group.className = "quick-links-group";
+      const heading = document.createElement("div");
+      heading.className = "quick-links-lang";
+      heading.textContent = lang.flag + " " + lang.name;
+      group.appendChild(heading);
+
+      const grid = document.createElement("div");
+      grid.className = "group-grid";
+      people.slice().reverse().forEach((person) => {
+        const card = document.createElement("div");
+        card.className = "group-card";
+        const name = document.createElement("div");
+        name.className = "group-card-name";
+        name.textContent = person.name;
+        card.appendChild(name);
+        if (person.level) {
+          const level = document.createElement("div");
+          level.className = "group-card-level";
+          level.textContent = person.level;
+          card.appendChild(level);
+        }
+        if (person.notes) {
+          const notes = document.createElement("div");
+          notes.className = "group-card-notes";
+          notes.textContent = person.notes;
+          card.appendChild(notes);
+        }
+        const delBtn = document.createElement("button");
+        delBtn.type = "button";
+        delBtn.className = "card-del";
+        delBtn.textContent = "Remove";
+        delBtn.addEventListener("click", () => {
+          state.groups = state.groups.filter((x) => x.id !== person.id);
+          saveState();
+          renderGroups();
+        });
+        card.appendChild(delBtn);
+        grid.appendChild(card);
+      });
+      group.appendChild(grid);
+      wrap.appendChild(group);
+    });
+    if (!wrap.children.length) {
+      wrap.innerHTML = '<p class="empty-note">No one added yet.</p>';
+    }
+  }
+
+  document.getElementById("groupForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const languageId = document.getElementById("groupLanguage").value;
+    const name = document.getElementById("groupName").value.trim();
+    const level = document.getElementById("groupLevel").value.trim();
+    const notes = document.getElementById("groupNotes").value.trim();
+    if (!name) return;
+    state.groups.push({ id: genId(), languageId, name, level, notes, addedAt: todayISODate() });
+    saveState();
+    document.getElementById("groupName").value = "";
+    document.getElementById("groupLevel").value = "";
+    document.getElementById("groupNotes").value = "";
+    renderGroups();
   });
 
   // ---------- calendar ----------
@@ -1384,7 +1658,7 @@
   });
 
   // ---------- tab bar ----------
-  const TAB_PANEL_IDS = { calendar: "tabCalendar", study: "tabStudy", resources: "tabResources", video: "tabVideo" };
+  const TAB_PANEL_IDS = { calendar: "tabCalendar", study: "tabStudy", resources: "tabResources", video: "tabVideo", groups: "tabGroups" };
   function switchTab(tabId) {
     Object.keys(TAB_PANEL_IDS).forEach((id) => {
       document.getElementById(TAB_PANEL_IDS[id]).hidden = id !== tabId;
@@ -1393,7 +1667,8 @@
       btn.classList.toggle("active", btn.dataset.tab === tabId);
     });
     if (tabId === "calendar") renderCalendar();
-    if (tabId === "resources") renderQuickLinks();
+    if (tabId === "resources") { renderQuickLinks(); renderLibrary(); }
+    if (tabId === "groups") renderGroups();
   }
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => switchTab(btn.dataset.tab));
@@ -1402,17 +1677,35 @@
   // ---------- video diary: prompt bank navigation ----------
   let currentLevel = "beginner";
   let currentPromptText = "";
+  let currentPromptHelpers = [];
 
   function pickNewPrompt() {
     const pool = (PROMPT_BANK[activeLanguage().id] && PROMPT_BANK[activeLanguage().id][currentLevel]) || [];
-    if (!pool.length) { currentPromptText = ""; return; }
-    if (pool.length === 1) { currentPromptText = pool[0]; return; }
-    let next = currentPromptText;
-    while (next === currentPromptText) next = pool[Math.floor(Math.random() * pool.length)];
-    currentPromptText = next;
+    if (!pool.length) { currentPromptText = ""; currentPromptHelpers = []; return; }
+    let next = pool[0];
+    if (pool.length > 1) {
+      while (next.text === currentPromptText) next = pool[Math.floor(Math.random() * pool.length)];
+    }
+    currentPromptText = next.text;
+    currentPromptHelpers = next.helpers || [];
   }
   function renderPrompt() {
     document.getElementById("vdPromptText").textContent = currentPromptText || "No prompts available for this level yet.";
+    const helpersWrap = document.getElementById("vdHelpers");
+    const helpersList = document.getElementById("vdHelpersList");
+    helpersList.innerHTML = "";
+    if (currentPromptHelpers.length) {
+      currentPromptHelpers.forEach((h) => {
+        const chip = document.createElement("span");
+        chip.className = "vd-helper-chip";
+        chip.textContent = h;
+        if (activeLanguage().id === "fa") chip.dir = "rtl";
+        helpersList.appendChild(chip);
+      });
+      helpersWrap.hidden = false;
+    } else {
+      helpersWrap.hidden = true;
+    }
   }
 
   // ---------- video diary: recording (getUserMedia + MediaRecorder) ----------
@@ -1587,6 +1880,21 @@
         noteEl.textContent = entry.note;
         li.appendChild(noteEl);
       }
+
+      const actions = document.createElement("div");
+      actions.className = "journal-actions";
+      const starBtn = document.createElement("button");
+      starBtn.type = "button";
+      starBtn.className = "star-toggle" + (entry.shareable ? " starred" : "");
+      starBtn.textContent = entry.shareable ? "★ Shareable" : "☆ Mark shareable";
+      starBtn.addEventListener("click", () => {
+        entry.shareable = !entry.shareable;
+        saveState();
+        renderJournal();
+      });
+      actions.appendChild(starBtn);
+      li.appendChild(actions);
+
       const delBtn = document.createElement("button");
       delBtn.type = "button";
       delBtn.className = "card-del";
@@ -1600,6 +1908,34 @@
       list.appendChild(li);
     });
   }
+
+  // Compiles only the starred ("shareable") journal entries into a plain
+  // text file — prompt + your note, never the video itself (which was
+  // never saved anywhere to begin with). Everything else stays private.
+  document.getElementById("exportShareableBtn").addEventListener("click", () => {
+    const starred = state.videoJournal.filter((e) => e.shareable);
+    if (!starred.length) {
+      alert("Nothing starred yet — mark an entry ⭐ shareable first.");
+      return;
+    }
+    const lines = starred
+      .slice()
+      .sort((a, b) => parseInt(a.id, 36) - parseInt(b.id, 36))
+      .map((entry) => {
+        const lang = LANGUAGES.find((l) => l.id === entry.languageId);
+        const header = entry.date + " — " + (lang ? lang.name : entry.languageId) + " — " + entry.level;
+        return header + "\n" + entry.prompt + (entry.note ? "\n" + entry.note : "");
+      });
+    const blob = new Blob([lines.join("\n\n---\n\n")], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "language-hub-shareable-insights.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  });
 
   document.getElementById("vdLevelSelect").addEventListener("change", (e) => {
     currentLevel = e.target.value;
@@ -1627,9 +1963,9 @@
   renderLangPills();
   populateLangSelects(true);
   renderStudyModes();
-  renderLibraryFilters();
   renderLibrary();
   renderQuickLinks();
+  renderGroups();
   pickNewPrompt();
   renderPrompt();
   renderJournal();
