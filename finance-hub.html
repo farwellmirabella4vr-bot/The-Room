@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finance Hub</title>
+<style>
+
+  /* ============================================================
+     FINANCE HUB — same mosque palette and geometric wall texture
+     as room.html. Two clearly separate zones: a Solana meme-coin
+     learning/observation space (gold accent, matches the rest of
+     the room) and a budget/savings tracker (cool teal accent, so
+     the two topics stay visually distinct at a glance).
+     ============================================================ */
+  :root {
+    --wall:        #3a1f2e;
+    --wall-dark:   #241220;
+    --wall-light:  #4d2a3c;
+    --gold:        #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory:       #f4e8d0;
+    --ivory-dim:   #cbb999;
+    --warn-bg:     #6b2a2a;
+    --warn-text:   #ffc9c9;
+    --cool:        #4a9b8e;
+    --cool-bright: #6cc9ba;
+    --income:      #6fc26f;
+    --expense:     #d97a6a;
+
+    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
+    --sky-lower: #d9773f; --sky-ground: #7a3220;
+
+    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ivory);
+    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  a { color: var(--gold-bright); }
+
+  .hub-header { text-align: center; padding: 2rem 1rem 1rem; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--ivory-dim);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold-bright); }
+
+  h1.hub-title {
+    margin: 0;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: clamp(1.3rem, 4vw, 1.9rem);
+    color: var(--gold-bright);
+    text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
+  }
+
+  .disclaimer {
+    max-width: 700px;
+    margin: 1.1rem auto 0;
+    padding: 0.9rem 1.3rem;
+    background: var(--warn-bg);
+    border: 1px solid rgba(255, 201, 201, 0.4);
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    line-height: 1.5;
+    color: var(--warn-text);
+    text-align: center;
+  }
+
+  .section-heading {
+    text-align: center;
+    max-width: 900px;
+    margin: 2.4rem auto 1.2rem;
+    padding: 0 1rem;
+  }
+  .section-heading h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .section-heading p { margin: 0.3rem 0 0; font-size: 0.8rem; color: var(--ivory-dim); }
+  .section-heading.crypto h2 { color: var(--gold-bright); }
+  .section-heading.budget h2 { color: var(--cool-bright); }
+
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  @media (max-width: 800px) { .hub-grid { grid-template-columns: 1fr; } }
+
+  .panel {
+    background:
+      var(--wall-pattern),
+      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 64px 64px, auto;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
+    padding: 1.2rem 1.4rem 1.4rem;
+  }
+  .panel.budget-panel {
+    border-color: rgba(108, 201, 186, 0.45);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(108, 201, 186, 0.14);
+  }
+  .panel h2 {
+    margin: 0 0 0.7rem;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  .budget-panel h2 { color: var(--cool-bright); }
+
+  form { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .form-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .form-row > * { flex: 1; min-width: 100px; }
+
+  input[type="text"], input[type="url"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+    resize: vertical;
+  }
+  .budget-panel input, .budget-panel select, .budget-panel textarea {
+    border-color: rgba(108, 201, 186, 0.4);
+  }
+  input::placeholder, textarea::placeholder { color: rgba(203, 185, 153, 0.5); }
+
+  button {
+    align-self: flex-start;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: none;
+    border-radius: 8px;
+    padding: 0.45rem 0.9rem;
+    color: #2a1a10;
+    font-weight: bold;
+    font-size: 0.76rem;
+    cursor: pointer;
+  }
+  .budget-panel button { background: linear-gradient(180deg, var(--cool-bright), var(--cool)); color: #0c2624; }
+
+  .filter-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.7rem; }
+  .filter-pill {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    color: var(--ivory-dim);
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.68rem;
+    font-weight: normal;
+    cursor: pointer;
+  }
+  .filter-pill.active { color: var(--gold-bright); border-color: var(--gold-bright); }
+
+  .item-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .item-card {
+    position: relative;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+    padding: 0.55rem 2.2rem 0.55rem 0.7rem;
+    font-size: 0.78rem;
+  }
+  .budget-panel .item-card { border-color: rgba(108, 201, 186, 0.3); }
+  .item-title { font-weight: bold; color: var(--gold-bright); }
+  .budget-panel .item-title { color: var(--cool-bright); }
+  .item-meta { color: var(--ivory-dim); font-size: 0.68rem; margin-top: 0.1rem; }
+  .item-notes { margin-top: 0.3rem; white-space: pre-wrap; }
+  .item-link { display: inline-block; margin-top: 0.3rem; font-size: 0.72rem; }
+  .item-del {
+    position: absolute;
+    top: 0.4rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--ivory-dim);
+    font-size: 0.9rem;
+    padding: 0;
+    cursor: pointer;
+  }
+  .item-del:hover { color: var(--warn-text); }
+
+  .amount-income { color: var(--income); font-weight: bold; }
+  .amount-expense { color: var(--expense); font-weight: bold; }
+
+  .empty-note { color: var(--ivory-dim); font-size: 0.8rem; }
+
+  /* ---------- budget summary + progress bar ---------- */
+  .budget-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .budget-summary div { background: rgba(0, 0, 0, 0.22); border-radius: 8px; padding: 0.5rem 0.3rem; }
+  .budget-summary .stat-label { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ivory-dim); }
+  .budget-summary .stat-value { display: block; font-size: 1rem; font-weight: bold; margin-top: 0.15rem; }
+
+  .goal-form { flex-direction: row; flex-wrap: wrap; align-items: end; }
+  .goal-form label { flex: 1; min-width: 120px; font-size: 0.68rem; color: var(--ivory-dim); display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .progress-wrap { margin-bottom: 1.1rem; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ivory-dim); margin-bottom: 0.3rem; }
+  .progress-track {
+    height: 14px;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid rgba(108, 201, 186, 0.35);
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cool), var(--cool-bright));
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .full-width { grid-column: 1 / -1; }
+
+  footer {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 0 1.25rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--ivory-dim);
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <a class="back-link" href="room.html">&larr; Back to the Room</a>
+    <h1 class="hub-title">Finance Hub</h1>
+    <p class="disclaimer">
+      This is a personal learning and observation space, not financial advice.
+      Nothing here is automated trading or investment guidance.
+    </p>
+  </header>
+
+  <div class="section-heading crypto">
+    <h2>Solana Meme Coin Learning Space</h2>
+    <p>Everything below is entered by hand — a place to watch, note, and learn, not a trading tool.</p>
+  </div>
+
+  <div class="hub-grid">
+
+    <section class="panel">
+      <h2>Watchlist</h2>
+      <form id="watchForm">
+        <div class="form-row">
+          <input type="text" id="watchName" placeholder="Name" required>
+          <input type="text" id="watchTicker" placeholder="Ticker (e.g. $DOGE)">
+        </div>
+        <textarea id="watchNotes" rows="2" placeholder="Notes..."></textarea>
+        <input type="url" id="watchLink" placeholder="Birdeye / Solscan / DexScreener link">
+        <button type="submit">Add to Watchlist</button>
+      </form>
+      <ul class="item-list" id="watchList"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Signal Journal</h2>
+      <form id="signalForm">
+        <div class="form-row">
+          <input type="date" id="signalDate">
+        </div>
+        <textarea id="signalNote" rows="3" placeholder="What did you notice? A whale move, a tweet spike, a pattern..." required></textarea>
+        <button type="submit">Log Signal</button>
+      </form>
+      <ul class="item-list" id="signalList"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Whale Watchlist</h2>
+      <form id="whaleForm">
+        <input type="text" id="whaleAddress" placeholder="Wallet address" required>
+        <div class="form-row">
+          <input type="text" id="whaleNickname" placeholder="Nickname">
+        </div>
+        <textarea id="whaleNotes" rows="2" placeholder="Notes..."></textarea>
+        <button type="submit">Add Wallet</button>
+      </form>
+      <ul class="item-list" id="whaleList"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Learning Notes</h2>
+      <form id="notesForm">
+        <div class="form-row">
+          <input type="text" id="noteTopic" placeholder="Topic (e.g. Liquidity, Hype cycles)">
+          <input type="date" id="noteDate">
+        </div>
+        <textarea id="noteText" rows="3" placeholder="What are you learning about how these markets behave?" required></textarea>
+        <button type="submit">Add Note</button>
+      </form>
+      <div class="filter-pills" id="noteFilters"></div>
+      <ul class="item-list" id="notesList"></ul>
+    </section>
+
+  </div>
+
+  <div class="section-heading budget">
+    <h2>Budget &amp; Savings Tracker</h2>
+    <p>Separate from the crypto space above — a plain, manual ledger and a savings goal.</p>
+  </div>
+
+  <div class="hub-grid">
+
+    <section class="panel budget-panel full-width">
+      <h2>Savings Goal</h2>
+      <form class="goal-form" id="goalForm">
+        <label>Goal name
+          <input type="text" id="goalName" placeholder="e.g. Emergency fund">
+        </label>
+        <label>Target amount ($)
+          <input type="number" id="goalTarget" min="0" step="1">
+        </label>
+        <button type="submit">Set Goal</button>
+      </form>
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="progressText">No goal set yet.</span><span id="progressPercent"></span></div>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      </div>
+
+      <div class="budget-summary">
+        <div><span class="stat-label">Total Income</span><span class="stat-value amount-income" id="totalIncome">$0</span></div>
+        <div><span class="stat-label">Total Expenses</span><span class="stat-value amount-expense" id="totalExpenses">$0</span></div>
+        <div><span class="stat-label">Net Saved</span><span class="stat-value" id="netSaved">$0</span></div>
+      </div>
+
+      <form id="txnForm">
+        <div class="form-row">
+          <select id="txnType">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+          <input type="text" id="txnDescription" placeholder="Description" required>
+          <input type="number" id="txnAmount" placeholder="Amount" min="0" step="0.01" required>
+          <input type="date" id="txnDate">
+        </div>
+        <button type="submit">Add Transaction</button>
+      </form>
+      <ul class="item-list" id="txnList"></ul>
+    </section>
+
+  </div>
+
+  <footer>
+    Everything on this page is saved to this browser's local storage only — nothing is sent
+    anywhere, nothing here reads live prices, wallets, or social data. <code>fetchLiveTokenData()</code>
+    and <code>fetchSocialMentions()</code> in the script below are stubs left ready for a real
+    on-chain/social API once this becomes a connected app.
+  </footer>
+
+<script>
+(() => {
+  const STORAGE_KEY = "room-finance-hub-v1";
+
+  function genId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+  function todayISODate() {
+    const d = new Date();
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+  function formatMoney(n) {
+    const sign = n < 0 ? "-" : "";
+    return sign + "$" + Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  }
+
+  // ------------------------------------------------------------
+  // FUTURE: once this becomes a connected app, these are where live
+  // on-chain data (price, liquidity, holder counts) and social
+  // mention tracking would be fetched and merged alongside the
+  // manually-entered watchlist/signal/whale data above. Both are
+  // stubs — nothing is fetched automatically in this static version.
+  // ------------------------------------------------------------
+  async function fetchLiveTokenData(ticker) { return null; }
+  async function fetchSocialMentions(ticker) { return []; }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          watchlist: Array.isArray(parsed.watchlist) ? parsed.watchlist : [],
+          signals: Array.isArray(parsed.signals) ? parsed.signals : [],
+          whales: Array.isArray(parsed.whales) ? parsed.whales : [],
+          learningNotes: Array.isArray(parsed.learningNotes) ? parsed.learningNotes : [],
+          budget: {
+            goalName: (parsed.budget && parsed.budget.goalName) || "",
+            goalTarget: (parsed.budget && Number(parsed.budget.goalTarget)) || 0,
+            transactions: (parsed.budget && Array.isArray(parsed.budget.transactions)) ? parsed.budget.transactions : [],
+          },
+        };
+      }
+    } catch (e) { /* corrupt storage, fall through to defaults */ }
+    return { watchlist: [], signals: [], whales: [], learningNotes: [], budget: { goalName: "", goalTarget: 0, transactions: [] } };
+  }
+  const state = loadState();
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+  }
+
+  function makeDelBtn(onClick) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "item-del";
+    b.textContent = "×";
+    b.addEventListener("click", onClick);
+    return b;
+  }
+  function sortNewestFirst(arr) {
+    return arr.slice().sort((a, b) => (a.id < b.id ? 1 : -1));
+  }
+
+  // ---------- watchlist ----------
+  function renderWatchlist() {
+    const list = document.getElementById("watchList");
+    list.innerHTML = "";
+    if (!state.watchlist.length) { list.innerHTML = '<li class="empty-note">Nothing on the watchlist yet.</li>'; return; }
+    sortNewestFirst(state.watchlist).forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const title = document.createElement("div");
+      title.className = "item-title";
+      title.textContent = item.name + (item.ticker ? " (" + item.ticker + ")" : "");
+      li.appendChild(title);
+      if (item.notes) {
+        const notes = document.createElement("div");
+        notes.className = "item-notes";
+        notes.textContent = item.notes;
+        li.appendChild(notes);
+      }
+      if (item.link) {
+        const a = document.createElement("a");
+        a.className = "item-link";
+        a.href = item.link;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = "Open chart →";
+        li.appendChild(a);
+      }
+      li.appendChild(makeDelBtn(() => {
+        state.watchlist = state.watchlist.filter((x) => x.id !== item.id);
+        saveState();
+        renderWatchlist();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("watchForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("watchName").value.trim();
+    const ticker = document.getElementById("watchTicker").value.trim();
+    const notes = document.getElementById("watchNotes").value.trim();
+    let link = document.getElementById("watchLink").value.trim();
+    if (!name) return;
+    if (link && !/^https?:\/\//i.test(link)) link = "";
+    state.watchlist.push({ id: genId(), name, ticker, notes, link, addedAt: todayISODate() });
+    saveState();
+    e.target.reset();
+    renderWatchlist();
+  });
+
+  // ---------- signal journal ----------
+  function renderSignals() {
+    const list = document.getElementById("signalList");
+    list.innerHTML = "";
+    if (!state.signals.length) { list.innerHTML = '<li class="empty-note">No signals logged yet.</li>'; return; }
+    sortNewestFirst(state.signals).forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const meta = document.createElement("div");
+      meta.className = "item-meta";
+      meta.textContent = item.date;
+      const notes = document.createElement("div");
+      notes.className = "item-notes";
+      notes.textContent = item.note;
+      li.appendChild(meta);
+      li.appendChild(notes);
+      li.appendChild(makeDelBtn(() => {
+        state.signals = state.signals.filter((x) => x.id !== item.id);
+        saveState();
+        renderSignals();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("signalForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const note = document.getElementById("signalNote").value.trim();
+    const date = document.getElementById("signalDate").value || todayISODate();
+    if (!note) return;
+    state.signals.push({ id: genId(), date, note });
+    saveState();
+    document.getElementById("signalNote").value = "";
+    document.getElementById("signalDate").value = todayISODate();
+    renderSignals();
+  });
+
+  // ---------- whale watchlist ----------
+  function renderWhales() {
+    const list = document.getElementById("whaleList");
+    list.innerHTML = "";
+    if (!state.whales.length) { list.innerHTML = '<li class="empty-note">No wallets tracked yet.</li>'; return; }
+    sortNewestFirst(state.whales).forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const title = document.createElement("div");
+      title.className = "item-title";
+      title.textContent = item.nickname || "(unnamed wallet)";
+      const meta = document.createElement("div");
+      meta.className = "item-meta";
+      meta.textContent = item.address;
+      li.appendChild(title);
+      li.appendChild(meta);
+      if (item.notes) {
+        const notes = document.createElement("div");
+        notes.className = "item-notes";
+        notes.textContent = item.notes;
+        li.appendChild(notes);
+      }
+      const a = document.createElement("a");
+      a.className = "item-link";
+      a.href = "https://solscan.io/account/" + encodeURIComponent(item.address);
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = "View on Solscan →";
+      li.appendChild(a);
+      li.appendChild(makeDelBtn(() => {
+        state.whales = state.whales.filter((x) => x.id !== item.id);
+        saveState();
+        renderWhales();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("whaleForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const address = document.getElementById("whaleAddress").value.trim();
+    const nickname = document.getElementById("whaleNickname").value.trim();
+    const notes = document.getElementById("whaleNotes").value.trim();
+    if (!address) return;
+    state.whales.push({ id: genId(), address, nickname, notes, addedAt: todayISODate() });
+    saveState();
+    e.target.reset();
+    renderWhales();
+  });
+
+  // ---------- learning notes ----------
+  let noteFilter = "all";
+  function renderNoteFilters() {
+    const wrap = document.getElementById("noteFilters");
+    wrap.innerHTML = "";
+    const topics = Array.from(new Set(state.learningNotes.map((n) => n.topic).filter(Boolean)));
+    const makePill = (label, value) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "filter-pill" + (noteFilter === value ? " active" : "");
+      b.textContent = label;
+      b.addEventListener("click", () => { noteFilter = value; renderNoteFilters(); renderLearningNotes(); });
+      return b;
+    };
+    wrap.appendChild(makePill("All", "all"));
+    topics.forEach((t) => wrap.appendChild(makePill(t, t)));
+  }
+  function renderLearningNotes() {
+    const list = document.getElementById("notesList");
+    list.innerHTML = "";
+    const items = state.learningNotes.filter((n) => noteFilter === "all" || n.topic === noteFilter);
+    if (!items.length) { list.innerHTML = '<li class="empty-note">No learning notes yet.</li>'; return; }
+    sortNewestFirst(items).forEach((item) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const title = document.createElement("div");
+      title.className = "item-title";
+      title.textContent = item.topic || "General";
+      const meta = document.createElement("div");
+      meta.className = "item-meta";
+      meta.textContent = item.date;
+      const notes = document.createElement("div");
+      notes.className = "item-notes";
+      notes.textContent = item.note;
+      li.appendChild(title);
+      li.appendChild(meta);
+      li.appendChild(notes);
+      li.appendChild(makeDelBtn(() => {
+        state.learningNotes = state.learningNotes.filter((x) => x.id !== item.id);
+        saveState();
+        renderNoteFilters();
+        renderLearningNotes();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("notesForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const topic = document.getElementById("noteTopic").value.trim();
+    const date = document.getElementById("noteDate").value || todayISODate();
+    const note = document.getElementById("noteText").value.trim();
+    if (!note) return;
+    state.learningNotes.push({ id: genId(), topic, date, note });
+    saveState();
+    document.getElementById("noteText").value = "";
+    document.getElementById("noteTopic").value = "";
+    document.getElementById("noteDate").value = todayISODate();
+    renderNoteFilters();
+    renderLearningNotes();
+  });
+
+  // ---------- budget & savings ----------
+  function renderBudget() {
+    const totalIncome = state.budget.transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+    const totalExpenses = state.budget.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+    const net = totalIncome - totalExpenses;
+
+    document.getElementById("totalIncome").textContent = formatMoney(totalIncome);
+    document.getElementById("totalExpenses").textContent = formatMoney(totalExpenses);
+    document.getElementById("netSaved").textContent = formatMoney(net);
+
+    const target = state.budget.goalTarget;
+    const percent = target > 0 ? Math.max(0, Math.min(100, (net / target) * 100)) : 0;
+    document.getElementById("progressFill").style.width = percent + "%";
+    document.getElementById("progressPercent").textContent = target > 0 ? Math.round(percent) + "%" : "";
+    document.getElementById("progressText").textContent = target > 0
+      ? (state.budget.goalName || "Goal") + ": " + formatMoney(net) + " of " + formatMoney(target)
+      : "No goal set yet.";
+
+    document.getElementById("goalName").value = state.budget.goalName;
+    document.getElementById("goalTarget").value = state.budget.goalTarget || "";
+
+    const list = document.getElementById("txnList");
+    list.innerHTML = "";
+    if (!state.budget.transactions.length) { list.innerHTML = '<li class="empty-note">No transactions logged yet.</li>'; return; }
+    sortNewestFirst(state.budget.transactions).forEach((txn) => {
+      const li = document.createElement("li");
+      li.className = "item-card";
+      const title = document.createElement("div");
+      title.className = "item-title";
+      title.textContent = txn.description;
+      const meta = document.createElement("div");
+      meta.className = "item-meta";
+      meta.textContent = txn.date + " — " + txn.type;
+      const amt = document.createElement("div");
+      amt.className = txn.type === "income" ? "amount-income" : "amount-expense";
+      amt.textContent = (txn.type === "income" ? "+" : "-") + formatMoney(txn.amount);
+      li.appendChild(title);
+      li.appendChild(meta);
+      li.appendChild(amt);
+      li.appendChild(makeDelBtn(() => {
+        state.budget.transactions = state.budget.transactions.filter((x) => x.id !== txn.id);
+        saveState();
+        renderBudget();
+      }));
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("goalForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    state.budget.goalName = document.getElementById("goalName").value.trim();
+    state.budget.goalTarget = Math.max(0, Number(document.getElementById("goalTarget").value) || 0);
+    saveState();
+    renderBudget();
+  });
+  document.getElementById("txnForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const type = document.getElementById("txnType").value;
+    const description = document.getElementById("txnDescription").value.trim();
+    const amount = Math.abs(Number(document.getElementById("txnAmount").value) || 0);
+    const date = document.getElementById("txnDate").value || todayISODate();
+    if (!description || amount <= 0) return;
+    state.budget.transactions.push({ id: genId(), type, description, amount, date });
+    saveState();
+    e.target.reset();
+    document.getElementById("txnDate").value = todayISODate();
+    renderBudget();
+  });
+
+  // ---------- init ----------
+  document.getElementById("signalDate").value = todayISODate();
+  document.getElementById("noteDate").value = todayISODate();
+  document.getElementById("txnDate").value = todayISODate();
+
+  renderWatchlist();
+  renderSignals();
+  renderWhales();
+  renderNoteFilters();
+  renderLearningNotes();
+  renderBudget();
+})();
+</script>
+
+</body>
+</html>
