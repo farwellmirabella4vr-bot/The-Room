@@ -945,20 +945,31 @@
     filter.frequency.value = fx.cutoff;
     src.connect(filter);
     filter.connect(destination);
+    const sendNodes = [];
     if (fxBus) {
       if (fx.delay > 0) {
         const g = ctx.createGain();
         g.gain.value = fx.delay / 100;
         filter.connect(g);
         g.connect(fxBus.delayIn);
+        sendNodes.push(g);
       }
       if (fx.reverb > 0) {
         const g = ctx.createGain();
         g.gain.value = fx.reverb / 100;
         filter.connect(g);
         g.connect(fxBus.reverbIn);
+        sendNodes.push(g);
       }
     }
+    // This hit's filter (and any delay/reverb send gains) are otherwise
+    // permanently wired into the live graph. Disconnect them once the
+    // source finishes so a long session doesn't quietly accumulate one
+    // more of these per pad hit / sequencer step / played beat.
+    src.addEventListener("ended", () => {
+      filter.disconnect();
+      sendNodes.forEach((n) => n.disconnect());
+    });
   }
 
   // White-noise impulse response, decaying via Math.pow(1 - i/len, power) —
@@ -2054,6 +2065,10 @@
   });
 
   function pollGamepad() {
+    // Stop rescheduling while the tab is backgrounded; a shared
+    // visibilitychange listener below restarts this loop once it's
+    // visible again, instead of it running forever unattended.
+    if (document.hidden) return;
     requestAnimationFrame(pollGamepad);
     if (gamepadIndex === null) return;
     const gp = navigator.getGamepads()[gamepadIndex];
@@ -2112,6 +2127,9 @@
   window.addEventListener("resize", resizeVizCanvas);
 
   function drawViz() {
+    // Same rationale as pollGamepad() above: don't keep animating a
+    // canvas nobody can see while the tab is backgrounded.
+    if (document.hidden) return;
     requestAnimationFrame(drawViz);
     analyser.getByteFrequencyData(vizData);
     const w = vizCanvas.width, h = vizCanvas.height;
@@ -2126,6 +2144,16 @@
   }
   resizeVizCanvas();
   requestAnimationFrame(drawViz);
+
+  // pollGamepad()/drawViz() both bail out without rescheduling themselves
+  // while document.hidden is true, so restart both the moment the tab
+  // becomes visible again — otherwise they'd stay stopped forever.
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      requestAnimationFrame(pollGamepad);
+      requestAnimationFrame(drawViz);
+    }
+  });
 
   // ---------- init: decode every sample already on a pad, render everything ----------
   async function restoreAllPadSamples() {

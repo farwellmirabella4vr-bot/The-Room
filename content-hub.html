@@ -456,6 +456,13 @@
     const el = document.createElement("div");
     el.className = "post-card";
 
+    // Rebuilding just this one card (instead of calling renderCards())
+    // means editing/deleting one card no longer tears down and reloads
+    // every other card's photo/video element too.
+    function refreshSelf() {
+      el.replaceWith(buildCardEl(card));
+    }
+
     const thumbWrap = document.createElement("div");
     thumbWrap.className = "card-thumb";
     if (card._objectUrl) {
@@ -509,7 +516,7 @@
       rm.type = "button";
       rm.className = "tag-remove";
       rm.textContent = "×";
-      rm.addEventListener("click", () => { card.tags.splice(idx, 1); saveCards(); renderCards(); });
+      rm.addEventListener("click", () => { card.tags.splice(idx, 1); saveCards(); refreshSelf(); });
       chip.appendChild(rm);
       tagsWrap.appendChild(chip);
     });
@@ -525,7 +532,7 @@
         if (val && !card.tags.includes(val)) {
           card.tags.push(val);
           saveCards();
-          renderCards();
+          refreshSelf();
         } else {
           tagInput.value = "";
         }
@@ -544,7 +551,7 @@
       btn.type = "button";
       btn.className = "status-pill" + (card.status === s ? " active status-" + s : "");
       btn.textContent = s;
-      btn.addEventListener("click", () => { card.status = s; saveCards(); renderCards(); });
+      btn.addEventListener("click", () => { card.status = s; saveCards(); refreshSelf(); });
       statusRow.appendChild(btn);
     });
     el.appendChild(statusRow);
@@ -568,7 +575,11 @@
       if (card._objectUrl) URL.revokeObjectURL(card._objectUrl);
       cards = cards.filter((c) => c.id !== card.id);
       saveCards();
-      renderCards();
+      if (cards.length) {
+        el.remove();
+      } else {
+        renderCards(); // last card gone — only now do we need the empty-state message
+      }
       deleteMedia(card.mediaId).catch(() => {});
     });
     el.appendChild(delBtn);
