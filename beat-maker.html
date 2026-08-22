@@ -83,12 +83,6 @@
   }
   .hub-header p { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--ink); }
 
-  /* ---------- flag rack ---------- */
-  .flag-rack { display: flex; gap: 1.8rem; justify-content: center; margin-top: 0.9rem; }
-  .flag-item { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
-  .flag-icon { width: 30px; height: auto; }
-  .flag-item span { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); }
-
   main { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 1.25rem; }
 
   .panel {
@@ -175,13 +169,13 @@
     font-size: 0.64rem;
     opacity: 0.85;
   }
-  .pad-rename, .pad-next, .pad-chop,
-  .pad-rename:hover, .pad-next:hover, .pad-chop:hover,
-  .pad-rename:active, .pad-next:active, .pad-chop:active {
+  .pad-rename, .pad-next, .pad-chop, .pad-fx,
+  .pad-rename:hover, .pad-next:hover, .pad-chop:hover, .pad-fx:hover,
+  .pad-rename:active, .pad-next:active, .pad-chop:active, .pad-fx:active {
     transform: none;
     box-shadow: none;
   }
-  .pad-rename, .pad-next, .pad-chop {
+  .pad-rename, .pad-next, .pad-chop, .pad-fx {
     position: absolute;
     background: var(--cream);
     border: 2px solid var(--ink);
@@ -196,6 +190,7 @@
     cursor: pointer;
     padding: 0;
   }
+  .pad-fx { top: 0.35rem; right: 1.75rem; }
   .pad-rename { top: 0.35rem; right: 0.4rem; }
   .pad-next { bottom: 0.35rem; right: 0.4rem; }
   .pad-chop { bottom: 0.35rem; left: 0.4rem; }
@@ -367,6 +362,56 @@
 
   footer { position: relative; z-index: 1; max-width: 900px; margin: 1rem auto 0; padding: 0 1.25rem; text-align: center; font-size: 0.7rem; color: var(--ink); opacity: 0.8; }
 
+  /* ---------- FX rack (shared per-pad filter/delay/reverb + reverse) ---------- */
+  .fx-target-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+  }
+  .fx-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.72rem;
+    margin-bottom: 0.7rem;
+  }
+  .fx-row input[type="range"] {
+    flex: 1;
+    accent-color: var(--green);
+  }
+  .fx-row span {
+    min-width: 3.6em;
+    text-align: right;
+    font-size: 0.68rem;
+  }
+
+  /* ---------- gamepad ---------- */
+  .gamepad-status {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+  }
+  .gamepad-legend {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.7rem;
+    line-height: 1.6;
+    text-align: center;
+    color: var(--ink);
+  }
+
+  /* ---------- audio-reactive visualizer ---------- */
+  .viz-canvas-wrap {
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    background: var(--cream);
+    padding: 0.4rem;
+  }
+  #vizCanvas { width: 100%; height: 90px; display: block; }
+
   /* ---------- chop/trim modal ---------- */
   .chop-overlay {
     position: fixed;
@@ -510,27 +555,6 @@
     <a class="back-link" href="room.html" style="margin-left:0.8rem;">Back to the Room</a>
     <h1 class="hub-title">Beat Maker</h1>
     <p>An 8-pad sampler for your own sounds &mdash; tap, record, save, export.</p>
-
-    <div class="flag-rack" aria-hidden="false">
-      <div class="flag-item">
-        <svg class="flag-icon" viewBox="0 0 34 40" aria-hidden="true">
-          <rect x="15" y="2" width="2" height="36" fill="#6b4423"/>
-          <rect x="17" y="4" width="15" height="4" fill="#c60b1e"/>
-          <rect x="17" y="8" width="15" height="4" fill="#ffc400"/>
-          <rect x="17" y="12" width="15" height="4" fill="#c60b1e"/>
-        </svg>
-        <span>Spanish</span>
-      </div>
-      <div class="flag-item">
-        <svg class="flag-icon" viewBox="0 0 34 40" aria-hidden="true">
-          <rect x="15" y="2" width="2" height="36" fill="#6b4423"/>
-          <rect x="17" y="4" width="5" height="12" fill="#221913"/>
-          <rect x="22" y="4" width="5" height="12" fill="#c8351f"/>
-          <rect x="27" y="4" width="5" height="12" fill="#2f7a3c"/>
-        </svg>
-        <span>Farsi (Afghanistan)</span>
-      </div>
-    </div>
   </header>
 
   <main>
@@ -544,6 +568,33 @@
         currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
         direct Splice account connection isn't available, but any sample file works.
       </p>
+    </section>
+
+    <section class="panel">
+      <h2>Visualizer</h2>
+      <div class="viz-canvas-wrap">
+        <canvas id="vizCanvas"></canvas>
+      </div>
+      <p class="sample-note">Reacts to everything passing through the master output — pads, the sequencer, saved-beat playback, and radio capture.</p>
+    </section>
+
+    <section class="panel">
+      <h2>FX Rack</h2>
+      <p class="sample-note">Click the &#9881; gear icon on a pad to edit its filter, delay, and reverb sends. Changes apply live and are baked into exports.</p>
+      <div class="fx-target-label" id="fxTargetLabel">No pad selected</div>
+      <label class="fx-row">Filter Cutoff
+        <input type="range" id="fxCutoff" min="200" max="20000" step="50" value="20000" disabled>
+        <span id="fxCutoffVal">20000Hz</span>
+      </label>
+      <label class="fx-row">Delay Send
+        <input type="range" id="fxDelay" min="0" max="100" step="1" value="0" disabled>
+        <span id="fxDelayVal">0%</span>
+      </label>
+      <label class="fx-row">Reverb Send
+        <input type="range" id="fxReverb" min="0" max="100" step="1" value="0" disabled>
+        <span id="fxReverbVal">0%</span>
+      </label>
+      <label class="fx-row"><input type="checkbox" id="fxReverse" disabled> Reverse sample</label>
     </section>
 
     <section class="panel">
@@ -602,6 +653,17 @@
     </section>
 
     <section class="panel">
+      <h2>Gamepad</h2>
+      <div class="gamepad-status" id="gamepadStatus">No controller connected</div>
+      <ul class="gamepad-legend">
+        <li>Cross / Circle / Square / Triangle / L1 / R1 / L2 / R2 &mdash; pads 1&ndash;8</li>
+        <li>Right stick Y &mdash; sweeps the master filter (up = open, down = closed)</li>
+        <li>D-pad Up / Down &mdash; nudge sequencer BPM &plusmn;1</li>
+        <li>Options &mdash; toggle sequencer play / stop</li>
+      </ul>
+    </section>
+
+    <section class="panel">
       <h2>Saved Beats</h2>
       <ul class="item-list" id="beatsList"></ul>
     </section>
@@ -657,12 +719,22 @@
   // it never fights the browser's autoplay policy.
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   const masterGain = audioCtx.createGain();
-  masterGain.connect(audioCtx.destination);
+  // master chain: masterGain -> masterFilter (right-stick sweep, item 3) ->
+  // analyser (visualizer taps here, item 4) -> destination
+  const masterFilter = audioCtx.createBiquadFilter();
+  masterFilter.type = "lowpass";
+  masterFilter.frequency.value = 20000;
+  const analyser = audioCtx.createAnalyser();
+  analyser.fftSize = 256;
+  masterGain.connect(masterFilter);
+  masterFilter.connect(analyser);
+  analyser.connect(audioCtx.destination);
   function resumeAudioIfNeeded() {
     if (audioCtx.state === "suspended") audioCtx.resume();
   }
 
   const bufferCache = new Map(); // sampleId -> AudioBuffer
+  const reversedBufferCache = new Map(); // sampleId -> reversed AudioBuffer, built lazily
 
   // ---------- IndexedDB: sample blobs + saved beats ----------
   let dbPromise = null;
@@ -772,6 +844,12 @@
     return Array.from({ length: PAD_COUNT }, () => ({ name: "", samples: [], currentIndex: 0 }));
   }
   let pads = loadPadsState();
+  // every pad gets an FX state { cutoff, delay, reverb } — normalized here
+  // (rather than in each loadPadsState() branch) so it's filled in
+  // regardless of which storage format/migration path was loaded.
+  pads.forEach((p) => {
+    if (!p.fx) p.fx = { cutoff: 20000, delay: 0, reverb: 0 };
+  });
   function savePadsState() {
     try { localStorage.setItem(PADS_KEY, JSON.stringify(pads)); } catch (e) { /* storage unavailable */ }
   }
@@ -781,9 +859,38 @@
     if (!pad.samples.length) return null;
     return pad.samples[pad.currentIndex] || pad.samples[0];
   }
+
+  // Reversed buffers are derived lazily from the forward buffer (copy the
+  // channel data, then reverse the copy — the original decoded buffer in
+  // bufferCache is never mutated) and cached so repeated triggers don't
+  // redo the copy/reverse work.
+  function reverseAudioBuffer(buffer) {
+    const reversed = audioCtx.createBuffer(buffer.numberOfChannels, buffer.length, buffer.sampleRate);
+    for (let ch = 0; ch < buffer.numberOfChannels; ch++) {
+      const src = buffer.getChannelData(ch);
+      const dst = reversed.getChannelData(ch);
+      dst.set(src);
+      dst.reverse();
+    }
+    return reversed;
+  }
+
+  // Every buffer lookup in the app (pad trigger, sequencer, record/save
+  // playback, saved-beat export) goes through this, so a sample's
+  // `reversed` flag is honored everywhere consistently.
+  function bufferForSampleEntry(entry) {
+    if (!entry) return null;
+    const forward = bufferCache.get(entry.sampleId);
+    if (!forward) return null;
+    if (!entry.reversed) return forward;
+    if (reversedBufferCache.has(entry.sampleId)) return reversedBufferCache.get(entry.sampleId);
+    const reversed = reverseAudioBuffer(forward);
+    reversedBufferCache.set(entry.sampleId, reversed);
+    return reversed;
+  }
+
   function currentBufferFor(padIndex) {
-    const sample = currentSampleFor(padIndex);
-    return sample ? bufferCache.get(sample.sampleId) || null : null;
+    return bufferForSampleEntry(currentSampleFor(padIndex));
   }
 
   // ---------- shared WAV encoder (used by beat export and by the chop tool) ----------
@@ -824,6 +931,81 @@
     }
     return new Blob([arrayBuffer], { type: "audio/wav" });
   }
+
+  // ============================================================
+  // FX CHAIN — one shared helper builds each hit's per-pad filter +
+  // delay/reverb sends, called identically by live playback (audioCtx)
+  // and offline WAV export (a fresh OfflineAudioContext per render), so
+  // FX sound the same in both.
+  // ============================================================
+  function connectPadChain(ctx, src, padIndex, destination, fxBus) {
+    const fx = pads[padIndex].fx;
+    const filter = ctx.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = fx.cutoff;
+    src.connect(filter);
+    filter.connect(destination);
+    if (fxBus) {
+      if (fx.delay > 0) {
+        const g = ctx.createGain();
+        g.gain.value = fx.delay / 100;
+        filter.connect(g);
+        g.connect(fxBus.delayIn);
+      }
+      if (fx.reverb > 0) {
+        const g = ctx.createGain();
+        g.gain.value = fx.reverb / 100;
+        filter.connect(g);
+        g.connect(fxBus.reverbIn);
+      }
+    }
+  }
+
+  // White-noise impulse response, decaying via Math.pow(1 - i/len, power) —
+  // no external audio file needed for the convolution reverb.
+  function buildImpulseResponse(ctx, durationSec, decayPower) {
+    const sampleRate = ctx.sampleRate;
+    const length = Math.max(1, Math.floor(sampleRate * durationSec));
+    const impulse = ctx.createBuffer(2, length, sampleRate);
+    for (let ch = 0; ch < 2; ch++) {
+      const data = impulse.getChannelData(ch);
+      for (let i = 0; i < length; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / length, decayPower);
+      }
+    }
+    return impulse;
+  }
+
+  // Builds a fresh delay/reverb bus for a given context (the live
+  // audioCtx, or a fresh OfflineAudioContext per export) — both effect
+  // sends feed into `destination`, same as the dry signal path.
+  function buildFxBus(ctx, destination) {
+    const delayNode = ctx.createDelay(1.0);
+    delayNode.delayTime.value = 0.28;
+    const feedbackGain = ctx.createGain();
+    feedbackGain.gain.value = 0.35;
+    const delayWetGain = ctx.createGain();
+    delayWetGain.gain.value = 0.6;
+    delayNode.connect(feedbackGain);
+    feedbackGain.connect(delayNode);
+    delayNode.connect(delayWetGain);
+    delayWetGain.connect(destination);
+
+    const reverbNode = ctx.createConvolver();
+    reverbNode.buffer = buildImpulseResponse(ctx, 2.2, 2.5);
+    const reverbWetGain = ctx.createGain();
+    reverbWetGain.gain.value = 0.6;
+    reverbNode.connect(reverbWetGain);
+    reverbWetGain.connect(destination);
+
+    return { delayIn: delayNode, reverbIn: reverbNode };
+  }
+
+  // The one live FX bus, shared by every pad tap / sequencer step /
+  // record-play / saved-beat play — built once, feeds back into masterGain
+  // alongside the dry path so both go through the same master filter +
+  // analyser downstream.
+  const liveFxBus = buildFxBus(audioCtx, masterGain);
 
   // ============================================================
   // CHOP / TRIM MODAL
@@ -1041,6 +1223,7 @@
   const padGrid = document.getElementById("padGrid");
   const padFileInputs = [];
   const lastTapTime = new Array(PAD_COUNT).fill(0);
+  let fxSelectedPad = null; // which pad the FX rack below is currently editing
 
   for (let i = 0; i < PAD_COUNT; i++) {
     const pad = document.createElement("button");
@@ -1103,6 +1286,17 @@
     });
     pad.appendChild(chopBtn);
 
+    const fxBtn = document.createElement("span");
+    fxBtn.className = "pad-fx";
+    fxBtn.textContent = "⚙";
+    fxBtn.title = "Edit FX (filter/delay/reverb/reverse)";
+    fxBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      fxSelectedPad = i;
+      syncFxRackUI();
+    });
+    pad.appendChild(fxBtn);
+
     pad.addEventListener("click", () => {
       if (pads[i].samples.length) {
         resumeAudioIfNeeded();
@@ -1147,7 +1341,69 @@
     }
     nextBtn.style.display = data.samples.length > 1 ? "flex" : "none";
     chopBtn.style.display = hasSamples ? "flex" : "none";
+
+    if (index === fxSelectedPad) syncFxRackUI();
   }
+
+  // ---------- FX rack: one shared UI editing whichever pad's gear icon
+  // was last clicked ----------
+  const fxTargetLabel = document.getElementById("fxTargetLabel");
+  const fxCutoffInput = document.getElementById("fxCutoff");
+  const fxCutoffVal = document.getElementById("fxCutoffVal");
+  const fxDelayInput = document.getElementById("fxDelay");
+  const fxDelayVal = document.getElementById("fxDelayVal");
+  const fxReverbInput = document.getElementById("fxReverb");
+  const fxReverbVal = document.getElementById("fxReverbVal");
+  const fxReverseInput = document.getElementById("fxReverse");
+
+  function syncFxRackUI() {
+    if (fxSelectedPad === null) {
+      fxTargetLabel.textContent = "No pad selected — click a pad's gear icon";
+      [fxCutoffInput, fxDelayInput, fxReverbInput, fxReverseInput].forEach((el) => { el.disabled = true; });
+      return;
+    }
+    const pad = pads[fxSelectedPad];
+    fxTargetLabel.textContent = "Editing: Pad " + (fxSelectedPad + 1) + (pad.name ? " (" + pad.name + ")" : "");
+    [fxCutoffInput, fxDelayInput, fxReverbInput, fxReverseInput].forEach((el) => { el.disabled = false; });
+    fxCutoffInput.value = pad.fx.cutoff;
+    fxCutoffVal.textContent = pad.fx.cutoff + "Hz";
+    fxDelayInput.value = pad.fx.delay;
+    fxDelayVal.textContent = pad.fx.delay + "%";
+    fxReverbInput.value = pad.fx.reverb;
+    fxReverbVal.textContent = pad.fx.reverb + "%";
+    const sample = pad.samples[pad.currentIndex];
+    fxReverseInput.checked = !!(sample && sample.reversed);
+  }
+
+  fxCutoffInput.addEventListener("input", () => {
+    if (fxSelectedPad === null) return;
+    const val = parseInt(fxCutoffInput.value, 10);
+    pads[fxSelectedPad].fx.cutoff = val;
+    fxCutoffVal.textContent = val + "Hz";
+    savePadsState();
+  });
+  fxDelayInput.addEventListener("input", () => {
+    if (fxSelectedPad === null) return;
+    const val = parseInt(fxDelayInput.value, 10);
+    pads[fxSelectedPad].fx.delay = val;
+    fxDelayVal.textContent = val + "%";
+    savePadsState();
+  });
+  fxReverbInput.addEventListener("input", () => {
+    if (fxSelectedPad === null) return;
+    const val = parseInt(fxReverbInput.value, 10);
+    pads[fxSelectedPad].fx.reverb = val;
+    fxReverbVal.textContent = val + "%";
+    savePadsState();
+  });
+  fxReverseInput.addEventListener("change", () => {
+    if (fxSelectedPad === null) return;
+    const pad = pads[fxSelectedPad];
+    const sample = pad.samples[pad.currentIndex];
+    if (!sample) return;
+    sample.reversed = fxReverseInput.checked;
+    savePadsState();
+  });
 
   // New samples (from a pad drop/upload, or a captured radio clip) are
   // queued and routed through the chop modal one at a time rather than
@@ -1188,7 +1444,7 @@
     resumeAudioIfNeeded();
     const src = audioCtx.createBufferSource();
     src.buffer = buffer;
-    src.connect(masterGain);
+    connectPadChain(audioCtx, src, index, masterGain, liveFxBus);
     src.start(0);
     flashPad(index);
   }
@@ -1206,7 +1462,7 @@
   // whatever is currently loaded live on the 8 pads (used by the
   // sequencer loop and the live-record play/save flow)
   function liveBuffersSnapshot() {
-    return pads.map((p) => p.samples.map((s) => bufferCache.get(s.sampleId) || null));
+    return pads.map((p) => p.samples.map((s) => bufferForSampleEntry(s)));
   }
 
   // ============================================================
@@ -1465,13 +1721,14 @@
     });
   });
 
-  seqBpmInput.value = seqState.bpm;
-  seqBpmInput.addEventListener("change", () => {
-    const val = Math.max(40, Math.min(240, parseInt(seqBpmInput.value, 10) || 100));
+  function setSeqBpm(newBpm) {
+    const val = Math.max(40, Math.min(240, Math.round(newBpm) || 100));
     seqState.bpm = val;
     seqBpmInput.value = val;
     saveSeqState();
-  });
+  }
+  seqBpmInput.value = seqState.bpm;
+  seqBpmInput.addEventListener("change", () => setSeqBpm(parseInt(seqBpmInput.value, 10)));
 
   // Each active step plays whatever sample is currently "dialed in" on
   // that pad at the moment you press Play/Save — the grid itself
@@ -1501,7 +1758,7 @@
       if (!buffer) return;
       const src = audioCtx.createBufferSource();
       src.buffer = buffer;
-      src.connect(masterGain);
+      connectPadChain(audioCtx, src, hit.pad, masterGain, liveFxBus);
       src.start(audioCtx.currentTime + (leadInMs + hit.timeMs) / 1000);
       seqStepTimeouts.push(setTimeout(() => flashPad(hit.pad), leadInMs + hit.timeMs));
     });
@@ -1539,7 +1796,7 @@
       id: genId(),
       name,
       hits,
-      padSamples: pads.map((p) => p.samples.map((s) => s.sampleId)),
+      padSamples: pads.map((p) => p.samples.map((s) => ({ sampleId: s.sampleId, reversed: !!s.reversed }))),
       durationMs: totalSteps() * stepMs,
       createdAt: new Date().toISOString(),
     };
@@ -1598,7 +1855,7 @@
       if (!buffer) return;
       const src = audioCtx.createBufferSource();
       src.buffer = buffer;
-      src.connect(masterGain);
+      connectPadChain(audioCtx, src, hit.pad, masterGain, liveFxBus);
       src.start(audioCtx.currentTime + (leadInMs + hit.timeMs) / 1000);
       setTimeout(() => flashPad(hit.pad), leadInMs + hit.timeMs);
     });
@@ -1619,7 +1876,7 @@
       id: genId(),
       name,
       hits: currentHits.slice(),
-      padSamples: pads.map((p) => p.samples.map((s) => s.sampleId)),
+      padSamples: pads.map((p) => p.samples.map((s) => ({ sampleId: s.sampleId, reversed: !!s.reversed }))),
       durationMs,
       createdAt: new Date().toISOString(),
     };
@@ -1637,14 +1894,20 @@
   });
 
   // ---------- saved beats: list, play, export, delete ----------
-  // Accepts both the current per-pad-collection padSamples format
-  // (array of arrays) and the older single-sample-per-pad format
-  // (flat array of sampleId|null), so beats saved before this change
-  // still play and export correctly.
+  // Accepts three historical padSamples formats and normalizes all of
+  // them to arrays of {sampleId, reversed} entries:
+  //   - oldest: a single sampleId string (or null) per pad
+  //   - middle: an array of plain sampleId strings per pad
+  //   - current: an array of {sampleId, reversed} objects per pad
+  // so beats saved at any point still play and export correctly.
   function normalizedPadSamples(beat) {
     return (beat.padSamples || []).map((entry) => {
-      if (Array.isArray(entry)) return entry;
-      if (entry) return [entry];
+      if (Array.isArray(entry)) {
+        return entry.map((item) => (typeof item === "string"
+          ? { sampleId: item, reversed: false }
+          : { sampleId: item.sampleId, reversed: !!item.reversed }));
+      }
+      if (entry) return [{ sampleId: entry, reversed: false }];
       return [];
     });
   }
@@ -1655,19 +1918,18 @@
     for (let p = 0; p < PAD_COUNT; p++) {
       const list = padSampleLists[p] || [];
       const buffers = [];
-      for (const sampleId of list) {
-        if (bufferCache.has(sampleId)) { buffers.push(bufferCache.get(sampleId)); continue; }
-        try {
-          const record = await getSample(sampleId);
-          if (record) {
-            const arrayBuffer = await record.blob.arrayBuffer();
-            const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-            bufferCache.set(sampleId, buffer);
-            buffers.push(buffer);
-          } else {
-            buffers.push(null);
-          }
-        } catch (e) { buffers.push(null); /* missing/corrupt original sample */ }
+      for (const entry of list) {
+        if (!bufferCache.has(entry.sampleId)) {
+          try {
+            const record = await getSample(entry.sampleId);
+            if (record) {
+              const arrayBuffer = await record.blob.arrayBuffer();
+              const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+              bufferCache.set(entry.sampleId, buffer);
+            }
+          } catch (e) { /* missing/corrupt original sample */ }
+        }
+        buffers.push(bufferForSampleEntry(entry));
       }
       result.push(buffers);
     }
@@ -1679,13 +1941,14 @@
     const durationSec = beat.durationMs / 1000 + 0.3;
     const sampleRate = audioCtx.sampleRate;
     const offlineCtx = new OfflineAudioContext(2, Math.ceil(sampleRate * durationSec), sampleRate);
+    const offlineFxBus = buildFxBus(offlineCtx, offlineCtx.destination);
     beat.hits.forEach((hit) => {
       const idx = typeof hit.sampleIndex === "number" ? hit.sampleIndex : 0;
       const buffer = buffers[hit.pad] && buffers[hit.pad][idx];
       if (!buffer) return;
       const src = offlineCtx.createBufferSource();
       src.buffer = buffer;
-      src.connect(offlineCtx.destination);
+      connectPadChain(offlineCtx, src, hit.pad, offlineCtx.destination, offlineFxBus);
       src.start(hit.timeMs / 1000);
     });
     const rendered = await offlineCtx.startRendering();
@@ -1761,6 +2024,108 @@
       list.appendChild(li);
     });
   }
+
+  // ============================================================
+  // GAMEPAD — standard-mapping controller (what Chrome reports for a
+  // PS5 DualSense over USB/Bluetooth). The Gamepad API has no press
+  // events, so each poll frame diffs button.pressed against the
+  // previous frame to detect a fresh press (otherwise a held button
+  // would re-trigger every single frame).
+  // ============================================================
+  const PAD_TRIGGER_BUTTONS = [0, 1, 2, 3, 4, 5, 6, 7]; // Cross,Circle,Square,Triangle,L1,R1,L2,R2 -> pads 1-8
+  let gamepadIndex = null;
+  let prevButtonPressed = [];
+  const gamepadStatusEl = document.getElementById("gamepadStatus");
+
+  function updateGamepadStatus() {
+    gamepadStatusEl.textContent = gamepadIndex !== null ? "Controller connected — pads live" : "No controller connected";
+  }
+
+  window.addEventListener("gamepadconnected", (e) => {
+    gamepadIndex = e.gamepad.index;
+    prevButtonPressed = new Array(e.gamepad.buttons.length).fill(false);
+    updateGamepadStatus();
+  });
+  window.addEventListener("gamepaddisconnected", (e) => {
+    if (e.gamepad.index === gamepadIndex) {
+      gamepadIndex = null;
+      updateGamepadStatus();
+    }
+  });
+
+  function pollGamepad() {
+    requestAnimationFrame(pollGamepad);
+    if (gamepadIndex === null) return;
+    const gp = navigator.getGamepads()[gamepadIndex];
+    if (!gp) return;
+
+    PAD_TRIGGER_BUTTONS.forEach((btnIndex, padIdx) => {
+      const btn = gp.buttons[btnIndex];
+      if (!btn) return;
+      if (btn.pressed && !prevButtonPressed[btnIndex]) {
+        resumeAudioIfNeeded();
+        triggerPad(padIdx);
+      }
+      prevButtonPressed[btnIndex] = btn.pressed;
+    });
+
+    const dpadUp = gp.buttons[12];
+    if (dpadUp && dpadUp.pressed && !prevButtonPressed[12]) setSeqBpm(seqState.bpm + 1);
+    prevButtonPressed[12] = dpadUp ? dpadUp.pressed : false;
+
+    const dpadDown = gp.buttons[13];
+    if (dpadDown && dpadDown.pressed && !prevButtonPressed[13]) setSeqBpm(seqState.bpm - 1);
+    prevButtonPressed[13] = dpadDown ? dpadDown.pressed : false;
+
+    const optionsBtn = gp.buttons[9];
+    if (optionsBtn && optionsBtn.pressed && !prevButtonPressed[9]) {
+      if (seqLoopInterval) seqStopBtn.click(); else seqPlayBtn.click();
+    }
+    prevButtonPressed[9] = optionsBtn ? optionsBtn.pressed : false;
+
+    // right stick Y sweeps the master filter — up (axis -1) opens to
+    // ~20000Hz, down (axis +1) closes to ~200Hz, exponential for a more
+    // natural-feeling sweep across such a wide frequency range.
+    const axisY = gp.axes[3];
+    if (typeof axisY === "number") {
+      const t = Math.max(0, Math.min(1, (1 - axisY) / 2));
+      masterFilter.frequency.value = 200 * Math.pow(20000 / 200, t);
+    }
+  }
+  requestAnimationFrame(pollGamepad);
+
+  // ============================================================
+  // AUDIO-REACTIVE VISUALIZER — taps the analyser already sitting on
+  // the master chain (after masterFilter, before destination), so it
+  // reacts to everything: pads, sequencer, saved-beat playback, radio
+  // capture (once routed to the master chain by the browser itself).
+  // ============================================================
+  const vizCanvas = document.getElementById("vizCanvas");
+  const vizCtx2d = vizCanvas.getContext("2d");
+  const vizData = new Uint8Array(analyser.frequencyBinCount);
+
+  function resizeVizCanvas() {
+    const rect = vizCanvas.getBoundingClientRect();
+    vizCanvas.width = Math.max(1, Math.round(rect.width));
+    vizCanvas.height = Math.max(1, Math.round(rect.height));
+  }
+  window.addEventListener("resize", resizeVizCanvas);
+
+  function drawViz() {
+    requestAnimationFrame(drawViz);
+    analyser.getByteFrequencyData(vizData);
+    const w = vizCanvas.width, h = vizCanvas.height;
+    vizCtx2d.clearRect(0, 0, w, h);
+    const barCount = vizData.length;
+    const barWidth = w / barCount;
+    vizCtx2d.fillStyle = "#7fae52";
+    for (let i = 0; i < barCount; i++) {
+      const barHeight = (vizData[i] / 255) * h;
+      vizCtx2d.fillRect(i * barWidth, h - barHeight, Math.max(1, barWidth - 1), barHeight);
+    }
+  }
+  resizeVizCanvas();
+  requestAnimationFrame(drawViz);
 
   // ---------- init: decode every sample already on a pad, render everything ----------
   async function restoreAllPadSamples() {
