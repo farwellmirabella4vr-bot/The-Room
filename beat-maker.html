@@ -694,8 +694,12 @@
           <summary>Gamepad Controls</summary>
           <ul class="gamepad-legend">
             <li>Cross / Circle / Square / Triangle / L1 / R1 / L2 / R2 &mdash; pads 1&ndash;8</li>
+            <li>Hold Select + a pad button &mdash; pick that pad as the FX rack's target</li>
             <li>Right stick Y &mdash; sweeps the master filter (up = open, down = closed)</li>
+            <li>Left stick X / Y &mdash; selected pad's delay / reverb send</li>
+            <li>Right stick X &mdash; selected pad's filter cutoff</li>
             <li>D-pad Up / Down &mdash; nudge sequencer BPM &plusmn;1</li>
+            <li>D-pad Left / Right &mdash; switch bank (disabled while locked)</li>
             <li>Options &mdash; toggle sequencer play / stop</li>
           </ul>
         </details>
@@ -1936,8 +1940,16 @@
   const seqBeatNameInput = document.getElementById("seqBeatNameInput");
   const seqBarsBtns = Array.from(document.querySelectorAll(".seq-bars-btn"));
 
+  // Cached [row][step] -> cell element lookup, rebuilt every render, so
+  // the playhead can toggle a single column's highlight per frame without
+  // re-querying the DOM.
+  let seqCellEls = [];
+  let currentPlayheadStep = -1;
+
   function renderSeqGrid() {
     seqGridEl.innerHTML = "";
+    seqCellEls = [];
+    currentPlayheadStep = -1;
     const steps = totalSteps();
     for (let p = 0; p < PAD_COUNT; p++) {
       const row = document.createElement("div");
@@ -1950,6 +1962,7 @@
 
       const cellsWrap = document.createElement("div");
       cellsWrap.className = "seq-cells";
+      const rowCells = [];
       for (let s = 0; s < steps; s++) {
         const cell = document.createElement("button");
         cell.type = "button";
@@ -1963,10 +1976,28 @@
           saveSeqState();
         });
         cellsWrap.appendChild(cell);
+        rowCells.push(cell);
       }
+      seqCellEls.push(rowCells);
       row.appendChild(cellsWrap);
       seqGridEl.appendChild(row);
     }
+  }
+
+  // Toggles the .playhead class off the previous step column and onto
+  // the new one, across every row, without touching anything else.
+  function setPlayheadStep(step) {
+    if (step === currentPlayheadStep) return;
+    if (currentPlayheadStep !== -1) {
+      seqCellEls.forEach((row) => { const c = row[currentPlayheadStep]; if (c) c.classList.remove("playhead"); });
+    }
+    seqCellEls.forEach((row) => { const c = row[step]; if (c) c.classList.add("playhead"); });
+    currentPlayheadStep = step;
+  }
+  function clearPlayheadHighlight() {
+    if (currentPlayheadStep === -1) return;
+    seqCellEls.forEach((row) => { const c = row[currentPlayheadStep]; if (c) c.classList.remove("playhead"); });
+    currentPlayheadStep = -1;
   }
 
   function setSeqControlsDisabled(disabled) {
@@ -2012,23 +2043,43 @@
 
   let seqLoopInterval = null;
   let seqStepTimeouts = [];
+  const SEQ_LEAD_IN_MS = 40;
+  // audioCtx.currentTime at the moment the currently-playing loop
+  // iteration's hits were scheduled — the playhead animator uses this
+  // same anchor + lead-in to figure out which step is "now", so its
+  // highlight stays sample-accurate with what's actually audible
+  // instead of drifting against a separate setInterval/rAF clock.
+  let loopAnchorTime = null;
 
   function scheduleOneLoopIteration() {
+    loopAnchorTime = audioCtx.currentTime;
     const hits = gridToHits();
     const buffers = liveBuffersSnapshot();
     const stepMs = 15000 / seqState.bpm;
     const loopMs = totalSteps() * stepMs;
-    const leadInMs = 40;
     hits.forEach((hit) => {
       const buffer = buffers[hit.pad] && buffers[hit.pad][hit.sampleIndex];
       if (!buffer) return;
       const src = audioCtx.createBufferSource();
       src.buffer = buffer;
       connectPadChain(audioCtx, src, hit.pad, masterGain, liveFxBus);
-      src.start(audioCtx.currentTime + (leadInMs + hit.timeMs) / 1000);
-      seqStepTimeouts.push(setTimeout(() => flashPad(hit.pad), leadInMs + hit.timeMs));
+      src.start(audioCtx.currentTime + (SEQ_LEAD_IN_MS + hit.timeMs) / 1000);
+      seqStepTimeouts.push(setTimeout(() => flashPad(hit.pad), SEQ_LEAD_IN_MS + hit.timeMs));
     });
     return loopMs;
+  }
+
+  function updatePlayhead() {
+    if (!seqLoopInterval) return;
+    requestAnimationFrame(updatePlayhead);
+    if (document.hidden || loopAnchorTime === null) return;
+    const stepMs = 15000 / seqState.bpm;
+    const loopMs = totalSteps() * stepMs;
+    let elapsedMs = (audioCtx.currentTime - loopAnchorTime) * 1000 - SEQ_LEAD_IN_MS;
+    if (elapsedMs < 0) elapsedMs = 0;
+    elapsedMs = elapsedMs % loopMs;
+    const step = Math.min(totalSteps() - 1, Math.floor(elapsedMs / stepMs));
+    setPlayheadStep(step);
   }
 
   seqPlayBtn.addEventListener("click", () => {
@@ -2038,11 +2089,14 @@
     seqPlayBtn.disabled = true;
     seqStopBtn.disabled = false;
     setSeqControlsDisabled(true);
+    requestAnimationFrame(updatePlayhead);
   });
   seqStopBtn.addEventListener("click", () => {
     if (seqLoopInterval) { clearInterval(seqLoopInterval); seqLoopInterval = null; }
     seqStepTimeouts.forEach((t) => clearTimeout(t));
     seqStepTimeouts = [];
+    loopAnchorTime = null;
+    clearPlayheadHighlight();
     seqPlayBtn.disabled = false;
     seqStopBtn.disabled = true;
     setSeqControlsDisabled(false);
@@ -2298,6 +2352,7 @@
   // would re-trigger every single frame).
   // ============================================================
   const PAD_TRIGGER_BUTTONS = [0, 1, 2, 3, 4, 5, 6, 7]; // Cross,Circle,Square,Triangle,L1,R1,L2,R2 -> pads 1-8
+  const FX_STICK_DEADZONE = 0.12; // ignore stick drift near center so per-pad FX doesn't get stomped just by holding a controller
   let gamepadIndex = null;
   let prevButtonPressed = [];
   const gamepadStatusEl = document.getElementById("gamepadStatus");
@@ -2331,12 +2386,24 @@
     const gp = navigator.getGamepads()[gamepadIndex];
     if (!gp) return;
 
+    // Holding Select (8) while pressing a pad trigger picks that pad as
+    // the FX rack's target instead of playing it — the only way to aim
+    // the stick-driven FX controls below at a specific pad without a
+    // mouse. Everything else about the trigger buttons is unchanged.
+    const selectBtn = gp.buttons[8];
+    const selectHeld = !!(selectBtn && selectBtn.pressed);
+
     PAD_TRIGGER_BUTTONS.forEach((btnIndex, padIdx) => {
       const btn = gp.buttons[btnIndex];
       if (!btn) return;
       if (btn.pressed && !prevButtonPressed[btnIndex]) {
-        resumeAudioIfNeeded();
-        triggerPad(padIdx);
+        if (selectHeld) {
+          fxSelectedPad = padIdx;
+          syncFxRackUI();
+        } else {
+          resumeAudioIfNeeded();
+          triggerPad(padIdx);
+        }
       }
       prevButtonPressed[btnIndex] = btn.pressed;
     });
@@ -2348,6 +2415,16 @@
     const dpadDown = gp.buttons[13];
     if (dpadDown && dpadDown.pressed && !prevButtonPressed[13]) setSeqBpm(seqState.bpm - 1);
     prevButtonPressed[13] = dpadDown ? dpadDown.pressed : false;
+
+    // D-pad Left/Right switches banks (still refused while bank-locked —
+    // switchBank() itself guards that, same as the [ and ] keyboard shortcuts).
+    const dpadLeft = gp.buttons[14];
+    if (dpadLeft && dpadLeft.pressed && !prevButtonPressed[14]) switchBank(banksState.activeBankIndex - 1);
+    prevButtonPressed[14] = dpadLeft ? dpadLeft.pressed : false;
+
+    const dpadRight = gp.buttons[15];
+    if (dpadRight && dpadRight.pressed && !prevButtonPressed[15]) switchBank(banksState.activeBankIndex + 1);
+    prevButtonPressed[15] = dpadRight ? dpadRight.pressed : false;
 
     const optionsBtn = gp.buttons[9];
     if (optionsBtn && optionsBtn.pressed && !prevButtonPressed[9]) {
@@ -2362,6 +2439,36 @@
     if (typeof axisY === "number") {
       const t = Math.max(0, Math.min(1, (1 - axisY) / 2));
       masterFilter.frequency.value = 200 * Math.pow(20000 / 200, t);
+    }
+
+    // Left stick X/Y = delay/reverb send, right stick X = filter cutoff,
+    // all applied to whichever pad is currently selected in the FX rack
+    // (click a pad's gear icon, or hold Select + a pad trigger above).
+    // Gated by a deadzone (rather than always-on like the master filter)
+    // because these values are persisted per-pad — an always-on mapping
+    // would silently overwrite saved FX settings just from a stick's
+    // resting position the moment a pad became selected.
+    if (fxSelectedPad !== null) {
+      const pad = pads[fxSelectedPad];
+      let fxChanged = false;
+
+      const stickX = gp.axes[0];
+      if (typeof stickX === "number" && Math.abs(stickX) > FX_STICK_DEADZONE) {
+        const val = Math.round(Math.max(0, Math.min(1, (stickX + 1) / 2)) * 100);
+        if (val !== pad.fx.delay) { pad.fx.delay = val; fxChanged = true; }
+      }
+      const stickY = gp.axes[1];
+      if (typeof stickY === "number" && Math.abs(stickY) > FX_STICK_DEADZONE) {
+        const val = Math.round(Math.max(0, Math.min(1, (1 - stickY) / 2)) * 100); // stick up = more reverb
+        if (val !== pad.fx.reverb) { pad.fx.reverb = val; fxChanged = true; }
+      }
+      const rStickX = gp.axes[2];
+      if (typeof rStickX === "number" && Math.abs(rStickX) > FX_STICK_DEADZONE) {
+        const t = Math.max(0, Math.min(1, (rStickX + 1) / 2));
+        const val = Math.round(200 * Math.pow(20000 / 200, t));
+        if (val !== pad.fx.cutoff) { pad.fx.cutoff = val; fxChanged = true; }
+      }
+      if (fxChanged) { syncFxRackUI(); savePadsState(); }
     }
   }
   requestAnimationFrame(pollGamepad);
@@ -2409,6 +2516,7 @@
     if (!document.hidden) {
       requestAnimationFrame(pollGamepad);
       requestAnimationFrame(drawViz);
+      if (seqLoopInterval) requestAnimationFrame(updatePlayhead);
     }
   });
 
