@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<style>
+
+  /* ============================================================
+     HOME — the front door for the whole project. Built on the same
+     mosque palette/geometric wall texture as room.html (the "base"
+     style), with each room card hinting at that room's own theme
+     via a small accent color, before you actually branch into it.
+     ============================================================ */
+  :root {
+    --wall:        #3a1f2e;
+    --wall-dark:   #241220;
+    --wall-light:  #4d2a3c;
+    --gold:        #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory:       #f4e8d0;
+    --ivory-dim:   #cbb999;
+    --ember:       #ff9d4d;
+
+    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
+    --sky-lower: #d9773f; --sky-ground: #7a3220;
+
+    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ivory);
+    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  a { color: var(--gold-bright); }
+
+  .hub-header { text-align: center; padding: 2.5rem 1rem 1rem; }
+  h1.hub-title {
+    margin: 0;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    color: var(--gold-bright);
+    text-shadow: 0 0 20px rgba(242, 200, 121, 0.5);
+  }
+  .hub-header p { margin: 0.6rem auto 0; max-width: 480px; font-size: 0.85rem; color: var(--ivory-dim); }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+
+  .panel {
+    position: relative;
+    background:
+      var(--wall-pattern),
+      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 64px 64px, auto;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
+    padding: 1.3rem 1.4rem 1.5rem;
+    margin-bottom: 1.75rem;
+  }
+  .panel h2 {
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--gold-bright);
+  }
+
+  /* ---------- today at a glance ---------- */
+  .glance-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+  .glance-chip {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    text-align: center;
+  }
+  .glance-icon { font-size: 1.4rem; margin-bottom: 0.3rem; }
+  .glance-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ivory-dim); }
+  .glance-value { font-size: 1rem; font-weight: bold; color: var(--gold-bright); margin-top: 0.25rem; }
+  .glance-sub { font-size: 0.68rem; color: var(--ivory-dim); margin-top: 0.15rem; }
+
+  /* ---------- room cards ---------- */
+  .room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+  .room-card {
+    display: block;
+    text-decoration: none;
+    color: var(--ivory);
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-top: 4px solid var(--room-accent, var(--gold));
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem 1.3rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .room-card:hover {
+    transform: translateY(-3px);
+    background: rgba(0, 0, 0, 0.32);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+  }
+  .room-card-icon { width: 34px; height: 34px; color: var(--room-accent, var(--gold-bright)); margin-bottom: 0.6rem; }
+  .room-card-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--gold-bright);
+    letter-spacing: 0.03em;
+    margin-bottom: 0.35rem;
+  }
+  .room-card-stat {
+    font-size: 0.78rem;
+    color: var(--ivory-dim);
+  }
+  .room-card-stat.has-data { color: var(--ember); font-weight: bold; }
+
+  footer {
+    max-width: 1000px;
+    margin: 1rem auto 0;
+    padding: 0 1.25rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--ivory-dim);
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <h1 class="hub-title">Home</h1>
+    <p>Your front door into the room, the languages, the learning, the beats, and the ledger.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Today at a Glance</h2>
+      <div class="glance-row">
+        <div class="glance-chip">
+          <div class="glance-icon">🕌</div>
+          <div class="glance-label">Next Prayer</div>
+          <div class="glance-value" id="glancePrayer">&hellip;</div>
+          <div class="glance-sub" id="glancePrayerTime"></div>
+        </div>
+        <div class="glance-chip">
+          <div class="glance-icon">🗣️</div>
+          <div class="glance-label">Studying Today</div>
+          <div class="glance-value" id="glanceLanguage">&hellip;</div>
+          <div class="glance-sub" id="glanceLanguageSub"></div>
+        </div>
+        <div class="glance-chip">
+          <div class="glance-icon">🔥</div>
+          <div class="glance-label">Streak</div>
+          <div class="glance-value" id="glanceStreak">&hellip;</div>
+          <div class="glance-sub">consecutive days opened</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Your Rooms</h2>
+      <div class="room-grid">
+
+        <a class="room-card" href="room.html" style="--room-accent:#d4a24c;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M8 34 L8 20 A12 12 0 0 1 32 20 L32 34 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <line x1="4" y1="34" x2="36" y2="34" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <div class="room-card-name">The Room</div>
+          <div class="room-card-stat">Mosque courtyard &amp; prayer times</div>
+        </a>
+
+        <a class="room-card" href="language-hub.html" style="--room-accent:#c1440e;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="2"/>
+            <ellipse cx="20" cy="20" rx="6" ry="14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="6" y1="20" x2="34" y2="20" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <div class="room-card-name">Language Hub</div>
+          <div class="room-card-stat" id="statLanguageHub">Get started</div>
+        </a>
+
+        <a class="room-card" href="knowledge-center.html" style="--room-accent:#f2c879;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M24 8 A12 12 0 1 0 24 32 A9 9 0 1 1 24 8 Z" fill="currentColor"/>
+          </svg>
+          <div class="room-card-name">Knowledge Center</div>
+          <div class="room-card-stat" id="statKnowledgeCenter">Get started</div>
+        </a>
+
+        <a class="room-card" href="beat-maker.html" style="--room-accent:#7fae52;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="22" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="6" y="22" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="22" y="22" width="12" height="12" rx="2" fill="currentColor"/>
+          </svg>
+          <div class="room-card-name">Beat Maker</div>
+          <div class="room-card-stat" id="statBeatMaker">Get started</div>
+        </a>
+
+        <a class="room-card" href="finance-hub.html" style="--room-accent:#4a9b8e;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <line x1="10" y1="8" x2="10" y2="32" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="7" y="14" width="6" height="10" fill="currentColor"/>
+            <line x1="22" y1="4" x2="22" y2="30" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="19" y="10" width="6" height="14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <line x1="34" y1="10" x2="34" y2="36" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="31" y="18" width="6" height="8" fill="currentColor"/>
+          </svg>
+          <div class="room-card-name">Finance Space</div>
+          <div class="room-card-stat" id="statFinanceHub">Get started</div>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Bookmark this page. Everything below is read locally from what each room has already saved in
+    this browser — nothing is fetched from anywhere else. If a card always shows "Get started" even
+    after using that room, your browser may not share local storage across separate local files;
+    that's a browser limitation, not a broken link.
+  </footer>
+
+<script>
+(() => {
+  function todayISO() {
+    const d = new Date();
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+  function startOfWeek(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diffToMonday = day === 0 ? -6 : 1 - day;
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + diffToMonday);
+    return d;
+  }
+
+  // ------------------------------------------------------------
+  // PRAYER TIMES — same solar-position calculation used in room.html
+  // (Salt Lake City, ISNA method), reimplemented self-contained here
+  // so this page never depends on room.html having been opened first.
+  // ------------------------------------------------------------
+  const SLC_LAT = 40.7608;
+  const SLC_LON = -111.8910;
+  const d2r = Math.PI / 180, r2d = 180 / Math.PI;
+  const dsin = (d) => Math.sin(d * d2r);
+  const dcos = (d) => Math.cos(d * d2r);
+  const dtan = (d) => Math.tan(d * d2r);
+  const darcsin = (x) => Math.asin(x) * r2d;
+  const darccos = (x) => Math.acos(Math.max(-1, Math.min(1, x))) * r2d;
+  const darctan2 = (y, x) => Math.atan2(y, x) * r2d;
+  const fixAngle = (a) => ((a % 360) + 360) % 360;
+  const fixHour = (h) => ((h % 24) + 24) % 24;
+
+  function julianDay(year, month, day) {
+    if (month <= 2) { year -= 1; month += 12; }
+    const A = Math.floor(year / 100);
+    const B = 2 - A + Math.floor(A / 4);
+    return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+  }
+  function sunPosition(jd) {
+    const D = jd - 2451545.0;
+    const g = fixAngle(357.529 + 0.98560028 * D);
+    const q = fixAngle(280.459 + 0.98564736 * D);
+    const L = fixAngle(q + 1.915 * dsin(g) + 0.020 * dsin(2 * g));
+    const e = 23.439 - 0.00000036 * D;
+    let RA = fixHour(darctan2(dcos(e) * dsin(L), dcos(L)) / 15);
+    const eqt = q / 15 - RA;
+    const decl = darcsin(dsin(e) * dsin(L));
+    return { decl, eqt };
+  }
+  function hourAngleForAltitude(lat, decl, altitude) {
+    const val = (dsin(altitude) - dsin(lat) * dsin(decl)) / (dcos(lat) * dcos(decl));
+    return darccos(val);
+  }
+  function toUTCDate(year, month, day, utcHours) {
+    const totalMinutes = Math.round(utcHours * 60);
+    return new Date(Date.UTC(year, month - 1, day, 0, totalMinutes, 0));
+  }
+  function getPrayerTimes(year, month, day) {
+    const jd = julianDay(year, month, day);
+    const { decl, eqt } = sunPosition(jd);
+    const dhuhrUTC = fixHour(12 - SLC_LON / 15 - eqt) + 1 / 60;
+    const hFajrIsha = hourAngleForAltitude(SLC_LAT, decl, -15) / 15;
+    const hMaghrib = hourAngleForAltitude(SLC_LAT, decl, -0.833) / 15;
+    const asrAltitude = darctan2(1, 1 + dtan(Math.abs(SLC_LAT - decl)));
+    const hAsr = hourAngleForAltitude(SLC_LAT, decl, asrAltitude) / 15;
+    return {
+      fajr: toUTCDate(year, month, day, dhuhrUTC - hFajrIsha),
+      dhuhr: toUTCDate(year, month, day, dhuhrUTC),
+      asr: toUTCDate(year, month, day, dhuhrUTC + hAsr),
+      maghrib: toUTCDate(year, month, day, dhuhrUTC + hMaghrib),
+      isha: toUTCDate(year, month, day, dhuhrUTC + hFajrIsha),
+    };
+  }
+  function formatLocalSLC(date) {
+    return date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "America/Denver" });
+  }
+  const PRAYER_NAMES = { fajr: "Fajr", dhuhr: "Dhuhr", asr: "Asr", maghrib: "Maghrib", isha: "Isha" };
+
+  function renderNextPrayer() {
+    const now = new Date();
+    const today = getPrayerTimes(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    const order = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+    const nextKey = order.find((k) => today[k] > now);
+    if (nextKey) {
+      document.getElementById("glancePrayer").textContent = PRAYER_NAMES[nextKey];
+      document.getElementById("glancePrayerTime").textContent = formatLocalSLC(today[nextKey]) + " (Salt Lake City)";
+    } else {
+      const tomorrow = new Date(now.getTime() + 24 * 3600 * 1000);
+      const t2 = getPrayerTimes(tomorrow.getFullYear(), tomorrow.getMonth() + 1, tomorrow.getDate());
+      document.getElementById("glancePrayer").textContent = "Fajr (tomorrow)";
+      document.getElementById("glancePrayerTime").textContent = formatLocalSLC(t2.fajr) + " (Salt Lake City)";
+    }
+  }
+
+  // ------------------------------------------------------------
+  // ACTIVE LANGUAGE — same Mon-Thu Spanish / Fri-Sun Farsi schedule
+  // as language-hub.html, plus a best-effort read of any manual
+  // override saved there.
+  // ------------------------------------------------------------
+  const LANGUAGES = [
+    { id: "es", name: "Spanish", flag: "🇪🇸", days: [1, 2, 3, 4] },
+    { id: "fa", name: "Farsi", flag: "🇮🇷", days: [5, 6, 0] },
+  ];
+  function todaysAutoLanguage() {
+    const dow = new Date().getDay();
+    return LANGUAGES.find((l) => l.days.includes(dow)) || LANGUAGES[0];
+  }
+  function getActiveLanguage() {
+    try {
+      const raw = localStorage.getItem("room-language-hub-v1");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.override) {
+          const l = LANGUAGES.find((x) => x.id === parsed.override);
+          if (l) return { lang: l, isOverride: true };
+        }
+      }
+    } catch (e) { /* cross-page storage unavailable or nothing saved yet */ }
+    return { lang: todaysAutoLanguage(), isOverride: false };
+  }
+  function renderLanguage() {
+    const { lang, isOverride } = getActiveLanguage();
+    document.getElementById("glanceLanguage").textContent = lang.flag + " " + lang.name;
+    document.getElementById("glanceLanguageSub").textContent = isOverride ? "manual override" : "today's schedule";
+  }
+
+  // ------------------------------------------------------------
+  // STREAK — this page's own localStorage, increments once per
+  // calendar day, resets if a day is skipped.
+  // ------------------------------------------------------------
+  function updateStreak() {
+    const STREAK_KEY = "home-streak-v1";
+    let state = { lastVisit: null, streak: 0 };
+    try {
+      const raw = localStorage.getItem(STREAK_KEY);
+      if (raw) state = JSON.parse(raw);
+    } catch (e) { /* corrupt storage, start fresh */ }
+
+    const today = todayISO();
+    if (state.lastVisit !== today) {
+      const yest = new Date();
+      yest.setDate(yest.getDate() - 1);
+      const yesterdayLocal = new Date(yest.getTime() - yest.getTimezoneOffset() * 60000);
+      const yesterday = yesterdayLocal.toISOString().slice(0, 10);
+      state.streak = state.lastVisit === yesterday ? state.streak + 1 : 1;
+      state.lastVisit = today;
+      try { localStorage.setItem(STREAK_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+    }
+    document.getElementById("glanceStreak").textContent = state.streak + (state.streak === 1 ? " day" : " days");
+  }
+
+  // ------------------------------------------------------------
+  // ROOM STATS — best-effort reads of each room's own saved data.
+  // Every one of these fails silently to "Get started" (the default
+  // already in the HTML) if the data isn't there or isn't reachable.
+  // ------------------------------------------------------------
+  function setStat(elId, text) {
+    if (!text) return; // leave the "Get started" default in place
+    const el = document.getElementById(elId);
+    el.textContent = text;
+    el.classList.add("has-data");
+  }
+
+  function renderLanguageHubStat() {
+    try {
+      const raw = localStorage.getItem("room-language-hub-v1");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      const sessions = Array.isArray(parsed.sessions) ? parsed.sessions : [];
+      if (!sessions.length) return;
+      const weekStart = startOfWeek(new Date());
+      const totalSec = sessions
+        .filter((s) => new Date(s.date + "T00:00:00") >= weekStart)
+        .reduce((sum, s) => sum + s.seconds, 0);
+      if (totalSec <= 0) return;
+      setStat("statLanguageHub", Math.round(totalSec / 60) + " min studied this week");
+    } catch (e) { /* nothing readable */ }
+  }
+
+  function renderKnowledgeCenterStat() {
+    try {
+      const raw = localStorage.getItem("room-knowledge-center-v2");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      const unlocked = parsed.unlockedCount || 0;
+      const total = Array.isArray(parsed.entries) ? parsed.entries.length : 0;
+      if (unlocked <= 0 || total <= 0) return;
+      setStat("statKnowledgeCenter", unlocked + " of " + total + " teachings reached");
+    } catch (e) { /* nothing readable */ }
+  }
+
+  function renderFinanceStat() {
+    try {
+      const raw = localStorage.getItem("room-finance-hub-v1");
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      const budget = parsed.budget || {};
+      if (budget.goalTarget > 0) {
+        const txns = Array.isArray(budget.transactions) ? budget.transactions : [];
+        const income = txns.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+        const expenses = txns.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+        const net = Math.round(income - expenses);
+        setStat("statFinanceHub", "$" + net.toLocaleString() + " of $" + Math.round(budget.goalTarget).toLocaleString() + " saved");
+        return;
+      }
+      const totalItems = (parsed.watchlist || []).length + (parsed.signals || []).length +
+        (parsed.whales || []).length + (parsed.learningNotes || []).length;
+      if (totalItems > 0) setStat("statFinanceHub", totalItems + " items tracked");
+    } catch (e) { /* nothing readable */ }
+  }
+
+  function renderBeatMakerStat() {
+    try {
+      const req = indexedDB.open("beat-maker-db", 1);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains("samples")) db.createObjectStore("samples", { keyPath: "id" });
+        if (!db.objectStoreNames.contains("beats")) db.createObjectStore("beats", { keyPath: "id" });
+      };
+      req.onsuccess = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains("beats")) return;
+        const tx = db.transaction("beats", "readonly");
+        const countReq = tx.objectStore("beats").count();
+        countReq.onsuccess = () => {
+          const count = countReq.result;
+          if (count > 0) setStat("statBeatMaker", count + (count === 1 ? " beat saved" : " beats saved"));
+        };
+      };
+      req.onerror = () => { /* IndexedDB unavailable; leave default */ };
+    } catch (e) { /* nothing readable */ }
+  }
+
+  renderNextPrayer();
+  renderLanguage();
+  updateStreak();
+  renderLanguageHubStat();
+  renderKnowledgeCenterStat();
+  renderFinanceStat();
+  renderBeatMakerStat();
+})();
+</script>
+
+</body>
+</html>
