@@ -1,0 +1,10 @@
+{
+  "id": "nest-of-knowledge-sync",
+  "name": "Nest of Knowledge Sync",
+  "version": "1.0.0",
+  "minAppVersion": "0.16.0",
+  "description": "One-way sync from this vault into the life hub's Nest of Knowledge room via a local bridge folder on disk. Never writes back into the vault.",
+  "author": "Trey",
+  "authorUrl": "",
+  "isDesktopOnly": true
+}
