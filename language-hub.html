@@ -178,16 +178,19 @@
   }
 
   /* ---------- layout ---------- */
-  .hub-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.75rem;
+  main {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.25rem;
   }
-  @media (max-width: 800px) {
-    .hub-grid { grid-template-columns: 1fr; }
+
+  /* ---------- tab bar (reuses .lang-pill styling exactly) ---------- */
+  .tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0 1rem 1.5rem;
   }
 
   .panel {
@@ -442,6 +445,120 @@
 
   .empty-note { color: var(--text-dim); font-size: 0.85rem; }
 
+  /* ---------- quick links (Resources tab) ---------- */
+  .quick-links-group { margin-bottom: 1rem; }
+  .quick-links-group:last-child { margin-bottom: 0; }
+  .quick-links-lang {
+    font-family: var(--font-display);
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  .quick-links-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  a.lang-pill { display: inline-block; text-decoration: none; }
+
+  /* ---------- calendar tab ---------- */
+  .cal-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.9rem;
+  }
+  .cal-nav { display: flex; gap: 0.4rem; }
+  .cal-nav button { padding: 0.4rem 0.8rem; font-size: 0.75rem; }
+  .cal-range-label {
+    font-family: var(--font-display);
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.95rem;
+  }
+  .cal-view-toggle { display: flex; gap: 0.4rem; }
+
+  .cal-weekday-labels {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+  }
+
+  .cal-day {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.4rem;
+    min-height: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .cal-day.clickable { cursor: pointer; }
+  .cal-day.clickable:hover { background: rgba(0, 0, 0, 0.07); }
+  .cal-day.muted { opacity: 0.4; }
+  .cal-day.today { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+  .cal-day-num { font-family: var(--font-display); font-weight: bold; font-size: 0.85rem; color: var(--text); }
+  .cal-day-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .cal-day-total { font-size: 0.6rem; color: var(--text-dim); min-height: 1em; }
+
+  .day-popover-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+  }
+  .day-popover-overlay[hidden] { display: none; }
+  .day-popover {
+    position: relative;
+    background: var(--panel-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 1.4rem 1.6rem;
+    max-width: 420px;
+    width: 100%;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .day-popover-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 1.8rem;
+    height: 1.8rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1rem;
+    line-height: 1;
+  }
+  .day-popover h3 { margin: 0 1.4rem 0.2rem 0; }
+  .day-popover-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .day-popover-row {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.7rem;
+    font-size: 0.82rem;
+  }
+  .day-popover-row .dp-skill { font-weight: bold; color: var(--secondary); }
+  .day-popover-row .dp-meta { font-size: 0.72rem; color: var(--text-dim); margin-top: 0.15rem; }
+
   footer {
     max-width: 1100px;
     margin: 2rem auto 0;
@@ -468,84 +585,132 @@
     <div class="lang-pills" id="langPills"></div>
   </nav>
 
-  <main class="hub-grid">
+  <nav class="tab-bar" id="tabBar" aria-label="Hub sections">
+    <button type="button" class="lang-pill tab-btn active" data-tab="calendar">Calendar</button>
+    <button type="button" class="lang-pill tab-btn" data-tab="study">Study Modes</button>
+    <button type="button" class="lang-pill tab-btn" data-tab="resources">Resources</button>
+    <button type="button" class="lang-pill tab-btn" data-tab="video">Video Diary</button>
+  </nav>
 
-    <section class="panel organizer-panel">
-      <h2>Study Modes</h2>
-      <div id="studyModes"></div>
+  <main>
+
+    <section class="tab-panel" id="tabCalendar" data-tab-panel="calendar">
+      <section class="panel">
+        <h2>Calendar</h2>
+        <div class="cal-toolbar">
+          <div class="cal-nav">
+            <button type="button" id="calPrevBtn">&larr;</button>
+            <button type="button" id="calTodayBtn">Today</button>
+            <button type="button" id="calNextBtn">&rarr;</button>
+          </div>
+          <div class="cal-range-label" id="calRangeLabel"></div>
+          <div class="cal-view-toggle">
+            <button type="button" class="filter-pill active" id="calWeekViewBtn">Week</button>
+            <button type="button" class="filter-pill" id="calMonthViewBtn">Month</button>
+          </div>
+        </div>
+        <div class="cal-weekday-labels">
+          <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </section>
     </section>
 
-    <section class="panel library-panel">
-      <h2>Content Library</h2>
-      <form id="libraryForm" class="library-form">
-        <label>Language
-          <select id="libLanguage"></select>
-        </label>
-        <label>Type
-          <select id="libType">
-            <option value="youtube">YouTube</option>
-            <option value="podcast">Podcast</option>
-            <option value="show">TV / Show</option>
-            <option value="other">Other</option>
-          </select>
-        </label>
-        <label>Title
-          <input type="text" id="libTitle" required placeholder="e.g. Dreaming Spanish">
-        </label>
-        <label>Link (optional)
-          <input type="url" id="libUrl" placeholder="https://...">
-        </label>
-        <button type="submit">Pin It</button>
-      </form>
+    <section class="tab-panel" id="tabStudy" data-tab-panel="study" hidden>
+      <section class="panel organizer-panel">
+        <h2>Study Modes</h2>
+        <div id="studyModes"></div>
+      </section>
+    </section>
 
-      <div class="library-filters" id="libraryFilters"></div>
-      <div class="library-grid" id="libraryGrid"></div>
+    <section class="tab-panel" id="tabResources" data-tab-panel="resources" hidden>
+      <section class="panel quick-links-panel">
+        <h2>Quick Links</h2>
+        <div id="quickLinks"></div>
+      </section>
+
+      <section class="panel library-panel">
+        <h2>Content Library</h2>
+        <form id="libraryForm" class="library-form">
+          <label>Language
+            <select id="libLanguage"></select>
+          </label>
+          <label>Type
+            <select id="libType">
+              <option value="youtube">YouTube</option>
+              <option value="podcast">Podcast</option>
+              <option value="show">TV / Show</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label>Title
+            <input type="text" id="libTitle" required placeholder="e.g. Dreaming Spanish">
+          </label>
+          <label>Link (optional)
+            <input type="url" id="libUrl" placeholder="https://...">
+          </label>
+          <button type="submit">Pin It</button>
+        </form>
+
+        <div class="library-filters" id="libraryFilters"></div>
+        <div class="library-grid" id="libraryGrid"></div>
+      </section>
+    </section>
+
+    <section class="tab-panel" id="tabVideo" data-tab-panel="video" hidden>
+      <section class="panel video-diary-panel">
+        <h2>Video Diary</h2>
+        <p class="vd-intro">
+          Speak out loud on a prompt, record yourself, and download the clip to your own folder.
+          A rough transcript is shown for self-check only — see the note below.
+        </p>
+
+        <div class="vd-prompt-box">
+          <span class="vd-label">Prompt</span>
+          <div class="vd-prompt-text" id="vdPromptText"></div>
+          <div class="vd-prompt-controls">
+            <select id="vdLevelSelect">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+            </select>
+            <button type="button" id="vdNewPromptBtn">New Prompt</button>
+          </div>
+        </div>
+
+        <div class="vd-recorder">
+          <video id="vdPreview" autoplay muted playsinline></video>
+          <div class="vd-controls">
+            <button type="button" id="vdRecordBtn">● Record</button>
+            <span class="vd-status" id="vdStatus"></span>
+          </div>
+        </div>
+
+        <div class="vd-result" id="vdResult" hidden>
+          <span class="vd-label">Rough transcript <span class="vd-disclaimer">(rough transcript, not a pronunciation grade)</span></span>
+          <div class="vd-transcript" id="vdTranscript"></div>
+          <button type="button" id="vdDownloadBtn">Download video</button>
+        </div>
+
+        <div class="vd-journal-form">
+          <h3>Log this practice</h3>
+          <textarea id="vdNote" placeholder="How did it feel? Any notes to yourself..."></textarea>
+          <button type="button" id="vdSaveLogBtn">Save to Journal</button>
+        </div>
+
+        <h3>Practice Journal</h3>
+        <ul class="journal-list" id="journalList"></ul>
+      </section>
     </section>
 
   </main>
 
-  <section class="panel video-diary-panel">
-    <h2>Video Diary</h2>
-    <p class="vd-intro">
-      Speak out loud on a prompt, record yourself, and download the clip to your own folder.
-      A rough transcript is shown for self-check only — see the note below.
-    </p>
-
-    <div class="vd-prompt-box">
-      <span class="vd-label">Prompt</span>
-      <div class="vd-prompt-text" id="vdPromptText"></div>
-      <div class="vd-prompt-controls">
-        <select id="vdLevelSelect">
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-        </select>
-        <button type="button" id="vdNewPromptBtn">New Prompt</button>
-      </div>
+  <div class="day-popover-overlay" id="dayPopoverOverlay" hidden>
+    <div class="day-popover">
+      <button type="button" class="day-popover-close" id="dayPopoverClose">&times;</button>
+      <h3 id="dayPopoverTitle"></h3>
+      <ul class="day-popover-list" id="dayPopoverList"></ul>
     </div>
-
-    <div class="vd-recorder">
-      <video id="vdPreview" autoplay muted playsinline></video>
-      <div class="vd-controls">
-        <button type="button" id="vdRecordBtn">● Record</button>
-        <span class="vd-status" id="vdStatus"></span>
-      </div>
-    </div>
-
-    <div class="vd-result" id="vdResult" hidden>
-      <span class="vd-label">Rough transcript <span class="vd-disclaimer">(rough transcript, not a pronunciation grade)</span></span>
-      <div class="vd-transcript" id="vdTranscript"></div>
-      <button type="button" id="vdDownloadBtn">Download video</button>
-    </div>
-
-    <div class="vd-journal-form">
-      <h3>Log this practice</h3>
-      <textarea id="vdNote" placeholder="How did it feel? Any notes to yourself..."></textarea>
-      <button type="button" id="vdSaveLogBtn">Save to Journal</button>
-    </div>
-
-    <h3>Practice Journal</h3>
-    <ul class="journal-list" id="journalList"></ul>
-  </section>
+  </div>
 
   <footer>
     Everything here is saved to this browser's local storage (per file,
@@ -634,10 +799,12 @@
     }[c]));
   }
 
-  function todayISODate() {
-    const d = new Date();
+  function dateToISO(d) {
     const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
     return local.toISOString().slice(0, 10);
+  }
+  function todayISODate() {
+    return dateToISO(new Date());
   }
 
   function loadState() {
@@ -662,9 +829,12 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
   }
 
-  function todaysAutoLanguage() {
-    const dow = new Date().getDay();
+  function languageForDate(date) {
+    const dow = date.getDay();
     return LANGUAGES.find((l) => l.days.includes(dow)) || LANGUAGES[0];
+  }
+  function todaysAutoLanguage() {
+    return languageForDate(new Date());
   }
   function activeLanguage() {
     if (state.override) {
@@ -773,6 +943,11 @@
     const mins = Math.round(totalSeconds / 60);
     if (mins < 60) return mins + "m";
     return Math.floor(mins / 60) + "h " + (mins % 60) + "m";
+  }
+  function secondsForDate(iso) {
+    return state.sessions
+      .filter((s) => s.date === iso)
+      .reduce((sum, s) => sum + s.seconds, 0);
   }
   function formatClock(totalSeconds) {
     const pad = (n) => String(n).padStart(2, "0");
@@ -967,10 +1142,47 @@
         state.library = state.library.filter((x) => x.id !== item.id);
         saveState();
         renderLibrary();
+        renderQuickLinks();
       });
       card.appendChild(delBtn);
       grid.appendChild(card);
     });
+  }
+
+  function renderQuickLinks() {
+    const wrap = document.getElementById("quickLinks");
+    wrap.innerHTML = "";
+    const withLinks = state.library.filter((item) => item.url);
+    if (!withLinks.length) {
+      wrap.innerHTML = '<p class="empty-note">Pin something with a link to see it here.</p>';
+      return;
+    }
+    LANGUAGES.forEach((lang) => {
+      const items = withLinks.filter((item) => item.languageId === lang.id);
+      if (!items.length) return;
+      const group = document.createElement("div");
+      group.className = "quick-links-group";
+      const heading = document.createElement("div");
+      heading.className = "quick-links-lang";
+      heading.textContent = lang.flag + " " + lang.name;
+      group.appendChild(heading);
+      const row = document.createElement("div");
+      row.className = "quick-links-row";
+      items.slice().reverse().forEach((item) => {
+        const a = document.createElement("a");
+        a.href = encodeURI(item.url);
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "lang-pill";
+        a.textContent = (TYPE_ICONS[item.type] || "🔗") + " " + item.title;
+        row.appendChild(a);
+      });
+      group.appendChild(row);
+      wrap.appendChild(group);
+    });
+    if (!wrap.children.length) {
+      wrap.innerHTML = '<p class="empty-note">Pin something with a link to see it here.</p>';
+    }
   }
 
   document.getElementById("libraryForm").addEventListener("submit", (e) => {
@@ -991,6 +1203,191 @@
     document.getElementById("libTitle").value = "";
     document.getElementById("libUrl").value = "";
     renderLibrary();
+    renderQuickLinks();
+  });
+
+  // ---------- calendar ----------
+  const langColorCache = {};
+  function primaryColorForLanguage(langId) {
+    if (langColorCache[langId]) return langColorCache[langId];
+    const probe = document.createElement("div");
+    probe.setAttribute("data-lang-theme", langId);
+    probe.style.cssText = "position:absolute; visibility:hidden; pointer-events:none; width:0; height:0; overflow:hidden;";
+    document.body.appendChild(probe);
+    const color = getComputedStyle(probe).getPropertyValue("--primary").trim();
+    document.body.removeChild(probe);
+    langColorCache[langId] = color || "#999999";
+    return langColorCache[langId];
+  }
+
+  const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  let calendarMode = "week"; // "week" | "month"
+  let calendarAnchorDate = new Date();
+
+  function startOfMonthGrid(date) {
+    const firstOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    return startOfWeek(firstOfMonth);
+  }
+
+  function buildDayCell(date, isMuted) {
+    const iso = dateToISO(date);
+    const lang = languageForDate(date);
+    const isClickable = iso <= todayISODate();
+
+    const cell = document.createElement("div");
+    cell.className = "cal-day" + (isMuted ? " muted" : "") + (isClickable ? " clickable" : "");
+    if (iso === todayISODate()) cell.classList.add("today");
+
+    const num = document.createElement("div");
+    num.className = "cal-day-num";
+    num.textContent = String(date.getDate());
+    cell.appendChild(num);
+
+    const dot = document.createElement("div");
+    dot.className = "cal-day-dot";
+    dot.style.background = primaryColorForLanguage(lang.id);
+    dot.title = lang.name;
+    cell.appendChild(dot);
+
+    const totalSec = secondsForDate(iso);
+    const totalEl = document.createElement("div");
+    totalEl.className = "cal-day-total";
+    totalEl.textContent = totalSec > 0 ? formatDuration(totalSec) : "";
+    cell.appendChild(totalEl);
+
+    if (isClickable) cell.addEventListener("click", () => openDayPopover(iso));
+
+    return cell;
+  }
+
+  function calendarRangeLabel() {
+    if (calendarMode === "month") {
+      return MONTH_NAMES[calendarAnchorDate.getMonth()] + " " + calendarAnchorDate.getFullYear();
+    }
+    const monday = startOfWeek(calendarAnchorDate);
+    const sunday = new Date(monday);
+    sunday.setDate(sunday.getDate() + 6);
+    const fmt = (d) => MONTH_NAMES[d.getMonth()].slice(0, 3) + " " + d.getDate();
+    return fmt(monday) + " – " + fmt(sunday) + ", " + sunday.getFullYear();
+  }
+
+  function renderCalendarWeek() {
+    const grid = document.getElementById("calGrid");
+    grid.innerHTML = "";
+    const monday = startOfWeek(calendarAnchorDate);
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(monday);
+      d.setDate(d.getDate() + i);
+      grid.appendChild(buildDayCell(d, false));
+    }
+  }
+
+  function renderCalendarMonth() {
+    const grid = document.getElementById("calGrid");
+    grid.innerHTML = "";
+    const gridStart = startOfMonthGrid(calendarAnchorDate);
+    const targetMonth = calendarAnchorDate.getMonth();
+    for (let i = 0; i < 42; i++) {
+      const d = new Date(gridStart);
+      d.setDate(d.getDate() + i);
+      grid.appendChild(buildDayCell(d, d.getMonth() !== targetMonth));
+    }
+  }
+
+  function renderCalendar() {
+    document.getElementById("calRangeLabel").textContent = calendarRangeLabel();
+    if (calendarMode === "week") renderCalendarWeek();
+    else renderCalendarMonth();
+  }
+
+  function syncCalendarViewToggle() {
+    document.getElementById("calWeekViewBtn").classList.toggle("active", calendarMode === "week");
+    document.getElementById("calMonthViewBtn").classList.toggle("active", calendarMode === "month");
+  }
+
+  function openDayPopover(iso) {
+    const sessions = state.sessions.filter((s) => s.date === iso);
+    const overlay = document.getElementById("dayPopoverOverlay");
+    const title = document.getElementById("dayPopoverTitle");
+    const list = document.getElementById("dayPopoverList");
+    const d = new Date(iso + "T00:00:00");
+    title.textContent = MONTH_NAMES[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    list.innerHTML = "";
+    if (!sessions.length) {
+      list.innerHTML = '<li class="empty-note">No sessions logged this day.</li>';
+    } else {
+      sessions.forEach((s) => {
+        const skill = SKILLS.find((sk) => sk.id === s.skill);
+        const lang = LANGUAGES.find((l) => l.id === s.languageId);
+        const li = document.createElement("li");
+        li.className = "day-popover-row";
+        const skillLine = document.createElement("div");
+        skillLine.className = "dp-skill";
+        skillLine.textContent = (skill ? skill.icon + " " + skill.name : s.skill) + " — " + formatDuration(s.seconds);
+        const metaLine = document.createElement("div");
+        metaLine.className = "dp-meta";
+        metaLine.textContent = (lang ? lang.flag + " " + lang.name : s.languageId) + (s.resourceNote ? " · " + escapeHtml(s.resourceNote) : "");
+        li.appendChild(skillLine);
+        li.appendChild(metaLine);
+        list.appendChild(li);
+      });
+    }
+    overlay.hidden = false;
+  }
+
+  function closeDayPopover() {
+    document.getElementById("dayPopoverOverlay").hidden = true;
+  }
+
+  document.getElementById("dayPopoverClose").addEventListener("click", closeDayPopover);
+  document.getElementById("dayPopoverOverlay").addEventListener("click", (e) => {
+    if (e.target.id === "dayPopoverOverlay") closeDayPopover();
+  });
+
+  document.getElementById("calPrevBtn").addEventListener("click", () => {
+    const d = new Date(calendarAnchorDate);
+    if (calendarMode === "week") d.setDate(d.getDate() - 7);
+    else d.setMonth(d.getMonth() - 1);
+    calendarAnchorDate = d;
+    renderCalendar();
+  });
+  document.getElementById("calNextBtn").addEventListener("click", () => {
+    const d = new Date(calendarAnchorDate);
+    if (calendarMode === "week") d.setDate(d.getDate() + 7);
+    else d.setMonth(d.getMonth() + 1);
+    calendarAnchorDate = d;
+    renderCalendar();
+  });
+  document.getElementById("calTodayBtn").addEventListener("click", () => {
+    calendarAnchorDate = new Date();
+    renderCalendar();
+  });
+  document.getElementById("calWeekViewBtn").addEventListener("click", () => {
+    calendarMode = "week";
+    syncCalendarViewToggle();
+    renderCalendar();
+  });
+  document.getElementById("calMonthViewBtn").addEventListener("click", () => {
+    calendarMode = "month";
+    syncCalendarViewToggle();
+    renderCalendar();
+  });
+
+  // ---------- tab bar ----------
+  const TAB_PANEL_IDS = { calendar: "tabCalendar", study: "tabStudy", resources: "tabResources", video: "tabVideo" };
+  function switchTab(tabId) {
+    Object.keys(TAB_PANEL_IDS).forEach((id) => {
+      document.getElementById(TAB_PANEL_IDS[id]).hidden = id !== tabId;
+    });
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tab === tabId);
+    });
+    if (tabId === "calendar") renderCalendar();
+    if (tabId === "resources") renderQuickLinks();
+  }
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => switchTab(btn.dataset.tab));
   });
 
   // ---------- video diary: prompt bank navigation ----------
@@ -1220,9 +1617,12 @@
   renderStudyModes();
   renderLibraryFilters();
   renderLibrary();
+  renderQuickLinks();
   pickNewPrompt();
   renderPrompt();
   renderJournal();
+  syncCalendarViewToggle();
+  renderCalendar();
 
   // Keep the day-based auto theme in sync if the page is left open;
   // doesn't touch in-progress form selections or the study timer.
