@@ -39,6 +39,7 @@
     --cat-spoke:    #d97a6a;
     --cat-listened: #9a7fd4;
     --cat-learned:  var(--gold-bright);
+    --cat-notes:    var(--teal-bright);
 
     /* One flat backdrop reused everywhere (was a 5-stop "sunset scene"
        gradient repeated on body/gate/day-view) and one soft shadow reused
@@ -313,6 +314,7 @@
   .section-pill.cat-spoke { color: var(--cat-spoke); border-color: var(--cat-spoke); }
   .section-pill.cat-listened { color: var(--cat-listened); border-color: var(--cat-listened); }
   .section-pill.cat-learned { color: var(--cat-learned); border-color: var(--cat-learned); }
+  .section-pill.cat-notes { color: var(--cat-notes); border-color: var(--cat-notes); }
 
   /* ---------- day sections ---------- */
   .day-section {
@@ -339,6 +341,27 @@
   #secSpoke h3 { border-color: var(--cat-spoke); }
   #secListened h3 { border-color: var(--cat-listened); }
   #secLearned h3 { border-color: var(--cat-learned); }
+  #secNotes h3 { border-color: var(--cat-notes); }
+  .note-item-title { font-weight: bold; color: var(--cat-notes); margin-bottom: 0.2rem; }
+  .note-item-excerpt { color: var(--ivory-dim); font-size: 0.78rem; }
+  .notes-connect-row {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.25rem 0.5rem;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--ivory-dim);
+  }
+  .notes-connect-row button {
+    background: none;
+    border: 1px solid rgba(63, 182, 168, 0.4);
+    color: var(--teal-bright);
+    border-radius: 6px;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
 
   .day-section p { line-height: 1.5; font-size: 0.9rem; color: var(--ivory); }
   .day-section ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
@@ -432,6 +455,11 @@
       <div class="day-grid" id="dayGrid"></div>
     </div>
 
+    <p class="notes-connect-row">
+      <span id="notesStatus">Obsidian notes not connected.</span>
+      <button type="button" id="connectNotesBtn">Connect Notes Folder</button>
+    </p>
+
     <div class="day-view" id="dayView" hidden>
       <button type="button" class="day-close" id="dayClose">&times; Close</button>
 
@@ -468,6 +496,11 @@
         <section class="day-section reveal" id="secLearned" data-cat="learned" hidden>
           <h3>Learned</h3>
           <p id="learnedText"></p>
+        </section>
+
+        <section class="day-section reveal" id="secNotes" data-cat="notes" hidden>
+          <h3>Obsidian Notes</h3>
+          <ul id="notesListEl"></ul>
         </section>
       </div>
     </div>
@@ -514,6 +547,100 @@
     if (!entry || !Array.isArray(entry.media)) return null;
     const img = entry.media.find((m) => m.type === "image" && m.url);
     return img ? img.url : null;
+  }
+
+  // ============================================================
+  // OBSIDIAN NOTES — read-only. Reads the same bridge folder the Nest
+  // of Knowledge Sync Obsidian plugin writes to, via the File System
+  // Access API (same mechanism as Beat Maker's footage-import folder).
+  // The folder handle is stored in an IndexedDB database shared across
+  // every life-hub page, so connecting it once anywhere (this page or
+  // Nest of Knowledge) means every other page picks it up without
+  // asking again. Only ever reads; nothing here writes anything back.
+  // ============================================================
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let notesDirHandle = null;
+  let notesIndex = null;
+  const notesStatusEl = document.getElementById("notesStatus");
+  const connectNotesBtn = document.getElementById("connectNotesBtn");
+  const fsAccessSupported = typeof window.showDirectoryPicker === "function";
+
+  function setNotesStatus(text) { notesStatusEl.textContent = text; }
+
+  if (!fsAccessSupported) {
+    connectNotesBtn.disabled = true;
+    setNotesStatus("Obsidian notes need Edge or Chrome on desktop.");
+  }
+
+  async function loadNotesIndex() {
+    if (!notesDirHandle) { notesIndex = null; return; }
+    try {
+      const fileHandle = await notesDirHandle.getFileHandle("_index.json");
+      const file = await fileHandle.getFile();
+      notesIndex = JSON.parse(await file.text());
+    } catch (e) {
+      notesIndex = null; // folder connected but no index yet (nothing synced from Obsidian so far)
+    }
+  }
+
+  async function tryRestoreNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("notesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "read" })) === "granted") {
+      notesDirHandle = handle;
+      await loadNotesIndex();
+      setNotesStatus("Obsidian notes connected (" + handle.name + "/).");
+    } else {
+      setNotesStatus("Notes folder connected previously — click to reconnect.");
+    }
+  }
+
+  if (fsAccessSupported) {
+    connectNotesBtn.addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "life-hub-notes", mode: "read" });
+        notesDirHandle = handle;
+        await saveHandle("notesFolder", handle);
+        await loadNotesIndex();
+        setNotesStatus("Obsidian notes connected (" + handle.name + "/).");
+      } catch (e) {
+        // user cancelled the picker — leave prior state alone
+      }
+    });
+    tryRestoreNotesFolder();
+  }
+
+  function notesForDate(iso) {
+    if (!notesIndex) return [];
+    return Object.values(notesIndex).filter((n) => n.date === iso);
   }
 
   // ---------- entrance gate ----------
@@ -644,11 +771,50 @@
     renderCarousel(entry.media || []);
     renderSectionNav(entry);
     renderSections(entry);
+    const iso = YEAR + "-" + String(month).padStart(2, "0") + "-" + String(day).padStart(2, "0");
+    renderNotesSection(iso);
     playBeatForDay(month, day);
 
     const view = document.getElementById("dayView");
     view.hidden = false;
     view.scrollTop = 0;
+  }
+
+  // Independent of categoriesForEntry/renderSections on purpose — notes
+  // come from the connected local folder, not from entry itself, so this
+  // stays a separate step rather than reshaping the entry-driven functions
+  // above it.
+  function renderNotesSection(iso) {
+    const notes = notesForDate(iso);
+    document.getElementById("secNotes").hidden = !notes.length;
+    const list = document.getElementById("notesListEl");
+    list.innerHTML = "";
+    notes.forEach((note) => {
+      const li = document.createElement("li");
+      const title = document.createElement("div");
+      title.className = "note-item-title";
+      title.textContent = note.title;
+      const excerpt = document.createElement("div");
+      excerpt.className = "note-item-excerpt";
+      excerpt.textContent = note.excerpt || "";
+      li.appendChild(title);
+      li.appendChild(excerpt);
+      list.appendChild(li);
+    });
+
+    const nav = document.getElementById("sectionNav");
+    const existingNotesPill = nav.querySelector(".cat-notes");
+    if (existingNotesPill) existingNotesPill.remove();
+    if (notes.length) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "section-pill cat-notes";
+      btn.textContent = "Notes";
+      btn.addEventListener("click", () => {
+        document.getElementById("secNotes").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+      nav.appendChild(btn);
+    }
   }
 
   document.getElementById("dayClose").addEventListener("click", () => {
