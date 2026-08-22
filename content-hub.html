@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Content Hub</title>
+<style>
+
+  /* ============================================================
+     CONTENT HUB — same mosque/lantern palette and geometric wall
+     texture as room.html, applied to an upload + organizing UI.
+     ============================================================ */
+  :root {
+    --wall:        #3a1f2e;
+    --wall-dark:   #241220;
+    --wall-light:  #4d2a3c;
+    --gold:        #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory:       #f4e8d0;
+    --ivory-dim:   #cbb999;
+    --ember:       #ff9d4d;
+    --status-idea:    #ff9d4d;
+    --status-drafted: #d4a24c;
+    --status-ready:   #4fa8c9;
+    --status-posted:  #5cb85c;
+
+    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
+    --sky-lower: #d9773f; --sky-ground: #7a3220;
+
+    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--ivory);
+    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  a { color: var(--gold-bright); }
+
+  .hub-header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--ivory-dim);
+    text-decoration: none;
+  }
+  .back-link:hover { color: var(--gold-bright); }
+
+  h1.hub-title {
+    margin: 0;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--gold-bright);
+    text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
+  }
+  h2, h3 { color: var(--gold-bright); margin: 0 0 0.6rem; }
+  h2 { font-size: 1.05rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  h3 { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ivory-dim); }
+
+  .claude-note {
+    max-width: 640px;
+    margin: 0.5rem auto 2rem;
+    padding: 0.75rem 1.2rem;
+    background: rgba(36, 18, 30, 0.55);
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 999px;
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--ivory);
+  }
+
+  .hub-layout {
+    display: grid;
+    grid-template-columns: 2.2fr 1fr;
+    gap: 1.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .hub-layout { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background:
+      var(--wall-pattern),
+      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 64px 64px, auto;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 16px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
+    padding: 1.4rem 1.5rem 1.6rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* ---------- upload / drop zone ---------- */
+  .drop-zone {
+    border: 2px dashed rgba(212, 162, 76, 0.6);
+    border-radius: 12px;
+    padding: 2.2rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    color: var(--ivory-dim);
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .drop-zone:hover, .drop-zone.drag-over {
+    border-color: var(--gold-bright);
+    background: rgba(242, 200, 121, 0.08);
+    color: var(--ivory);
+  }
+  .drop-zone .drop-title {
+    font-size: 1rem;
+    color: var(--gold-bright);
+    margin-bottom: 0.3rem;
+  }
+  .drop-zone small { display: block; margin-top: 0.4rem; font-size: 0.72rem; }
+  .drop-zone input[type="file"] { display: none; }
+
+  /* ---------- post cards ---------- */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.4rem;
+  }
+  .post-card {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 12px;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .card-thumb {
+    width: 100%;
+    height: 170px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--gold);
+  }
+  .card-thumb img, .card-thumb video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .thumb-missing {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    color: var(--ivory-dim);
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .card-meta {
+    font-size: 0.65rem;
+    color: var(--ivory-dim);
+  }
+  .card-field-label {
+    display: block;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ivory-dim);
+    margin-top: 0.2rem;
+  }
+  .post-card textarea, .post-card input[type="text"] {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.78rem;
+    padding: 0.4rem 0.55rem;
+    border-radius: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+    resize: vertical;
+  }
+  .post-card textarea::placeholder, .post-card input::placeholder { color: rgba(203, 185, 153, 0.55); }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .tag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: rgba(212, 162, 76, 0.18);
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 999px;
+    padding: 0.15rem 0.5rem 0.15rem 0.65rem;
+    font-size: 0.68rem;
+    color: var(--gold-bright);
+  }
+  .tag-remove {
+    background: none;
+    border: none;
+    color: var(--ivory-dim);
+    cursor: pointer;
+    font-size: 0.8rem;
+    line-height: 1;
+    padding: 0;
+  }
+  .tag-remove:hover { color: var(--gold-bright); }
+
+  .status-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+  .status-pill {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    background: rgba(0, 0, 0, 0.25);
+    color: var(--ivory-dim);
+    cursor: pointer;
+  }
+  .status-pill.active { color: #1a1010; font-weight: bold; }
+  .status-pill.active.status-idea    { background: var(--status-idea); border-color: var(--status-idea); }
+  .status-pill.active.status-drafted { background: var(--status-drafted); border-color: var(--status-drafted); }
+  .status-pill.active.status-ready   { background: var(--status-ready); border-color: var(--status-ready); }
+  .status-pill.active.status-posted  { background: var(--status-posted); border-color: var(--status-posted); }
+
+  .card-delete {
+    align-self: flex-start;
+    margin-top: 0.2rem;
+    background: none;
+    border: 1px solid rgba(255, 120, 120, 0.5);
+    color: #ffb3b3;
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.68rem;
+    cursor: pointer;
+  }
+  .card-delete:hover { background: rgba(255, 120, 120, 0.15); }
+
+  .empty-note { color: var(--ivory-dim); font-size: 0.85rem; }
+
+  /* ---------- idea notepad ---------- */
+  .note-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+  }
+  .note-form textarea {
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+    resize: vertical;
+    min-height: 2.4rem;
+  }
+  .note-form button {
+    align-self: flex-end;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    color: #2a1a10;
+    font-weight: bold;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+
+  .idea-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .idea-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.8rem;
+  }
+  .idea-row span { white-space: pre-wrap; }
+  .del-btn {
+    background: none;
+    border: none;
+    color: var(--ivory-dim);
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .del-btn:hover { color: var(--gold-bright); }
+
+  footer {
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    padding: 0 1.25rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--ivory-dim);
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <a class="back-link" href="room.html">&larr; Back to the Room</a>
+    <h1 class="hub-title">Content Hub</h1>
+  </header>
+
+  <p class="claude-note">Bring your uploads and ideas to Claude chat for creative feedback and editing guidance.</p>
+
+  <div class="hub-layout">
+
+    <div class="main-column">
+      <section class="panel">
+        <h2>Upload Media</h2>
+        <div class="drop-zone" id="dropZone" tabindex="0">
+          <div class="drop-title">Drop images or videos here</div>
+          <div>or click to browse</div>
+          <small>Multiple files at once, images and videos. Everything stays in this browser — nothing uploads anywhere.</small>
+          <input type="file" id="fileInput" accept="image/*,video/*" multiple>
+        </div>
+        <div class="cards-grid" id="cardsGrid"></div>
+      </section>
+    </div>
+
+    <div class="side-column">
+      <section class="panel">
+        <h2>Idea Notepad</h2>
+        <form class="note-form" id="noteForm">
+          <textarea id="noteInput" placeholder="Jot a content idea, no media needed yet..."></textarea>
+          <button type="submit">Add</button>
+        </form>
+        <ul class="idea-list" id="notesList"></ul>
+      </section>
+    </div>
+
+  </div>
+
+  <footer>
+    Uploaded media is stored locally in this browser (IndexedDB) so it survives a page reload;
+    captions, tags, statuses, notes and ideas are stored alongside it. Nothing is ever sent anywhere.
+  </footer>
+
+<script>
+(() => {
+  const CARDS_KEY = "content-hub-cards-v1";
+  const NOTES_KEY = "content-hub-notes-v1";
+  const STATUSES = ["idea", "drafted", "ready", "posted"];
+
+  function genId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  // ---------- IndexedDB: stores the actual media blobs ----------
+  let mediaDBPromise = null;
+  function getMediaDB() {
+    if (!mediaDBPromise) {
+      mediaDBPromise = new Promise((resolve, reject) => {
+        const req = indexedDB.open("content-hub-media", 1);
+        req.onupgradeneeded = () => {
+          const db = req.result;
+          if (!db.objectStoreNames.contains("files")) db.createObjectStore("files", { keyPath: "id" });
+        };
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+    }
+    return mediaDBPromise;
+  }
+  async function putMedia(id, file) {
+    const db = await getMediaDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("files", "readwrite");
+      tx.objectStore("files").put({ id, blob: file, type: file.type, name: file.name });
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function getAllMedia() {
+    const db = await getMediaDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("files", "readonly");
+      const req = tx.objectStore("files").getAll();
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function deleteMedia(id) {
+    const db = await getMediaDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("files", "readwrite");
+      tx.objectStore("files").delete(id);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  // ---------- cards (metadata in localStorage, media in IndexedDB) ----------
+  function loadCards() {
+    try {
+      const raw = localStorage.getItem(CARDS_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* corrupt storage, start fresh */ }
+    return [];
+  }
+  let cards = loadCards();
+  function saveCards() {
+    const toSave = cards.map(({ _objectUrl, ...rest }) => rest);
+    try { localStorage.setItem(CARDS_KEY, JSON.stringify(toSave)); } catch (e) { /* storage unavailable */ }
+  }
+
+  function renderCards() {
+    const grid = document.getElementById("cardsGrid");
+    grid.innerHTML = "";
+    if (!cards.length) {
+      grid.innerHTML = '<p class="empty-note">No uploads yet — drop images or videos above to get started.</p>';
+      return;
+    }
+    cards.slice().reverse().forEach((card) => grid.appendChild(buildCardEl(card)));
+  }
+
+  function buildCardEl(card) {
+    const el = document.createElement("div");
+    el.className = "post-card";
+
+    const thumbWrap = document.createElement("div");
+    thumbWrap.className = "card-thumb";
+    if (card._objectUrl) {
+      if (card.mediaType === "video") {
+        const v = document.createElement("video");
+        v.src = card._objectUrl;
+        v.controls = true;
+        v.muted = true;
+        thumbWrap.appendChild(v);
+      } else {
+        const img = document.createElement("img");
+        img.src = card._objectUrl;
+        img.alt = card.mediaName || "uploaded image";
+        thumbWrap.appendChild(img);
+      }
+    } else {
+      const missing = document.createElement("div");
+      missing.className = "thumb-missing";
+      missing.textContent = "Media unavailable (local storage was cleared)";
+      thumbWrap.appendChild(missing);
+    }
+    el.appendChild(thumbWrap);
+
+    const meta = document.createElement("div");
+    meta.className = "card-meta";
+    meta.textContent = (card.mediaName || "untitled") + " · " + new Date(card.createdAt).toLocaleDateString();
+    el.appendChild(meta);
+
+    const capLabel = document.createElement("label");
+    capLabel.className = "card-field-label";
+    capLabel.textContent = "Caption draft";
+    el.appendChild(capLabel);
+    const capArea = document.createElement("textarea");
+    capArea.rows = 2;
+    capArea.placeholder = "Write a caption draft...";
+    capArea.value = card.caption;
+    capArea.addEventListener("input", () => { card.caption = capArea.value; saveCards(); });
+    el.appendChild(capArea);
+
+    const tagsLabel = document.createElement("label");
+    tagsLabel.className = "card-field-label";
+    tagsLabel.textContent = "Tags";
+    el.appendChild(tagsLabel);
+    const tagsWrap = document.createElement("div");
+    tagsWrap.className = "tag-list";
+    card.tags.forEach((tag, idx) => {
+      const chip = document.createElement("span");
+      chip.className = "tag-chip";
+      chip.textContent = tag;
+      const rm = document.createElement("button");
+      rm.type = "button";
+      rm.className = "tag-remove";
+      rm.textContent = "×";
+      rm.addEventListener("click", () => { card.tags.splice(idx, 1); saveCards(); renderCards(); });
+      chip.appendChild(rm);
+      tagsWrap.appendChild(chip);
+    });
+    el.appendChild(tagsWrap);
+
+    const tagInput = document.createElement("input");
+    tagInput.type = "text";
+    tagInput.placeholder = "Add a tag, press Enter";
+    tagInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const val = tagInput.value.trim();
+        if (val && !card.tags.includes(val)) {
+          card.tags.push(val);
+          saveCards();
+          renderCards();
+        } else {
+          tagInput.value = "";
+        }
+      }
+    });
+    el.appendChild(tagInput);
+
+    const statusLabel = document.createElement("label");
+    statusLabel.className = "card-field-label";
+    statusLabel.textContent = "Status";
+    el.appendChild(statusLabel);
+    const statusRow = document.createElement("div");
+    statusRow.className = "status-row";
+    STATUSES.forEach((s) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "status-pill" + (card.status === s ? " active status-" + s : "");
+      btn.textContent = s;
+      btn.addEventListener("click", () => { card.status = s; saveCards(); renderCards(); });
+      statusRow.appendChild(btn);
+    });
+    el.appendChild(statusRow);
+
+    const notesLabel = document.createElement("label");
+    notesLabel.className = "card-field-label";
+    notesLabel.textContent = "Edit / effect notes";
+    el.appendChild(notesLabel);
+    const notesArea = document.createElement("textarea");
+    notesArea.rows = 2;
+    notesArea.placeholder = 'e.g. "add slow zoom," "try warmer grade"...';
+    notesArea.value = card.editNotes;
+    notesArea.addEventListener("input", () => { card.editNotes = notesArea.value; saveCards(); });
+    el.appendChild(notesArea);
+
+    const delBtn = document.createElement("button");
+    delBtn.type = "button";
+    delBtn.className = "card-delete";
+    delBtn.textContent = "Delete card";
+    delBtn.addEventListener("click", () => {
+      if (card._objectUrl) URL.revokeObjectURL(card._objectUrl);
+      cards = cards.filter((c) => c.id !== card.id);
+      saveCards();
+      renderCards();
+      deleteMedia(card.mediaId).catch(() => {});
+    });
+    el.appendChild(delBtn);
+
+    return el;
+  }
+
+  function handleFiles(fileList) {
+    const files = Array.from(fileList).filter((f) => f.type.startsWith("image/") || f.type.startsWith("video/"));
+    files.forEach((file) => {
+      const id = genId();
+      const mediaType = file.type.startsWith("video/") ? "video" : "image";
+      const objectUrl = URL.createObjectURL(file);
+      cards.push({
+        id, mediaId: id, mediaType, mediaName: file.name,
+        caption: "", tags: [], status: "idea", editNotes: "",
+        createdAt: new Date().toISOString(), _objectUrl: objectUrl,
+      });
+      saveCards();
+      renderCards();
+      putMedia(id, file).catch(() => {});
+    });
+  }
+
+  const dropZone = document.getElementById("dropZone");
+  const fileInput = document.getElementById("fileInput");
+  dropZone.addEventListener("click", () => fileInput.click());
+  dropZone.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fileInput.click(); } });
+  dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("drag-over"); });
+  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-over");
+    handleFiles(e.dataTransfer.files);
+  });
+  fileInput.addEventListener("change", () => {
+    handleFiles(fileInput.files);
+    fileInput.value = "";
+  });
+
+  // ---------- idea notepad ----------
+  function loadNotes() {
+    try {
+      const raw = localStorage.getItem(NOTES_KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) { /* corrupt storage, start fresh */ }
+    return [];
+  }
+  let notes = loadNotes();
+  function saveNotes() {
+    try { localStorage.setItem(NOTES_KEY, JSON.stringify(notes)); } catch (e) { /* storage unavailable */ }
+  }
+  function renderNotes() {
+    const list = document.getElementById("notesList");
+    list.innerHTML = "";
+    if (!notes.length) {
+      list.innerHTML = '<li class="empty-note">No ideas jotted down yet.</li>';
+      return;
+    }
+    notes.slice().reverse().forEach((note) => {
+      const li = document.createElement("li");
+      li.className = "idea-row";
+      const span = document.createElement("span");
+      span.textContent = note.text;
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "del-btn";
+      del.textContent = "×";
+      del.addEventListener("click", () => {
+        notes = notes.filter((n) => n.id !== note.id);
+        saveNotes();
+        renderNotes();
+      });
+      li.appendChild(span);
+      li.appendChild(del);
+      list.appendChild(li);
+    });
+  }
+  document.getElementById("noteForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("noteInput");
+    const text = input.value.trim();
+    if (!text) return;
+    notes.push({ id: genId(), text, createdAt: new Date().toISOString() });
+    saveNotes();
+    input.value = "";
+    renderNotes();
+  });
+
+  // ---------- init ----------
+  async function init() {
+    renderNotes();
+    let mediaMap = new Map();
+    try {
+      const allMedia = await getAllMedia();
+      allMedia.forEach((m) => mediaMap.set(m.id, m.blob));
+    } catch (e) { /* IndexedDB unavailable; previously-uploaded media just won't restore */ }
+    cards.forEach((card) => {
+      const blob = mediaMap.get(card.mediaId);
+      card._objectUrl = blob ? URL.createObjectURL(blob) : null;
+    });
+    renderCards();
+  }
+  init();
+})();
+</script>
+
+</body>
+</html>
