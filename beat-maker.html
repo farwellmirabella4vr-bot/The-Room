@@ -338,6 +338,28 @@
   .radio-player-controls { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; }
   .radio-capture-status { margin-top: 0.6rem; font-size: 0.72rem; opacity: 0.85; min-height: 1.2em; }
 
+  .radio-tray-wrap { margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.2); }
+  .radio-tray-wrap h3 { margin: 0 0 0.4rem; font-size: 0.9rem; }
+  .radio-tray { list-style: none; margin: 0.4rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; max-height: 320px; overflow-y: auto; }
+  .tray-clip {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(160deg, #ffffff 0%, var(--cream) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 2px 5px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0.7rem;
+    cursor: grab;
+  }
+  .tray-clip:active { cursor: grabbing; }
+  .tray-clip-wave { flex: 0 0 auto; width: 90px; height: 28px; border-radius: 4px; background: var(--screen-bg); }
+  .tray-clip-info { flex: 1 1 auto; min-width: 0; font-size: 0.78rem; }
+  .tray-clip-name { font-weight: bold; color: var(--afghan-red); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tray-clip-meta { color: var(--ink); opacity: 0.75; font-size: 0.68rem; margin-top: 0.1rem; }
+  .tray-clip-play, .tray-clip-remove { flex: 0 0 auto; padding: 0.35rem 0.55rem; font-size: 0.72rem; }
+  .tray-clip-remove { background: var(--cream); color: var(--afghan-red); box-shadow: inset 0 0 0 1px var(--afghan-red); }
+
   /* ---------- saved beats ---------- */
   .item-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; max-height: 420px; overflow-y: auto; }
   .beat-card {
@@ -787,6 +809,12 @@
             <button type="button" id="radioCaptureBtn" disabled>&#9210; Capture 10s Clip</button>
           </div>
           <div class="radio-capture-status" id="radioCaptureStatus"></div>
+        </div>
+        <div class="radio-tray-wrap">
+          <h3>Clip Tray</h3>
+          <p class="sample-note">Captured clips stay here until you remove them &mdash; drag any clip onto a pad in either bank, as many times as you like.</p>
+          <ul class="radio-tray" id="radioTray"></ul>
+          <p class="empty-note" id="radioTrayEmpty">No clips captured yet.</p>
         </div>
       </section>
     </section>
@@ -1529,7 +1557,14 @@
     pad.addEventListener("drop", (e) => {
       e.preventDefault();
       pad.classList.remove("drag-over");
-      if (e.dataTransfer.files && e.dataTransfer.files.length) addSamplesToPad(i, e.dataTransfer.files);
+      if (e.dataTransfer.files && e.dataTransfer.files.length) {
+        addSamplesToPad(i, e.dataTransfer.files);
+        return;
+      }
+      const text = e.dataTransfer.getData("text/plain");
+      if (text && text.startsWith("radio-tray-clip:")) {
+        assignTrayClipToPad(i, text.slice("radio-tray-clip:".length));
+      }
     });
 
     padGrid.appendChild(pad);
@@ -1742,6 +1777,171 @@
   const RADIO_API_BASE = "https://all.api.radio-browser.info";
   let currentStation = null;
 
+  // ---------- radio clip tray — captured clips collect here instead of
+  // going straight into the trim modal, and can be dragged onto any pad
+  // in either bank whenever you like, as many times as you like. Trimming
+  // still happens through the exact same chop modal, just triggered by a
+  // drop instead of straight off a capture. Metadata (station name,
+  // duration, a mini-waveform peaks array) persists in localStorage; the
+  // raw audio blob persists in the same IndexedDB "samples" store pad
+  // samples already use, decoded on demand rather than kept live in memory.
+  // ============================================================
+  const RADIO_TRAY_KEY = "beat-maker-radio-tray-v1";
+  function loadRadioTray() {
+    try {
+      const raw = localStorage.getItem(RADIO_TRAY_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) { /* corrupt storage, fall through */ }
+    return [];
+  }
+  let radioTray = loadRadioTray();
+  function saveRadioTray() {
+    try { localStorage.setItem(RADIO_TRAY_KEY, JSON.stringify(radioTray)); } catch (e) { /* storage unavailable */ }
+  }
+
+  // best-effort decode cache for tray clips, separate from the pad
+  // bufferCache (whose eviction logic assumes "is this on a pad?", which
+  // is never true for a tray-only clip) — never evicted since a user
+  // realistically captures a handful of clips, not hundreds.
+  const trayBufferCache = new Map();
+  async function bufferForTrayClip(clip) {
+    if (trayBufferCache.has(clip.id)) return trayBufferCache.get(clip.id);
+    const record = await getSample(clip.sampleId);
+    if (!record || !record.blob) return null;
+    const arrayBuffer = await record.blob.arrayBuffer();
+    const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+    trayBufferCache.set(clip.id, buffer);
+    return buffer;
+  }
+
+  function computePeaks(buffer, bucketCount) {
+    const data = buffer.getChannelData(0);
+    const samplesPerBucket = Math.max(1, Math.floor(data.length / bucketCount));
+    const peaks = [];
+    for (let b = 0; b < bucketCount; b++) {
+      const start = b * samplesPerBucket;
+      let min = 0, max = 0;
+      for (let i = 0; i < samplesPerBucket; i++) {
+        const v = data[start + i];
+        if (v === undefined) break;
+        if (v < min) min = v;
+        if (v > max) max = v;
+      }
+      peaks.push([min, max]);
+    }
+    return peaks;
+  }
+
+  function drawMiniWaveform(canvas, peaks) {
+    const ctx = canvas.getContext("2d");
+    const width = canvas.width, height = canvas.height, mid = height / 2;
+    ctx.clearRect(0, 0, width, height);
+    if (!peaks || !peaks.length) return;
+    const colWidth = width / peaks.length;
+    ctx.strokeStyle = "#7fe0a0";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    peaks.forEach((p, i) => {
+      const x = i * colWidth + colWidth / 2;
+      ctx.moveTo(x, mid + p[0] * mid);
+      ctx.lineTo(x, mid + p[1] * mid);
+    });
+    ctx.stroke();
+  }
+
+  const radioTrayEl = document.getElementById("radioTray");
+  const radioTrayEmptyEl = document.getElementById("radioTrayEmpty");
+
+  function renderRadioTray() {
+    radioTrayEl.innerHTML = "";
+    radioTrayEmptyEl.hidden = radioTray.length > 0;
+    radioTray.forEach((clip) => {
+      const li = document.createElement("li");
+      li.className = "tray-clip";
+      li.draggable = true;
+      li.title = "Drag onto a pad to use this clip";
+
+      const canvas = document.createElement("canvas");
+      canvas.className = "tray-clip-wave";
+      canvas.width = 90;
+      canvas.height = 28;
+      drawMiniWaveform(canvas, clip.peaks);
+
+      const info = document.createElement("div");
+      info.className = "tray-clip-info";
+      const name = document.createElement("div");
+      name.className = "tray-clip-name";
+      name.textContent = clip.stationName;
+      const meta = document.createElement("div");
+      meta.className = "tray-clip-meta";
+      meta.textContent = clip.durationSec.toFixed(1) + "s";
+      info.appendChild(name);
+      info.appendChild(meta);
+
+      const playBtn = document.createElement("button");
+      playBtn.type = "button";
+      playBtn.className = "tray-clip-play";
+      playBtn.textContent = "▶";
+      playBtn.title = "Preview";
+      playBtn.addEventListener("click", (e) => { e.stopPropagation(); previewTrayClip(clip); });
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "tray-clip-remove";
+      removeBtn.textContent = "✕";
+      removeBtn.title = "Remove from tray";
+      removeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        trayBufferCache.delete(clip.id);
+        radioTray = radioTray.filter((c) => c.id !== clip.id);
+        saveRadioTray();
+        renderRadioTray();
+      });
+
+      li.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", "radio-tray-clip:" + clip.id);
+        e.dataTransfer.effectAllowed = "copy";
+      });
+
+      li.appendChild(canvas);
+      li.appendChild(info);
+      li.appendChild(playBtn);
+      li.appendChild(removeBtn);
+      radioTrayEl.appendChild(li);
+    });
+  }
+
+  async function previewTrayClip(clip) {
+    let buffer;
+    try { buffer = await bufferForTrayClip(clip); } catch (e) { buffer = null; }
+    if (!buffer) return;
+    resumeAudioIfNeeded();
+    const src = audioCtx.createBufferSource();
+    src.buffer = buffer;
+    src.connect(masterGain);
+    src.start(0);
+  }
+
+  // Triggered by dropping a tray clip onto a pad — reuses the exact same
+  // chop modal as every other "new sample" path, just pre-aimed at the
+  // pad that was dropped on (whichever bank happens to be active), so
+  // trimming still always happens at the moment a clip is actually
+  // assigned somewhere, never at capture time.
+  async function assignTrayClipToPad(padIndex, clipId) {
+    if (chopModalOpen) return;
+    const clip = radioTray.find((c) => c.id === clipId);
+    if (!clip) return;
+    resumeAudioIfNeeded();
+    let buffer;
+    try { buffer = await bufferForTrayClip(clip); } catch (e) { buffer = null; }
+    if (!buffer) { alert("This clip's audio couldn't be loaded — it may have been cleared from storage."); return; }
+    chopContext = { mode: "new", padIndex, fileName: clip.stationName };
+    showChopModal(buffer, clip.stationName, false);
+  }
+
   async function loadCountries() {
     const sel = document.getElementById("radioCountrySelect");
     try {
@@ -1880,18 +2080,38 @@
       statusEl.textContent = "This station's stream can't be captured (likely a browser security restriction) — try a different station.";
       captureBtn.disabled = false;
     };
-    recorder.onstop = () => {
+    recorder.onstop = async () => {
       captureBtn.disabled = false;
       if (!chunks.length) {
         statusEl.textContent = "No audio was captured — this stream may block recording. Try a different station.";
         return;
       }
-      statusEl.textContent = "Clip captured — opening trim tool...";
+      statusEl.textContent = "Processing captured clip...";
       const blob = new Blob(chunks, { type: recorder.mimeType || "audio/webm" });
-      const clipFile = new File([blob], slugify(currentStation.name) + "-clip.webm", { type: blob.type });
-      chopQueue.push({ padIndex: null, file: clipFile, needsPadPicker: true });
-      if (!chopModalOpen) advanceChopQueue();
-      statusEl.textContent = "";
+      let buffer;
+      try {
+        const arrayBuffer = await blob.arrayBuffer();
+        buffer = await audioCtx.decodeAudioData(arrayBuffer);
+      } catch (e) {
+        statusEl.textContent = "Captured clip couldn't be decoded — try a different station.";
+        return;
+      }
+      const sampleId = genId();
+      try { await putSample({ id: sampleId, blob, name: currentStation.name + " clip", type: blob.type, addedAt: new Date().toISOString() }); }
+      catch (e) { /* storage unavailable; clip still usable this session via trayBufferCache below */ }
+      const clip = {
+        id: genId(),
+        sampleId,
+        stationName: currentStation.name,
+        durationSec: buffer.duration,
+        peaks: computePeaks(buffer, 40),
+        addedAt: new Date().toISOString(),
+      };
+      trayBufferCache.set(clip.id, buffer);
+      radioTray.unshift(clip);
+      saveRadioTray();
+      renderRadioTray();
+      statusEl.textContent = "Clip captured — drag it onto a pad to use it.";
     };
 
     captureBtn.disabled = true;
@@ -2555,6 +2775,7 @@
   updateGamepadStatus();
   renderBankSelector();
   renderBankLock();
+  renderRadioTray();
 
   // ---------- mode tabs (Pads / Pattern / FX / Library) ----------
   const TAB_PANEL_IDS = { pads: "tabPads", pattern: "tabPattern", fx: "tabFx", library: "tabLibrary" };
