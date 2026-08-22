@@ -311,6 +311,7 @@
   .seq-cell.on:hover { background: var(--green-dark); }
   /* playhead: the currently-playing step/column, highlighted as the loop runs */
   .seq-cell.playhead { outline: 2px solid var(--yellow-bright); outline-offset: -1px; }
+  .seq-cell.cursor { outline: 2px dashed var(--afghan-red); outline-offset: -1px; }
 
   .seq-transport { display: flex; gap: 0.6rem; justify-content: center; margin-top: 1.1rem; flex-wrap: wrap; }
 
@@ -716,13 +717,17 @@
           <summary>Gamepad Controls</summary>
           <ul class="gamepad-legend">
             <li>Cross / Circle / Square / Triangle / L1 / R1 / L2 / R2 &mdash; pads 1&ndash;8</li>
-            <li>Hold Select + a pad button &mdash; pick that pad as the FX rack's target</li>
+            <li>Hold Select + a pad button &mdash; pick that pad as the FX rack + step-cursor target</li>
             <li>Right stick Y &mdash; sweeps the master filter (up = open, down = closed)</li>
             <li>Left stick X / Y &mdash; selected pad's delay / reverb send</li>
             <li>Right stick X &mdash; selected pad's filter cutoff</li>
             <li>D-pad Up / Down &mdash; nudge sequencer BPM &plusmn;1</li>
             <li>D-pad Left / Right &mdash; switch bank (disabled while locked)</li>
-            <li>Options &mdash; toggle sequencer play / stop</li>
+            <li>Hold Select + D-pad Left / Right &mdash; move the sequencer step-cursor</li>
+            <li>Hold Select + Options &mdash; toggle the cell at the step-cursor</li>
+            <li>Options (no Select) &mdash; toggle sequencer play / stop</li>
+            <li>L3 &mdash; switch 4 / 8 bars</li>
+            <li>R3 &mdash; clear the sequencer grid</li>
           </ul>
         </details>
       </section>
@@ -2166,10 +2171,22 @@
   let seqCellEls = [];
   let currentPlayheadStep = -1;
 
+  // Gamepad-only step cursor for toggling cells without a mouse (Select +
+  // D-pad Left/Right moves it, Select + Options toggles it — see
+  // pollGamepad below). Stays hidden until first used so mouse-only users
+  // never see a stray highlighted cell.
+  let seqCursorPad = 0;
+  let seqCursorStep = 0;
+  let seqCursorRowShown = -1;
+  let seqCursorStepShown = -1;
+  let gamepadCursorActive = false;
+
   function renderSeqGrid() {
     seqGridEl.innerHTML = "";
     seqCellEls = [];
     currentPlayheadStep = -1;
+    seqCursorRowShown = -1;
+    seqCursorStepShown = -1;
     const steps = totalSteps();
     for (let p = 0; p < PAD_COUNT; p++) {
       const row = document.createElement("div");
@@ -2202,6 +2219,8 @@
       row.appendChild(cellsWrap);
       seqGridEl.appendChild(row);
     }
+    if (seqCursorStep > steps - 1) seqCursorStep = Math.max(0, steps - 1);
+    updateSeqCursorHighlight();
   }
 
   // Toggles the .playhead class off the previous step column and onto
@@ -2218,6 +2237,33 @@
     if (currentPlayheadStep === -1) return;
     seqCellEls.forEach((row) => { const c = row[currentPlayheadStep]; if (c) c.classList.remove("playhead"); });
     currentPlayheadStep = -1;
+  }
+
+  function updateSeqCursorHighlight() {
+    if (!gamepadCursorActive) return;
+    if (seqCursorRowShown !== -1) {
+      const prev = seqCellEls[seqCursorRowShown] && seqCellEls[seqCursorRowShown][seqCursorStepShown];
+      if (prev) prev.classList.remove("cursor");
+    }
+    const cell = seqCellEls[seqCursorPad] && seqCellEls[seqCursorPad][seqCursorStep];
+    if (cell) cell.classList.add("cursor");
+    seqCursorRowShown = seqCursorPad;
+    seqCursorStepShown = seqCursorStep;
+  }
+  function activateGamepadCursor() {
+    gamepadCursorActive = true;
+    updateSeqCursorHighlight();
+  }
+  function moveSeqCursor(delta) {
+    seqCursorStep = Math.max(0, Math.min(totalSteps() - 1, seqCursorStep + delta));
+    activateGamepadCursor();
+  }
+  function toggleSeqCursorCell() {
+    activateGamepadCursor();
+    seqState.grid[seqCursorPad][seqCursorStep] = !seqState.grid[seqCursorPad][seqCursorStep];
+    saveSeqState();
+    const cell = seqCellEls[seqCursorPad] && seqCellEls[seqCursorPad][seqCursorStep];
+    if (cell) cell.classList.toggle("on", seqState.grid[seqCursorPad][seqCursorStep]);
   }
 
   function setSeqControlsDisabled(disabled) {
@@ -2618,8 +2664,12 @@
       if (!btn) return;
       if (btn.pressed && !prevButtonPressed[btnIndex]) {
         if (selectHeld) {
+          // Also picks this pad as the step-cursor's row below, so the
+          // same combo aims both the FX controls and cell-toggling.
           fxSelectedPad = padIdx;
+          seqCursorPad = padIdx;
           syncFxRackUI();
+          activateGamepadCursor();
         } else {
           resumeAudioIfNeeded();
           triggerPad(padIdx);
@@ -2637,20 +2687,43 @@
     prevButtonPressed[13] = dpadDown ? dpadDown.pressed : false;
 
     // D-pad Left/Right switches banks (still refused while bank-locked —
-    // switchBank() itself guards that, same as the [ and ] keyboard shortcuts).
+    // switchBank() itself guards that, same as the [ and ] keyboard
+    // shortcuts) — unless Select is held, in which case it moves the
+    // step-cursor across the grid instead.
     const dpadLeft = gp.buttons[14];
-    if (dpadLeft && dpadLeft.pressed && !prevButtonPressed[14]) switchBank(banksState.activeBankIndex - 1);
+    if (dpadLeft && dpadLeft.pressed && !prevButtonPressed[14]) {
+      if (selectHeld) moveSeqCursor(-1); else switchBank(banksState.activeBankIndex - 1);
+    }
     prevButtonPressed[14] = dpadLeft ? dpadLeft.pressed : false;
 
     const dpadRight = gp.buttons[15];
-    if (dpadRight && dpadRight.pressed && !prevButtonPressed[15]) switchBank(banksState.activeBankIndex + 1);
+    if (dpadRight && dpadRight.pressed && !prevButtonPressed[15]) {
+      if (selectHeld) moveSeqCursor(1); else switchBank(banksState.activeBankIndex + 1);
+    }
     prevButtonPressed[15] = dpadRight ? dpadRight.pressed : false;
 
+    // Options toggles play/stop, unless Select is held — then it toggles
+    // the cell under the step-cursor instead (no need to be playing).
     const optionsBtn = gp.buttons[9];
     if (optionsBtn && optionsBtn.pressed && !prevButtonPressed[9]) {
-      if (seqLoopInterval) seqStopBtn.click(); else seqPlayBtn.click();
+      if (selectHeld) toggleSeqCursorCell();
+      else if (seqLoopInterval) seqStopBtn.click(); else seqPlayBtn.click();
     }
     prevButtonPressed[9] = optionsBtn ? optionsBtn.pressed : false;
+
+    // L3 flips between 4 and 8 bars; R3 clears the grid — the only two
+    // sequencer transport actions that didn't already have a home above.
+    const l3Btn = gp.buttons[10];
+    if (l3Btn && l3Btn.pressed && !prevButtonPressed[10]) {
+      const otherBars = seqState.bars === 4 ? 8 : 4;
+      const targetBtn = seqBarsBtns.find((b) => parseInt(b.dataset.bars, 10) === otherBars);
+      if (targetBtn && !targetBtn.disabled) targetBtn.click();
+    }
+    prevButtonPressed[10] = l3Btn ? l3Btn.pressed : false;
+
+    const r3Btn = gp.buttons[11];
+    if (r3Btn && r3Btn.pressed && !prevButtonPressed[11]) seqClearBtn.click();
+    prevButtonPressed[11] = r3Btn ? r3Btn.pressed : false;
 
     // right stick Y sweeps the master filter — up (axis -1) opens to
     // ~20000Hz, down (axis +1) closes to ~200Hz, exponential for a more
