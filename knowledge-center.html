@@ -329,6 +329,16 @@
     cursor: pointer;
   }
   .card-delete:hover { background: rgba(255, 120, 120, 0.15); }
+  .card-log {
+    background: none;
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    color: var(--gold-bright);
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.68rem;
+    cursor: pointer;
+  }
+  .card-log:hover { background: rgba(212, 162, 76, 0.15); }
 
   .add-step-row {
     text-align: center;
@@ -490,6 +500,113 @@
 
   function genId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  // ============================================================
+  // OBSIDIAN LOGGING — writes a note directly into the connected vault's
+  // Rough Notes folder (readwrite), via the File System Access API.
+  // Manual, one teaching at a time. The granted handle is stored in the
+  // same shared IndexedDB database Video Log/Nest of Knowledge/Beat
+  // Maker use for their own folder connections, under its own key, so
+  // connecting once anywhere carries over.
+  // ============================================================
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; }
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; }
+  }
+  function sanitizeNoteFilename(name) {
+    return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
+  // Turns a teaching into a real note — relatedTitles become actual
+  // [[wiki-links]], which is exactly how this vault's own tagging system
+  // (linked notes, not #hashtags) expects topic connections to be made.
+  function logTeachingToObsidian(entry) {
+    const lines = ["#baby"];
+    if (entry.source) lines.push("#quote");
+    lines.push("", "# " + entry.title, "");
+    if (entry.arabic) { lines.push("**Arabic:**", "", entry.arabic, ""); }
+    if (entry.transliteration) { lines.push("**Transliteration:** " + entry.transliteration, ""); }
+    if (entry.english) { lines.push("**English:** " + entry.english, ""); }
+    if (entry.spanish) { lines.push("**Español:** " + entry.spanish, ""); }
+    if (entry.description) { lines.push(entry.description, ""); }
+    if (entry.surahName || entry.surahNumber || entry.ayahRange) {
+      lines.push(
+        "**Location:** " +
+        [entry.surahName, entry.surahNumber ? "Surah " + entry.surahNumber : "", entry.ayahRange ? "Ayah " + entry.ayahRange : ""]
+          .filter(Boolean).join(" · "),
+        ""
+      );
+    }
+    const related = (entry.relatedTitles || "")
+      .split(",").map((t) => t.trim()).filter(Boolean).map((t) => "[[" + t + "]]");
+    lines.push("## References");
+    if (entry.source) lines.push("- " + entry.source + (entry.sourceLink ? " — " + entry.sourceLink : ""));
+    related.forEach((r) => lines.push("- " + r));
+    if (!entry.source && !related.length) lines.push("- ");
+    const filename = sanitizeNoteFilename(entry.title || "Untitled Teaching");
+    return writeNoteToVault(filename, lines.join("\n"));
   }
 
   // Five structural placeholder steps. Topic labels only — every field
@@ -732,6 +849,22 @@
     toggleWrap.appendChild(toggleInput);
     toggleWrap.appendChild(document.createTextNode("Still needs verified source content"));
     footer.appendChild(toggleWrap);
+
+    if (!entry.isPlaceholder) {
+      const logBtn = document.createElement("button");
+      logBtn.type = "button";
+      logBtn.className = "card-log";
+      logBtn.textContent = "Log to Obsidian";
+      logBtn.addEventListener("click", async () => {
+        logBtn.disabled = true;
+        const original = logBtn.textContent;
+        logBtn.textContent = "Logging…";
+        const ok = await logTeachingToObsidian(entry);
+        logBtn.textContent = ok ? "Logged ✓" : "Couldn't log";
+        setTimeout(() => { logBtn.textContent = original; logBtn.disabled = false; }, 2000);
+      });
+      footer.appendChild(logBtn);
+    }
 
     const delBtn = document.createElement("button");
     delBtn.type = "button";
