@@ -10,3 +10,8 @@ Thumbs.db
 # local env/secrets, if any ever get added
 .env
 .env.local
+
+# Nest of Knowledge Sync's local bridge folder -- live, personal Obsidian
+# vault content synced from a real vault, not project source. Never belongs
+# in version control.
+nest-of-knowledge/
