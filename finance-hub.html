@@ -7,11 +7,16 @@
 <style>
 
   /* ============================================================
-     FINANCE HUB — same mosque palette and geometric wall texture
-     as room.html. Two clearly separate zones: a Solana meme-coin
-     learning/observation space (gold accent, matches the rest of
-     the room) and a budget/savings tracker (cool teal accent, so
-     the two topics stay visually distinct at a glance).
+     FINANCE HUB — simplified down to just one thing: tracking money
+     in/out and a savings goal, styled with the same mosque palette
+     as the rest of the site but using this room's own teal accent
+     throughout (the earlier gold-vs-teal split existed to separate
+     a crypto-watching zone from the budget zone; that zone is gone,
+     so there's only one accent now).
+
+     Also doubles as a light financial-literacy space: instead of a
+     separate "Learn" panel to browse, short contextual tips (.tip)
+     sit right next to the numbers/controls they explain.
      ============================================================ */
   :root {
     --wall:        #3a1f2e;
@@ -21,7 +26,6 @@
     --gold-bright: #f2c879;
     --ivory:       #f4e8d0;
     --ivory-dim:   #cbb999;
-    --warn-bg:     #6b2a2a;
     --warn-text:   #ffc9c9;
     --cool:        #4a9b8e;
     --cool-bright: #6cc9ba;
@@ -69,130 +73,80 @@
   }
 
   .disclaimer {
-    max-width: 700px;
-    margin: 1.1rem auto 0;
-    padding: 0.9rem 1.3rem;
-    background: var(--warn-bg);
-    border: 1px solid rgba(255, 201, 201, 0.4);
-    border-radius: 10px;
-    font-size: 0.85rem;
-    font-weight: bold;
+    max-width: 500px;
+    margin: 0.8rem auto 0;
+    font-size: 0.78rem;
     line-height: 1.5;
-    color: var(--warn-text);
-    text-align: center;
+    color: var(--ivory-dim);
   }
 
-  .section-heading {
-    text-align: center;
-    max-width: 900px;
-    margin: 2.4rem auto 1.2rem;
-    padding: 0 1rem;
-  }
-  .section-heading h2 {
-    margin: 0;
-    font-size: 1.1rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-  .section-heading p { margin: 0.3rem 0 0; font-size: 0.8rem; color: var(--ivory-dim); }
-  .section-heading.crypto h2 { color: var(--gold-bright); }
-  .section-heading.budget h2 { color: var(--cool-bright); }
-  .section-heading.learn h2 { color: var(--gold-bright); }
-
-  .hub-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
+  .page-wrap {
+    max-width: 720px;
+    margin: 2rem auto 0;
     padding: 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
   }
-  @media (max-width: 800px) { .hub-grid { grid-template-columns: 1fr; } }
 
   .panel {
     background:
       var(--wall-pattern),
       linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
     background-size: 64px 64px, auto;
-    border: 1px solid rgba(212, 162, 76, 0.4);
+    border: 1px solid rgba(108, 201, 186, 0.4);
     border-radius: 14px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(108, 201, 186, 0.12);
     padding: 1.2rem 1.4rem 1.4rem;
-  }
-  .panel.budget-panel {
-    border-color: rgba(108, 201, 186, 0.45);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(108, 201, 186, 0.14);
   }
   .panel h2 {
     margin: 0 0 0.7rem;
     font-size: 1rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--gold-bright);
+    color: var(--cool-bright);
   }
-  .budget-panel h2 { color: var(--cool-bright); }
 
   form { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
   .form-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .form-row > * { flex: 1; min-width: 100px; }
 
-  input[type="text"], input[type="url"], input[type="number"], input[type="date"], select, textarea {
+  input[type="text"], input[type="number"], input[type="date"], select, textarea {
     width: 100%;
     font-family: inherit;
     font-size: 0.8rem;
     padding: 0.4rem 0.55rem;
     border-radius: 6px;
-    border: 1px solid rgba(212, 162, 76, 0.35);
+    border: 1px solid rgba(108, 201, 186, 0.4);
     background: rgba(0, 0, 0, 0.3);
     color: var(--ivory);
     resize: vertical;
-  }
-  .budget-panel input, .budget-panel select, .budget-panel textarea {
-    border-color: rgba(108, 201, 186, 0.4);
   }
   input::placeholder, textarea::placeholder { color: rgba(203, 185, 153, 0.5); }
 
   button {
     align-self: flex-start;
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    background: linear-gradient(180deg, var(--cool-bright), var(--cool));
     border: none;
     border-radius: 8px;
     padding: 0.45rem 0.9rem;
-    color: #2a1a10;
+    color: #0c2624;
     font-weight: bold;
     font-size: 0.76rem;
     cursor: pointer;
   }
-  .budget-panel button { background: linear-gradient(180deg, var(--cool-bright), var(--cool)); color: #0c2624; }
-
-  .filter-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.7rem; }
-  .filter-pill {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid rgba(212, 162, 76, 0.4);
-    color: var(--ivory-dim);
-    border-radius: 999px;
-    padding: 0.25rem 0.7rem;
-    font-size: 0.68rem;
-    font-weight: normal;
-    cursor: pointer;
-  }
-  .filter-pill.active { color: var(--gold-bright); border-color: var(--gold-bright); }
 
   .item-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
   .item-card {
     position: relative;
     background: rgba(0, 0, 0, 0.22);
-    border: 1px solid rgba(212, 162, 76, 0.25);
+    border: 1px solid rgba(108, 201, 186, 0.3);
     border-radius: 8px;
     padding: 0.55rem 2.2rem 0.55rem 0.7rem;
     font-size: 0.78rem;
   }
-  .budget-panel .item-card { border-color: rgba(108, 201, 186, 0.3); }
-  .item-title { font-weight: bold; color: var(--gold-bright); }
-  .budget-panel .item-title { color: var(--cool-bright); }
+  .item-title { font-weight: bold; color: var(--cool-bright); }
   .item-meta { color: var(--ivory-dim); font-size: 0.68rem; margin-top: 0.1rem; }
-  .item-notes { margin-top: 0.3rem; white-space: pre-wrap; }
-  .item-link { display: inline-block; margin-top: 0.3rem; font-size: 0.72rem; }
   .item-del {
     position: absolute;
     top: 0.4rem;
@@ -211,22 +165,19 @@
 
   .empty-note { color: var(--ivory-dim); font-size: 0.8rem; }
 
-  /* ---------- budget summary + progress bar ---------- */
-  .budget-summary {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-    text-align: center;
+  .tip {
+    margin: 0.35rem 0 0;
+    font-size: 0.72rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ivory-dim);
   }
-  .budget-summary div { background: rgba(0, 0, 0, 0.22); border-radius: 8px; padding: 0.5rem 0.3rem; }
-  .budget-summary .stat-label { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ivory-dim); }
-  .budget-summary .stat-value { display: block; font-size: 1rem; font-weight: bold; margin-top: 0.15rem; }
 
+  /* ---------- savings goal + monthly gauge ---------- */
   .goal-form { flex-direction: row; flex-wrap: wrap; align-items: end; }
-  .goal-form label { flex: 1; min-width: 120px; font-size: 0.68rem; color: var(--ivory-dim); display: flex; flex-direction: column; gap: 0.2rem; }
+  .goal-form label { flex: 1; min-width: 130px; font-size: 0.68rem; color: var(--ivory-dim); display: flex; flex-direction: column; gap: 0.2rem; }
 
-  .progress-wrap { margin-bottom: 1.1rem; }
+  .progress-wrap { margin: 0.2rem 0 1rem; }
   .progress-label { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--ivory-dim); margin-bottom: 0.3rem; }
   .progress-track {
     height: 14px;
@@ -242,47 +193,26 @@
     transition: width 0.4s ease;
   }
 
-  .full-width { grid-column: 1 / -1; }
+  .gauge-row { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; margin: 0.6rem 0 0.2rem; }
+  .gauge-row svg { width: 168px; height: 168px; }
+  .gauge-value { font-size: 1.15rem; font-weight: bold; fill: var(--ivory); }
+  .gauge-sub { font-size: 0.6rem; fill: var(--ivory-dim); text-transform: uppercase; letter-spacing: 0.04em; }
+  .gauge-caption { max-width: 320px; text-align: center; font-size: 0.72rem; color: var(--ivory-dim); }
 
-  /* ---------- learn panel ---------- */
-  .learn-intro { margin: 0 0 1rem; font-size: 0.8rem; color: var(--ivory-dim); }
-  .learn-category { margin-bottom: 1.2rem; }
-  .learn-category:last-child { margin-bottom: 0; }
-  .learn-category h3 {
-    margin: 0 0 0.5rem;
-    font-size: 0.82rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold-bright);
-    font-weight: normal;
-  }
-  .learn-links {
+  /* ---------- summary stats ---------- */
+  .budget-summary {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 0.6rem;
+    margin-bottom: 0.3rem;
+    text-align: center;
   }
-  .learn-card {
-    display: block;
-    background: rgba(0, 0, 0, 0.22);
-    border: 1px solid rgba(212, 162, 76, 0.25);
-    border-radius: 8px;
-    padding: 0.6rem 0.75rem;
-    text-decoration: none;
-    color: var(--ivory);
-  }
-  .learn-card:hover { border-color: rgba(212, 162, 76, 0.6); }
-  .learn-card-title { display: block; font-weight: bold; color: var(--gold-bright); font-size: 0.82rem; }
-  .learn-card-desc { display: block; margin-top: 0.25rem; font-size: 0.72rem; color: var(--ivory-dim); line-height: 1.4; }
-  .learn-card-url { display: block; margin-top: 0.3rem; font-size: 0.68rem; color: var(--gold); }
+  .budget-summary div { background: rgba(0, 0, 0, 0.22); border-radius: 8px; padding: 0.5rem 0.3rem; }
+  .budget-summary .stat-label { display: block; font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ivory-dim); }
+  .budget-summary .stat-value { display: block; font-size: 1rem; font-weight: bold; margin-top: 0.15rem; }
 
-  /* ---------- my questions ---------- */
-  .checkbox-row { flex-direction: row; align-items: center; gap: 0.4rem; font-size: 0.72rem; color: var(--ivory-dim); }
-  .checkbox-row input[type="checkbox"] { width: auto; }
-  .question-actions { display: flex; gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
-  .answer-editor { margin-top: 0.4rem; display: flex; flex-direction: column; gap: 0.3rem; }
-
-  /* ---------- budget charts ---------- */
-  .chart-block { margin-bottom: 1.1rem; }
+  /* ---------- mirrored income/expense chart ---------- */
+  .chart-block { margin: 1rem 0 1.1rem; }
   .chart-block h3 {
     margin: 0 0 0.4rem;
     font-size: 0.78rem;
@@ -293,9 +223,12 @@
   }
   .chart-wrap { background: rgba(0, 0, 0, 0.18); border-radius: 8px; padding: 0.6rem; }
   .chart-wrap svg { display: block; width: 100%; height: auto; }
+  .chart-legend { display: flex; gap: 1rem; justify-content: center; font-size: 0.68rem; color: var(--ivory-dim); margin-top: 0.4rem; }
+  .chart-legend span { display: inline-flex; align-items: center; gap: 0.3rem; }
+  .chart-legend i { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
 
   footer {
-    max-width: 1100px;
+    max-width: 720px;
     margin: 2rem auto 0;
     padding: 0 1.25rem;
     text-align: center;
@@ -319,191 +252,77 @@
     <a class="back-link" href="room.html" style="margin-left:0.8rem;">Back to the Room</a>
     <h1 class="hub-title">Finance Hub</h1>
     <p class="disclaimer">
-      This is a personal learning and observation space, not financial advice.
-      Nothing here is automated trading or investment guidance.
+      A personal budget tracker. The short tips throughout are general financial-literacy
+      info, not personalized financial advice.
     </p>
   </header>
 
-  <div class="section-heading learn">
-    <h2>Learn: Financial Literacy First</h2>
-    <p>Start here — neutral resources to learn from, and a place to track your own questions as they come up. Not financial advice.</p>
-  </div>
-
-  <div class="hub-grid">
-
-    <section class="panel full-width reveal" id="learnPanel">
-      <h2>Learn</h2>
-      <p class="learn-intro">A curated set of well-known, neutral resources. These are starting points, not endorsements of any one source — cross-check anything important.</p>
-
-      <div class="learn-category">
-        <h3>Investing &amp; Stocks Basics</h3>
-        <div class="learn-links">
-          <a class="learn-card" href="https://www.investopedia.com" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">Investopedia</span>
-            <span class="learn-card-desc">Plain-language definitions and explainers for almost any investing or finance term you run into.</span>
-            <span class="learn-card-url">investopedia.com</span>
-          </a>
-          <a class="learn-card" href="https://www.khanacademy.org/college-careers-more/personal-finance" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">Khan Academy — Personal Finance</span>
-            <span class="learn-card-desc">A free, structured video course covering investing, credit, taxes, and more from the ground up.</span>
-            <span class="learn-card-url">khanacademy.org</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="learn-category">
-        <h3>Staying Safe / Avoiding Scams</h3>
-        <div class="learn-links">
-          <a class="learn-card" href="https://www.investor.gov" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">Investor.gov</span>
-            <span class="learn-card-desc">The SEC's own investor-education site — how to spot fraud and check whether someone is a licensed advisor.</span>
-            <span class="learn-card-url">investor.gov</span>
-          </a>
-          <a class="learn-card" href="https://www.consumerfinance.gov" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">Consumer Financial Protection Bureau</span>
-            <span class="learn-card-desc">Guides on banking, credit, and loans, plus where to file a complaint if something goes wrong.</span>
-            <span class="learn-card-url">consumerfinance.gov</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="learn-category">
-        <h3>Saving, Credit &amp; Banking Basics</h3>
-        <div class="learn-links">
-          <a class="learn-card" href="https://www.nerdwallet.com" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">NerdWallet — Learning Guides</span>
-            <span class="learn-card-desc">Comparisons and how-tos for savings accounts, credit cards, and building credit history.</span>
-            <span class="learn-card-url">nerdwallet.com</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="learn-category">
-        <h3>Long-Term / Retirement Investing 101</h3>
-        <div class="learn-links">
-          <a class="learn-card" href="https://www.bogleheads.org/wiki/Main_Page" target="_blank" rel="noopener noreferrer">
-            <span class="learn-card-title">Bogleheads Wiki</span>
-            <span class="learn-card-desc">A well-regarded, non-commercial community reference focused on simple, low-cost index-fund investing.</span>
-            <span class="learn-card-url">bogleheads.org/wiki</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel full-width reveal" id="questionsPanel">
-      <h2>My Questions</h2>
-      <form id="questionForm">
-        <input type="text" id="questionText" placeholder="e.g. How do I open a brokerage account here?" required>
-        <textarea id="questionAnswer" rows="2" placeholder="Answer / notes, if you already have them..."></textarea>
-        <label class="checkbox-row">
-          <input type="checkbox" id="questionResolved"> Already resolved
-        </label>
-        <button type="submit">Log Question</button>
-      </form>
-      <div class="filter-pills" id="questionFilters"></div>
-      <ul class="item-list" id="questionsList"></ul>
-    </section>
-
-  </div>
-
-  <div class="section-heading crypto">
-    <h2>Speculative Watching (Not Investing Advice)</h2>
-    <p>Everything below is entered by hand — a place to watch, note, and learn, not a trading tool.</p>
-  </div>
-
-  <div class="hub-grid">
+  <div class="page-wrap">
 
     <section class="panel reveal">
-      <h2>Watchlist</h2>
-      <form id="watchForm">
-        <div class="form-row">
-          <input type="text" id="watchName" placeholder="Name" required>
-          <input type="text" id="watchTicker" placeholder="Ticker (e.g. $DOGE)">
-        </div>
-        <textarea id="watchNotes" rows="2" placeholder="Notes..."></textarea>
-        <input type="url" id="watchLink" placeholder="Birdeye / Solscan / DexScreener link">
-        <button type="submit">Add to Watchlist</button>
-      </form>
-      <ul class="item-list" id="watchList"></ul>
-    </section>
-
-    <section class="panel reveal">
-      <h2>Signal Journal</h2>
-      <form id="signalForm">
-        <div class="form-row">
-          <input type="date" id="signalDate">
-        </div>
-        <textarea id="signalNote" rows="3" placeholder="What did you notice? A whale move, a tweet spike, a pattern..." required></textarea>
-        <button type="submit">Log Signal</button>
-      </form>
-      <ul class="item-list" id="signalList"></ul>
-    </section>
-
-    <section class="panel reveal">
-      <h2>Whale Watchlist</h2>
-      <form id="whaleForm">
-        <input type="text" id="whaleAddress" placeholder="Wallet address" required>
-        <div class="form-row">
-          <input type="text" id="whaleNickname" placeholder="Nickname">
-        </div>
-        <textarea id="whaleNotes" rows="2" placeholder="Notes..."></textarea>
-        <button type="submit">Add Wallet</button>
-      </form>
-      <ul class="item-list" id="whaleList"></ul>
-    </section>
-
-    <section class="panel reveal">
-      <h2>Learning Notes</h2>
-      <form id="notesForm">
-        <div class="form-row">
-          <input type="text" id="noteTopic" placeholder="Topic (e.g. Liquidity, Hype cycles)">
-          <input type="date" id="noteDate">
-        </div>
-        <textarea id="noteText" rows="3" placeholder="What are you learning about how these markets behave?" required></textarea>
-        <button type="submit">Add Note</button>
-      </form>
-      <div class="filter-pills" id="noteFilters"></div>
-      <ul class="item-list" id="notesList"></ul>
-    </section>
-
-  </div>
-
-  <div class="section-heading budget">
-    <h2>Budget &amp; Savings Tracker</h2>
-    <p>Separate from the crypto space above — a plain, manual ledger and a savings goal.</p>
-  </div>
-
-  <div class="hub-grid">
-
-    <section class="panel budget-panel full-width reveal">
       <h2>Savings Goal</h2>
       <form class="goal-form" id="goalForm">
         <label>Goal name
-          <input type="text" id="goalName" placeholder="e.g. Emergency fund">
+          <input type="text" id="goalName" placeholder="e.g. Spain Exchange Program">
         </label>
         <label>Target amount ($)
           <input type="number" id="goalTarget" min="0" step="1">
         </label>
+        <label>Target date
+          <input type="date" id="goalTargetDate">
+        </label>
         <button type="submit">Set Goal</button>
       </form>
+      <p class="tip">Setting a target date turns your goal into a monthly pace below, so you always know what "on track" looks like — not just the far-off total.</p>
+
       <div class="progress-wrap">
         <div class="progress-label"><span id="progressText">No goal set yet.</span><span id="progressPercent"></span></div>
         <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
       </div>
 
-      <div class="budget-summary">
-        <div><span class="stat-label">Total Income</span><span class="stat-value amount-income" id="totalIncome">$0</span></div>
-        <div><span class="stat-label">Total Expenses</span><span class="stat-value amount-expense" id="totalExpenses">$0</span></div>
-        <div><span class="stat-label">Net Saved</span><span class="stat-value" id="netSaved">$0</span></div>
+      <div class="gauge-row" id="gaugeRow">
+        <svg viewBox="0 0 180 180" role="img" aria-labelledby="gaugeCaption">
+          <circle cx="90" cy="90" r="72" fill="none" stroke="rgba(0,0,0,0.35)" stroke-width="14"
+            stroke-dasharray="339.3 452.4" stroke-dashoffset="0" transform="rotate(135 90 90)" stroke-linecap="round"></circle>
+          <circle id="gaugeArc" cx="90" cy="90" r="72" fill="none" stroke="url(#gaugeGradient)" stroke-width="14"
+            stroke-dasharray="0 452.4" stroke-dashoffset="0" transform="rotate(135 90 90)" stroke-linecap="round"></circle>
+          <defs>
+            <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--cool-bright)"></stop>
+              <stop offset="100%" stop-color="var(--cool)"></stop>
+            </linearGradient>
+            <radialGradient id="gaugeDome" cx="35%" cy="30%" r="65%">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.12)"></stop>
+              <stop offset="100%" stop-color="rgba(255,255,255,0)"></stop>
+            </radialGradient>
+          </defs>
+          <circle cx="90" cy="90" r="58" fill="url(#gaugeDome)"></circle>
+          <text id="gaugeValueText" x="90" y="86" text-anchor="middle" class="gauge-value">$0</text>
+          <text id="gaugeSubText" x="90" y="104" text-anchor="middle" class="gauge-sub">this month</text>
+        </svg>
+        <p class="gauge-caption" id="gaugeCaption">Set a target amount and date above to see your monthly pace.</p>
       </div>
+      <p class="tip">This gauge compares what you've saved <em>this month</em> to the pace you'd need to hit your goal by the target date — a quick "am I on track right now" check.</p>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Income &amp; Expenses</h2>
+
+      <div class="budget-summary">
+        <div><span class="stat-label">Income</span><span class="stat-value amount-income" id="totalIncome">$0</span></div>
+        <div><span class="stat-label">Expenses</span><span class="stat-value amount-expense" id="totalExpenses">$0</span></div>
+        <div><span class="stat-label">Net Saved</span><span class="stat-value" id="netSaved">$0</span></div>
+        <div><span class="stat-label">Savings Rate</span><span class="stat-value" id="savingsRate">—</span></div>
+      </div>
+      <p class="tip">Savings rate is how much of what you earn you keep (net saved &divide; income). Many guides suggest aiming for 20%+ when you can — but any positive number is progress.</p>
 
       <div class="chart-block">
         <h3>Income vs. Expenses by Month</h3>
-        <div class="chart-wrap" id="chartIncomeExpense"></div>
-      </div>
-      <div class="chart-block">
-        <h3>Net Savings Trend</h3>
-        <div class="chart-wrap" id="chartSavingsTrend"></div>
+        <div class="chart-wrap" id="chartWaveform"></div>
+        <div class="chart-legend">
+          <span><i style="background:var(--income)"></i>Income (above)</span>
+          <span><i style="background:var(--expense)"></i>Expenses (below)</span>
+        </div>
       </div>
 
       <form id="txnForm">
@@ -518,16 +337,14 @@
         </div>
         <button type="submit">Add Transaction</button>
       </form>
+      <p class="tip">Logging every transaction, even small ones, is what makes the numbers above trustworthy — skipped entries make patterns harder to see.</p>
       <ul class="item-list" id="txnList"></ul>
     </section>
 
   </div>
 
   <footer>
-    Everything on this page is saved to this browser's local storage only — nothing is sent
-    anywhere, nothing here reads live prices, wallets, or social data. <code>fetchLiveTokenData()</code>
-    and <code>fetchSocialMentions()</code> in the script below are stubs left ready for a real
-    on-chain/social API once this becomes a connected app.
+    Everything on this page is saved to this browser's local storage only — nothing is sent anywhere.
   </footer>
 
 <script>
@@ -547,36 +364,23 @@
     return sign + "$" + Math.abs(n).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
   }
 
-  // ------------------------------------------------------------
-  // FUTURE: once this becomes a connected app, these are where live
-  // on-chain data (price, liquidity, holder counts) and social
-  // mention tracking would be fetched and merged alongside the
-  // manually-entered watchlist/signal/whale data above. Both are
-  // stubs — nothing is fetched automatically in this static version.
-  // ------------------------------------------------------------
-  async function fetchLiveTokenData(ticker) { return null; }
-  async function fetchSocialMentions(ticker) { return []; }
-
   function loadState() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
+        const budget = parsed.budget || {};
         return {
-          watchlist: Array.isArray(parsed.watchlist) ? parsed.watchlist : [],
-          signals: Array.isArray(parsed.signals) ? parsed.signals : [],
-          whales: Array.isArray(parsed.whales) ? parsed.whales : [],
-          learningNotes: Array.isArray(parsed.learningNotes) ? parsed.learningNotes : [],
-          questions: Array.isArray(parsed.questions) ? parsed.questions : [],
           budget: {
-            goalName: (parsed.budget && parsed.budget.goalName) || "",
-            goalTarget: (parsed.budget && Number(parsed.budget.goalTarget)) || 0,
-            transactions: (parsed.budget && Array.isArray(parsed.budget.transactions)) ? parsed.budget.transactions : [],
+            goalName: budget.goalName || "",
+            goalTarget: Number(budget.goalTarget) || 0,
+            goalTargetDate: budget.goalTargetDate || "",
+            transactions: Array.isArray(budget.transactions) ? budget.transactions : [],
           },
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { watchlist: [], signals: [], whales: [], learningNotes: [], questions: [], budget: { goalName: "", goalTarget: 0, transactions: [] } };
+    return { budget: { goalName: "", goalTarget: 0, goalTargetDate: "", transactions: [] } };
   }
   const state = loadState();
   function saveState() {
@@ -595,306 +399,6 @@
     return arr.slice().sort((a, b) => (a.id < b.id ? 1 : -1));
   }
 
-  // ---------- watchlist ----------
-  function renderWatchlist() {
-    const list = document.getElementById("watchList");
-    list.innerHTML = "";
-    if (!state.watchlist.length) { list.innerHTML = '<li class="empty-note">Nothing on the watchlist yet.</li>'; return; }
-    sortNewestFirst(state.watchlist).forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "item-card";
-      const title = document.createElement("div");
-      title.className = "item-title";
-      title.textContent = item.name + (item.ticker ? " (" + item.ticker + ")" : "");
-      li.appendChild(title);
-      if (item.notes) {
-        const notes = document.createElement("div");
-        notes.className = "item-notes";
-        notes.textContent = item.notes;
-        li.appendChild(notes);
-      }
-      if (item.link) {
-        const a = document.createElement("a");
-        a.className = "item-link";
-        a.href = item.link;
-        a.target = "_blank";
-        a.rel = "noopener noreferrer";
-        a.textContent = "Open chart →";
-        li.appendChild(a);
-      }
-      li.appendChild(makeDelBtn(() => {
-        state.watchlist = state.watchlist.filter((x) => x.id !== item.id);
-        saveState();
-        renderWatchlist();
-      }));
-      list.appendChild(li);
-    });
-  }
-  document.getElementById("watchForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("watchName").value.trim();
-    const ticker = document.getElementById("watchTicker").value.trim();
-    const notes = document.getElementById("watchNotes").value.trim();
-    let link = document.getElementById("watchLink").value.trim();
-    if (!name) return;
-    if (link && !/^https?:\/\//i.test(link)) link = "";
-    state.watchlist.push({ id: genId(), name, ticker, notes, link, addedAt: todayISODate() });
-    saveState();
-    e.target.reset();
-    renderWatchlist();
-  });
-
-  // ---------- signal journal ----------
-  function renderSignals() {
-    const list = document.getElementById("signalList");
-    list.innerHTML = "";
-    if (!state.signals.length) { list.innerHTML = '<li class="empty-note">No signals logged yet.</li>'; return; }
-    sortNewestFirst(state.signals).forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "item-card";
-      const meta = document.createElement("div");
-      meta.className = "item-meta";
-      meta.textContent = item.date;
-      const notes = document.createElement("div");
-      notes.className = "item-notes";
-      notes.textContent = item.note;
-      li.appendChild(meta);
-      li.appendChild(notes);
-      li.appendChild(makeDelBtn(() => {
-        state.signals = state.signals.filter((x) => x.id !== item.id);
-        saveState();
-        renderSignals();
-      }));
-      list.appendChild(li);
-    });
-  }
-  document.getElementById("signalForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const note = document.getElementById("signalNote").value.trim();
-    const date = document.getElementById("signalDate").value || todayISODate();
-    if (!note) return;
-    state.signals.push({ id: genId(), date, note });
-    saveState();
-    document.getElementById("signalNote").value = "";
-    document.getElementById("signalDate").value = todayISODate();
-    renderSignals();
-  });
-
-  // ---------- whale watchlist ----------
-  function renderWhales() {
-    const list = document.getElementById("whaleList");
-    list.innerHTML = "";
-    if (!state.whales.length) { list.innerHTML = '<li class="empty-note">No wallets tracked yet.</li>'; return; }
-    sortNewestFirst(state.whales).forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "item-card";
-      const title = document.createElement("div");
-      title.className = "item-title";
-      title.textContent = item.nickname || "(unnamed wallet)";
-      const meta = document.createElement("div");
-      meta.className = "item-meta";
-      meta.textContent = item.address;
-      li.appendChild(title);
-      li.appendChild(meta);
-      if (item.notes) {
-        const notes = document.createElement("div");
-        notes.className = "item-notes";
-        notes.textContent = item.notes;
-        li.appendChild(notes);
-      }
-      const a = document.createElement("a");
-      a.className = "item-link";
-      a.href = "https://solscan.io/account/" + encodeURIComponent(item.address);
-      a.target = "_blank";
-      a.rel = "noopener noreferrer";
-      a.textContent = "View on Solscan →";
-      li.appendChild(a);
-      li.appendChild(makeDelBtn(() => {
-        state.whales = state.whales.filter((x) => x.id !== item.id);
-        saveState();
-        renderWhales();
-      }));
-      list.appendChild(li);
-    });
-  }
-  document.getElementById("whaleForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const address = document.getElementById("whaleAddress").value.trim();
-    const nickname = document.getElementById("whaleNickname").value.trim();
-    const notes = document.getElementById("whaleNotes").value.trim();
-    if (!address) return;
-    state.whales.push({ id: genId(), address, nickname, notes, addedAt: todayISODate() });
-    saveState();
-    e.target.reset();
-    renderWhales();
-  });
-
-  // ---------- learning notes ----------
-  let noteFilter = "all";
-  function renderNoteFilters() {
-    const wrap = document.getElementById("noteFilters");
-    wrap.innerHTML = "";
-    const topics = Array.from(new Set(state.learningNotes.map((n) => n.topic).filter(Boolean)));
-    const makePill = (label, value) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "filter-pill" + (noteFilter === value ? " active" : "");
-      b.textContent = label;
-      b.addEventListener("click", () => { noteFilter = value; renderNoteFilters(); renderLearningNotes(); });
-      return b;
-    };
-    wrap.appendChild(makePill("All", "all"));
-    topics.forEach((t) => wrap.appendChild(makePill(t, t)));
-  }
-  function renderLearningNotes() {
-    const list = document.getElementById("notesList");
-    list.innerHTML = "";
-    const items = state.learningNotes.filter((n) => noteFilter === "all" || n.topic === noteFilter);
-    if (!items.length) { list.innerHTML = '<li class="empty-note">No learning notes yet.</li>'; return; }
-    sortNewestFirst(items).forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "item-card";
-      const title = document.createElement("div");
-      title.className = "item-title";
-      title.textContent = item.topic || "General";
-      const meta = document.createElement("div");
-      meta.className = "item-meta";
-      meta.textContent = item.date;
-      const notes = document.createElement("div");
-      notes.className = "item-notes";
-      notes.textContent = item.note;
-      li.appendChild(title);
-      li.appendChild(meta);
-      li.appendChild(notes);
-      li.appendChild(makeDelBtn(() => {
-        state.learningNotes = state.learningNotes.filter((x) => x.id !== item.id);
-        saveState();
-        renderNoteFilters();
-        renderLearningNotes();
-      }));
-      list.appendChild(li);
-    });
-  }
-  document.getElementById("notesForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const topic = document.getElementById("noteTopic").value.trim();
-    const date = document.getElementById("noteDate").value || todayISODate();
-    const note = document.getElementById("noteText").value.trim();
-    if (!note) return;
-    state.learningNotes.push({ id: genId(), topic, date, note });
-    saveState();
-    document.getElementById("noteText").value = "";
-    document.getElementById("noteTopic").value = "";
-    document.getElementById("noteDate").value = todayISODate();
-    renderNoteFilters();
-    renderLearningNotes();
-  });
-
-  // ---------- my questions ----------
-  let questionFilter = "all"; // all | open | resolved
-  function renderQuestionFilters() {
-    const wrap = document.getElementById("questionFilters");
-    wrap.innerHTML = "";
-    const makePill = (label, value) => {
-      const b = document.createElement("button");
-      b.type = "button";
-      b.className = "filter-pill" + (questionFilter === value ? " active" : "");
-      b.textContent = label;
-      b.addEventListener("click", () => { questionFilter = value; renderQuestionFilters(); renderQuestions(); });
-      return b;
-    };
-    wrap.appendChild(makePill("All", "all"));
-    wrap.appendChild(makePill("Open", "open"));
-    wrap.appendChild(makePill("Resolved", "resolved"));
-  }
-  function renderQuestions() {
-    const list = document.getElementById("questionsList");
-    list.innerHTML = "";
-    const items = state.questions.filter((q) => {
-      if (questionFilter === "open") return !q.resolved;
-      if (questionFilter === "resolved") return !!q.resolved;
-      return true;
-    });
-    if (!items.length) { list.innerHTML = '<li class="empty-note">No questions logged yet.</li>'; return; }
-    sortNewestFirst(items).forEach((item) => {
-      const li = document.createElement("li");
-      li.className = "item-card";
-      const title = document.createElement("div");
-      title.className = "item-title";
-      title.textContent = item.question;
-      const meta = document.createElement("div");
-      meta.className = "item-meta";
-      meta.textContent = item.date + " — " + (item.resolved ? "Resolved" : "Open");
-      li.appendChild(title);
-      li.appendChild(meta);
-      if (item.answer) {
-        const notes = document.createElement("div");
-        notes.className = "item-notes";
-        notes.textContent = item.answer;
-        li.appendChild(notes);
-      }
-
-      const actions = document.createElement("div");
-      actions.className = "question-actions";
-
-      const toggleBtn = document.createElement("button");
-      toggleBtn.type = "button";
-      toggleBtn.textContent = item.resolved ? "Mark Open" : "Mark Resolved";
-      toggleBtn.addEventListener("click", () => {
-        item.resolved = !item.resolved;
-        saveState();
-        renderQuestions();
-      });
-      actions.appendChild(toggleBtn);
-
-      if (!item.answer) {
-        const answerBtn = document.createElement("button");
-        answerBtn.type = "button";
-        answerBtn.textContent = "Add Answer";
-        answerBtn.addEventListener("click", () => {
-          const editor = document.createElement("div");
-          editor.className = "answer-editor";
-          const ta = document.createElement("textarea");
-          ta.rows = 2;
-          ta.placeholder = "Paste what you found out...";
-          const saveBtn = document.createElement("button");
-          saveBtn.type = "button";
-          saveBtn.textContent = "Save Answer";
-          saveBtn.addEventListener("click", () => {
-            item.answer = ta.value.trim();
-            if (item.answer) item.resolved = true;
-            saveState();
-            renderQuestions();
-          });
-          editor.appendChild(ta);
-          editor.appendChild(saveBtn);
-          answerBtn.replaceWith(editor);
-        });
-        actions.appendChild(answerBtn);
-      }
-
-      li.appendChild(actions);
-      li.appendChild(makeDelBtn(() => {
-        state.questions = state.questions.filter((x) => x.id !== item.id);
-        saveState();
-        renderQuestions();
-      }));
-      list.appendChild(li);
-    });
-  }
-  document.getElementById("questionForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const question = document.getElementById("questionText").value.trim();
-    const answer = document.getElementById("questionAnswer").value.trim();
-    const resolved = document.getElementById("questionResolved").checked;
-    if (!question) return;
-    state.questions.push({ id: genId(), question, answer, resolved, date: todayISODate() });
-    saveState();
-    e.target.reset();
-    renderQuestionFilters();
-    renderQuestions();
-  });
-
   // ---------- budget & savings ----------
   function monthKey(dateStr) {
     return (dateStr || "").slice(0, 7); // YYYY-MM
@@ -910,88 +414,145 @@
     });
     return Object.keys(map).sort().map((k) => ({ month: k, income: map[k].income, expense: map[k].expense }));
   }
-  function buildCumulativeSeries() {
-    const sorted = state.budget.transactions
-      .slice()
-      .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
-    let running = 0;
-    return sorted.map((t) => {
-      running += t.type === "income" ? t.amount : -t.amount;
-      return { date: t.date, value: running };
-    });
-  }
-  function renderIncomeExpenseChart() {
-    const container = document.getElementById("chartIncomeExpense");
+
+  // Mirrored, ribbon-shaded income/expense chart — income plotted as a
+  // gradient-filled ribbon above a center $0 line, expenses mirrored
+  // below it, like a population pyramid. The gap above vs. below that
+  // line for any given month is the "at a glance" surplus/deficit read
+  // the flat grouped-bar version this replaced didn't give as directly.
+  function renderSpendingWaveform() {
+    const container = document.getElementById("chartWaveform");
     const data = buildMonthlyTotals();
     if (data.length < 2) {
       container.innerHTML = '<p class="empty-note">Add a few transactions across different months to see this.</p>';
       return;
     }
-    const width = 480, height = 180;
-    const padding = { top: 10, right: 10, bottom: 24, left: 10 };
+    const width = 560, height = 220;
+    const padding = { top: 14, right: 16, bottom: 22, left: 16 };
     const chartW = width - padding.left - padding.right;
-    const chartH = height - padding.top - padding.bottom;
+    const centerY = padding.top + (height - padding.top - padding.bottom) / 2;
+    const halfH = (height - padding.top - padding.bottom) / 2 - 4;
     const maxVal = Math.max(1, ...data.map((d) => Math.max(d.income, d.expense)));
-    const groupW = chartW / data.length;
-    const barW = Math.min(18, groupW / 3);
+    const stepX = data.length > 1 ? chartW / (data.length - 1) : 0;
 
-    let bars = "";
+    const xAt = (i) => padding.left + i * stepX;
+    const incomeYAt = (d) => centerY - (d.income / maxVal) * halfH;
+    const expenseYAt = (d) => centerY + (d.expense / maxVal) * halfH;
+
+    const incomeLine = data.map((d, i) => (i === 0 ? "M" : "L") + xAt(i).toFixed(1) + "," + incomeYAt(d).toFixed(1)).join(" ");
+    const incomeArea = incomeLine +
+      " L" + xAt(data.length - 1).toFixed(1) + "," + centerY.toFixed(1) +
+      " L" + xAt(0).toFixed(1) + "," + centerY.toFixed(1) + " Z";
+    const expenseLine = data.map((d, i) => (i === 0 ? "M" : "L") + xAt(i).toFixed(1) + "," + expenseYAt(d).toFixed(1)).join(" ");
+    const expenseArea = expenseLine +
+      " L" + xAt(data.length - 1).toFixed(1) + "," + centerY.toFixed(1) +
+      " L" + xAt(0).toFixed(1) + "," + centerY.toFixed(1) + " Z";
+
     let labels = "";
     data.forEach((d, i) => {
-      const groupX = padding.left + i * groupW + groupW / 2;
-      const incomeH = (d.income / maxVal) * chartH;
-      const expenseH = (d.expense / maxVal) * chartH;
-      const incomeX = groupX - barW - 2;
-      const expenseX = groupX + 2;
-      bars += '<rect x="' + incomeX.toFixed(1) + '" y="' + (padding.top + chartH - incomeH).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + incomeH.toFixed(1) + '" rx="2" style="fill:var(--income)"></rect>';
-      bars += '<rect x="' + expenseX.toFixed(1) + '" y="' + (padding.top + chartH - expenseH).toFixed(1) + '" width="' + barW.toFixed(1) + '" height="' + expenseH.toFixed(1) + '" rx="2" style="fill:var(--expense)"></rect>';
-      labels += '<text x="' + groupX.toFixed(1) + '" y="' + (height - 6) + '" text-anchor="middle" font-size="9" style="fill:var(--ivory-dim)">' + d.month + '</text>';
+      labels += '<text x="' + xAt(i).toFixed(1) + '" y="' + (height - 6) + '" text-anchor="middle" font-size="9" style="fill:var(--ivory-dim)">' + d.month + '</text>';
     });
 
     container.innerHTML =
-      '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Income vs expenses by month">' +
-      '<line x1="' + padding.left + '" y1="' + (padding.top + chartH) + '" x2="' + (width - padding.right) + '" y2="' + (padding.top + chartH) + '" stroke="rgba(244,232,208,0.25)"></line>' +
-      bars + labels +
+      '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Income and expenses by month, mirrored above and below zero">' +
+      '<defs>' +
+        '<linearGradient id="incomeFill" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="var(--income)" stop-opacity="0.75"></stop>' +
+          '<stop offset="100%" stop-color="var(--income)" stop-opacity="0.08"></stop>' +
+        '</linearGradient>' +
+        '<linearGradient id="expenseFill" x1="0" y1="1" x2="0" y2="0">' +
+          '<stop offset="0%" stop-color="var(--expense)" stop-opacity="0.75"></stop>' +
+          '<stop offset="100%" stop-color="var(--expense)" stop-opacity="0.08"></stop>' +
+        '</linearGradient>' +
+      '</defs>' +
+      '<line x1="' + padding.left + '" y1="' + centerY.toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + centerY.toFixed(1) + '" stroke="rgba(244,232,208,0.3)"></line>' +
+      '<path d="' + incomeArea + '" fill="url(#incomeFill)" stroke="none"></path>' +
+      '<path d="' + incomeLine + '" fill="none" stroke="var(--income)" stroke-width="2" stroke-linejoin="round"></path>' +
+      '<path d="' + expenseArea + '" fill="url(#expenseFill)" stroke="none"></path>' +
+      '<path d="' + expenseLine + '" fill="none" stroke="var(--expense)" stroke-width="2" stroke-linejoin="round"></path>' +
+      labels +
       '</svg>';
   }
-  function renderSavingsTrendChart() {
-    const container = document.getElementById("chartSavingsTrend");
-    const series = buildCumulativeSeries();
-    if (series.length < 2) {
-      container.innerHTML = '<p class="empty-note">Add a few transactions to see this.</p>';
+
+  // ---------- monthly savings gauge ----------
+  // The 270-degree ring below is drawn once in HTML with a fixed-length
+  // dasharray (339.3 = 75% of the r=72 circle's circumference, 452.4);
+  // this only ever changes the *progress* arc's dash length to reflect
+  // percent, and rotates both by 135deg so the gap sits at the bottom.
+  const GAUGE_R = 72;
+  const GAUGE_CIRCUMFERENCE = 2 * Math.PI * GAUGE_R; // ~452.4
+  const GAUGE_SWEEP = GAUGE_CIRCUMFERENCE * 0.75; // 270 degrees of the full circle
+
+  function computeMonthlyPace() {
+    const totalIncome = state.budget.transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
+    const totalExpenses = state.budget.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
+    const netSoFar = totalIncome - totalExpenses;
+    const target = state.budget.goalTarget;
+
+    const thisMonthKey = monthKey(todayISODate());
+    const monthly = buildMonthlyTotals().find((m) => m.month === thisMonthKey);
+    const thisMonthNet = monthly ? monthly.income - monthly.expense : 0;
+
+    if (!target || target <= 0) {
+      return { hasTarget: false, thisMonthNet };
+    }
+    if (netSoFar >= target) {
+      return { hasTarget: true, reached: true, percent: 100, thisMonthNet };
+    }
+
+    let monthlyTarget = null;
+    if (state.budget.goalTargetDate) {
+      const now = new Date();
+      const target_d = new Date(state.budget.goalTargetDate + "T00:00:00");
+      const monthsRemaining = Math.max(1, (target_d.getFullYear() - now.getFullYear()) * 12 + (target_d.getMonth() - now.getMonth()) + 1);
+      monthlyTarget = Math.max(0, (target - netSoFar) / monthsRemaining);
+    }
+
+    const percent = monthlyTarget && monthlyTarget > 0
+      ? Math.max(0, Math.min(100, (thisMonthNet / monthlyTarget) * 100))
+      : 0;
+
+    return { hasTarget: true, reached: false, percent, monthlyTarget, thisMonthNet };
+  }
+
+  // A rounded line-cap still paints a visible dot for a zero-length dash,
+  // so a 0% gauge would otherwise show a stray dot on the ring — switch
+  // to a flat cap only for that case, round everywhere else.
+  function setGaugeArcDash(dashLength) {
+    const arc = document.getElementById("gaugeArc");
+    arc.setAttribute("stroke-dasharray", dashLength.toFixed(1) + " " + GAUGE_CIRCUMFERENCE.toFixed(1));
+    arc.setAttribute("stroke-linecap", dashLength < 0.5 ? "butt" : "round");
+  }
+
+  function renderGauge() {
+    const pace = computeMonthlyPace();
+    const valueText = document.getElementById("gaugeValueText");
+    const subText = document.getElementById("gaugeSubText");
+    const caption = document.getElementById("gaugeCaption");
+
+    if (!pace.hasTarget) {
+      setGaugeArcDash(0);
+      valueText.textContent = formatMoney(pace.thisMonthNet);
+      subText.textContent = "saved this month";
+      caption.textContent = "Set a target amount and date above to see your monthly pace.";
       return;
     }
-    const width = 480, height = 160;
-    const padding = { top: 16, right: 12, bottom: 12, left: 12 };
-    const chartW = width - padding.left - padding.right;
-    const chartH = height - padding.top - padding.bottom;
+    if (pace.reached) {
+      setGaugeArcDash(GAUGE_SWEEP);
+      valueText.textContent = "🎉";
+      subText.textContent = "goal reached";
+      caption.textContent = "You've hit your target — nice work.";
+      return;
+    }
 
-    const values = series.map((p) => p.value);
-    const maxVal = Math.max(0, ...values);
-    const minVal = Math.min(0, ...values);
-    const range = (maxVal - minVal) || 1;
-
-    const stepX = chartW / (series.length - 1);
-    const points = series.map((p, i) => [
-      padding.left + i * stepX,
-      padding.top + chartH - ((p.value - minVal) / range) * chartH,
-    ]);
-    const zeroY = padding.top + chartH - ((0 - minVal) / range) * chartH;
-
-    const linePath = points.map((pt, i) => (i === 0 ? "M" : "L") + pt[0].toFixed(1) + "," + pt[1].toFixed(1)).join(" ");
-    const areaPath = linePath +
-      " L" + points[points.length - 1][0].toFixed(1) + "," + zeroY.toFixed(1) +
-      " L" + points[0][0].toFixed(1) + "," + zeroY.toFixed(1) + " Z";
-
-    container.innerHTML =
-      '<svg viewBox="0 0 ' + width + ' ' + height + '" width="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Net savings trend over time">' +
-      '<line x1="' + padding.left + '" y1="' + zeroY.toFixed(1) + '" x2="' + (width - padding.right) + '" y2="' + zeroY.toFixed(1) + '" stroke="rgba(244,232,208,0.25)"></line>' +
-      '<path d="' + areaPath + '" style="fill:var(--cool-bright); opacity:0.18; stroke:none;"></path>' +
-      '<path d="' + linePath + '" style="fill:none; stroke:var(--cool-bright); stroke-width:2;"></path>' +
-      '<text x="' + padding.left + '" y="12" font-size="9" style="fill:var(--ivory-dim)">' + formatMoney(maxVal) + '</text>' +
-      '<text x="' + padding.left + '" y="' + (height - 4) + '" font-size="9" style="fill:var(--ivory-dim)">' + formatMoney(minVal) + '</text>' +
-      '</svg>';
+    const dash = GAUGE_SWEEP * (pace.percent / 100);
+    setGaugeArcDash(dash);
+    valueText.textContent = formatMoney(pace.thisMonthNet);
+    subText.textContent = "of " + formatMoney(pace.monthlyTarget) + " pace";
+    caption.textContent = Math.round(pace.percent) + "% of this month's pace toward your goal, based on " +
+      formatMoney(pace.monthlyTarget) + "/month needed by " + state.budget.goalTargetDate + ".";
   }
+
   function renderBudget() {
     const totalIncome = state.budget.transactions.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);
     const totalExpenses = state.budget.transactions.filter((t) => t.type === "expense").reduce((s, t) => s + t.amount, 0);
@@ -1000,6 +561,7 @@
     document.getElementById("totalIncome").textContent = formatMoney(totalIncome);
     document.getElementById("totalExpenses").textContent = formatMoney(totalExpenses);
     document.getElementById("netSaved").textContent = formatMoney(net);
+    document.getElementById("savingsRate").textContent = totalIncome > 0 ? Math.round((net / totalIncome) * 100) + "%" : "—";
 
     const target = state.budget.goalTarget;
     const percent = target > 0 ? Math.max(0, Math.min(100, (net / target) * 100)) : 0;
@@ -1011,9 +573,10 @@
 
     document.getElementById("goalName").value = state.budget.goalName;
     document.getElementById("goalTarget").value = state.budget.goalTarget || "";
+    document.getElementById("goalTargetDate").value = state.budget.goalTargetDate || "";
 
-    renderIncomeExpenseChart();
-    renderSavingsTrendChart();
+    renderGauge();
+    renderSpendingWaveform();
 
     const list = document.getElementById("txnList");
     list.innerHTML = "";
@@ -1045,6 +608,7 @@
     e.preventDefault();
     state.budget.goalName = document.getElementById("goalName").value.trim();
     state.budget.goalTarget = Math.max(0, Number(document.getElementById("goalTarget").value) || 0);
+    state.budget.goalTargetDate = document.getElementById("goalTargetDate").value || "";
     saveState();
     renderBudget();
   });
@@ -1063,17 +627,7 @@
   });
 
   // ---------- init ----------
-  document.getElementById("signalDate").value = todayISODate();
-  document.getElementById("noteDate").value = todayISODate();
   document.getElementById("txnDate").value = todayISODate();
-
-  renderWatchlist();
-  renderSignals();
-  renderWhales();
-  renderNoteFilters();
-  renderLearningNotes();
-  renderQuestionFilters();
-  renderQuestions();
   renderBudget();
 
   // ---------- scroll reveal: fade/slide each .reveal element in once, the
