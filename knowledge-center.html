@@ -31,6 +31,10 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; }
+  /* The hidden attribute must always win, even over elements whose own
+     class sets display:flex/grid (author CSS otherwise beats the
+     browser's built-in [hidden] rule at equal specificity). */
+  [hidden] { display: none !important; }
 
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -235,9 +239,13 @@
 
   .arabic-text {
     font-family: "Traditional Arabic", "Segoe UI", Tahoma, serif;
-    font-size: 1.15rem;
+    font-size: 1.3rem;
     line-height: 1.9;
     text-align: right;
+  }
+  .transliteration-text {
+    font-style: italic;
+    color: var(--gold-bright);
   }
 
   .teaching-card .title-input {
@@ -274,6 +282,24 @@
   }
   @media (max-width: 520px) {
     .source-row { grid-template-columns: 1fr; }
+  }
+  .quran-location-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 0.7rem;
+  }
+  @media (max-width: 520px) {
+    .quran-location-row { grid-template-columns: 1fr; }
+  }
+  .quran-location-row input[type="number"] {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.82rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
   }
 
   .card-footer {
@@ -319,6 +345,64 @@
   }
   .add-step-row button:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
 
+  /* ---------- toolbar: view toggle + export/import ---------- */
+  .hub-toolbar {
+    max-width: 680px;
+    margin: 1.4rem auto 0;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  .hub-toolbar button, .hub-toolbar label.file-btn {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    color: var(--ivory-dim);
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    font-size: 0.74rem;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .hub-toolbar button:hover, .hub-toolbar label.file-btn:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+  .hub-toolbar button.active { color: var(--wall-dark); background: var(--gold-bright); border-color: var(--gold-bright); }
+  .hub-toolbar input[type="file"] { display: none; }
+
+  /* ---------- Quran map: a read-only, sorted view of your own reached,
+     verified entries that have a Surah/Ayah location filled in — never
+     shows locked/placeholder content, same principle as the path itself. ---------- */
+  .quran-map-intro {
+    max-width: 680px;
+    margin: 1.2rem auto 0;
+    padding: 0 1.25rem;
+    font-size: 0.8rem;
+    color: var(--ivory-dim);
+    text-align: center;
+  }
+  .quran-map-list {
+    max-width: 680px;
+    margin: 1rem auto 0;
+    padding: 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .quran-map-item {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+  }
+  .quran-map-loc {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+  .quran-map-title { font-weight: bold; color: var(--gold-bright); margin-top: 0.15rem; }
+  .quran-map-snippet { font-size: 0.8rem; color: var(--ivory-dim); margin-top: 0.3rem; line-height: 1.4; }
+
   footer {
     max-width: 680px;
     margin: 2rem auto 0;
@@ -327,6 +411,7 @@
     font-size: 0.7rem;
     color: var(--ivory-dim);
   }
+  footer code { background: rgba(0, 0, 0, 0.3); padding: 0.05em 0.35em; border-radius: 4px; }
 
   /* ---------- scroll reveal: fade/slide content in once, as it enters view.
      Scoped to static intro content only — the step track already has its
@@ -355,20 +440,36 @@
     </p>
   </header>
 
-  <div class="path-heading reveal">
+  <div class="hub-toolbar">
+    <button type="button" id="viewPathBtn" class="active">My Path</button>
+    <button type="button" id="viewMapBtn">Quran Map</button>
+    <button type="button" id="exportJsonBtn">Export JSON (backup)</button>
+    <button type="button" id="exportMdBtn">Export Markdown (Obsidian-ready)</button>
+    <label class="file-btn">Import JSON<input type="file" id="importInput" accept="application/json,.json"></label>
+  </div>
+
+  <div class="path-heading reveal" id="pathHeading">
     <h2>Your Path</h2>
     <p>Move through these steps as you're ready. Each one reveals itself when you choose to continue.</p>
   </div>
 
   <div class="path-track" id="pathTrack"></div>
 
-  <div class="add-step-row">
+  <div class="add-step-row" id="addStepRow">
     <button type="button" id="addStepBtn">+ Add another step</button>
   </div>
 
+  <p class="quran-map-intro reveal" id="quranMapIntro" hidden>
+    Every teaching you've reached that has a Surah/Ayah location filled in, sorted in Quran order —
+    a map of what you've covered so far, built entirely from your own verified entries.
+  </p>
+  <div class="quran-map-list" id="quranMapList" hidden></div>
+
   <footer>
     Progress and any text you enter are stored only in this browser's local storage.
-    Nothing is sent anywhere.
+    Nothing is sent anywhere. Export makes a copy you control — a JSON backup you can re-import
+    here, or a Markdown file with <code>[[wiki-links]]</code> between related teachings, ready to
+    drop into a tool like Obsidian for your own visual map.
   </footer>
 
 <script>
@@ -398,17 +499,22 @@
     {
       title: "Patience (Sabr)",
       arabic: "يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+      transliteration: "",
       description: "",
       english: "O believers! Seek comfort in patience and prayer. Allah is truly with those who are patient.",
       spanish: "PLACEHOLDER - traducción al español aquí.",
       source: "Quran 2:153 (Surah Al-Baqarah)",
       sourceLink: "https://quran.com/2/153",
+      surahName: "Al-Baqarah",
+      surahNumber: 2,
+      ayahRange: "153",
+      relatedTitles: "",
       isPlaceholder: false,
     },
-    { title: "Teaching 2 — Gratitude (Shukr)", arabic: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "" },
-    { title: "Teaching 3 — Prayer (Salah)", arabic: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "" },
-    { title: "Teaching 4 — Kindness to Parents", arabic: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "" },
-    { title: "Teaching 5 — Charity (Sadaqah)", arabic: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "" },
+    { title: "Teaching 2 — Gratitude (Shukr)", arabic: "", transliteration: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "", surahName: "", surahNumber: "", ayahRange: "", relatedTitles: "" },
+    { title: "Teaching 3 — Prayer (Salah)", arabic: "", transliteration: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "", surahName: "", surahNumber: "", ayahRange: "", relatedTitles: "" },
+    { title: "Teaching 4 — Kindness to Parents", arabic: "", transliteration: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "", surahName: "", surahNumber: "", ayahRange: "", relatedTitles: "" },
+    { title: "Teaching 5 — Charity (Sadaqah)", arabic: "", transliteration: "", description: "PLACEHOLDER - replace with verified source content. Copy a short passage or hadith about this topic from a source like Quran.com or Sunnah.com and paste it here.", english: "PLACEHOLDER - English translation goes here.", spanish: "PLACEHOLDER - traducción al español aquí.", source: "", sourceLink: "", surahName: "", surahNumber: "", ayahRange: "", relatedTitles: "" },
   ];
 
   function freshDefaultEntries() {
@@ -487,6 +593,18 @@
     arArea.addEventListener("input", () => { entry.arabic = arArea.value; debouncedSaveState(); });
     card.appendChild(arArea);
 
+    const translitLabel = document.createElement("label");
+    translitLabel.className = "field-label";
+    translitLabel.textContent = "Transliteration (how it sounds, for recitation practice)";
+    card.appendChild(translitLabel);
+    const translitArea = document.createElement("textarea");
+    translitArea.rows = 2;
+    translitArea.className = "transliteration-text";
+    translitArea.placeholder = "e.g. Yā ayyuhā alladhīna āmanū...";
+    translitArea.value = entry.transliteration || "";
+    translitArea.addEventListener("input", () => { entry.transliteration = translitArea.value; debouncedSaveState(); });
+    card.appendChild(translitArea);
+
     const descLabel = document.createElement("label");
     descLabel.className = "field-label";
     descLabel.textContent = "Description (copy from a verified source)";
@@ -555,6 +673,48 @@
     sourceRow.appendChild(srcWrap);
     sourceRow.appendChild(linkWrap);
     card.appendChild(sourceRow);
+
+    const quranLocLabel = document.createElement("label");
+    quranLocLabel.className = "field-label";
+    quranLocLabel.textContent = "Location in the Quran (optional — powers the Quran Map view below)";
+    card.appendChild(quranLocLabel);
+    const quranLocRow = document.createElement("div");
+    quranLocRow.className = "quran-location-row";
+
+    const surahNameInput = document.createElement("input");
+    surahNameInput.type = "text";
+    surahNameInput.placeholder = "Surah name (e.g. Al-Baqarah)";
+    surahNameInput.value = entry.surahName || "";
+    surahNameInput.addEventListener("input", () => { entry.surahName = surahNameInput.value; debouncedSaveState(); });
+
+    const surahNumInput = document.createElement("input");
+    surahNumInput.type = "number";
+    surahNumInput.min = "1";
+    surahNumInput.placeholder = "Surah #";
+    surahNumInput.value = entry.surahNumber || "";
+    surahNumInput.addEventListener("input", () => { entry.surahNumber = surahNumInput.value ? Number(surahNumInput.value) : ""; debouncedSaveState(); });
+
+    const ayahInput = document.createElement("input");
+    ayahInput.type = "text";
+    ayahInput.placeholder = "Ayah (e.g. 153 or 1-5)";
+    ayahInput.value = entry.ayahRange || "";
+    ayahInput.addEventListener("input", () => { entry.ayahRange = ayahInput.value; debouncedSaveState(); });
+
+    quranLocRow.appendChild(surahNameInput);
+    quranLocRow.appendChild(surahNumInput);
+    quranLocRow.appendChild(ayahInput);
+    card.appendChild(quranLocRow);
+
+    const relatedLabel = document.createElement("label");
+    relatedLabel.className = "field-label";
+    relatedLabel.textContent = "Related teachings (comma-separated titles — becomes [[wiki-links]] in the Markdown export)";
+    card.appendChild(relatedLabel);
+    const relatedInput = document.createElement("input");
+    relatedInput.type = "text";
+    relatedInput.placeholder = "e.g. Gratitude (Shukr), Charity (Sadaqah)";
+    relatedInput.value = entry.relatedTitles || "";
+    relatedInput.addEventListener("input", () => { entry.relatedTitles = relatedInput.value; debouncedSaveState(); });
+    card.appendChild(relatedInput);
 
     const footer = document.createElement("div");
     footer.className = "card-footer";
@@ -634,12 +794,157 @@
 
   document.getElementById("addStepBtn").addEventListener("click", () => {
     state.entries.push({
-      id: genId(), title: "New Teaching", arabic: "", description: "", english: "", spanish: "",
-      source: "", sourceLink: "", isPlaceholder: true,
+      id: genId(), title: "New Teaching", arabic: "", transliteration: "", description: "", english: "", spanish: "",
+      source: "", sourceLink: "", surahName: "", surahNumber: "", ayahRange: "", relatedTitles: "", isPlaceholder: true,
     });
     saveState();
     render();
   });
+
+  // ============================================================
+  // EXPORT / IMPORT — a JSON backup (full state, re-importable here)
+  // and a Markdown export meant for a tool like Obsidian: one file per
+  // export, one section per reached/verified entry, with [[wiki-links]]
+  // built from each entry's "Related teachings" field. Placeholder
+  // entries are left out of the Markdown export since it's meant to
+  // travel into a "bigger project" as verified content, not scaffolding.
+  // ============================================================
+  function triggerDownload(filename, content, mimeType) {
+    const blob = new Blob([content], { type: mimeType });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById("exportJsonBtn").addEventListener("click", () => {
+    triggerDownload("knowledge-center-export.json", JSON.stringify(state, null, 2), "application/json");
+  });
+
+  document.getElementById("importInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!confirm("This replaces everything currently here with this file's contents. Continue?")) {
+      e.target.value = "";
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (!Array.isArray(parsed.entries)) throw new Error("missing entries array");
+        state.entries = parsed.entries;
+        state.unlockedCount = typeof parsed.unlockedCount === "number" ? parsed.unlockedCount : 0;
+        saveState();
+        render();
+      } catch (err) {
+        alert("Could not read that file as a Knowledge Center export.");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  });
+
+  function mdEscapeFrontmatter(s) {
+    return String(s || "").replace(/"/g, '\\"');
+  }
+
+  document.getElementById("exportMdBtn").addEventListener("click", () => {
+    const verified = state.entries.filter((e) => !e.isPlaceholder && (e.title || "").trim());
+    if (!verified.length) {
+      alert("No verified (non-placeholder) teachings to export yet.");
+      return;
+    }
+    const parts = verified.map((entry) => {
+      const related = (entry.relatedTitles || "")
+        .split(",")
+        .map((t) => t.trim())
+        .filter(Boolean)
+        .map((t) => "[[" + t + "]]")
+        .join(", ");
+      const lines = [];
+      lines.push("---");
+      lines.push('title: "' + mdEscapeFrontmatter(entry.title) + '"');
+      if (entry.source) lines.push('source: "' + mdEscapeFrontmatter(entry.source) + '"');
+      if (entry.sourceLink) lines.push('source_link: "' + mdEscapeFrontmatter(entry.sourceLink) + '"');
+      if (entry.surahName) lines.push('surah: "' + mdEscapeFrontmatter(entry.surahName) + '"');
+      if (entry.surahNumber) lines.push("surah_number: " + Number(entry.surahNumber));
+      if (entry.ayahRange) lines.push('ayah: "' + mdEscapeFrontmatter(entry.ayahRange) + '"');
+      lines.push("---");
+      lines.push("");
+      lines.push("## " + entry.title);
+      lines.push("");
+      if (entry.arabic) { lines.push("**Arabic:**"); lines.push(""); lines.push(entry.arabic); lines.push(""); }
+      if (entry.transliteration) { lines.push("**Transliteration:** " + entry.transliteration); lines.push(""); }
+      if (entry.english) { lines.push("**English:** " + entry.english); lines.push(""); }
+      if (entry.spanish) { lines.push("**Español:** " + entry.spanish); lines.push(""); }
+      if (entry.description) { lines.push("**Notes:**"); lines.push(""); lines.push(entry.description); lines.push(""); }
+      if (related) { lines.push("**Related:** " + related); lines.push(""); }
+      return lines.join("\n");
+    });
+    const combined = parts.join("\n\n---\n\n");
+    triggerDownload("knowledge-center-export.md", combined, "text/markdown");
+  });
+
+  // ---------- Quran map: read-only, sorted view of reached + verified
+  // entries that have a Surah number set. Never includes locked or
+  // placeholder entries — same "no preview, no hint" principle as the
+  // path itself. ----------
+  function renderQuranMap() {
+    const list = document.getElementById("quranMapList");
+    list.innerHTML = "";
+    const items = state.entries
+      .map((entry, i) => ({ entry, index: i }))
+      .filter(({ entry, index }) => index < state.unlockedCount && !entry.isPlaceholder && entry.surahNumber)
+      .sort((a, b) => {
+        const surahDiff = Number(a.entry.surahNumber) - Number(b.entry.surahNumber);
+        if (surahDiff !== 0) return surahDiff;
+        return (parseInt(a.entry.ayahRange, 10) || 0) - (parseInt(b.entry.ayahRange, 10) || 0);
+      });
+
+    if (!items.length) {
+      list.innerHTML = '<p class="empty-note" style="text-align:center;">Nothing here yet — reach a step and give it a Surah/Ayah location to see it appear here.</p>';
+      return;
+    }
+    items.forEach(({ entry }) => {
+      const card = document.createElement("div");
+      card.className = "quran-map-item";
+      const loc = document.createElement("div");
+      loc.className = "quran-map-loc";
+      loc.textContent = "Surah " + entry.surahNumber + (entry.surahName ? " · " + entry.surahName : "") + (entry.ayahRange ? " · Ayah " + entry.ayahRange : "");
+      const title = document.createElement("div");
+      title.className = "quran-map-title";
+      title.textContent = entry.title || "(untitled)";
+      card.appendChild(loc);
+      card.appendChild(title);
+      if (entry.english) {
+        const snippet = document.createElement("div");
+        snippet.className = "quran-map-snippet";
+        snippet.textContent = entry.english;
+        card.appendChild(snippet);
+      }
+      list.appendChild(card);
+    });
+  }
+
+  // ---------- view toggle: My Path <-> Quran Map ----------
+  function setView(view) {
+    const isMap = view === "map";
+    document.getElementById("viewPathBtn").classList.toggle("active", !isMap);
+    document.getElementById("viewMapBtn").classList.toggle("active", isMap);
+    document.getElementById("pathHeading").hidden = isMap;
+    document.getElementById("pathTrack").hidden = isMap;
+    document.getElementById("addStepRow").hidden = isMap;
+    document.getElementById("quranMapIntro").hidden = !isMap;
+    document.getElementById("quranMapList").hidden = !isMap;
+    if (isMap) renderQuranMap();
+  }
+  document.getElementById("viewPathBtn").addEventListener("click", () => setView("path"));
+  document.getElementById("viewMapBtn").addEventListener("click", () => setView("map"));
 
   render();
 
