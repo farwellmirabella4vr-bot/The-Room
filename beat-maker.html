@@ -898,6 +898,89 @@
     return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40) || "beat";
   }
 
+  // ============================================================
+  // OBSIDIAN LOGGING — writes a note directly into the connected vault's
+  // Rough Notes folder (readwrite), via the File System Access API. This
+  // is the reverse of a read-only folder connection: it writes straight
+  // into the vault. Manual, one beat at a time — nothing here logs
+  // automatically. The granted handle is stored in the same shared
+  // IndexedDB database Video Log/Nest of Knowledge use for their own
+  // (read-only, different) folder connection, under its own key, so
+  // connecting once in any life-hub room carries over to the rest.
+  // ============================================================
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; } // requestPermission needs a user gesture; caller is already inside a click handler
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; } // user cancelled the picker
+  }
+  function sanitizeNoteFilename(name) {
+    return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  // Connects on first use if needed (prompts via the picker), then writes/
+  // overwrites the given filename in Rough Notes. Returns false (never
+  // throws) on cancellation or a denied/unavailable folder, so callers can
+  // show a plain "couldn't log that" message instead of an uncaught error.
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
   // ---------- Web Audio setup ----------
   // Created immediately (harmless — decoding doesn't require a running
   // context) but only resumed inside a real user-gesture handler, so
@@ -2613,6 +2696,29 @@
     setTimeout(() => URL.revokeObjectURL(url), 2000);
   }
 
+  // Writes/overwrites a Rough Notes entry for this beat — re-logging the
+  // same beat updates the same note rather than piling up duplicates,
+  // since the filename is derived from the beat's own stable id.
+  async function logBeatToObsidian(beat) {
+    const padCounts = {};
+    beat.hits.forEach((h) => { padCounts[h.pad] = (padCounts[h.pad] || 0) + 1; });
+    const padLines = Object.keys(padCounts)
+      .sort((a, b) => Number(a) - Number(b))
+      .map((p) => "- Pad " + (Number(p) + 1) + ": " + padCounts[p] + " hit" + (padCounts[p] === 1 ? "" : "s"))
+      .join("\n");
+    const created = new Date(beat.createdAt);
+    const content =
+      "#baby\n\n" +
+      "# " + beat.name + "\n\n" +
+      "Beat made in Beat Maker, " + created.toLocaleDateString() + ".\n\n" +
+      "- Total hits: " + beat.hits.length + "\n" +
+      "- Duration: " + (beat.durationMs / 1000).toFixed(1) + "s\n\n" +
+      (padLines ? padLines + "\n\n" : "") +
+      "## References\n- \n";
+    const filename = sanitizeNoteFilename("Beat - " + beat.name + " (" + beat.id.slice(-6) + ")");
+    return writeNoteToVault(filename, content);
+  }
+
   async function renderSavedBeats() {
     const list = document.getElementById("beatsList");
     let beats;
@@ -2656,6 +2762,18 @@
         finally { exportBtn.disabled = false; exportBtn.textContent = "Export"; }
       });
 
+      const logBtn = document.createElement("button");
+      logBtn.type = "button";
+      logBtn.textContent = "Log to Obsidian";
+      logBtn.addEventListener("click", async () => {
+        logBtn.disabled = true;
+        const originalText = logBtn.textContent;
+        logBtn.textContent = "Logging…";
+        const ok = await logBeatToObsidian(beat);
+        logBtn.textContent = ok ? "Logged ✓" : "Couldn't log";
+        setTimeout(() => { logBtn.textContent = originalText; logBtn.disabled = false; }, 2000);
+      });
+
       const delBtn = document.createElement("button");
       delBtn.type = "button";
       delBtn.className = "danger";
@@ -2667,6 +2785,7 @@
 
       actions.appendChild(playThisBtn);
       actions.appendChild(exportBtn);
+      actions.appendChild(logBtn);
       actions.appendChild(delBtn);
 
       li.appendChild(info);
