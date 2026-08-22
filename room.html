@@ -430,6 +430,96 @@
     50%      { transform: scale(1.12); opacity: 1; }
   }
 
+  /* ---------- prayer times plaque: sits in the empty top-right
+     corner cell, near the distant mosque silhouette ---------- */
+  .plaque {
+    grid-column: 3;
+    grid-row: 1;
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    justify-self: center;
+    width: 94%;
+    padding: 0.55rem 0.6rem 0.55rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    background:
+      var(--wall-pattern),
+      linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 64px 64px, auto;
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 10px;
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.4),
+      inset 0 0 0 3px rgba(212, 162, 76, 0.15);
+    color: var(--ivory);
+  }
+  .plaque-icon {
+    width: clamp(18px, 3vmin, 28px);
+    height: auto;
+    color: var(--gold-bright);
+    margin-bottom: 0.1rem;
+  }
+  .plaque h2 {
+    margin: 0;
+    font-size: clamp(0.6rem, 1.3vw, 0.76rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    text-align: center;
+  }
+  .plaque-sub {
+    margin: -0.1rem 0 0.25rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.06em;
+    color: var(--ivory-dim);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .plaque-times {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.12rem;
+  }
+  .plaque-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.14rem 0.35rem;
+    border-radius: 4px;
+    font-size: clamp(0.58rem, 1.2vw, 0.7rem);
+    transition: background 0.4s ease;
+  }
+  .plaque-row .p-name { color: var(--ivory-dim); letter-spacing: 0.05em; }
+  .plaque-row .p-time { color: var(--ivory); font-variant-numeric: tabular-nums; }
+  .plaque-row.next {
+    background: rgba(242, 200, 121, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(242, 200, 121, 0.5);
+  }
+  .plaque-row.next .p-name,
+  .plaque-row.next .p-time {
+    color: var(--gold-bright);
+    font-weight: 600;
+  }
+  .plaque-next-note {
+    margin-top: 0.15rem;
+    font-size: 0.54rem;
+    color: var(--ember);
+    text-align: center;
+  }
+  .plaque-note {
+    margin-top: 0.3rem;
+    padding-top: 0.3rem;
+    border-top: 1px solid rgba(212, 162, 76, 0.25);
+    font-size: 0.5rem;
+    line-height: 1.35;
+    color: var(--ivory-dim);
+    text-align: center;
+  }
+
   footer {
     position: relative;
     z-index: 1;
@@ -487,6 +577,31 @@
     <div class="knowledge">
       <div class="knowledge-core"></div>
       <div class="knowledge-label">Shared&nbsp;Knowledge</div>
+    </div>
+
+    <div class="plaque">
+      <svg class="plaque-icon" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+        <line x1="20" y1="2" x2="20" y2="8" stroke="currentColor" stroke-width="2"/>
+        <line x1="20" y1="32" x2="20" y2="38" stroke="currentColor" stroke-width="2"/>
+        <line x1="2" y1="20" x2="8" y2="20" stroke="currentColor" stroke-width="2"/>
+        <line x1="32" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="2"/>
+        <line x1="6.5" y1="6.5" x2="10.8" y2="10.8" stroke="currentColor" stroke-width="2"/>
+        <line x1="29.2" y1="29.2" x2="33.5" y2="33.5" stroke="currentColor" stroke-width="2"/>
+        <line x1="6.5" y1="33.5" x2="10.8" y2="29.2" stroke="currentColor" stroke-width="2"/>
+        <line x1="29.2" y1="10.8" x2="33.5" y2="6.5" stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h2>Prayer Times</h2>
+      <div class="plaque-sub">Salt Lake City, UT</div>
+      <div class="plaque-times">
+        <div class="plaque-row" data-prayer="fajr"><span class="p-name">Fajr</span><span class="p-time">--:--</span></div>
+        <div class="plaque-row" data-prayer="dhuhr"><span class="p-name">Dhuhr</span><span class="p-time">--:--</span></div>
+        <div class="plaque-row" data-prayer="asr"><span class="p-name">Asr</span><span class="p-time">--:--</span></div>
+        <div class="plaque-row" data-prayer="maghrib"><span class="p-name">Maghrib</span><span class="p-time">--:--</span></div>
+        <div class="plaque-row" data-prayer="isha"><span class="p-name">Isha</span><span class="p-time">--:--</span></div>
+      </div>
+      <div class="plaque-next-note" hidden></div>
+      <div class="plaque-note">Calculated using the ISNA method (15&deg; angle, Shafi&#8217;i Asr) &mdash; may differ slightly from your local mosque&rsquo;s posted schedule.</div>
     </div>
 
     <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
@@ -742,7 +857,125 @@
   }
 
   applyTimeOfDay();
-  setInterval(applyTimeOfDay, 60000);
+
+  // ------------------------------------------------------------
+  // PRAYER TIMES — Salt Lake City, UT, computed from real solar
+  // position astronomy (not hardcoded / not a fixed table).
+  // Method: ISNA (Fajr/Isha at 15deg sun depression), Asr per
+  // Shafi'i jurisprudence (shadow-length factor t = 1).
+  // ------------------------------------------------------------
+  const SLC_LAT = 40.7608;
+  const SLC_LON = -111.8910; // degrees, west is negative
+
+  const d2r = Math.PI / 180, r2d = 180 / Math.PI;
+  const dsin = (d) => Math.sin(d * d2r);
+  const dcos = (d) => Math.cos(d * d2r);
+  const dtan = (d) => Math.tan(d * d2r);
+  const darcsin = (x) => Math.asin(x) * r2d;
+  const darccos = (x) => Math.acos(Math.max(-1, Math.min(1, x))) * r2d;
+  const darctan2 = (y, x) => Math.atan2(y, x) * r2d;
+  const fixAngle = (a) => ((a % 360) + 360) % 360;
+  const fixHour = (h) => ((h % 24) + 24) % 24;
+
+  // Julian Day at 0h UT for a Gregorian calendar date (Meeus algorithm).
+  function julianDay(year, month, day) {
+    if (month <= 2) { year -= 1; month += 12; }
+    const A = Math.floor(year / 100);
+    const B = 2 - A + Math.floor(A / 4);
+    return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+  }
+
+  // Low-precision solar position (sub-minute accuracy): mean anomaly,
+  // mean longitude, ecliptic longitude, obliquity -> declination and
+  // the equation of time, from days-since-J2000 (D).
+  function sunPosition(jd) {
+    const D = jd - 2451545.0;
+    const g = fixAngle(357.529 + 0.98560028 * D);
+    const q = fixAngle(280.459 + 0.98564736 * D);
+    const L = fixAngle(q + 1.915 * dsin(g) + 0.020 * dsin(2 * g));
+    const e = 23.439 - 0.00000036 * D;
+    let RA = fixHour(darctan2(dcos(e) * dsin(L), dcos(L)) / 15);
+    const eqt = q / 15 - RA; // hours
+    const decl = darcsin(dsin(e) * dsin(L)); // degrees
+    return { decl, eqt };
+  }
+
+  // Hour angle (degrees) for the sun to reach a given altitude
+  // (negative = below horizon, e.g. -15 for Fajr/Isha; positive =
+  // above horizon, used for the Asr shadow-length altitude).
+  function hourAngleForAltitude(lat, decl, altitude) {
+    const val = (dsin(altitude) - dsin(lat) * dsin(decl)) / (dcos(lat) * dcos(decl));
+    return darccos(val);
+  }
+
+  function toUTCDate(year, month, day, utcHours) {
+    const totalMinutes = Math.round(utcHours * 60);
+    return new Date(Date.UTC(year, month - 1, day, 0, totalMinutes, 0));
+  }
+
+  function getPrayerTimes(year, month, day) {
+    const jd = julianDay(year, month, day);
+    const { decl, eqt } = sunPosition(jd);
+
+    const dhuhrUTC = fixHour(12 - SLC_LON / 15 - eqt) + 1 / 60; // +1 min zawal margin
+
+    const hFajrIsha = hourAngleForAltitude(SLC_LAT, decl, -15) / 15;   // ISNA angle
+    const hMaghrib = hourAngleForAltitude(SLC_LAT, decl, -0.833) / 15; // sunset
+
+    const asrShadowFactor = 1; // Shafi'i
+    const asrAltitude = darctan2(1, asrShadowFactor + dtan(Math.abs(SLC_LAT - decl)));
+    const hAsr = hourAngleForAltitude(SLC_LAT, decl, asrAltitude) / 15;
+
+    return {
+      fajr: toUTCDate(year, month, day, dhuhrUTC - hFajrIsha),
+      dhuhr: toUTCDate(year, month, day, dhuhrUTC),
+      asr: toUTCDate(year, month, day, dhuhrUTC + hAsr),
+      maghrib: toUTCDate(year, month, day, dhuhrUTC + hMaghrib),
+      isha: toUTCDate(year, month, day, dhuhrUTC + hFajrIsha),
+    };
+  }
+
+  function formatLocalSLC(date) {
+    return date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/Denver", // auto-handles MST/MDT
+    });
+  }
+
+  const PRAYER_ORDER = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+
+  function updatePrayerPanel() {
+    const now = new Date();
+    const today = getPrayerTimes(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    const rows = {};
+
+    PRAYER_ORDER.forEach((key) => {
+      const row = document.querySelector('.plaque-row[data-prayer="' + key + '"]');
+      row.querySelector(".p-time").textContent = formatLocalSLC(today[key]);
+      row.classList.remove("next");
+      rows[key] = row;
+    });
+
+    const noteEl = document.querySelector(".plaque-next-note");
+    const nextKey = PRAYER_ORDER.find((key) => today[key] > now);
+
+    if (nextKey) {
+      rows[nextKey].classList.add("next");
+      noteEl.hidden = true;
+    } else {
+      const tomorrow = new Date(now.getTime() + 24 * 3600 * 1000);
+      const nextDay = getPrayerTimes(tomorrow.getFullYear(), tomorrow.getMonth() + 1, tomorrow.getDate());
+      noteEl.textContent = "Next: Fajr tomorrow at " + formatLocalSLC(nextDay.fajr);
+      noteEl.hidden = false;
+    }
+  }
+
+  updatePrayerPanel();
+  setInterval(() => {
+    applyTimeOfDay();
+    updatePrayerPanel();
+  }, 60000);
 })();
 </script>
 
