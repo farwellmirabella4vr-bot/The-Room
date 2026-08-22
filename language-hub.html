@@ -439,6 +439,16 @@
   }
   .star-toggle.starred { color: var(--gold); border-color: var(--gold); background: rgba(0, 0, 0, 0.03); }
   .star-toggle:hover { transform: none; }
+  .card-log {
+    background: none;
+    box-shadow: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.15rem 0.55rem;
+    font-size: 0.7rem;
+    border-radius: 999px;
+  }
+  .card-log:hover { transform: none; background: rgba(0, 0, 0, 0.03); }
   .journal-header-row { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; }
   .export-shareable-btn { font-size: 0.75rem; }
 
@@ -894,6 +904,99 @@
 
   function genId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  // ============================================================
+  // OBSIDIAN LOGGING — writes a note directly into the connected vault's
+  // Rough Notes folder (readwrite), via the File System Access API.
+  // Manual, one journal entry at a time. The granted handle is stored in
+  // the same shared IndexedDB database Video Log/Nest of Knowledge/Beat
+  // Maker/Knowledge Center use for their own folder connections, under
+  // its own key, so connecting once anywhere carries over.
+  // ============================================================
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; }
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; }
+  }
+  function sanitizeNoteFilename(name) {
+    return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
+  function logJournalEntryToObsidian(entry) {
+    const lang = LANGUAGES.find((l) => l.id === entry.languageId);
+    const langName = lang ? lang.flag + " " + lang.name : entry.languageId;
+    const lines = [
+      "#baby", "",
+      "# " + langName + " practice — " + entry.date, "",
+      "**Language:** " + langName, "",
+      "**Level:** " + entry.level, "",
+      "**Prompt:** " + entry.prompt, "",
+    ];
+    if (entry.note) { lines.push("## Notes", "", entry.note, ""); }
+    lines.push("## References", "- ");
+    const filename = sanitizeNoteFilename("Language - " + langName.replace(/[^\w\s-]/g, "").trim() + " " + entry.date + " (" + entry.id.slice(-6) + ")");
+    return writeNoteToVault(filename, lines.join("\n"));
   }
 
   // Short in-language affirmations, keyed by language id then skill id —
@@ -1893,6 +1996,19 @@
         renderJournal();
       });
       actions.appendChild(starBtn);
+
+      const logBtn = document.createElement("button");
+      logBtn.type = "button";
+      logBtn.className = "card-log";
+      logBtn.textContent = "Log to Obsidian";
+      logBtn.addEventListener("click", async () => {
+        logBtn.disabled = true;
+        logBtn.textContent = "Logging…";
+        const ok = await logJournalEntryToObsidian(entry);
+        logBtn.textContent = ok ? "Logged ✓" : "Couldn't log";
+        setTimeout(() => { logBtn.textContent = "Log to Obsidian"; logBtn.disabled = false; }, 2000);
+      });
+      actions.appendChild(logBtn);
       li.appendChild(actions);
 
       const delBtn = document.createElement("button");
