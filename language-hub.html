@@ -217,64 +217,90 @@
     margin-top: 1.3rem;
   }
 
-  /* ---------- study log form ---------- */
-  .log-form {
+  /* ---------- study mode navigator: home tiles + detail view ---------- */
+  .skill-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.6rem;
-    align-items: end;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 1rem;
   }
-  .log-form label {
+  .skill-tile, .mini-tile, .back-btn {
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .skill-tile:hover, .mini-tile:hover, .back-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+    transform: translateY(-1px);
+  }
+  .skill-tile:active, .mini-tile:active, .back-btn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  }
+  .skill-tile {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    font-size: 0.72rem;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 1.5rem 0.8rem;
+    border-radius: var(--radius-md);
+  }
+  .skill-icon { font-size: 1.8rem; }
+  .skill-name { font-family: var(--font-display); font-size: 0.85rem; color: var(--secondary); }
+  .skill-today { font-size: 0.68rem; font-weight: normal; color: var(--text-dim); }
+
+  .detail-view { display: flex; flex-direction: column; gap: 1.2rem; }
+  .back-btn { align-self: flex-start; font-size: 0.78rem; padding: 0.4rem 0.8rem; }
+
+  .mini-strip { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .mini-tile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+    border-radius: 999px;
+  }
+  .mini-tile .skill-icon { font-size: 1rem; }
+
+  .focus-card {
+    text-align: center;
+    padding: 1.5rem 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .focus-heading { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .skill-icon-lg { font-size: 2.4rem; }
+  .focus-heading h2 { margin: 0; font-size: 1.3rem; }
+
+  .timer-display {
+    font-family: "Courier New", monospace;
+    font-size: 2.4rem;
+    letter-spacing: 0.04em;
+    color: var(--primary-dark);
+  }
+  .timer-btn { min-width: 140px; font-size: 0.95rem; padding: 0.6rem 1.4rem; }
+  .timer-btn.running {
+    background: linear-gradient(180deg, #e35f5f 0%, #a52a2a 55%, #7a1f1f 100%);
+    box-shadow: 0 3px 0 #5a1515, 0 6px 12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .field-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
     color: var(--text-dim);
   }
-  .log-form button { grid-column: span 4; justify-self: start; margin-top: 0.2rem; }
-  @media (max-width: 520px) {
-    .log-form { grid-template-columns: 1fr 1fr; }
-    .log-form button { grid-column: span 2; }
-  }
+  #resourceNoteInput { width: 100%; max-width: 280px; text-align: center; }
 
-  .add-resource-row {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.8rem;
-  }
-  .add-resource-row input { flex: 1; }
+  .totals-row { display: flex; gap: 2.2rem; margin-top: 0.3rem; }
+  .totals-row > div { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; }
+  .totals-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); }
+  .totals-value { font-size: 1.15rem; color: var(--secondary); font-weight: bold; }
 
-  .resource-totals, .recent-log {
-    list-style: none;
-    margin: 0.5rem 0 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-  .total-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.4rem 0.8rem;
-    padding: 0.4rem 0.6rem;
-    background: rgba(0, 0, 0, 0.035);
-    border-radius: var(--radius-sm);
-  }
-  .total-name { font-weight: bold; color: var(--secondary); }
-  .total-minutes { color: var(--primary-dark); font-variant-numeric: tabular-nums; }
-  .total-breakdown { font-size: 0.72rem; color: var(--text-dim); }
-
-  .recent-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.78rem;
-    padding: 0.3rem 0.5rem;
-    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-  }
-  .del-btn, .card-del {
+  .card-del {
     background: none;
     box-shadow: none;
     color: var(--text-dim);
@@ -282,7 +308,78 @@
     font-size: 0.9rem;
     line-height: 1;
   }
-  .del-btn:hover, .card-del:hover { color: var(--secondary); transform: none; }
+  .card-del:hover { color: var(--secondary); transform: none; }
+
+  /* ---------- video diary ---------- */
+  .video-diary-panel { max-width: 1100px; margin: 0 auto 2rem; }
+  .vd-intro { font-size: 0.85rem; color: var(--text-dim); margin: 0 0 1rem; }
+  .vd-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .vd-prompt-box {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+  .vd-prompt-text {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin: 0.3rem 0 0.9rem;
+  }
+  .vd-prompt-controls { display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+
+  .vd-recorder { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; margin-bottom: 1.4rem; }
+  #vdPreview {
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4 / 3;
+    background: #111;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+  }
+  .vd-controls { display: flex; align-items: center; gap: 0.8rem; }
+  #vdRecordBtn.recording {
+    background: linear-gradient(180deg, #e35f5f 0%, #a52a2a 55%, #7a1f1f 100%);
+    box-shadow: 0 3px 0 #5a1515, 0 6px 12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .vd-status { font-size: 0.8rem; color: var(--text-dim); min-height: 1.1em; }
+
+  .vd-result { max-width: 480px; margin: 0 auto 1.6rem; }
+  .vd-disclaimer { font-weight: normal; text-transform: none; letter-spacing: normal; font-style: italic; }
+  .vd-transcript {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 0.3rem 0 0.9rem;
+    white-space: pre-wrap;
+  }
+
+  .vd-journal-form { display: flex; flex-direction: column; gap: 0.6rem; max-width: 480px; margin: 0 auto 1.4rem; }
+  .vd-journal-form textarea { min-height: 3rem; resize: vertical; }
+  .vd-journal-form button { align-self: flex-start; }
+
+  .journal-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+  .journal-row {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    font-size: 0.8rem;
+    position: relative;
+  }
+  .journal-top { color: var(--text-dim); font-size: 0.72rem; margin-bottom: 0.2rem; }
+  .journal-prompt { color: var(--secondary); font-weight: bold; margin-bottom: 0.2rem; }
+  .journal-note { color: var(--text); white-space: pre-wrap; }
+  .journal-row .card-del { position: absolute; top: 0.5rem; right: 0.6rem; }
 
   /* ---------- content library ---------- */
   .library-form {
@@ -373,33 +470,8 @@
   <main class="hub-grid">
 
     <section class="panel organizer-panel">
-      <h2>Study Log</h2>
-      <form id="logForm" class="log-form">
-        <label>Language
-          <select id="logLanguage"></select>
-        </label>
-        <label>Resource
-          <select id="logResource"></select>
-        </label>
-        <label>Minutes
-          <input type="number" id="logMinutes" min="1" max="600" required>
-        </label>
-        <label>Date
-          <input type="date" id="logDate">
-        </label>
-        <button type="submit">Log Session</button>
-      </form>
-
-      <div class="add-resource-row">
-        <input type="text" id="newResourceName" placeholder="Add custom resource (e.g. iTalki)">
-        <button id="addResourceBtn" type="button">+ Add</button>
-      </div>
-
-      <h3>This Week's Totals</h3>
-      <ul class="resource-totals" id="resourceTotals"></ul>
-
-      <h3>Recent Sessions</h3>
-      <ul class="recent-log" id="recentLog"></ul>
+      <h2>Study Modes</h2>
+      <div id="studyModes"></div>
     </section>
 
     <section class="panel library-panel">
@@ -431,6 +503,49 @@
 
   </main>
 
+  <section class="panel video-diary-panel">
+    <h2>Video Diary</h2>
+    <p class="vd-intro">
+      Speak out loud on a prompt, record yourself, and download the clip to your own folder.
+      A rough transcript is shown for self-check only — see the note below.
+    </p>
+
+    <div class="vd-prompt-box">
+      <span class="vd-label">Prompt</span>
+      <div class="vd-prompt-text" id="vdPromptText"></div>
+      <div class="vd-prompt-controls">
+        <select id="vdLevelSelect">
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+        </select>
+        <button type="button" id="vdNewPromptBtn">New Prompt</button>
+      </div>
+    </div>
+
+    <div class="vd-recorder">
+      <video id="vdPreview" autoplay muted playsinline></video>
+      <div class="vd-controls">
+        <button type="button" id="vdRecordBtn">● Record</button>
+        <span class="vd-status" id="vdStatus"></span>
+      </div>
+    </div>
+
+    <div class="vd-result" id="vdResult" hidden>
+      <span class="vd-label">Rough transcript <span class="vd-disclaimer">(rough transcript, not a pronunciation grade)</span></span>
+      <div class="vd-transcript" id="vdTranscript"></div>
+      <button type="button" id="vdDownloadBtn">Download video</button>
+    </div>
+
+    <div class="vd-journal-form">
+      <h3>Log this practice</h3>
+      <textarea id="vdNote" placeholder="How did it feel? Any notes to yourself..."></textarea>
+      <button type="button" id="vdSaveLogBtn">Save to Journal</button>
+    </div>
+
+    <h3>Practice Journal</h3>
+    <ul class="journal-list" id="journalList"></ul>
+  </section>
+
   <footer>
     Everything here is saved to this browser's local storage (per file,
     nothing leaves your machine). The content library stores plain
@@ -453,8 +568,64 @@
     { id: "fa", name: "Farsi", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", days: [5, 6, 0] },
   ];
 
-  const DEFAULT_RESOURCES = ["Pimsleur", "Anki", "Linguno"];
   const STORAGE_KEY = "room-language-hub-v1";
+
+  // Five study modes. Add another by pushing an object here — the
+  // home grid and detail view are both generic over this list.
+  const SKILLS = [
+    { id: "reading", name: "Reading", icon: "📖" },
+    { id: "writing", name: "Writing", icon: "✍️" },
+    { id: "listening", name: "Listening", icon: "🎧" },
+    { id: "speaking", name: "Speaking", icon: "🗣️" },
+    { id: "comprehension", name: "Comprehension", icon: "🧩" },
+  ];
+
+  function genId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  // Speaking-prompt bank for the Video Diary, keyed by language id then
+  // level. Add more by pushing strings into the matching array — each
+  // language's lists are independent, so they can diverge over time
+  // (e.g. culture-specific topics) even though they start identical.
+  const PROMPT_BANK = {
+    es: {
+      beginner: [
+        "Describe your day so far.",
+        "Talk about your favorite food and why you like it.",
+        "Describe your family in a few sentences.",
+        "Talk about the weather today.",
+        "Describe your home or room.",
+        "Talk about what you usually do on weekends.",
+      ],
+      intermediate: [
+        "Explain your plans for tomorrow.",
+        "Talk about a memorable trip you've taken.",
+        "Describe a challenge you faced recently and how you handled it.",
+        "Give your opinion on a movie or show you've watched recently.",
+        "Explain how to cook your favorite dish, step by step.",
+        "Talk about a goal you're working toward and why it matters to you.",
+      ],
+    },
+    fa: {
+      beginner: [
+        "Describe your day so far.",
+        "Talk about your favorite food and why you like it.",
+        "Describe your family in a few sentences.",
+        "Talk about the weather today.",
+        "Describe your home or room.",
+        "Talk about what you usually do on weekends.",
+      ],
+      intermediate: [
+        "Explain your plans for tomorrow.",
+        "Talk about a memorable trip you've taken.",
+        "Describe a challenge you faced recently and how you handled it.",
+        "Give your opinion on a movie or show you've watched recently.",
+        "Explain how to cook your favorite dish, step by step.",
+        "Talk about a goal you're working toward and why it matters to you.",
+      ],
+    },
+  };
 
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, (c) => ({
@@ -474,14 +645,15 @@
       if (raw) {
         const parsed = JSON.parse(raw);
         return {
-          resources: Array.isArray(parsed.resources) ? parsed.resources : DEFAULT_RESOURCES.slice(),
-          logs: Array.isArray(parsed.logs) ? parsed.logs : [],
+          sessions: Array.isArray(parsed.sessions) ? parsed.sessions : [],
+          activeTimer: parsed.activeTimer || null,
           library: Array.isArray(parsed.library) ? parsed.library : [],
+          videoJournal: Array.isArray(parsed.videoJournal) ? parsed.videoJournal : [],
           override: parsed.override || null,
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { resources: DEFAULT_RESOURCES.slice(), logs: [], library: [], override: null };
+    return { sessions: [], activeTimer: null, library: [], videoJournal: [], override: null };
   }
 
   const state = loadState();
@@ -542,7 +714,7 @@
       applyTheme();
       renderLangPills();
       populateLangSelects(true);
-      renderTotals();
+      renderStudyModes();
     }));
     LANGUAGES.forEach((l) => {
       wrap.appendChild(makePill(l.flag + " " + l.name, state.override === l.id, () => {
@@ -551,13 +723,13 @@
         applyTheme();
         renderLangPills();
         populateLangSelects(true);
-        renderTotals();
+        renderStudyModes();
       }));
     });
   }
 
   function populateLangSelects(forceDefault) {
-    ["logLanguage", "libLanguage"].forEach((id) => {
+    ["libLanguage"].forEach((id) => {
       const sel = document.getElementById(id);
       if (!sel.dataset.populated) {
         sel.innerHTML = LANGUAGES.map((l) => '<option value="' + l.id + '">' + escapeHtml(l.name) + "</option>").join("");
@@ -565,13 +737,6 @@
       }
       if (forceDefault) sel.value = activeLanguage().id;
     });
-  }
-
-  function populateResourceSelect() {
-    const sel = document.getElementById("logResource");
-    const current = sel.value;
-    sel.innerHTML = state.resources.map((r) => '<option value="' + escapeHtml(r) + '">' + escapeHtml(r) + "</option>").join("");
-    if (state.resources.includes(current)) sel.value = current;
   }
 
   // ---------- study log ----------
@@ -584,86 +749,175 @@
     return d;
   }
 
-  function renderTotals() {
+  function secondsForSkillOn(skillId, predicate) {
+    return state.sessions
+      .filter((s) => s.skill === skillId && s.languageId === activeLanguage().id && predicate(s))
+      .reduce((sum, s) => sum + s.seconds, 0);
+  }
+  function secondsToday(skillId) {
+    const today = todayISODate();
+    return secondsForSkillOn(skillId, (s) => s.date === today);
+  }
+  function secondsThisWeek(skillId) {
     const weekStart = startOfWeek(new Date());
-    const list = document.getElementById("resourceTotals");
-    list.innerHTML = "";
-    state.resources.forEach((resource) => {
-      const entries = state.logs.filter((l) => l.resource === resource && new Date(l.date + "T00:00:00") >= weekStart);
-      const total = entries.reduce((sum, l) => sum + l.minutes, 0);
-      const byLang = {};
-      entries.forEach((l) => { byLang[l.languageId] = (byLang[l.languageId] || 0) + l.minutes; });
-      const breakdown = Object.keys(byLang)
-        .map((id) => { const lang = LANGUAGES.find((x) => x.id === id); return (lang ? lang.name : id) + ": " + byLang[id] + "m"; })
-        .join(", ");
-      const li = document.createElement("li");
-      li.className = "total-row";
-      li.innerHTML =
-        '<span class="total-name">' + escapeHtml(resource) + "</span>" +
-        '<span class="total-minutes">' + total + " min this week</span>" +
-        (breakdown ? '<span class="total-breakdown">(' + escapeHtml(breakdown) + ")</span>" : "");
-      list.appendChild(li);
-    });
+    return secondsForSkillOn(skillId, (s) => new Date(s.date + "T00:00:00") >= weekStart);
   }
-
-  function renderRecent() {
-    const list = document.getElementById("recentLog");
-    list.innerHTML = "";
-    const recent = state.logs.slice().sort((a, b) => parseInt(b.id, 10) - parseInt(a.id, 10)).slice(0, 8);
-    if (!recent.length) {
-      list.innerHTML = '<li class="empty-note">No sessions logged yet.</li>';
-      return;
+  function liveSecondsFor(skillId) {
+    if (state.activeTimer && state.activeTimer.skill === skillId && state.activeTimer.languageId === activeLanguage().id) {
+      return Math.max(0, Math.floor((Date.now() - state.activeTimer.startedAt) / 1000));
     }
-    recent.forEach((entry) => {
-      const lang = LANGUAGES.find((l) => l.id === entry.languageId);
-      const li = document.createElement("li");
-      li.className = "recent-row";
-      const span = document.createElement("span");
-      span.textContent = entry.date + " — " + (lang ? lang.flag + " " + lang.name : entry.languageId) + " — " + entry.resource + " — " + entry.minutes + "m";
-      const delBtn = document.createElement("button");
-      delBtn.type = "button";
-      delBtn.className = "del-btn";
-      delBtn.textContent = "×";
-      delBtn.addEventListener("click", () => {
-        state.logs = state.logs.filter((l) => l.id !== entry.id);
-        saveState();
-        renderTotals();
-        renderRecent();
-      });
-      li.appendChild(span);
-      li.appendChild(delBtn);
-      list.appendChild(li);
-    });
+    return 0;
+  }
+  function formatDuration(totalSeconds) {
+    const mins = Math.round(totalSeconds / 60);
+    if (mins < 60) return mins + "m";
+    return Math.floor(mins / 60) + "h " + (mins % 60) + "m";
+  }
+  function formatClock(totalSeconds) {
+    const pad = (n) => String(n).padStart(2, "0");
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    return h > 0 ? h + ":" + pad(m) + ":" + pad(s) : pad(m) + ":" + pad(s);
   }
 
-  document.getElementById("logForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const languageId = document.getElementById("logLanguage").value;
-    const resource = document.getElementById("logResource").value;
-    const minutes = parseInt(document.getElementById("logMinutes").value, 10);
-    const dateVal = document.getElementById("logDate").value || todayISODate();
-    if (!resource || !minutes || minutes <= 0) return;
-    state.logs.push({
-      id: Date.now() + "" + Math.floor(Math.random() * 1000),
-      languageId, resource, minutes, date: dateVal,
-    });
+  function startTimer(skillId) {
+    if (state.activeTimer && state.activeTimer.skill !== skillId) stopTimer();
+    const noteEl = document.getElementById("resourceNoteInput");
+    state.activeTimer = {
+      skill: skillId,
+      languageId: activeLanguage().id,
+      startedAt: Date.now(),
+      note: noteEl ? noteEl.value : "",
+    };
     saveState();
-    document.getElementById("logMinutes").value = "";
-    renderTotals();
-    renderRecent();
-  });
+  }
+  function stopTimer() {
+    if (!state.activeTimer) return;
+    const t = state.activeTimer;
+    const seconds = Math.max(1, Math.round((Date.now() - t.startedAt) / 1000));
+    state.sessions.push({ id: genId(), languageId: t.languageId, skill: t.skill, seconds, resourceNote: t.note || "", date: todayISODate() });
+    state.activeTimer = null;
+    saveState();
+  }
 
-  document.getElementById("addResourceBtn").addEventListener("click", () => {
-    const input = document.getElementById("newResourceName");
-    const name = input.value.trim();
-    if (!name) return;
-    if (state.resources.some((r) => r.toLowerCase() === name.toLowerCase())) { input.value = ""; return; }
-    state.resources.push(name);
-    saveState();
-    input.value = "";
-    populateResourceSelect();
-    renderTotals();
-  });
+  let expandedSkill = state.activeTimer ? state.activeTimer.skill : null;
+
+  function buildHomeView() {
+    const grid = document.createElement("div");
+    grid.className = "skill-grid";
+    SKILLS.forEach((skill) => {
+      const tile = document.createElement("button");
+      tile.type = "button";
+      tile.className = "skill-tile";
+      const todaySec = secondsToday(skill.id) + liveSecondsFor(skill.id);
+      tile.innerHTML =
+        '<span class="skill-icon">' + skill.icon + "</span>" +
+        '<span class="skill-name">' + skill.name + "</span>" +
+        '<span class="skill-today">' + formatDuration(todaySec) + " today</span>";
+      tile.addEventListener("click", () => { expandedSkill = skill.id; renderStudyModes(); });
+      grid.appendChild(tile);
+    });
+    return grid;
+  }
+
+  function buildDetailView(skillId) {
+    const skill = SKILLS.find((s) => s.id === skillId);
+    const wrap = document.createElement("div");
+    wrap.className = "detail-view";
+
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "back-btn";
+    backBtn.textContent = "← Back to overview";
+    backBtn.addEventListener("click", () => { expandedSkill = null; renderStudyModes(); });
+    wrap.appendChild(backBtn);
+
+    const strip = document.createElement("div");
+    strip.className = "mini-strip";
+    SKILLS.forEach((s) => {
+      if (s.id === skillId) return;
+      const mini = document.createElement("button");
+      mini.type = "button";
+      mini.className = "mini-tile";
+      mini.innerHTML = '<span class="skill-icon">' + s.icon + '</span><span class="skill-name">' + s.name + "</span>";
+      mini.addEventListener("click", () => { expandedSkill = s.id; renderStudyModes(); });
+      strip.appendChild(mini);
+    });
+    wrap.appendChild(strip);
+
+    const isRunning = !!(state.activeTimer && state.activeTimer.skill === skillId);
+
+    const focus = document.createElement("div");
+    focus.className = "focus-card";
+
+    const heading = document.createElement("div");
+    heading.className = "focus-heading";
+    heading.innerHTML = '<span class="skill-icon-lg">' + skill.icon + "</span><h2>" + skill.name + "</h2>";
+    focus.appendChild(heading);
+
+    const timerDisplay = document.createElement("div");
+    timerDisplay.className = "timer-display";
+    timerDisplay.id = "timerDisplay";
+    timerDisplay.textContent = formatClock(isRunning ? liveSecondsFor(skillId) : 0);
+    focus.appendChild(timerDisplay);
+
+    const timerBtn = document.createElement("button");
+    timerBtn.type = "button";
+    timerBtn.className = "timer-btn" + (isRunning ? " running" : "");
+    timerBtn.textContent = isRunning ? "Stop" : "Start";
+    timerBtn.addEventListener("click", () => {
+      if (isRunning) stopTimer(); else startTimer(skillId);
+      renderStudyModes();
+    });
+    focus.appendChild(timerBtn);
+
+    const noteLabel = document.createElement("label");
+    noteLabel.className = "field-label";
+    noteLabel.textContent = "What are you using?";
+    focus.appendChild(noteLabel);
+    const noteInput = document.createElement("input");
+    noteInput.type = "text";
+    noteInput.id = "resourceNoteInput";
+    noteInput.placeholder = "e.g. Pimsleur, Anki, Linguno...";
+    noteInput.value = isRunning ? (state.activeTimer.note || "") : "";
+    noteInput.addEventListener("input", () => {
+      if (state.activeTimer && state.activeTimer.skill === skillId) {
+        state.activeTimer.note = noteInput.value;
+        saveState();
+      }
+    });
+    focus.appendChild(noteInput);
+
+    const totals = document.createElement("div");
+    totals.className = "totals-row";
+    totals.innerHTML =
+      '<div><span class="totals-label">Today</span><span class="totals-value" id="todayTotal">' + formatDuration(secondsToday(skillId) + liveSecondsFor(skillId)) + "</span></div>" +
+      '<div><span class="totals-label">This week</span><span class="totals-value" id="weekTotal">' + formatDuration(secondsThisWeek(skillId) + liveSecondsFor(skillId)) + "</span></div>";
+    focus.appendChild(totals);
+
+    wrap.appendChild(focus);
+    return wrap;
+  }
+
+  function renderStudyModes() {
+    const container = document.getElementById("studyModes");
+    container.innerHTML = "";
+    container.appendChild(expandedSkill ? buildDetailView(expandedSkill) : buildHomeView());
+  }
+
+  // Live tick for the running timer's clock + totals, without a full
+  // re-render (which would drop focus out of the note field).
+  setInterval(() => {
+    if (!state.activeTimer || expandedSkill !== state.activeTimer.skill) return;
+    const skillId = state.activeTimer.skill;
+    const disp = document.getElementById("timerDisplay");
+    if (disp) disp.textContent = formatClock(liveSecondsFor(skillId));
+    const todayEl = document.getElementById("todayTotal");
+    if (todayEl) todayEl.textContent = formatDuration(secondsToday(skillId) + liveSecondsFor(skillId));
+    const weekEl = document.getElementById("weekTotal");
+    if (weekEl) weekEl.textContent = formatDuration(secondsThisWeek(skillId) + liveSecondsFor(skillId));
+  }, 1000);
 
   // ---------- content library ----------
   let libraryFilter = "all";
@@ -738,23 +992,242 @@
     renderLibrary();
   });
 
+  // ---------- video diary: prompt bank navigation ----------
+  let currentLevel = "beginner";
+  let currentPromptText = "";
+
+  function pickNewPrompt() {
+    const pool = (PROMPT_BANK[activeLanguage().id] && PROMPT_BANK[activeLanguage().id][currentLevel]) || [];
+    if (!pool.length) { currentPromptText = ""; return; }
+    if (pool.length === 1) { currentPromptText = pool[0]; return; }
+    let next = currentPromptText;
+    while (next === currentPromptText) next = pool[Math.floor(Math.random() * pool.length)];
+    currentPromptText = next;
+  }
+  function renderPrompt() {
+    document.getElementById("vdPromptText").textContent = currentPromptText || "No prompts available for this level yet.";
+  }
+
+  // ---------- video diary: recording (getUserMedia + MediaRecorder) ----------
+  let mediaStream = null;
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let recognition = null;
+  let liveTranscript = "";
+  let lastRecordingBlob = null;
+  let lastRecordingMimeType = "video/webm";
+
+  const PREFERRED_MIME_TYPES = ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm", "video/mp4"];
+  function pickMimeType() {
+    if (typeof MediaRecorder === "undefined" || !MediaRecorder.isTypeSupported) return "";
+    for (const t of PREFERRED_MIME_TYPES) { if (MediaRecorder.isTypeSupported(t)) return t; }
+    return "";
+  }
+
+  function setStatus(text) { document.getElementById("vdStatus").textContent = text; }
+
+  function setRecordingControlsDisabled(disabled) {
+    document.getElementById("vdLevelSelect").disabled = disabled;
+    document.getElementById("vdNewPromptBtn").disabled = disabled;
+  }
+
+  function stopStreamTracks() {
+    if (mediaStream) {
+      mediaStream.getTracks().forEach((t) => t.stop());
+      mediaStream = null;
+    }
+  }
+
+  async function startRecording() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setStatus("Camera/mic access isn't available in this browser.");
+      return;
+    }
+    try {
+      mediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    } catch (err) {
+      setStatus("Camera/mic permission was denied, or no device is available.");
+      return;
+    }
+
+    const preview = document.getElementById("vdPreview");
+    preview.srcObject = mediaStream;
+    preview.muted = true; // avoid echo while previewing the live feed
+    preview.removeAttribute("controls");
+
+    recordedChunks = [];
+    const mimeType = pickMimeType();
+    try {
+      mediaRecorder = mimeType ? new MediaRecorder(mediaStream, { mimeType }) : new MediaRecorder(mediaStream);
+    } catch (err) {
+      setStatus("Recording isn't supported in this browser.");
+      stopStreamTracks();
+      return;
+    }
+    lastRecordingMimeType = mediaRecorder.mimeType || mimeType || "video/webm";
+    mediaRecorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = onRecordingStopped;
+    mediaRecorder.start();
+
+    liveTranscript = "";
+    startSpeechRecognition();
+
+    document.getElementById("vdResult").hidden = true;
+    const btn = document.getElementById("vdRecordBtn");
+    btn.textContent = "■ Stop";
+    btn.classList.add("recording");
+    setRecordingControlsDisabled(true);
+    setStatus("Recording...");
+  }
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== "inactive") mediaRecorder.stop();
+    stopSpeechRecognition();
+  }
+
+  function onRecordingStopped() {
+    stopStreamTracks();
+    const blob = new Blob(recordedChunks, { type: lastRecordingMimeType });
+    lastRecordingBlob = blob;
+
+    const preview = document.getElementById("vdPreview");
+    preview.srcObject = null;
+    preview.src = URL.createObjectURL(blob);
+    preview.muted = false;
+    preview.controls = true;
+
+    const btn = document.getElementById("vdRecordBtn");
+    btn.textContent = "● Record";
+    btn.classList.remove("recording");
+    setRecordingControlsDisabled(false);
+    setStatus("Recording finished.");
+
+    document.getElementById("vdTranscript").textContent =
+      liveTranscript.trim() || "(No speech detected, or transcription isn't available in this browser.)";
+    document.getElementById("vdResult").hidden = false;
+  }
+
+  // ---------- video diary: rough self-check transcript (Web Speech API) ----------
+  function getSpeechRecognitionCtor() {
+    return window.SpeechRecognition || window.webkitSpeechRecognition || null;
+  }
+  function startSpeechRecognition() {
+    const Ctor = getSpeechRecognitionCtor();
+    if (!Ctor) return; // no transcript; onRecordingStopped() shows the fallback message
+    recognition = new Ctor();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = activeLanguage().id === "es" ? "es-ES" : "fa-IR";
+    recognition.onresult = (e) => {
+      let text = "";
+      for (let i = 0; i < e.results.length; i++) text += e.results[i][0].transcript;
+      liveTranscript = text;
+    };
+    recognition.onerror = () => { /* transcript just stays partial/empty; recording is unaffected */ };
+    try { recognition.start(); } catch (err) { /* already running or unsupported in this state */ }
+  }
+  function stopSpeechRecognition() {
+    if (recognition) {
+      try { recognition.stop(); } catch (err) { /* already stopped */ }
+      recognition = null;
+    }
+  }
+
+  // ---------- video diary: download ----------
+  function slugify(text) {
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40);
+  }
+  function downloadRecording() {
+    if (!lastRecordingBlob) return;
+    const ext = lastRecordingMimeType.indexOf("mp4") !== -1 ? "mp4" : "webm";
+    const filename = activeLanguage().id + "-" + slugify(currentPromptText) + "-" + todayISODate() + "." + ext;
+    const url = URL.createObjectURL(lastRecordingBlob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  }
+
+  // ---------- video diary: practice journal (metadata only — never the video itself) ----------
+  function renderJournal() {
+    const list = document.getElementById("journalList");
+    list.innerHTML = "";
+    if (!state.videoJournal.length) {
+      list.innerHTML = '<li class="empty-note">No practice logged yet.</li>';
+      return;
+    }
+    state.videoJournal.slice().sort((a, b) => parseInt(b.id, 36) - parseInt(a.id, 36)).forEach((entry) => {
+      const lang = LANGUAGES.find((l) => l.id === entry.languageId);
+      const li = document.createElement("li");
+      li.className = "journal-row";
+      const top = document.createElement("div");
+      top.className = "journal-top";
+      top.textContent = entry.date + " — " + (lang ? lang.flag + " " + lang.name : entry.languageId) + " — " + entry.level;
+      const promptEl = document.createElement("div");
+      promptEl.className = "journal-prompt";
+      promptEl.textContent = entry.prompt;
+      li.appendChild(top);
+      li.appendChild(promptEl);
+      if (entry.note) {
+        const noteEl = document.createElement("div");
+        noteEl.className = "journal-note";
+        noteEl.textContent = entry.note;
+        li.appendChild(noteEl);
+      }
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "card-del";
+      delBtn.textContent = "Remove";
+      delBtn.addEventListener("click", () => {
+        state.videoJournal = state.videoJournal.filter((e) => e.id !== entry.id);
+        saveState();
+        renderJournal();
+      });
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    });
+  }
+
+  document.getElementById("vdLevelSelect").addEventListener("change", (e) => {
+    currentLevel = e.target.value;
+    pickNewPrompt();
+    renderPrompt();
+  });
+  document.getElementById("vdNewPromptBtn").addEventListener("click", () => { pickNewPrompt(); renderPrompt(); });
+  document.getElementById("vdRecordBtn").addEventListener("click", () => {
+    const isRecording = mediaRecorder && mediaRecorder.state === "recording";
+    if (isRecording) stopRecording(); else startRecording();
+  });
+  document.getElementById("vdDownloadBtn").addEventListener("click", downloadRecording);
+  document.getElementById("vdSaveLogBtn").addEventListener("click", () => {
+    const note = document.getElementById("vdNote").value.trim();
+    state.videoJournal.push({
+      id: genId(), languageId: activeLanguage().id, level: currentLevel, prompt: currentPromptText, note, date: todayISODate(),
+    });
+    saveState();
+    document.getElementById("vdNote").value = "";
+    renderJournal();
+  });
+
   // ---------- init ----------
-  document.getElementById("logDate").value = todayISODate();
   applyTheme();
   renderLangPills();
   populateLangSelects(true);
-  populateResourceSelect();
-  renderTotals();
-  renderRecent();
+  renderStudyModes();
   renderLibraryFilters();
   renderLibrary();
+  pickNewPrompt();
+  renderPrompt();
+  renderJournal();
 
-  // Keep the day-based auto theme (and week-boundary totals) in sync
-  // if the page is left open; doesn't touch in-progress form selections.
+  // Keep the day-based auto theme in sync if the page is left open;
+  // doesn't touch in-progress form selections or the study timer.
   setInterval(() => {
     applyTheme();
     renderLangPills();
-    renderTotals();
   }, 60000);
 })();
 </script>
