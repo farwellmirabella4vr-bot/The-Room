@@ -175,6 +175,56 @@
     font-size: 0.78rem;
   }
 
+  .footage-import {
+    margin: 0.9rem 0 1.1rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(63, 182, 168, 0.3);
+  }
+  .footage-import-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--teal-bright);
+  }
+  .footage-import-header button { width: auto; margin: 0; font-size: 0.72rem; padding: 0.5rem 0.7rem; }
+  .footage-import .hint { margin: 0.5rem 0 0.7rem; }
+  .footage-import .hint code {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .footage-import .hint.connected { color: var(--teal-bright); }
+  .footage-drop-zone {
+    border: 2px dashed rgba(63, 182, 168, 0.45);
+    border-radius: 8px;
+    padding: 1.1rem 0.8rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--ivory-dim);
+  }
+  .footage-drop-zone.drag-over {
+    border-color: var(--teal-bright);
+    background: rgba(63, 182, 168, 0.12);
+    color: var(--ivory);
+  }
+  .footage-file-label {
+    display: inline;
+    margin: 0;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: inherit;
+    color: var(--teal-bright);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
   .day-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
   .day-chip {
     width: auto;
@@ -251,6 +301,24 @@
       <p class="hint">Photos/videos for this day's carousel, in order.</p>
       <div class="repeat-group" id="mediaRows"></div>
       <button type="button" class="add-row-btn" id="mediaAddBtn">+ Add Media</button>
+
+      <div class="footage-import">
+        <div class="footage-import-header">
+          <span>Import Footage</span>
+          <button type="button" class="secondary" id="connectMediaFolderBtn">📂 Connect Media Folder</button>
+        </div>
+        <p class="hint" id="footageImportStatus">
+          Not connected — dropped/chosen files will still be added below by filename, but you'll need to
+          copy them into <code>video-log/media/</code> yourself before Save.
+        </p>
+        <div class="footage-drop-zone" id="footageDropZone">
+          Drag DJI clips (or any photos/videos) here — or
+          <label class="footage-file-label">
+            choose files
+            <input type="file" id="footageFileInput" accept="video/*,image/*" multiple hidden>
+          </label>
+        </div>
+      </div>
 
       <label for="entryDid">Did</label>
       <textarea id="entryDid" placeholder="What happened today, in plain language."></textarea>
@@ -331,10 +399,40 @@
     statusTimeout = setTimeout(() => { el.hidden = true; }, 3000);
   }
 
+  // ---------- oEmbed auto-title (YouTube/Vimeo/SoundCloud/Spotify) ----------
+  // These four providers' oEmbed endpoints send CORS headers and need no
+  // API key, so a title lookup works straight from a static page. Anything
+  // else (an article link, a random site) just isn't supported client-side
+  // without a backend — the field stays manually-typed for those, which is
+  // the explicitly-chosen fallback rather than a silent gap.
+  const OEMBED_PROVIDERS = [
+    { test: (h) => h === "youtube.com" || h === "www.youtube.com" || h === "youtu.be" || h === "m.youtube.com",
+      endpoint: (raw) => "https://www.youtube.com/oembed?format=json&url=" + encodeURIComponent(raw) },
+    { test: (h) => h === "vimeo.com" || h === "www.vimeo.com",
+      endpoint: (raw) => "https://vimeo.com/api/oembed.json?url=" + encodeURIComponent(raw) },
+    { test: (h) => h === "soundcloud.com" || h === "www.soundcloud.com",
+      endpoint: (raw) => "https://soundcloud.com/oembed?format=json&url=" + encodeURIComponent(raw) },
+    { test: (h) => h === "open.spotify.com",
+      endpoint: (raw) => "https://open.spotify.com/oembed?url=" + encodeURIComponent(raw) },
+  ];
+  async function fetchOEmbedTitle(rawUrl) {
+    let parsed;
+    try { parsed = new URL(rawUrl); } catch (e) { return null; }
+    const provider = OEMBED_PROVIDERS.find((p) => p.test(parsed.hostname));
+    if (!provider) return null;
+    try {
+      const res = await fetch(provider.endpoint(rawUrl));
+      if (!res.ok) return null;
+      const data = await res.json();
+      return data.title || null;
+    } catch (e) { return null; } // network error, provider down, etc. — leave the title field alone
+  }
+
   // ---------- generic repeating row group ----------
-  function createRepeatingGroup(containerId, fields, initialItems) {
+  function createRepeatingGroup(containerId, fields, initialItems, opts) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
+    const autoTitle = !!(opts && opts.autoTitle);
 
     function addRow(values) {
       const row = document.createElement("div");
@@ -365,12 +463,28 @@
       rm.addEventListener("click", () => row.remove());
       row.appendChild(rm);
       container.appendChild(row);
+
+      if (autoTitle) {
+        const urlInput = row.querySelector('[data-field="url"]');
+        const titleInput = row.querySelector('[data-field="title"]');
+        if (urlInput && titleInput) {
+          const titleField = fields.find((f) => f.name === "title");
+          urlInput.addEventListener("blur", async () => {
+            if (titleInput.value.trim() || !urlInput.value.trim()) return; // never clobber a typed title
+            const original = titleField ? (titleField.placeholder || "") : "";
+            titleInput.placeholder = "Looking up title...";
+            const title = await fetchOEmbedTitle(urlInput.value.trim());
+            titleInput.placeholder = original;
+            if (title && !titleInput.value.trim()) titleInput.value = title;
+          });
+        }
+      }
     }
 
     (initialItems || []).forEach((item) => addRow(item));
 
     return {
-      addRow: () => addRow(null),
+      addRow: (values) => addRow(values || null),
       getValues: () => Array.from(container.children).map((row) => {
         const obj = {};
         fields.forEach((f) => {
@@ -394,20 +508,206 @@
       [{ name: "type", type: "select", options: ["image", "video"] }, { name: "url", type: "text", placeholder: "media/filename.jpg" }],
       entry ? entry.media : []);
     watchedGroup = createRepeatingGroup("watchedRows",
-      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional)" }],
-      entry ? entry.watched : []);
+      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional) — auto-titles for YouTube/Vimeo" }],
+      entry ? entry.watched : [], { autoTitle: true });
     spokeGroup = createRepeatingGroup("spokeRows",
       [{ name: "lang", type: "text", placeholder: "Language" }, { name: "note", type: "text", placeholder: "Note" }],
       entry ? entry.spoke : []);
     listenedGroup = createRepeatingGroup("listenedRows",
-      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional)" }],
-      entry ? entry.listened : []);
+      [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional) — auto-titles for SoundCloud/Spotify" }],
+      entry ? entry.listened : [], { autoTitle: true });
   }
 
   document.getElementById("mediaAddBtn").addEventListener("click", () => mediaGroup.addRow());
   document.getElementById("watchedAddBtn").addEventListener("click", () => watchedGroup.addRow());
   document.getElementById("spokeAddBtn").addEventListener("click", () => spokeGroup.addRow());
   document.getElementById("listenedAddBtn").addEventListener("click", () => listenedGroup.addRow());
+
+  // ============================================================
+  // FOOTAGE IMPORT — connects a real local folder (your DJI Osmo Pocket 3
+  // export folder's destination, i.e. this project's video-log/media/) via
+  // the File System Access API, so files dragged in get copied there AND
+  // added as a media row in one step, instead of you manually copying a
+  // file then retyping its filename. Chromium desktop only (Edge/Chrome);
+  // everywhere else, the drop zone still works, it just can't write to
+  // disk, so it adds a row referencing the filename and tells you to copy
+  // the file over yourself before Save.
+  // ============================================================
+  const FS_HANDLES_DB = "video-log-editor-handles";
+  const VIDEO_EXTS = ["mp4", "mov", "m4v", "avi", "webm"];
+  const IMAGE_EXTS = ["jpg", "jpeg", "png", "heic", "gif", "webp", "dng"];
+
+  function getHandlesDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(FS_HANDLES_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandlesDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandlesDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let mediaDirHandle = null;
+  const connectBtn = document.getElementById("connectMediaFolderBtn");
+  const footageStatusEl = document.getElementById("footageImportStatus");
+  const footageDropZone = document.getElementById("footageDropZone");
+  const footageFileInput = document.getElementById("footageFileInput");
+  const fsAccessSupported = typeof window.showDirectoryPicker === "function";
+
+  function setFootageStatus(msg, connected) {
+    footageStatusEl.textContent = msg;
+    footageStatusEl.classList.toggle("connected", !!connected);
+  }
+
+  if (!fsAccessSupported) {
+    connectBtn.disabled = true;
+    connectBtn.title = "Needs Edge or Chrome on desktop";
+    setFootageStatus(
+      "Folder connect isn't available in this browser — drop or choose files below and they'll be " +
+      "added by filename; copy them into video-log/media/ yourself before Save."
+    );
+  }
+
+  async function ensureReadWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; } // requestPermission needs a user gesture; caller is already inside a click handler
+  }
+
+  async function tryRestoreMediaFolder() {
+    let handle;
+    try { handle = await loadHandle("mediaFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") {
+      mediaDirHandle = handle;
+      setFootageStatus("Connected to " + handle.name + "/ — drop files below to copy them in.", true);
+    } else {
+      setFootageStatus("Connected to " + handle.name + "/ previously — click Connect Media Folder to reconnect (permission resets each session).");
+    }
+  }
+
+  if (fsAccessSupported) {
+    connectBtn.addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "video-log-media", mode: "readwrite" });
+        mediaDirHandle = handle;
+        await saveHandle("mediaFolder", handle);
+        setFootageStatus("Connected to " + handle.name + "/ — drop files below to copy them in.", true);
+      } catch (e) {
+        // user cancelled the picker — leave prior state alone
+      }
+    });
+    tryRestoreMediaFolder();
+  }
+
+  function extOf(filename) {
+    const m = /\.([a-z0-9]+)$/i.exec(filename);
+    return m ? m[1].toLowerCase() : "";
+  }
+  function mediaKindFor(filename) {
+    const ext = extOf(filename);
+    if (VIDEO_EXTS.includes(ext)) return "video";
+    if (IMAGE_EXTS.includes(ext)) return "image";
+    return null; // not a type this app's media carousel understands — skipped
+  }
+
+  async function importMediaFile(file) {
+    const kind = mediaKindFor(file.name);
+    if (!kind) return { added: false, reason: "unsupported file type" };
+
+    let copied = false;
+    if (mediaDirHandle && (await ensureReadWritePermission(mediaDirHandle))) {
+      try {
+        const destHandle = await mediaDirHandle.getFileHandle(file.name, { create: true });
+        const writable = await destHandle.createWritable();
+        await writable.write(file);
+        await writable.close();
+        copied = true;
+      } catch (e) { /* copy failed — still reference it by filename below */ }
+    }
+    mediaGroup.addRow({ type: kind, url: "media/" + file.name });
+    return { added: true, copied };
+  }
+
+  async function importFiles(fileList) {
+    const files = Array.from(fileList);
+    if (!files.length) return;
+    let added = 0, copied = 0, skipped = 0;
+    for (const file of files) {
+      const result = await importMediaFile(file);
+      if (result.added) { added++; if (result.copied) copied++; } else { skipped++; }
+    }
+    let msg = added + " file(s) added to Media";
+    if (mediaDirHandle) msg += copied === added ? " and copied into " + mediaDirHandle.name + "/" : " (" + copied + " copied, " + (added - copied) + " need manual copying)";
+    else if (added) msg += " — copy them into video-log/media/ yourself before Save";
+    if (skipped) msg += "; " + skipped + " skipped (not a photo/video type)";
+    showStatus(msg, added === 0);
+  }
+
+  footageFileInput.addEventListener("change", () => {
+    importFiles(footageFileInput.files);
+    footageFileInput.value = "";
+  });
+
+  // Recursively walks a dropped folder (DataTransferItem.webkitGetAsEntry),
+  // so dragging your whole DJI export folder in works, not just loose files.
+  function readAllEntries(reader) {
+    return new Promise((resolve, reject) => {
+      const all = [];
+      function readBatch() {
+        reader.readEntries((entries) => {
+          if (!entries.length) { resolve(all); return; }
+          all.push(...entries);
+          readBatch(); // readEntries only returns a batch at a time — keep calling until empty
+        }, reject);
+      }
+      readBatch();
+    });
+  }
+  async function collectFilesFromEntry(entry, out) {
+    if (entry.isFile) {
+      const file = await new Promise((resolve, reject) => entry.file(resolve, reject));
+      out.push(file);
+    } else if (entry.isDirectory) {
+      const entries = await readAllEntries(entry.createReader());
+      for (const child of entries) await collectFilesFromEntry(child, out);
+    }
+  }
+
+  footageDropZone.addEventListener("dragover", (e) => { e.preventDefault(); footageDropZone.classList.add("drag-over"); });
+  footageDropZone.addEventListener("dragleave", () => footageDropZone.classList.remove("drag-over"));
+  footageDropZone.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    footageDropZone.classList.remove("drag-over");
+    const items = e.dataTransfer.items;
+    if (items && items.length && items[0].webkitGetAsEntry) {
+      const files = [];
+      for (const item of items) {
+        const entry = item.webkitGetAsEntry && item.webkitGetAsEntry();
+        if (entry) await collectFilesFromEntry(entry, files);
+      }
+      if (files.length) { await importFiles(files); return; }
+    }
+    if (e.dataTransfer.files && e.dataTransfer.files.length) await importFiles(e.dataTransfer.files);
+  });
 
   function renderMonthDayChips(month) {
     const wrap = document.getElementById("monthDayChips");
