@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Travel World</title>
+<!--
+  TRAVEL WORLD — a Battlefront-style planet-select globe of real
+  travel destinations. Plain Three.js, vendored locally in lib/ (no
+  CDN — works offline once hosted). Uses ES module imports and
+  fetch() for destinations/manifest.json + per-place info.json, both
+  of which require this page to be served over real HTTP — opening
+  index.html directly as a local file:// URL will fail (the browser
+  blocks module imports and fetch() from file:// origins the same
+  way it blocks video-log's data.json fetch elsewhere in this
+  project). Run a local static server (e.g. `npx serve travel-world`)
+  to test locally.
+
+  Adding a new place: create destinations/<slug>/ with an info.json
+  ({ name, lat, lng, dates, notes, photos: [...], videos: [...] }),
+  drop your photos/videos in matching subfolders, then add "<slug>"
+  to the places array in destinations/manifest.json. No code changes.
+-->
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="loading-screen ornate-frame" id="loadingScreen">
+    <div class="loading-card">
+      <div class="loading-star"></div>
+      <div class="loading-title">Charting the World</div>
+      <div class="loading-status" id="loadingStatus">Loading destinations&hellip;</div>
+    </div>
+  </div>
+
+  <header class="hub-header">
+    <a class="back-link" href="../room.html">&larr; Back to the Room</a>
+    &nbsp;&middot;&nbsp;
+    <a class="back-link" href="../home.html">Home</a>
+    <h1 class="hub-title">Travel World</h1>
+    <p>Every marker is a real trip. Tap one to fly in.</p>
+  </header>
+
+  <div class="scene-wrap">
+    <canvas id="globeCanvas"></canvas>
+    <div class="scene-hint">Drag to look around &middot; tap a marker to visit</div>
+  </div>
+
+  <footer>
+    Nothing here is fetched from the internet at runtime — the globe, the patterns, and Three.js
+    itself are all part of this room. Add your own trips under <code>destinations/</code>; see the
+    comment at the top of this file for the exact folder shape.
+  </footer>
+
+  <div class="place-panel" id="placePanel" hidden>
+    <div class="place-card ornate-frame">
+      <button type="button" class="panel-close" id="panelCloseBtn">&times;</button>
+      <h2 class="place-name" id="placeName"></h2>
+      <div class="place-dates" id="placeDates"></div>
+      <p class="place-notes" id="placeNotes"></p>
+
+      <p class="place-section-label">Photos</p>
+      <div class="place-gallery" id="placeGallery"></div>
+
+      <p class="place-section-label" id="placeVideosLabel" hidden>Videos</p>
+      <div class="place-videos" id="placeVideos"></div>
+    </div>
+  </div>
+
+<script type="module" src="app.js" id="appModule"></script>
+<script>
+  // Fallback for the file:// case: a module script that fails to load
+  // fires a plain "error" event on its <script> element. app.js can't
+  // report this itself since a blocked module never executes at all.
+  document.getElementById("appModule").addEventListener("error", () => {
+    var status = document.getElementById("loadingStatus");
+    if (status) {
+      status.textContent = "Could not load. This page needs to be served over HTTP (e.g. a local dev server) — opening index.html directly as a local file won't work.";
+    }
+  });
+</script>
+
+</body>
+</html>

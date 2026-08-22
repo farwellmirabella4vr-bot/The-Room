@@ -1,0 +1,9 @@
+{
+  "name": "Reykjavik, Iceland",
+  "lat": 64.1466,
+  "lng": -21.9426,
+  "dates": "Demo location",
+  "notes": "This is placeholder demo content shipped with the room. Replace this whole folder with your own trip: same info.json shape (name, lat, lng, dates, notes, photos, videos), your own files in photos/ and videos/.",
+  "photos": ["photos/demo-1.svg", "photos/demo-2.svg", "photos/demo-3.svg"],
+  "videos": []
+}
