@@ -33,6 +33,10 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; min-height: 100%; }
+  /* the hidden attribute must always win, even over an element whose own
+     class sets display:flex/grid (author CSS otherwise beats the
+     browser's built-in [hidden] rule at equal specificity) */
+  [hidden] { display: none !important; }
 
   body {
     position: relative;
@@ -386,21 +390,66 @@
     font-size: 0.68rem;
   }
 
-  /* ---------- gamepad ---------- */
+  /* ---------- gamepad status badge (lives on the device screen now,
+     the full legend moved into a <details> on the Pads tab) ---------- */
   .gamepad-status {
-    text-align: center;
-    font-size: 0.78rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.62rem;
     font-weight: bold;
-    margin-bottom: 0.8rem;
+    background: var(--cream);
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.22rem 0.55rem;
+    z-index: 1;
   }
+  .gamepad-status.connected { background: var(--green); color: var(--cream); }
   .gamepad-legend {
     list-style: none;
-    margin: 0;
+    margin: 0.6rem 0 0;
     padding: 0;
     font-size: 0.7rem;
     line-height: 1.6;
     text-align: center;
     color: var(--ink);
+  }
+  .gamepad-details {
+    margin-top: 1.1rem;
+    text-align: center;
+  }
+  .gamepad-details summary {
+    cursor: pointer;
+    font-size: 0.72rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: inline-block;
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+    border-radius: 4px;
+    padding: 0.35rem 0.7rem;
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+
+  /* ---------- device screen: persistent across every tab ---------- */
+  .device-screen { position: relative; margin-bottom: 1.3rem; }
+
+  /* ---------- mode tabs (reuses the base button styling exactly) ---------- */
+  .mode-tabs {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 0 1.3rem;
+  }
+  .mode-tab { padding: 0.6rem 1.15rem; font-size: 0.78rem; }
+  .mode-tab.active,
+  .mode-tab.active:hover {
+    background: var(--green);
+    color: var(--cream);
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
   }
 
   /* ---------- audio-reactive visualizer ---------- */
@@ -565,114 +614,126 @@
   </header>
 
   <main>
-    <section class="panel reveal">
-      <h2>Sampler</h2>
-      <div class="pad-grid" id="padGrid"></div>
-      <p class="sample-note">
-        Each pad is its own category — drag or upload several files onto one pad (e.g. all your
-        kicks) and tap it repeatedly to cycle through them, or use the small &#9656; arrow.
-        New samples open the trim tool first; use the &#9986; icon on a pad to re-trim what's
-        currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
-        direct Splice account connection isn't available, but any sample file works.
-      </p>
-    </section>
-
-    <section class="panel reveal">
-      <h2>Visualizer</h2>
+    <div class="device-screen">
       <div class="viz-canvas-wrap">
         <canvas id="vizCanvas"></canvas>
       </div>
-      <p class="sample-note">Reacts to everything passing through the master output — pads, the sequencer, saved-beat playback, and radio capture.</p>
-    </section>
+      <div class="gamepad-status" id="gamepadStatus">No controller</div>
+    </div>
 
-    <section class="panel reveal">
-      <h2>FX Rack</h2>
-      <p class="sample-note">Click the &#9881; gear icon on a pad to edit its filter, delay, and reverb sends. Changes apply live and are baked into exports.</p>
-      <div class="fx-target-label" id="fxTargetLabel">No pad selected</div>
-      <label class="fx-row">Filter Cutoff
-        <input type="range" id="fxCutoff" min="200" max="20000" step="50" value="20000" disabled>
-        <span id="fxCutoffVal">20000Hz</span>
-      </label>
-      <label class="fx-row">Delay Send
-        <input type="range" id="fxDelay" min="0" max="100" step="1" value="0" disabled>
-        <span id="fxDelayVal">0%</span>
-      </label>
-      <label class="fx-row">Reverb Send
-        <input type="range" id="fxReverb" min="0" max="100" step="1" value="0" disabled>
-        <span id="fxReverbVal">0%</span>
-      </label>
-      <label class="fx-row"><input type="checkbox" id="fxReverse" disabled> Reverse sample</label>
-    </section>
+    <nav class="mode-tabs" id="modeTabs">
+      <button type="button" class="mode-tab active" data-tab="pads">Pads</button>
+      <button type="button" class="mode-tab" data-tab="pattern">Pattern</button>
+      <button type="button" class="mode-tab" data-tab="fx">FX</button>
+      <button type="button" class="mode-tab" data-tab="library">Library</button>
+    </nav>
 
-    <section class="panel reveal">
-      <h2>World Radio</h2>
-      <p class="sample-note">For personal, non-commercial sampling and practice only.</p>
-      <div class="radio-controls">
-        <select id="radioCountrySelect"><option value="">Loading countries...</option></select>
-      </div>
-      <ul class="item-list" id="radioStationList"></ul>
-      <div class="radio-player" id="radioPlayer" hidden>
-        <div class="radio-now-playing" id="radioNowPlaying"></div>
-        <audio id="radioAudio" preload="none"></audio>
-        <div class="radio-player-controls">
-          <button type="button" id="radioPlayBtn">&#9658; Play</button>
-          <button type="button" id="radioStopBtn">&#9632; Stop</button>
-          <button type="button" id="radioCaptureBtn" disabled>&#9210; Capture 10s Clip</button>
+    <section class="tab-panel" id="tabPads" data-tab-panel="pads">
+      <section class="panel reveal">
+        <h2>Sampler</h2>
+        <div class="pad-grid" id="padGrid"></div>
+        <p class="sample-note">
+          Each pad is its own category — drag or upload several files onto one pad (e.g. all your
+          kicks) and tap it repeatedly to cycle through them, or use the small &#9656; arrow.
+          New samples open the trim tool first; use the &#9986; icon on a pad to re-trim what's
+          currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
+          direct Splice account connection isn't available, but any sample file works.
+        </p>
+        <details class="gamepad-details">
+          <summary>Gamepad Controls</summary>
+          <ul class="gamepad-legend">
+            <li>Cross / Circle / Square / Triangle / L1 / R1 / L2 / R2 &mdash; pads 1&ndash;8</li>
+            <li>Right stick Y &mdash; sweeps the master filter (up = open, down = closed)</li>
+            <li>D-pad Up / Down &mdash; nudge sequencer BPM &plusmn;1</li>
+            <li>Options &mdash; toggle sequencer play / stop</li>
+          </ul>
+        </details>
+      </section>
+
+      <section class="panel reveal">
+        <h2>Record &amp; Play</h2>
+        <div class="transport-row">
+          <button type="button" id="recordBtn">&#9679; Record</button>
+          <button type="button" id="playBtn" disabled>&#9658; Play</button>
+          <button type="button" id="clearBtn" disabled>Clear</button>
         </div>
-        <div class="radio-capture-status" id="radioCaptureStatus"></div>
-      </div>
-    </section>
-
-    <section class="panel reveal">
-      <h2>Sequencer</h2>
-      <div class="seq-controls">
-        <label>BPM <input type="number" id="seqBpm" min="40" max="240" value="100"></label>
-        <div class="seq-bars-toggle">
-          <button type="button" class="seq-bars-btn" data-bars="4">4 Bars</button>
-          <button type="button" class="seq-bars-btn" data-bars="8">8 Bars</button>
+        <div class="save-row" id="saveRow">
+          <input type="text" id="beatNameInput" placeholder="Name this beat...">
+          <button type="button" id="saveBeatBtn">Save Beat</button>
         </div>
-      </div>
-      <div class="seq-grid-wrap">
-        <div class="seq-grid" id="seqGrid"></div>
-      </div>
-      <div class="seq-transport">
-        <button type="button" id="seqPlayBtn">&#9658; Play Loop</button>
-        <button type="button" id="seqStopBtn" disabled>&#9632; Stop</button>
-        <button type="button" id="seqClearBtn">Clear Grid</button>
-      </div>
-      <div class="save-row visible" id="seqSaveRow">
-        <input type="text" id="seqBeatNameInput" placeholder="Name this pattern...">
-        <button type="button" id="seqSaveBtn">Save Beat</button>
-      </div>
+      </section>
     </section>
 
-    <section class="panel reveal">
-      <h2>Record &amp; Play</h2>
-      <div class="transport-row">
-        <button type="button" id="recordBtn">&#9679; Record</button>
-        <button type="button" id="playBtn" disabled>&#9658; Play</button>
-        <button type="button" id="clearBtn" disabled>Clear</button>
-      </div>
-      <div class="save-row" id="saveRow">
-        <input type="text" id="beatNameInput" placeholder="Name this beat...">
-        <button type="button" id="saveBeatBtn">Save Beat</button>
-      </div>
+    <section class="tab-panel" id="tabPattern" data-tab-panel="pattern" hidden>
+      <section class="panel reveal">
+        <h2>Sequencer</h2>
+        <div class="seq-controls">
+          <label>BPM <input type="number" id="seqBpm" min="40" max="240" value="100"></label>
+          <div class="seq-bars-toggle">
+            <button type="button" class="seq-bars-btn" data-bars="4">4 Bars</button>
+            <button type="button" class="seq-bars-btn" data-bars="8">8 Bars</button>
+          </div>
+        </div>
+        <div class="seq-grid-wrap">
+          <div class="seq-grid" id="seqGrid"></div>
+        </div>
+        <div class="seq-transport">
+          <button type="button" id="seqPlayBtn">&#9658; Play Loop</button>
+          <button type="button" id="seqStopBtn" disabled>&#9632; Stop</button>
+          <button type="button" id="seqClearBtn">Clear Grid</button>
+        </div>
+        <div class="save-row visible" id="seqSaveRow">
+          <input type="text" id="seqBeatNameInput" placeholder="Name this pattern...">
+          <button type="button" id="seqSaveBtn">Save Beat</button>
+        </div>
+      </section>
     </section>
 
-    <section class="panel reveal">
-      <h2>Gamepad</h2>
-      <div class="gamepad-status" id="gamepadStatus">No controller connected</div>
-      <ul class="gamepad-legend">
-        <li>Cross / Circle / Square / Triangle / L1 / R1 / L2 / R2 &mdash; pads 1&ndash;8</li>
-        <li>Right stick Y &mdash; sweeps the master filter (up = open, down = closed)</li>
-        <li>D-pad Up / Down &mdash; nudge sequencer BPM &plusmn;1</li>
-        <li>Options &mdash; toggle sequencer play / stop</li>
-      </ul>
+    <section class="tab-panel" id="tabFx" data-tab-panel="fx" hidden>
+      <section class="panel reveal">
+        <h2>FX Rack</h2>
+        <p class="sample-note">Click the &#9881; gear icon on a pad to edit its filter, delay, and reverb sends. Changes apply live and are baked into exports.</p>
+        <div class="fx-target-label" id="fxTargetLabel">No pad selected</div>
+        <label class="fx-row">Filter Cutoff
+          <input type="range" id="fxCutoff" min="200" max="20000" step="50" value="20000" disabled>
+          <span id="fxCutoffVal">20000Hz</span>
+        </label>
+        <label class="fx-row">Delay Send
+          <input type="range" id="fxDelay" min="0" max="100" step="1" value="0" disabled>
+          <span id="fxDelayVal">0%</span>
+        </label>
+        <label class="fx-row">Reverb Send
+          <input type="range" id="fxReverb" min="0" max="100" step="1" value="0" disabled>
+          <span id="fxReverbVal">0%</span>
+        </label>
+        <label class="fx-row"><input type="checkbox" id="fxReverse" disabled> Reverse sample</label>
+      </section>
     </section>
 
-    <section class="panel reveal">
-      <h2>Saved Beats</h2>
-      <ul class="item-list" id="beatsList"></ul>
+    <section class="tab-panel" id="tabLibrary" data-tab-panel="library" hidden>
+      <section class="panel reveal">
+        <h2>Saved Beats</h2>
+        <ul class="item-list" id="beatsList"></ul>
+      </section>
+
+      <section class="panel reveal">
+        <h2>World Radio</h2>
+        <p class="sample-note">For personal, non-commercial sampling and practice only.</p>
+        <div class="radio-controls">
+          <select id="radioCountrySelect"><option value="">Loading countries...</option></select>
+        </div>
+        <ul class="item-list" id="radioStationList"></ul>
+        <div class="radio-player" id="radioPlayer" hidden>
+          <div class="radio-now-playing" id="radioNowPlaying"></div>
+          <audio id="radioAudio" preload="none"></audio>
+          <div class="radio-player-controls">
+            <button type="button" id="radioPlayBtn">&#9658; Play</button>
+            <button type="button" id="radioStopBtn">&#9632; Stop</button>
+            <button type="button" id="radioCaptureBtn" disabled>&#9210; Capture 10s Clip</button>
+          </div>
+          <div class="radio-capture-status" id="radioCaptureStatus"></div>
+        </div>
+      </section>
     </section>
   </main>
 
@@ -2075,7 +2136,10 @@
   const gamepadStatusEl = document.getElementById("gamepadStatus");
 
   function updateGamepadStatus() {
-    gamepadStatusEl.textContent = gamepadIndex !== null ? "Controller connected — pads live" : "No controller connected";
+    const connected = gamepadIndex !== null;
+    gamepadStatusEl.textContent = connected ? "🎮 Connected" : "🎮 No Controller";
+    gamepadStatusEl.classList.toggle("connected", connected);
+    gamepadStatusEl.title = connected ? "Controller connected — pads live" : "No controller connected";
   }
 
   window.addEventListener("gamepadconnected", (e) => {
@@ -2210,6 +2274,21 @@
   restoreAllPadSamples();
   renderSavedBeats();
   loadCountries();
+  updateGamepadStatus();
+
+  // ---------- mode tabs (Pads / Pattern / FX / Library) ----------
+  const TAB_PANEL_IDS = { pads: "tabPads", pattern: "tabPattern", fx: "tabFx", library: "tabLibrary" };
+  function switchTab(tabId) {
+    Object.keys(TAB_PANEL_IDS).forEach((id) => {
+      document.getElementById(TAB_PANEL_IDS[id]).hidden = id !== tabId;
+    });
+    document.querySelectorAll(".mode-tab").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.tab === tabId);
+    });
+  }
+  document.querySelectorAll(".mode-tab").forEach((btn) => {
+    btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+  });
 
   // ---------- scroll reveal: fade/slide each .reveal element in once, the
   // first time it enters view, then stop watching it (no ongoing cost) ----------
