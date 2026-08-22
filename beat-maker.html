@@ -17,23 +17,24 @@
      logic changed anywhere for this pass.
      ============================================================ */
   :root {
-    --bg-top:    #dedcd5;  /* light putty-grey chassis top */
-    --bg-mid:    #c7c4bb;  /* mid grey chassis body */
-    --bg-ground: #a9a69c;  /* darker grey chassis base */
-    --panel-bg:  #d3d1c9;  /* recessed panel grey */
-    --panel-bg-light: #dedcd4;  /* lighter panel tone, for a subtle top-lit gradient */
+    --bg-top:    #eeece6;  /* bright warm-white chassis top (was putty-grey — pushed lighter toward a toy-sampler plastic) */
+    --bg-mid:    #d8d5cb;  /* mid grey chassis body */
+    --bg-ground: #b7b4a8;  /* darker grey chassis base */
+    --panel-bg:  #e2e0d7;  /* recessed panel grey */
+    --panel-bg-light: #f3f1ea;  /* lighter panel tone, for a subtle top-lit gradient */
     --ink:       #2b2d2f;  /* dark charcoal - borders, text, outlines */
     --green:        #2a8a82;  /* teal - "on"/active/assigned state */
     --green-dark:   #1f6b64;
-    --yellow:        #d9772e;  /* orange - primary button/label color */
-    --yellow-bright: #f2954a;
+    --yellow:        #e0641f;  /* bolder toy-sampler orange - primary button/label/accent color */
+    --yellow-bright: #ff9142;
     --brown:        #8a8680;  /* neutral grey accent (mountains removed; kept defined, low-risk) */
     --afghan-black: #1a1b1c;  /* near-black, pad-number badge */
     --afghan-red:   #c0453d;  /* warm red - record/danger/alert state */
     --afghan-green: #2a8a82;  /* unused after backdrop removal; kept defined for safety */
-    --cream:        #eeece6;  /* pad face / input field off-white */
+    --cream:        #f5f3ec;  /* pad face / input field off-white */
     --screen-bg:    #16221f;  /* backlit LCD screen background */
     --screen-fg:    #7fe0a0;  /* pale LCD green text */
+    --grille: radial-gradient(circle, rgba(0,0,0,0.35) 1.1px, transparent 1.1px); /* perforated speaker-grille dot texture */
   }
 
   * { box-sizing: border-box; }
@@ -55,19 +56,30 @@
 
   a { color: var(--afghan-red); }
 
-  .hub-header { position: relative; z-index: 1; text-align: center; padding: 2rem 1rem 1rem; }
-  .back-link { display: inline-block; margin-bottom: 0.75rem; font-size: 0.85rem; color: var(--ink); text-decoration: none; font-weight: bold; opacity: 0.75; }
+  .hub-header { position: relative; z-index: 1; text-align: center; padding: 1.1rem 1rem 0.6rem; }
+  .back-link { display: inline-block; font-size: 0.85rem; color: var(--ink); text-decoration: none; font-weight: bold; opacity: 0.75; }
   .back-link:hover { color: var(--afghan-red); opacity: 1; }
-  h1.hub-title {
+  /* Small corner brand label on the device screen itself, instead of a
+     big hero title above it — less "webpage with a heading", more
+     "device with a nameplate", and a lot less to visually wade through
+     before getting to the pads. */
+  .device-nameplate {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
     margin: 0;
-    letter-spacing: 0.12em;
+    font-size: 0.62rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-weight: 700;
-    font-size: clamp(1.4rem, 4vw, 2rem);
-    color: var(--ink);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    color: var(--cream);
+    background: linear-gradient(180deg, var(--yellow-bright), var(--yellow));
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    padding: 0.22rem 0.55rem;
+    z-index: 1;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 1px 3px rgba(0, 0, 0, 0.3);
   }
-  .hub-header p { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--ink); opacity: 0.75; }
 
   main { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 1.25rem; }
 
@@ -504,6 +516,17 @@
     background: linear-gradient(160deg, #e4e2da, #b8b5ad);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   }
+  /* Purely decorative perforated speaker-grille strip, borrowed from the
+     toy-sampler reference photo — a quiet visual signature, not a control. */
+  .device-grille {
+    height: 10px;
+    margin-top: 3px;
+    border-radius: 4px;
+    background-color: var(--bg-ground);
+    background-image: var(--grille);
+    background-size: 6px 6px;
+    background-position: 3px center;
+  }
 
   /* ---------- mode tabs (reuses the base button styling exactly) ---------- */
   .mode-tabs {
@@ -677,16 +700,16 @@
   <header class="hub-header">
     <a class="back-link" href="home.html">&larr; Home</a>
     <a class="back-link" href="room.html" style="margin-left:0.8rem;">Back to the Room</a>
-    <h1 class="hub-title">Beat Maker</h1>
-    <p>An 8-pad sampler for your own sounds &mdash; tap, record, save, export.</p>
   </header>
 
   <main>
     <div class="device-screen">
+      <h1 class="device-nameplate">Beat Maker</h1>
       <div class="viz-canvas-wrap">
         <canvas id="vizCanvas"></canvas>
       </div>
       <div class="gamepad-status" id="gamepadStatus">No controller</div>
+      <div class="device-grille" aria-hidden="true"></div>
     </div>
 
     <nav class="mode-tabs" id="modeTabs">
@@ -702,17 +725,23 @@
         <div class="bank-row">
           <div class="bank-selector" id="bankSelector"></div>
           <button type="button" class="bank-lock-btn" id="bankLockBtn" aria-pressed="false" title="Lock bank switching">
-            <span class="bank-lock-led"></span> Lock
+            <span class="bank-lock-led"></span> Bank Lock
+          </button>
+          <button type="button" class="bank-lock-btn" id="sampleLockBtn" aria-pressed="false" title="Stop rapid tapping from cycling a pad's sample">
+            <span class="bank-lock-led"></span> Sample Lock
           </button>
         </div>
         <div class="pad-grid" id="padGrid"></div>
-        <p class="sample-note">
-          Each pad is its own category — drag or upload several files onto one pad (e.g. all your
-          kicks) and tap it repeatedly to cycle through them, or use the small &#9656; arrow.
-          New samples open the trim tool first; use the &#9986; icon on a pad to re-trim what's
-          currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
-          direct Splice account connection isn't available, but any sample file works.
-        </p>
+        <details class="gamepad-details">
+          <summary>How Pads Work</summary>
+          <p class="sample-note">
+            Each pad is its own category — drag or upload several files onto one pad (e.g. all your
+            kicks) and tap it repeatedly to cycle through them, or use the small &#9656; arrow.
+            New samples open the trim tool first; use the &#9986; icon on a pad to re-trim what's
+            currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
+            direct Splice account connection isn't available, but any sample file works.
+          </p>
+        </details>
         <details class="gamepad-details">
           <summary>Gamepad Controls</summary>
           <ul class="gamepad-legend">
@@ -726,7 +755,7 @@
             <li>Hold Select + D-pad Left / Right &mdash; move the sequencer step-cursor</li>
             <li>Hold Select + Options &mdash; toggle the cell at the step-cursor</li>
             <li>Options (no Select) &mdash; toggle sequencer play / stop</li>
-            <li>L3 &mdash; switch 4 / 8 bars</li>
+            <li>L3 &mdash; switch A-Side / B-Side (2 / 4 bars)</li>
             <li>R3 &mdash; clear the sequencer grid</li>
           </ul>
         </details>
@@ -752,8 +781,8 @@
         <div class="seq-controls">
           <label>BPM <input type="number" id="seqBpm" min="40" max="240" value="100"></label>
           <div class="seq-bars-toggle">
-            <button type="button" class="seq-bars-btn" data-bars="4">4 Bars</button>
-            <button type="button" class="seq-bars-btn" data-bars="8">8 Bars</button>
+            <button type="button" class="seq-bars-btn" data-bars="2">A-Side · 2 Bars</button>
+            <button type="button" class="seq-bars-btn" data-bars="4">B-Side · 4 Bars</button>
           </div>
         </div>
         <div class="seq-grid-wrap">
@@ -1087,6 +1116,20 @@
   let bankLocked = loadBankLock();
   function saveBankLock() {
     try { localStorage.setItem(LOCK_KEY, bankLocked ? "1" : "0"); } catch (e) { /* storage unavailable */ }
+  }
+
+  // Sample lock: while engaged, rapid-tapping a pad to test/preview it no
+  // longer advances to the next sample in its collection (a common
+  // annoyance when just spam-tapping to check a sound) — the explicit
+  // next-sample arrow still works either way, since that's a deliberate
+  // action, not an incidental side effect of tapping fast.
+  const SAMPLE_LOCK_KEY = "beat-maker-sample-lock-v1";
+  function loadSampleLock() {
+    try { return localStorage.getItem(SAMPLE_LOCK_KEY) === "1"; } catch (e) { return false; }
+  }
+  let sampleLocked = loadSampleLock();
+  function saveSampleLock() {
+    try { localStorage.setItem(SAMPLE_LOCK_KEY, sampleLocked ? "1" : "0"); } catch (e) { /* storage unavailable */ }
   }
 
   function currentSampleFor(padIndex) {
@@ -1646,6 +1689,20 @@
     renderBankSelector(); // re-render so the per-bank buttons pick up the new disabled state
   });
 
+  const sampleLockBtn = document.getElementById("sampleLockBtn");
+  function renderSampleLock() {
+    sampleLockBtn.classList.toggle("engaged", sampleLocked);
+    sampleLockBtn.setAttribute("aria-pressed", String(sampleLocked));
+    sampleLockBtn.title = sampleLocked
+      ? "Sample locked — rapid tapping replays the same sound; click to unlock"
+      : "Sample unlocked — rapid tapping cycles through a pad's samples; click to lock";
+  }
+  sampleLockBtn.addEventListener("click", () => {
+    sampleLocked = !sampleLocked;
+    saveSampleLock();
+    renderSampleLock();
+  });
+
   document.addEventListener("keydown", (e) => {
     // Ignore while typing in a text field/textarea so bracket keys in a
     // beat/pad name don't accidentally flip banks.
@@ -1736,12 +1793,15 @@
   // explicit "next" arrow, advances to the next sample in the pad's
   // collection first — so rapid tapping auditions the whole category,
   // while a single deliberate tap replays the same sound predictably.
+  // Sample Lock disables only the rapid-tap side effect (so spam-tapping
+  // to test a sound doesn't accidentally cycle it) — the explicit arrow
+  // is a deliberate action and still works either way.
   function cycleAndPlay(index, forceAdvance) {
     const pad = pads[index];
     if (!pad.samples.length) return;
 
     const now = Date.now();
-    const rapid = now - lastTapTime[index] < RAPID_TAP_MS;
+    const rapid = !sampleLocked && now - lastTapTime[index] < RAPID_TAP_MS;
     if ((forceAdvance || rapid) && pad.samples.length > 1) {
       pad.currentIndex = (pad.currentIndex + 1) % pad.samples.length;
     }
@@ -2129,17 +2189,22 @@
   const SEQ_KEY = "beat-maker-sequencer-v1";
   const STEPS_PER_BAR = 16;
 
+  // A/B-side length options are 2 and 4 bars now (was 4/8) -- but 8 stays
+  // accepted here for backward compatibility so an existing saved 8-bar
+  // pattern still loads intact instead of being silently wiped; it just
+  // won't show either toggle button as active until you pick one, which
+  // then resizes (truncates) it via resizeGridToBars() same as always.
   function loadSeqState() {
     try {
       const raw = localStorage.getItem(SEQ_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (parsed && Array.isArray(parsed.grid) && parsed.grid.length === PAD_COUNT && (parsed.bars === 4 || parsed.bars === 8)) {
+        if (parsed && Array.isArray(parsed.grid) && parsed.grid.length === PAD_COUNT && (parsed.bars === 2 || parsed.bars === 4 || parsed.bars === 8)) {
           return parsed;
         }
       }
     } catch (e) { /* corrupt storage, fall through */ }
-    return { bpm: 100, bars: 4, grid: Array.from({ length: PAD_COUNT }, () => new Array(4 * STEPS_PER_BAR).fill(false)) };
+    return { bpm: 100, bars: 2, grid: Array.from({ length: PAD_COUNT }, () => new Array(2 * STEPS_PER_BAR).fill(false)) };
   }
   let seqState = loadSeqState();
   function saveSeqState() {
@@ -2711,11 +2776,12 @@
     }
     prevButtonPressed[9] = optionsBtn ? optionsBtn.pressed : false;
 
-    // L3 flips between 4 and 8 bars; R3 clears the grid — the only two
-    // sequencer transport actions that didn't already have a home above.
+    // L3 flips between A-Side (2 bars) and B-Side (4 bars); R3 clears the
+    // grid — the only two sequencer transport actions that didn't already
+    // have a home above.
     const l3Btn = gp.buttons[10];
     if (l3Btn && l3Btn.pressed && !prevButtonPressed[10]) {
-      const otherBars = seqState.bars === 4 ? 8 : 4;
+      const otherBars = seqState.bars === 2 ? 4 : 2;
       const targetBtn = seqBarsBtns.find((b) => parseInt(b.dataset.bars, 10) === otherBars);
       if (targetBtn && !targetBtn.disabled) targetBtn.click();
     }
@@ -2848,6 +2914,7 @@
   updateGamepadStatus();
   renderBankSelector();
   renderBankLock();
+  renderSampleLock();
   renderRadioTray();
 
   // ---------- mode tabs (Pads / Pattern / FX / Library) ----------
