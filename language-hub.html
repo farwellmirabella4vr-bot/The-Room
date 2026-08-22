@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en" data-lang-theme="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Language Hub</title>
+<style>
+
+  /* ============================================================
+     LANGUAGE HUB — tweakable theme variables.
+     Aesthetic: 2000s "Web 2.0" glossy UI (rounded pill buttons,
+     gradient sheen, drop shadows) as the shared throughline, with
+     each language's own period-appropriate regional palette/motif/
+     font stack layered on top via [data-lang-theme="xx"].
+
+     TO ADD A THIRD LANGUAGE: add a [data-lang-theme="xx"] block
+     here with the same variable set, then add a matching entry to
+     the LANGUAGES array in the <script> below (id must match).
+     ============================================================ */
+  :root {
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+    --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  /* -------- Spanish (2000s warm Latin palette: terracotta, sangria,
+     Mediterranean teal + gold, Trebuchet-forward web-safe type) -------- */
+  [data-lang-theme="es"] {
+    --bg: #fdf1de;
+    --bg-alt: #fbe4c2;
+    --primary: #c1440e;
+    --primary-light: #e35f1f;
+    --primary-dark: #8a2f0a;
+    --secondary: #7a1f2b;
+    --accent: #1f7a6c;
+    --gold: #e8a33d;
+    --text: #4a2a12;
+    --text-dim: #8a6a4a;
+    --panel-bg: #fffaf0;
+    --font-display: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+    --font-body: "Verdana", "Segoe UI", sans-serif;
+    --motif-size: 48px 48px;
+    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='none' stroke='%231f7a6c' stroke-width='1' opacity='0.35'%3E%3Ccircle cx='24' cy='24' r='7'/%3E%3Ccircle cx='0' cy='0' r='7'/%3E%3Ccircle cx='48' cy='0' r='7'/%3E%3Ccircle cx='0' cy='48' r='7'/%3E%3Ccircle cx='48' cy='48' r='7'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  /* -------- Farsi / Persian (2000s Iranian web palette: Persian
+     turquoise + wine + gold, Tahoma — the defining Persian-web font
+     of the era) -------- */
+  [data-lang-theme="fa"] {
+    --bg: #fbf3e3;
+    --bg-alt: #f0e0bd;
+    --primary: #1b6f8c;
+    --primary-light: #2a8fb0;
+    --primary-dark: #124b5e;
+    --secondary: #6b1f3a;
+    --accent: #c9a227;
+    --gold: #c9a227;
+    --text: #2e2418;
+    --text-dim: #7a6a52;
+    --panel-bg: #fffdf6;
+    --font-display: "Tahoma", "Segoe UI", sans-serif;
+    --font-body: "Tahoma", "Segoe UI", sans-serif;
+    --motif-size: 40px 40px;
+    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 6 C28 6 32 14 28 22 C25 28 18 30 14 26 C10 22 12 14 20 6 Z' fill='none' stroke='%236b1f3a' stroke-width='1' opacity='0.32'/%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text);
+    background: var(--motif), linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    background-size: var(--motif-size), auto;
+    transition: background 0.6s ease, color 0.6s ease;
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  a { color: var(--primary-dark); }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    color: var(--secondary);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+    margin: 0 0 0.5rem;
+  }
+
+  /* ---------- header ---------- */
+  .hub-header {
+    text-align: center;
+    padding: 2rem 1rem 1rem;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text-dim);
+  }
+  .back-link:hover { color: var(--primary-dark); }
+
+  .hub-title {
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    letter-spacing: 0.02em;
+    color: var(--secondary); /* fallback if background-clip:text unsupported */
+    background: linear-gradient(180deg, var(--gold) 0%, var(--primary) 60%, var(--primary-dark) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+  }
+
+  .theme-badge {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .theme-badge strong { color: var(--secondary); }
+  .greeting {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- language selector ---------- */
+  .language-selector {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem 1.5rem;
+  }
+  .selector-label {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-right: 0.3rem;
+  }
+
+  /* ---------- shared 2000s "Web 2.0" glossy control styling ---------- */
+  button, .lang-pill, .filter-pill {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    border: none;
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 55%, var(--primary-dark) 100%);
+    box-shadow:
+      0 3px 0 var(--primary-dark),
+      0 6px 12px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  button:hover, .lang-pill:hover, .filter-pill:hover { transform: translateY(-1px); }
+  button:active, .lang-pill:active, .filter-pill:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 var(--primary-dark), inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .lang-pill.active, .filter-pill.active {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  input, select {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    padding: 0.45rem 0.7rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: #fff;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+    color: var(--text);
+  }
+
+  /* ---------- layout ---------- */
+  .hub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.75rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+  @media (max-width: 800px) {
+    .hub-grid { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    position: relative;
+    overflow: hidden;
+    background: var(--panel-bg);
+    border-radius: var(--radius-lg);
+    padding: 1.4rem 1.6rem 1.6rem;
+    box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 6px solid var(--gold);
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+  }
+  .panel h2 { font-size: 1.2rem; }
+  .panel h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    margin-top: 1.3rem;
+  }
+
+  /* ---------- study log form ---------- */
+  .log-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    align-items: end;
+  }
+  .log-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .log-form button { grid-column: span 4; justify-self: start; margin-top: 0.2rem; }
+  @media (max-width: 520px) {
+    .log-form { grid-template-columns: 1fr 1fr; }
+    .log-form button { grid-column: span 2; }
+  }
+
+  .add-resource-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.8rem;
+  }
+  .add-resource-row input { flex: 1; }
+
+  .resource-totals, .recent-log {
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .total-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.8rem;
+    padding: 0.4rem 0.6rem;
+    background: rgba(0, 0, 0, 0.035);
+    border-radius: var(--radius-sm);
+  }
+  .total-name { font-weight: bold; color: var(--secondary); }
+  .total-minutes { color: var(--primary-dark); font-variant-numeric: tabular-nums; }
+  .total-breakdown { font-size: 0.72rem; color: var(--text-dim); }
+
+  .recent-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    padding: 0.3rem 0.5rem;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+  }
+  .del-btn, .card-del {
+    background: none;
+    box-shadow: none;
+    color: var(--text-dim);
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9rem;
+    line-height: 1;
+  }
+  .del-btn:hover, .card-del:hover { color: var(--secondary); transform: none; }
+
+  /* ---------- content library ---------- */
+  .library-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  .library-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .library-form label:nth-child(3),
+  .library-form label:nth-child(4) { grid-column: span 2; }
+  .library-form button { grid-column: span 2; justify-self: start; margin-top: 0.2rem; }
+
+  .library-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 1rem 0 0.8rem;
+  }
+  .filter-pill {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.85rem;
+  }
+
+  .library-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.7rem;
+  }
+  .library-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+  }
+  .card-title { font-weight: bold; color: var(--secondary); font-size: 0.85rem; }
+  .card-link {
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .card-link:hover { text-decoration: underline; }
+  .card-del { align-self: flex-end; }
+
+  .empty-note { color: var(--text-dim); font-size: 0.85rem; }
+
+  footer {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 0 1.25rem;
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <a class="back-link" href="room.html">&larr; Back to the Room</a>
+    <h1 class="hub-title">Language Hub</h1>
+    <div class="theme-badge">Today's theme: <strong id="themeLabel">&hellip;</strong> <span id="autoTag"></span></div>
+    <div class="greeting" id="greetingText"></div>
+  </header>
+
+  <nav class="language-selector" aria-label="Active language override">
+    <span class="selector-label">Studying now:</span>
+    <div class="lang-pills" id="langPills"></div>
+  </nav>
+
+  <main class="hub-grid">
+
+    <section class="panel organizer-panel">
+      <h2>Study Log</h2>
+      <form id="logForm" class="log-form">
+        <label>Language
+          <select id="logLanguage"></select>
+        </label>
+        <label>Resource
+          <select id="logResource"></select>
+        </label>
+        <label>Minutes
+          <input type="number" id="logMinutes" min="1" max="600" required>
+        </label>
+        <label>Date
+          <input type="date" id="logDate">
+        </label>
+        <button type="submit">Log Session</button>
+      </form>
+
+      <div class="add-resource-row">
+        <input type="text" id="newResourceName" placeholder="Add custom resource (e.g. iTalki)">
+        <button id="addResourceBtn" type="button">+ Add</button>
+      </div>
+
+      <h3>This Week's Totals</h3>
+      <ul class="resource-totals" id="resourceTotals"></ul>
+
+      <h3>Recent Sessions</h3>
+      <ul class="recent-log" id="recentLog"></ul>
+    </section>
+
+    <section class="panel library-panel">
+      <h2>Content Library</h2>
+      <form id="libraryForm" class="library-form">
+        <label>Language
+          <select id="libLanguage"></select>
+        </label>
+        <label>Type
+          <select id="libType">
+            <option value="youtube">YouTube</option>
+            <option value="podcast">Podcast</option>
+            <option value="show">TV / Show</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>Title
+          <input type="text" id="libTitle" required placeholder="e.g. Dreaming Spanish">
+        </label>
+        <label>Link (optional)
+          <input type="url" id="libUrl" placeholder="https://...">
+        </label>
+        <button type="submit">Pin It</button>
+      </form>
+
+      <div class="library-filters" id="libraryFilters"></div>
+      <div class="library-grid" id="libraryGrid"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    Everything here is saved to this browser's local storage (per file,
+    nothing leaves your machine). The content library stores plain
+    manually-pinned entries today — <code>fetchSuggestedContent()</code>
+    in the script below is a stub left ready for a real content API later.
+    Add a language by editing the <code>LANGUAGES</code> array and adding
+    a matching <code>[data-lang-theme]</code> CSS block.
+  </footer>
+
+<script>
+(() => {
+  // ------------------------------------------------------------
+  // LANGUAGES — add a new language by pushing another object here
+  // (id must match a [data-lang-theme="xx"] CSS block above) and
+  // assigning it some days of the week. days uses JS Date.getDay()
+  // convention: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat.
+  // ------------------------------------------------------------
+  const LANGUAGES = [
+    { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", days: [1, 2, 3, 4] },
+    { id: "fa", name: "Farsi", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", days: [5, 6, 0] },
+  ];
+
+  const DEFAULT_RESOURCES = ["Pimsleur", "Anki", "Linguno"];
+  const STORAGE_KEY = "room-language-hub-v1";
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+
+  function todayISODate() {
+    const d = new Date();
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          resources: Array.isArray(parsed.resources) ? parsed.resources : DEFAULT_RESOURCES.slice(),
+          logs: Array.isArray(parsed.logs) ? parsed.logs : [],
+          library: Array.isArray(parsed.library) ? parsed.library : [],
+          override: parsed.override || null,
+        };
+      }
+    } catch (e) { /* corrupt storage, fall through to defaults */ }
+    return { resources: DEFAULT_RESOURCES.slice(), logs: [], library: [], override: null };
+  }
+
+  const state = loadState();
+  function saveState() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
+  }
+
+  function todaysAutoLanguage() {
+    const dow = new Date().getDay();
+    return LANGUAGES.find((l) => l.days.includes(dow)) || LANGUAGES[0];
+  }
+  function activeLanguage() {
+    if (state.override) {
+      const l = LANGUAGES.find((x) => x.id === state.override);
+      if (l) return l;
+    }
+    return todaysAutoLanguage();
+  }
+
+  // ------------------------------------------------------------
+  // FUTURE: content-fetching API hook. When this becomes a full
+  // app, replace this stub with a real fetch() (YouTube Data API,
+  // a podcast index, etc.) returning suggestions in the same shape
+  // as a manually-pinned library entry, then merge them into the
+  // render alongside (or instead of) the manual list.
+  // ------------------------------------------------------------
+  async function fetchSuggestedContent(languageId) {
+    return []; // not implemented in the static version
+  }
+
+  function applyTheme() {
+    const lang = activeLanguage();
+    document.documentElement.setAttribute("data-lang-theme", lang.id);
+    document.getElementById("themeLabel").textContent = lang.name + " (" + lang.native + ")";
+    document.getElementById("autoTag").textContent = state.override
+      ? "— manual override"
+      : "— today's auto theme";
+    const greetEl = document.getElementById("greetingText");
+    greetEl.textContent = lang.greeting;
+    greetEl.dir = lang.id === "fa" ? "rtl" : "ltr";
+  }
+
+  function makePill(label, active, onClick) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "lang-pill" + (active ? " active" : "");
+    b.textContent = label;
+    b.addEventListener("click", onClick);
+    return b;
+  }
+
+  function renderLangPills() {
+    const wrap = document.getElementById("langPills");
+    wrap.innerHTML = "";
+    wrap.appendChild(makePill("Auto (" + todaysAutoLanguage().name + ")", !state.override, () => {
+      state.override = null;
+      saveState();
+      applyTheme();
+      renderLangPills();
+      populateLangSelects(true);
+      renderTotals();
+    }));
+    LANGUAGES.forEach((l) => {
+      wrap.appendChild(makePill(l.flag + " " + l.name, state.override === l.id, () => {
+        state.override = l.id;
+        saveState();
+        applyTheme();
+        renderLangPills();
+        populateLangSelects(true);
+        renderTotals();
+      }));
+    });
+  }
+
+  function populateLangSelects(forceDefault) {
+    ["logLanguage", "libLanguage"].forEach((id) => {
+      const sel = document.getElementById(id);
+      if (!sel.dataset.populated) {
+        sel.innerHTML = LANGUAGES.map((l) => '<option value="' + l.id + '">' + escapeHtml(l.name) + "</option>").join("");
+        sel.dataset.populated = "true";
+      }
+      if (forceDefault) sel.value = activeLanguage().id;
+    });
+  }
+
+  function populateResourceSelect() {
+    const sel = document.getElementById("logResource");
+    const current = sel.value;
+    sel.innerHTML = state.resources.map((r) => '<option value="' + escapeHtml(r) + '">' + escapeHtml(r) + "</option>").join("");
+    if (state.resources.includes(current)) sel.value = current;
+  }
+
+  // ---------- study log ----------
+  function startOfWeek(date) {
+    const d = new Date(date);
+    const day = d.getDay();
+    const diffToMonday = day === 0 ? -6 : 1 - day;
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + diffToMonday);
+    return d;
+  }
+
+  function renderTotals() {
+    const weekStart = startOfWeek(new Date());
+    const list = document.getElementById("resourceTotals");
+    list.innerHTML = "";
+    state.resources.forEach((resource) => {
+      const entries = state.logs.filter((l) => l.resource === resource && new Date(l.date + "T00:00:00") >= weekStart);
+      const total = entries.reduce((sum, l) => sum + l.minutes, 0);
+      const byLang = {};
+      entries.forEach((l) => { byLang[l.languageId] = (byLang[l.languageId] || 0) + l.minutes; });
+      const breakdown = Object.keys(byLang)
+        .map((id) => { const lang = LANGUAGES.find((x) => x.id === id); return (lang ? lang.name : id) + ": " + byLang[id] + "m"; })
+        .join(", ");
+      const li = document.createElement("li");
+      li.className = "total-row";
+      li.innerHTML =
+        '<span class="total-name">' + escapeHtml(resource) + "</span>" +
+        '<span class="total-minutes">' + total + " min this week</span>" +
+        (breakdown ? '<span class="total-breakdown">(' + escapeHtml(breakdown) + ")</span>" : "");
+      list.appendChild(li);
+    });
+  }
+
+  function renderRecent() {
+    const list = document.getElementById("recentLog");
+    list.innerHTML = "";
+    const recent = state.logs.slice().sort((a, b) => parseInt(b.id, 10) - parseInt(a.id, 10)).slice(0, 8);
+    if (!recent.length) {
+      list.innerHTML = '<li class="empty-note">No sessions logged yet.</li>';
+      return;
+    }
+    recent.forEach((entry) => {
+      const lang = LANGUAGES.find((l) => l.id === entry.languageId);
+      const li = document.createElement("li");
+      li.className = "recent-row";
+      const span = document.createElement("span");
+      span.textContent = entry.date + " — " + (lang ? lang.flag + " " + lang.name : entry.languageId) + " — " + entry.resource + " — " + entry.minutes + "m";
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "del-btn";
+      delBtn.textContent = "×";
+      delBtn.addEventListener("click", () => {
+        state.logs = state.logs.filter((l) => l.id !== entry.id);
+        saveState();
+        renderTotals();
+        renderRecent();
+      });
+      li.appendChild(span);
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    });
+  }
+
+  document.getElementById("logForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const languageId = document.getElementById("logLanguage").value;
+    const resource = document.getElementById("logResource").value;
+    const minutes = parseInt(document.getElementById("logMinutes").value, 10);
+    const dateVal = document.getElementById("logDate").value || todayISODate();
+    if (!resource || !minutes || minutes <= 0) return;
+    state.logs.push({
+      id: Date.now() + "" + Math.floor(Math.random() * 1000),
+      languageId, resource, minutes, date: dateVal,
+    });
+    saveState();
+    document.getElementById("logMinutes").value = "";
+    renderTotals();
+    renderRecent();
+  });
+
+  document.getElementById("addResourceBtn").addEventListener("click", () => {
+    const input = document.getElementById("newResourceName");
+    const name = input.value.trim();
+    if (!name) return;
+    if (state.resources.some((r) => r.toLowerCase() === name.toLowerCase())) { input.value = ""; return; }
+    state.resources.push(name);
+    saveState();
+    input.value = "";
+    populateResourceSelect();
+    renderTotals();
+  });
+
+  // ---------- content library ----------
+  let libraryFilter = "all";
+  const TYPE_ICONS = { youtube: "▶", podcast: "🎙", show: "📺", other: "🔗" };
+
+  function makeFilterPill(label, active, onClick) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "filter-pill" + (active ? " active" : "");
+    b.textContent = label;
+    b.addEventListener("click", onClick);
+    return b;
+  }
+
+  function renderLibraryFilters() {
+    const wrap = document.getElementById("libraryFilters");
+    wrap.innerHTML = "";
+    wrap.appendChild(makeFilterPill("All", libraryFilter === "all", () => { libraryFilter = "all"; renderLibraryFilters(); renderLibrary(); }));
+    LANGUAGES.forEach((l) => {
+      wrap.appendChild(makeFilterPill(l.flag + " " + l.name, libraryFilter === l.id, () => { libraryFilter = l.id; renderLibraryFilters(); renderLibrary(); }));
+    });
+  }
+
+  function renderLibrary() {
+    const grid = document.getElementById("libraryGrid");
+    grid.innerHTML = "";
+    const items = state.library.filter((item) => libraryFilter === "all" || item.languageId === libraryFilter);
+    if (!items.length) {
+      grid.innerHTML = '<p class="empty-note">Nothing pinned yet' + (libraryFilter === "all" ? "" : " for this language") + ".</p>";
+      return;
+    }
+    items.slice().reverse().forEach((item) => {
+      const lang = LANGUAGES.find((l) => l.id === item.languageId);
+      const card = document.createElement("div");
+      card.className = "library-card";
+      card.innerHTML =
+        '<div class="card-top"><span>' + (TYPE_ICONS[item.type] || "🔗") + " " + escapeHtml(item.type) + "</span>" +
+        "<span>" + (lang ? lang.flag : "") + "</span></div>" +
+        '<div class="card-title">' + escapeHtml(item.title) + "</div>" +
+        (item.url ? '<a class="card-link" href="' + encodeURI(item.url) + '" target="_blank" rel="noopener noreferrer">Open →</a>' : "");
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "card-del";
+      delBtn.textContent = "Remove";
+      delBtn.addEventListener("click", () => {
+        state.library = state.library.filter((x) => x.id !== item.id);
+        saveState();
+        renderLibrary();
+      });
+      card.appendChild(delBtn);
+      grid.appendChild(card);
+    });
+  }
+
+  document.getElementById("libraryForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const languageId = document.getElementById("libLanguage").value;
+    const type = document.getElementById("libType").value;
+    const title = document.getElementById("libTitle").value.trim();
+    let url = document.getElementById("libUrl").value.trim();
+    if (!title) return;
+    if (url && !/^https?:\/\//i.test(url)) url = ""; // ignore non-http(s) links
+    state.library.push({
+      id: Date.now() + "" + Math.floor(Math.random() * 1000),
+      languageId, type, title, url,
+      source: "manual", // future values: 'youtube-api', 'podcast-api', ...
+      addedAt: todayISODate(),
+    });
+    saveState();
+    document.getElementById("libTitle").value = "";
+    document.getElementById("libUrl").value = "";
+    renderLibrary();
+  });
+
+  // ---------- init ----------
+  document.getElementById("logDate").value = todayISODate();
+  applyTheme();
+  renderLangPills();
+  populateLangSelects(true);
+  populateResourceSelect();
+  renderTotals();
+  renderRecent();
+  renderLibraryFilters();
+  renderLibrary();
+
+  // Keep the day-based auto theme (and week-boundary totals) in sync
+  // if the page is left open; doesn't touch in-progress form selections.
+  setInterval(() => {
+    applyTheme();
+    renderLangPills();
+    renderTotals();
+  }, 60000);
+})();
+</script>
+
+</body>
+</html>
