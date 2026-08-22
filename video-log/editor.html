@@ -239,6 +239,28 @@
   }
   .empty-note { font-size: 0.78rem; color: var(--ivory-dim); }
 
+  .quick-log { border-color: rgba(63, 182, 168, 0.4); }
+  .quick-log-status {
+    font-size: 0.78rem;
+    color: var(--teal-bright);
+    min-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+  #quickLogCheckBtn { background: linear-gradient(180deg, var(--teal-bright), var(--teal)); color: #0a1f1c; }
+  .quick-log-record-row { display: flex; gap: 0.6rem; margin-top: 0.6rem; }
+  .quick-log-record-row button { margin-top: 0; }
+  .quick-log-recorder {
+    margin-top: 0.8rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(63, 182, 168, 0.35);
+    text-align: center;
+  }
+  #quickLogPreview { width: 100%; max-height: 240px; border-radius: 8px; margin-bottom: 0.6rem; background: #000; }
+  .quick-log-timer { font-size: 1.1rem; font-weight: bold; color: var(--teal-bright); margin-bottom: 0.6rem; }
+  #quickLogStopBtn { background: linear-gradient(180deg, #ff9d4d, #d97a2e); color: #2a1a10; }
+
   .status-msg {
     position: fixed;
     left: 1rem; right: 1rem; bottom: 1rem;
@@ -274,6 +296,26 @@
       <a class="back-link" href="../home.html">Home</a>
       <h1 class="page-title">Video Log Editor</h1>
     </header>
+
+    <section class="panel reveal quick-log">
+      <h2>Quick Log — Today</h2>
+      <p class="hint">
+        Mark today logged right now, low-friction — fill in the rest whenever you actually sit down
+        with it. A recorded clip or voice note is added straight to today's Media, ready to review later.
+      </p>
+      <p class="quick-log-status" id="quickLogStatus"></p>
+      <button type="button" id="quickLogCheckBtn">✓ I Logged Today</button>
+      <div class="quick-log-record-row">
+        <button type="button" class="secondary" id="quickRecordVideoBtn">🎥 Record Video</button>
+        <button type="button" class="secondary" id="quickRecordAudioBtn">🎙️ Record Voice Note</button>
+      </div>
+      <div class="quick-log-recorder" id="quickLogRecorder" hidden>
+        <video id="quickLogPreview" autoplay muted playsinline hidden></video>
+        <div class="quick-log-timer" id="quickLogTimer">0:00</div>
+        <button type="button" id="quickLogStopBtn">■ Stop &amp; Save</button>
+        <button type="button" class="secondary" id="quickLogCancelBtn">Cancel</button>
+      </div>
+    </section>
 
     <section class="panel reveal">
       <h2>Pick a Day</h2>
@@ -505,7 +547,7 @@
     document.getElementById("entryLearned").value = entry ? (entry.learned || "") : "";
 
     mediaGroup = createRepeatingGroup("mediaRows",
-      [{ name: "type", type: "select", options: ["image", "video"] }, { name: "url", type: "text", placeholder: "media/filename.jpg" }],
+      [{ name: "type", type: "select", options: ["image", "video", "audio"] }, { name: "url", type: "text", placeholder: "media/filename.jpg" }],
       entry ? entry.media : []);
     watchedGroup = createRepeatingGroup("watchedRows",
       [{ name: "title", type: "text", placeholder: "Title" }, { name: "url", type: "text", placeholder: "Link (optional) — auto-titles for YouTube/Vimeo" }],
@@ -709,6 +751,159 @@
     if (e.dataTransfer.files && e.dataTransfer.files.length) await importFiles(e.dataTransfer.files);
   });
 
+  // ============================================================
+  // QUICK LOG — a single low-friction "I logged today" check-off (so the
+  // calendar shows the day as done the moment you tap it, before you've
+  // written a word) plus in-browser video/voice recording, so a day can be
+  // captured visually and audibly on the spot and written up properly
+  // later. Recordings become real media rows (type "video"/"audio") on
+  // today's entry, copied into the connected media folder the same way a
+  // dropped file is above.
+  // ============================================================
+  function todayMonthDay() {
+    const now = new Date();
+    return { month: String(now.getMonth() + 1), day: String(now.getDate()) };
+  }
+  function refreshFormIfShowingDay(month, day) {
+    if (document.getElementById("monthSelect").value === month && document.getElementById("daySelect").value === day) {
+      const entry = (editorState.entries[month] && editorState.entries[month][day]) || null;
+      populateForm(entry);
+    }
+  }
+  function updateQuickLogStatus() {
+    const { month, day } = todayMonthDay();
+    const entry = editorState.entries[month] && editorState.entries[month][day];
+    const el = document.getElementById("quickLogStatus");
+    if (entry && entry.loggedAt) {
+      el.textContent = "✓ Logged today at " + new Date(entry.loggedAt).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    } else if (entry) {
+      el.textContent = "Today has entry content, but hasn't been checked off yet.";
+    } else {
+      el.textContent = "Not logged yet today.";
+    }
+  }
+
+  document.getElementById("quickLogCheckBtn").addEventListener("click", () => {
+    const { month, day } = todayMonthDay();
+    if (!editorState.entries[month]) editorState.entries[month] = {};
+    if (!editorState.entries[month][day]) editorState.entries[month][day] = {};
+    editorState.entries[month][day].loggedAt = new Date().toISOString();
+    saveEditorState();
+    renderMonthDayChips(document.getElementById("monthSelect").value);
+    refreshFormIfShowingDay(month, day);
+    updateQuickLogStatus();
+    showStatus("Logged today ✓", false);
+  });
+
+  let activeStream = null;
+  let activeRecorder = null;
+  let activeChunks = [];
+  let activeMode = null; // "video" | "audio"
+  let recordTimerInterval = null;
+  let recordStartTime = 0;
+
+  function formatTimer(ms) {
+    const totalSec = Math.floor(ms / 1000);
+    return Math.floor(totalSec / 60) + ":" + String(totalSec % 60).padStart(2, "0");
+  }
+
+  async function startRecording(mode) {
+    if (activeRecorder) return; // already recording — Stop or Cancel first
+    const constraints = mode === "video" ? { video: true, audio: true } : { audio: true };
+    let stream;
+    try { stream = await navigator.mediaDevices.getUserMedia(constraints); }
+    catch (e) { showStatus("Couldn't access " + (mode === "video" ? "camera/mic" : "microphone") + " — check permissions.", true); return; }
+
+    let recorder;
+    try { recorder = new MediaRecorder(stream); }
+    catch (e) {
+      showStatus("Recording isn't supported in this browser.", true);
+      stream.getTracks().forEach((t) => t.stop());
+      return;
+    }
+
+    activeStream = stream;
+    activeMode = mode;
+    activeChunks = [];
+    recorder.ondataavailable = (e) => { if (e.data && e.data.size > 0) activeChunks.push(e.data); };
+    activeRecorder = recorder;
+
+    const preview = document.getElementById("quickLogPreview");
+    if (mode === "video") { preview.srcObject = stream; preview.hidden = false; } else { preview.hidden = true; }
+
+    recorder.start();
+    recordStartTime = Date.now();
+    document.getElementById("quickLogTimer").textContent = "0:00";
+    recordTimerInterval = setInterval(() => {
+      document.getElementById("quickLogTimer").textContent = formatTimer(Date.now() - recordStartTime);
+    }, 500);
+    document.getElementById("quickLogRecorder").hidden = false;
+  }
+
+  function teardownRecording() {
+    if (recordTimerInterval) { clearInterval(recordTimerInterval); recordTimerInterval = null; }
+    if (activeStream) { activeStream.getTracks().forEach((t) => t.stop()); activeStream = null; }
+    const preview = document.getElementById("quickLogPreview");
+    preview.srcObject = null;
+    preview.hidden = true;
+    document.getElementById("quickLogRecorder").hidden = true;
+    activeRecorder = null;
+    activeMode = null;
+    activeChunks = [];
+  }
+
+  document.getElementById("quickRecordVideoBtn").addEventListener("click", () => startRecording("video"));
+  document.getElementById("quickRecordAudioBtn").addEventListener("click", () => startRecording("audio"));
+  document.getElementById("quickLogCancelBtn").addEventListener("click", () => {
+    if (activeRecorder && activeRecorder.state !== "inactive") activeRecorder.stop();
+    teardownRecording();
+  });
+
+  document.getElementById("quickLogStopBtn").addEventListener("click", async () => {
+    if (!activeRecorder) return;
+    const mode = activeMode;
+    const stopped = new Promise((resolve) => { activeRecorder.onstop = resolve; });
+    if (activeRecorder.state !== "inactive") activeRecorder.stop();
+    await stopped;
+
+    const blob = new Blob(activeChunks, { type: activeRecorder.mimeType || (mode === "video" ? "video/webm" : "audio/webm") });
+    teardownRecording();
+    if (!blob.size) { showStatus("Nothing recorded.", true); return; }
+
+    const { month, day } = todayMonthDay();
+    const ext = (blob.type.split("/")[1] || "webm").split(";")[0];
+    const filename = "log-" + new Date().toISOString().replace(/[:.]/g, "-") + "-" + mode + "." + ext;
+    const file = new File([blob], filename, { type: blob.type });
+
+    let copied = false;
+    if (mediaDirHandle && (await ensureReadWritePermission(mediaDirHandle))) {
+      try {
+        const destHandle = await mediaDirHandle.getFileHandle(filename, { create: true });
+        const writable = await destHandle.createWritable();
+        await writable.write(file);
+        await writable.close();
+        copied = true;
+      } catch (e) { /* couldn't write — still record the reference below */ }
+    }
+
+    if (!editorState.entries[month]) editorState.entries[month] = {};
+    if (!editorState.entries[month][day]) editorState.entries[month][day] = {};
+    const entry = editorState.entries[month][day];
+    if (!Array.isArray(entry.media)) entry.media = [];
+    entry.media.push({ type: mode, url: "media/" + filename });
+    entry.loggedAt = new Date().toISOString();
+    saveEditorState();
+
+    renderMonthDayChips(document.getElementById("monthSelect").value);
+    refreshFormIfShowingDay(month, day);
+    updateQuickLogStatus();
+    showStatus(
+      (mode === "video" ? "Video" : "Voice note") + " saved" +
+      (copied ? " and copied into media/" : " — copy it into video-log/media/ yourself before Save") + " ✓",
+      false
+    );
+  });
+
   function renderMonthDayChips(month) {
     const wrap = document.getElementById("monthDayChips");
     wrap.innerHTML = "";
@@ -745,7 +940,14 @@
     const day = document.getElementById("daySelect").value;
     if (!month || !day) { showStatus("Pick a month and day first.", true); return; }
 
+    // Spread the existing entry first so metadata the form doesn't know
+    // about (loggedAt, set by Quick Log) survives a Save even when nothing
+    // in the form actually changed — a plain object literal here would
+    // silently wipe it every time.
+    if (!editorState.entries[month]) editorState.entries[month] = {};
+    const existing = editorState.entries[month][day] || {};
     const entry = {
+      ...existing,
       title: document.getElementById("entryTitle").value.trim(),
       media: mediaGroup ? mediaGroup.getValues() : [],
       did: document.getElementById("entryDid").value.trim(),
@@ -755,7 +957,6 @@
       learned: document.getElementById("entryLearned").value.trim(),
     };
 
-    if (!editorState.entries[month]) editorState.entries[month] = {};
     editorState.entries[month][day] = entry;
     saveEditorState();
     renderMonthDayChips(month);
@@ -842,6 +1043,7 @@
   populateForm(null);
   renderMonthDayChips(document.getElementById("monthSelect").value);
   loadBeatsForMonth();
+  updateQuickLogStatus();
 
   // ---------- scroll reveal: fade/slide each .reveal element in once, the
   // first time it enters view, then stop watching it (no ongoing cost) ----------

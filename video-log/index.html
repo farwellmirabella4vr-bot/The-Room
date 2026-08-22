@@ -254,6 +254,18 @@
     object-fit: cover;
     display: block;
   }
+  .carousel-audio-slide {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: linear-gradient(160deg, var(--wall-light) 0%, var(--wall-dark) 100%);
+  }
+  .carousel-audio-icon { font-size: 2.4rem; }
+  .carousel-audio-slide audio { width: 85%; }
   .carousel-dots {
     display: flex;
     justify-content: center;
@@ -718,6 +730,19 @@
         video.playsInline = true;
         video.preload = "metadata";
         slide.appendChild(video);
+      } else if (item.type === "audio") {
+        const wrap = document.createElement("div");
+        wrap.className = "carousel-audio-slide";
+        const icon = document.createElement("div");
+        icon.className = "carousel-audio-icon";
+        icon.textContent = "🎙️";
+        const audio = document.createElement("audio");
+        audio.src = item.url;
+        audio.controls = true;
+        audio.preload = "metadata";
+        wrap.appendChild(icon);
+        wrap.appendChild(audio);
+        slide.appendChild(wrap);
       } else {
         const img = document.createElement("img");
         img.src = item.url;
