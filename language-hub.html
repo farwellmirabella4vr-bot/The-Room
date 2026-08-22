@@ -1414,6 +1414,7 @@
   let liveTranscript = "";
   let lastRecordingBlob = null;
   let lastRecordingMimeType = "video/webm";
+  let lastPreviewObjectUrl = null;
 
   const PREFERRED_MIME_TYPES = ["video/webm;codecs=vp9,opus", "video/webm;codecs=vp8,opus", "video/webm", "video/mp4"];
   function pickMimeType() {
@@ -1490,7 +1491,9 @@
 
     const preview = document.getElementById("vdPreview");
     preview.srcObject = null;
-    preview.src = URL.createObjectURL(blob);
+    if (lastPreviewObjectUrl) URL.revokeObjectURL(lastPreviewObjectUrl); // release the previous take before creating a new one
+    lastPreviewObjectUrl = URL.createObjectURL(blob);
+    preview.src = lastPreviewObjectUrl;
     preview.muted = false;
     preview.controls = true;
 

@@ -736,6 +736,26 @@
   const bufferCache = new Map(); // sampleId -> AudioBuffer
   const reversedBufferCache = new Map(); // sampleId -> reversed AudioBuffer, built lazily
 
+  // Both caches above otherwise grow forever across a long session (every
+  // sample ever loaded onto a pad or referenced by a saved beat stays fully
+  // decoded in memory). Cap them and evict the oldest entries once over the
+  // cap — but never evict a sample that's currently assigned to a pad, so
+  // nothing audibly loaded in the UI can go silent from being evicted.
+  const MAX_CACHED_BUFFERS = 48;
+  function isSampleIdAssignedToAnyPad(sampleId) {
+    return pads.some((pad) => pad.samples.some((s) => s.sampleId === sampleId));
+  }
+  function cacheBufferWithEviction(cache, key, value) {
+    cache.delete(key);
+    cache.set(key, value);
+    if (cache.size <= MAX_CACHED_BUFFERS) return;
+    for (const oldestKey of Array.from(cache.keys())) {
+      if (cache.size <= MAX_CACHED_BUFFERS) break;
+      if (oldestKey === key || isSampleIdAssignedToAnyPad(oldestKey)) continue;
+      cache.delete(oldestKey);
+    }
+  }
+
   // ---------- IndexedDB: sample blobs + saved beats ----------
   let dbPromise = null;
   function getDB() {
@@ -885,7 +905,7 @@
     if (!entry.reversed) return forward;
     if (reversedBufferCache.has(entry.sampleId)) return reversedBufferCache.get(entry.sampleId);
     const reversed = reverseAudioBuffer(forward);
-    reversedBufferCache.set(entry.sampleId, reversed);
+    cacheBufferWithEviction(reversedBufferCache, entry.sampleId, reversed);
     return reversed;
   }
 
@@ -1210,7 +1230,7 @@
     const name = chopContext.fileName;
     try { await putSample({ id: sampleId, blob: wavBlob, name, type: "audio/wav", addedAt: new Date().toISOString() }); }
     catch (e) { /* storage unavailable; sample still works for this session */ }
-    bufferCache.set(sampleId, rendered);
+    cacheBufferWithEviction(bufferCache, sampleId, rendered);
 
     const pad = pads[targetPadIndex];
     if (chopContext.mode === "new") {
@@ -1925,26 +1945,25 @@
 
   async function resolveBeatBuffers(beat) {
     const padSampleLists = normalizedPadSamples(beat);
-    const result = [];
-    for (let p = 0; p < PAD_COUNT; p++) {
-      const list = padSampleLists[p] || [];
-      const buffers = [];
-      for (const entry of list) {
-        if (!bufferCache.has(entry.sampleId)) {
-          try {
-            const record = await getSample(entry.sampleId);
-            if (record) {
-              const arrayBuffer = await record.blob.arrayBuffer();
-              const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-              bufferCache.set(entry.sampleId, buffer);
-            }
-          } catch (e) { /* missing/corrupt original sample */ }
+
+    // Decode every not-yet-cached sample this beat uses in parallel instead
+    // of one at a time — a beat referencing many distinct samples used to
+    // take roughly the sum of all their decode times; now it's the max.
+    const uniqueSampleIds = new Set();
+    padSampleLists.forEach((list) => list.forEach((entry) => uniqueSampleIds.add(entry.sampleId)));
+    await Promise.all(Array.from(uniqueSampleIds).map(async (sampleId) => {
+      if (bufferCache.has(sampleId)) return;
+      try {
+        const record = await getSample(sampleId);
+        if (record) {
+          const arrayBuffer = await record.blob.arrayBuffer();
+          const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+          cacheBufferWithEviction(bufferCache, sampleId, buffer);
         }
-        buffers.push(bufferForSampleEntry(entry));
-      }
-      result.push(buffers);
-    }
-    return result;
+      } catch (e) { /* missing/corrupt original sample */ }
+    }));
+
+    return padSampleLists.map((list) => list.map((entry) => bufferForSampleEntry(entry)));
   }
 
   async function exportBeat(beat) {
@@ -2157,20 +2176,26 @@
 
   // ---------- init: decode every sample already on a pad, render everything ----------
   async function restoreAllPadSamples() {
+    // Decode every distinct sample used across all pads in parallel — a
+    // pad bank with many samples assigned used to decode one at a time
+    // (pad 8 wouldn't even start until pads 1-7 finished); now every
+    // sample decodes concurrently and the pads render once they're ready.
+    const uniqueSampleIds = new Set();
     for (let i = 0; i < PAD_COUNT; i++) {
-      for (const sample of pads[i].samples) {
-        if (bufferCache.has(sample.sampleId)) continue;
-        try {
-          const record = await getSample(sample.sampleId);
-          if (record) {
-            const arrayBuffer = await record.blob.arrayBuffer();
-            const buffer = await audioCtx.decodeAudioData(arrayBuffer);
-            bufferCache.set(sample.sampleId, buffer);
-          }
-        } catch (e) { /* stored sample missing/corrupt; stays silent when selected */ }
-      }
-      renderPad(i);
+      for (const sample of pads[i].samples) uniqueSampleIds.add(sample.sampleId);
     }
+    await Promise.all(Array.from(uniqueSampleIds).map(async (sampleId) => {
+      if (bufferCache.has(sampleId)) return;
+      try {
+        const record = await getSample(sampleId);
+        if (record) {
+          const arrayBuffer = await record.blob.arrayBuffer();
+          const buffer = await audioCtx.decodeAudioData(arrayBuffer);
+          cacheBufferWithEviction(bufferCache, sampleId, buffer);
+        }
+      } catch (e) { /* stored sample missing/corrupt; stays silent when selected */ }
+    }));
+    for (let i = 0; i < PAD_COUNT; i++) renderPad(i);
     renderSeqGrid();
   }
 

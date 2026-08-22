@@ -205,6 +205,16 @@
           <div class="room-card-stat" id="statKnowledgeCenter">Get started</div>
         </a>
 
+        <a class="room-card" href="content-hub.html" style="--room-accent:#c9689a;">
+          <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
+            <rect x="6" y="8" width="28" height="22" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="14" cy="16" r="3" fill="currentColor"/>
+            <path d="M8 27 L17 18 L23 24 L28 19 L32 27 Z" fill="currentColor"/>
+          </svg>
+          <div class="room-card-name">Content Hub</div>
+          <div class="room-card-stat" id="statContentHub">Get started</div>
+        </a>
+
         <a class="room-card" href="beat-maker.html" style="--room-accent:#7fae52;">
           <svg class="room-card-icon" viewBox="0 0 40 40" aria-hidden="true">
             <rect x="6" y="6" width="12" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
@@ -461,6 +471,16 @@
     } catch (e) { /* nothing readable */ }
   }
 
+  function renderContentHubStat() {
+    try {
+      const raw = localStorage.getItem("content-hub-cards-v1");
+      if (!raw) return;
+      const cards = JSON.parse(raw);
+      if (!Array.isArray(cards) || !cards.length) return;
+      setStat("statContentHub", cards.length + (cards.length === 1 ? " item uploaded" : " items uploaded"));
+    } catch (e) { /* nothing readable */ }
+  }
+
   function renderBeatMakerStat() {
     try {
       const req = indexedDB.open("beat-maker-db", 1);
@@ -489,6 +509,7 @@
   renderLanguageHubStat();
   renderKnowledgeCenterStat();
   renderFinanceStat();
+  renderContentHubStat();
   renderBeatMakerStat();
 })();
 </script>

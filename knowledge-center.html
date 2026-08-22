@@ -423,6 +423,14 @@
   function saveState() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
   }
+  // For the free-text entry fields, which fire on every keystroke — waits
+  // for a short pause instead of writing the whole state to storage on
+  // every single character typed.
+  let saveStateTimeout = null;
+  function debouncedSaveState() {
+    clearTimeout(saveStateTimeout);
+    saveStateTimeout = setTimeout(saveState, 500);
+  }
 
   function stepForward() {
     if (state.unlockedCount < state.entries.length) {
@@ -452,7 +460,7 @@
     titleInput.type = "text";
     titleInput.className = "title-input";
     titleInput.value = entry.title || "";
-    titleInput.addEventListener("input", () => { entry.title = titleInput.value; saveState(); });
+    titleInput.addEventListener("input", () => { entry.title = titleInput.value; debouncedSaveState(); });
     card.appendChild(titleInput);
 
     const arLabel = document.createElement("label");
@@ -466,7 +474,7 @@
     arArea.lang = "ar";
     arArea.placeholder = "Paste the original Arabic text here...";
     arArea.value = entry.arabic || "";
-    arArea.addEventListener("input", () => { entry.arabic = arArea.value; saveState(); });
+    arArea.addEventListener("input", () => { entry.arabic = arArea.value; debouncedSaveState(); });
     card.appendChild(arArea);
 
     const descLabel = document.createElement("label");
@@ -476,7 +484,7 @@
     const descArea = document.createElement("textarea");
     descArea.rows = 3;
     descArea.value = entry.description || "";
-    descArea.addEventListener("input", () => { entry.description = descArea.value; saveState(); });
+    descArea.addEventListener("input", () => { entry.description = descArea.value; debouncedSaveState(); });
     card.appendChild(descArea);
 
     const transRow = document.createElement("div");
@@ -489,7 +497,7 @@
     const enArea = document.createElement("textarea");
     enArea.rows = 3;
     enArea.value = entry.english || "";
-    enArea.addEventListener("input", () => { entry.english = enArea.value; saveState(); });
+    enArea.addEventListener("input", () => { entry.english = enArea.value; debouncedSaveState(); });
     enWrap.appendChild(enLabel);
     enWrap.appendChild(enArea);
 
@@ -500,7 +508,7 @@
     const esArea = document.createElement("textarea");
     esArea.rows = 3;
     esArea.value = entry.spanish || "";
-    esArea.addEventListener("input", () => { entry.spanish = esArea.value; saveState(); });
+    esArea.addEventListener("input", () => { entry.spanish = esArea.value; debouncedSaveState(); });
     esWrap.appendChild(esLabel);
     esWrap.appendChild(esArea);
 
@@ -518,7 +526,7 @@
     const srcInput = document.createElement("input");
     srcInput.type = "text";
     srcInput.value = entry.source || "";
-    srcInput.addEventListener("input", () => { entry.source = srcInput.value; saveState(); });
+    srcInput.addEventListener("input", () => { entry.source = srcInput.value; debouncedSaveState(); });
     srcWrap.appendChild(srcLabel);
     srcWrap.appendChild(srcInput);
 
@@ -530,7 +538,7 @@
     linkInput.type = "url";
     linkInput.placeholder = "https://...";
     linkInput.value = entry.sourceLink || "";
-    linkInput.addEventListener("input", () => { entry.sourceLink = linkInput.value; saveState(); });
+    linkInput.addEventListener("input", () => { entry.sourceLink = linkInput.value; debouncedSaveState(); });
     linkWrap.appendChild(linkLabel);
     linkWrap.appendChild(linkInput);
 

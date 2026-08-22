@@ -32,6 +32,9 @@
     --teal:        #3fb6a8;
     --teal-bright: #6cc9ba;
 
+    --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
+    --sky-lower: #d9773f; --sky-ground: #7a3220;
+
     --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
   }
 
@@ -41,7 +44,7 @@
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--ivory);
-    background: linear-gradient(to bottom, #241031 0%, #4a1f47 30%, #8c3559 58%, #d9773f 80%, #7a3220 100%);
+    background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-upper) 30%, var(--sky-mid) 58%, var(--sky-lower) 80%, var(--sky-ground) 100%);
     background-attachment: fixed;
     min-height: 100vh;
     padding-bottom: 3rem;
@@ -52,7 +55,7 @@
 
   header.top {
     text-align: center;
-    padding: 2rem 0 1rem;
+    padding: 1.4rem 0 0.8rem;
   }
   .back-link {
     display: inline-block;
@@ -66,7 +69,7 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-weight: 300;
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
     color: var(--gold-bright);
     text-shadow: 0 0 16px rgba(242, 200, 121, 0.45);
   }
@@ -77,10 +80,10 @@
       linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
     background-size: 64px 64px, auto;
     border: 1px solid rgba(212, 162, 76, 0.4);
-    border-radius: 14px;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
-    padding: 1.2rem 1.3rem 1.4rem;
-    margin-bottom: 1.3rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.32), inset 0 0 0 2px rgba(212, 162, 76, 0.1);
+    padding: 1rem 1.1rem 1.2rem;
+    margin-bottom: 1rem;
   }
   .panel h2 {
     font-size: 0.95rem;
@@ -210,6 +213,8 @@
       <a class="back-link" href="index.html">&larr; View Site</a>
       &nbsp;·&nbsp;
       <a class="back-link" href="../room.html">Back to the Room</a>
+      &nbsp;·&nbsp;
+      <a class="back-link" href="../home.html">Home</a>
       <h1 class="page-title">Video Log Editor</h1>
     </header>
 

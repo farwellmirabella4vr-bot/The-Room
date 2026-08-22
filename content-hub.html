@@ -336,6 +336,8 @@
 
   <header class="hub-header">
     <a class="back-link" href="room.html">&larr; Back to the Room</a>
+    &nbsp;·&nbsp;
+    <a class="back-link" href="home.html">Home</a>
     <h1 class="hub-title">Content Hub</h1>
   </header>
 
@@ -441,6 +443,14 @@
     const toSave = cards.map(({ _objectUrl, ...rest }) => rest);
     try { localStorage.setItem(CARDS_KEY, JSON.stringify(toSave)); } catch (e) { /* storage unavailable */ }
   }
+  // For free-text fields that fire on every keystroke (caption, edit notes)
+  // — waits for a short pause instead of writing the whole cards array to
+  // storage on every single character typed.
+  let saveCardsTimeout = null;
+  function debouncedSaveCards() {
+    clearTimeout(saveCardsTimeout);
+    saveCardsTimeout = setTimeout(saveCards, 500);
+  }
 
   function renderCards() {
     const grid = document.getElementById("cardsGrid");
@@ -499,7 +509,7 @@
     capArea.rows = 2;
     capArea.placeholder = "Write a caption draft...";
     capArea.value = card.caption;
-    capArea.addEventListener("input", () => { card.caption = capArea.value; saveCards(); });
+    capArea.addEventListener("input", () => { card.caption = capArea.value; debouncedSaveCards(); });
     el.appendChild(capArea);
 
     const tagsLabel = document.createElement("label");
@@ -564,7 +574,7 @@
     notesArea.rows = 2;
     notesArea.placeholder = 'e.g. "add slow zoom," "try warmer grade"...';
     notesArea.value = card.editNotes;
-    notesArea.addEventListener("input", () => { card.editNotes = notesArea.value; saveCards(); });
+    notesArea.addEventListener("input", () => { card.editNotes = notesArea.value; debouncedSaveCards(); });
     el.appendChild(notesArea);
 
     const delBtn = document.createElement("button");
