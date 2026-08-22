@@ -95,6 +95,73 @@
   .glance-value { font-size: 1rem; font-weight: bold; color: var(--gold-bright); margin-top: 0.25rem; }
   .glance-sub { font-size: 0.68rem; color: var(--ivory-dim); margin-top: 0.15rem; }
 
+  /* ---------- daily habits ---------- */
+  .habits-progress {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--ivory-dim);
+    margin-bottom: 0.9rem;
+  }
+  .habits-progress .count { color: var(--gold-bright); font-weight: bold; }
+  .habits-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
+  .habit-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 10px;
+    padding: 0.55rem 0.8rem;
+  }
+  .habit-row.done { border-color: rgba(242, 200, 121, 0.55); }
+  .habit-check {
+    flex: 0 0 auto;
+    width: 1.3rem;
+    height: 1.3rem;
+    accent-color: var(--gold-bright);
+    cursor: pointer;
+  }
+  .habit-name { flex: 1 1 auto; font-size: 0.85rem; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .habit-row.done .habit-name { color: var(--gold-bright); }
+  .habit-streak { flex: 0 0 auto; font-size: 0.72rem; color: var(--ivory-dim); white-space: nowrap; }
+  .habit-streak.active { color: var(--ember); font-weight: bold; }
+  .habit-del {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    color: var(--ivory-dim);
+    font-size: 0.9rem;
+    padding: 0 0.2rem;
+    cursor: pointer;
+  }
+  .habit-del:hover { color: var(--gold-bright); }
+  .habits-empty { font-size: 0.8rem; color: var(--ivory-dim); text-align: center; margin-bottom: 1rem; }
+
+  .habits-add-form { display: flex; gap: 0.5rem; }
+  .habits-add-form input {
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.82rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--ivory);
+  }
+  .habits-add-form input::placeholder { color: rgba(203, 185, 153, 0.5); }
+  .habits-add-form button {
+    flex: 0 0 auto;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 0.8rem;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: #2a1a10;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+
   /* ---------- room cards ---------- */
   .room-grid {
     display: grid;
@@ -190,6 +257,16 @@
           <div class="glance-sub">consecutive days opened</div>
         </div>
       </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Daily Habits</h2>
+      <div class="habits-progress" id="habitsProgress"></div>
+      <div class="habits-list" id="habitsList"></div>
+      <form class="habits-add-form" id="habitsAddForm">
+        <input type="text" id="habitNameInput" placeholder="Add a habit..." maxlength="60">
+        <button type="submit">Add</button>
+      </form>
     </section>
 
     <section class="panel reveal">
@@ -430,6 +507,136 @@
   }
 
   // ------------------------------------------------------------
+  // DAILY HABITS — a small, self-defined checklist for today, with a
+  // per-habit streak. A habit's streak still counts today even before
+  // it's checked off (the day isn't over yet) — it only breaks once a
+  // full calendar day passes with that habit left undone.
+  // ------------------------------------------------------------
+  const HABITS_KEY = "home-habits-v1";
+  function dateToISO(date) {
+    const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 10);
+  }
+  function genHabitId() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+  function loadHabitsState() {
+    try {
+      const raw = localStorage.getItem(HABITS_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          habits: Array.isArray(parsed.habits) ? parsed.habits : [],
+          completions: (parsed.completions && typeof parsed.completions === "object") ? parsed.completions : {},
+        };
+      }
+    } catch (e) { /* corrupt storage, fall through to defaults */ }
+    return {
+      habits: [
+        { id: genHabitId(), name: "Studied" },
+        { id: genHabitId(), name: "Read / Reviewed" },
+        { id: genHabitId(), name: "Journaled" },
+      ],
+      completions: {},
+    };
+  }
+  const habitsState = loadHabitsState();
+  function saveHabitsState() {
+    try { localStorage.setItem(HABITS_KEY, JSON.stringify(habitsState)); } catch (e) { /* storage unavailable */ }
+  }
+
+  function habitDoneToday(habitId) {
+    return (habitsState.completions[todayISO()] || []).includes(habitId);
+  }
+  function toggleHabitToday(habitId) {
+    const today = todayISO();
+    const list = habitsState.completions[today] || [];
+    const idx = list.indexOf(habitId);
+    if (idx === -1) list.push(habitId); else list.splice(idx, 1);
+    habitsState.completions[today] = list;
+    saveHabitsState();
+  }
+  function habitStreak(habitId) {
+    let streak = 0;
+    const d = new Date();
+    if (!habitDoneToday(habitId)) d.setDate(d.getDate() - 1); // today not done yet — count from yesterday, streak still alive
+    while ((habitsState.completions[dateToISO(d)] || []).includes(habitId)) {
+      streak++;
+      d.setDate(d.getDate() - 1);
+    }
+    return streak;
+  }
+
+  function renderHabits() {
+    const list = document.getElementById("habitsList");
+    const progress = document.getElementById("habitsProgress");
+    list.innerHTML = "";
+
+    if (!habitsState.habits.length) {
+      list.innerHTML = '<p class="habits-empty">No habits yet — add one below.</p>';
+      progress.textContent = "";
+      return;
+    }
+
+    const doneCount = habitsState.habits.filter((h) => habitDoneToday(h.id)).length;
+    progress.innerHTML = '<span class="count">' + doneCount + ' of ' + habitsState.habits.length + '</span> done today';
+
+    habitsState.habits.forEach((habit) => {
+      const done = habitDoneToday(habit.id);
+      const streak = habitStreak(habit.id);
+
+      const row = document.createElement("div");
+      row.className = "habit-row" + (done ? " done" : "");
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "habit-check";
+      checkbox.checked = done;
+      checkbox.setAttribute("aria-label", habit.name);
+      checkbox.addEventListener("change", () => {
+        toggleHabitToday(habit.id);
+        renderHabits();
+      });
+      row.appendChild(checkbox);
+
+      const name = document.createElement("span");
+      name.className = "habit-name";
+      name.textContent = habit.name;
+      row.appendChild(name);
+
+      const streakEl = document.createElement("span");
+      streakEl.className = "habit-streak" + (streak > 0 ? " active" : "");
+      streakEl.textContent = streak > 0 ? "🔥 " + streak + (streak === 1 ? " day" : " days") : "";
+      row.appendChild(streakEl);
+
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "habit-del";
+      delBtn.textContent = "×";
+      delBtn.setAttribute("aria-label", "Remove " + habit.name);
+      delBtn.addEventListener("click", () => {
+        habitsState.habits = habitsState.habits.filter((h) => h.id !== habit.id);
+        saveHabitsState();
+        renderHabits();
+      });
+      row.appendChild(delBtn);
+
+      list.appendChild(row);
+    });
+  }
+
+  document.getElementById("habitsAddForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("habitNameInput");
+    const name = input.value.trim();
+    if (!name) return;
+    habitsState.habits.push({ id: genHabitId(), name });
+    saveHabitsState();
+    input.value = "";
+    renderHabits();
+  });
+
+  // ------------------------------------------------------------
   // ROOM STATS — best-effort reads of each room's own saved data.
   // Every one of these fails silently to "Get started" (the default
   // already in the HTML) if the data isn't there or isn't reachable.
@@ -524,6 +731,7 @@
   renderNextPrayer();
   renderLanguage();
   updateStreak();
+  renderHabits();
   renderLanguageHubStat();
   renderKnowledgeCenterStat();
   renderFinanceStat();
