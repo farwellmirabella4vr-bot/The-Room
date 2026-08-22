@@ -215,6 +215,7 @@
     border: 1px solid rgba(212, 162, 76, 0.35);
     border-radius: var(--niche-radius) var(--niche-radius) 6px 6px / 80% 80% 6px 6px;
     box-shadow:
+      inset 0 34px 54px rgba(0, 0, 0, 0.5),
       inset 0 0 40px rgba(0, 0, 0, 0.45),
       0 0 30px rgba(0, 0, 0, 0.35);
   }
@@ -547,6 +548,34 @@
       <g id="dot-motif">
         <polygon points="0,-4 4,0 0,4 -4,0" fill="currentColor"/>
       </g>
+
+      <!-- subtle woven/stone grain texture, layered over flat fills for depth -->
+      <filter id="fabric-grain" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" result="noise"/>
+        <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0"/>
+      </filter>
+      <!-- soft directional highlight + vignette, for a shaded/dimensional rug surface -->
+      <radialGradient id="rug-sheen" cx="32%" cy="22%" r="95%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.16"/>
+        <stop offset="45%" stop-color="#ffffff" stop-opacity="0.04"/>
+        <stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>
+      </radialGradient>
+      <!-- shared rounded-rect clip so grain/sheen overlays never poke past a rug's corners -->
+      <clipPath id="rug-clip">
+        <rect x="4" y="4" width="192" height="132" rx="10"/>
+      </clipPath>
+      <!-- Herati/Mahi "fish" lattice: a diamond grid with a small leaf motif
+           radiating from each intersection — the Coder rug's all-over field -->
+      <pattern id="herati-tile" width="44" height="44" patternUnits="userSpaceOnUse">
+        <path d="M22 4 L40 22 L22 40 L4 22 Z" fill="none" stroke="#8a3345" stroke-width="1" opacity="0.6"/>
+        <g fill="#c97b8a" opacity="0.75">
+          <circle cx="22" cy="22" r="3.2"/>
+          <path d="M22 9 Q26.5 15.5 22 22 Q17.5 15.5 22 9 Z"/>
+          <path d="M35 22 Q28.5 26.5 22 22 Q28.5 17.5 35 22 Z"/>
+          <path d="M22 35 Q17.5 28.5 22 22 Q26.5 28.5 22 35 Z"/>
+          <path d="M9 22 Q15.5 17.5 22 22 Q15.5 26.5 9 22 Z"/>
+        </g>
+      </pattern>
     </defs>
   </svg>
 
@@ -564,6 +593,10 @@
     </svg>
     <div class="mountains-far"></div>
     <div class="mountains-near"></div>
+  </div>
+
+  <div style="text-align:center; position:relative; z-index:1;">
+    <a href="home.html" style="color: var(--gold-bright); font-size: 0.85rem; text-decoration:none;">&larr; Home</a>
   </div>
 
   <h1>The Room</h1>
@@ -607,23 +640,40 @@
     <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
     <button class="mat" data-agent="planner" data-pos="top">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="4" y="4" width="192" height="132" rx="10" fill="#1f4a44"/>
-        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#2f7a6d" stroke-width="2"/>
-        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
-        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#2f7a6d" stroke-width="1" stroke-dasharray="4 3"/>
-        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
-        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#2f7a6d"/>
-        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#2f7a6d"/>
-        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#2f7a6d"/>
-        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#2f7a6d"/>
-        <g transform="translate(100,70)">
-          <polygon points="0,-26 12,-12 26,0 12,12 0,26 -12,12 -26,0 -12,-12" fill="none" stroke="#f2c879" stroke-width="1.5"/>
-          <polygon points="0,-14 14,0 0,14 -14,0" fill="#2f7a6d" stroke="#f2c879" stroke-width="1"/>
-          <circle r="3.5" fill="#f2c879"/>
+        <g clip-path="url(#rug-clip)">
+          <rect x="4" y="4" width="192" height="132" rx="10" fill="#1f4a44"/>
+          <rect x="4" y="4" width="192" height="132" fill="#1f4a44" filter="url(#fabric-grain)"/>
+          <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#2f7a6d" stroke-width="2"/>
+          <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+          <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#2f7a6d" stroke-width="1" stroke-dasharray="4 3"/>
+          <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(30,30) scale(0.5)" style="color:#e8cf9a"/>
+          <use href="#corner-motif" transform="translate(170,30) scale(0.5)" style="color:#e8cf9a"/>
+          <use href="#corner-motif" transform="translate(170,110) scale(0.5)" style="color:#e8cf9a"/>
+          <use href="#corner-motif" transform="translate(30,110) scale(0.5)" style="color:#e8cf9a"/>
+          <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#2f7a6d"/>
+          <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#2f7a6d"/>
+          <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#2f7a6d"/>
+          <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#2f7a6d"/>
+          <use href="#dot-motif" transform="translate(65,42) scale(0.75)" style="color:#e8cf9a"/>
+          <use href="#dot-motif" transform="translate(135,42) scale(0.75)" style="color:#e8cf9a"/>
+          <use href="#dot-motif" transform="translate(65,98) scale(0.75)" style="color:#e8cf9a"/>
+          <use href="#dot-motif" transform="translate(135,98) scale(0.75)" style="color:#e8cf9a"/>
+          <g transform="translate(100,70)">
+            <ellipse cx="0" cy="-30" rx="6" ry="9" fill="#e8cf9a" opacity="0.85"/>
+            <ellipse cx="30" cy="0" rx="9" ry="6" fill="#e8cf9a" opacity="0.85"/>
+            <ellipse cx="0" cy="30" rx="6" ry="9" fill="#e8cf9a" opacity="0.85"/>
+            <ellipse cx="-30" cy="0" rx="9" ry="6" fill="#e8cf9a" opacity="0.85"/>
+            <polygon points="0,-26 12,-12 26,0 12,12 0,26 -12,12 -26,0 -12,-12" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+            <polygon points="0,-14 14,0 0,14 -14,0" fill="#2f7a6d" stroke="#f2c879" stroke-width="1"/>
+            <circle r="3.5" fill="#f2c879"/>
+          </g>
+          <rect x="4" y="4" width="192" height="132" fill="url(#rug-sheen)"/>
         </g>
+        <text x="178" y="128" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="8" fill="#f2c879" opacity="0.55" text-anchor="end">Tabriz</text>
       </svg>
       <svg class="presence" viewBox="0 0 60 30" aria-hidden="true">
         <circle cx="10" cy="15" r="6" fill="#e8cf9a"/>
@@ -641,23 +691,25 @@
     <!-- Coder: deep crimson rug, octagon medallion, sandals -->
     <button class="mat" data-agent="coder" data-pos="right">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="4" y="4" width="192" height="132" rx="10" fill="#5c1f2b"/>
-        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#8a3345" stroke-width="2"/>
-        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
-        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#8a3345" stroke-width="1" stroke-dasharray="4 3"/>
-        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
-        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#8a3345"/>
-        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#8a3345"/>
-        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#8a3345"/>
-        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#8a3345"/>
-        <g transform="translate(100,70)">
-          <polygon points="-10,-24 10,-24 24,-10 24,10 10,24 -10,24 -24,10 -24,-10" fill="none" stroke="#f2c879" stroke-width="1.5"/>
-          <polygon points="-6,-14 6,-14 14,-6 14,6 6,14 -6,14 -14,6 -14,-6" fill="#8a3345" stroke="#f2c879" stroke-width="1"/>
-          <circle r="3.5" fill="#f2c879"/>
+        <g clip-path="url(#rug-clip)">
+          <rect x="4" y="4" width="192" height="132" rx="10" fill="#5c1f2b"/>
+          <rect x="22" y="22" width="156" height="96" fill="url(#herati-tile)"/>
+          <rect x="4" y="4" width="192" height="132" fill="#5c1f2b" filter="url(#fabric-grain)"/>
+          <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#8a3345" stroke-width="2"/>
+          <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
+          <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#8a3345" stroke-width="1" stroke-dasharray="4 3"/>
+          <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
+          <g transform="translate(100,70)">
+            <polygon points="-10,-24 10,-24 24,-10 24,10 10,24 -10,24 -24,10 -24,-10" fill="#5c1f2b" stroke="#f2c879" stroke-width="1.5"/>
+            <polygon points="-6,-14 6,-14 14,-6 14,6 6,14 -6,14 -14,6 -14,-6" fill="#8a3345" stroke="#f2c879" stroke-width="1"/>
+            <circle r="3.5" fill="#f2c879"/>
+          </g>
+          <rect x="4" y="4" width="192" height="132" fill="url(#rug-sheen)"/>
         </g>
+        <text x="178" y="128" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="8" fill="#f2c879" opacity="0.55" text-anchor="end">Herati</text>
       </svg>
       <svg class="presence" viewBox="0 0 60 30" aria-hidden="true">
         <ellipse cx="16" cy="16" rx="12" ry="6" fill="#5a3620" transform="rotate(-8 16 16)"/>
@@ -675,29 +727,32 @@
     <!-- Tester: deep navy rug, lobed floral medallion, small lantern -->
     <button class="mat" data-agent="tester" data-pos="bottom">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="4" y="4" width="192" height="132" rx="10" fill="#1c2b52"/>
-        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#35508c" stroke-width="2"/>
-        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
-        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#35508c" stroke-width="1" stroke-dasharray="4 3"/>
-        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
-        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#35508c"/>
-        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#35508c"/>
-        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#35508c"/>
-        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#35508c"/>
-        <g transform="translate(100,70)">
-          <circle r="24" fill="none" stroke="#f2c879" stroke-width="1.5"/>
-          <circle cx="0" cy="-18" r="8" fill="#35508c"/>
-          <circle cx="17" cy="-9" r="8" fill="#35508c"/>
-          <circle cx="17" cy="9" r="8" fill="#35508c"/>
-          <circle cx="0" cy="18" r="8" fill="#35508c"/>
-          <circle cx="-17" cy="9" r="8" fill="#35508c"/>
-          <circle cx="-17" cy="-9" r="8" fill="#35508c"/>
-          <circle r="10" fill="#1c2b52" stroke="#f2c879" stroke-width="1"/>
-          <circle r="3.5" fill="#f2c879"/>
+        <g clip-path="url(#rug-clip)">
+          <rect x="4" y="4" width="192" height="132" rx="10" fill="#6b1420"/>
+          <rect x="4" y="4" width="192" height="132" fill="#6b1420" filter="url(#fabric-grain)"/>
+          <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#2a2f6b" stroke-width="3"/>
+          <rect x="17" y="17" width="166" height="106" fill="none" stroke="#f2c879" stroke-width="1"/>
+          <rect x="23" y="23" width="154" height="94" fill="none" stroke="#2a2f6b" stroke-width="1.5"/>
+          <use href="#corner-motif" transform="translate(31,31)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(169,31)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(169,109)" style="color:#f2c879"/>
+          <use href="#corner-motif" transform="translate(31,109)" style="color:#f2c879"/>
+          <use href="#dot-motif" transform="translate(100,32) scale(1.1)" style="color:#2a2f6b"/>
+          <use href="#dot-motif" transform="translate(100,108) scale(1.1)" style="color:#2a2f6b"/>
+          <use href="#dot-motif" transform="translate(46,70) scale(1.1)" style="color:#2a2f6b"/>
+          <use href="#dot-motif" transform="translate(154,70) scale(1.1)" style="color:#2a2f6b"/>
+          <use href="#dot-motif" transform="translate(70,45) scale(0.7)" style="color:#f2c879"/>
+          <use href="#dot-motif" transform="translate(130,45) scale(0.7)" style="color:#f2c879"/>
+          <use href="#dot-motif" transform="translate(70,95) scale(0.7)" style="color:#f2c879"/>
+          <use href="#dot-motif" transform="translate(130,95) scale(0.7)" style="color:#f2c879"/>
+          <g transform="translate(100,70)">
+            <polygon points="0,-30 8,-22 8,-14 16,-14 16,-6 24,-6 24,6 16,6 16,14 8,14 8,22 0,30 -8,22 -8,14 -16,14 -16,6 -24,6 -24,-6 -16,-6 -16,-14 -8,-14 -8,-22" fill="none" stroke="#f2c879" stroke-width="1.5"/>
+            <polygon points="0,-18 6,-12 6,-6 12,-6 12,6 6,6 6,12 0,18 -6,12 -6,6 -12,6 -12,-6 -6,-6 -6,-12" fill="#2a2f6b" stroke="#f2c879" stroke-width="1"/>
+            <circle r="3.5" fill="#f2c879"/>
+          </g>
+          <rect x="4" y="4" width="192" height="132" fill="url(#rug-sheen)"/>
         </g>
+        <text x="178" y="128" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="8" fill="#f2c879" opacity="0.55" text-anchor="end">Qashqai</text>
       </svg>
       <svg class="presence" viewBox="0 0 30 40" aria-hidden="true">
         <rect x="13" y="0" width="4" height="5" fill="#8a6a3a"/>
@@ -715,23 +770,28 @@
     <!-- Reviewer: deep olive rug, hexagon medallion, wax seal -->
     <button class="mat" data-agent="reviewer" data-pos="left">
       <svg class="rug" viewBox="0 0 200 140" preserveAspectRatio="none" aria-hidden="true">
-        <rect x="4" y="4" width="192" height="132" rx="10" fill="#33401c"/>
-        <rect x="10" y="10" width="180" height="120" rx="8" fill="none" stroke="#5c7a2f" stroke-width="2"/>
-        <rect x="16" y="16" width="168" height="108" rx="6" fill="none" stroke="#f2c879" stroke-width="1"/>
-        <rect x="22" y="22" width="156" height="96" rx="4" fill="none" stroke="#5c7a2f" stroke-width="1" stroke-dasharray="4 3"/>
-        <use href="#corner-motif" transform="translate(30,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,30)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(170,110)" style="color:#f2c879"/>
-        <use href="#corner-motif" transform="translate(30,110)" style="color:#f2c879"/>
-        <use href="#dot-motif" transform="translate(100,30) scale(1.2)" style="color:#5c7a2f"/>
-        <use href="#dot-motif" transform="translate(100,110) scale(1.2)" style="color:#5c7a2f"/>
-        <use href="#dot-motif" transform="translate(45,70) scale(1.2)" style="color:#5c7a2f"/>
-        <use href="#dot-motif" transform="translate(155,70) scale(1.2)" style="color:#5c7a2f"/>
-        <g transform="translate(100,70)">
-          <polygon points="0,-26 22,-13 22,13 0,26 -22,13 -22,-13" fill="none" stroke="#f2c879" stroke-width="1.5"/>
-          <polygon points="0,-15 13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5" fill="#5c7a2f" stroke="#f2c879" stroke-width="1"/>
-          <circle r="3.5" fill="#f2c879"/>
+        <g clip-path="url(#rug-clip)">
+          <rect x="4" y="4" width="192" height="132" rx="10" fill="#2e1614"/>
+          <rect x="4" y="4" width="192" height="132" fill="#2e1614" filter="url(#fabric-grain)"/>
+          <rect x="10" y="10" width="180" height="120" rx="6" fill="none" stroke="#24304f" stroke-width="2"/>
+          <rect x="16" y="16" width="168" height="108" rx="4" fill="none" stroke="#b8965a" stroke-width="1"/>
+          <use href="#corner-motif" transform="translate(28,28) scale(0.8)" style="color:#b8965a"/>
+          <use href="#corner-motif" transform="translate(172,28) scale(0.8)" style="color:#b8965a"/>
+          <use href="#corner-motif" transform="translate(172,112) scale(0.8)" style="color:#b8965a"/>
+          <use href="#corner-motif" transform="translate(28,112) scale(0.8)" style="color:#b8965a"/>
+          <use href="#dot-motif" transform="translate(100,28) scale(0.9)" style="color:#24304f"/>
+          <use href="#dot-motif" transform="translate(100,112) scale(0.9)" style="color:#24304f"/>
+          <use href="#dot-motif" transform="translate(44,70) scale(0.9)" style="color:#24304f"/>
+          <use href="#dot-motif" transform="translate(156,70) scale(0.9)" style="color:#24304f"/>
+          <g transform="translate(100,70)">
+            <polygon points="0,-26 22,-13 22,13 0,26 -22,13 -22,-13" fill="none" stroke="#b8965a" stroke-width="1.5"/>
+            <polygon points="0,-15 13,-7.5 13,7.5 0,15 -13,7.5 -13,-7.5" fill="#24304f" stroke="#b8965a" stroke-width="1"/>
+            <polygon points="0,-8 7,-4 7,4 0,8 -7,4 -7,-4" fill="none" stroke="#b8965a" stroke-width="1"/>
+            <circle r="2.5" fill="#b8965a"/>
+          </g>
+          <rect x="4" y="4" width="192" height="132" fill="url(#rug-sheen)"/>
         </g>
+        <text x="178" y="128" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="8" fill="#b8965a" opacity="0.55" text-anchor="end">Baluch</text>
       </svg>
       <svg class="presence" viewBox="0 0 30 30" aria-hidden="true">
         <rect x="11" y="2" width="8" height="12" rx="2" fill="#7a4a2a"/>
