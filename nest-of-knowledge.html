@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nest of Knowledge</title>
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/patterns.css">
+<link rel="stylesheet" href="design-system/components.css">
 <style>
 
   /* ============================================================
@@ -13,107 +16,20 @@
      own saved data. Read-only in every direction -- this page never
      writes into your Obsidian vault or into another room's storage.
 
-     Visual language matches Travel World exactly (same palette, same
-     girih pattern, same "ornate frame" treatment) since this room is
-     explicitly an extension of that one, and it's the same palette the
-     Nest of Knowledge Obsidian theme uses -- Travel World, this room,
-     and Obsidian itself all read as one connected space.
-
-     Palette source: dev-team/travel-world/style.css (:root block),
-     same hex values, not approximated.
+     Visual language matches Travel World and the rest of the hub --
+     now literally the shared foundation (design-system/tokens.css,
+     patterns.css, components.css) rather than a locally duplicated
+     copy of it, since this room's ground was already the plain
+     ink/plum/gold/parchment palette with no local variation. The
+     invented rotated-square "girih" placeholder is gone too, replaced
+     by the real girih star-polygon strapwork from the pattern library.
      ============================================================ */
-  :root {
-    --ink:          #150b12;
-    --ink-deep:     #0b0509;
-    --plum:         #2c1035;
-    --plum-light:   #4a1f5a;
-    --jewel-red:    #7a1f35;
-    --jewel-red-br: #c9425a;
-    --jewel-blue:   #1a3a6b;
-    --jewel-blue-br:#3a6ac9;
-    --jewel-teal:   #145f56;
-    --jewel-teal-br:#2ea08a;
-    --gold:         #d4a24c;
-    --gold-bright:  #f2c879;
-    --parchment:    #f4e8d0;
-    --parchment-dim:#cbb999;
-
-    --girih-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23f2c879' stroke-width='1' opacity='0.16'%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3Crect x='15' y='15' width='30' height='30' transform='rotate(45 30 30)'/%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  * { box-sizing: border-box; }
-  html, body { margin: 0; min-height: 100%; }
-  [hidden] { display: none !important; }
-
-  body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--parchment);
-    background: radial-gradient(ellipse at 50% 20%, var(--plum-light) 0%, var(--plum) 45%, var(--ink) 100%);
-    min-height: 100vh;
-    padding-bottom: 3rem;
-  }
-
-  a { color: var(--gold-bright); }
-
-  .hub-header { position: relative; z-index: 2; text-align: center; padding: 1.6rem 1rem 0.8rem; }
-  .back-link { display: inline-block; font-size: 0.82rem; color: var(--parchment-dim); text-decoration: none; }
-  .back-link:hover { color: var(--gold-bright); }
-  .hub-title {
-    margin: 0.5rem 0 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
-    letter-spacing: 0.08em;
-    font-weight: 400;
-    font-size: clamp(1.4rem, 4.5vw, 2.1rem);
-    color: var(--gold-bright);
-    text-shadow: 0 0 24px rgba(242, 200, 121, 0.45);
-  }
-  .hub-header p { margin: 0.5rem auto 0; max-width: 460px; font-size: 0.82rem; color: var(--parchment-dim); }
-
-  main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
-
-  .ornate-frame {
-    position: relative;
-    background:
-      var(--girih-pattern),
-      linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
-    background-size: 60px 60px, auto;
-    border: 3px solid var(--gold);
-    border-radius: 6px;
-    box-shadow: 0 0 0 1px rgba(242, 200, 121, 0.35) inset, 0 20px 50px rgba(0, 0, 0, 0.4);
-    padding: 1.4rem 1.6rem 1.6rem;
-    margin-bottom: 1.6rem;
-  }
-  .ornate-frame::before {
-    content: "";
-    position: absolute;
-    inset: 8px;
-    border: 1px solid rgba(242, 200, 121, 0.4);
-    border-radius: 3px;
-    pointer-events: none;
-  }
-  .ornate-frame::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background-image:
-      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
-      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
-      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
-      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px);
-    background-repeat: no-repeat;
-    background-position: 8px 8px, calc(100% - 8px) 8px, 8px calc(100% - 8px), calc(100% - 8px) calc(100% - 8px);
-    opacity: 0.8;
-  }
-  .ornate-frame h2 {
-    margin: 0 0 0.9rem;
-    font-family: Georgia, "Times New Roman", serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.2rem;
-    color: var(--gold-bright);
-  }
+  /* body, a, .hub-header, .back-link, .hub-title, .hub-header p, main,
+     .ornate-frame (and its ::before/::after/h2), and .reveal all now
+     come from design-system/components.css (tokens.css supplies the
+     --ink/--plum/--gold/--parchment/--jewel-* values, patterns.css the
+     girih strapwork) -- only this page's own content stays local
+     below. */
 
   /* ---------- life at a glance ---------- */
   .glance-grid {
@@ -319,12 +235,6 @@
     text-align: center;
     font-size: 0.7rem;
     color: var(--parchment-dim);
-  }
-
-  .reveal { transition: opacity 0.5s ease, transform 0.5s ease; }
-  .reveal:not(.in-view) { opacity: 0; transform: translateY(14px); }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
   }
 
 </style>
