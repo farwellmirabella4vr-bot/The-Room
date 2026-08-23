@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Room</title>
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/patterns.css">
 <style>
 
   /* ============================================================
@@ -15,23 +17,25 @@
        four reference palettes the JS blends between.
      ============================================================ */
   :root {
-    /* room / architecture palette */
+    /* room-specific: its own dusk-courtyard wall ground, distinct from
+       the shared components' plain plum ground -- this room keeps that
+       character on top of the shared foundation, per the brief. */
     --wall:        #3a1f2e;
     --wall-dark:   #241220;
     --wall-light:  #4d2a3c;
-    --gold:        #d4a24c;
-    --gold-bright: #f2c879;
-    --ivory:       #f4e8d0;
-    --ivory-dim:   #cbb999;
     --ember:       #ff9d4d;
 
     /* layout */
     --room-size: min(92vmin, 920px);
     --niche-radius: 65%;
 
-    /* Islamic geometric star-lattice tile — courtyard wall screen.
-       Edit the stroke='%23......' hex to change the pattern color. */
-    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+    /* gold/ivory now come from design-system/tokens.css (identical
+       values, so nothing visually changes) -- aliased under this room's
+       existing names so none of the rules below need to change. The
+       generic invented wall-pattern is gone; niches now use the real
+       girih pattern from design-system/patterns.css instead. */
+    --ivory:     var(--parchment);
+    --ivory-dim: var(--parchment-dim);
   }
 
   /* -------- time-of-day reference palettes (JS blends between these) -------- */
@@ -92,12 +96,17 @@
     position: relative;
     z-index: 1;
     margin: 0;
+    padding: 0 0 1.1rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     font-weight: 300;
     font-size: clamp(1.1rem, 2.5vw, 1.6rem);
     color: var(--gold-bright);
     text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
+    background-image: var(--pattern-iznik-border);
+    background-size: 64px 32px;
+    background-repeat: repeat-x;
+    background-position: bottom;
   }
 
   /* ============================================================
@@ -198,9 +207,9 @@
   .arch-niche {
     position: relative;
     background:
-      var(--wall-pattern),
+      var(--pattern-girih),
       linear-gradient(to top, var(--wall) 0%, var(--wall) 36%, var(--sky-lower) 82%, var(--sky-mid) 100%);
-    background-size: 64px 64px, auto;
+    background-size: 60px 60px, auto;
     transition: background 2s ease;
     border: 1px solid rgba(212, 162, 76, 0.35);
     border-radius: var(--niche-radius) var(--niche-radius) 6px 6px / 80% 80% 6px 6px;
@@ -465,9 +474,9 @@
     align-items: center;
     gap: 0.15rem;
     background:
-      var(--wall-pattern),
+      var(--pattern-zellij),
       linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
-    background-size: 64px 64px, auto;
+    background-size: 72px 72px, auto;
     border: 1px solid rgba(212, 162, 76, 0.5);
     border-radius: 10px;
     box-shadow:
