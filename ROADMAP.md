@@ -45,10 +45,22 @@ rooms, or a new single-file room. No new infrastructure, no accounts.
 
 Same static/serverless model, just larger builds.
 
-- **Cross-device backup via export/import**, the same pattern Video
-  Log's editor already uses (download a JSON snapshot, load it back in
-  on another device) — extended to Finance Hub and Language Hub so your
-  data isn't stuck in one browser's localStorage.
+- ~~**Cross-device backup via export/import**~~ — **Done (2026-08-23).**
+  Built as a single "Sync Across Devices" panel in Nest of Knowledge
+  rather than per-room export/import buttons: bundles habits, Finance
+  Hub, Language Hub, Knowledge Center, Content Hub, Beat Maker
+  patterns, and Video Log entries into one `life-hub-sync.json`,
+  merged by unioning each collection's existing ids so additions from
+  either device survive a sync (same-id edits on both sides: the
+  more-recently-exported side wins — no per-field conflict resolution).
+  On desktop Chrome/Edge, "Connect Sync Folder" gets silent read/write
+  via the File System Access API, same as the existing media/notes
+  folder connects. iOS Safari has no such API, so it falls back to
+  Import (Files picker) / Export (download → Save to Files) — both
+  pointed at the same iCloud Drive/Dropbox folder so the file itself
+  stays in sync without AirDrop or email. API keys and OAuth tokens are
+  deliberately excluded from the bundle; media blobs (photos, audio,
+  video) stay device-local in each room's own IndexedDB.
 - **Beat sharing, file-based.** Export a full beat "project" (pattern +
   referenced samples) as a bundle a friend can drop into their own
   Beat Maker and keep working on — real sharing, still zero backend,

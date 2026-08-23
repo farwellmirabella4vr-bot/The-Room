@@ -31,6 +31,34 @@
      girih strapwork) -- only this page's own content stays local
      below. */
 
+  /* ---------- sync across devices ---------- */
+  .sync-intro { font-size: 0.82rem; color: var(--parchment-dim); margin: 0 0 1rem; line-height: 1.5; }
+  .sync-fallback { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+  .sync-fallback button {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    color: var(--parchment);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .sync-fallback button:hover { border-color: var(--gold-bright); }
+  .sync-now-btn {
+    display: block;
+    margin: 0 auto;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.4rem;
+    color: var(--ink-deep);
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .sync-last { text-align: center; font-size: 0.72rem; color: var(--parchment-dim); margin: 0.7rem 0 0; }
+  .sync-log { text-align: center; font-size: 0.78rem; color: var(--gold-bright); margin: 0.4rem 0 0; min-height: 1.2em; }
+
   /* ---------- life at a glance ---------- */
   .glance-grid {
     display: grid;
@@ -252,6 +280,29 @@
   </header>
 
   <main>
+
+    <section class="ornate-frame reveal" id="syncSection">
+      <h2>Sync Across Devices</h2>
+      <p class="sync-intro">
+        Keep habits, Finance Hub, Language Hub, Knowledge Center, Content Hub, Beat
+        Maker patterns, and Video Log entries in step across every device — point each
+        one at the same synced folder (iCloud Drive, Dropbox, whatever you already use)
+        and sync from here. No accounts, nothing uploaded anywhere but that folder.
+        Photos, audio, and video stay local to each device and aren't included.
+      </p>
+      <p class="connect-row">
+        <span id="syncStatus">Sync folder not connected.</span>
+        <button type="button" id="connectSyncBtn">Connect Sync Folder</button>
+      </p>
+      <div class="sync-fallback" id="syncFallback" hidden>
+        <button type="button" id="syncExportBtn">Export Sync File</button>
+        <button type="button" id="syncImportBtn">Import Sync File</button>
+        <input type="file" id="syncImportInput" accept="application/json,.json" hidden>
+      </div>
+      <button type="button" class="sync-now-btn" id="syncNowBtn">Sync Now</button>
+      <p class="sync-last" id="syncLast"></p>
+      <p class="sync-log" id="syncLog"></p>
+    </section>
 
     <section class="ornate-frame reveal">
       <h2>Life at a Glance</h2>
@@ -594,14 +645,18 @@
     updateConstellation();
   }
 
+  function refreshAllStats() {
+    renderFinanceStat();
+    renderLanguageStat();
+    renderKnowledgeStat();
+    renderContentStat();
+    renderBeatMakerStat();
+    renderVideoLogStat();
+    collectConstellationCounts();
+  }
+
   renderGlanceGrid();
-  renderFinanceStat();
-  renderLanguageStat();
-  renderKnowledgeStat();
-  renderContentStat();
-  renderBeatMakerStat();
-  renderVideoLogStat();
-  collectConstellationCounts();
+  refreshAllStats();
 
   // ============================================================
   // KNOWLEDGE BASE — reads the same bridge folder the Nest of
@@ -692,6 +747,227 @@
     });
     tryRestoreNotesFolder();
   }
+
+  // ============================================================
+  // SYNC ACROSS DEVICES — bundles every room's structured data (not
+  // media blobs, not API keys/OAuth tokens) into one portable JSON
+  // file every device points at from the same synced folder (iCloud
+  // Drive, Dropbox, etc. -- syncing the file itself is the OS/cloud
+  // provider's job, not this app's). On desktop Chrome/Edge, "Connect
+  // Sync Folder" gets silent read/write access via the File System
+  // Access API (same shared-handle DB the notes folder above uses,
+  // different id, so the two connections don't collide). On iOS
+  // Safari, which doesn't support that API at all, Export/Import fall
+  // back to the normal file picker + a downloaded file, both pointed
+  // at the same folder in the Files app.
+  //
+  // Merge strategy: arrays of {id, ...} objects (habits, transactions,
+  // journal entries, cards, beat patterns, day-log entries -- every
+  // room here already gives its list items a unique id) are unioned
+  // by id, so additions made on either device survive a sync. Where
+  // the same id exists on both sides, the copy from the
+  // more-recently-exported bundle wins. This is not a full field-level
+  // conflict resolver -- editing the exact same item differently on
+  // two devices between syncs will drop one of the edits -- but for
+  // "log from whichever device you have," which is how this is meant
+  // to be used, additions are the common case and this covers that
+  // safely.
+  // ============================================================
+  const SYNC_KEYS = [
+    "home-habits-v1", "home-streak-v1",
+    "room-finance-hub-v1", "room-language-hub-v1", "room-knowledge-center-v2",
+    "content-hub-cards-v1", "content-hub-notes-v1",
+    "beat-maker-banks-v2", "beat-maker-pad-collections-v1", "beat-maker-bank-lock-v1",
+    "beat-maker-radio-tray-v1", "beat-maker-sequencer-v1",
+    "video-log-editor-v1",
+  ];
+  const SYNC_FILE_NAME = "life-hub-sync.json";
+  const SYNC_LAST_KEY = "life-hub-last-sync-v1";
+
+  function readCurrentBundle() {
+    const data = {};
+    SYNC_KEYS.forEach((key) => {
+      const raw = localStorage.getItem(key);
+      if (raw === null) return;
+      try { data[key] = JSON.parse(raw); } catch (e) { /* not JSON, skip */ }
+    });
+    return { version: 1, exportedAt: new Date().toISOString(), data };
+  }
+
+  function applyBundleToStorage(bundle) {
+    Object.keys(bundle.data || {}).forEach((key) => {
+      if (!SYNC_KEYS.includes(key)) return; // never let an unexpected key slip in
+      try { localStorage.setItem(key, JSON.stringify(bundle.data[key])); } catch (e) { /* storage unavailable */ }
+    });
+  }
+
+  // Arrays of {id, ...} objects union by id (remoteWins breaks ties on a
+  // shared id); plain objects merge key-by-key; arrays of primitives
+  // union by value; anything else falls back to whichever side wins.
+  function mergeJSON(local, remote, remoteWins) {
+    if (local === undefined) return remote;
+    if (remote === undefined) return local;
+    if (Array.isArray(local) && Array.isArray(remote)) {
+      const idIsh = (arr) => arr.length === 0 || arr.every((x) => x && typeof x === "object" && "id" in x);
+      if (idIsh(local) && idIsh(remote)) {
+        const map = new Map();
+        local.forEach((item) => map.set(item.id, item));
+        remote.forEach((item) => { if (!map.has(item.id) || remoteWins) map.set(item.id, item); });
+        return Array.from(map.values());
+      }
+      const seen = new Set();
+      const out = [];
+      local.concat(remote).forEach((v) => {
+        const k = JSON.stringify(v);
+        if (!seen.has(k)) { seen.add(k); out.push(v); }
+      });
+      return out;
+    }
+    if (local && remote && typeof local === "object" && typeof remote === "object" &&
+        !Array.isArray(local) && !Array.isArray(remote)) {
+      const out = {};
+      new Set([...Object.keys(local), ...Object.keys(remote)]).forEach((k) => {
+        out[k] = mergeJSON(local[k], remote[k], remoteWins);
+      });
+      return out;
+    }
+    return remoteWins ? remote : local;
+  }
+
+  function mergeBundles(localBundle, remoteBundle) {
+    if (!remoteBundle) return localBundle;
+    if (!localBundle) return remoteBundle;
+    const remoteWins = new Date(remoteBundle.exportedAt) > new Date(localBundle.exportedAt);
+    const keys = new Set([...Object.keys(localBundle.data || {}), ...Object.keys(remoteBundle.data || {})]);
+    const data = {};
+    keys.forEach((k) => { data[k] = mergeJSON(localBundle.data[k], remoteBundle.data[k], remoteWins); });
+    return { version: 1, exportedAt: new Date().toISOString(), data };
+  }
+
+  function setSyncStatus(text) { document.getElementById("syncStatus").textContent = text; }
+  function setSyncLog(text) { document.getElementById("syncLog").textContent = text; }
+  function updateLastSyncedLabel() {
+    const raw = localStorage.getItem(SYNC_LAST_KEY);
+    document.getElementById("syncLast").textContent =
+      raw ? "Last synced " + new Date(raw).toLocaleString() : "Never synced yet.";
+  }
+  function markSynced() {
+    localStorage.setItem(SYNC_LAST_KEY, new Date().toISOString());
+    updateLastSyncedLabel();
+  }
+
+  let syncDirHandle = null;
+  const syncFsSupported = typeof window.showDirectoryPicker === "function";
+  const connectSyncBtn = document.getElementById("connectSyncBtn");
+  const syncNowBtn = document.getElementById("syncNowBtn");
+  const syncFallback = document.getElementById("syncFallback");
+
+  if (!syncFsSupported) {
+    connectSyncBtn.disabled = true;
+    syncFallback.hidden = false;
+    setSyncStatus("This browser can't connect a folder directly (expected on iPhone/Safari) — use Export/Import below, pointed at the same synced folder in Files.");
+  } else {
+    connectSyncBtn.addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "life-hub-sync", mode: "readwrite" });
+        syncDirHandle = handle;
+        await saveHandle("syncFolder", handle);
+        setSyncStatus("Sync folder connected (" + handle.name + "/).");
+      } catch (e) {
+        // user cancelled the picker — leave prior state alone
+      }
+    });
+    (async () => {
+      let handle;
+      try { handle = await loadHandle("syncFolder"); } catch (e) { return; }
+      if (!handle) return;
+      if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") {
+        syncDirHandle = handle;
+        setSyncStatus("Sync folder connected (" + handle.name + "/).");
+      } else {
+        setSyncStatus("Sync folder connected previously — click Connect to reconnect.");
+      }
+    })();
+  }
+
+  async function readBundleFromFolder() {
+    if (!syncDirHandle) return null;
+    try {
+      const fh = await syncDirHandle.getFileHandle(SYNC_FILE_NAME);
+      const file = await fh.getFile();
+      return JSON.parse(await file.text());
+    } catch (e) {
+      return null; // no file there yet -- fine, the first sync creates it
+    }
+  }
+  async function writeBundleToFolder(bundle) {
+    const fh = await syncDirHandle.getFileHandle(SYNC_FILE_NAME, { create: true });
+    const writable = await fh.createWritable();
+    await writable.write(JSON.stringify(bundle, null, 2));
+    await writable.close();
+  }
+
+  function downloadBundle(bundle) {
+    const blob = new Blob([JSON.stringify(bundle, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = SYNC_FILE_NAME;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  syncNowBtn.addEventListener("click", async () => {
+    if (!syncDirHandle) {
+      setSyncLog("Connect a sync folder first (or use Export/Import below on iPhone).");
+      return;
+    }
+    setSyncLog("Syncing...");
+    try {
+      const remoteBundle = await readBundleFromFolder();
+      const localBundle = readCurrentBundle();
+      const merged = mergeBundles(localBundle, remoteBundle);
+      applyBundleToStorage(merged);
+      await writeBundleToFolder(merged);
+      markSynced();
+      refreshAllStats();
+      setSyncLog("Synced — " + Object.keys(merged.data).length + " data sets up to date.");
+    } catch (e) {
+      setSyncLog("Sync failed: " + e.message);
+    }
+  });
+
+  document.getElementById("syncExportBtn").addEventListener("click", () => {
+    downloadBundle(readCurrentBundle());
+    setSyncLog("Downloaded " + SYNC_FILE_NAME + " — save it into your synced folder (Files app, the same iCloud Drive/Dropbox location every device uses).");
+  });
+
+  document.getElementById("syncImportInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const remoteBundle = JSON.parse(reader.result);
+        const localBundle = readCurrentBundle();
+        const merged = mergeBundles(localBundle, remoteBundle);
+        applyBundleToStorage(merged);
+        markSynced();
+        refreshAllStats();
+        downloadBundle(merged);
+        setSyncLog("Merged and downloaded the updated " + SYNC_FILE_NAME + " — save it back over the one in your synced folder to finish.");
+      } catch (err) {
+        setSyncLog("Could not read that file — is it a " + SYNC_FILE_NAME + " export?");
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = ""; // allow re-selecting the same file later
+  });
+  document.getElementById("syncImportBtn").addEventListener("click", () => {
+    document.getElementById("syncImportInput").click();
+  });
+
+  updateLastSyncedLabel();
 
   // Render the empty/connect-prompt state immediately rather than leaving
   // the list blank until a folder happens to get connected.
