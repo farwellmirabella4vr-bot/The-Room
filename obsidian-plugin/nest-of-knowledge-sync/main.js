@@ -113,8 +113,29 @@ module.exports = class NestOfKnowledgeSync extends Plugin {
     await fs.promises.writeFile(bridge.index, JSON.stringify(index, null, 2), "utf-8");
   }
 
+  // ---------- write serialization ----------
+  // handleChange() below fires syncNote() without awaiting it, on purpose --
+  // vault events shouldn't block on disk I/O. But syncNote() and
+  // removeSyncedNote() both do a read-modify-write on the single shared
+  // _index.json, and a burst of vault events (Obsidian firing "modify"/
+  // "create" for many files at once, e.g. on startup reindex) can fire many
+  // overlapping calls. Two calls racing on that read-then-write can drop
+  // one call's index update, or -- worse, given every call also does its
+  // own independent file.basename/content/cachedRead() lookups on
+  // whichever `file` it closed over -- interleave in a way where a note's
+  // own record.json ends up holding another note's data. Routing every
+  // write through this single promise chain makes them run strictly one at
+  // a time without making handleChange() itself blocking.
+  runSerialized(fn) {
+    this.writeQueue = (this.writeQueue || Promise.resolve()).then(fn, fn);
+    return this.writeQueue;
+  }
+
   // ---------- core sync ----------
   async syncNote(file) {
+    return this.runSerialized(() => this._syncNote(file));
+  }
+  async _syncNote(file) {
     const bridge = this.bridgePaths();
     if (!bridge) { this.enqueueRetry(file.path); return; }
 
@@ -155,6 +176,9 @@ module.exports = class NestOfKnowledgeSync extends Plugin {
   }
 
   async removeSyncedNote(vaultPath) {
+    return this.runSerialized(() => this._removeSyncedNote(vaultPath));
+  }
+  async _removeSyncedNote(vaultPath) {
     const bridge = this.bridgePaths();
     if (!bridge) return;
     const fileName = this.sanitizeFileName(vaultPath);
