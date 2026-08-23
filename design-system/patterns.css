@@ -1,0 +1,89 @@
+/* ============================================================
+   THE ROOM — shared geometric pattern library
+   ============================================================
+   Three patterns, one per tradition in the chosen blend, each built
+   from the tradition's own real construction method rather than an
+   approximated "Middle Eastern-coded" look. No figurative imagery, no
+   calligraphy, no crescent-and-star. Requires design-system/tokens.css
+   for its color values to make sense elsewhere, but the patterns below
+   are self-contained data-URIs (their own hex colors baked in, since a
+   CSS custom property can't be interpolated into a data: URI) matching
+   the token values in tokens.css by construction.
+
+   ---------------------------------------------------------------
+   1. GIRIH (Persian) — --pattern-girih
+   ---------------------------------------------------------------
+   Real girih construction is based on a small set of edge-tagged
+   polygons (decagon, pentagon, hexagon/bowtie, rhombus) whose "girih
+   lines" connect edge-to-edge into continuous strapwork -- historically
+   often built on 10-fold, decagon-rooted symmetry. A full multi-tile
+   strapwork network is impractical as a single repeating CSS tile, so
+   this uses the simpler, also historically real form: a grid of
+   8-pointed star polygons (an {8/3} star -- connect every 3rd point of
+   8 evenly spaced points around a circle), which is the same star-
+   polygon mathematics girih strapwork is built from, and appears
+   throughout real Persian/Central Asian architectural ornament as
+   star-medallion tiling in its own right (Isfahan among many others).
+   Rendered as a single continuous stroked line (no fill) -- strapwork
+   in girih and stucco relief is a carved/inlaid LINE, not a colored
+   tile piece, which is the real visual distinction from zellij below.
+   Points computed directly (not eyeballed): center (50,50), outer
+   radius 26, inner radius 10.5, 16 points alternating outer/inner every
+   22.5°, starting at -90°.
+   ---------------------------------------------------------------
+   2. ZELLIJ (Moroccan/Andalusian) — --pattern-zellij
+   ---------------------------------------------------------------
+   Zellij is hand-cut, individually glazed tile pieces assembled with
+   visible grout lines -- a mosaic technique, not a carved line. The
+   single most iconic zellij composition is "star and cross": an
+   8-pointed star at each tile's center, surrounded by four elongated
+   dart/lozenge pieces filling the gaps toward the tile's edges, each
+   piece its own separately colored tile. Built here the same way: the
+   star uses the identical {8/3} star-polygon math as the girih pattern
+   above (both traditions really do share this underlying geometry --
+   the regional difference is technique and color, not the math), scaled
+   down, filled solid rather than stroked. Four lozenge "cross" pieces
+   sit around it. Every shape gets a thin dark stroke, standing in for
+   the grout line between real cut tiles. Colors: zellij's traditional
+   cobalt/emerald/ochre trio, not the girih pattern's gold.
+   ---------------------------------------------------------------
+   3. IZNIK (Ottoman) — --pattern-iznik-border
+   ---------------------------------------------------------------
+   Iznik tilework is characteristically botanical/arabesque, not
+   geometric star-tiling -- large stylized florals (tulips, carnations,
+   saz leaves) in a specific, recognizable palette: Iznik's own
+   "tomato/coral red" alongside cobalt and turquoise on a white ground.
+   Built as a horizontal repeating BORDER strip (background-repeat-x),
+   matching how Iznik florals were actually deployed architecturally --
+   framing panels and borders, not tiled as an all-over field the way
+   girih/zellij are. A single stylized tulip silhouette (the flower
+   Iznik ware is most associated with) with a stem and two saz-leaf-
+   inspired curling leaves, in Iznik red and turquoise. Stylized and
+   flat, matching this whole project's icon language -- not a
+   photorealistic botanical illustration.
+   ============================================================ */
+
+:root {
+  --pattern-girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50,24 L54.02,40.30 L68.38,31.62 L59.70,45.98 L76,50 L59.70,54.02 L68.38,68.38 L54.02,59.70 L50,76 L45.98,59.70 L31.62,68.38 L40.30,54.02 L24,50 L40.30,45.98 L31.62,31.62 L45.98,40.30 Z' fill='none' stroke='%23f2c879' stroke-width='1.1' opacity='0.55'/%3E%3C/svg%3E");
+
+  --pattern-zellij: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50,32 L52.76,43.35 L62.73,37.27 L56.65,47.24 L68,50 L56.65,52.76 L62.73,62.73 L52.76,56.65 L50,68 L47.24,56.65 L37.27,62.73 L43.35,52.76 L32,50 L43.35,47.24 L37.27,37.27 L47.24,43.35 Z' fill='%233f8fc4' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,4 L56,14 L50,24 L44,14 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,76 L56,86 L50,96 L44,86 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M14,40 L20,50 L14,60 L8,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M86,40 L92,50 L86,60 L80,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3C/svg%3E");
+
+  --pattern-iznik-border: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cpath d='M40,28 L40,38' stroke='%233fc2b8' stroke-width='1.5' fill='none'/%3E%3Cpath d='M40,34 Q28,30 22,36 Q30,38 40,36 Z' fill='%233fc2b8' stroke='%230b0509' stroke-width='0.6'/%3E%3Cpath d='M40,34 Q52,30 58,36 Q50,38 40,36 Z' fill='%233fc2b8' stroke='%230b0509' stroke-width='0.6'/%3E%3Cpath d='M30,28 Q28,16 34,10 Q37,6 40,12 Q43,6 46,10 Q52,16 50,28 Q40,32 30,28 Z' fill='%23e8624f' stroke='%230b0509' stroke-width='0.6'/%3E%3C/svg%3E");
+}
+
+.pattern-girih {
+  background-image: var(--pattern-girih);
+  background-size: 60px 60px;
+  background-repeat: repeat;
+}
+.pattern-zellij {
+  background-image: var(--pattern-zellij);
+  background-size: 72px 72px;
+  background-repeat: repeat;
+}
+.pattern-iznik-border {
+  background-image: var(--pattern-iznik-border);
+  background-size: 64px 32px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+}

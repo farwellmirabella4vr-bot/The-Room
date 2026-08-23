@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Room — Design System</title>
+<!--
+  Standalone showcase for the shared design system: tokens, the three
+  pattern traditions, typography, and base components -- on its own,
+  before any real room gets touched, per the "show me this first" plan.
+  Nothing on this page is a real room; it's a reference/approval surface.
+-->
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/patterns.css">
+<link rel="stylesheet" href="design-system/components.css">
+<style>
+  .showcase-section { margin-bottom: var(--space-7); }
+  .showcase-section > h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-bright);
+    font-size: 1rem;
+    margin: 0 0 var(--space-2);
+  }
+  .showcase-note { font-size: 0.78rem; color: var(--parchment-dim); margin: 0 0 var(--space-4); max-width: 640px; }
+
+  .swatch-row { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .swatch {
+    width: 108px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    border: 1px solid rgba(242, 200, 121, 0.25);
+    font-size: 0.66rem;
+  }
+  .swatch-color { height: 54px; }
+  .swatch-label { padding: 0.3rem 0.4rem; background: rgba(11,5,9,0.5); color: var(--parchment-dim); }
+
+  .pattern-tile-row { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+  .pattern-tile {
+    width: 220px;
+    height: 160px;
+    border: 1px solid rgba(242, 200, 121, 0.3);
+    border-radius: var(--radius-sm);
+    background-color: var(--ink);
+  }
+  .pattern-tile-label { font-size: 0.76rem; color: var(--parchment); margin-top: var(--space-2); }
+  .pattern-tile-note { font-size: 0.7rem; color: var(--parchment-dim); max-width: 220px; }
+
+  .type-specimen { margin-bottom: var(--space-4); }
+  .type-specimen .display-sample {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.8rem;
+    color: var(--gold-bright);
+  }
+  .type-specimen .body-sample {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--parchment);
+    max-width: 560px;
+    margin-top: 0.4rem;
+  }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+
+  .frame-row { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+  .frame-row .ornate-frame { flex: 1 1 260px; margin-bottom: 0; }
+  .frame-row .ornate-frame p { font-size: 0.8rem; color: var(--parchment-dim); margin: 0; }
+
+  .scale-row { display: flex; align-items: flex-end; gap: var(--space-3); }
+  .scale-bar { background: var(--gold); border-radius: 2px; width: 24px; }
+  .scale-bar-label { font-size: 0.66rem; color: var(--parchment-dim); text-align: center; margin-top: 0.3rem; }
+  .scale-box-row { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+  .scale-box { width: 64px; height: 64px; background: var(--plum-light); border: 1px solid var(--gold); }
+
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-3); max-width: 560px; }
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <a class="back-link" href="home.html">&larr; Home</a>
+    &nbsp;&middot;&nbsp;
+    <a class="back-link" href="room.html">Back to the Room</a>
+    <h1 class="hub-title">Design System</h1>
+    <p>
+      One palette, one pattern library, one type pairing, one base component set -- meant to make
+      every room feel like one connected building instead of a pile of unrelated apps, while each
+      room keeps its own character on top. An equal blend of three real traditions: Persian girih,
+      Moroccan zellij, and Ottoman Iznik. Geometric, botanical, and architectural only -- no
+      figurative imagery, no calligraphy or religious text, no crescent-and-star.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Palette</h2>
+      <p class="showcase-note">Ground and gold trim are shared everywhere. Each tradition then gets its own accent trio.</p>
+
+      <h3>Ground &amp; gold (shared)</h3>
+      <div class="swatch-row" style="margin-bottom: var(--space-5);">
+        <div class="swatch"><div class="swatch-color" style="background:var(--ink-deep);"></div><div class="swatch-label">--ink-deep</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--ink);"></div><div class="swatch-label">--ink</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--plum);"></div><div class="swatch-label">--plum</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--plum-light);"></div><div class="swatch-label">--plum-light</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--parchment);"></div><div class="swatch-label" style="color:var(--ink);background:var(--parchment-dim);">--parchment</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--gold);"></div><div class="swatch-label">--gold</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--gold-bright);"></div><div class="swatch-label">--gold-bright</div></div>
+      </div>
+
+      <h3>Persian / girih</h3>
+      <div class="swatch-row" style="margin-bottom: var(--space-5);">
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-red);"></div><div class="swatch-label">--jewel-red</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-red-br);"></div><div class="swatch-label">--jewel-red-br</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-blue);"></div><div class="swatch-label">--jewel-blue</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-blue-br);"></div><div class="swatch-label">--jewel-blue-br</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-teal);"></div><div class="swatch-label">--jewel-teal</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--jewel-teal-br);"></div><div class="swatch-label">--jewel-teal-br</div></div>
+      </div>
+
+      <h3>Moroccan / zellij</h3>
+      <div class="swatch-row" style="margin-bottom: var(--space-5);">
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-blue);"></div><div class="swatch-label">--zellij-blue</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-blue-br);"></div><div class="swatch-label">--zellij-blue-br</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-green);"></div><div class="swatch-label">--zellij-green</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-green-br);"></div><div class="swatch-label">--zellij-green-br</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-ochre);"></div><div class="swatch-label">--zellij-ochre</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--zellij-ochre-br);"></div><div class="swatch-label">--zellij-ochre-br</div></div>
+      </div>
+
+      <h3>Ottoman / Iznik</h3>
+      <div class="swatch-row">
+        <div class="swatch"><div class="swatch-color" style="background:var(--iznik-coral);"></div><div class="swatch-label">--iznik-coral</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--iznik-coral-br);"></div><div class="swatch-label">--iznik-coral-br</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--iznik-turquoise);"></div><div class="swatch-label">--iznik-turquoise</div></div>
+        <div class="swatch"><div class="swatch-color" style="background:var(--iznik-turquoise-br);"></div><div class="swatch-label">--iznik-turquoise-br</div></div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Pattern Library</h2>
+      <p class="showcase-note">
+        Real construction, not an approximated look — see the comments in design-system/patterns.css
+        for exactly how each is built.
+      </p>
+      <div class="pattern-tile-row">
+        <div>
+          <div class="pattern-tile pattern-girih"></div>
+          <div class="pattern-tile-label">Girih (Persian)</div>
+          <div class="pattern-tile-note">{8/3} star-polygon strapwork, stroked not filled — an all-over field pattern.</div>
+        </div>
+        <div>
+          <div class="pattern-tile pattern-zellij"></div>
+          <div class="pattern-tile-label">Zellij (Moroccan)</div>
+          <div class="pattern-tile-note">Star-and-cross mosaic — filled tile pieces with grout-line strokes.</div>
+        </div>
+        <div>
+          <div class="pattern-tile pattern-iznik-border" style="background-color: var(--plum);"></div>
+          <div class="pattern-tile-label">Iznik (Ottoman)</div>
+          <div class="pattern-tile-note">Stylized tulip border strip — botanical, meant for framing, not an all-over field.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Typography</h2>
+      <div class="type-specimen">
+        <div class="display-sample">A room, a title, a place</div>
+        <div class="showcase-note" style="margin: 0.2rem 0 0;">--font-display — Georgia / Times New Roman, italic. Every hub-title and section heading.</div>
+      </div>
+      <div class="type-specimen">
+        <div class="body-sample">The quick brown fox jumps over the lazy dog. Everything you've learned and tracked, in one place.</div>
+        <div class="showcase-note" style="margin: 0.2rem 0 0;">--font-body — Segoe UI stack. Every paragraph, label, and button.</div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Buttons</h2>
+      <div class="btn-row">
+        <button class="btn" type="button">Primary</button>
+        <button class="btn secondary" type="button">Secondary</button>
+        <button class="btn" type="button" disabled>Disabled</button>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Cards</h2>
+      <div class="card-grid">
+        <a class="card" href="#" onclick="return false;">
+          <div class="card-title">A Room</div>
+          <div class="card-meta">Some stat pulled from real data</div>
+        </a>
+        <div class="card">
+          <div class="card-title">Non-link card</div>
+          <div class="card-meta">Same base style, no hover lift</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Frame Variants</h2>
+      <p class="showcase-note">The default frame carries the girih field. Two accent variants swap it for the other two traditions.</p>
+      <div class="frame-row">
+        <div class="ornate-frame">
+          <h2>Default</h2>
+          <p>Girih strapwork field (Persian).</p>
+        </div>
+        <div class="ornate-frame zellij-framed">
+          <h2>Zellij-framed</h2>
+          <p>Star-and-cross mosaic field (Moroccan).</p>
+        </div>
+        <div class="ornate-frame iznik-framed">
+          <h2>Iznik-framed</h2>
+          <p>Tulip border along the base (Ottoman).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Spacing Scale</h2>
+      <div class="scale-row">
+        <div><div class="scale-bar" style="height: calc(var(--space-1) * 4);"></div><div class="scale-bar-label">1</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-2) * 4);"></div><div class="scale-bar-label">2</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-3) * 4);"></div><div class="scale-bar-label">3</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-4) * 4);"></div><div class="scale-bar-label">4</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-5) * 4);"></div><div class="scale-bar-label">5</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-6) * 4);"></div><div class="scale-bar-label">6</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-7) * 4);"></div><div class="scale-bar-label">7</div></div>
+        <div><div class="scale-bar" style="height: calc(var(--space-8) * 4);"></div><div class="scale-bar-label">8</div></div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal showcase-section">
+      <h2>Radii &amp; Shadows</h2>
+      <div class="scale-box-row">
+        <div class="scale-box" style="border-radius: var(--radius-sm);"></div>
+        <div class="scale-box" style="border-radius: var(--radius-md);"></div>
+        <div class="scale-box" style="border-radius: var(--radius-lg);"></div>
+        <div class="scale-box" style="border-radius: var(--radius-md); box-shadow: var(--shadow-soft);"></div>
+        <div class="scale-box" style="border-radius: var(--radius-md); box-shadow: var(--shadow-deep);"></div>
+      </div>
+    </section>
+
+  </main>
+
+<script>
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  }
+</script>
+</body>
+</html>

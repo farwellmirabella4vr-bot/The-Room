@@ -1,0 +1,198 @@
+/* ============================================================
+   THE ROOM — shared base component library
+   ============================================================
+   Requires design-system/tokens.css (and, for .ornate-frame's pattern,
+   design-system/patterns.css) loaded first. These are BASE styles only
+   -- every room keeps layering its own accent on top (Beat Maker's
+   hardware-panel look, Travel World's globe/star-chart look, etc.)
+   rather than these replacing a room's character. A room overrides by
+   adding its own rules after this stylesheet, or by scoping a variant
+   class alongside these.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+[hidden] { display: none !important; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--parchment);
+  background: radial-gradient(ellipse at 50% 20%, var(--plum-light) 0%, var(--plum) 45%, var(--ink) 100%);
+  min-height: 100vh;
+}
+
+a { color: var(--gold-bright); }
+
+/* ---------- header ---------- */
+.hub-header { position: relative; z-index: 2; text-align: center; padding: 1.6rem 1rem 0.8rem; }
+.back-link { display: inline-block; font-size: 0.82rem; color: var(--parchment-dim); text-decoration: none; }
+.back-link:hover { color: var(--gold-bright); }
+.hub-title {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+  font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+  color: var(--gold-bright);
+  text-shadow: 0 0 24px rgba(242, 200, 121, 0.45);
+}
+.hub-header p { margin: 0.5rem auto 0; max-width: 480px; font-size: 0.82rem; color: var(--parchment-dim); }
+
+main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* ---------- ornate-frame panel (the shared "card" every room's
+   sections sit in) ---------- */
+.ornate-frame {
+  position: relative;
+  background:
+    var(--pattern-girih, none),
+    linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
+  background-size: 60px 60px, auto;
+  border: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-frame-inset), var(--shadow-deep);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  margin-bottom: var(--space-6);
+}
+.ornate-frame::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(242, 200, 121, 0.4);
+  border-radius: 3px;
+  pointer-events: none;
+}
+.ornate-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+    radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+    radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+    radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px);
+  background-repeat: no-repeat;
+  background-position: 8px 8px, calc(100% - 8px) 8px, 8px calc(100% - 8px), calc(100% - 8px) calc(100% - 8px);
+  opacity: 0.8;
+}
+.ornate-frame h2 {
+  margin: 0 0 var(--space-4);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: var(--gold-bright);
+}
+
+/* An ornate-frame with an Iznik border strip along its bottom edge,
+   instead of the girih field -- for a room/section that wants the
+   Ottoman accent specifically (e.g. a panel framing a floral/botanical
+   feature) rather than the default Persian ground. */
+.ornate-frame.iznik-framed {
+  border-bottom-width: 10px;
+  border-image: none;
+}
+.ornate-frame.iznik-framed::after {
+  background-image: var(--pattern-iznik-border, none);
+  background-size: 64px 32px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  opacity: 1;
+  inset: auto 0 -3px 0;
+  height: 14px;
+}
+
+/* A zellij-mosaic variant of the frame, for a room/section that wants
+   the Moroccan accent instead of the default girih strapwork field. */
+.ornate-frame.zellij-framed {
+  background-image: var(--pattern-zellij, none), linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
+  background-size: 72px 72px, auto;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  font-family: var(--font-body);
+  font-weight: bold;
+  font-size: 0.85rem;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--ink-deep);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+.btn:disabled { opacity: 0.5; cursor: default; }
+.btn.secondary {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--parchment);
+  border: 1px solid rgba(212, 162, 76, 0.4);
+}
+.btn.secondary:hover { border-color: var(--gold-bright); }
+
+/* ---------- cards (smaller, non-ornate content blocks -- glance
+   grids, list items, etc.) ---------- */
+.card {
+  background: rgba(11, 5, 9, 0.4);
+  border: 1px solid rgba(242, 200, 121, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  color: var(--parchment);
+}
+a.card { display: block; text-decoration: none; transition: border-color 0.15s ease, transform 0.15s ease; }
+a.card:hover { border-color: var(--gold-bright); transform: translateY(-1px); }
+.card-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--gold-bright);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-2);
+}
+.card-meta { font-size: 0.8rem; color: var(--parchment-dim); }
+
+/* ---------- modal/overlay ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(11, 5, 9, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+.modal-box {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  background:
+    var(--pattern-girih, none),
+    linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
+  background-size: 60px 60px, auto;
+  border: 3px solid var(--gold);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-frame-inset), var(--shadow-deep);
+  padding: var(--space-5) var(--space-6);
+}
+.modal-close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  background: none;
+  border: none;
+  color: var(--parchment-dim);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover { color: var(--gold-bright); }
+
+/* ---------- scroll reveal (used identically everywhere) ---------- */
+.reveal { transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal:not(.in-view) { opacity: 0; transform: translateY(14px); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+}

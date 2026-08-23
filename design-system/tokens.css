@@ -1,0 +1,88 @@
+/* ============================================================
+   THE ROOM — shared design tokens
+   ============================================================
+   One palette, spacing scale, radius scale, shadow system, and type
+   pairing, meant to be <link>-ed by every room's own stylesheet rather
+   than redeclared inline. Plain CSS custom properties, no build step --
+   consistent with the rest of this project (every room is still a
+   single self-contained HTML file; this just factors out the handful of
+   values that should actually be shared).
+
+   Palette lineage: an equal blend of three real, named decorative
+   traditions (see design-system/patterns.css for the geometry itself):
+     - Persian/Iranian girih  -> the existing ink/plum/jewel/gold ground,
+       already established across Travel World and Nest of Knowledge.
+     - Moroccan/Andalusian zellij -> cobalt, emerald, and ochre accents.
+     - Ottoman Iznik -> a distinct coral-red and turquoise pair, the
+       two colors Iznik tilework is most immediately recognized by.
+   No figurative imagery, no calligraphy/religious text, no crescent-
+   and-star -- geometric, botanical (arabesque), and architectural
+   motifs only, per the constraints this system was built under.
+   ============================================================ */
+
+:root {
+  /* ---------- ground (shared across every room) ---------- */
+  --ink:           #150b12;
+  --ink-deep:      #0b0509;
+  --plum:          #2c1035;
+  --plum-light:    #4a1f5a;
+  --parchment:     #f4e8d0;
+  --parchment-dim: #cbb999;
+
+  /* ---------- gold trim (shared across all three traditions) ---------- */
+  --gold:          #d4a24c;
+  --gold-bright:   #f2c879;
+
+  /* ---------- Persian / girih accents ---------- */
+  --jewel-red:     #7a1f35;
+  --jewel-red-br:  #c9425a;
+  --jewel-blue:    #1a3a6b;
+  --jewel-blue-br: #3a6ac9;
+  --jewel-teal:    #145f56;
+  --jewel-teal-br: #2ea08a;
+
+  /* ---------- Moroccan / zellij accents ---------- */
+  --zellij-blue:      #1e5c8a;
+  --zellij-blue-br:   #3f8fc4;
+  --zellij-green:     #1f6e4a;
+  --zellij-green-br:  #3fa06f;
+  --zellij-ochre:     #c67d2e;
+  --zellij-ochre-br:  #e3a355;
+
+  /* ---------- Ottoman / Iznik accents ---------- */
+  --iznik-coral:      #c0392b;
+  --iznik-coral-br:   #e8624f;
+  --iznik-turquoise:  #1f8a83;
+  --iznik-turquoise-br: #3fc2b8;
+
+  /* ---------- spacing scale ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* ---------- corner radii ---------- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* ---------- shadows ---------- */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.28);
+  --shadow-deep: 0 20px 50px rgba(0, 0, 0, 0.4);
+  --shadow-frame-inset: 0 0 0 1px rgba(242, 200, 121, 0.35) inset;
+
+  /* ---------- type pairing ----------
+     Display: an italic serif for headings/titles -- already used this
+     way, unattributed, across every existing room. Formalized here
+     rather than changed, since it already reads as this project's voice.
+     Body: a system UI sans, for legibility at small sizes everywhere
+     else. Both are OS-installed stacks -- no webfont loading, no
+     external requests, consistent with this project having no build
+     step and no CDN dependencies. */
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
