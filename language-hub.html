@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Language Hub</title>
+<script src="design-system/utils.js"></script>
 <style>
 
   /* ============================================================
@@ -1250,11 +1251,7 @@
     },
   };
 
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
-    }[c]));
-  }
+  // escapeHtml() now comes from design-system/utils.js, loaded in <head>.
 
   function dateToISO(d) {
     const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
