@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connecting Spotify...</title>
+<!--
+  The redirect target for the Spotify Authorization Code + PKCE flow
+  started in editor.html. Exchanges the ?code= for a token pair using the
+  code_verifier that editor.html stashed in sessionStorage before
+  redirecting here (same tab, so it survives the round trip), then sends
+  you back to editor.html. No client secret involved anywhere -- PKCE is
+  what makes that safe for a public static site.
+-->
+<style>
+  :root {
+    --wall-dark: #241220;
+    --gold: #d4a24c;
+    --gold-bright: #f2c879;
+    --ivory: #f4e8d0;
+    --ivory-dim: #cbb999;
+    --warn-text: #ffc9c9;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: linear-gradient(180deg, var(--wall-dark) 0%, #170d14 100%);
+    color: var(--ivory);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .box { max-width: 380px; padding: 2rem; text-align: center; }
+  h1 { font-size: 1.1rem; color: var(--gold-bright); margin: 0 0 0.8rem; }
+  p { font-size: 0.85rem; color: var(--ivory-dim); line-height: 1.5; }
+  p.error { color: var(--warn-text); }
+  a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #2a1a10;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 8px;
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h1 id="statusTitle">Connecting to Spotify...</h1>
+    <p id="statusText">Hang on a moment.</p>
+    <a href="editor.html" id="backLink" hidden>Back to the editor</a>
+  </div>
+
+<script>
+(async () => {
+  const SPOTIFY_CLIENT_ID_KEY = "life-hub-spotify-client-id";
+  const SPOTIFY_TOKENS_KEY = "life-hub-spotify-tokens";
+  const SPOTIFY_VERIFIER_KEY = "life-hub-spotify-pkce-verifier";
+
+  const titleEl = document.getElementById("statusTitle");
+  const textEl = document.getElementById("statusText");
+  const backLink = document.getElementById("backLink");
+
+  function fail(message) {
+    titleEl.textContent = "Couldn't connect";
+    textEl.textContent = message;
+    textEl.classList.add("error");
+    backLink.hidden = false;
+  }
+  function goBack(query) {
+    location.href = "editor.html?" + query;
+  }
+
+  const params = new URLSearchParams(location.search);
+  const error = params.get("error");
+  if (error) {
+    fail("Spotify said: " + error);
+    setTimeout(() => goBack("spotify=error&message=" + encodeURIComponent(error)), 2500);
+    return;
+  }
+
+  const code = params.get("code");
+  if (!code) { fail("No authorization code in the redirect — try connecting again from the editor."); return; }
+
+  let verifier;
+  try { verifier = sessionStorage.getItem(SPOTIFY_VERIFIER_KEY); } catch (e) { verifier = null; }
+  if (!verifier) { fail("Lost the connection details for this attempt — try Connect Spotify again from the editor."); return; }
+
+  let clientId;
+  try { clientId = localStorage.getItem(SPOTIFY_CLIENT_ID_KEY) || ""; } catch (e) { clientId = ""; }
+  if (!clientId) { fail("No Spotify Client ID saved — go back and save one first."); return; }
+
+  const redirectUri = new URL("spotify-callback.html", location.href).toString();
+
+  try {
+    const res = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: redirectUri,
+        client_id: clientId,
+        code_verifier: verifier,
+      }),
+    });
+    if (!res.ok) {
+      const detail = await res.text().catch(() => "");
+      fail("Token exchange failed (" + res.status + "). " + detail.slice(0, 200));
+      setTimeout(() => goBack("spotify=error&message=" + encodeURIComponent("token exchange failed")), 3000);
+      return;
+    }
+    const data = await res.json();
+    const tokens = {
+      access_token: data.access_token,
+      refresh_token: data.refresh_token,
+      expires_at: Date.now() + data.expires_in * 1000,
+    };
+    try {
+      localStorage.setItem(SPOTIFY_TOKENS_KEY, JSON.stringify(tokens));
+      sessionStorage.removeItem(SPOTIFY_VERIFIER_KEY);
+    } catch (e) { /* storage unavailable */ }
+
+    titleEl.textContent = "Connected ✓";
+    textEl.textContent = "Taking you back to the editor...";
+    setTimeout(() => goBack("spotify=connected"), 700);
+  } catch (e) {
+    fail("Network error during token exchange: " + e.message);
+  }
+})();
+</script>
+</body>
+</html>

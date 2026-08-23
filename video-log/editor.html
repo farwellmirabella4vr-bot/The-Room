@@ -273,6 +273,11 @@
   }
   .footage-card-add.added { background: var(--teal-bright); color: #06231f; }
 
+  .spotify-row { display: flex; gap: 0.5rem; align-items: center; }
+  .spotify-row input { margin: 0; }
+  .spotify-row button { width: auto; margin: 0; white-space: nowrap; }
+  .hint.connected { color: var(--teal-bright); }
+
   .day-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
   .day-chip {
     width: auto;
@@ -363,6 +368,23 @@
         <button type="button" id="quickLogStopBtn">■ Stop &amp; Save</button>
         <button type="button" class="secondary" id="quickLogCancelBtn">Cancel</button>
       </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Spotify</h2>
+      <p class="hint">
+        Pulls your recently-played tracks (Spotify caps this at the last ~50 / roughly 24 hours) and
+        logs them under "Listened" on the matching day. Hub-only — this never touches your Obsidian
+        vault or its one-way sync.
+      </p>
+      <div class="spotify-row">
+        <input type="text" id="spotifyClientIdInput" placeholder="Spotify Client ID">
+        <button type="button" class="secondary" id="spotifyClientIdSaveBtn">Save</button>
+      </div>
+      <p class="hint" id="spotifyStatus">Not connected.</p>
+      <button type="button" id="spotifyConnectBtn">Connect Spotify</button>
+      <button type="button" class="secondary" id="spotifySyncBtn" disabled>Sync Recent Listening</button>
+      <p class="hint" id="spotifySyncStatus"></p>
     </section>
 
     <section class="panel reveal">
@@ -984,6 +1006,205 @@
   }
 
   refreshFootageBtn.addEventListener("click", loadFootageGrid);
+
+  // ============================================================
+  // SPOTIFY — real OAuth (Authorization Code + PKCE, no client secret,
+  // safe for a public static site), fetch-on-load only. There is no
+  // backend anywhere in this project to run a periodic polling job, and
+  // Spotify's API caps recently-played at ~50 tracks / ~24h regardless,
+  // so "click Sync, pull what's new" is the only approach that fits --
+  // not a stopgap, the actual right shape here. Logged hub-only, straight
+  // into the matching day's `listened` array: this never touches the
+  // Obsidian vault or its one-way sync in any direction.
+  // ============================================================
+  const SPOTIFY_CLIENT_ID_KEY = "life-hub-spotify-client-id";
+  const SPOTIFY_TOKENS_KEY = "life-hub-spotify-tokens"; // { access_token, refresh_token, expires_at }
+  const SPOTIFY_VERIFIER_KEY = "life-hub-spotify-pkce-verifier"; // sessionStorage, transient across the redirect
+  const SPOTIFY_SYNCED_KEY = "video-log-spotify-synced-plays"; // played_at instants already merged in, so Sync never duplicates a play
+  const SPOTIFY_SCOPE = "user-read-recently-played";
+
+  function getSpotifyClientId() {
+    try { return localStorage.getItem(SPOTIFY_CLIENT_ID_KEY) || ""; } catch (e) { return ""; }
+  }
+  function getSpotifyTokens() {
+    try { return JSON.parse(localStorage.getItem(SPOTIFY_TOKENS_KEY) || "null"); } catch (e) { return null; }
+  }
+  function saveSpotifyTokens(tokens) {
+    try { localStorage.setItem(SPOTIFY_TOKENS_KEY, JSON.stringify(tokens)); } catch (e) { /* storage unavailable */ }
+  }
+  function getSyncedPlayIds() {
+    try { return new Set(JSON.parse(localStorage.getItem(SPOTIFY_SYNCED_KEY) || "[]")); } catch (e) { return new Set(); }
+  }
+  function saveSyncedPlayIds(set) {
+    try { localStorage.setItem(SPOTIFY_SYNCED_KEY, JSON.stringify(Array.from(set))); } catch (e) { /* storage unavailable */ }
+  }
+  function spotifyRedirectUri() {
+    return new URL("spotify-callback.html", location.href).toString();
+  }
+
+  function base64UrlEncode(bytes) {
+    let str = "";
+    bytes.forEach((b) => { str += String.fromCharCode(b); });
+    return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function generateCodeVerifier() {
+    const arr = new Uint8Array(64);
+    crypto.getRandomValues(arr);
+    return base64UrlEncode(arr);
+  }
+  async function generateCodeChallenge(verifier) {
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier));
+    return base64UrlEncode(new Uint8Array(digest));
+  }
+
+  function setSpotifyStatus(text, connected) {
+    const el = document.getElementById("spotifyStatus");
+    el.textContent = text;
+    el.classList.toggle("connected", !!connected);
+  }
+  function setSpotifySyncStatus(text) {
+    document.getElementById("spotifySyncStatus").textContent = text;
+  }
+  function renderSpotifyConnection() {
+    const tokens = getSpotifyTokens();
+    const syncBtn = document.getElementById("spotifySyncBtn");
+    if (tokens) {
+      setSpotifyStatus("Connected ✓", true);
+      syncBtn.disabled = false;
+    } else {
+      setSpotifyStatus("Not connected.");
+      syncBtn.disabled = true;
+    }
+    document.getElementById("spotifyClientIdInput").placeholder = getSpotifyClientId()
+      ? "Client ID saved (paste a new one to replace it)" : "Spotify Client ID";
+  }
+  renderSpotifyConnection();
+
+  // The callback page redirects here with ?spotify=connected or
+  // ?spotify=error=<message> once the token exchange finishes.
+  (() => {
+    const params = new URLSearchParams(location.search);
+    const spotifyResult = params.get("spotify");
+    if (!spotifyResult) return;
+    if (spotifyResult === "connected") setSpotifySyncStatus("Spotify connected ✓ — click Sync Recent Listening whenever you want to pull it in.");
+    else if (spotifyResult === "error") setSpotifySyncStatus("Spotify connection failed: " + (params.get("message") || "unknown error"));
+    history.replaceState(null, "", location.pathname);
+    renderSpotifyConnection();
+  })();
+
+  document.getElementById("spotifyClientIdSaveBtn").addEventListener("click", () => {
+    const input = document.getElementById("spotifyClientIdInput");
+    const id = input.value.trim();
+    if (!id) return;
+    try { localStorage.setItem(SPOTIFY_CLIENT_ID_KEY, id); } catch (e) { /* storage unavailable */ }
+    input.value = "";
+    renderSpotifyConnection();
+  });
+
+  document.getElementById("spotifyConnectBtn").addEventListener("click", async () => {
+    const clientId = getSpotifyClientId();
+    if (!clientId) { setSpotifyStatus("Save your Spotify Client ID above first."); return; }
+    const verifier = generateCodeVerifier();
+    try { sessionStorage.setItem(SPOTIFY_VERIFIER_KEY, verifier); } catch (e) { /* storage unavailable */ }
+    const challenge = await generateCodeChallenge(verifier);
+    const params = new URLSearchParams({
+      client_id: clientId,
+      response_type: "code",
+      redirect_uri: spotifyRedirectUri(),
+      code_challenge_method: "S256",
+      code_challenge: challenge,
+      scope: SPOTIFY_SCOPE,
+    });
+    location.href = "https://accounts.spotify.com/authorize?" + params.toString();
+  });
+
+  async function ensureSpotifyAccessToken() {
+    const tokens = getSpotifyTokens();
+    if (!tokens) return null;
+    if (Date.now() < tokens.expires_at - 60000) return tokens.access_token; // still valid, with a 1min buffer
+    const clientId = getSpotifyClientId();
+    if (!clientId) return null;
+    try {
+      const res = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ grant_type: "refresh_token", refresh_token: tokens.refresh_token, client_id: clientId }),
+      });
+      if (!res.ok) return null;
+      const data = await res.json();
+      const newTokens = {
+        access_token: data.access_token,
+        refresh_token: data.refresh_token || tokens.refresh_token, // Spotify doesn't always rotate it
+        expires_at: Date.now() + data.expires_in * 1000,
+      };
+      saveSpotifyTokens(newTokens);
+      return newTokens.access_token;
+    } catch (e) { return null; }
+  }
+
+  document.getElementById("spotifySyncBtn").addEventListener("click", async () => {
+    const btn = document.getElementById("spotifySyncBtn");
+    btn.disabled = true;
+    setSpotifySyncStatus("Connecting...");
+
+    const token = await ensureSpotifyAccessToken();
+    if (!token) {
+      setSpotifySyncStatus("Not connected, or the connection expired — click Connect Spotify again.");
+      renderSpotifyConnection();
+      btn.disabled = false;
+      return;
+    }
+
+    setSpotifySyncStatus("Fetching recently played...");
+    let data;
+    try {
+      const res = await fetch("https://api.spotify.com/v1/me/player/recently-played?limit=50", {
+        headers: { Authorization: "Bearer " + token },
+      });
+      if (!res.ok) { setSpotifySyncStatus("Spotify request failed (" + res.status + ")."); btn.disabled = false; return; }
+      data = await res.json();
+    } catch (e) { setSpotifySyncStatus("Network error: " + e.message); btn.disabled = false; return; }
+
+    const synced = getSyncedPlayIds();
+    const items = (data.items || []).filter((item) => item.track && !synced.has(item.played_at));
+
+    if (!items.length) {
+      setSpotifySyncStatus("Up to date — nothing new in your last " + (data.items || []).length + " play(s).");
+      btn.disabled = false;
+      return;
+    }
+
+    const touchedDays = [];
+    items.forEach((item) => {
+      const track = item.track;
+      const playedAt = new Date(item.played_at);
+      const month = String(playedAt.getMonth() + 1);
+      const day = String(playedAt.getDate());
+      const artistNames = (track.artists || []).map((a) => a.name).join(", ");
+      const title = track.name + (artistNames ? " — " + artistNames : "");
+      const url = (track.external_urls && track.external_urls.spotify) || "";
+
+      if (!editorState.entries[month]) editorState.entries[month] = {};
+      if (!editorState.entries[month][day]) editorState.entries[month][day] = {};
+      const entry = editorState.entries[month][day];
+      if (!Array.isArray(entry.listened)) entry.listened = [];
+      entry.listened.push({ title, url });
+
+      synced.add(item.played_at);
+      touchedDays.push([month, day]);
+    });
+
+    saveEditorState();
+    saveSyncedPlayIds(synced);
+
+    const monthSelectVal = document.getElementById("monthSelect").value;
+    renderMonthDayChips(monthSelectVal);
+    touchedDays.forEach(([month, day]) => refreshFormIfShowingDay(month, day));
+
+    const uniqueDays = new Set(touchedDays.map(([m, d]) => m + "/" + d));
+    setSpotifySyncStatus("Added " + items.length + " track(s) across " + uniqueDays.size + " day(s).");
+    btn.disabled = false;
+  });
 
   // ============================================================
   // QUICK LOG — a single low-friction "I logged today" check-off (so the
