@@ -961,6 +961,15 @@
   function sanitizeNoteFilename(name) {
     return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
   }
+  // Shared with every other room's Log to Obsidian feature -- Nest of
+  // Knowledge reads this to show the "logged out" side of its ouroboros,
+  // instead of scanning the vault's Rough Notes folder itself.
+  function bumpObsidianLogCount() {
+    try {
+      const key = "life-hub-obsidian-log-count";
+      localStorage.setItem(key, String(Number(localStorage.getItem(key) || "0") + 1));
+    } catch (e) {}
+  }
   // Connects on first use if needed (prompts via the picker), then writes/
   // overwrites the given filename in Rough Notes. Returns false (never
   // throws) on cancellation or a denied/unavailable folder, so callers can
@@ -976,6 +985,7 @@
       const writable = await fileHandle.createWritable();
       await writable.write(content);
       await writable.close();
+      bumpObsidianLogCount();
       return true;
     } catch (e) { return false; }
   }

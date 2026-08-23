@@ -468,6 +468,15 @@
   function sanitizeNoteFilename(name) {
     return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
   }
+  // Shared with every other room's Log to Obsidian feature -- Nest of
+  // Knowledge reads this to show the "logged out" side of its ouroboros,
+  // instead of scanning the vault's Rough Notes folder itself.
+  function bumpObsidianLogCount() {
+    try {
+      const key = "life-hub-obsidian-log-count";
+      localStorage.setItem(key, String(Number(localStorage.getItem(key) || "0") + 1));
+    } catch (e) {}
+  }
   async function writeNoteToVault(filename, content) {
     if (!roughNotesDirHandle) {
       const connected = await connectRoughNotesFolder();
@@ -479,6 +488,7 @@
       const writable = await fileHandle.createWritable();
       await writable.write(content);
       await writable.close();
+      bumpObsidianLogCount();
       return true;
     } catch (e) { return false; }
   }
