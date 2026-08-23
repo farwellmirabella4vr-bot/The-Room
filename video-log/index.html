@@ -698,6 +698,11 @@
       localStorage.setItem(key, String(Number(localStorage.getItem(key) || "0") + 1));
     } catch (e) {}
   }
+  // Writes land in a "Video Log" subfolder of the shared Rough Notes
+  // folder, not the folder's root -- one section per room, per the user's
+  // request. Applies to new writes only; anything already logged before
+  // this change stays where it is.
+  const ROOM_VAULT_SUBFOLDER = "Video Log";
   async function writeNoteToVault(filename, content) {
     if (!roughNotesDirHandle) {
       const connected = await connectRoughNotesFolder();
@@ -705,7 +710,8 @@
     }
     if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
     try {
-      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const roomDirHandle = await roughNotesDirHandle.getDirectoryHandle(ROOM_VAULT_SUBFOLDER, { create: true });
+      const fileHandle = await roomDirHandle.getFileHandle(filename, { create: true });
       const writable = await fileHandle.createWritable();
       await writable.write(content);
       await writable.close();

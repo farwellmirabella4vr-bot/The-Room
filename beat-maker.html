@@ -966,9 +966,14 @@
     } catch (e) {}
   }
   // Connects on first use if needed (prompts via the picker), then writes/
-  // overwrites the given filename in Rough Notes. Returns false (never
-  // throws) on cancellation or a denied/unavailable folder, so callers can
-  // show a plain "couldn't log that" message instead of an uncaught error.
+  // overwrites the given filename in a "Beat Maker" subfolder of Rough
+  // Notes -- one section per room, per the user's request, rather than
+  // every room's notes piling into the folder's root. Applies to new
+  // writes only; anything already logged before this change stays where
+  // it is. Returns false (never throws) on cancellation or a denied/
+  // unavailable folder, so callers can show a plain "couldn't log that"
+  // message instead of an uncaught error.
+  const ROOM_VAULT_SUBFOLDER = "Beat Maker";
   async function writeNoteToVault(filename, content) {
     if (!roughNotesDirHandle) {
       const connected = await connectRoughNotesFolder();
@@ -976,7 +981,8 @@
     }
     if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
     try {
-      const fileHandle = await roughNotesDirHandle.getFileHandle(filename, { create: true });
+      const roomDirHandle = await roughNotesDirHandle.getDirectoryHandle(ROOM_VAULT_SUBFOLDER, { create: true });
+      const fileHandle = await roomDirHandle.getFileHandle(filename, { create: true });
       const writable = await fileHandle.createWritable();
       await writable.write(content);
       await writable.close();
