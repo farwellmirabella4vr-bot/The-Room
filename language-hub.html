@@ -411,6 +411,28 @@
     white-space: pre-wrap;
   }
 
+  #vdBreakdownBtn { margin-top: 0.8rem; }
+  .vd-breakdown {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed rgba(0, 0, 0, 0.12);
+  }
+  .vd-breakdown-text {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.85rem;
+    color: var(--text);
+    margin: 0.3rem 0 0;
+    white-space: pre-wrap;
+  }
+
+  .vd-ai-settings { margin-bottom: 1.2rem; font-size: 0.8rem; color: var(--text-dim); }
+  .vd-ai-settings summary { cursor: pointer; color: var(--secondary); font-weight: bold; }
+  .vd-ai-settings-body { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-top: 0.6rem; }
+  .vd-ai-settings-body input[type="password"] { flex: 1 1 220px; }
+  .vd-ai-key-status { font-size: 0.75rem; color: var(--text-dim); flex-basis: 100%; }
+
   .vd-journal-form { display: flex; flex-direction: column; gap: 0.6rem; max-width: 480px; margin: 0 auto 1.4rem; }
   .vd-journal-form textarea { min-height: 3rem; resize: vertical; }
   .vd-journal-form button { align-self: flex-start; }
@@ -784,6 +806,20 @@
           never the video) is saved locally in this browser.
         </p>
 
+        <details class="vd-ai-settings">
+          <summary>Native breakdown — AI settings</summary>
+          <div class="vd-ai-settings-body">
+            <input type="password" id="vdApiKeyInput" placeholder="Anthropic API key (sk-ant-...)" autocomplete="off">
+            <button type="button" id="vdApiKeySaveBtn">Save Key</button>
+            <button type="button" id="vdApiKeyClearBtn">Clear</button>
+            <span class="vd-ai-key-status" id="vdApiKeyStatus">
+              Saved only in this browser's local storage — never sent anywhere except directly to
+              Anthropic when you request a breakdown, and never committed to this project's code.
+              Get a key at console.anthropic.com; setting a spend limit there is recommended.
+            </span>
+          </div>
+        </details>
+
         <div class="vd-prompt-box">
           <span class="vd-label">Prompt</span>
           <div class="vd-prompt-text" id="vdPromptText"></div>
@@ -812,6 +848,12 @@
           <span class="vd-label">Rough transcript <span class="vd-disclaimer">(rough transcript, not a pronunciation grade)</span></span>
           <div class="vd-transcript" id="vdTranscript"></div>
           <button type="button" id="vdDownloadBtn">Download video</button>
+
+          <button type="button" id="vdBreakdownBtn">Show native breakdown</button>
+          <div class="vd-breakdown" id="vdBreakdown" hidden>
+            <span class="vd-label">Native breakdown <span class="vd-disclaimer">(AI-generated, for comparison only)</span></span>
+            <div class="vd-breakdown-text" id="vdBreakdownText"></div>
+          </div>
         </div>
 
         <div class="vd-journal-form">
@@ -992,6 +1034,115 @@
     } catch (e) { return false; }
   }
   tryRestoreRoughNotesFolder();
+
+  // ============================================================
+  // NATIVE BREAKDOWN — an on-demand Anthropic API call, only made when you
+  // click "Show native breakdown" after attempting a prompt. The key is
+  // pasted in once and kept in this browser's local storage only; it is
+  // never written into this project's source or committed anywhere. This
+  // site is a public static page, so the key is visible to anyone with
+  // access to this browser's devtools -- set a spend limit on the key
+  // itself at console.anthropic.com rather than relying on secrecy alone.
+  // ============================================================
+  const ANTHROPIC_KEY_STORAGE = "life-hub-anthropic-api-key";
+  const ANTHROPIC_MODEL = "claude-haiku-4-5-20251001";
+  function getAnthropicKey() {
+    try { return localStorage.getItem(ANTHROPIC_KEY_STORAGE) || ""; } catch (e) { return ""; }
+  }
+  function setAnthropicKey(key) {
+    try {
+      if (key) localStorage.setItem(ANTHROPIC_KEY_STORAGE, key);
+      else localStorage.removeItem(ANTHROPIC_KEY_STORAGE);
+    } catch (e) { /* storage unavailable */ }
+  }
+  function renderApiKeyStatus() {
+    const status = document.getElementById("vdApiKeyStatus");
+    const input = document.getElementById("vdApiKeyInput");
+    if (getAnthropicKey()) {
+      status.textContent = "Key saved ✓ — stored only in this browser's local storage.";
+      input.placeholder = "Key saved (paste a new one to replace it)";
+    } else {
+      status.textContent =
+        "Saved only in this browser's local storage — never sent anywhere except directly to " +
+        "Anthropic when you request a breakdown, and never committed to this project's code. " +
+        "Get a key at console.anthropic.com; setting a spend limit there is recommended.";
+      input.placeholder = "Anthropic API key (sk-ant-...)";
+    }
+  }
+  renderApiKeyStatus();
+  document.getElementById("vdApiKeySaveBtn").addEventListener("click", () => {
+    const input = document.getElementById("vdApiKeyInput");
+    const key = input.value.trim();
+    if (!key) return;
+    setAnthropicKey(key);
+    input.value = "";
+    renderApiKeyStatus();
+  });
+  document.getElementById("vdApiKeyClearBtn").addEventListener("click", () => {
+    setAnthropicKey("");
+    document.getElementById("vdApiKeyInput").value = "";
+    renderApiKeyStatus();
+  });
+
+  function resetBreakdown() {
+    document.getElementById("vdBreakdown").hidden = true;
+    document.getElementById("vdBreakdownText").textContent = "";
+    const btn = document.getElementById("vdBreakdownBtn");
+    btn.disabled = false;
+    btn.textContent = "Show native breakdown";
+  }
+
+  async function fetchNativeBreakdown(promptText, language, level) {
+    const key = getAnthropicKey();
+    if (!key) return { ok: false, text: 'No API key saved yet — open "Native breakdown — AI settings" above and paste one in.' };
+
+    const userMessage =
+      "A " + level + "-level learner of " + language.name + " (" + language.native + ") was given this " +
+      "speaking prompt: \"" + promptText + "\". Write, in " + language.name + ", 2-4 sentences of what a " +
+      "native speaker would naturally and idiomatically say in response to this same prompt -- natural " +
+      "conversational register, not a textbook sentence. On a new line after it, add a plain-English gloss " +
+      "prefixed exactly with \"English: \". Output only those two things, nothing else -- no preamble, no " +
+      "explanation of your role, no extra commentary.";
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": key,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
+        },
+        body: JSON.stringify({
+          model: ANTHROPIC_MODEL,
+          max_tokens: 300,
+          messages: [{ role: "user", content: userMessage }],
+        }),
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        return { ok: false, text: "Request failed (" + res.status + "). " + (detail ? detail.slice(0, 200) : "Check that your API key is valid.") };
+      }
+      const data = await res.json();
+      const text = (data.content || []).map((c) => c.text || "").join("").trim();
+      return { ok: true, text: text || "(Empty response.)" };
+    } catch (e) {
+      return { ok: false, text: "Network/request error: " + e.message };
+    }
+  }
+
+  document.getElementById("vdBreakdownBtn").addEventListener("click", async () => {
+    const btn = document.getElementById("vdBreakdownBtn");
+    const wrap = document.getElementById("vdBreakdown");
+    const textEl = document.getElementById("vdBreakdownText");
+    btn.disabled = true;
+    btn.textContent = "Generating...";
+    const result = await fetchNativeBreakdown(currentPromptText, activeLanguage(), currentLevel);
+    textEl.textContent = result.text;
+    wrap.hidden = false;
+    btn.textContent = result.ok ? "Regenerate" : "Show native breakdown";
+    btn.disabled = false;
+  });
 
   function logJournalEntryToObsidian(entry) {
     const lang = LANGUAGES.find((l) => l.id === entry.languageId);
@@ -1887,6 +2038,7 @@
     startSpeechRecognition();
 
     document.getElementById("vdResult").hidden = true;
+    resetBreakdown();
     const btn = document.getElementById("vdRecordBtn");
     btn.textContent = "■ Stop";
     btn.classList.add("recording");
@@ -2067,8 +2219,15 @@
     currentLevel = e.target.value;
     pickNewPrompt();
     renderPrompt();
+    document.getElementById("vdResult").hidden = true;
+    resetBreakdown();
   });
-  document.getElementById("vdNewPromptBtn").addEventListener("click", () => { pickNewPrompt(); renderPrompt(); });
+  document.getElementById("vdNewPromptBtn").addEventListener("click", () => {
+    pickNewPrompt();
+    renderPrompt();
+    document.getElementById("vdResult").hidden = true;
+    resetBreakdown();
+  });
   document.getElementById("vdRecordBtn").addEventListener("click", () => {
     const isRecording = mediaRecorder && mediaRecorder.state === "recording";
     if (isRecording) stopRecording(); else startRecording();
