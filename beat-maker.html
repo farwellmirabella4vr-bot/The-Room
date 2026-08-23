@@ -727,19 +727,15 @@
           <button type="button" class="bank-lock-btn" id="bankLockBtn" aria-pressed="false" title="Lock bank switching">
             <span class="bank-lock-led"></span> Bank Lock
           </button>
-          <button type="button" class="bank-lock-btn" id="sampleLockBtn" aria-pressed="false" title="Stop rapid tapping from cycling a pad's sample">
-            <span class="bank-lock-led"></span> Sample Lock
-          </button>
         </div>
         <div class="pad-grid" id="padGrid"></div>
         <details class="gamepad-details">
           <summary>How Pads Work</summary>
           <p class="sample-note">
             Each pad is its own category — drag or upload several files onto one pad (e.g. all your
-            kicks) and tap it repeatedly to cycle through them, or use the small &#9656; arrow.
-            New samples open the trim tool first; use the &#9986; icon on a pad to re-trim what's
-            currently selected. Download packs from Splice (or anywhere) and drag them in here &mdash;
-            direct Splice account connection isn't available, but any sample file works.
+            kicks). Tapping the pad always replays whatever sample is currently selected; use the
+            small &#9656; arrow to move to the next sample in that pad's collection. New samples open
+            the trim tool first; use the &#9986; icon on a pad to re-trim what's currently selected.
           </p>
         </details>
         <details class="gamepad-details">
@@ -889,7 +885,6 @@
   const OLD_SINGLE_PADS_KEY = "beat-maker-pads-v1";
   const OLD_BANKS_KEY = "beat-maker-banks-v1";
   const PADS_KEY = "beat-maker-pad-collections-v1";
-  const RAPID_TAP_MS = 500; // taps on the same pad within this window cycle to the next sample
 
   function genId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
@@ -1209,20 +1204,6 @@
   let bankLocked = loadBankLock();
   function saveBankLock() {
     try { localStorage.setItem(LOCK_KEY, bankLocked ? "1" : "0"); } catch (e) { /* storage unavailable */ }
-  }
-
-  // Sample lock: while engaged, rapid-tapping a pad to test/preview it no
-  // longer advances to the next sample in its collection (a common
-  // annoyance when just spam-tapping to check a sound) — the explicit
-  // next-sample arrow still works either way, since that's a deliberate
-  // action, not an incidental side effect of tapping fast.
-  const SAMPLE_LOCK_KEY = "beat-maker-sample-lock-v1";
-  function loadSampleLock() {
-    try { return localStorage.getItem(SAMPLE_LOCK_KEY) === "1"; } catch (e) { return false; }
-  }
-  let sampleLocked = loadSampleLock();
-  function saveSampleLock() {
-    try { localStorage.setItem(SAMPLE_LOCK_KEY, sampleLocked ? "1" : "0"); } catch (e) { /* storage unavailable */ }
   }
 
   function currentSampleFor(padIndex) {
@@ -1604,7 +1585,6 @@
   // ---------- pad rendering + interaction ----------
   const padGrid = document.getElementById("padGrid");
   const padFileInputs = [];
-  const lastTapTime = new Array(PAD_COUNT).fill(0);
   let fxSelectedPad = null; // which pad the FX rack below is currently editing
 
   for (let i = 0; i < PAD_COUNT; i++) {
@@ -1782,20 +1762,6 @@
     renderBankSelector(); // re-render so the per-bank buttons pick up the new disabled state
   });
 
-  const sampleLockBtn = document.getElementById("sampleLockBtn");
-  function renderSampleLock() {
-    sampleLockBtn.classList.toggle("engaged", sampleLocked);
-    sampleLockBtn.setAttribute("aria-pressed", String(sampleLocked));
-    sampleLockBtn.title = sampleLocked
-      ? "Sample locked — rapid tapping replays the same sound; click to unlock"
-      : "Sample unlocked — rapid tapping cycles through a pad's samples; click to lock";
-  }
-  sampleLockBtn.addEventListener("click", () => {
-    sampleLocked = !sampleLocked;
-    saveSampleLock();
-    renderSampleLock();
-  });
-
   document.addEventListener("keydown", (e) => {
     // Ignore while typing in a text field/textarea so bracket keys in a
     // beat/pad name don't accidentally flip banks.
@@ -1882,23 +1848,17 @@
     pad.classList.add("hit");
   }
 
-  // Plays the pad's current sample. If tapped again quickly, or via the
-  // explicit "next" arrow, advances to the next sample in the pad's
-  // collection first — so rapid tapping auditions the whole category,
-  // while a single deliberate tap replays the same sound predictably.
-  // Sample Lock disables only the rapid-tap side effect (so spam-tapping
-  // to test a sound doesn't accidentally cycle it) — the explicit arrow
-  // is a deliberate action and still works either way.
+  // Plays the pad's current sample. Tapping the pad itself always
+  // retriggers whatever sample is currently selected, no matter how fast
+  // or how many times — only the explicit "next" arrow (forceAdvance)
+  // moves to the next sample in the pad's collection.
   function cycleAndPlay(index, forceAdvance) {
     const pad = pads[index];
     if (!pad.samples.length) return;
 
-    const now = Date.now();
-    const rapid = !sampleLocked && now - lastTapTime[index] < RAPID_TAP_MS;
-    if ((forceAdvance || rapid) && pad.samples.length > 1) {
+    if (forceAdvance && pad.samples.length > 1) {
       pad.currentIndex = (pad.currentIndex + 1) % pad.samples.length;
     }
-    lastTapTime[index] = now;
 
     const buffer = currentBufferFor(index);
     renderPad(index);
@@ -3043,7 +3003,6 @@
   updateGamepadStatus();
   renderBankSelector();
   renderBankLock();
-  renderSampleLock();
   renderRadioTray();
 
   // ---------- mode tabs (Pads / Pattern / FX / Library) ----------
