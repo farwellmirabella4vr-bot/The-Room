@@ -225,6 +225,54 @@
     cursor: pointer;
   }
 
+  .footage-browser { margin-top: 0.9rem; }
+  .footage-browser-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+  .footage-browser-header button { width: auto; margin: 0; font-size: 0.72rem; padding: 0.5rem 0.7rem; }
+  .footage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.7rem;
+    margin-top: 0.7rem;
+  }
+  .footage-card {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(63, 182, 168, 0.25);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .footage-thumb-wrap {
+    aspect-ratio: 4 / 3;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .footage-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .footage-thumb-placeholder { font-size: 0.68rem; color: var(--ivory-dim); }
+  .footage-card-body { padding: 0.5rem 0.6rem 0.6rem; display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+  .footage-card-name {
+    font-size: 0.72rem;
+    color: var(--ivory);
+    word-break: break-all;
+    line-height: 1.25;
+  }
+  .footage-card-meta { font-size: 0.66rem; color: var(--ivory-dim); }
+  .footage-card-add {
+    margin-top: auto;
+    width: 100%;
+    font-size: 0.72rem;
+    padding: 0.4rem 0.5rem;
+  }
+  .footage-card-add.added { background: var(--teal-bright); color: #06231f; }
+
   .day-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
   .day-chip {
     width: auto;
@@ -359,6 +407,15 @@
             choose files
             <input type="file" id="footageFileInput" accept="video/*,image/*" multiple hidden>
           </label>
+        </div>
+
+        <div class="footage-browser">
+          <div class="footage-browser-header">
+            <span>Browse Footage</span>
+            <button type="button" class="secondary" id="refreshFootageBtn">↻ Refresh</button>
+          </div>
+          <p class="hint" id="footageBrowserStatus">Connect a media folder above to browse what's already in it.</p>
+          <div class="footage-grid" id="footageGrid"></div>
         </div>
       </div>
 
@@ -641,6 +698,7 @@
     if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") {
       mediaDirHandle = handle;
       setFootageStatus("Connected to " + handle.name + "/ — drop files below to copy them in.", true);
+      loadFootageGrid();
     } else {
       setFootageStatus("Connected to " + handle.name + "/ previously — click Connect Media Folder to reconnect (permission resets each session).");
     }
@@ -653,6 +711,7 @@
         mediaDirHandle = handle;
         await saveHandle("mediaFolder", handle);
         setFootageStatus("Connected to " + handle.name + "/ — drop files below to copy them in.", true);
+        loadFootageGrid();
       } catch (e) {
         // user cancelled the picker — leave prior state alone
       }
@@ -702,6 +761,7 @@
     else if (added) msg += " — copy them into video-log/media/ yourself before Save";
     if (skipped) msg += "; " + skipped + " skipped (not a photo/video type)";
     showStatus(msg, added === 0);
+    if (mediaDirHandle && added) loadFootageGrid();
   }
 
   footageFileInput.addEventListener("change", () => {
@@ -750,6 +810,180 @@
     }
     if (e.dataTransfer.files && e.dataTransfer.files.length) await importFiles(e.dataTransfer.files);
   });
+
+  // ============================================================
+  // FOOTAGE BROWSER — lists everything already sitting in the connected
+  // media folder (not just newly dropped files), with a generated
+  // preview, filename, duration, and file date, so you can decide what
+  // belongs in a day's entry before adding it. Thumbnails are grabbed
+  // entirely in the browser (a hidden <video> seeked to a frame, drawn to
+  // a <canvas>) -- no backend needed. "Date recorded" uses the file's
+  // last-modified time, which is what a browser can actually read; that's
+  // accurate as long as files land here via a straight copy (which is how
+  // they get here today) rather than a re-save that changes it.
+  // ============================================================
+  const footageGrid = document.getElementById("footageGrid");
+  const footageBrowserStatus = document.getElementById("footageBrowserStatus");
+  const refreshFootageBtn = document.getElementById("refreshFootageBtn");
+
+  function formatDuration(seconds) {
+    if (!isFinite(seconds) || seconds < 0) return "";
+    const m = Math.floor(seconds / 60);
+    const s = Math.round(seconds % 60);
+    return m + ":" + String(s).padStart(2, "0");
+  }
+  function formatClipDate(ts) {
+    const d = new Date(ts);
+    return d.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" }) +
+      " " + d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  }
+
+  // Loads a video just far enough to grab one frame as a thumbnail and
+  // read its duration, then tears the element down. Object URLs are
+  // revoked as soon as we're done so a big folder doesn't leak memory.
+  function generateVideoPreview(file) {
+    return new Promise((resolve) => {
+      const url = URL.createObjectURL(file);
+      const video = document.createElement("video");
+      video.muted = true;
+      video.preload = "metadata";
+      video.src = url;
+      let settled = false;
+      function finish(result) {
+        if (settled) return;
+        settled = true;
+        URL.revokeObjectURL(url);
+        resolve(result);
+      }
+      video.addEventListener("loadedmetadata", () => {
+        const duration = video.duration;
+        try { video.currentTime = Math.min(1, duration / 2 || 0); }
+        catch (e) { finish({ duration, thumbUrl: null }); }
+      });
+      video.addEventListener("seeked", () => {
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = video.videoWidth || 160;
+          canvas.height = video.videoHeight || 120;
+          canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
+          canvas.toBlob((blob) => {
+            finish({ duration: video.duration, thumbUrl: blob ? URL.createObjectURL(blob) : null });
+          }, "image/jpeg", 0.7);
+        } catch (e) { finish({ duration: video.duration, thumbUrl: null }); }
+      });
+      video.addEventListener("error", () => finish({ duration: NaN, thumbUrl: null }));
+      video.load(); // some browsers need this explicitly for metadata to fire reliably
+    });
+  }
+
+  function footageCard(name, kind, lastModified, getFile) {
+    const card = document.createElement("div");
+    card.className = "footage-card";
+
+    const thumbWrap = document.createElement("div");
+    thumbWrap.className = "footage-thumb-wrap";
+    const placeholder = document.createElement("span");
+    placeholder.className = "footage-thumb-placeholder";
+    placeholder.textContent = "Loading...";
+    thumbWrap.appendChild(placeholder);
+    card.appendChild(thumbWrap);
+
+    const body = document.createElement("div");
+    body.className = "footage-card-body";
+    const nameEl = document.createElement("div");
+    nameEl.className = "footage-card-name";
+    nameEl.textContent = name;
+    const metaEl = document.createElement("div");
+    metaEl.className = "footage-card-meta";
+    metaEl.textContent = formatClipDate(lastModified);
+    const addBtn = document.createElement("button");
+    addBtn.type = "button";
+    addBtn.className = "footage-card-add";
+    addBtn.textContent = "+ Add to this day";
+    addBtn.addEventListener("click", () => {
+      if (!mediaGroup) {
+        addBtn.textContent = "Load a day first";
+        setTimeout(() => { addBtn.textContent = "+ Add to this day"; }, 1800);
+        return;
+      }
+      mediaGroup.addRow({ type: kind, url: "media/" + name });
+      addBtn.textContent = "Added ✓";
+      addBtn.classList.add("added");
+      setTimeout(() => { addBtn.textContent = "+ Add to this day"; addBtn.classList.remove("added"); }, 1800);
+    });
+    body.appendChild(nameEl);
+    body.appendChild(metaEl);
+    body.appendChild(addBtn);
+    card.appendChild(body);
+
+    // Fill in the real preview (and duration, for video) once available,
+    // without blocking the rest of the grid from rendering.
+    (async () => {
+      const file = await getFile();
+      if (kind === "image") {
+        const url = URL.createObjectURL(file);
+        thumbWrap.innerHTML = "";
+        const img = document.createElement("img");
+        img.src = url;
+        thumbWrap.appendChild(img);
+        return;
+      }
+      const { duration, thumbUrl } = await generateVideoPreview(file);
+      thumbWrap.innerHTML = "";
+      if (thumbUrl) {
+        const img = document.createElement("img");
+        img.src = thumbUrl;
+        thumbWrap.appendChild(img);
+      } else {
+        const fallback = document.createElement("span");
+        fallback.className = "footage-thumb-placeholder";
+        fallback.textContent = "No preview";
+        thumbWrap.appendChild(fallback);
+      }
+      if (isFinite(duration)) metaEl.textContent = formatClipDate(lastModified) + " · " + formatDuration(duration);
+    })();
+
+    return card;
+  }
+
+  async function loadFootageGrid() {
+    if (!mediaDirHandle) {
+      footageBrowserStatus.textContent = "Connect a media folder above to browse what's already in it.";
+      footageBrowserStatus.hidden = false;
+      footageGrid.innerHTML = "";
+      return;
+    }
+    footageBrowserStatus.textContent = "Loading...";
+    footageBrowserStatus.hidden = false;
+    footageGrid.innerHTML = "";
+
+    const clips = [];
+    try {
+      for await (const [name, handle] of mediaDirHandle.entries()) {
+        if (handle.kind !== "file") continue;
+        const kind = mediaKindFor(name);
+        if (!kind) continue;
+        clips.push({ name, handle, kind });
+      }
+    } catch (e) {
+      footageBrowserStatus.textContent = "Couldn't read the folder: " + e.message;
+      return;
+    }
+
+    if (!clips.length) {
+      footageBrowserStatus.textContent = "No photos or videos found in " + mediaDirHandle.name + "/ yet.";
+      return;
+    }
+    footageBrowserStatus.hidden = true;
+
+    clips.sort((a, b) => a.name.localeCompare(b.name));
+    for (const clip of clips) {
+      const file = await clip.handle.getFile();
+      footageGrid.appendChild(footageCard(clip.name, clip.kind, file.lastModified, () => clip.handle.getFile()));
+    }
+  }
+
+  refreshFootageBtn.addEventListener("click", loadFootageGrid);
 
   // ============================================================
   // QUICK LOG — a single low-friction "I logged today" check-off (so the
