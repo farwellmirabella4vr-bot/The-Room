@@ -178,6 +178,29 @@
   .ouroboros-stat-out .ouroboros-count { color: var(--gold-bright); }
   .ouroboros-caption { text-align: center; font-size: 0.68rem; color: var(--parchment-dim); margin: -0.5rem 0 1rem; }
 
+  /* ---------- the constellation: one star per room, orbiting a shared
+     core, sized by how much you've saved there. Static (no spin) so its
+     text labels stay readable -- the ouroboros above is where the motion
+     lives. ---------- */
+  .constellation-wrap { display: flex; justify-content: center; }
+  .constellation-svg { width: 100%; max-width: 460px; height: auto; overflow: visible; }
+  .constellation-core { fill: var(--parchment); opacity: 0.85; }
+  .constellation-line { stroke: rgba(244, 232, 208, 0.22); stroke-width: 1; }
+  .constellation-node {
+    stroke: var(--ink-deep);
+    stroke-width: 1.5;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+  }
+  .constellation-node:hover, .constellation-node:focus { filter: brightness(1.25); }
+  .constellation-label {
+    fill: var(--parchment-dim);
+    font-size: 9px;
+    text-anchor: middle;
+    pointer-events: none;
+  }
+  .constellation-caption { text-align: center; font-size: 0.68rem; color: var(--parchment-dim); margin-top: 0.6rem; }
+
   /* ---------- notes connect ---------- */
   .connect-row {
     display: flex;
@@ -326,6 +349,14 @@
     </section>
 
     <section class="ornate-frame reveal">
+      <h2>The Constellation</h2>
+      <div class="constellation-wrap">
+        <svg class="constellation-svg" id="constellationSvg" viewBox="0 0 440 260" role="img" aria-label="A constellation of every room's saved knowledge, orbiting a shared core"></svg>
+      </div>
+      <p class="constellation-caption">Every room, in one sky — each star sized by how much you've put into it. Click a star to go there.</p>
+    </section>
+
+    <section class="ornate-frame reveal" id="kbSection">
       <h2>Knowledge Base</h2>
 
       <div class="ouroboros-header">
@@ -387,6 +418,16 @@
 
 <script>
 (() => {
+  // Declared up front since both the constellation (below) and the
+  // Knowledge Base section (further down) read notesIndex before that
+  // section's own code runs.
+  const LOG_COUNT_KEY = "life-hub-obsidian-log-count";
+  const OUROBOROS_CIRCUMFERENCE = 2 * Math.PI * 78;
+  let notesDirHandle = null;
+  let notesIndex = null; // { vaultPath: {path,title,date,tags,modifiedAt,excerpt,file} }
+  let activeTagFilter = null;
+  let searchTerm = "";
+
   // ============================================================
   // LIFE AT A GLANCE — same read-only stat logic already proven in
   // home.html (identical localStorage/IndexedDB keys), reused here
@@ -499,6 +540,8 @@
         countReq.onsuccess = () => {
           const count = countReq.result;
           if (count > 0) setStat("beatmaker", count + (count === 1 ? " beat saved" : " beats saved"));
+          constellationCounts.beatmaker = count;
+          updateConstellation();
         };
       };
       req.onerror = () => { /* IndexedDB unavailable; leave default */ };
@@ -520,6 +563,127 @@
     } catch (e) { /* nothing readable */ }
   }
 
+  // ============================================================
+  // THE CONSTELLATION — one star per room (plus Obsidian), orbiting a
+  // shared core, each sized by how much you've saved there. Reads the
+  // same localStorage/IndexedDB sources as the stats above; doesn't
+  // touch anything new. Obsidian's count comes from the same notesIndex
+  // the Knowledge Base section below already loads.
+  // ============================================================
+  const CONSTELLATION_NODES = [
+    { id: "finance", name: "Finance Hub", href: "finance-hub.html" },
+    { id: "language", name: "Language Hub", href: "language-hub.html" },
+    { id: "knowledge", name: "Knowledge Center", href: "knowledge-center.html" },
+    { id: "beatmaker", name: "Beat Maker", href: "beat-maker.html" },
+    { id: "videolog", name: "Video Log", href: "video-log/index.html" },
+    { id: "content", name: "Content Hub", href: "content-hub.html" },
+    { id: "obsidian", name: "Obsidian Notes", href: "#kbSection" },
+  ];
+  const CONSTELLATION_COLORS = ["var(--jewel-red-br)", "var(--jewel-blue-br)", "var(--jewel-teal-br)", "var(--gold-bright)"];
+  const constellationCounts = {};
+
+  function updateConstellation() {
+    const svg = document.getElementById("constellationSvg");
+    if (!svg) return;
+    const cx = 220, cy = 130, rx = 165, ry = 92, minR = 9, maxR = 24;
+    const n = CONSTELLATION_NODES.length;
+    const maxCount = Math.max(1, ...CONSTELLATION_NODES.map((node) => constellationCounts[node.id] || 0));
+    const svgNS = "http://www.w3.org/2000/svg";
+
+    svg.innerHTML = "";
+    const group = document.createElementNS(svgNS, "g");
+    group.setAttribute("class", "constellation-ring");
+
+    const core = document.createElementNS(svgNS, "circle");
+    core.setAttribute("cx", cx);
+    core.setAttribute("cy", cy);
+    core.setAttribute("r", 13);
+    core.setAttribute("class", "constellation-core");
+    group.appendChild(core);
+
+    CONSTELLATION_NODES.forEach((node, i) => {
+      const angle = ((360 / n) * i - 90) * (Math.PI / 180);
+      const x = cx + rx * Math.cos(angle);
+      const y = cy + ry * Math.sin(angle);
+      const count = constellationCounts[node.id] || 0;
+      const r = minR + (maxR - minR) * (Math.sqrt(count) / Math.sqrt(maxCount));
+      const color = CONSTELLATION_COLORS[i % CONSTELLATION_COLORS.length];
+
+      const line = document.createElementNS(svgNS, "line");
+      line.setAttribute("x1", cx);
+      line.setAttribute("y1", cy);
+      line.setAttribute("x2", x);
+      line.setAttribute("y2", y);
+      line.setAttribute("class", "constellation-line");
+      group.appendChild(line);
+
+      const a = document.createElementNS(svgNS, "a");
+      a.setAttribute("href", node.href);
+
+      const dot = document.createElementNS(svgNS, "circle");
+      dot.setAttribute("cx", x);
+      dot.setAttribute("cy", y);
+      dot.setAttribute("r", r);
+      dot.setAttribute("class", "constellation-node");
+      dot.setAttribute("style", "fill:" + color);
+      const title = document.createElementNS(svgNS, "title");
+      title.textContent = node.name + " — " + count + (count === 1 ? " entry" : " entries");
+      dot.appendChild(title);
+      a.appendChild(dot);
+      group.appendChild(a);
+
+      const label = document.createElementNS(svgNS, "text");
+      label.setAttribute("x", x);
+      label.setAttribute("y", y + r + 13);
+      label.setAttribute("class", "constellation-label");
+      label.textContent = node.name;
+      group.appendChild(label);
+    });
+
+    svg.appendChild(group);
+  }
+
+  function collectConstellationCounts() {
+    try {
+      const raw = localStorage.getItem("room-finance-hub-v1");
+      const parsed = raw ? JSON.parse(raw) : {};
+      const txns = parsed.budget && Array.isArray(parsed.budget.transactions) ? parsed.budget.transactions : [];
+      constellationCounts.finance = txns.length;
+    } catch (e) { constellationCounts.finance = 0; }
+
+    try {
+      const raw = localStorage.getItem("room-language-hub-v1");
+      const parsed = raw ? JSON.parse(raw) : {};
+      constellationCounts.language = Array.isArray(parsed.videoJournal) ? parsed.videoJournal.length : 0;
+    } catch (e) { constellationCounts.language = 0; }
+
+    try {
+      const raw = localStorage.getItem("room-knowledge-center-v2");
+      const parsed = raw ? JSON.parse(raw) : {};
+      constellationCounts.knowledge = parsed.unlockedCount || 0;
+    } catch (e) { constellationCounts.knowledge = 0; }
+
+    try {
+      const raw = localStorage.getItem("content-hub-cards-v1");
+      const cards = raw ? JSON.parse(raw) : [];
+      constellationCounts.content = Array.isArray(cards) ? cards.length : 0;
+    } catch (e) { constellationCounts.content = 0; }
+
+    try {
+      const raw = localStorage.getItem("video-log-editor-v1");
+      const parsed = raw ? JSON.parse(raw) : {};
+      let total = 0;
+      if (parsed.entries) {
+        Object.keys(parsed.entries).forEach((month) => { total += Object.keys(parsed.entries[month] || {}).length; });
+      }
+      constellationCounts.videolog = total;
+    } catch (e) { constellationCounts.videolog = 0; }
+
+    constellationCounts.beatmaker = constellationCounts.beatmaker || 0; // filled async in renderBeatMakerStat
+    constellationCounts.obsidian = allNotes().length;
+    updateConstellation();
+  }
+
   renderGlanceGrid();
   renderFinanceStat();
   renderLanguageStat();
@@ -527,6 +691,7 @@
   renderContentStat();
   renderBeatMakerStat();
   renderVideoLogStat();
+  collectConstellationCounts();
 
   // ============================================================
   // KNOWLEDGE BASE — reads the same bridge folder the Nest of
@@ -563,13 +728,6 @@
     });
   }
 
-  const LOG_COUNT_KEY = "life-hub-obsidian-log-count";
-  const OUROBOROS_CIRCUMFERENCE = 2 * Math.PI * 78;
-  let notesDirHandle = null;
-  let notesIndex = null; // { vaultPath: {path,title,date,tags,modifiedAt,excerpt,file} }
-  let activeTagFilter = null;
-  let searchTerm = "";
-
   const notesStatusEl = document.getElementById("notesStatus");
   const connectNotesBtn = document.getElementById("connectNotesBtn");
   const fsAccessSupported = typeof window.showDirectoryPicker === "function";
@@ -593,6 +751,8 @@
     renderTagPills();
     renderKbList();
     updateOuroboros();
+    constellationCounts.obsidian = allNotes().length;
+    updateConstellation();
   }
 
   async function tryRestoreNotesFolder() {
