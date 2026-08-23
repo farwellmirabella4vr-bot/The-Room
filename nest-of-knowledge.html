@@ -142,6 +142,42 @@
   .glance-card-stat { font-size: 0.8rem; color: var(--parchment-dim); }
   .glance-card-stat.has-data { color: var(--parchment); }
 
+  /* ---------- ouroboros: the Obsidian sync cycle, as a snake eating its
+     own tail -- one colored arc for notes read in from the vault, one for
+     notes logged back out to it. Both directions, always the same loop. ---------- */
+  .ouroboros-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+  }
+  .ouroboros { width: 132px; height: 132px; flex: 0 0 auto; overflow: visible; }
+  .ouroboros-track { fill: none; stroke: rgba(244, 232, 208, 0.1); stroke-width: 9; }
+  .ouroboros-ring { transform-origin: 100px 100px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .ouroboros-ring { animation: ouroboros-spin 110s linear infinite; }
+  }
+  @keyframes ouroboros-spin { to { transform: rotate(360deg); } }
+  .ouroboros-arc {
+    fill: none;
+    stroke-width: 9;
+    stroke-linecap: round;
+  }
+  .ouroboros-arc-in { stroke: var(--jewel-teal-br); }
+  .ouroboros-arc-out { stroke: var(--gold-bright); }
+  .ouroboros-head path { fill: var(--gold-bright); stroke: var(--ink-deep); stroke-width: 1.4; }
+  .ouroboros-head circle { fill: var(--ink-deep); }
+  .ouroboros-head line { stroke: var(--ink-deep); stroke-width: 1.2; }
+  .ouroboros-stats { display: flex; flex-direction: column; gap: 0.6rem; }
+  .ouroboros-stat { display: flex; align-items: baseline; gap: 0.5rem; }
+  .ouroboros-count { font-size: 1.3rem; font-weight: bold; color: var(--parchment); min-width: 1.6em; text-align: right; }
+  .ouroboros-label { font-size: 0.72rem; color: var(--parchment-dim); }
+  .ouroboros-stat-in .ouroboros-count { color: var(--jewel-teal-br); }
+  .ouroboros-stat-out .ouroboros-count { color: var(--gold-bright); }
+  .ouroboros-caption { text-align: center; font-size: 0.68rem; color: var(--parchment-dim); margin: -0.5rem 0 1rem; }
+
   /* ---------- notes connect ---------- */
   .connect-row {
     display: flex;
@@ -291,6 +327,35 @@
 
     <section class="ornate-frame reveal">
       <h2>Knowledge Base</h2>
+
+      <div class="ouroboros-header">
+        <svg class="ouroboros" viewBox="0 0 200 200" role="img" aria-label="An ouroboros representing the Obsidian sync cycle">
+          <circle class="ouroboros-track" cx="100" cy="100" r="78"></circle>
+          <g class="ouroboros-ring">
+            <path class="ouroboros-arc ouroboros-arc-in" id="ouroborosArcIn"></path>
+            <path class="ouroboros-arc ouroboros-arc-out" id="ouroborosArcOut"></path>
+            <g class="ouroboros-head">
+              <path d="M 86 20 Q 100 2 114 20 Q 110 33 100 33 Q 90 33 86 20 Z"></path>
+              <circle cx="93" cy="17" r="2"></circle>
+              <circle cx="107" cy="17" r="2"></circle>
+              <line x1="100" y1="33" x2="96" y2="42"></line>
+              <line x1="100" y1="33" x2="104" y2="42"></line>
+            </g>
+          </g>
+        </svg>
+        <div class="ouroboros-stats">
+          <div class="ouroboros-stat ouroboros-stat-in">
+            <span class="ouroboros-count" id="ouroborosInCount">0</span>
+            <span class="ouroboros-label">notes synced in from Obsidian</span>
+          </div>
+          <div class="ouroboros-stat ouroboros-stat-out">
+            <span class="ouroboros-count" id="ouroborosOutCount">0</span>
+            <span class="ouroboros-label">notes logged out to Obsidian</span>
+          </div>
+        </div>
+      </div>
+      <p class="ouroboros-caption">The loop between this hub and your vault — everything that's come in, everything you've sent back.</p>
+
       <p class="connect-row">
         <span id="notesStatus">Obsidian notes not connected.</span>
         <button type="button" id="connectNotesBtn">Connect Notes Folder</button>
@@ -498,6 +563,8 @@
     });
   }
 
+  const LOG_COUNT_KEY = "life-hub-obsidian-log-count";
+  const OUROBOROS_CIRCUMFERENCE = 2 * Math.PI * 78;
   let notesDirHandle = null;
   let notesIndex = null; // { vaultPath: {path,title,date,tags,modifiedAt,excerpt,file} }
   let activeTagFilter = null;
@@ -525,6 +592,7 @@
     }
     renderTagPills();
     renderKbList();
+    updateOuroboros();
   }
 
   async function tryRestoreNotesFolder() {
@@ -559,6 +627,47 @@
   // the list blank until a folder happens to get connected.
   renderTagPills();
   renderKbList();
+  updateOuroboros();
+
+  // ---------- ouroboros: two arcs of one ring, split proportionally
+  // between notes read in from Obsidian and notes logged back out to it.
+  // The "logged out" count is a simple shared counter every room's
+  // writeNoteToVault() bumps on a successful write -- this page never
+  // scans the vault's Rough Notes folder itself, keeping it read-only. ----------
+  function loggedOutCount() {
+    return Number(localStorage.getItem(LOG_COUNT_KEY) || "0");
+  }
+  // Point on the ring at `angleDeg` clockwise from the top (where the
+  // snake's head sits), for a circle centered at (100,100) with r=78.
+  function ouroborosPoint(angleDeg) {
+    const rad = (angleDeg * Math.PI) / 180;
+    return { x: 100 + 78 * Math.sin(rad), y: 100 - 78 * Math.cos(rad) };
+  }
+  function ouroborosArcPath(startDeg, endDeg) {
+    const start = ouroborosPoint(startDeg);
+    const end = ouroborosPoint(endDeg);
+    const largeArc = endDeg - startDeg > 180 ? 1 : 0;
+    return "M " + start.x + " " + start.y + " A 78 78 0 " + largeArc + " 1 " + end.x + " " + end.y;
+  }
+  function updateOuroboros() {
+    const inCount = allNotes().length;
+    const outCount = loggedOutCount();
+    document.getElementById("ouroborosInCount").textContent = inCount;
+    document.getElementById("ouroborosOutCount").textContent = outCount;
+
+    const total = inCount + outCount;
+    const MIN_FRACTION = 0.08;
+    let inFraction = total === 0 ? 0.5 : inCount / total;
+    inFraction = Math.min(1 - MIN_FRACTION, Math.max(MIN_FRACTION, inFraction));
+    const inDeg = 360 * inFraction;
+
+    // A hair of headroom on each side so the two arcs don't run directly
+    // into the head/tail icon at the seam.
+    const gap = 4;
+    document.getElementById("ouroborosArcIn").setAttribute("d", ouroborosArcPath(gap, inDeg));
+    document.getElementById("ouroborosArcOut").setAttribute("d", ouroborosArcPath(inDeg, 360 - gap));
+  }
+  window.addEventListener("storage", (e) => { if (e.key === LOG_COUNT_KEY) updateOuroboros(); });
 
   function allNotes() {
     return notesIndex ? Object.values(notesIndex) : [];
