@@ -104,7 +104,7 @@
     color: var(--gold-bright);
     text-shadow: 0 0 18px rgba(242, 200, 121, 0.5);
     background-image: var(--pattern-iznik-border);
-    background-size: 64px 32px;
+    background-size: 80px 40px;
     background-repeat: repeat-x;
     background-position: bottom;
   }
@@ -209,7 +209,7 @@
     background:
       var(--pattern-girih),
       linear-gradient(to top, var(--wall) 0%, var(--wall) 36%, var(--sky-lower) 82%, var(--sky-mid) 100%);
-    background-size: 60px 60px, auto;
+    background-size: 100px 100px, auto;
     transition: background 2s ease;
     border: 1px solid rgba(212, 162, 76, 0.35);
     border-radius: var(--niche-radius) var(--niche-radius) 6px 6px / 80% 80% 6px 6px;
@@ -476,7 +476,7 @@
     background:
       var(--pattern-zellij),
       linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
-    background-size: 72px 72px, auto;
+    background-size: 100px 100px, auto;
     border: 1px solid rgba(212, 162, 76, 0.5);
     border-radius: 10px;
     box-shadow:
@@ -571,6 +571,29 @@
   .mat.reveal:nth-of-type(4) { transition-delay: 0.3s; }
   @media (prefers-reduced-motion: reduce) {
     .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---------- mobile: the top-right cell the plaque shares with the
+     top niche gets too narrow below ~700px for a 5-row time table
+     (rows were wrapping to two lines) -- give the plaque its own
+     full-width row under the room instead. Placed last in the file so
+     it wins over the earlier unconditional .room/.plaque rules at
+     equal specificity. ---------- */
+  @media (max-width: 700px) {
+    .room {
+      height: auto;
+      grid-template-rows: 1fr 1.35fr 1fr auto;
+      grid-template-areas:
+        ".      top    ."
+        "left   center right"
+        ".      bottom ."
+        "plaque plaque plaque";
+    }
+    .plaque {
+      grid-area: plaque;
+      width: 100%;
+      margin-top: clamp(10px, 2vmin, 24px);
+    }
   }
 
 </style>

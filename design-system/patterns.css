@@ -64,26 +64,33 @@
    ============================================================ */
 
 :root {
-  --pattern-girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50,24 L54.02,40.30 L68.38,31.62 L59.70,45.98 L76,50 L59.70,54.02 L68.38,68.38 L54.02,59.70 L50,76 L45.98,59.70 L31.62,68.38 L40.30,54.02 L24,50 L40.30,45.98 L31.62,31.62 L45.98,40.30 Z' fill='none' stroke='%23f2c879' stroke-width='1.1' opacity='0.55'/%3E%3C/svg%3E");
+  /* Both patterns' opacity was lowered from an earlier, much louder pass
+     (girih was 0.55, zellij had no opacity at all -- full-saturation
+     tiles) after real-device testing found them competing with text
+     sitting on top. The old invented placeholder this replaced ran at
+     0.28 and read fine, so girih is brought back down near that
+     baseline; zellij keeps a bit more presence since color *is* the
+     point of zellij, but at roughly half its original strength. */
+  --pattern-girih: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50,24 L54.02,40.30 L68.38,31.62 L59.70,45.98 L76,50 L59.70,54.02 L68.38,68.38 L54.02,59.70 L50,76 L45.98,59.70 L31.62,68.38 L40.30,54.02 L24,50 L40.30,45.98 L31.62,31.62 L45.98,40.30 Z' fill='none' stroke='%23f2c879' stroke-width='1.1' opacity='0.26'/%3E%3C/svg%3E");
 
-  --pattern-zellij: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpath d='M50,32 L52.76,43.35 L62.73,37.27 L56.65,47.24 L68,50 L56.65,52.76 L62.73,62.73 L52.76,56.65 L50,68 L47.24,56.65 L37.27,62.73 L43.35,52.76 L32,50 L43.35,47.24 L37.27,37.27 L47.24,43.35 Z' fill='%233f8fc4' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,4 L56,14 L50,24 L44,14 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,76 L56,86 L50,96 L44,86 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M14,40 L20,50 L14,60 L8,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M86,40 L92,50 L86,60 L80,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3C/svg%3E");
+  --pattern-zellij: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cg opacity='0.2'%3E%3Cpath d='M50,32 L52.76,43.35 L62.73,37.27 L56.65,47.24 L68,50 L56.65,52.76 L62.73,62.73 L52.76,56.65 L50,68 L47.24,56.65 L37.27,62.73 L43.35,52.76 L32,50 L43.35,47.24 L37.27,37.27 L47.24,43.35 Z' fill='%233f8fc4' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,4 L56,14 L50,24 L44,14 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M50,76 L56,86 L50,96 L44,86 Z' fill='%233fa06f' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M14,40 L20,50 L14,60 L8,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3Cpath d='M86,40 L92,50 L86,60 L80,50 Z' fill='%23e3a355' stroke='%230b0509' stroke-width='0.8'/%3E%3C/g%3E%3C/svg%3E");
 
   --pattern-iznik-border: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Cpath d='M40,28 L40,38' stroke='%233fc2b8' stroke-width='1.5' fill='none'/%3E%3Cpath d='M40,34 Q28,30 22,36 Q30,38 40,36 Z' fill='%233fc2b8' stroke='%230b0509' stroke-width='0.6'/%3E%3Cpath d='M40,34 Q52,30 58,36 Q50,38 40,36 Z' fill='%233fc2b8' stroke='%230b0509' stroke-width='0.6'/%3E%3Cpath d='M30,28 Q28,16 34,10 Q37,6 40,12 Q43,6 46,10 Q52,16 50,28 Q40,32 30,28 Z' fill='%23e8624f' stroke='%230b0509' stroke-width='0.6'/%3E%3C/svg%3E");
 }
 
 .pattern-girih {
   background-image: var(--pattern-girih);
-  background-size: 60px 60px;
+  background-size: 100px 100px;
   background-repeat: repeat;
 }
 .pattern-zellij {
   background-image: var(--pattern-zellij);
-  background-size: 72px 72px;
+  background-size: 100px 100px;
   background-repeat: repeat;
 }
 .pattern-iznik-border {
   background-image: var(--pattern-iznik-border);
-  background-size: 64px 32px;
+  background-size: 80px 40px;
   background-repeat: repeat-x;
   background-position: bottom;
 }

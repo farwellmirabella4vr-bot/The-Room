@@ -48,7 +48,7 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
   background:
     var(--pattern-girih, none),
     linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
-  background-size: 60px 60px, auto;
+  background-size: 100px 100px, auto;
   border: 3px solid var(--gold);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-frame-inset), var(--shadow-deep);
@@ -96,7 +96,7 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
 }
 .ornate-frame.iznik-framed::after {
   background-image: var(--pattern-iznik-border, none);
-  background-size: 64px 32px;
+  background-size: 80px 40px;
   background-repeat: repeat-x;
   background-position: bottom;
   opacity: 1;
@@ -108,7 +108,7 @@ main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
    the Moroccan accent instead of the default girih strapwork field. */
 .ornate-frame.zellij-framed {
   background-image: var(--pattern-zellij, none), linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
-  background-size: 72px 72px, auto;
+  background-size: 100px 100px, auto;
 }
 
 /* ---------- buttons ---------- */
@@ -171,7 +171,7 @@ a.card:hover { border-color: var(--gold-bright); transform: translateY(-1px); }
   background:
     var(--pattern-girih, none),
     linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
-  background-size: 60px 60px, auto;
+  background-size: 100px 100px, auto;
   border: 3px solid var(--gold);
   border-radius: var(--radius-sm);
   box-shadow: var(--shadow-frame-inset), var(--shadow-deep);
