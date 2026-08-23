@@ -4,20 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Content Hub</title>
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="design-system/patterns.css">
 <style>
 
   /* ============================================================
-     CONTENT HUB — same mosque/lantern palette and geometric wall
-     texture as room.html, applied to an upload + organizing UI.
+     CONTENT HUB — same mosque/lantern palette as room.html, applied
+     to an upload + organizing UI. Gold/ivory and the wall pattern now
+     come from design-system/ (see the :root comment below).
      ============================================================ */
   :root {
     --wall:        #3a1f2e;
     --wall-dark:   #241220;
     --wall-light:  #4d2a3c;
-    --gold:        #d4a24c;
-    --gold-bright: #f2c879;
-    --ivory:       #f4e8d0;
-    --ivory-dim:   #cbb999;
     --ember:       #ff9d4d;
     --status-idea:    #ff9d4d;
     --status-drafted: #d4a24c;
@@ -27,7 +26,13 @@
     --sky-top: #241031; --sky-upper: #4a1f47; --sky-mid: #8c3559;
     --sky-lower: #d9773f; --sky-ground: #7a3220;
 
-    --wall-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%23d4a24c' stroke-width='1' opacity='0.28'%3E%3Cpath d='M32 8 L56 32 L32 56 L8 32 Z'/%3E%3Cpath d='M16 16 L48 16 L48 48 L16 48 Z'/%3E%3C/g%3E%3C/svg%3E");
+    /* gold/ivory now come from design-system/tokens.css (identical
+       values, so nothing visually changes) -- aliased under this
+       room's existing names so none of the rules below need to
+       change. The generic invented wall-pattern is gone; .panel now
+       uses the real girih pattern from design-system/patterns.css. */
+    --ivory:     var(--parchment);
+    --ivory-dim: var(--parchment-dim);
   }
 
   * { box-sizing: border-box; }
@@ -46,7 +51,11 @@
 
   .hub-header {
     text-align: center;
-    padding: 2rem 1rem 1rem;
+    padding: 2rem 1rem 2.2rem;
+    background-image: var(--pattern-iznik-border);
+    background-size: 64px 32px;
+    background-repeat: repeat-x;
+    background-position: bottom;
   }
   .back-link {
     display: inline-block;
@@ -97,14 +106,21 @@
 
   .panel {
     background:
-      var(--wall-pattern),
+      var(--pattern-girih),
       linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
-    background-size: 64px 64px, auto;
+    background-size: 60px 60px, auto;
     border: 1px solid rgba(212, 162, 76, 0.4);
     border-radius: 16px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), inset 0 0 0 3px rgba(212, 162, 76, 0.12);
     padding: 1.4rem 1.5rem 1.6rem;
     margin-bottom: 1.75rem;
+  }
+  /* The Moroccan accent from the shared pattern library, on the
+     sidebar panel -- so this page shows two traditions in use, like
+     home.html does (girih field + zellij accent panel). */
+  .panel.zellij {
+    background-image: var(--pattern-zellij), linear-gradient(160deg, var(--wall-light) 0%, var(--wall) 60%, var(--wall-dark) 100%);
+    background-size: 72px 72px, auto;
   }
 
   /* ---------- upload / drop zone ---------- */
@@ -366,7 +382,7 @@
     </div>
 
     <div class="side-column">
-      <section class="panel reveal">
+      <section class="panel zellij reveal">
         <h2>Idea Notepad</h2>
         <form class="note-form" id="noteForm">
           <textarea id="noteInput" placeholder="Jot a content idea, no media needed yet..."></textarea>
