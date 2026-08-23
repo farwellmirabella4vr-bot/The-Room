@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Archive</title>
+<!--
+  THE ARCHIVE — preview/selection step only, by design. Picks a cutoff
+  date and shows exactly what would be included in a full export across
+  every room, with real counts and (where a source folder is connected)
+  real byte sizes -- before any zip/write/verify/delete pipeline exists.
+  That pipeline is a deliberate later step, not built here.
+
+  Read-only in every direction: this page never deletes or modifies
+  anything in any room's storage, and never touches the real Obsidian
+  vault -- only its one-way, read-only mirror folder, exactly like Nest
+  of Knowledge already does.
+
+  Visual language matches Nest of Knowledge (same palette, same
+  "ornate frame" treatment) since that's the closest thing this project
+  has to a shared cross-room look right now -- the real shared design
+  system (Section 6 of the UI-upscale work) hasn't landed yet. This room
+  should get re-skinned once it does.
+-->
+<style>
+
+  :root {
+    --ink:          #150b12;
+    --ink-deep:     #0b0509;
+    --plum:         #2c1035;
+    --plum-light:   #4a1f5a;
+    --jewel-red:    #7a1f35;
+    --jewel-red-br: #c9425a;
+    --jewel-blue:   #1a3a6b;
+    --jewel-blue-br:#3a6ac9;
+    --jewel-teal:   #145f56;
+    --jewel-teal-br:#2ea08a;
+    --gold:         #d4a24c;
+    --gold-bright:  #f2c879;
+    --parchment:    #f4e8d0;
+    --parchment-dim:#cbb999;
+
+    --girih-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='none' stroke='%23f2c879' stroke-width='1' opacity='0.16'%3E%3Crect x='15' y='15' width='30' height='30'/%3E%3Crect x='15' y='15' width='30' height='30' transform='rotate(45 30 30)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; }
+  [hidden] { display: none !important; }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--parchment);
+    background: radial-gradient(ellipse at 50% 20%, var(--plum-light) 0%, var(--plum) 45%, var(--ink) 100%);
+    min-height: 100vh;
+    padding-bottom: 3rem;
+  }
+
+  a { color: var(--gold-bright); }
+
+  .hub-header { position: relative; z-index: 2; text-align: center; padding: 1.6rem 1rem 0.8rem; }
+  .back-link { display: inline-block; font-size: 0.82rem; color: var(--parchment-dim); text-decoration: none; }
+  .back-link:hover { color: var(--gold-bright); }
+  .hub-title {
+    margin: 0.5rem 0 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+    color: var(--gold-bright);
+    text-shadow: 0 0 24px rgba(242, 200, 121, 0.45);
+  }
+  .hub-header p { margin: 0.5rem auto 0; max-width: 480px; font-size: 0.82rem; color: var(--parchment-dim); }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 0 1.25rem; }
+
+  .ornate-frame {
+    position: relative;
+    background:
+      var(--girih-pattern),
+      linear-gradient(160deg, var(--plum-light) 0%, var(--plum) 55%, var(--ink) 100%);
+    background-size: 60px 60px, auto;
+    border: 3px solid var(--gold);
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px rgba(242, 200, 121, 0.35) inset, 0 20px 50px rgba(0, 0, 0, 0.4);
+    padding: 1.4rem 1.6rem 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+  .ornate-frame::before {
+    content: "";
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(242, 200, 121, 0.4);
+    border-radius: 3px;
+    pointer-events: none;
+  }
+  .ornate-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px),
+      radial-gradient(circle, var(--gold-bright) 0 2px, transparent 2.5px);
+    background-repeat: no-repeat;
+    background-position: 8px 8px, calc(100% - 8px) 8px, 8px calc(100% - 8px), calc(100% - 8px) calc(100% - 8px);
+    opacity: 0.8;
+  }
+  .ornate-frame h2 {
+    margin: 0 0 0.9rem;
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--gold-bright);
+  }
+
+  .cutoff-row { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+  .cutoff-row label { font-size: 0.85rem; color: var(--parchment-dim); }
+  .cutoff-row input[type="date"] {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--parchment);
+  }
+  .cutoff-note { font-size: 0.72rem; color: var(--parchment-dim); margin-top: 0.7rem; }
+
+  .connect-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+  .connect-source-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    background: rgba(11, 5, 9, 0.35);
+    border: 1px solid rgba(242, 200, 121, 0.2);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+  }
+  .connect-source-name { font-size: 0.85rem; color: var(--parchment); }
+  .connect-source-status { font-size: 0.72rem; color: var(--parchment-dim); display: block; margin-top: 0.15rem; }
+  .connect-source-status.connected { color: var(--jewel-teal-br); }
+  .connect-source-row button {
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    color: var(--ink-deep);
+    font-weight: bold;
+    font-size: 0.78rem;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .preview-card {
+    background: rgba(11, 5, 9, 0.4);
+    border: 1px solid rgba(242, 200, 121, 0.25);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+  }
+  .preview-card-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-style: italic;
+    color: var(--gold-bright);
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .preview-card-count { font-size: 1.3rem; font-weight: bold; color: var(--parchment); }
+  .preview-card-label { font-size: 0.7rem; color: var(--parchment-dim); text-transform: uppercase; letter-spacing: 0.04em; }
+  .preview-card-size { font-size: 0.76rem; color: var(--parchment-dim); margin-top: 0.4rem; }
+
+  .preview-total {
+    text-align: center;
+    font-size: 1rem;
+    color: var(--parchment);
+    padding: 0.9rem;
+    border-top: 1px dashed rgba(242, 200, 121, 0.3);
+    margin-top: 0.4rem;
+  }
+  .preview-total strong { color: var(--gold-bright); }
+
+  .excluded-note {
+    font-size: 0.76rem;
+    color: var(--parchment-dim);
+    background: rgba(11, 5, 9, 0.35);
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+  .excluded-note strong { color: var(--parchment); }
+
+  .next-step-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--parchment-dim);
+    margin-top: 0.5rem;
+  }
+
+  .reveal { transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal:not(.in-view) { opacity: 0; transform: translateY(14px); }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
+</style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <a class="back-link" href="home.html">&larr; Home</a>
+    &nbsp;&middot;&nbsp;
+    <a class="back-link" href="room.html">Back to the Room</a>
+    <h1 class="hub-title">The Archive</h1>
+    <p>
+      Bundle up everything from before a date, move it to an external drive, and only then --
+      as a completely separate, deliberate step -- decide whether to delete the originals.
+      This page is the preview only. Nothing here writes, moves, or deletes anything.
+    </p>
+  </header>
+
+  <main>
+
+    <section class="ornate-frame reveal">
+      <h2>Cutoff Date</h2>
+      <div class="cutoff-row">
+        <label for="cutoffDate">Archive everything dated before</label>
+        <input type="date" id="cutoffDate">
+      </div>
+      <p class="cutoff-note" id="videoLogYearNote"></p>
+    </section>
+
+    <section class="ornate-frame reveal">
+      <h2>Connect for Accurate Sizes</h2>
+      <p class="cutoff-note" style="margin-top: 0;">
+        Item counts below work either way. Connecting these folders (same picker you already use
+        elsewhere in the hub -- no separate ceremony) fills in real file sizes instead of leaving
+        them unknown.
+      </p>
+      <div class="connect-grid">
+        <div class="connect-source-row">
+          <div>
+            <span class="connect-source-name">Video Log media folder</span>
+            <span class="connect-source-status" id="mediaFolderStatus">Not connected — sizes unknown.</span>
+          </div>
+          <button type="button" id="connectMediaFolderBtn">Connect</button>
+        </div>
+        <div class="connect-source-row">
+          <div>
+            <span class="connect-source-name">Obsidian synced-notes folder</span>
+            <span class="connect-source-status" id="notesFolderStatus">Not connected — notes won't be included until connected.</span>
+          </div>
+          <button type="button" id="connectNotesFolderBtn">Connect</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ornate-frame reveal">
+      <h2>Preview</h2>
+      <div class="preview-grid" id="previewGrid"></div>
+      <p class="preview-total" id="previewTotal"></p>
+      <p class="excluded-note">
+        <strong>Not included:</strong> Knowledge Center (teachings track a "reached N of M" position,
+        never a date, so there's nothing to filter by cutoff) and Travel World (photos/videos there
+        are static files you drop in by hand, with no per-item date or delete mechanism yet).
+        Language Hub video diary recordings aren't included either — by design, those are never saved
+        anywhere; they exist only until you download them yourself.
+      </p>
+      <p class="next-step-note">
+        Building the zip, writing to a drive, verifying it, and deleting originals are separate steps,
+        built and shown one at a time after this preview is right.
+      </p>
+    </section>
+
+  </main>
+
+<script>
+(() => {
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+
+  // Video Log stores its own media-folder handle in a separate database
+  // (video-log-editor-handles), not the shared one -- read it directly
+  // rather than asking you to connect the same real folder a second time.
+  function getVideoLogHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open("video-log-editor-handles", 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function loadVideoLogMediaHandle() {
+    try {
+      const db = await getVideoLogHandleDB();
+      return await new Promise((resolve, reject) => {
+        const tx = db.transaction("handles", "readonly");
+        const req = tx.objectStore("handles").get("mediaFolder");
+        req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+        req.onerror = () => reject(req.error);
+      });
+    } catch (e) { return null; }
+  }
+
+  let mediaDirHandle = null;
+  let notesDirHandle = null;
+
+  function setStatus(elId, text, connected) {
+    const el = document.getElementById(elId);
+    el.textContent = text;
+    el.classList.toggle("connected", !!connected);
+  }
+
+  async function tryRestoreFolders() {
+    try {
+      const mHandle = await loadVideoLogMediaHandle();
+      if (mHandle && (await mHandle.queryPermission({ mode: "read" })) === "granted") {
+        mediaDirHandle = mHandle;
+        setStatus("mediaFolderStatus", "Connected (" + mHandle.name + "/) — sizes are real.", true);
+      } else if (mHandle) {
+        setStatus("mediaFolderStatus", "Connected previously — click Connect to reconnect this session.");
+      }
+    } catch (e) { /* not connected anywhere yet */ }
+
+    try {
+      const nHandle = await loadHandle("notesFolder");
+      if (nHandle && (await nHandle.queryPermission({ mode: "read" })) === "granted") {
+        notesDirHandle = nHandle;
+        setStatus("notesFolderStatus", "Connected (" + nHandle.name + "/) — sizes are real.", true);
+      } else if (nHandle) {
+        setStatus("notesFolderStatus", "Connected previously — click Connect to reconnect this session.");
+      }
+    } catch (e) { /* not connected anywhere yet */ }
+
+    computePreview();
+  }
+
+  const fsAccessSupported = typeof window.showDirectoryPicker === "function";
+  if (!fsAccessSupported) {
+    document.getElementById("connectMediaFolderBtn").disabled = true;
+    document.getElementById("connectNotesFolderBtn").disabled = true;
+  } else {
+    document.getElementById("connectMediaFolderBtn").addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "video-log-media", mode: "read" });
+        mediaDirHandle = handle;
+        setStatus("mediaFolderStatus", "Connected (" + handle.name + "/) — sizes are real.", true);
+        computePreview();
+      } catch (e) { /* user cancelled */ }
+    });
+    document.getElementById("connectNotesFolderBtn").addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "life-hub-notes", mode: "read" });
+        notesDirHandle = handle;
+        await saveHandle("notesFolder", handle);
+        setStatus("notesFolderStatus", "Connected (" + handle.name + "/) — sizes are real.", true);
+        computePreview();
+      } catch (e) { /* user cancelled */ }
+    });
+    tryRestoreFolders();
+  }
+
+  // ---------- per-source data gathering ----------
+  function cutoffDateValue() {
+    const input = document.getElementById("cutoffDate");
+    if (!input.value) return null;
+    const d = new Date(input.value + "T00:00:00");
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function getVideoLogEntries() {
+    try {
+      const raw = localStorage.getItem("video-log-editor-v1");
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      const year = new Date().getFullYear(); // no year is tracked in the data itself -- see the note above the date picker
+      const out = [];
+      Object.keys(parsed.entries || {}).forEach((month) => {
+        Object.keys(parsed.entries[month] || {}).forEach((day) => {
+          const entry = parsed.entries[month][day];
+          out.push({ date: new Date(year, Number(month) - 1, Number(day)), entry });
+        });
+      });
+      return out;
+    } catch (e) { return []; }
+  }
+
+  async function fileSizeInFolder(dirHandle, filename) {
+    if (!dirHandle) return null;
+    try {
+      const fh = await dirHandle.getFileHandle(filename);
+      const file = await fh.getFile();
+      return file.size;
+    } catch (e) { return null; }
+  }
+
+  async function computeVideoLog(cutoff) {
+    const all = getVideoLogEntries();
+    const before = cutoff ? all.filter((e) => e.date < cutoff) : [];
+    let mediaCount = 0;
+    let sizeBytes = 0;
+    let sizeKnown = !!mediaDirHandle;
+    for (const { entry } of before) {
+      const media = Array.isArray(entry.media) ? entry.media : [];
+      mediaCount += media.length;
+      if (mediaDirHandle) {
+        for (const m of media) {
+          const filename = (m.url || "").replace(/^media\//, "");
+          if (!filename) continue;
+          const size = await fileSizeInFolder(mediaDirHandle, filename);
+          if (size == null) sizeKnown = false; else sizeBytes += size;
+        }
+      }
+    }
+    return { count: before.length, mediaCount, sizeBytes, sizeKnown: sizeKnown && before.length > 0 };
+  }
+
+  function openIndexedDB(name, upgrade) {
+    return new Promise((resolve) => {
+      const req = indexedDB.open(name, 1);
+      req.onupgradeneeded = () => upgrade(req.result);
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => resolve(null);
+    });
+  }
+  function getAllFromStore(db, storeName) {
+    return new Promise((resolve) => {
+      if (!db || !db.objectStoreNames.contains(storeName)) { resolve([]); return; }
+      const tx = db.transaction(storeName, "readonly");
+      const req = tx.objectStore(storeName).getAll();
+      req.onsuccess = () => resolve(req.result || []);
+      req.onerror = () => resolve([]);
+    });
+  }
+
+  async function computeBeatMaker(cutoff) {
+    const db = await openIndexedDB("beat-maker-db", (d) => {
+      if (!d.objectStoreNames.contains("samples")) d.createObjectStore("samples", { keyPath: "id" });
+      if (!d.objectStoreNames.contains("beats")) d.createObjectStore("beats", { keyPath: "id" });
+    });
+    const [beats, samples] = await Promise.all([getAllFromStore(db, "beats"), getAllFromStore(db, "samples")]);
+    const beatsBefore = cutoff ? beats.filter((b) => b.createdAt && new Date(b.createdAt) < cutoff) : [];
+    const samplesBefore = cutoff ? samples.filter((s) => s.addedAt && new Date(s.addedAt) < cutoff) : [];
+    const sizeBytes = samplesBefore.reduce((sum, s) => sum + (s.blob && s.blob.size ? s.blob.size : 0), 0);
+    return { count: beatsBefore.length + samplesBefore.length, sizeBytes, sizeKnown: true };
+  }
+
+  async function computeContentHub(cutoff) {
+    let cards = [];
+    try { cards = JSON.parse(localStorage.getItem("content-hub-cards-v1") || "[]"); } catch (e) { cards = []; }
+    const before = cutoff ? cards.filter((c) => c.createdAt && new Date(c.createdAt) < cutoff) : [];
+    const db = await openIndexedDB("content-hub-media", (d) => {
+      if (!d.objectStoreNames.contains("files")) d.createObjectStore("files", { keyPath: "id" });
+    });
+    const files = await getAllFromStore(db, "files");
+    const fileMap = new Map(files.map((f) => [f.id, f]));
+    const sizeBytes = before.reduce((sum, c) => {
+      const f = fileMap.get(c.mediaId);
+      return sum + (f && f.blob && f.blob.size ? f.blob.size : 0);
+    }, 0);
+    return { count: before.length, sizeBytes, sizeKnown: true };
+  }
+
+  function computeLanguageHub(cutoff) {
+    try {
+      const raw = localStorage.getItem("room-language-hub-v1");
+      if (!raw) return { count: 0, sizeBytes: 0, sizeKnown: true };
+      const parsed = JSON.parse(raw);
+      const journal = Array.isArray(parsed.videoJournal) ? parsed.videoJournal : [];
+      const before = cutoff ? journal.filter((j) => j.date && new Date(j.date + "T00:00:00") < cutoff) : [];
+      return { count: before.length, sizeBytes: 0, sizeKnown: true };
+    } catch (e) { return { count: 0, sizeBytes: 0, sizeKnown: true }; }
+  }
+
+  function computeFinanceHub(cutoff) {
+    try {
+      const raw = localStorage.getItem("room-finance-hub-v1");
+      if (!raw) return { count: 0, sizeBytes: 0, sizeKnown: true };
+      const parsed = JSON.parse(raw);
+      const txns = (parsed.budget && Array.isArray(parsed.budget.transactions)) ? parsed.budget.transactions : [];
+      const before = cutoff ? txns.filter((t) => t.date && new Date(t.date + "T00:00:00") < cutoff) : [];
+      return { count: before.length, sizeBytes: 0, sizeKnown: true };
+    } catch (e) { return { count: 0, sizeBytes: 0, sizeKnown: true }; }
+  }
+
+  async function computeObsidianCache(cutoff) {
+    if (!notesDirHandle) return { count: 0, sizeBytes: 0, sizeKnown: false, needsConnect: true };
+    let notesIndex;
+    try {
+      const fh = await notesDirHandle.getFileHandle("_index.json");
+      const file = await fh.getFile();
+      notesIndex = JSON.parse(await file.text());
+    } catch (e) { return { count: 0, sizeBytes: 0, sizeKnown: false, needsConnect: true }; }
+
+    const notes = Object.values(notesIndex || {});
+    const before = cutoff ? notes.filter((n) => {
+      const d = n.modifiedAt || n.date;
+      return d && new Date(d) < cutoff;
+    }) : [];
+
+    let sizeBytes = 0;
+    let sizeKnown = true;
+    for (const note of before) {
+      if (!note.file) { sizeKnown = false; continue; }
+      const size = await fileSizeInFolder(notesDirHandle, note.file);
+      if (size == null) sizeKnown = false; else sizeBytes += size;
+    }
+    return { count: before.length, sizeBytes, sizeKnown: sizeKnown && before.length > 0 };
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+    return (bytes / (1024 * 1024 * 1024)).toFixed(2) + " GB";
+  }
+
+  function previewCard(name, result, extraLabel) {
+    const card = document.createElement("div");
+    card.className = "preview-card";
+    const nameEl = document.createElement("div");
+    nameEl.className = "preview-card-name";
+    nameEl.textContent = name;
+    const countEl = document.createElement("div");
+    countEl.className = "preview-card-count";
+    countEl.textContent = result.count;
+    const labelEl = document.createElement("div");
+    labelEl.className = "preview-card-label";
+    labelEl.textContent = extraLabel || (result.count === 1 ? "item" : "items");
+    const sizeEl = document.createElement("div");
+    sizeEl.className = "preview-card-size";
+    sizeEl.textContent = result.needsConnect
+      ? "Connect the notes folder above to include this"
+      : (result.sizeKnown ? formatBytes(result.sizeBytes) : "Size unknown — connect a folder above for real numbers");
+    card.appendChild(nameEl);
+    card.appendChild(countEl);
+    card.appendChild(labelEl);
+    card.appendChild(sizeEl);
+    return card;
+  }
+
+  let computeToken = 0;
+  async function computePreview() {
+    const myToken = ++computeToken; // guards against an older, slower computation overwriting a newer one
+    const cutoff = cutoffDateValue();
+    const grid = document.getElementById("previewGrid");
+    const totalEl = document.getElementById("previewTotal");
+
+    if (!cutoff) {
+      grid.innerHTML = "";
+      totalEl.textContent = "Pick a cutoff date above to see what would be included.";
+      return;
+    }
+
+    const [videoLog, beatMaker, contentHub, languageHub, financeHub, obsidian] = await Promise.all([
+      computeVideoLog(cutoff),
+      computeBeatMaker(cutoff),
+      computeContentHub(cutoff),
+      Promise.resolve(computeLanguageHub(cutoff)),
+      Promise.resolve(computeFinanceHub(cutoff)),
+      computeObsidianCache(cutoff),
+    ]);
+    if (myToken !== computeToken) return; // a newer date change superseded this one
+
+    grid.innerHTML = "";
+    grid.appendChild(previewCard("Video Log", videoLog, videoLog.count === 1 ? "day logged" : "days logged"));
+    grid.appendChild(previewCard("Beat Maker", beatMaker, "beats + samples"));
+    grid.appendChild(previewCard("Content Hub", contentHub));
+    grid.appendChild(previewCard("Language Hub journal", languageHub, "journal entries"));
+    grid.appendChild(previewCard("Finance Hub", financeHub, "transactions"));
+    grid.appendChild(previewCard("Obsidian notes cache", obsidian));
+
+    const totalCount = videoLog.count + beatMaker.count + contentHub.count + languageHub.count + financeHub.count + obsidian.count;
+    const knownSizeBytes = [videoLog, beatMaker, contentHub, obsidian]
+      .filter((r) => r.sizeKnown)
+      .reduce((sum, r) => sum + r.sizeBytes, 0);
+    const anyUnknown = [videoLog, beatMaker, contentHub, obsidian].some((r) => r.count > 0 && !r.sizeKnown);
+
+    totalEl.innerHTML = "<strong>" + totalCount + "</strong> item(s) total" +
+      (totalCount > 0
+        ? ", " + (anyUnknown ? "at least " : "") + "<strong>" + formatBytes(knownSizeBytes) + "</strong>" +
+          (anyUnknown ? " (connect the folders above for the full real size)" : "")
+        : "");
+  }
+
+  document.getElementById("cutoffDate").addEventListener("change", computePreview);
+
+  // ---------- the Video Log year caveat, stated plainly since it's a real gap ----------
+  document.getElementById("videoLogYearNote").textContent =
+    "Note: Video Log entries only track month + day, not a year -- this page treats them all as " +
+    new Date().getFullYear() + " since the app hasn't been used across a year boundary yet. " +
+    "That assumption will need revisiting once it has.";
+
+  computePreview();
+
+  // ---------- scroll reveal (matches the rest of the hub) ----------
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+  }
+})();
+</script>
+</body>
+</html>
