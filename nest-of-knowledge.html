@@ -352,6 +352,10 @@
         <span id="notesStatus">Obsidian notes not connected.</span>
         <button type="button" id="connectNotesBtn">Connect Notes Folder</button>
       </p>
+      <div class="sync-fallback" id="notesFallback" hidden>
+        <button type="button" id="notesImportBtn">Import Notes Folder</button>
+        <input type="file" id="notesImportInput" webkitdirectory multiple hidden>
+      </div>
       <div class="kb-toolbar">
         <input type="text" class="kb-search" id="kbSearch" placeholder="Search notes by title, tag, or content...">
       </div>
@@ -695,13 +699,23 @@
 
   const notesStatusEl = document.getElementById("notesStatus");
   const connectNotesBtn = document.getElementById("connectNotesBtn");
+  const notesFallback = document.getElementById("notesFallback");
   const fsAccessSupported = typeof window.showDirectoryPicker === "function";
+
+  // Populated on iOS/Safari (no File System Access API) by importing the
+  // whole synced-notes folder at once via <input webkitdirectory>, instead
+  // of the live directory handle desktop gets. Same folder, same content --
+  // just a one-time import per session rather than a standing connection,
+  // since Safari can't hold a folder handle across page loads. Keyed by
+  // the note's `file` field (the same filename notesIndex entries point at).
+  const importedNoteFiles = new Map();
 
   function setNotesStatus(text) { notesStatusEl.textContent = text; }
 
   if (!fsAccessSupported) {
     connectNotesBtn.disabled = true;
-    setNotesStatus("Obsidian notes need Edge or Chrome on desktop.");
+    notesFallback.hidden = false;
+    setNotesStatus("This browser can't connect a folder directly (expected on iPhone/Safari) — use Import below, pointed at your synced-notes folder.");
   }
 
   async function loadNotesIndex() {
@@ -747,6 +761,45 @@
     });
     tryRestoreNotesFolder();
   }
+
+  // Fallback for browsers without the File System Access API: select the
+  // whole synced-notes folder at once (webkitdirectory), find _index.json
+  // among the files, and stash every notes/*.json alongside it in memory
+  // so openNoteDetail() below can read full note content without a
+  // directory handle. Nothing is written anywhere -- read-only, same as
+  // the desktop path.
+  document.getElementById("notesImportBtn").addEventListener("click", () => {
+    document.getElementById("notesImportInput").click();
+  });
+  document.getElementById("notesImportInput").addEventListener("change", async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    const indexFile = files.find((f) => /(^|\/)_index\.json$/.test(f.webkitRelativePath || f.name));
+    if (!indexFile) {
+      setNotesStatus("Couldn't find _index.json in that folder — select the synced-notes folder itself, not a subfolder.");
+      return;
+    }
+    try {
+      notesIndex = JSON.parse(await indexFile.text());
+    } catch (err) {
+      setNotesStatus("Couldn't read _index.json — it may be corrupt. Try re-syncing from Obsidian first.");
+      return;
+    }
+    importedNoteFiles.clear();
+    for (const f of files) {
+      const rel = f.webkitRelativePath || f.name;
+      if (/\/notes\/.+\.json$/.test(rel) || (!rel.includes("/") && f !== indexFile && rel.endsWith(".json"))) {
+        try { importedNoteFiles.set(f.name, JSON.parse(await f.text())); } catch (err) { /* skip unreadable note */ }
+      }
+    }
+    setNotesStatus("Obsidian notes imported (" + allNotes().length + " note(s)) — re-import after your next Obsidian sync to refresh.");
+    renderTagPills();
+    renderKbList();
+    updateOuroboros();
+    constellationCounts.obsidian = allNotes().length;
+    updateConstellation();
+    e.target.value = ""; // allow re-importing the same folder later
+  });
 
   // ============================================================
   // SYNC ACROSS DEVICES — bundles every room's structured data (not
@@ -1100,11 +1153,17 @@
     contentEl.textContent = "Loading...";
     document.getElementById("noteOverlay").hidden = false;
     try {
-      const notesDirHandleRef = await notesDirHandle.getDirectoryHandle("notes");
-      const noteFileHandle = await notesDirHandleRef.getFileHandle(note.file);
-      const file = await noteFileHandle.getFile();
-      const record = JSON.parse(await file.text());
-      contentEl.textContent = record.content || "(empty note)";
+      if (notesDirHandle) {
+        const notesDirHandleRef = await notesDirHandle.getDirectoryHandle("notes");
+        const noteFileHandle = await notesDirHandleRef.getFileHandle(note.file);
+        const file = await noteFileHandle.getFile();
+        const record = JSON.parse(await file.text());
+        contentEl.textContent = record.content || "(empty note)";
+      } else if (importedNoteFiles.has(note.file)) {
+        contentEl.textContent = importedNoteFiles.get(note.file).content || "(empty note)";
+      } else {
+        throw new Error("not available");
+      }
     } catch (e) {
       contentEl.textContent = "Could not read this note's full content — the file may have moved. Its summary is still shown above.";
     }
