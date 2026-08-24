@@ -1505,10 +1505,13 @@
   // assigning it some days of the week. days uses JS Date.getDay()
   // convention: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat.
   // ------------------------------------------------------------
+  // days: which day-of-week (0=Sun..6=Sat) each language gets as the
+  // default "today's auto theme" -- must partition the week with no
+  // overlaps, since the lookup below takes the first array match.
   const LANGUAGES = [
-    { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", days: [1, 2, 3, 4] },
-    { id: "fa", name: "Farsi", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", days: [5, 6, 0], rtl: true },
-    { id: "ar", name: "Arabic", native: "العربية", flag: "🇸🇦", greeting: "مرحباً", days: [1, 3, 5], rtl: true },
+    { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", days: [1, 2, 3] },
+    { id: "fa", name: "Farsi", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", days: [4, 5], rtl: true },
+    { id: "ar", name: "Arabic", native: "العربية", flag: "🇸🇦", greeting: "مرحباً", days: [6, 0], rtl: true },
   ];
   // Central place to ask "is this language's script right-to-left" --
   // used instead of repeating === "fa" checks everywhere, so adding a
