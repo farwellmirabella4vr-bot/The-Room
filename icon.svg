@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- App icon: the same {8/3} star-polygon construction used throughout
+       the project (design-system/patterns.css's girih pattern, The Room's
+       knowledge-core, the guided-prayer overlay's corner motifs) rather
+       than a new mark -- gold on the shared ink-deep ground. Star stays
+       inside the ~80% center safe zone so it survives OS maskable-icon
+       cropping. -->
+  <rect width="512" height="512" fill="#0b0509"/>
+  <circle cx="256" cy="256" r="230" fill="#150b12"/>
+  <path d="M256.0,102.0 L279.7,198.7 L364.9,147.1 L313.3,232.3 L410.0,256.0 L313.3,279.7 L364.9,364.9 L279.7,313.3 L256.0,410.0 L232.3,313.3 L147.1,364.9 L198.7,279.7 L102.0,256.0 L198.7,232.3 L147.1,147.1 L232.3,198.7 Z"
+    fill="none" stroke="#f2c879" stroke-width="9"/>
+  <circle cx="256" cy="256" r="20" fill="#f2c879"/>
+</svg>

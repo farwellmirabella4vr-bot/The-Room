@@ -1,0 +1,15 @@
+{
+  "name": "The Room",
+  "short_name": "The Room",
+  "description": "A personal multi-room life hub -- language study, prayer times, finance, and more. Works offline once installed.",
+  "start_url": "home.html",
+  "scope": "./",
+  "id": "the-room-life-hub",
+  "display": "standalone",
+  "background_color": "#0b0509",
+  "theme_color": "#150b12",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

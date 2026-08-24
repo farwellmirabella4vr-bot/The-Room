@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#150b12">
 <title>The Room</title>
 <link rel="stylesheet" href="design-system/tokens.css">
 <link rel="stylesheet" href="design-system/patterns.css">
@@ -2413,5 +2415,10 @@
 })();
 </script>
 
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
+</script>
 </body>
 </html>

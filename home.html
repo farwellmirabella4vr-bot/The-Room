@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#150b12">
 <!-- Lets "Add to Home Screen" on iPhone open this in its own standalone
      window instead of inside Safari's browser chrome. -->
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -811,5 +813,10 @@
 })();
 </script>
 
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
+</script>
 </body>
 </html>
