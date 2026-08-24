@@ -374,8 +374,7 @@
       <h2>Spotify</h2>
       <p class="hint">
         Pulls your recently-played tracks (Spotify caps this at the last ~50 / roughly 24 hours) and
-        logs them under "Listened" on the matching day. Hub-only — this never touches your Obsidian
-        vault or its one-way sync.
+        logs them under "Listened" on the matching day.
       </p>
       <div class="spotify-row">
         <input type="text" id="spotifyClientIdInput" placeholder="Spotify Client ID">
@@ -385,6 +384,14 @@
       <button type="button" id="spotifyConnectBtn">Connect Spotify</button>
       <button type="button" class="secondary" id="spotifySyncBtn" disabled>Sync Recent Listening</button>
       <p class="hint" id="spotifySyncStatus"></p>
+      <p class="hint">
+        Optional: connect your vault's Rough Notes folder and every day a sync touches also gets
+        logged straight to Obsidian — same as this room's "Log this day to Obsidian" button, just
+        automatic. It fully regenerates that day's note from what's in this editor, so avoid
+        hand-editing a Video Log day's note directly in Obsidian if you're going to keep syncing it.
+      </p>
+      <p class="hint" id="notesFolderStatus">Obsidian logging: not connected.</p>
+      <button type="button" class="secondary" id="connectRoughNotesBtn">Connect Notes Folder (for Obsidian logging)</button>
     </section>
 
     <section class="panel reveal">
@@ -1008,14 +1015,133 @@
   refreshFootageBtn.addEventListener("click", loadFootageGrid);
 
   // ============================================================
+  // ROUGH NOTES WRITE-THROUGH — same mechanism as this room's (index.html)
+  // "Log this day to Obsidian": a readwrite folder handle on the vault's
+  // Rough Notes folder via the File System Access API, writing a dated
+  // YYYY-MM-DD.md into its "Video Log" subfolder. Uses the SAME IndexedDB
+  // database and key ("roughNotesFolder" in "life-hub-shared-handles") so
+  // connecting it once in either page picks it up in the other, same as
+  // the read-only notes bridge folder already does. Deliberately a
+  // separate, explicit "Connect Notes Folder" button rather than
+  // auto-prompting mid-sync: showDirectoryPicker() needs a real, fresh
+  // user gesture, and by the time a sync's Spotify fetch resolves that
+  // gesture may already have expired.
+  // ============================================================
+  const SHARED_HANDLES_DB = "life-hub-shared-handles";
+  const ROOM_VAULT_SUBFOLDER = "Video Log";
+  const VIDEO_LOG_YEAR = 2026; // matches index.html's YEAR -- keeps filenames for the same day identical across both pages
+
+  function getSharedHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(SHARED_HANDLES_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveSharedHandle(id, handle) {
+    const db = await getSharedHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadSharedHandle(id) {
+    const db = await getSharedHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  let roughNotesDirHandle = null;
+  const notesFolderStatusEl = document.getElementById("notesFolderStatus");
+  const connectRoughNotesBtn = document.getElementById("connectRoughNotesBtn");
+
+  function setNotesFolderStatus(text) { notesFolderStatusEl.textContent = "Obsidian logging: " + text; }
+
+  if (typeof window.showDirectoryPicker !== "function") {
+    connectRoughNotesBtn.disabled = true;
+    setNotesFolderStatus("needs Edge or Chrome on desktop.");
+  }
+
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadSharedHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") {
+      roughNotesDirHandle = handle;
+      setNotesFolderStatus("connected (" + handle.name + "/).");
+    } else {
+      setNotesFolderStatus("connected previously — click to reconnect.");
+    }
+  }
+  tryRestoreRoughNotesFolder();
+
+  if (typeof window.showDirectoryPicker === "function") {
+    connectRoughNotesBtn.addEventListener("click", async () => {
+      try {
+        const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+        roughNotesDirHandle = handle;
+        await saveSharedHandle("roughNotesFolder", handle);
+        setNotesFolderStatus("connected (" + handle.name + "/).");
+      } catch (e) {
+        // user cancelled the picker — leave prior state alone
+      }
+    });
+  }
+
+  async function writeNoteToVault(filename, content) {
+    if (!roughNotesDirHandle) return false;
+    try {
+      if ((await roughNotesDirHandle.queryPermission({ mode: "readwrite" })) !== "granted") return false;
+      const roomDirHandle = await roughNotesDirHandle.getDirectoryHandle(ROOM_VAULT_SUBFOLDER, { create: true });
+      const fileHandle = await roomDirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      return true;
+    } catch (e) { return false; }
+  }
+
+  // Mirrors index.html's dayEntryToNoteContent() exactly, so a day logged
+  // from either page produces the same note.
+  function dayEntryToNoteContent(entry, iso) {
+    const lines = ["#baby", "", "# " + (entry.title || iso), ""];
+    if (entry.did) { lines.push("## Did", "", entry.did, ""); }
+    if (Array.isArray(entry.watched) && entry.watched.length) {
+      lines.push("## Watched", "");
+      entry.watched.forEach((w) => lines.push("- " + (w.url ? "[" + (w.title || w.url) + "](" + w.url + ")" : (w.title || ""))));
+      lines.push("");
+    }
+    if (Array.isArray(entry.spoke) && entry.spoke.length) {
+      lines.push("## Spoke", "");
+      entry.spoke.forEach((s) => lines.push("- " + (s.lang ? s.lang + " — " : "") + (s.note || "")));
+      lines.push("");
+    }
+    if (Array.isArray(entry.listened) && entry.listened.length) {
+      lines.push("## Listened", "");
+      entry.listened.forEach((l) => lines.push("- " + (l.url ? "[" + (l.title || l.url) + "](" + l.url + ")" : (l.title || ""))));
+      lines.push("");
+    }
+    if (entry.learned) { lines.push("## Learned", "", entry.learned, ""); }
+    lines.push("## References", "- ");
+    return lines.join("\n");
+  }
+
+  // ============================================================
   // SPOTIFY — real OAuth (Authorization Code + PKCE, no client secret,
   // safe for a public static site), fetch-on-load only. There is no
   // backend anywhere in this project to run a periodic polling job, and
   // Spotify's API caps recently-played at ~50 tracks / ~24h regardless,
   // so "click Sync, pull what's new" is the only approach that fits --
-  // not a stopgap, the actual right shape here. Logged hub-only, straight
-  // into the matching day's `listened` array: this never touches the
-  // Obsidian vault or its one-way sync in any direction.
+  // not a stopgap, the actual right shape here. Logged straight into the
+  // matching day's `listened` array; optionally also logged to Obsidian
+  // per-day right after sync -- see ROUGH NOTES WRITE-THROUGH below.
   // ============================================================
   const SPOTIFY_CLIENT_ID_KEY = "life-hub-spotify-client-id";
   const SPOTIFY_TOKENS_KEY = "life-hub-spotify-tokens"; // { access_token, refresh_token, expires_at }
@@ -1202,7 +1328,26 @@
     touchedDays.forEach(([month, day]) => refreshFormIfShowingDay(month, day));
 
     const uniqueDays = new Set(touchedDays.map(([m, d]) => m + "/" + d));
-    setSpotifySyncStatus("Added " + items.length + " track(s) across " + uniqueDays.size + " day(s).");
+    let statusMsg = "Added " + items.length + " track(s) across " + uniqueDays.size + " day(s).";
+
+    if (roughNotesDirHandle) {
+      let logged = 0;
+      for (const key of uniqueDays) {
+        const [month, day] = key.split("/");
+        const entry = editorState.entries[month] && editorState.entries[month][day];
+        if (!entry) continue;
+        const iso = VIDEO_LOG_YEAR + "-" + month.padStart(2, "0") + "-" + day.padStart(2, "0");
+        const ok = await writeNoteToVault(iso + ".md", dayEntryToNoteContent(entry, iso));
+        if (ok) logged++;
+      }
+      statusMsg += logged === uniqueDays.size
+        ? " Logged " + logged + " day(s) to Obsidian."
+        : " Logged " + logged + "/" + uniqueDays.size + " day(s) to Obsidian — reconnect Notes Folder above for the rest.";
+    } else {
+      statusMsg += " Connect Notes Folder above to also log these to Obsidian.";
+    }
+
+    setSpotifySyncStatus(statusMsg);
     btn.disabled = false;
   });
 
