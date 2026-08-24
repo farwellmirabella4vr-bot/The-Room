@@ -584,6 +584,435 @@
   }
   .group-card-notes { font-size: 0.78rem; color: var(--text); white-space: pre-wrap; }
 
+  /* ---------- curriculum ---------- */
+  [lang="fa"] { font-family: "Tahoma", "Segoe UI", sans-serif; }
+
+  .curr-subnav { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+  .curr-lang-band {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .curr-lang-native {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    color: var(--secondary);
+  }
+  .curr-lang-english { font-size: 0.8rem; color: var(--text-dim); }
+  .curr-empty { color: var(--text-dim); font-size: 0.85rem; }
+
+  .curr-shelf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .curr-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.1rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .curr-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+  .curr-card-title-row { display: flex; align-items: center; gap: 0.4rem; flex: 1 1 auto; min-width: 0; }
+  .curr-card-title { font-family: var(--font-display); font-weight: bold; color: var(--secondary); font-size: 1rem; }
+  .curr-card-title-input { flex: 1 1 auto; min-width: 0; }
+  .curr-pencil-btn, .curr-reset-btn {
+    background: none;
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: var(--text-dim);
+    padding: 0.1rem 0.45rem;
+    font-size: 0.72rem;
+    border-radius: 999px;
+    flex: 0 0 auto;
+  }
+  .curr-pencil-btn:hover, .curr-reset-btn:hover { transform: none; background: rgba(0, 0, 0, 0.05); }
+  .curr-card-source { font-size: 0.72rem; color: var(--text-dim); }
+  .curr-card-body { display: flex; align-items: center; gap: 0.9rem; }
+  .curr-ring {
+    --pct: 0;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    background: conic-gradient(var(--primary) calc(var(--pct) * 1%), rgba(0, 0, 0, 0.08) 0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .curr-ring-inner {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--panel-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: bold;
+    color: var(--secondary);
+  }
+  .curr-card-stats { display: flex; flex-direction: column; gap: 0.15rem; font-size: 0.78rem; color: var(--text); }
+  .curr-card-stats .curr-stat-label { color: var(--text-dim); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .curr-card-projection { font-size: 0.74rem; color: var(--text-dim); font-style: italic; }
+  .curr-card-open-btn { align-self: flex-start; font-size: 0.78rem; padding: 0.4rem 0.9rem; }
+
+  .curr-module-header { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .curr-module-title-row { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+  .curr-module-title { font-size: 1.15rem; }
+
+  .curr-unit {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 0.2rem 0.9rem;
+    margin-bottom: 0.6rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .curr-unit summary {
+    cursor: pointer;
+    padding: 0.7rem 0;
+    font-family: var(--font-display);
+    color: var(--secondary);
+    font-weight: bold;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .curr-unit summary .curr-unit-pages { font-family: var(--font-body); font-weight: normal; font-size: 0.75rem; color: var(--text-dim); }
+  .curr-unit-goal { font-size: 0.78rem; color: var(--text-dim); margin: 0 0 0.8rem; }
+  .curr-unit.locked { opacity: 0.55; }
+  .curr-unit.locked summary { cursor: default; }
+  .curr-unit-lock-note {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 0.6rem 0 0.9rem;
+  }
+
+  .curr-lesson {
+    border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    padding: 0.8rem 0;
+  }
+  .curr-lesson:first-child { border-top: none; }
+  .curr-lesson-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.3rem; }
+  .curr-lesson-title { font-weight: bold; color: var(--secondary); font-size: 0.9rem; }
+  .curr-lesson-meta { font-size: 0.72rem; color: var(--text-dim); }
+  .curr-lesson.done .curr-lesson-title::after { content: " ✓"; color: var(--accent); }
+  .curr-skill-icons { display: flex; gap: 0.25rem; font-size: 0.85rem; }
+  .curr-audio-row { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+  .curr-audio-btn {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+  }
+  .curr-audio-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text-dim);
+    transform: none !important;
+  }
+  .curr-task-list { list-style: none; margin: 0.4rem 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+  .curr-task-row { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.82rem; }
+  .curr-task-row input[type="checkbox"] { margin-top: 0.2rem; flex: 0 0 auto; }
+  .curr-task-row.done .curr-task-text { color: var(--text-dim); text-decoration: line-through; }
+  .curr-task-type {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    flex: 0 0 auto;
+    padding-top: 0.05rem;
+  }
+  .curr-vocab-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.4rem 0; }
+  .curr-vocab-chip {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.74rem;
+    display: flex;
+    gap: 0.35rem;
+    align-items: baseline;
+  }
+  .curr-lesson-notes { width: 100%; min-height: 2.2rem; font-size: 0.8rem; margin-top: 0.3rem; }
+  .curr-lesson-empty { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
+
+  .curr-checkpoint-row {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed rgba(0, 0, 0, 0.12);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .curr-checkpoint-row strong { color: var(--secondary); }
+
+  .curr-progress-stats { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-bottom: 1rem; }
+  .curr-progress-stats > div { display: flex; flex-direction: column; gap: 0.1rem; }
+
+  /* ---------- curriculum: audio service (Job 3) ---------- */
+  .curr-audio-btn.playing {
+    background: linear-gradient(180deg, #e35f5f 0%, #a52a2a 55%, #7a1f1f 100%);
+    box-shadow: 0 3px 0 #5a1515, 0 6px 12px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .curr-audio-settings { display: inline-flex; gap: 0.3rem; margin-left: 0.2rem; }
+  .curr-audio-speed-btn, .curr-audio-loop-btn {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.55rem;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-dim);
+    box-shadow: none;
+  }
+  .curr-audio-speed-btn.active, .curr-audio-loop-btn.active {
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 55%, var(--primary-dark) 100%);
+    color: #fff;
+    box-shadow: 0 2px 0 var(--primary-dark);
+  }
+  .curr-task-audio-btn {
+    flex: 0 0 auto;
+    font-size: 0.68rem;
+    padding: 0.1rem 0.4rem;
+    line-height: 1.4;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text-dim);
+    box-shadow: none;
+    margin-top: 0.05rem;
+  }
+  .curr-task-audio-btn.playing {
+    background: linear-gradient(180deg, #e35f5f 0%, #a52a2a 55%, #7a1f1f 100%);
+    color: #fff;
+  }
+  .curr-task-audio-btn:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; transform: none !important; }
+
+  /* ---------- curriculum: pace engine / campaign mode (Job 2) ---------- */
+  .curr-panel-header { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; flex-wrap: wrap; }
+  .curr-plain-toggle.active { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .curr-objective-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border-left: 4px solid var(--gold);
+  }
+  .curr-objective-card.done { border-left-color: var(--accent); }
+  .curr-objective-eyebrow { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 0.2rem; }
+  .curr-objective-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--secondary); margin: 0 0 0.2rem; }
+  .curr-objective-gap { font-size: 0.78rem; color: var(--text-dim); margin: 0 0 0.5rem; }
+  .curr-objective-meta { font-size: 0.76rem; color: var(--text-dim); margin-bottom: 0.6rem; }
+  .curr-session-controls { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin: 0.6rem 0; }
+  .curr-session-timer { font-family: "Courier New", monospace; font-size: 1.1rem; color: var(--primary-dark); }
+  .curr-manual-log { display: flex; align-items: flex-end; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.6rem; font-size: 0.78rem; }
+  .curr-manual-log label { display: flex; flex-direction: column; gap: 0.2rem; color: var(--text-dim); }
+  .curr-manual-log input { width: 8rem; }
+  .curr-review-line { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.6rem; display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+
+  .curr-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.4rem 0 1rem; }
+  .curr-badge {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.76rem;
+    color: var(--text);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  .curr-badge strong { color: var(--secondary); }
+
+  .curr-projection { font-size: 0.85rem; color: var(--text); margin: 0.3rem 0 1rem; }
+  .curr-projection.dim { color: var(--text-dim); font-style: italic; }
+
+  .curr-ref-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 0.4rem 0 1.2rem; }
+  .curr-ref-table th, .curr-ref-table td { text-align: left; padding: 0.35rem 0.6rem; border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+  .curr-ref-table th { color: var(--text-dim); font-weight: normal; text-transform: uppercase; font-size: 0.66rem; letter-spacing: 0.05em; }
+
+  .curr-unit-map { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem; margin: 0.6rem 0 1.4rem; }
+  .curr-unit-node-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+  .curr-unit-node {
+    width: 34px;
+    height: 34px;
+    transform: rotate(45deg);
+    background: rgba(0, 0, 0, 0.08);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .curr-unit-node span { transform: rotate(-45deg); font-size: 0.7rem; font-weight: bold; color: var(--text-dim); }
+  .curr-unit-node.done { background: var(--primary); border-color: var(--primary-dark); }
+  .curr-unit-node.done span { color: #fff; }
+  .curr-unit-node.current { background: var(--panel-bg); border-color: var(--gold); border-width: 3px; }
+  .curr-unit-node.current span { color: var(--secondary); }
+  .curr-unit-node-label { font-size: 0.6rem; color: var(--text-dim); max-width: 52px; text-align: center; line-height: 1.1; }
+  .curr-unit-connector { width: 16px; height: 2px; background: repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0 4px, transparent 4px 8px); }
+
+  .curr-flashcard {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-md);
+    padding: 1.2rem;
+    text-align: center;
+    max-width: 360px;
+    margin: 0.6rem 0;
+    box-shadow: var(--shadow-soft);
+  }
+  .curr-flashcard-kind { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-dim); }
+  .curr-flashcard-prompt { font-family: var(--font-display); font-size: 1.6rem; color: var(--secondary); margin: 0.5rem 0; }
+  .curr-flashcard-answer { font-size: 0.9rem; color: var(--text); margin: 0.5rem 0; min-height: 1.4em; }
+  .curr-flashcard-actions { display: flex; justify-content: center; gap: 0.6rem; margin-top: 0.6rem; }
+  .curr-flashcard-progress { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.4rem; }
+
+  .curr-exam-q { padding: 0.8rem 0; border-top: 1px dashed rgba(0, 0, 0, 0.12); }
+  .curr-exam-q:first-of-type { border-top: none; }
+  .curr-exam-q-prompt { font-size: 0.88rem; margin-bottom: 0.4rem; }
+  .curr-exam-choice { display: flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; padding: 0.15rem 0; }
+  .curr-exam-result { font-size: 0.85rem; margin: 0.6rem 0; }
+  .curr-exam-result.pass { color: var(--accent); font-weight: bold; }
+  .curr-exam-result.fail { color: var(--secondary); font-weight: bold; }
+  .curr-exam-missed-list { font-size: 0.78rem; color: var(--text-dim); margin: 0.4rem 0; }
+
+  /* ---------- curriculum: worksheets (Job 4) ---------- */
+  .curr-worksheets-section { margin-top: 1.6rem; padding-top: 1rem; border-top: 2px solid rgba(0, 0, 0, 0.08); }
+  .curr-worksheets-note { font-size: 0.74rem; color: var(--text-dim); font-style: italic; margin: 0 0 0.9rem; }
+  .curr-worksheet-group { margin-bottom: 1rem; }
+  .curr-worksheet-group-label {
+    font-family: var(--font-display);
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  .curr-worksheet-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .curr-worksheet-title { font-weight: bold; color: var(--secondary); font-size: 0.85rem; flex: 1 1 auto; }
+  .curr-worksheet-meta { font-size: 0.72rem; color: var(--text-dim); flex: 1 1 auto; }
+
+  .curr-ws-picker { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.6rem 0 1rem; }
+  .curr-ws-picker-dot {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 0.74rem;
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--text-dim);
+    box-shadow: none;
+  }
+  .curr-ws-picker-dot.current { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .curr-ws-picker-dot.correct { background: var(--accent); color: #fff; }
+  .curr-ws-picker-dot.incorrect { background: var(--secondary); color: #fff; }
+
+  .curr-ws-exercise {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+  .curr-ws-prompt { font-size: 0.92rem; margin-bottom: 0.6rem; }
+  .curr-ws-display {
+    font-family: var(--font-display);
+    font-size: 2.4rem;
+    color: var(--secondary);
+    text-align: center;
+    margin: 0.4rem 0 0.8rem;
+  }
+  .curr-ws-choice { margin: 0.2rem 0.4rem 0.2rem 0; }
+  .curr-ws-choice.correct-choice { outline: 2px solid var(--accent); }
+  .curr-ws-choice.incorrect-choice { outline: 2px solid var(--secondary); }
+  .curr-ws-input { width: 100%; max-width: 320px; margin: 0.4rem 0; display: block; }
+  .curr-ws-feedback { font-size: 0.85rem; margin-top: 0.5rem; }
+  .curr-ws-feedback.correct { color: var(--accent); font-weight: bold; }
+  .curr-ws-feedback.incorrect { color: var(--secondary); font-weight: bold; }
+  .curr-ws-explain { font-size: 0.8rem; color: var(--text-dim); font-weight: normal; margin-top: 0.3rem; }
+  .curr-ws-answer-reveal { font-size: 0.82rem; color: var(--text); margin-top: 0.3rem; }
+
+  .curr-ws-trace-glyph {
+    font-family: var(--font-display);
+    font-size: 4rem;
+    color: var(--secondary);
+    text-align: center;
+    margin: 0.6rem 0;
+  }
+  .curr-ws-rubric { font-size: 0.82rem; margin: 0.4rem 0 0.8rem; padding-left: 1.2rem; }
+  .curr-ws-rubric li { margin-bottom: 0.25rem; }
+
+  .curr-ws-match-row { display: flex; gap: 1.5rem; margin: 0.4rem 0; }
+  .curr-ws-match-col { display: flex; flex-direction: column; gap: 0.4rem; flex: 1 1 0; }
+  .curr-ws-match-item { text-align: center; }
+  .curr-ws-match-item.selected { outline: 2px solid var(--gold); }
+  .curr-ws-match-item.matched { opacity: 0.45; }
+
+  .curr-ws-order-built {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    min-height: 2.4rem;
+    padding: 0.4rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.6rem;
+  }
+  .curr-ws-order-pool { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .curr-ws-order-chip.placed {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 999px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .curr-ws-nav { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.8rem; }
+
+  .curr-persian-keyboard { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.5rem 0; }
+  .curr-pk-key {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    padding: 0.3rem 0.65rem;
+    background: rgba(0, 0, 0, 0.06);
+    color: var(--text);
+    box-shadow: none;
+  }
+  .curr-pk-key:hover { transform: none; background: rgba(0, 0, 0, 0.12); }
+
+  /* ---------- vault & paths (Job 5) ---------- */
+  .vault-status-line { font-size: 0.88rem; color: var(--text); margin: 0 0 0.5rem; }
+  .vault-status-line strong { color: var(--secondary); }
+  .vault-btn-row { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 0.4rem; }
+  .vault-helper-text { font-size: 0.74rem; color: var(--text-dim); margin: 0 0 1.1rem; }
+  .vault-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 0.7rem;
+  }
+  .vault-path-row {
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: var(--radius-sm);
+    padding: 0.7rem 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  .vault-path-input { width: 100%; max-width: 420px; display: block; margin: 0.3rem 0 0.4rem; }
+  .vault-dest-line { font-size: 0.76rem; color: var(--text-dim); font-family: "Courier New", monospace; }
+
   /* ---------- calendar tab ---------- */
   .cal-toolbar {
     display: flex;
@@ -710,6 +1139,7 @@
   <header class="hub-header">
     <a class="back-link" href="home.html">&larr; Home</a>
     <a class="back-link" href="room.html" style="margin-left:0.8rem;">Back to the Room</a>
+    <a class="back-link" href="#vaultPathsPanel" id="vaultPathsJumpLink" style="margin-left:0.8rem;" title="Jump to Vault &amp; Paths">📁 Vault &amp; Paths</a>
     <h1 class="hub-title">Language Hub</h1>
     <div class="theme-badge">Today's theme: <strong id="themeLabel">&hellip;</strong> <span id="autoTag"></span></div>
     <div class="greeting" id="greetingText"></div>
@@ -723,6 +1153,7 @@
   <nav class="tab-bar" id="tabBar" aria-label="Hub sections">
     <button type="button" class="lang-pill tab-btn active" data-tab="calendar">Calendar</button>
     <button type="button" class="lang-pill tab-btn" data-tab="study">Study Modes</button>
+    <button type="button" class="lang-pill tab-btn" data-tab="curriculum">Curriculum</button>
     <button type="button" class="lang-pill tab-btn" data-tab="resources">Resources</button>
     <button type="button" class="lang-pill tab-btn" data-tab="video">Video Diary</button>
     <button type="button" class="lang-pill tab-btn" data-tab="groups">Groups</button>
@@ -759,6 +1190,17 @@
       </section>
     </section>
 
+    <section class="tab-panel" id="tabCurriculum" data-tab-panel="curriculum" hidden>
+      <section class="panel curriculum-panel reveal">
+        <div class="curr-panel-header">
+          <h2>Curriculum</h2>
+          <button type="button" class="filter-pill curr-plain-toggle" id="curriculumPlainToggle">Plain mode</button>
+        </div>
+        <div id="curriculumObjective"></div>
+        <div id="curriculumRoot"></div>
+      </section>
+    </section>
+
     <section class="tab-panel" id="tabResources" data-tab-panel="resources" hidden>
       <section class="panel quick-links-panel reveal">
         <h2>Quick Links</h2>
@@ -789,6 +1231,24 @@
         </form>
 
         <div id="libraryGroups"></div>
+      </section>
+
+      <section class="panel vault-paths-panel reveal" id="vaultPathsPanel">
+        <h2>Vault &amp; Paths</h2>
+        <p class="vd-intro">
+          Where this room's "Log to Obsidian" buttons (practice journal, curriculum lessons and
+          exams) actually save their notes, and how to change it.
+        </p>
+        <div id="vaultConnectionStatus"></div>
+        <div class="vault-warning">
+          🔗 The folder handle is shared with every other room (Video Log, Nest of Knowledge, Beat
+          Maker, Knowledge Center). Changing it here changes it for all of them.
+        </div>
+        <div class="vault-warning">
+          📝 Path changes apply to new notes only. Existing notes stay put; move them by dragging
+          in Obsidian.
+        </div>
+        <div id="vaultPathsForm"></div>
       </section>
     </section>
 
@@ -903,6 +1363,8 @@
 
   </main>
 
+  <audio id="curriculumAudioPlayer" preload="none"></audio>
+
   <div class="day-popover-overlay" id="dayPopoverOverlay" hidden>
     <div class="day-popover">
       <button type="button" class="day-popover-close" id="dayPopoverClose">&times;</button>
@@ -997,6 +1459,7 @@
     try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
     if (!handle) return;
     if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+    renderVaultPanel();
   }
   async function connectRoughNotesFolder() {
     if (typeof window.showDirectoryPicker !== "function") return false;
@@ -1007,8 +1470,20 @@
       return true;
     } catch (e) { return false; }
   }
+  async function deleteHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").delete(id);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
   function sanitizeNoteFilename(name) {
     return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  function sanitizePathSegment(seg) {
+    return String(seg).replace(/[\\/:*?"<>|]/g, "_").trim();
   }
   // Shared with every other room's Log to Obsidian feature -- Nest of
   // Knowledge reads this to show the "logged out" side of its ouroboros,
@@ -1019,21 +1494,45 @@
       localStorage.setItem(key, String(Number(localStorage.getItem(key) || "0") + 1));
     } catch (e) {}
   }
-  // Writes land in a "Language Hub" subfolder of the shared Rough Notes
-  // folder, not the folder's root -- one section per room, per the user's
-  // request (this is the "video diary goes in its own Language Hub
-  // section" room specifically). Applies to new writes only; anything
-  // already logged before this change stays where it is.
-  const ROOM_VAULT_SUBFOLDER = "Language Hub";
-  async function writeNoteToVault(filename, content) {
+  // ---- per-feature vault paths (Job 5) ----
+  // Shared project-wide key/shape: { <roomKey>: { <feature>: "sub/folder/path" } }.
+  // This room owns the "languageHub" slot but reads/writes the whole object so
+  // another room's paths (once it adopts the same standard) round-trip intact.
+  const VAULT_PATHS_STORAGE_KEY = "life-hub-vault-paths";
+  const VAULT_PATH_DEFAULTS = {
+    videoDiary: "Language Hub/Video Diary",
+    journal: "Language Hub/Journal",
+    curriculum: "Language Hub/Curriculum",
+    worksheets: "Language Hub/Worksheets",
+  };
+  function loadVaultPaths() {
+    let all = {};
+    try { all = JSON.parse(localStorage.getItem(VAULT_PATHS_STORAGE_KEY) || "{}") || {}; } catch (e) { all = {}; }
+    if (typeof all !== "object" || all === null) all = {};
+    const mine = Object.assign({}, VAULT_PATH_DEFAULTS, all.languageHub || {});
+    return { all, mine };
+  }
+  function saveVaultPaths(mine) {
+    const { all } = loadVaultPaths();
+    all.languageHub = mine;
+    try { localStorage.setItem(VAULT_PATHS_STORAGE_KEY, JSON.stringify(all)); } catch (e) { /* storage unavailable */ }
+  }
+  // Splits subpath on "/", walking/creating each segment -- empty subpath
+  // means the connected folder's own root, which is allowed. filename still
+  // gets its own .md extension + sanitization via sanitizeNoteFilename.
+  async function writeNoteToVault(subpath, filename, content) {
     if (!roughNotesDirHandle) {
       const connected = await connectRoughNotesFolder();
       if (!connected) return false;
     }
     if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
     try {
-      const roomDirHandle = await roughNotesDirHandle.getDirectoryHandle(ROOM_VAULT_SUBFOLDER, { create: true });
-      const fileHandle = await roomDirHandle.getFileHandle(filename, { create: true });
+      let dirHandle = roughNotesDirHandle;
+      const segments = String(subpath || "").split("/").map(sanitizePathSegment).filter(Boolean);
+      for (const seg of segments) {
+        dirHandle = await dirHandle.getDirectoryHandle(seg, { create: true });
+      }
+      const fileHandle = await dirHandle.getFileHandle(filename, { create: true });
       const writable = await fileHandle.createWritable();
       await writable.write(content);
       await writable.close();
@@ -1165,7 +1664,146 @@
     if (entry.note) { lines.push("## Notes", "", entry.note, ""); }
     lines.push("## References", "- ");
     const filename = sanitizeNoteFilename("Language - " + langName.replace(/[^\w\s-]/g, "").trim() + " " + entry.date + " (" + entry.id.slice(-6) + ")");
-    return writeNoteToVault(filename, lines.join("\n"));
+    return writeNoteToVault(loadVaultPaths().mine.journal, filename, lines.join("\n"));
+  }
+
+  // ---- Vault & Paths panel (Job 5) ----
+  const VAULT_FEATURE_LABELS = {
+    videoDiary: "Video diary",
+    journal: "Practice journal",
+    curriculum: "Curriculum (lessons & exams)",
+    worksheets: "Worksheets",
+  };
+  function renderVaultPanel() {
+    const statusEl = document.getElementById("vaultConnectionStatus");
+    if (!statusEl) return; // not on the page yet during very early init
+    statusEl.innerHTML = "";
+
+    const nameLine = document.createElement("p");
+    nameLine.className = "vault-status-line";
+    nameLine.innerHTML = roughNotesDirHandle
+      ? "Connected folder: <strong>" + escapeHtml(roughNotesDirHandle.name) + "</strong>"
+      : "No folder connected yet.";
+    statusEl.appendChild(nameLine);
+
+    const btnRow = document.createElement("div");
+    btnRow.className = "vault-btn-row";
+    const changeBtn = document.createElement("button");
+    changeBtn.type = "button";
+    changeBtn.textContent = roughNotesDirHandle ? "Change folder" : "Connect folder";
+    changeBtn.addEventListener("click", async () => {
+      changeBtn.disabled = true;
+      await connectRoughNotesFolder();
+      changeBtn.disabled = false;
+      renderVaultPanel();
+    });
+    btnRow.appendChild(changeBtn);
+    if (roughNotesDirHandle) {
+      const disconnectBtn = document.createElement("button");
+      disconnectBtn.type = "button";
+      disconnectBtn.textContent = "Disconnect";
+      disconnectBtn.addEventListener("click", async () => {
+        try { await deleteHandle("roughNotesFolder"); } catch (e) { /* nothing to remove */ }
+        roughNotesDirHandle = null;
+        renderVaultPanel();
+      });
+      btnRow.appendChild(disconnectBtn);
+    }
+    statusEl.appendChild(btnRow);
+
+    const helper = document.createElement("p");
+    helper.className = "vault-helper-text";
+    helper.textContent = "Disconnecting only forgets the folder here — it deletes nothing in the vault itself.";
+    statusEl.appendChild(helper);
+
+    const pathsWrap = document.getElementById("vaultPathsForm");
+    pathsWrap.innerHTML = "";
+    const paths = loadVaultPaths().mine;
+    const rootLabel = roughNotesDirHandle ? roughNotesDirHandle.name : "(connect a folder)";
+    Object.keys(VAULT_PATH_DEFAULTS).forEach((key) => {
+      const label = VAULT_FEATURE_LABELS[key] || key;
+      const row = document.createElement("div");
+      row.className = "vault-path-row";
+      const labelEl = document.createElement("label");
+      labelEl.className = "field-label";
+      labelEl.textContent = label;
+      row.appendChild(labelEl);
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "vault-path-input";
+      input.value = paths[key];
+      input.placeholder = "(folder root)";
+      input.addEventListener("change", () => {
+        const updated = loadVaultPaths().mine;
+        updated[key] = input.value.trim();
+        saveVaultPaths(updated);
+        renderVaultPanel();
+      });
+      row.appendChild(input);
+      const dest = document.createElement("div");
+      dest.className = "vault-dest-line";
+      const segs = String(paths[key] || "").split("/").map((s) => s.trim()).filter(Boolean);
+      dest.textContent = "Next " + label.toLowerCase() + " note saves to: " + [rootLabel].concat(segs).join(" / ") + "/";
+      row.appendChild(dest);
+      pathsWrap.appendChild(row);
+    });
+  }
+  document.getElementById("vaultPathsJumpLink").addEventListener("click", (e) => {
+    e.preventDefault();
+    switchTab("resources");
+    document.getElementById("vaultPathsPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  function logLessonToObsidian(mod, unit, lesson) {
+    const lang = LANGUAGES.find((l) => l.id === mod.languageId);
+    const langName = lang ? lang.name : mod.languageId;
+    const progress = getModuleProgress(mod.id);
+    const doneCount = lesson.tasks.filter((t) => isTaskDone(mod.id, t.id)).length;
+    const date = progress.lessonDates[lesson.id] || todayISODate();
+    const note = progress.notes[lesson.id] || "";
+    const lines = [
+      "#baby", "",
+      "# Curriculum — " + moduleDisplayTitle(mod) + " — " + lesson.title, "",
+      "**Module:** " + moduleDisplayTitle(mod), "",
+      "**Unit:** " + unit.title, "",
+      "**Lesson:** " + lesson.title + " (pp. " + lesson.pages + ")", "",
+      "**Date:** " + date, "",
+      "**Tasks done:** " + doneCount + " / " + lesson.tasks.length, "",
+    ];
+    if (note) lines.push("## Notes", "", note, "");
+    if (lesson.vocab.length) {
+      lines.push("## Vocabulary", "");
+      lesson.vocab.forEach((v) => lines.push("- " + v.term + " (" + v.translit + ") — " + v.gloss));
+      lines.push("");
+    }
+    lines.push("## References", "- ");
+    const filename = sanitizeNoteFilename("Curriculum - " + langName + " - " + moduleDisplayTitle(mod) + " - " + lesson.title + " (" + lesson.id.slice(-6) + ")");
+    return writeNoteToVault(loadVaultPaths().mine.curriculum, filename, lines.join("\n"));
+  }
+
+  function logExamToObsidian(mod, unit, examResult) {
+    const lang = LANGUAGES.find((l) => l.id === mod.languageId);
+    const langName = lang ? lang.name : mod.languageId;
+    const cpProgress = getModuleProgress(mod.id).checkpoints[unit.checkpoint.id];
+    const lines = [
+      "#baby", "",
+      "# Curriculum — " + moduleDisplayTitle(mod) + " — " + unit.checkpoint.title, "",
+      "**Module:** " + moduleDisplayTitle(mod), "",
+      "**Unit:** " + unit.title, "",
+      "**Checkpoint:** " + unit.checkpoint.title, "",
+      "**Score:** " + examResult.score + "% (pass mark " + unit.checkpoint.passMark + "%)", "",
+      "**Attempts:** " + (cpProgress ? cpProgress.attempts : 1), "",
+    ];
+    if (examResult.missed && examResult.missed.length) {
+      lines.push("## Missed", "");
+      examResult.missed.forEach((q) => lines.push("- " + q.prompt + " → " + q.correctAnswer));
+      lines.push("");
+    } else {
+      lines.push("All items correct on this attempt.", "");
+    }
+    lines.push("## References", "- ");
+    const filename = sanitizeNoteFilename("Curriculum - " + langName + " - " + moduleDisplayTitle(mod) + " - " + unit.checkpoint.title + " (" + unit.checkpoint.id.slice(-6) + ")");
+    return writeNoteToVault(loadVaultPaths().mine.curriculum, filename, lines.join("\n"));
   }
 
   // Short in-language affirmations, keyed by language id then skill id —
@@ -1280,10 +1918,13 @@
           videoJournal: Array.isArray(parsed.videoJournal) ? parsed.videoJournal : [],
           groups: Array.isArray(parsed.groups) ? parsed.groups : [],
           override: parsed.override || null,
+          curriculum: (parsed.curriculum && typeof parsed.curriculum === "object") ? parsed.curriculum : {},
+          plainMode: !!parsed.plainMode,
+          curriculumActiveSession: parsed.curriculumActiveSession || null,
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { sessions: [], activeTimer: null, library: [], videoJournal: [], groups: [], override: null };
+    return { sessions: [], activeTimer: null, library: [], videoJournal: [], groups: [], override: null, curriculum: {}, plainMode: false, curriculumActiveSession: null };
   }
 
   const state = loadState();
@@ -1348,6 +1989,7 @@
       renderLangPills();
       populateLangSelects(true);
       renderStudyModes();
+      if (curriculumIndex) { curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot(); }
     }));
     LANGUAGES.forEach((l) => {
       wrap.appendChild(makePill(l.flag + " " + l.name, state.override === l.id, () => {
@@ -1357,6 +1999,7 @@
         renderLangPills();
         populateLangSelects(true);
         renderStudyModes();
+        if (curriculumIndex) { curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot(); }
       }));
     });
   }
@@ -1757,6 +2400,1924 @@
     renderGroups();
   });
 
+  // ---------- curriculum ----------
+  // Course content is fetched JSON (data/curriculum/index.json + one file
+  // per module); progress lives in state.curriculum, keyed by module id.
+  // That split stays absolute: nothing here ever writes into the fetched
+  // module objects, only into state.curriculum.
+  let curriculumIndex = null;
+  const curriculumModules = {}; // moduleId -> parsed module JSON
+  const curriculumLoadingSet = new Set();
+  let curriculumIndexLoading = false;
+  let curriculumLoadError = null;
+  let curriculumView = "shelf"; // "shelf" | "module" | "progress"
+  let curriculumActiveModuleId = null;
+  const curriculumOpenUnits = new Set(); // in-memory only, not persisted
+
+  function defaultModuleProgress() {
+    return { displayName: null, startedOn: null, done: {}, lessonDates: {}, checkpoints: {}, notes: {}, sessions: [], srs: {}, worksheets: {} };
+  }
+  // Backfills any field a stored progress object is missing (e.g. a save
+  // made before `srs` existed) so every reader/writer below can assume the
+  // full shape without checking -- mutates in place, which is safe since
+  // it's idempotent and only fills in gaps, never overwrites real data.
+  function normalizeModuleProgress(p) {
+    const d = defaultModuleProgress();
+    Object.keys(d).forEach((k) => { if (p[k] === undefined) p[k] = d[k]; });
+    return p;
+  }
+  function getModuleProgress(moduleId) {
+    const stored = state.curriculum && state.curriculum[moduleId];
+    return stored ? normalizeModuleProgress(stored) : defaultModuleProgress();
+  }
+  function ensureModuleProgress(moduleId) {
+    if (!state.curriculum) state.curriculum = {};
+    if (!state.curriculum[moduleId]) {
+      state.curriculum[moduleId] = defaultModuleProgress();
+      state.curriculum[moduleId].startedOn = todayISODate();
+    }
+    return normalizeModuleProgress(state.curriculum[moduleId]);
+  }
+  function moduleDisplayTitle(mod) {
+    const progress = getModuleProgress(mod.id);
+    return progress.displayName || mod.title;
+  }
+
+  // Wraps runs of Arabic-script text (Persian included) in their own
+  // dir="rtl" lang="fa" span so a line mixing Persian and English stays
+  // legible and each script gets correct bidi isolation, without setting
+  // rtl on the whole panel. Escaping happens in here -- always pass raw
+  // text, never pre-escaped.
+  function renderMixedScript(text) {
+    const s = String(text == null ? "" : text);
+    const re = /[؀-ۿ‌‏]+/g;
+    let out = "";
+    let last = 0;
+    let m;
+    while ((m = re.exec(s))) {
+      out += escapeHtml(s.slice(last, m.index));
+      out += '<span dir="rtl" lang="fa">' + escapeHtml(m[0]) + "</span>";
+      last = re.lastIndex;
+    }
+    out += escapeHtml(s.slice(last));
+    return out;
+  }
+
+  async function loadCurriculumIndex() {
+    if (curriculumIndex || curriculumLoadError || curriculumIndexLoading) return;
+    curriculumIndexLoading = true;
+    try {
+      const res = await fetch("data/curriculum/index.json");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      curriculumIndex = await res.json();
+    } catch (e) {
+      curriculumLoadError = e;
+    } finally {
+      curriculumIndexLoading = false;
+    }
+  }
+  async function loadCurriculumModule(moduleId) {
+    if (curriculumModules[moduleId]) return curriculumModules[moduleId];
+    const entry = curriculumIndex && curriculumIndex.modules.find((m) => m.id === moduleId);
+    if (!entry) return null;
+    try {
+      const res = await fetch("data/curriculum/" + entry.file);
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const mod = await res.json();
+      curriculumModules[moduleId] = mod;
+      return mod;
+    } catch (e) {
+      curriculumLoadError = e;
+      return null;
+    }
+  }
+  // Kicks off a load at most once per module id, re-rendering when it
+  // lands. Guarded by curriculumLoadingSet so a render that runs again
+  // before the fetch resolves (e.g. the shelf re-rendering itself) never
+  // starts a second fetch or a self-sustaining render loop.
+  function ensureModuleLoaded(moduleId) {
+    if (curriculumModules[moduleId] || curriculumLoadingSet.has(moduleId)) return;
+    curriculumLoadingSet.add(moduleId);
+    loadCurriculumModule(moduleId).then((mod) => {
+      curriculumLoadingSet.delete(moduleId);
+      if (mod) { loadAudioIndexForLanguage(mod.languageId); ensureWorksheetsLoaded(mod); }
+      renderCurriculumRoot();
+    });
+  }
+
+  // ---------- audio service (Job 3) ----------
+  // One shared <audio> element for the whole tab (not one per button), so
+  // playback survives every re-render instead of being torn down and
+  // restarted -- the room's existing pattern (see the Video Diary preview)
+  // applied here to track playback.
+  const audioEl = document.getElementById("curriculumAudioPlayer");
+  const audioIndexByLang = {}; // languageId -> parsed audio-index.json, or "failed"
+  const audioIndexLoadingSet = new Set();
+  let currentAudioTrackId = null;
+  let audioSpeed = 1; // 0.75 | 1
+  let audioLoop = false;
+
+  async function loadAudioIndexForLanguage(languageId) {
+    if (audioIndexByLang[languageId] || audioIndexLoadingSet.has(languageId)) return;
+    audioIndexLoadingSet.add(languageId);
+    try {
+      const res = await fetch("data/curriculum/" + languageId + "/audio-index.json");
+      audioIndexByLang[languageId] = res.ok ? await res.json() : "failed";
+    } catch (e) {
+      audioIndexByLang[languageId] = "failed";
+    } finally {
+      audioIndexLoadingSet.delete(languageId);
+      renderCurriculumRoot();
+    }
+  }
+  // Returns a track's file path, or null when it isn't playable yet -- the
+  // manifest hasn't loaded, or the track just isn't in it (e.g. the mp3s
+  // haven't been downloaded via get-farsi-audio.ps1 yet). Callers use null
+  // to disable the button rather than ever failing silently.
+  function resolveAudioPath(languageId, trackId) {
+    const idx = audioIndexByLang[languageId];
+    if (!idx || idx === "failed" || !idx.tracks || !idx.tracks[trackId]) return null;
+    return "data/curriculum/" + languageId + "/" + (idx.audioPath || "") + idx.tracks[trackId];
+  }
+  function toggleTrack(languageId, trackId) {
+    const path = resolveAudioPath(languageId, trackId);
+    if (!path) return;
+    if (currentAudioTrackId === trackId && !audioEl.paused) { audioEl.pause(); return; }
+    if (currentAudioTrackId !== trackId) { audioEl.src = path; currentAudioTrackId = trackId; }
+    audioEl.playbackRate = audioSpeed;
+    audioEl.loop = audioLoop;
+    audioEl.play().catch(() => {}); // e.g. blocked without a user gesture -- button just stays showing ▶
+  }
+  audioEl.addEventListener("play", renderCurriculumRoot);
+  audioEl.addEventListener("pause", renderCurriculumRoot);
+  audioEl.addEventListener("ended", renderCurriculumRoot);
+
+  function buildAudioSettingsControls() {
+    const wrap = document.createElement("span");
+    wrap.className = "curr-audio-settings";
+    const speedBtn = document.createElement("button");
+    speedBtn.type = "button";
+    speedBtn.className = "curr-audio-speed-btn" + (audioSpeed === 0.75 ? " active" : "");
+    speedBtn.textContent = audioSpeed === 0.75 ? "0.75×" : "1×";
+    speedBtn.title = "Toggle playback speed — 0.75× is slower, for a new script";
+    speedBtn.addEventListener("click", () => {
+      audioSpeed = audioSpeed === 1 ? 0.75 : 1;
+      audioEl.playbackRate = audioSpeed;
+      renderCurriculumRoot();
+    });
+    wrap.appendChild(speedBtn);
+    const loopBtn = document.createElement("button");
+    loopBtn.type = "button";
+    loopBtn.className = "curr-audio-loop-btn" + (audioLoop ? " active" : "");
+    loopBtn.textContent = "🔁 Repeat";
+    loopBtn.title = "Loop the current track — for drilling a letter sound";
+    loopBtn.addEventListener("click", () => {
+      audioLoop = !audioLoop;
+      audioEl.loop = audioLoop;
+      renderCurriculumRoot();
+    });
+    wrap.appendChild(loopBtn);
+    return wrap;
+  }
+  // Row of play buttons for a lesson's track ids, plus one shared speed/
+  // repeat control if at least one track actually resolves. A missing track
+  // renders disabled with a tooltip naming it and pointing at the download
+  // script -- never a silent failure or a console-only error.
+  function buildAudioRow(languageId, trackIds) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-audio-row";
+    let anyResolved = false;
+    trackIds.forEach((trackId) => {
+      const path = resolveAudioPath(languageId, trackId);
+      const btn = document.createElement("button");
+      btn.type = "button";
+      const playing = currentAudioTrackId === trackId && !audioEl.paused;
+      btn.className = "curr-audio-btn" + (playing ? " playing" : "");
+      btn.textContent = (playing ? "⏸ " : "▶ ") + trackId;
+      if (!path) {
+        btn.disabled = true;
+        btn.title = 'Track "' + trackId + '" isn\'t downloaded yet — run get-farsi-audio.ps1, then reload this page.';
+      } else {
+        anyResolved = true;
+        btn.addEventListener("click", () => toggleTrack(languageId, trackId));
+      }
+      wrap.appendChild(btn);
+    });
+    if (anyResolved) wrap.appendChild(buildAudioSettingsControls());
+    return wrap;
+  }
+  // A small inline button next to a single task that carries its own audio
+  // field -- distinct from the lesson-level row above it, so a "listen"
+  // task can be played without hunting through every track in the lesson.
+  function buildTaskAudioButton(languageId, trackId) {
+    const path = resolveAudioPath(languageId, trackId);
+    const btn = document.createElement("button");
+    btn.type = "button";
+    const playing = currentAudioTrackId === trackId && !audioEl.paused;
+    btn.className = "curr-task-audio-btn" + (playing ? " playing" : "");
+    btn.textContent = playing ? "⏸" : "▶";
+    if (!path) {
+      btn.disabled = true;
+      btn.title = 'Track "' + trackId + '" isn\'t downloaded yet — run get-farsi-audio.ps1, then reload this page.';
+    } else {
+      btn.title = "Play " + trackId;
+      btn.addEventListener("click", () => toggleTrack(languageId, trackId));
+    }
+    return btn;
+  }
+  // Shared by the module view's lesson rows and the Today's Objective card
+  // so checkboxes, per-task audio, and text rendering stay in exactly one
+  // place instead of two copies drifting apart.
+  function buildTaskListEl(mod, lesson) {
+    const list = document.createElement("ul");
+    list.className = "curr-task-list";
+    lesson.tasks.forEach((task) => {
+      const li = document.createElement("li");
+      const taskDone = isTaskDone(mod.id, task.id);
+      li.className = "curr-task-row" + (taskDone ? " done" : "");
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
+      cb.checked = taskDone;
+      cb.addEventListener("change", () => toggleTask(mod, lesson, task, cb.checked));
+      li.appendChild(cb);
+      const typeSpan = document.createElement("span");
+      typeSpan.className = "curr-task-type";
+      typeSpan.textContent = task.type;
+      li.appendChild(typeSpan);
+      const textSpan = document.createElement("span");
+      textSpan.className = "curr-task-text";
+      textSpan.innerHTML = renderMixedScript(task.text);
+      li.appendChild(textSpan);
+      if (task.audio) li.appendChild(buildTaskAudioButton(mod.languageId, task.audio));
+      list.appendChild(li);
+    });
+    return list;
+  }
+
+  // ---------- worksheets (Job 4) ----------
+  // Loaded from data/curriculum/{lang}/worksheets/index.json + one file per
+  // worksheet -- the browser can't list a directory, so a worksheet that
+  // exists on disk but isn't named in index.json simply won't appear here.
+  const worksheetIndexByModule = {}; // moduleId -> array of filenames once loaded
+  const worksheetsByModule = {}; // moduleId -> { [worksheetId]: worksheet JSON }
+  const worksheetLoadingSet = new Set();
+  const WORKSHEET_SRS_TYPES = ["recognize", "transcribe", "fill", "dictation"];
+
+  async function ensureWorksheetsLoaded(mod) {
+    if (worksheetIndexByModule[mod.id] || worksheetLoadingSet.has(mod.id)) return;
+    worksheetLoadingSet.add(mod.id);
+    try {
+      const res = await fetch("data/curriculum/" + mod.languageId + "/worksheets/index.json");
+      const idx = res.ok ? await res.json() : { worksheets: [] };
+      const files = Array.isArray(idx.worksheets) ? idx.worksheets : [];
+      const loaded = {};
+      await Promise.all(files.map(async (filename) => {
+        try {
+          const r = await fetch("data/curriculum/" + mod.languageId + "/worksheets/" + filename);
+          if (r.ok) { const ws = await r.json(); loaded[ws.id] = ws; }
+        } catch (e) { /* one bad worksheet file doesn't block the rest */ }
+      }));
+      worksheetsByModule[mod.id] = loaded;
+      worksheetIndexByModule[mod.id] = files;
+    } catch (e) {
+      worksheetsByModule[mod.id] = {};
+      worksheetIndexByModule[mod.id] = [];
+    } finally {
+      worksheetLoadingSet.delete(mod.id);
+      renderCurriculumRoot();
+    }
+  }
+  function checkTextAnswer(userText, exercise) {
+    const norm = (s) => String(s == null ? "" : s).trim();
+    const candidates = [exercise.answer].concat(Array.isArray(exercise.accept) ? exercise.accept : []);
+    return candidates.some((c) => norm(c) === norm(userText));
+  }
+  // What a worksheet exercise contributes to the shared review-queue pool,
+  // for the types with one clean right answer -- match/order/trace/produce
+  // don't have a single prompt/answer pair that makes sense as a flashcard.
+  function worksheetExercisePromptAnswer(exercise) {
+    if (exercise.type === "recognize") return { prompt: (exercise.display && exercise.display.fa) || exercise.prompt, answer: exercise.answer };
+    return { prompt: exercise.prompt || "(dictation)", answer: exercise.answer };
+  }
+  // Records an answer, updates worksheet completion/score once every
+  // exercise has been touched, and -- for the checkable types -- feeds the
+  // same spaced-repetition queue letters/vocab use, so a missed worksheet
+  // item comes back around instead of just being marked wrong and forgotten.
+  function recordWorksheetAnswer(mod, ws, exercise, correct, value) {
+    const progress = ensureModuleProgress(mod.id);
+    if (!progress.worksheets[ws.id]) progress.worksheets[ws.id] = { answers: {}, completedOn: null, score: null };
+    const rec = progress.worksheets[ws.id];
+    rec.answers[exercise.id] = { correct, value };
+    if (Object.keys(rec.answers).length >= ws.exercises.length) {
+      const correctCount = Object.values(rec.answers).filter((a) => a.correct).length;
+      rec.score = Math.round((correctCount / ws.exercises.length) * 100);
+      rec.completedOn = todayISODate();
+    }
+    if (WORKSHEET_SRS_TYPES.indexOf(exercise.type) !== -1) {
+      const itemId = "ws:" + ws.id + ":" + exercise.id;
+      if (!progress.srs[itemId]) progress.srs[itemId] = { ease: 2.5, interval: 1, dueOn: todayISODate(), lapses: 0 };
+      gradeSrsItem(progress, itemId, correct);
+    }
+    saveState();
+  }
+
+  let activePersianInput = null;
+  const PERSIAN_KEYBOARD_CHARS = ["پ", "چ", "ژ", "گ", "ک", "ی", "َ", "ُ", "ِ", "ّ", "ْ", "ء"];
+  // Inserted via mousedown+preventDefault (not click) so the button never
+  // steals focus from the text input first -- that's what keeps
+  // selectionStart/selectionEnd meaningful for where to insert the char.
+  function buildPersianKeyboardRow() {
+    const row = document.createElement("div");
+    row.className = "curr-persian-keyboard";
+    PERSIAN_KEYBOARD_CHARS.forEach((ch) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "curr-pk-key";
+      btn.textContent = ch;
+      btn.tabIndex = -1;
+      btn.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        const input = activePersianInput;
+        if (!input) return;
+        const start = input.selectionStart == null ? input.value.length : input.selectionStart;
+        const end = input.selectionEnd == null ? input.value.length : input.selectionEnd;
+        input.value = input.value.slice(0, start) + ch + input.value.slice(end);
+        const pos = start + ch.length;
+        input.setSelectionRange(pos, pos);
+        input.focus();
+      });
+      row.appendChild(btn);
+    });
+    return row;
+  }
+
+  function buildMatchExercise(mod, ws, exercise, prior) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-ws-match";
+    const pairs = exercise.pairs || [];
+    const matchedMap = (prior && prior.value) || {};
+    let selectedLeft = null;
+    const rightOrder = pairs.map((p, i) => i).sort(() => Math.random() - 0.5);
+
+    const row = document.createElement("div");
+    row.className = "curr-ws-match-row";
+    const leftCol = document.createElement("div");
+    leftCol.className = "curr-ws-match-col";
+    const rightCol = document.createElement("div");
+    rightCol.className = "curr-ws-match-col";
+    row.appendChild(leftCol);
+    row.appendChild(rightCol);
+    wrap.appendChild(row);
+
+    function renderCols() {
+      leftCol.innerHTML = "";
+      rightCol.innerHTML = "";
+      pairs.forEach((p, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-pill curr-ws-match-item" + (matchedMap[i] !== undefined ? " matched" : "") + (selectedLeft === i ? " selected" : "");
+        btn.innerHTML = renderMixedScript(p.left);
+        btn.disabled = matchedMap[i] !== undefined || !!prior;
+        btn.addEventListener("click", () => { selectedLeft = i; renderCols(); });
+        leftCol.appendChild(btn);
+      });
+      rightOrder.forEach((i) => {
+        const p = pairs[i];
+        const isMatched = Object.keys(matchedMap).some((l) => matchedMap[l] === i);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-pill curr-ws-match-item" + (isMatched ? " matched" : "");
+        btn.innerHTML = renderMixedScript(p.right);
+        btn.disabled = isMatched || !!prior;
+        btn.addEventListener("click", () => {
+          if (selectedLeft === null) return;
+          if (selectedLeft === i) matchedMap[selectedLeft] = i;
+          selectedLeft = null;
+          renderCols();
+          if (!prior && Object.keys(matchedMap).length === pairs.length) {
+            recordWorksheetAnswer(mod, ws, exercise, true, matchedMap);
+            renderCurriculumRoot();
+          }
+        });
+        rightCol.appendChild(btn);
+      });
+    }
+    renderCols();
+    if (prior) {
+      const fb = document.createElement("p");
+      fb.className = "curr-ws-feedback correct";
+      fb.textContent = "Matched.";
+      wrap.appendChild(fb);
+    }
+    return wrap;
+  }
+
+  function buildOrderExercise(mod, ws, exercise, prior) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-ws-order";
+    const tokens = exercise.tokens || [];
+    const shuffledIdx = tokens.map((_, i) => i).sort(() => Math.random() - 0.5);
+    let pickedIdx = prior ? prior.value : [];
+
+    const builtRow = document.createElement("div");
+    builtRow.className = "curr-ws-order-built";
+    const poolRow = document.createElement("div");
+    poolRow.className = "curr-ws-order-pool";
+    wrap.appendChild(builtRow);
+    wrap.appendChild(poolRow);
+
+    function renderChips() {
+      builtRow.innerHTML = "";
+      pickedIdx.forEach((i) => {
+        const chip = document.createElement("span");
+        chip.className = "curr-ws-order-chip placed";
+        chip.innerHTML = renderMixedScript(tokens[i]);
+        builtRow.appendChild(chip);
+      });
+      poolRow.innerHTML = "";
+      shuffledIdx.filter((i) => pickedIdx.indexOf(i) === -1).forEach((i) => {
+        const chip = document.createElement("button");
+        chip.type = "button";
+        chip.className = "filter-pill curr-ws-order-chip";
+        chip.innerHTML = renderMixedScript(tokens[i]);
+        chip.disabled = !!prior;
+        chip.addEventListener("click", () => {
+          pickedIdx = pickedIdx.concat([i]);
+          renderChips();
+          if (!prior && pickedIdx.length === tokens.length) {
+            const chosen = pickedIdx.map((idx) => tokens[idx]);
+            const correct = JSON.stringify(chosen) === JSON.stringify(exercise.answer);
+            recordWorksheetAnswer(mod, ws, exercise, correct, pickedIdx);
+            renderCurriculumRoot();
+          }
+        });
+        poolRow.appendChild(chip);
+      });
+    }
+    renderChips();
+    if (prior) {
+      const fb = document.createElement("p");
+      fb.className = "curr-ws-feedback " + (prior.correct ? "correct" : "incorrect");
+      fb.textContent = prior.correct ? "Correct order." : "Not the order the book teaches these in — check your notes.";
+      wrap.appendChild(fb);
+    }
+    return wrap;
+  }
+
+  function buildExerciseCard(mod, ws, exercise, rec) {
+    const card = document.createElement("div");
+    card.className = "curr-ws-exercise";
+    if (exercise.prompt) {
+      const promptEl = document.createElement("div");
+      promptEl.className = "curr-ws-prompt";
+      promptEl.innerHTML = renderMixedScript(exercise.prompt);
+      card.appendChild(promptEl);
+    }
+    const prior = rec && rec.answers[exercise.id];
+
+    function showFeedback() {
+      const fb = document.createElement("div");
+      fb.className = "curr-ws-feedback " + (prior.correct ? "correct" : "incorrect");
+      fb.textContent = prior.correct ? "Correct." : "Not quite.";
+      if (exercise.explain) {
+        const ex2 = document.createElement("div");
+        ex2.className = "curr-ws-explain";
+        ex2.innerHTML = renderMixedScript(exercise.explain);
+        fb.appendChild(ex2);
+      }
+      card.appendChild(fb);
+    }
+    function buildTextInputExercise() {
+      const input = document.createElement("input");
+      input.type = "text";
+      input.dir = "rtl";
+      input.lang = "fa";
+      input.className = "curr-ws-input";
+      input.value = prior ? prior.value : "";
+      input.disabled = !!prior;
+      input.addEventListener("focus", () => { activePersianInput = input; });
+      card.appendChild(input);
+      card.appendChild(buildPersianKeyboardRow());
+      if (!prior) {
+        const submitBtn = document.createElement("button");
+        submitBtn.type = "button";
+        submitBtn.textContent = "Check";
+        submitBtn.addEventListener("click", () => {
+          const correct = checkTextAnswer(input.value, exercise);
+          recordWorksheetAnswer(mod, ws, exercise, correct, input.value);
+          renderCurriculumRoot();
+        });
+        card.appendChild(submitBtn);
+      } else {
+        showFeedback();
+        if (!prior.correct) {
+          const ans = document.createElement("div");
+          ans.className = "curr-ws-answer-reveal";
+          ans.innerHTML = "Answer: " + renderMixedScript(exercise.answer);
+          card.appendChild(ans);
+        }
+      }
+    }
+
+    if (exercise.type === "recognize") {
+      if (exercise.display && exercise.display.fa) {
+        const disp = document.createElement("div");
+        disp.className = "curr-ws-display";
+        disp.setAttribute("dir", "rtl");
+        disp.setAttribute("lang", "fa");
+        disp.textContent = exercise.display.fa;
+        card.appendChild(disp);
+      }
+      const choicesWrap = document.createElement("div");
+      (exercise.choices || []).forEach((choice) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-pill curr-ws-choice";
+        btn.textContent = choice;
+        if (prior) {
+          btn.disabled = true;
+          if (choice === exercise.answer) btn.classList.add("correct-choice");
+          else if (choice === prior.value) btn.classList.add("incorrect-choice");
+        } else {
+          btn.addEventListener("click", () => {
+            recordWorksheetAnswer(mod, ws, exercise, choice === exercise.answer, choice);
+            renderCurriculumRoot();
+          });
+        }
+        choicesWrap.appendChild(btn);
+      });
+      card.appendChild(choicesWrap);
+      if (prior) showFeedback();
+    } else if (exercise.type === "transcribe" || exercise.type === "fill") {
+      buildTextInputExercise();
+    } else if (exercise.type === "dictation") {
+      if (exercise.audio) card.appendChild(buildAudioRow(mod.languageId, [exercise.audio]));
+      buildTextInputExercise();
+    } else if (exercise.type === "trace") {
+      const glyph = document.createElement("div");
+      glyph.className = "curr-ws-trace-glyph";
+      glyph.setAttribute("dir", "rtl");
+      glyph.setAttribute("lang", "fa");
+      glyph.textContent = (exercise.display && exercise.display.fa) || "";
+      card.appendChild(glyph);
+      if (exercise.strokeNote) {
+        const note = document.createElement("p");
+        note.className = "curr-lesson-empty";
+        note.innerHTML = renderMixedScript(exercise.strokeNote);
+        card.appendChild(note);
+      }
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = prior ? "✓ Done on paper" : "I did it on paper";
+      btn.disabled = !!prior;
+      btn.addEventListener("click", () => { recordWorksheetAnswer(mod, ws, exercise, true, "confirmed"); renderCurriculumRoot(); });
+      card.appendChild(btn);
+    } else if (exercise.type === "produce") {
+      if (exercise.rubric && exercise.rubric.length) {
+        const ul = document.createElement("ul");
+        ul.className = "curr-ws-rubric";
+        exercise.rubric.forEach((r) => {
+          const li = document.createElement("li");
+          li.innerHTML = renderMixedScript(r);
+          ul.appendChild(li);
+        });
+        card.appendChild(ul);
+      }
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = prior ? "✓ Marked done" : "Mark as done";
+      btn.disabled = !!prior;
+      btn.addEventListener("click", () => { recordWorksheetAnswer(mod, ws, exercise, true, "confirmed"); renderCurriculumRoot(); });
+      card.appendChild(btn);
+    } else if (exercise.type === "match") {
+      card.appendChild(buildMatchExercise(mod, ws, exercise, prior));
+    } else if (exercise.type === "order") {
+      card.appendChild(buildOrderExercise(mod, ws, exercise, prior));
+    }
+
+    return card;
+  }
+
+  let curriculumWorksheet = null; // { moduleId, worksheetId, index }
+  function buildWorksheetPlayerView() {
+    const cw = curriculumWorksheet;
+    const mod = curriculumModules[cw.moduleId];
+    const ws = (worksheetsByModule[mod.id] || {})[cw.worksheetId];
+    const wrap = document.createElement("div");
+    wrap.className = "detail-view";
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "back-btn";
+    backBtn.textContent = "← Back";
+    backBtn.addEventListener("click", () => { curriculumWorksheet = null; renderCurriculumRoot(); });
+    wrap.appendChild(backBtn);
+    if (!ws) {
+      const p = document.createElement("p");
+      p.className = "curr-empty";
+      p.textContent = "Worksheet not found.";
+      wrap.appendChild(p);
+      return wrap;
+    }
+    const h2 = document.createElement("h2");
+    h2.innerHTML = renderMixedScript(ws.title);
+    wrap.appendChild(h2);
+    const meta = document.createElement("p");
+    meta.className = "curr-card-source";
+    meta.textContent = "pp. " + ws.sourcePages + " · " + ws.estMinutes + " min";
+    wrap.appendChild(meta);
+
+    const progress = getModuleProgress(mod.id);
+    const rec = progress.worksheets[ws.id];
+
+    const picker = document.createElement("div");
+    picker.className = "curr-ws-picker";
+    ws.exercises.forEach((ex, i) => {
+      const answer = rec && rec.answers[ex.id];
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "curr-ws-picker-dot" + (i === cw.index ? " current" : "") + (answer ? (answer.correct ? " correct" : " incorrect") : "");
+      btn.textContent = String(i + 1);
+      btn.addEventListener("click", () => { cw.index = i; renderCurriculumRoot(); });
+      picker.appendChild(btn);
+    });
+    wrap.appendChild(picker);
+
+    wrap.appendChild(buildExerciseCard(mod, ws, ws.exercises[cw.index], rec));
+
+    const nav = document.createElement("div");
+    nav.className = "curr-ws-nav";
+    if (cw.index > 0) {
+      const prevBtn = document.createElement("button");
+      prevBtn.type = "button";
+      prevBtn.className = "back-btn";
+      prevBtn.textContent = "← Previous";
+      prevBtn.addEventListener("click", () => { cw.index--; renderCurriculumRoot(); });
+      nav.appendChild(prevBtn);
+    }
+    if (cw.index < ws.exercises.length - 1) {
+      const nextBtn = document.createElement("button");
+      nextBtn.type = "button";
+      nextBtn.className = "filter-pill";
+      nextBtn.textContent = "Next →";
+      nextBtn.addEventListener("click", () => { cw.index++; renderCurriculumRoot(); });
+      nav.appendChild(nextBtn);
+    } else {
+      const doneMsg = document.createElement("span");
+      doneMsg.className = "curr-empty";
+      doneMsg.textContent = rec && rec.completedOn ? "Worksheet complete — " + rec.score + "%." : "Last exercise.";
+      nav.appendChild(doneMsg);
+    }
+    wrap.appendChild(nav);
+    return wrap;
+  }
+
+  function worksheetCompletionInfo(mod, ws) {
+    const progress = getModuleProgress(mod.id);
+    const rec = progress.worksheets[ws.id];
+    const total = ws.exercises.length;
+    const done = rec ? Object.keys(rec.answers).length : 0;
+    return { rec, total, done };
+  }
+  function buildWorksheetRow(mod, ws) {
+    const row = document.createElement("div");
+    row.className = "curr-worksheet-row";
+    const info = worksheetCompletionInfo(mod, ws);
+    const titleEl = document.createElement("div");
+    titleEl.className = "curr-worksheet-title";
+    titleEl.innerHTML = renderMixedScript(ws.title);
+    row.appendChild(titleEl);
+    const meta = document.createElement("div");
+    meta.className = "curr-worksheet-meta";
+    meta.textContent = ws.createdOn + " · pp. " + ws.sourcePages + " · " + ws.estMinutes + " min · " +
+      (info.rec && info.rec.completedOn ? "Done " + info.rec.completedOn + " (" + info.rec.score + "%)" : info.done ? info.done + " / " + info.total + " answered" : "Not started");
+    row.appendChild(meta);
+    const openBtn = document.createElement("button");
+    openBtn.type = "button";
+    openBtn.className = "filter-pill";
+    openBtn.textContent = info.rec && info.rec.completedOn ? "Review" : info.done ? "Continue" : "Start";
+    openBtn.addEventListener("click", () => { curriculumWorksheet = { moduleId: mod.id, worksheetId: ws.id, index: 0 }; renderCurriculumRoot(); });
+    row.appendChild(openBtn);
+    return row;
+  }
+  function buildWorksheetsSection(mod) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-worksheets-section";
+    const h3 = document.createElement("h3");
+    h3.textContent = "Worksheets";
+    wrap.appendChild(h3);
+    const note = document.createElement("p");
+    note.className = "curr-worksheets-note";
+    note.textContent = "New worksheet files need their filename added to worksheets/index.json before they show up here.";
+    wrap.appendChild(note);
+
+    if (!worksheetIndexByModule[mod.id]) {
+      ensureWorksheetsLoaded(mod);
+      const p = document.createElement("p");
+      p.className = "curr-empty";
+      p.textContent = "Loading worksheets…";
+      wrap.appendChild(p);
+      return wrap;
+    }
+    const all = Object.keys(worksheetsByModule[mod.id] || {}).map((id) => worksheetsByModule[mod.id][id]);
+    if (!all.length) {
+      const p = document.createElement("p");
+      p.className = "curr-empty";
+      p.textContent = "No worksheets yet.";
+      wrap.appendChild(p);
+      return wrap;
+    }
+    const groups = {};
+    all.forEach((ws) => {
+      const key = mod.units.some((u) => u.id === ws.unitId) ? ws.unitId : "unsorted";
+      (groups[key] = groups[key] || []).push(ws);
+    });
+    mod.units.map((u) => u.id).concat(["unsorted"]).forEach((key) => {
+      const list = groups[key];
+      if (!list || !list.length) return;
+      const unit = mod.units.find((u) => u.id === key);
+      const groupEl = document.createElement("div");
+      groupEl.className = "curr-worksheet-group";
+      const label = document.createElement("div");
+      label.className = "curr-worksheet-group-label";
+      label.textContent = unit ? unit.title : "Unsorted";
+      groupEl.appendChild(label);
+      list.slice().sort((a, b) => (a.createdOn < b.createdOn ? 1 : -1)).forEach((ws) => groupEl.appendChild(buildWorksheetRow(mod, ws)));
+      wrap.appendChild(groupEl);
+    });
+    return wrap;
+  }
+
+  function isTaskDone(moduleId, taskId) { return !!getModuleProgress(moduleId).done[taskId]; }
+  function isLessonDone(moduleId, lesson) {
+    return lesson.tasks.length > 0 && lesson.tasks.every((t) => isTaskDone(moduleId, t.id));
+  }
+  function unitLocked(mod, unitIndex) {
+    if (unitIndex === 0) return false;
+    const prevUnit = mod.units[unitIndex - 1];
+    const cp = getModuleProgress(mod.id).checkpoints[prevUnit.checkpoint.id];
+    return !(cp && cp.passedOn);
+  }
+  function moduleStats(mod) {
+    let totalLessons = 0, doneLessons = 0, doneUnits = 0;
+    mod.units.forEach((u) => {
+      totalLessons += u.lessons.length;
+      if (u.lessons.length > 0 && u.lessons.every((l) => isLessonDone(mod.id, l))) doneUnits++;
+      u.lessons.forEach((l) => { if (isLessonDone(mod.id, l)) doneLessons++; });
+    });
+    const progress = getModuleProgress(mod.id);
+    const hoursLogged = progress.sessions.reduce((s, sess) => s + (sess.minutes || 0), 0) / 60;
+    return { totalLessons, doneLessons, totalUnits: mod.units.length, doneUnits, hoursLogged };
+  }
+
+  // ---------- pace engine & campaign mode (Job 2) ----------
+  // No target dates anywhere here -- everything below reads the session log
+  // and projects from it, never the other way around.
+  const RANK_LADDER = [
+    { rank: 0, name: "Can't read a letter", afterCheckpoint: null },
+    { rank: 1, name: "Reads isolated letters", afterCheckpoint: "u3cp" },
+    { rank: 2, name: "Reads connected words", afterCheckpoint: "u4cp" },
+    { rank: 3, name: "Reads a full sentence", afterCheckpoint: "u6cp" },
+    { rank: 4, name: "Reads a paragraph aloud", afterCheckpoint: "u8cp" },
+    { rank: 5, name: "Writes from dictation", afterCheckpoint: "u9cp" },
+    { rank: 6, name: "Reads unvowelled text", afterCheckpoint: "u10cp" },
+  ];
+  const SRS_INTERVAL_STEPS = [1, 3, 7, 16, 35]; // days; halved on a lapse instead of stepping back
+
+  function daysBetweenISO(fromIso, toIso) {
+    return Math.round((new Date(toIso + "T00:00:00") - new Date(fromIso + "T00:00:00")) / 86400000);
+  }
+  function addDaysISO(iso, days) {
+    const d = new Date(iso + "T00:00:00");
+    d.setDate(d.getDate() + days);
+    return dateToISO(d);
+  }
+  function formatApproxDate(iso) {
+    const d = new Date(iso + "T00:00:00");
+    const part = d.getDate() <= 10 ? "early" : d.getDate() <= 20 ? "mid" : "late";
+    const yearSuffix = d.getFullYear() !== new Date().getFullYear() ? " " + d.getFullYear() : "";
+    return part + " " + MONTH_NAMES[d.getMonth()] + yearSuffix;
+  }
+
+  function hoursInWindow(progress, days) {
+    const cutoff = addDaysISO(todayISODate(), -days);
+    return progress.sessions.filter((s) => s.date >= cutoff).reduce((sum, s) => sum + (s.minutes || 0), 0) / 60;
+  }
+  function hoursTotal(progress) {
+    return progress.sessions.reduce((sum, s) => sum + (s.minutes || 0), 0) / 60;
+  }
+  // Rolling 30-day rate, clipped to startedOn -- days before you started this
+  // module never count against (or for) your pace.
+  function observedWeeklyRate(progress) {
+    if (!progress.startedOn) return 0;
+    const daysSinceStart = Math.max(1, daysBetweenISO(progress.startedOn, todayISODate()));
+    const windowStart = addDaysISO(todayISODate(), -Math.min(30, daysSinceStart));
+    const effectiveStart = windowStart > progress.startedOn ? windowStart : progress.startedOn;
+    const hours = progress.sessions.filter((s) => s.date >= effectiveStart).reduce((sum, s) => sum + (s.minutes || 0), 0) / 60;
+    const spanDays = Math.max(1, daysBetweenISO(effectiveStart, todayISODate()));
+    return hours / (spanDays / 7);
+  }
+  function remainingHours(mod, progress) {
+    let minutes = 0;
+    mod.units.forEach((u) => u.lessons.forEach((l) => { if (!isLessonDone(mod.id, l)) minutes += l.estMinutes; }));
+    return minutes / 60;
+  }
+  // Never a single date -- a range whose width narrows a little as more
+  // sessions accumulate, floored so it never claims false precision.
+  function projectionRange(mod, progress) {
+    if (progress.sessions.length < 3) return { status: "insufficient-data" };
+    const rate = observedWeeklyRate(progress);
+    if (rate <= 0) return { status: "no-recent-activity" };
+    const remaining = remainingHours(mod, progress);
+    if (remaining <= 0) return { status: "complete" };
+    const bandPct = Math.max(0.15, 0.5 - progress.sessions.length * 0.015);
+    const fastWeeks = remaining / (rate * (1 + bandPct));
+    const slowWeeks = remaining / (rate * Math.max(0.05, 1 - bandPct));
+    return {
+      status: "ok",
+      rate,
+      fromDate: addDaysISO(todayISODate(), Math.round(fastWeeks * 7)),
+      toDate: addDaysISO(todayISODate(), Math.round(slowWeeks * 7)),
+    };
+  }
+  // A reference table, not a goal-setter -- pure math off remainingHours,
+  // independent of the session log entirely.
+  function referenceScenarios(mod, progress) {
+    const remaining = remainingHours(mod, progress);
+    return [2, 5, 8, 12].map((hoursPerWeek) => {
+      const weeks = remaining / hoursPerWeek;
+      return { hoursPerWeek, weeks: Math.round(weeks * 10) / 10, finishApprox: formatApproxDate(addDaysISO(todayISODate(), Math.round(weeks * 7))) };
+    });
+  }
+
+  function buildTaskLessonIndex(mod) {
+    const map = {};
+    mod.units.forEach((u) => u.lessons.forEach((l) => l.tasks.forEach((t) => { map[t.id] = l; })));
+    return map;
+  }
+  // XP is weighted by the lesson's estMinutes split across its tasks, so a
+  // lesson with 5 short tasks and one with 3 longer tasks award the same
+  // total XP for the same total minutes -- never just "1 XP per checkbox."
+  function xpForModule(mod, progress) {
+    const taskLessonMap = buildTaskLessonIndex(mod);
+    let xp = 0;
+    Object.keys(progress.done).forEach((taskId) => {
+      const lesson = taskLessonMap[taskId];
+      if (lesson && lesson.tasks.length) xp += lesson.estMinutes / lesson.tasks.length;
+    });
+    Object.keys(progress.checkpoints).forEach((cpId) => {
+      const cp = progress.checkpoints[cpId];
+      if (cp.passedOn && cp.attempts === 1) xp += 50; // first-try bonus
+    });
+    const worksheets = worksheetsByModule[mod.id] || {};
+    Object.keys(progress.worksheets || {}).forEach((wsId) => {
+      const rec = progress.worksheets[wsId];
+      const ws = worksheets[wsId];
+      if (rec.completedOn && ws) xp += ws.estMinutes;
+    });
+    return Math.round(xp);
+  }
+  function studyDaysSet(progress) {
+    const set = new Set();
+    progress.sessions.forEach((s) => set.add(s.date));
+    Object.values(progress.done).forEach((d) => set.add(d));
+    Object.values(progress.lessonDates).forEach((d) => set.add(d));
+    Object.values(progress.checkpoints).forEach((cp) => { if (cp.passedOn) set.add(cp.passedOn); });
+    Object.values(progress.worksheets || {}).forEach((w) => { if (w.completedOn) set.add(w.completedOn); });
+    return set;
+  }
+  function lastActivityDateForModule(progress) {
+    let max = null;
+    studyDaysSet(progress).forEach((d) => { if (!max || d > max) max = d; });
+    return max;
+  }
+  // Ranks only advance on a passed checkpoint, never on XP/time -- XP is
+  // pace, rank is proof. RANK_LADDER is in unit order, so the last one
+  // whose checkpoint is passed wins.
+  function currentRank(mod, progress) {
+    let best = RANK_LADDER[0];
+    RANK_LADDER.forEach((r) => {
+      if (r.afterCheckpoint && progress.checkpoints[r.afterCheckpoint] && progress.checkpoints[r.afterCheckpoint].passedOn) best = r;
+    });
+    return best;
+  }
+
+  // ---- spaced repetition (SM-2-style, fixed steps) ----
+  // Only lessons literally titled "Letter — X" / "Mark — X" are letter/mark
+  // review items; every vocab entry on a done lesson is a vocab review item.
+  function letterLessonInfo(lesson) {
+    const m = /^(Letter|Mark) — (.+)$/.exec(lesson.title);
+    return m ? { kind: m[1] === "Letter" ? "letter" : "mark", label: m[2] } : null;
+  }
+  function srsSourceItemsForLesson(lesson) {
+    const items = [];
+    const info = letterLessonInfo(lesson);
+    if (info) {
+      // Split "Seen (س)" into glyph "س" (the prompt) and name "Seen" (the
+      // answer) -- showing the same label as both prompt and answer would
+      // test nothing. Falls back to the whole label if it has no "(...)".
+      const m = /^(.+?)\s*\(([^)]+)\)\s*$/.exec(info.label);
+      const glyph = m ? m[2].split(",")[0].trim() : info.label;
+      const name = m ? m[1].trim() : info.label;
+      items.push({ id: lesson.id + "#letter", kind: info.kind, prompt: glyph, answer: name, lessonId: lesson.id });
+    }
+    lesson.vocab.forEach((v, i) => {
+      items.push({ id: lesson.id + "#vocab" + i, kind: "vocab", prompt: v.term, answer: v.translit + " — " + v.gloss, lessonId: lesson.id });
+    });
+    return items;
+  }
+  function allSrsSourceItems(mod) {
+    const items = [];
+    mod.units.forEach((u) => u.lessons.forEach((l) => { if (isLessonDone(mod.id, l)) items.push(...srsSourceItemsForLesson(l)); }));
+    // Worksheet exercises only join the pool once actually attempted at
+    // least once (i.e. an SRS record already exists for them) -- unlike
+    // lessons, a worksheet has no separate "done" gate to check against.
+    const progress = getModuleProgress(mod.id);
+    const worksheets = worksheetsByModule[mod.id] || {};
+    Object.keys(worksheets).forEach((wsId) => {
+      const ws = worksheets[wsId];
+      ws.exercises.forEach((ex) => {
+        if (WORKSHEET_SRS_TYPES.indexOf(ex.type) === -1) return;
+        const itemId = "ws:" + ws.id + ":" + ex.id;
+        if (!progress.srs[itemId]) return;
+        const pa = worksheetExercisePromptAnswer(ex);
+        items.push({ id: itemId, kind: "worksheet", prompt: pa.prompt, answer: pa.answer, lessonId: null });
+      });
+    });
+    return items;
+  }
+  function unitSrsPool(mod, unit) {
+    const items = [];
+    unit.lessons.forEach((l) => { if (isLessonDone(mod.id, l)) items.push(...srsSourceItemsForLesson(l)); });
+    return items;
+  }
+  // Called right after a lesson newly becomes done -- seeds its letter/vocab
+  // items into the schedule, first review due tomorrow. Never overwrites an
+  // existing schedule (e.g. re-checking a box after unchecking it).
+  function ensureSrsInitialized(mod, progress, lesson) {
+    srsSourceItemsForLesson(lesson).forEach((item) => {
+      if (!progress.srs[item.id]) progress.srs[item.id] = { ease: 2.5, interval: 1, dueOn: addDaysISO(todayISODate(), 1), lapses: 0 };
+    });
+  }
+  // Cap of 20/day: due items beyond the cap just aren't shown today -- their
+  // dueOn is untouched, so they (and whatever else comes due) show tomorrow
+  // instead of forcing a multi-week backlog into one sitting.
+  function dueSrsQueue(mod, progress, cap) {
+    const bySource = {};
+    allSrsSourceItems(mod).forEach((it) => { bySource[it.id] = it; });
+    const today = todayISODate();
+    return Object.keys(progress.srs)
+      .filter((id) => bySource[id] && progress.srs[id].dueOn <= today)
+      .sort((a, b) => (progress.srs[a].dueOn < progress.srs[b].dueOn ? -1 : 1))
+      .map((id) => bySource[id])
+      .slice(0, cap || 20);
+  }
+  function gradeSrsItem(progress, itemId, correct) {
+    const rec = progress.srs[itemId];
+    if (!rec) return;
+    if (correct) {
+      const next = SRS_INTERVAL_STEPS.find((v) => v > rec.interval);
+      rec.interval = next || SRS_INTERVAL_STEPS[SRS_INTERVAL_STEPS.length - 1];
+    } else {
+      rec.interval = Math.max(1, Math.round(rec.interval / 2));
+      rec.lapses++;
+    }
+    rec.dueOn = addDaysISO(todayISODate(), rec.interval);
+  }
+
+  // ---- today's objective ----
+  function nextObjectiveLesson(mod, progress) {
+    for (let i = 0; i < mod.units.length; i++) {
+      if (unitLocked(mod, i)) break; // units lock in sequence, so nothing past here is reachable yet
+      for (const lesson of mod.units[i].lessons) {
+        if (!isLessonDone(mod.id, lesson)) return { unit: mod.units[i], lesson, hasTasks: lesson.tasks.length > 0 };
+      }
+    }
+    return null;
+  }
+
+  // ---- session tracking ----
+  function formatMinSec(totalSeconds) {
+    const m = Math.floor(totalSeconds / 60), s = totalSeconds % 60;
+    return String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+  }
+  function startCurriculumSession(mod, lesson) {
+    state.curriculumActiveSession = {
+      moduleId: mod.id, lessonId: lesson.id, startedAt: Date.now(),
+      doneSnapshot: Object.keys(getModuleProgress(mod.id).done).length,
+    };
+    saveState();
+  }
+  function stopCurriculumSession() {
+    const sess = state.curriculumActiveSession;
+    if (!sess) return;
+    const minutes = Math.max(1, Math.round((Date.now() - sess.startedAt) / 60000));
+    const progress = ensureModuleProgress(sess.moduleId);
+    const tasksDone = Math.max(0, Object.keys(progress.done).length - sess.doneSnapshot);
+    progress.sessions.push({ date: todayISODate(), minutes, lessonId: sess.lessonId, tasksDone });
+    state.curriculumActiveSession = null;
+    saveState();
+  }
+
+  function toggleTask(mod, lesson, task, checked) {
+    const progress = ensureModuleProgress(mod.id);
+    const wasLessonDone = isLessonDone(mod.id, lesson);
+    if (checked) progress.done[task.id] = todayISODate();
+    else delete progress.done[task.id];
+    const nowLessonDone = isLessonDone(mod.id, lesson);
+    if (!wasLessonDone && nowLessonDone) {
+      progress.lessonDates[lesson.id] = todayISODate();
+      ensureSrsInitialized(mod, progress, lesson);
+    }
+    if (wasLessonDone && !nowLessonDone) delete progress.lessonDates[lesson.id];
+    saveState();
+    renderCurriculumRoot();
+  }
+
+  function startRenameModule(mod, titleRowEl) {
+    titleRowEl.innerHTML = "";
+    const input = document.createElement("input");
+    input.type = "text";
+    input.className = "curr-card-title-input";
+    input.value = moduleDisplayTitle(mod);
+    titleRowEl.appendChild(input);
+    input.focus();
+    input.select();
+    let committed = false;
+    const commit = () => {
+      if (committed) return;
+      committed = true;
+      const val = input.value.trim();
+      const progress = ensureModuleProgress(mod.id);
+      progress.displayName = (val && val !== mod.title) ? val : null;
+      saveState();
+      renderCurriculumRoot();
+    };
+    input.addEventListener("blur", commit);
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") { e.preventDefault(); input.blur(); }
+      if (e.key === "Escape") { e.preventDefault(); committed = true; renderCurriculumRoot(); }
+    });
+  }
+
+  function buildShelfCard(entry) {
+    const card = document.createElement("div");
+    card.className = "curr-card";
+    const mod = curriculumModules[entry.id];
+    if (!mod) {
+      ensureModuleLoaded(entry.id);
+      card.innerHTML = '<div class="curr-card-title">' + escapeHtml(entry.title) + '</div><p class="curr-empty">Loading…</p>';
+      return card;
+    }
+
+    const stats = moduleStats(mod);
+    const progress = getModuleProgress(mod.id);
+    const pct = stats.totalLessons ? Math.round((stats.doneLessons / stats.totalLessons) * 100) : 0;
+
+    const titleRow = document.createElement("div");
+    titleRow.className = "curr-card-title-row";
+    const titleSpan = document.createElement("span");
+    titleSpan.className = "curr-card-title";
+    titleSpan.textContent = moduleDisplayTitle(mod);
+    titleRow.appendChild(titleSpan);
+    const pencilBtn = document.createElement("button");
+    pencilBtn.type = "button";
+    pencilBtn.className = "curr-pencil-btn";
+    pencilBtn.textContent = "✎";
+    pencilBtn.title = "Rename";
+    pencilBtn.addEventListener("click", () => startRenameModule(mod, titleRow));
+    titleRow.appendChild(pencilBtn);
+    if (progress.displayName) {
+      const resetBtn = document.createElement("button");
+      resetBtn.type = "button";
+      resetBtn.className = "curr-reset-btn";
+      resetBtn.textContent = "Reset to book title";
+      resetBtn.addEventListener("click", () => {
+        ensureModuleProgress(mod.id).displayName = null;
+        saveState();
+        renderCurriculumRoot();
+      });
+      titleRow.appendChild(resetBtn);
+    }
+    card.appendChild(titleRow);
+
+    const source = document.createElement("div");
+    source.className = "curr-card-source";
+    source.textContent = mod.source.authors + " — " + mod.source.publisher + ", " + mod.source.pages + " pages";
+    card.appendChild(source);
+
+    const body = document.createElement("div");
+    body.className = "curr-card-body";
+    const ring = document.createElement("div");
+    ring.className = "curr-ring";
+    ring.style.setProperty("--pct", String(pct));
+    const ringInner = document.createElement("div");
+    ringInner.className = "curr-ring-inner";
+    ringInner.textContent = pct + "%";
+    ring.appendChild(ringInner);
+    body.appendChild(ring);
+
+    const statsWrap = document.createElement("div");
+    statsWrap.className = "curr-card-stats";
+    statsWrap.innerHTML =
+      '<div><span class="curr-stat-label">Units</span> ' + stats.doneUnits + " / " + stats.totalUnits + "</div>" +
+      '<div><span class="curr-stat-label">Lessons</span> ' + stats.doneLessons + " / " + stats.totalLessons + "</div>" +
+      '<div><span class="curr-stat-label">Hours logged</span> ' + stats.hoursLogged.toFixed(1) + "h</div>";
+    body.appendChild(statsWrap);
+    card.appendChild(body);
+
+    if (!state.plainMode) {
+      const rankLine = document.createElement("div");
+      rankLine.className = "curr-card-projection";
+      rankLine.textContent = "Rank: " + currentRank(mod, progress).name;
+      card.appendChild(rankLine);
+    }
+    const proj = projectionRange(mod, progress);
+    if (proj.status === "ok") {
+      const fromLabel = formatApproxDate(proj.fromDate), toLabel = formatApproxDate(proj.toDate);
+      const projLine = document.createElement("div");
+      projLine.className = "curr-card-projection";
+      projLine.textContent = "Finishes " + (fromLabel === toLabel ? "around " + fromLabel : fromLabel + "–" + toLabel);
+      card.appendChild(projLine);
+    }
+
+    const openBtn = document.createElement("button");
+    openBtn.type = "button";
+    openBtn.className = "curr-card-open-btn";
+    openBtn.textContent = "Open";
+    openBtn.addEventListener("click", () => { curriculumView = "module"; curriculumActiveModuleId = mod.id; renderCurriculumRoot(); });
+    card.appendChild(openBtn);
+
+    return card;
+  }
+
+  function buildShelfView() {
+    const wrap = document.createElement("div");
+    const lang = activeLanguage();
+
+    const band = document.createElement("div");
+    band.className = "curr-lang-band";
+    const native = document.createElement("span");
+    native.className = "curr-lang-native";
+    native.textContent = lang.native;
+    if (lang.id === "fa") { native.dir = "rtl"; native.lang = "fa"; }
+    const eng = document.createElement("span");
+    eng.className = "curr-lang-english";
+    eng.textContent = lang.flag + " " + lang.name;
+    band.appendChild(native);
+    band.appendChild(eng);
+    wrap.appendChild(band);
+
+    const modules = curriculumIndex.modules.filter((m) => m.languageId === lang.id);
+    if (!modules.length) {
+      const p = document.createElement("p");
+      p.className = "curr-empty";
+      p.textContent = "No curriculum modules for " + lang.name + " yet.";
+      wrap.appendChild(p);
+      return wrap;
+    }
+
+    const grid = document.createElement("div");
+    grid.className = "curr-shelf-grid";
+    modules.forEach((entry) => grid.appendChild(buildShelfCard(entry)));
+    wrap.appendChild(grid);
+    return wrap;
+  }
+
+  function buildLessonRow(mod, unit, lesson) {
+    const row = document.createElement("div");
+    const done = isLessonDone(mod.id, lesson);
+    row.className = "curr-lesson" + (done ? " done" : "");
+
+    const head = document.createElement("div");
+    head.className = "curr-lesson-head";
+    const title = document.createElement("span");
+    title.className = "curr-lesson-title";
+    title.innerHTML = renderMixedScript(lesson.title);
+    head.appendChild(title);
+    const meta = document.createElement("span");
+    meta.className = "curr-lesson-meta";
+    meta.textContent = "pp. " + lesson.pages + " · " + lesson.estMinutes + " min";
+    head.appendChild(meta);
+    const skillIcons = document.createElement("span");
+    skillIcons.className = "curr-skill-icons";
+    skillIcons.textContent = lesson.skills.map((sid) => { const sk = SKILLS.find((s) => s.id === sid); return sk ? sk.icon : ""; }).join(" ");
+    head.appendChild(skillIcons);
+    row.appendChild(head);
+
+    if (lesson.audio.length) row.appendChild(buildAudioRow(mod.languageId, lesson.audio));
+
+    if (lesson.vocab.length) {
+      const vocabWrap = document.createElement("div");
+      vocabWrap.className = "curr-vocab-list";
+      lesson.vocab.forEach((v) => {
+        const chip = document.createElement("span");
+        chip.className = "curr-vocab-chip";
+        chip.innerHTML =
+          '<span dir="rtl" lang="fa">' + escapeHtml(v.term) + "</span>" +
+          '<span dir="ltr">' + escapeHtml(v.translit) + "</span>" +
+          '<span dir="ltr">— ' + escapeHtml(v.gloss) + "</span>";
+        vocabWrap.appendChild(chip);
+      });
+      row.appendChild(vocabWrap);
+    }
+
+    if (lesson.tasks.length) {
+      row.appendChild(buildTaskListEl(mod, lesson));
+    } else {
+      const empty = document.createElement("p");
+      empty.className = "curr-lesson-empty";
+      empty.textContent = "No tasks yet — fills in once these pages are photographed.";
+      row.appendChild(empty);
+    }
+
+    const notes = document.createElement("textarea");
+    notes.className = "curr-lesson-notes";
+    notes.placeholder = "Notes on this lesson…";
+    notes.value = getModuleProgress(mod.id).notes[lesson.id] || "";
+    notes.addEventListener("blur", () => {
+      const progress = ensureModuleProgress(mod.id);
+      progress.notes[lesson.id] = notes.value;
+      saveState();
+    });
+    row.appendChild(notes);
+
+    if (done) {
+      const logBtn = document.createElement("button");
+      logBtn.type = "button";
+      logBtn.className = "card-log";
+      logBtn.style.marginTop = "0.5rem";
+      logBtn.textContent = "Log to Obsidian";
+      logBtn.addEventListener("click", async () => {
+        logBtn.disabled = true;
+        logBtn.textContent = "Logging…";
+        const ok = await logLessonToObsidian(mod, unit, lesson);
+        logBtn.textContent = ok ? "Logged ✓" : "Couldn't log";
+        setTimeout(() => { logBtn.textContent = "Log to Obsidian"; logBtn.disabled = false; }, 2000);
+      });
+      row.appendChild(logBtn);
+    }
+
+    return row;
+  }
+
+  function buildUnitSection(mod, unit, index) {
+    const locked = unitLocked(mod, index);
+    const details = document.createElement("details");
+    details.className = "curr-unit" + (locked ? " locked" : "");
+
+    const summary = document.createElement("summary");
+    summary.innerHTML =
+      "Unit " + unit.number + " — " + escapeHtml(unit.title) +
+      '<span class="curr-unit-pages">pp. ' + escapeHtml(unit.pages) + "</span>" +
+      (locked ? '<span class="curr-unit-pages">🔒 locked</span>' : "");
+    details.appendChild(summary);
+
+    if (locked) {
+      summary.addEventListener("click", (e) => e.preventDefault());
+      const prevUnit = mod.units[index - 1];
+      const note = document.createElement("p");
+      note.className = "curr-unit-lock-note";
+      note.textContent = 'Locked — pass "' + prevUnit.checkpoint.title + '" to unlock.';
+      details.appendChild(note);
+      return details;
+    }
+
+    details.open = curriculumOpenUnits.has(unit.id);
+    details.addEventListener("toggle", () => {
+      if (details.open) curriculumOpenUnits.add(unit.id); else curriculumOpenUnits.delete(unit.id);
+    });
+
+    const goal = document.createElement("p");
+    goal.className = "curr-unit-goal";
+    goal.innerHTML = renderMixedScript(unit.goal);
+    details.appendChild(goal);
+
+    unit.lessons.forEach((lesson) => details.appendChild(buildLessonRow(mod, unit, lesson)));
+
+    const cpRow = document.createElement("div");
+    cpRow.className = "curr-checkpoint-row";
+    const cpProgress = getModuleProgress(mod.id).checkpoints[unit.checkpoint.id];
+    const unitAllDone = unit.lessons.length > 0 && unit.lessons.every((l) => isLessonDone(mod.id, l));
+    const label = document.createElement("div");
+    label.innerHTML =
+      "<strong>" + escapeHtml(unit.checkpoint.title) + "</strong> — pass mark " + unit.checkpoint.passMark + "%. " +
+      (cpProgress && cpProgress.passedOn
+        ? "Passed " + cpProgress.passedOn + " (" + cpProgress.attempts + " attempt" + (cpProgress.attempts === 1 ? "" : "s") + ")."
+        : cpProgress && cpProgress.attempts
+          ? "Best so far: " + cpProgress.score + "% (" + cpProgress.attempts + " attempt" + (cpProgress.attempts === 1 ? "" : "s") + ")."
+          : unitAllDone
+            ? "All lessons complete — ready for the checkpoint."
+            : "Complete every lesson in this unit to unlock the checkpoint.");
+    cpRow.appendChild(label);
+    if (unitAllDone) {
+      const examPool = unitSrsPool(mod, unit);
+      if (examPool.length >= 2) {
+        const takeBtn = document.createElement("button");
+        takeBtn.type = "button";
+        takeBtn.className = "filter-pill";
+        takeBtn.textContent = cpProgress && cpProgress.attempts ? "Retake exam" : "Take exam";
+        takeBtn.addEventListener("click", () => startCheckpointExam(mod, unit));
+        cpRow.appendChild(takeBtn);
+      } else if (!(cpProgress && cpProgress.passedOn)) {
+        // Some units (e.g. sound-system/grammar-only units) have no letter or
+        // vocab items to auto-generate a quiz from -- rather than lock
+        // progress behind a checkpoint that can never produce questions,
+        // offer an honest self-assessed pass instead of a fake quiz.
+        const selfBtn = document.createElement("button");
+        selfBtn.type = "button";
+        selfBtn.className = "filter-pill";
+        selfBtn.textContent = "Mark unit reviewed";
+        selfBtn.title = "No letter/vocab items in this unit yet to build a quiz from, so this is a self-assessed pass.";
+        selfBtn.addEventListener("click", () => selfAssessCheckpoint(mod, unit));
+        cpRow.appendChild(selfBtn);
+      }
+    }
+    details.appendChild(cpRow);
+
+    return details;
+  }
+
+  function buildModuleView(mod) {
+    const wrap = document.createElement("div");
+    wrap.className = "detail-view";
+
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "back-btn";
+    backBtn.textContent = "← Back to Shelf";
+    backBtn.addEventListener("click", () => { curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot(); });
+    wrap.appendChild(backBtn);
+
+    const header = document.createElement("div");
+    header.className = "curr-module-header";
+    const titleRow = document.createElement("div");
+    titleRow.className = "curr-module-title-row";
+    const h2 = document.createElement("h2");
+    h2.className = "curr-module-title";
+    h2.textContent = moduleDisplayTitle(mod);
+    titleRow.appendChild(h2);
+    const pencilBtn = document.createElement("button");
+    pencilBtn.type = "button";
+    pencilBtn.className = "curr-pencil-btn";
+    pencilBtn.textContent = "✎";
+    pencilBtn.title = "Rename";
+    pencilBtn.addEventListener("click", () => startRenameModule(mod, titleRow));
+    titleRow.appendChild(pencilBtn);
+    header.appendChild(titleRow);
+    const source = document.createElement("div");
+    source.className = "curr-card-source";
+    source.textContent = mod.source.book + " — " + mod.source.authors + " (" + mod.source.publisher + ", ISBN " + mod.source.isbn + ")";
+    header.appendChild(source);
+    wrap.appendChild(header);
+
+    mod.units.forEach((unit, i) => wrap.appendChild(buildUnitSection(mod, unit, i)));
+    wrap.appendChild(buildWorksheetsSection(mod));
+    return wrap;
+  }
+
+  function buildUnitMap(mod, progress) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-unit-map";
+    const next = nextObjectiveLesson(mod, progress);
+    mod.units.forEach((unit, i) => {
+      if (i > 0) {
+        const connector = document.createElement("div");
+        connector.className = "curr-unit-connector";
+        wrap.appendChild(connector);
+      }
+      const done = unit.lessons.length > 0 && unit.lessons.every((l) => isLessonDone(mod.id, l));
+      const isCurrent = !!(next && next.unit.id === unit.id);
+      const nodeWrap = document.createElement("div");
+      nodeWrap.className = "curr-unit-node-wrap";
+      const node = document.createElement("div");
+      node.className = "curr-unit-node" + (done ? " done" : "") + (isCurrent ? " current" : "");
+      node.innerHTML = "<span>" + (done ? "✓" : unit.number) + "</span>";
+      nodeWrap.appendChild(node);
+      const label = document.createElement("div");
+      label.className = "curr-unit-node-label";
+      label.textContent = unit.title;
+      nodeWrap.appendChild(label);
+      wrap.appendChild(nodeWrap);
+    });
+    return wrap;
+  }
+
+  function buildPopReviewButton(mod, progress) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "filter-pill";
+    btn.textContent = "Pop review";
+    const pool = allSrsSourceItems(mod);
+    btn.disabled = !pool.length;
+    if (!pool.length) btn.title = "Complete a few lessons first.";
+    btn.addEventListener("click", () => openFlashcardSession(mod, pool.slice().sort(() => Math.random() - 0.5).slice(0, 10), "pop"));
+    return btn;
+  }
+
+  function buildProgressView() {
+    const wrap = document.createElement("div");
+    const lang = activeLanguage();
+    const modules = curriculumIndex.modules.filter((m) => m.languageId === lang.id);
+    if (!modules.length) {
+      wrap.innerHTML = '<p class="curr-empty">No curriculum modules for ' + escapeHtml(lang.name) + " yet.</p>";
+      return wrap;
+    }
+    modules.forEach((entry) => {
+      const mod = curriculumModules[entry.id];
+      if (!mod) { ensureModuleLoaded(entry.id); return; }
+      const progress = getModuleProgress(mod.id);
+      const stats = moduleStats(mod);
+
+      const section = document.createElement("div");
+      const h3 = document.createElement("h3");
+      h3.textContent = moduleDisplayTitle(mod);
+      section.appendChild(h3);
+
+      const statsRow = document.createElement("div");
+      statsRow.className = "curr-progress-stats";
+      statsRow.innerHTML =
+        '<div><span class="totals-label">Units done</span><span class="totals-value">' + stats.doneUnits + " / " + stats.totalUnits + "</span></div>" +
+        '<div><span class="totals-label">Lessons done</span><span class="totals-value">' + stats.doneLessons + " / " + stats.totalLessons + "</span></div>" +
+        '<div><span class="totals-label">Hours logged</span><span class="totals-value">' + hoursTotal(progress).toFixed(1) + "h</span></div>" +
+        '<div><span class="totals-label">Last 14 days</span><span class="totals-value">' + hoursInWindow(progress, 14).toFixed(1) + "h</span></div>" +
+        '<div><span class="totals-label">Last 30 days</span><span class="totals-value">' + hoursInWindow(progress, 30).toFixed(1) + "h</span></div>";
+      section.appendChild(statsRow);
+
+      if (!state.plainMode) {
+        const badges = document.createElement("div");
+        badges.className = "curr-badges";
+        badges.innerHTML =
+          '<span class="curr-badge"><strong>' + xpForModule(mod, progress) + "</strong> XP</span>" +
+          '<span class="curr-badge"><strong>' + studyDaysSet(progress).size + "</strong> study days</span>" +
+          '<span class="curr-badge">Rank: <strong>' + escapeHtml(currentRank(mod, progress).name) + "</strong></span>";
+        section.appendChild(badges);
+      }
+
+      const proj = document.createElement("p");
+      const p = projectionRange(mod, progress);
+      if (p.status === "insufficient-data") {
+        proj.className = "curr-projection dim";
+        proj.textContent = "Not enough sessions logged yet to project a pace — a few more and this fills in.";
+      } else if (p.status === "no-recent-activity") {
+        proj.className = "curr-projection dim";
+        proj.textContent = "No recent activity to project from. Log a session whenever you pick it back up.";
+      } else if (p.status === "complete") {
+        proj.className = "curr-projection";
+        proj.textContent = "Every unlocked lesson is complete.";
+      } else {
+        const fromLabel = formatApproxDate(p.fromDate), toLabel = formatApproxDate(p.toDate);
+        proj.className = "curr-projection";
+        proj.textContent = "At your pace over the last month (~" + p.rate.toFixed(1) + " hr/week), you finish somewhere " +
+          (fromLabel === toLabel ? "around " + fromLabel : "between " + fromLabel + " and " + toLabel) + ".";
+      }
+      section.appendChild(proj);
+
+      const refTable = document.createElement("table");
+      refTable.className = "curr-ref-table";
+      const scenarios = referenceScenarios(mod, progress);
+      refTable.innerHTML =
+        "<thead><tr><th>Hours/week</th><th>Weeks left</th><th>Rough finish</th></tr></thead><tbody>" +
+        scenarios.map((s) => "<tr><td>" + s.hoursPerWeek + "</td><td>" + s.weeks + "</td><td>" + escapeHtml(s.finishApprox) + "</td></tr>").join("") +
+        "</tbody>";
+      section.appendChild(refTable);
+
+      section.appendChild(buildUnitMap(mod, progress));
+
+      const actionsRow = document.createElement("div");
+      actionsRow.className = "curr-review-line";
+      actionsRow.appendChild(buildPopReviewButton(mod, progress));
+      const dueCount = dueSrsQueue(mod, progress, 20).length;
+      if (dueCount) {
+        const reviewBtn = document.createElement("button");
+        reviewBtn.type = "button";
+        reviewBtn.className = "filter-pill";
+        reviewBtn.textContent = "Review " + dueCount + " due";
+        reviewBtn.addEventListener("click", () => openFlashcardSession(mod, dueSrsQueue(mod, progress, 20), "due"));
+        actionsRow.appendChild(reviewBtn);
+      }
+      section.appendChild(actionsRow);
+
+      wrap.appendChild(section);
+    });
+    if (!wrap.children.length) wrap.innerHTML = '<p class="curr-empty">Loading…</p>';
+    return wrap;
+  }
+
+  // ---- flashcard sessions (spaced-repetition review + pop review) ----
+  let curriculumFlashcards = null; // { moduleId, items, index, mode: "due"|"pop", showingAnswer }
+
+  function openFlashcardSession(mod, items, mode) {
+    if (!items.length) return;
+    curriculumFlashcards = { moduleId: mod.id, items, index: 0, mode, showingAnswer: false };
+    renderCurriculumRoot();
+  }
+  function closeFlashcardSession() {
+    curriculumFlashcards = null;
+    renderCurriculumRoot();
+  }
+  function advanceFlashcard(correct) {
+    const fc = curriculumFlashcards;
+    const progress = ensureModuleProgress(fc.moduleId);
+    if (fc.mode === "due") gradeSrsItem(progress, fc.items[fc.index].id, correct);
+    saveState();
+    fc.index++;
+    fc.showingAnswer = false;
+    if (fc.index >= fc.items.length) { closeFlashcardSession(); return; }
+    renderCurriculumRoot();
+  }
+  function buildFlashcardOverlay() {
+    const fc = curriculumFlashcards;
+    const item = fc.items[fc.index];
+    const wrap = document.createElement("div");
+    wrap.className = "curr-flashcard";
+    wrap.innerHTML =
+      '<div class="curr-flashcard-progress">' + (fc.mode === "due" ? "Review" : "Pop review") + " — " + (fc.index + 1) + " / " + fc.items.length + "</div>" +
+      '<div class="curr-flashcard-kind">' + escapeHtml(item.kind) + "</div>" +
+      '<div class="curr-flashcard-prompt">' + renderMixedScript(item.prompt) + "</div>";
+    const answerEl = document.createElement("div");
+    answerEl.className = "curr-flashcard-answer";
+    if (fc.showingAnswer) answerEl.innerHTML = renderMixedScript(item.answer);
+    wrap.appendChild(answerEl);
+
+    const actions = document.createElement("div");
+    actions.className = "curr-flashcard-actions";
+    if (!fc.showingAnswer) {
+      const showBtn = document.createElement("button");
+      showBtn.type = "button";
+      showBtn.textContent = "Show answer";
+      showBtn.addEventListener("click", () => { fc.showingAnswer = true; renderCurriculumRoot(); });
+      actions.appendChild(showBtn);
+    } else {
+      const missBtn = document.createElement("button");
+      missBtn.type = "button";
+      missBtn.textContent = "Missed it";
+      missBtn.addEventListener("click", () => advanceFlashcard(false));
+      actions.appendChild(missBtn);
+      const gotBtn = document.createElement("button");
+      gotBtn.type = "button";
+      gotBtn.textContent = "Got it";
+      gotBtn.addEventListener("click", () => advanceFlashcard(true));
+      actions.appendChild(gotBtn);
+    }
+    wrap.appendChild(actions);
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "card-del";
+    closeBtn.textContent = "Stop reviewing";
+    closeBtn.style.marginTop = "0.6rem";
+    closeBtn.addEventListener("click", closeFlashcardSession);
+    wrap.appendChild(closeBtn);
+    return wrap;
+  }
+
+  // ---- checkpoint exams ----
+  // Questions are generated from the unit's own vocab/letters (the JSON I
+  // wrote myself), never copied from the book -- so a unit with no vocab/
+  // letters marked done yet simply can't produce an exam.
+  function buildCheckpointExam(mod, unit) {
+    const pool = unitSrsPool(mod, unit);
+    if (pool.length < 2) return null;
+    const widePool = allSrsSourceItems(mod);
+    const questions = pool.map((item) => {
+      const distractors = widePool
+        .filter((x) => x.id !== item.id && x.kind === item.kind)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 3)
+        .map((x) => x.answer);
+      return { itemId: item.id, kind: item.kind, prompt: item.prompt, correctAnswer: item.answer, choices: distractors.concat([item.answer]).sort(() => Math.random() - 0.5) };
+    });
+    return questions.sort(() => Math.random() - 0.5).slice(0, Math.min(10, questions.length));
+  }
+  function selfAssessCheckpoint(mod, unit) {
+    const progress = ensureModuleProgress(mod.id);
+    const cp = progress.checkpoints[unit.checkpoint.id] || { score: 0, passedOn: "", attempts: 0 };
+    cp.attempts++;
+    cp.score = 100;
+    if (!cp.passedOn) cp.passedOn = todayISODate();
+    progress.checkpoints[unit.checkpoint.id] = cp;
+    saveState();
+    renderCurriculumRoot();
+  }
+  let curriculumExam = null; // { moduleId, unitId, questions, answers, result }
+  function startCheckpointExam(mod, unit) {
+    const questions = buildCheckpointExam(mod, unit);
+    if (!questions) return;
+    curriculumExam = { moduleId: mod.id, unitId: unit.id, questions, answers: {}, result: null };
+    renderCurriculumRoot();
+  }
+  function closeCheckpointExam() {
+    curriculumExam = null;
+    renderCurriculumRoot();
+  }
+  function submitCheckpointExam() {
+    const ex = curriculumExam;
+    const mod = curriculumModules[ex.moduleId];
+    const unit = mod.units.find((u) => u.id === ex.unitId);
+    const progress = ensureModuleProgress(ex.moduleId);
+    let correct = 0;
+    const missed = [];
+    ex.questions.forEach((q) => {
+      if (ex.answers[q.itemId] === q.correctAnswer) correct++;
+      else missed.push(q);
+    });
+    const score = Math.round((correct / ex.questions.length) * 100);
+    const cp = progress.checkpoints[unit.checkpoint.id] || { score: 0, passedOn: "", attempts: 0 };
+    cp.attempts++;
+    cp.score = score;
+    if (score >= unit.checkpoint.passMark && !cp.passedOn) cp.passedOn = todayISODate();
+    progress.checkpoints[unit.checkpoint.id] = cp;
+    // A miss schedules a targeted review rather than just recording the fail.
+    missed.forEach((q) => { if (progress.srs[q.itemId]) progress.srs[q.itemId].dueOn = todayISODate(); });
+    saveState();
+    ex.result = { score, passed: score >= unit.checkpoint.passMark, missed };
+    renderCurriculumRoot();
+  }
+  function buildExamView() {
+    const ex = curriculumExam;
+    const mod = curriculumModules[ex.moduleId];
+    const unit = mod.units.find((u) => u.id === ex.unitId);
+    const wrap = document.createElement("div");
+    wrap.className = "detail-view";
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.className = "back-btn";
+    backBtn.textContent = "← Back";
+    backBtn.addEventListener("click", closeCheckpointExam);
+    wrap.appendChild(backBtn);
+    const h2 = document.createElement("h2");
+    h2.textContent = unit.checkpoint.title;
+    wrap.appendChild(h2);
+
+    if (ex.result) {
+      const resEl = document.createElement("div");
+      resEl.className = "curr-exam-result " + (ex.result.passed ? "pass" : "fail");
+      resEl.textContent = "Score: " + ex.result.score + "% (pass mark " + unit.checkpoint.passMark + "%) — " + (ex.result.passed ? "Passed." : "Not yet.");
+      wrap.appendChild(resEl);
+      if (!ex.result.passed && ex.result.missed.length) {
+        const missedEl = document.createElement("div");
+        missedEl.className = "curr-exam-missed-list";
+        missedEl.innerHTML = "Queued for review: " + ex.result.missed.map((q) => renderMixedScript(q.prompt)).join(", ");
+        wrap.appendChild(missedEl);
+      }
+      if (ex.result.passed) {
+        const logBtn = document.createElement("button");
+        logBtn.type = "button";
+        logBtn.className = "card-log";
+        logBtn.textContent = "Log to Obsidian";
+        logBtn.addEventListener("click", async () => {
+          logBtn.disabled = true;
+          logBtn.textContent = "Logging…";
+          const ok = await logExamToObsidian(mod, unit, ex.result);
+          logBtn.textContent = ok ? "Logged ✓" : "Couldn't log";
+          setTimeout(() => { logBtn.textContent = "Log to Obsidian"; logBtn.disabled = false; }, 2000);
+        });
+        wrap.appendChild(logBtn);
+      }
+      const retakeBtn = document.createElement("button");
+      retakeBtn.type = "button";
+      retakeBtn.textContent = "Retake";
+      retakeBtn.addEventListener("click", () => startCheckpointExam(mod, unit));
+      wrap.appendChild(retakeBtn);
+      const doneBtn = document.createElement("button");
+      doneBtn.type = "button";
+      doneBtn.className = "back-btn";
+      doneBtn.style.marginLeft = "0.5rem";
+      doneBtn.textContent = "Done";
+      doneBtn.addEventListener("click", closeCheckpointExam);
+      wrap.appendChild(doneBtn);
+      return wrap;
+    }
+
+    ex.questions.forEach((q, i) => {
+      const qEl = document.createElement("div");
+      qEl.className = "curr-exam-q";
+      const p = document.createElement("div");
+      p.className = "curr-exam-q-prompt";
+      p.innerHTML = (i + 1) + ". " + (q.kind === "vocab" ? "What does this mean? " : "Which letter/mark is this? ") + renderMixedScript(q.prompt);
+      qEl.appendChild(p);
+      q.choices.forEach((choice) => {
+        const label = document.createElement("label");
+        label.className = "curr-exam-choice";
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "exam-" + q.itemId;
+        radio.value = choice;
+        radio.addEventListener("change", () => { ex.answers[q.itemId] = choice; });
+        label.appendChild(radio);
+        const span = document.createElement("span");
+        span.innerHTML = renderMixedScript(choice);
+        label.appendChild(span);
+        qEl.appendChild(label);
+      });
+      wrap.appendChild(qEl);
+    });
+    const submitBtn = document.createElement("button");
+    submitBtn.type = "button";
+    submitBtn.textContent = "Submit";
+    submitBtn.addEventListener("click", submitCheckpointExam);
+    wrap.appendChild(submitBtn);
+    return wrap;
+  }
+
+  // ---- today's objective card ----
+  function buildReviewLine(mod, progress, dueCount) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-review-line";
+    wrap.appendChild(document.createTextNode(dueCount + " item" + (dueCount === 1 ? "" : "s") + " due for review."));
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "filter-pill";
+    btn.textContent = "Review now";
+    btn.addEventListener("click", () => openFlashcardSession(mod, dueSrsQueue(mod, progress, 20), "due"));
+    wrap.appendChild(btn);
+    return wrap;
+  }
+  function buildManualLogForm(mod, lesson) {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.className = "field-label";
+    summary.style.cursor = "pointer";
+    summary.textContent = "Log a past session";
+    details.appendChild(summary);
+    const form = document.createElement("div");
+    form.className = "curr-manual-log";
+    form.innerHTML =
+      '<label>Date <input type="date" class="curr-log-date" value="' + todayISODate() + '" max="' + todayISODate() + '"></label>' +
+      '<label>Minutes <input type="number" class="curr-log-minutes" min="1" value="30"></label>' +
+      '<label>Tasks done <input type="number" class="curr-log-tasks" min="0" value="0"></label>';
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = "Log it";
+    btn.addEventListener("click", () => {
+      const date = form.querySelector(".curr-log-date").value || todayISODate();
+      const minutes = Math.max(1, parseInt(form.querySelector(".curr-log-minutes").value, 10) || 0);
+      const tasksDone = Math.max(0, parseInt(form.querySelector(".curr-log-tasks").value, 10) || 0);
+      const progress = ensureModuleProgress(mod.id);
+      progress.sessions.push({ date, minutes, lessonId: lesson.id, tasksDone });
+      saveState();
+      renderCurriculumRoot();
+    });
+    form.appendChild(btn);
+    details.appendChild(form);
+    return details;
+  }
+  function buildSessionControls(mod, lesson) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-session-controls";
+    const active = state.curriculumActiveSession && state.curriculumActiveSession.moduleId === mod.id && state.curriculumActiveSession.lessonId === lesson.id;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "timer-btn" + (active ? " running" : "");
+    btn.textContent = active ? "End Session" : "Start Session";
+    btn.addEventListener("click", () => {
+      if (active) stopCurriculumSession(); else startCurriculumSession(mod, lesson);
+      renderCurriculumRoot();
+    });
+    wrap.appendChild(btn);
+    if (active) {
+      const timerEl = document.createElement("span");
+      timerEl.className = "curr-session-timer";
+      timerEl.id = "currSessionTimer";
+      timerEl.textContent = formatMinSec(Math.floor((Date.now() - state.curriculumActiveSession.startedAt) / 1000));
+      wrap.appendChild(timerEl);
+    }
+    wrap.appendChild(buildManualLogForm(mod, lesson));
+    return wrap;
+  }
+
+  function renderTodaysObjective() {
+    const el = document.getElementById("curriculumObjective");
+    if (!el) return;
+    el.innerHTML = "";
+    if (curriculumView === "module" || curriculumFlashcards || curriculumExam || !curriculumIndex) return;
+    const lang = activeLanguage();
+    const entry = curriculumIndex.modules.find((m) => m.languageId === lang.id);
+    if (!entry) return;
+    const mod = curriculumModules[entry.id];
+    if (!mod) { ensureModuleLoaded(entry.id); return; }
+    const progress = getModuleProgress(mod.id);
+
+    const today = todayISODate();
+    const lastActivity = lastActivityDateForModule(progress);
+    // Deliberately narrower than "any activity today": flips only once a
+    // whole lesson finished today, not the moment a single task is ticked.
+    const completedToday = Object.values(progress.lessonDates).some((d) => d === today);
+    const dueCount = dueSrsQueue(mod, progress, 20).length;
+    const next = nextObjectiveLesson(mod, progress);
+
+    const card = document.createElement("div");
+    card.className = "curr-objective-card" + (completedToday ? " done" : "");
+
+    if (completedToday) {
+      card.innerHTML =
+        '<div class="curr-objective-eyebrow">Today’s objective — done</div>' +
+        "<div class=\"curr-objective-title\">Nice work — you've logged progress today.</div>";
+      if (next) {
+        const p = document.createElement("p");
+        p.className = "curr-objective-meta";
+        p.innerHTML = "Optional, if you want to keep going: <strong>" + renderMixedScript(next.lesson.title) + "</strong> (pp. " + escapeHtml(next.lesson.pages) + ")";
+        card.appendChild(p);
+        const openBtn = document.createElement("button");
+        openBtn.type = "button";
+        openBtn.className = "filter-pill";
+        openBtn.textContent = "Open it anyway";
+        openBtn.addEventListener("click", () => { curriculumView = "module"; curriculumActiveModuleId = mod.id; curriculumOpenUnits.add(next.unit.id); renderCurriculumRoot(); });
+        card.appendChild(openBtn);
+      }
+      if (dueCount) card.appendChild(buildReviewLine(mod, progress, dueCount));
+      el.appendChild(card);
+      return;
+    }
+
+    let gapHtml = "";
+    if (lastActivity) {
+      const gapDays = daysBetweenISO(lastActivity, today);
+      if (gapDays >= 3) gapHtml = "<p class=\"curr-objective-gap\">It's been " + gapDays + " days since your last session.</p>";
+    }
+
+    if (!next) {
+      card.innerHTML =
+        gapHtml +
+        '<div class="curr-objective-eyebrow">Today’s objective</div>' +
+        '<div class="curr-objective-title">Everything unlocked so far is complete.</div>' +
+        '<p class="curr-objective-meta">Pass the next checkpoint to unlock more, or revisit anything from the Shelf.</p>';
+      if (dueCount) card.appendChild(buildReviewLine(mod, progress, dueCount));
+      el.appendChild(card);
+      return;
+    }
+
+    card.innerHTML =
+      gapHtml +
+      '<div class="curr-objective-eyebrow">Today’s objective</div>' +
+      '<div class="curr-objective-title">' + renderMixedScript(next.lesson.title) + "</div>" +
+      '<p class="curr-objective-meta">pp. ' + escapeHtml(next.lesson.pages) + " · " + next.lesson.estMinutes + " min · " + escapeHtml(next.unit.title) + "</p>";
+
+    if (next.hasTasks) {
+      card.appendChild(buildTaskListEl(mod, next.lesson));
+      if (next.lesson.audio.length) card.appendChild(buildAudioRow(mod.languageId, next.lesson.audio));
+    } else {
+      const p = document.createElement("p");
+      p.className = "curr-lesson-empty";
+      p.textContent = "No tasks written for this lesson yet.";
+      card.appendChild(p);
+    }
+
+    card.appendChild(buildSessionControls(mod, next.lesson));
+    if (dueCount) card.appendChild(buildReviewLine(mod, progress, dueCount));
+    el.appendChild(card);
+  }
+
+  function renderCurriculumRoot() {
+    const root = document.getElementById("curriculumRoot");
+    if (!root) return;
+    if (curriculumLoadError) {
+      root.innerHTML =
+        '<p class="curr-empty">Couldn’t load the curriculum data. Make sure the local server is ' +
+        'running (double-click <code>Start Local Site.bat</code>, or run <code>node local-server.js</code>) ' +
+        "and reopen this tab.</p>";
+      return;
+    }
+    if (!curriculumIndex) {
+      root.innerHTML = '<p class="curr-empty">Loading curriculum…</p>';
+      return;
+    }
+    renderTodaysObjective();
+    root.innerHTML = "";
+    if (curriculumFlashcards) { root.appendChild(buildFlashcardOverlay()); return; }
+    if (curriculumExam) { root.appendChild(buildExamView()); return; }
+    if (curriculumWorksheet) { root.appendChild(buildWorksheetPlayerView()); return; }
+    if (curriculumView === "module" && curriculumActiveModuleId && curriculumModules[curriculumActiveModuleId]) {
+      root.appendChild(buildModuleView(curriculumModules[curriculumActiveModuleId]));
+      return;
+    }
+    if (curriculumView === "module") curriculumView = "shelf"; // module not loaded (yet) -- fall back rather than show nothing
+    const subnav = document.createElement("div");
+    subnav.className = "curr-subnav";
+    subnav.appendChild(makePill("Shelf", curriculumView === "shelf", () => { curriculumView = "shelf"; renderCurriculumRoot(); }));
+    subnav.appendChild(makePill("Progress", curriculumView === "progress", () => { curriculumView = "progress"; renderCurriculumRoot(); }));
+    root.appendChild(subnav);
+    root.appendChild(curriculumView === "progress" ? buildProgressView() : buildShelfView());
+  }
+
+  // Plain mode: hides XP/study-days/rank everywhere above, leaves the
+  // curriculum itself (lessons, tasks, checkpoints, review) fully working.
+  const curriculumPlainToggleBtn = document.getElementById("curriculumPlainToggle");
+  curriculumPlainToggleBtn.classList.toggle("active", state.plainMode);
+  curriculumPlainToggleBtn.addEventListener("click", () => {
+    state.plainMode = !state.plainMode;
+    saveState();
+    curriculumPlainToggleBtn.classList.toggle("active", state.plainMode);
+    renderCurriculumRoot();
+  });
+
+  // Live tick for an in-progress curriculum session's timer display.
+  setInterval(() => {
+    if (!state.curriculumActiveSession) return;
+    const el = document.getElementById("currSessionTimer");
+    if (el) el.textContent = formatMinSec(Math.floor((Date.now() - state.curriculumActiveSession.startedAt) / 1000));
+  }, 1000);
+
   // ---------- calendar ----------
   const langColorCache = {};
   function primaryColorForLanguage(langId) {
@@ -1926,7 +4487,7 @@
   });
 
   // ---------- tab bar ----------
-  const TAB_PANEL_IDS = { calendar: "tabCalendar", study: "tabStudy", resources: "tabResources", video: "tabVideo", groups: "tabGroups" };
+  const TAB_PANEL_IDS = { calendar: "tabCalendar", study: "tabStudy", curriculum: "tabCurriculum", resources: "tabResources", video: "tabVideo", groups: "tabGroups" };
   function switchTab(tabId) {
     Object.keys(TAB_PANEL_IDS).forEach((id) => {
       document.getElementById(TAB_PANEL_IDS[id]).hidden = id !== tabId;
@@ -1935,8 +4496,12 @@
       btn.classList.toggle("active", btn.dataset.tab === tabId);
     });
     if (tabId === "calendar") renderCalendar();
-    if (tabId === "resources") { renderQuickLinks(); renderLibrary(); }
+    if (tabId === "resources") { renderQuickLinks(); renderLibrary(); renderVaultPanel(); }
     if (tabId === "groups") renderGroups();
+    if (tabId === "curriculum") {
+      renderCurriculumRoot();
+      if (!curriculumIndex && !curriculumLoadError) loadCurriculumIndex().then(renderCurriculumRoot);
+    }
   }
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => switchTab(btn.dataset.tab));
@@ -2252,8 +4817,10 @@
   renderLangPills();
   populateLangSelects(true);
   renderStudyModes();
+  loadCurriculumIndex(); // fire in the background so the Curriculum tab is ready by the time it's opened
   renderLibrary();
   renderQuickLinks();
+  renderVaultPanel();
   renderGroups();
   pickNewPrompt();
   renderPrompt();

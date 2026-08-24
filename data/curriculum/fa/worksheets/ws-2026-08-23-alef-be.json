@@ -1,0 +1,77 @@
+{
+  "id": "ws-2026-08-23-alef-be",
+  "moduleId": "fa-rw-farsi",
+  "languageId": "fa",
+  "title": "Alef and Be — drill set",
+  "createdOn": "2026-08-23",
+  "sourcePages": "20-22",
+  "unitId": "u3",
+  "estMinutes": 20,
+  "exercises": [
+    {
+      "id": "e1",
+      "type": "recognize",
+      "prompt": "Which letter is this?",
+      "display": { "fa": "ب" },
+      "choices": ["Alef", "Be", "Noon", "Daal"],
+      "answer": "Be",
+      "explain": "One dot below the bowl. Compare to Pe (three dots below) and Te (two dots above)."
+    },
+    {
+      "id": "e2",
+      "type": "trace",
+      "prompt": "Trace Alef, then write it freehand five times.",
+      "display": { "fa": "ا" },
+      "strokeNote": "A single vertical stroke, top to bottom. No lifting the pen."
+    },
+    {
+      "id": "e3",
+      "type": "transcribe",
+      "prompt": "Write \"bâbâ\" (dad) in Persian script using Be and Alef.",
+      "answer": "بابا",
+      "accept": []
+    },
+    {
+      "id": "e4",
+      "type": "match",
+      "prompt": "Match each letter to its name.",
+      "pairs": [
+        { "left": "ا", "right": "Alef" },
+        { "left": "ب", "right": "Be" },
+        { "left": "ن", "right": "Noon" },
+        { "left": "د", "right": "Daal" }
+      ]
+    },
+    {
+      "id": "e5",
+      "type": "fill",
+      "prompt": "Which letter is missing? ن_ن spells نان (nân — bread).",
+      "answer": "ا",
+      "accept": []
+    },
+    {
+      "id": "e6",
+      "type": "dictation",
+      "prompt": "Listen and type the letter you hear.",
+      "audio": "A02-01",
+      "answer": "ا"
+    },
+    {
+      "id": "e7",
+      "type": "order",
+      "prompt": "Put these letters in the order the book teaches them (earliest first).",
+      "tokens": ["Re", "Alef", "Noon", "Be"],
+      "answer": ["Alef", "Be", "Noon", "Re"]
+    },
+    {
+      "id": "e8",
+      "type": "produce",
+      "prompt": "Say five words out loud that you can now sound out using just Alef, Be, and Noon.",
+      "rubric": [
+        "Attempted at least three words",
+        "Sounded out letter-by-letter rather than guessed",
+        "Checked pronunciation against the audio for each letter"
+      ]
+    }
+  ]
+}

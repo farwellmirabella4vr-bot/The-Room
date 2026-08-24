@@ -1,0 +1,555 @@
+{
+  "id": "fa-rw-farsi",
+  "languageId": "fa",
+  "title": "Reading & Writing Farsi",
+  "source": {
+    "book": "Reading & Writing Farsi (Persian): A Workbook for Self-Study",
+    "authors": "Pegah Vil, Amir Hossein Ahooie",
+    "publisher": "Tuttle",
+    "isbn": "9780804852890",
+    "pages": 192,
+    "answerKey": "docs/answer-key.pdf",
+    "flashCards": "docs/flash-cards.pdf"
+  },
+  "estTotalHours": 105,
+  "units": [
+    {
+      "id": "u1",
+      "number": 1,
+      "title": "Orientation & the Sound System",
+      "pages": "5-10",
+      "goal": "Produce the four sounds English doesn't have (kh, zh, gh, ein), hear how much flatter Farsi stress is than English, and recognize when the book is showing formal vs. colloquial forms.",
+      "unlocks": "u2",
+      "lessons": [
+        {
+          "id": "u1l1",
+          "title": "The Sound System",
+          "pages": "5-7",
+          "estMinutes": 90,
+          "skills": ["listening", "speaking"],
+          "audio": ["I-01"],
+          "objectives": [
+            "Hear kh, zh, gh, and ein without trying to read anything yet",
+            "Notice where each sound is made in the mouth compared to its nearest English sound"
+          ],
+          "tasks": [
+            { "id": "u1l1t1", "type": "listen", "text": "Play track I-01 straight through once, just listening for the four sounds — don't try to write anything yet.", "audio": "I-01" },
+            { "id": "u1l1t2", "type": "read", "text": "Read the pronunciation notes on pages 5-7 for how kh, zh, gh, and ein are each formed." },
+            { "id": "u1l1t3", "type": "speak", "text": "Say each of the four sounds out loud several times, comparing your version against the audio." },
+            { "id": "u1l1t4", "type": "produce", "text": "Say all four sounds back to back and check that they're clearly distinguishable from each other, not blurring together." },
+            { "id": "u1l1t5", "type": "review", "text": "Without looking at the page, say all four sounds again from memory, in any order." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u1l2",
+          "title": "Stress & Rhythm",
+          "pages": "7-8",
+          "estMinutes": 60,
+          "skills": ["listening", "speaking"],
+          "audio": [],
+          "objectives": [
+            "Notice that Farsi stress is flatter and more even than English's strong-syllable stress",
+            "Catch yourself over-stressing syllables out of English habit, and correct it"
+          ],
+          "tasks": [
+            { "id": "u1l2t1", "type": "listen", "text": "Listen to a short phrase from the intro material and pay attention to how evenly the syllables land, compared to English." },
+            { "id": "u1l2t2", "type": "read", "text": "Read the note on stress/rhythm on page 7-8." },
+            { "id": "u1l2t3", "type": "speak", "text": "Say the same phrase back twice: once with English-style stress, once flattened out. Notice the difference." },
+            { "id": "u1l2t4", "type": "produce", "text": "Pick any short phrase from the page and say it three times, deliberately flattening the stress a little more each time." },
+            { "id": "u1l2t5", "type": "review", "text": "Say the phrase once more from memory, aiming for the flatter rhythm without thinking about it." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u1l3",
+          "title": "Formal vs. Colloquial",
+          "pages": "9-10",
+          "estMinutes": 90,
+          "skills": ["reading", "listening"],
+          "audio": [],
+          "objectives": [
+            "Recognize the book's notation for formal (written/polite) vs. colloquial (spoken) Farsi",
+            "Understand why this distinction matters before starting on vocabulary"
+          ],
+          "tasks": [
+            { "id": "u1l3t1", "type": "read", "text": "Read pages 9-10 on formal vs. colloquial Farsi and how the book marks the difference." },
+            { "id": "u1l3t2", "type": "read", "text": "Find the example pair(s) of a formal and colloquial version of the same word or phrase, and note what changes between them." },
+            { "id": "u1l3t3", "type": "listen", "text": "If audio is available for the examples, listen for how the colloquial version sounds shortened or softened compared to the formal one." },
+            { "id": "u1l3t4", "type": "produce", "text": "Write one sentence, in your own words, explaining when you'd expect to hear the colloquial form vs. see the formal one." },
+            { "id": "u1l3t5", "type": "review", "text": "Quiz yourself: given a formal-looking word, guess whether its colloquial form would be longer or shorter, then check." }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u1cp",
+        "title": "Unit 1 exam",
+        "passMark": 80,
+        "sections": ["sound production", "stress recognition", "register identification"]
+      }
+    },
+    {
+      "id": "u2",
+      "number": 2,
+      "title": "Vowels, Consonants & Numbers",
+      "pages": "11-18",
+      "goal": "Name every vowel type in the Farsi vowel system, and read and write the Farsi numerals 0-9 and multi-digit numbers.",
+      "unlocks": "u3",
+      "lessons": [
+        {
+          "id": "u2l1",
+          "title": "Short Vowels",
+          "pages": "11-12",
+          "estMinutes": 60,
+          "skills": ["reading", "listening"],
+          "audio": ["A01-01"],
+          "objectives": ["Name each short vowel and recognize its written mark", "Hear each short vowel in isolation"],
+          "tasks": [
+            { "id": "u2l1t1", "type": "listen", "text": "Play track A01-01 and listen for each short vowel sound in isolation.", "audio": "A01-01" },
+            { "id": "u2l1t2", "type": "read", "text": "Read pages 11-12 and learn the name and written mark for each short vowel." },
+            { "id": "u2l1t3", "type": "write", "text": "Copy each short-vowel mark a few times, on its own, to get the shape into your hand." },
+            { "id": "u2l1t4", "type": "produce", "text": "Say each short vowel out loud while writing its mark, matching sound to shape." },
+            { "id": "u2l1t5", "type": "review", "text": "Cover the page and name all the short vowels from memory, in order." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u2l2",
+          "title": "Long Vowels & Diphthongs",
+          "pages": "13-14",
+          "estMinutes": 60,
+          "skills": ["reading", "listening"],
+          "audio": ["A01-02"],
+          "objectives": ["Name each long vowel and diphthong", "Hear the difference between a short and a long vowel"],
+          "tasks": [
+            { "id": "u2l2t1", "type": "listen", "text": "Play track A01-02 and listen for the long vowels and diphthongs.", "audio": "A01-02" },
+            { "id": "u2l2t2", "type": "read", "text": "Read pages 13-14 and learn the name and written form of each long vowel and diphthong." },
+            { "id": "u2l2t3", "type": "write", "text": "Copy each long-vowel/diphthong form a few times." },
+            { "id": "u2l2t4", "type": "produce", "text": "Say a short vowel then its long counterpart back to back, several times, to feel the length difference." },
+            { "id": "u2l2t5", "type": "review", "text": "From memory, list every vowel type covered so far — short, long, and diphthong." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u2l3",
+          "title": "Consonant Overview",
+          "pages": "14-15",
+          "estMinutes": 45,
+          "skills": ["reading", "listening"],
+          "audio": ["A01-03"],
+          "objectives": ["Get a first look at the full consonant set before learning individual letters", "Notice which consonants look similar and will need extra care to tell apart"],
+          "tasks": [
+            { "id": "u2l3t1", "type": "listen", "text": "Play track A01-03 and just listen to the consonant set read aloud once through.", "audio": "A01-03" },
+            { "id": "u2l3t2", "type": "read", "text": "Skim pages 14-15's consonant chart — don't try to memorize it yet, just get oriented." },
+            { "id": "u2l3t3", "type": "review", "text": "Pick out three consonants that look visually similar to you and jot down what distinguishes them (dots, position, etc.)." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u2l4",
+          "title": "Farsi Numerals 0-9",
+          "pages": "16-17",
+          "estMinutes": 75,
+          "skills": ["reading", "writing"],
+          "audio": ["A01-04"],
+          "objectives": ["Recognize and write each Farsi numeral 0-9", "Say each numeral aloud correctly"],
+          "tasks": [
+            { "id": "u2l4t1", "type": "listen", "text": "Play track A01-04 and listen to the numerals 0-9 read aloud in order.", "audio": "A01-04" },
+            { "id": "u2l4t2", "type": "read", "text": "Read pages 16-17 and learn the written form of each numeral 0-9." },
+            { "id": "u2l4t3", "type": "write", "text": "Write the numerals 0-9 in order, then again out of order from a self-made shuffled list." },
+            { "id": "u2l4t4", "type": "produce", "text": "Say each numeral out loud as you write it." },
+            { "id": "u2l4t5", "type": "review", "text": "Have someone (or a random-number generator) call out digits 0-9 and write each one down as fast as you can." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u2l5",
+          "title": "Reading Multi-Digit Numbers",
+          "pages": "17-18",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A01-05"],
+          "objectives": ["Read a multi-digit Farsi number left-to-right the way the book explains it", "Write a multi-digit number from a spoken or English-numeral prompt"],
+          "tasks": [
+            { "id": "u2l5t1", "type": "listen", "text": "Play track A01-05 and listen to a few multi-digit numbers read aloud.", "audio": "A01-05" },
+            { "id": "u2l5t2", "type": "read", "text": "Read pages 17-18 on how multi-digit numbers are written and ordered." },
+            { "id": "u2l5t3", "type": "write", "text": "Write out today's date and your phone number using Farsi numerals." },
+            { "id": "u2l5t4", "type": "drill", "text": "Convert five two- or three-digit English numbers of your choosing into Farsi numerals." },
+            { "id": "u2l5t5", "type": "review", "text": "Read your own written numbers back out loud without hesitating." }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u2cp",
+        "title": "Unit 2 exam",
+        "passMark": 80,
+        "sections": ["vowel recognition", "numeral reading", "numeral writing"]
+      }
+    },
+    {
+      "id": "u3",
+      "number": 3,
+      "title": "First Letters",
+      "pages": "20-34, 131-132",
+      "goal": "Read and write Alef, Be, Noon, Daal, Re, long A (آ), Meem, and Seen; greet someone in Farsi; recognize basic subject-verb-object word order.",
+      "unlocks": "u4",
+      "lessons": [
+        {
+          "id": "u3l1",
+          "title": "Letter — Alef (ا)",
+          "pages": "20-21",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-01"],
+          "objectives": ["Recognize Alef in isolated and connecting positions", "Write Alef cleanly from memory"],
+          "tasks": [
+            { "id": "u3l1t1", "type": "listen", "text": "Play track A02-01 and listen for how Alef sounds.", "audio": "A02-01" },
+            { "id": "u3l1t2", "type": "read", "text": "Read pages 20-21 and learn Alef's isolated and connecting forms." },
+            { "id": "u3l1t3", "type": "write", "text": "Trace Alef a few times, then write it freehand until it's consistent." },
+            { "id": "u3l1t4", "type": "produce", "text": "Write Alef five times in a row without looking at the page." },
+            { "id": "u3l1t5", "type": "review", "text": "Say Alef's sound while writing it, once more, from memory." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u3l2",
+          "title": "Letter — Be (ب)",
+          "pages": "21-22",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-02"],
+          "objectives": ["Recognize Be's isolated, initial, medial, and final forms", "Write the first real Farsi word using Be and Alef"],
+          "tasks": [
+            { "id": "u3l2t1", "type": "listen", "text": "Play track A02-02 and listen for how Be sounds.", "audio": "A02-02" },
+            { "id": "u3l2t2", "type": "read", "text": "Read pages 21-22 and learn Be's four written forms." },
+            { "id": "u3l2t3", "type": "write", "text": "Trace, then freehand, all four forms of Be." },
+            { "id": "u3l2t4", "type": "produce", "text": "Write بابا (bâbâ — dad) using Be and Alef, the two letters you now know." },
+            { "id": "u3l2t5", "type": "review", "text": "Write Be's four forms from memory, unprompted." }
+          ],
+          "vocab": [{ "term": "بابا", "translit": "bâbâ", "gloss": "dad" }]
+        },
+        {
+          "id": "u3l3",
+          "title": "Letter — Noon (ن)",
+          "pages": "22-23",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-03"],
+          "objectives": ["Recognize Noon's four written forms", "Read/write a real word combining Noon and Alef"],
+          "tasks": [
+            { "id": "u3l3t1", "type": "listen", "text": "Play track A02-03 and listen for how Noon sounds.", "audio": "A02-03" },
+            { "id": "u3l3t2", "type": "read", "text": "Read pages 22-23 and learn Noon's four written forms." },
+            { "id": "u3l3t3", "type": "write", "text": "Trace, then freehand, all four forms of Noon." },
+            { "id": "u3l3t4", "type": "produce", "text": "Write نان (nân — bread) using Noon and Alef." },
+            { "id": "u3l3t5", "type": "review", "text": "Write Noon's four forms from memory." }
+          ],
+          "vocab": [{ "term": "نان", "translit": "nân", "gloss": "bread" }]
+        },
+        {
+          "id": "u3l4",
+          "title": "Letter — Daal (د)",
+          "pages": "23-24",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-04"],
+          "objectives": ["Recognize Daal (a non-connecting letter) in context", "Read/write a real word combining Daal and Be"],
+          "tasks": [
+            { "id": "u3l4t1", "type": "listen", "text": "Play track A02-04 and listen for how Daal sounds.", "audio": "A02-04" },
+            { "id": "u3l4t2", "type": "read", "text": "Read pages 23-24 — note that Daal doesn't connect to the letter after it, unlike Be and Noon." },
+            { "id": "u3l4t3", "type": "write", "text": "Trace, then freehand, Daal's isolated and final forms." },
+            { "id": "u3l4t4", "type": "produce", "text": "Write بد (bad — bad) using Be and Daal." },
+            { "id": "u3l4t5", "type": "review", "text": "Write Daal from memory and explain out loud why it doesn't connect forward." }
+          ],
+          "vocab": [{ "term": "بد", "translit": "bad", "gloss": "bad" }]
+        },
+        {
+          "id": "u3l5",
+          "title": "Letter — Re (ر)",
+          "pages": "24-25",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-05"],
+          "objectives": ["Recognize Re (also non-connecting) and tell it apart from Daal", "Read/write a real word combining Daal and Re"],
+          "tasks": [
+            { "id": "u3l5t1", "type": "listen", "text": "Play track A02-05 and listen for how Re sounds.", "audio": "A02-05" },
+            { "id": "u3l5t2", "type": "read", "text": "Read pages 24-25 and compare Re's shape against Daal's — they're easy to confuse at first." },
+            { "id": "u3l5t3", "type": "write", "text": "Trace, then freehand, Re, then alternate writing Daal/Re pairs to drill the difference." },
+            { "id": "u3l5t4", "type": "produce", "text": "Write در (dar — door / in) using Daal and Re." },
+            { "id": "u3l5t5", "type": "review", "text": "Write five letters in a row, mixing Daal and Re at random, and check you got each one right." }
+          ],
+          "vocab": [{ "term": "در", "translit": "dar", "gloss": "door / in" }]
+        },
+        {
+          "id": "u3l6",
+          "title": "Letter — Long A (آ, Alef with Madda)",
+          "pages": "25-26",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-06"],
+          "objectives": ["Recognize آ as the long-A carrier, distinct from plain Alef", "Read/write a real word using آ and Be"],
+          "tasks": [
+            { "id": "u3l6t1", "type": "listen", "text": "Play track A02-06 and listen for the long-A sound.", "audio": "A02-06" },
+            { "id": "u3l6t2", "type": "read", "text": "Read pages 25-26 on آ and how it differs from a plain Alef." },
+            { "id": "u3l6t3", "type": "write", "text": "Trace, then freehand, آ a few times." },
+            { "id": "u3l6t4", "type": "produce", "text": "Write آب (âb — water) using آ and Be." },
+            { "id": "u3l6t5", "type": "review", "text": "Write آ and ا side by side from memory and say the sound difference out loud." }
+          ],
+          "vocab": [{ "term": "آب", "translit": "âb", "gloss": "water" }]
+        },
+        {
+          "id": "u3l7",
+          "title": "Letter — Meem (م)",
+          "pages": "26-27",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-07"],
+          "objectives": ["Recognize Meem's four forms", "Read/write a real word combining everything learned so far"],
+          "tasks": [
+            { "id": "u3l7t1", "type": "listen", "text": "Play track A02-07 and listen for how Meem sounds.", "audio": "A02-07" },
+            { "id": "u3l7t2", "type": "read", "text": "Read pages 26-27 and learn Meem's four written forms." },
+            { "id": "u3l7t3", "type": "write", "text": "Trace, then freehand, all four forms of Meem." },
+            { "id": "u3l7t4", "type": "produce", "text": "Write مادر (mâdar — mother) using Meem, Alef, Daal, and Re." },
+            { "id": "u3l7t5", "type": "review", "text": "Write Meem's four forms from memory." }
+          ],
+          "vocab": [{ "term": "مادر", "translit": "mâdar", "gloss": "mother" }]
+        },
+        {
+          "id": "u3l8",
+          "title": "Letter — Seen (س)",
+          "pages": "27-28",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": ["A02-08"],
+          "objectives": ["Recognize Seen's four forms — the last new letter of the unit", "Read/write a real word combining Seen with earlier letters"],
+          "tasks": [
+            { "id": "u3l8t1", "type": "listen", "text": "Play track A02-08 and listen for how Seen sounds.", "audio": "A02-08" },
+            { "id": "u3l8t2", "type": "read", "text": "Read pages 27-28 and learn Seen's four written forms." },
+            { "id": "u3l8t3", "type": "write", "text": "Trace, then freehand, all four forms of Seen." },
+            { "id": "u3l8t4", "type": "produce", "text": "Write سرد (sard — cold) using Seen, Re, and Daal." },
+            { "id": "u3l8t5", "type": "review", "text": "Write all eight letters learned in this unit, in order, from memory." }
+          ],
+          "vocab": [{ "term": "سرد", "translit": "sard", "gloss": "cold" }]
+        },
+        {
+          "id": "u3l9",
+          "title": "Greetings",
+          "pages": "28-29, 131",
+          "estMinutes": 90,
+          "skills": ["speaking", "reading"],
+          "audio": [],
+          "objectives": ["Read and say a basic greeting and its reply", "Notice which greeting words use letters you've already learned"],
+          "tasks": [
+            { "id": "u3l9t1", "type": "read", "text": "Read pages 28-29 and 131 for the basic greeting phrases the book introduces here." },
+            { "id": "u3l9t2", "type": "speak", "text": "Say each greeting phrase out loud a few times." },
+            { "id": "u3l9t3", "type": "produce", "text": "Practice a short back-and-forth: greet, then give the reply, out loud, without reading it." },
+            { "id": "u3l9t4", "type": "review", "text": "Write down one greeting and its reply from memory." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u3l10",
+          "title": "Basic Sentence Order (Subject–Verb–Object)",
+          "pages": "29-30, 131-132",
+          "estMinutes": 90,
+          "skills": ["reading", "writing"],
+          "audio": [],
+          "objectives": ["Identify subject, verb, and object in a simple Farsi sentence", "Notice that Farsi verb order differs from English"],
+          "tasks": [
+            { "id": "u3l10t1", "type": "read", "text": "Read pages 29-30 and 131-132 on basic sentence word order." },
+            { "id": "u3l10t2", "type": "read", "text": "Find one example sentence and label which part is the subject, which is the verb, and which is the object." },
+            { "id": "u3l10t3", "type": "write", "text": "Write one simple sentence of your own following the same subject-object-verb pattern, using letters you already know where possible." },
+            { "id": "u3l10t4", "type": "produce", "text": "Say your sentence out loud." },
+            { "id": "u3l10t5", "type": "review", "text": "Explain out loud, in your own words, how Farsi word order differs from English word order." }
+          ],
+          "vocab": []
+        },
+        {
+          "id": "u3l11",
+          "title": "Unit 3 Review & Reading Practice",
+          "pages": "32-34",
+          "estMinutes": 60,
+          "skills": ["reading", "writing"],
+          "audio": [],
+          "objectives": ["Read a short passage using only Unit 3's eight letters", "Confirm all eight letters are solid before the checkpoint"],
+          "tasks": [
+            { "id": "u3l11t1", "type": "read", "text": "Read the practice text on pages 32-34, sounding out each word letter by letter where needed." },
+            { "id": "u3l11t2", "type": "write", "text": "Copy out two or three words from the passage by hand." },
+            { "id": "u3l11t3", "type": "drill", "text": "Go back through all eight letters from this unit and write each one's four forms once more." },
+            { "id": "u3l11t4", "type": "review", "text": "Note which of the eight letters still feels shakiest, and plan to spend extra review time on it." }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u3cp",
+        "title": "Unit 3 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u4",
+      "number": 4,
+      "title": "Building Words",
+      "pages": "35-50, 133, 138",
+      "goal": "Read and write Te, Ze, E, Kaaf, Ee, Ye, and Oo; use personal pronouns; form plurals.",
+      "unlocks": "u5",
+      "lessons": [
+        { "id": "u4l1", "title": "Letter — Te", "pages": "35-36", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l2", "title": "Letter — Ze", "pages": "36-37", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l3", "title": "Letter — E", "pages": "37-38", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l4", "title": "Letter — Kaaf", "pages": "38-39", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l5", "title": "Letter — Ee", "pages": "39-40", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l6", "title": "Letter — Ye", "pages": "40-41", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l7", "title": "Letter — Oo", "pages": "41-42", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l8", "title": "Pronouns", "pages": "133", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u4l9", "title": "Plurals", "pages": "138", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u4cp",
+        "title": "Unit 4 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u5",
+      "number": 5,
+      "title": "People & Things",
+      "pages": "51-64, 122-124, 134",
+      "goal": "Read and write Pe, Sheen, Fe, O, Gaaf, and Ghaaf; learn family vocabulary; use this/that.",
+      "unlocks": "u6",
+      "lessons": [
+        { "id": "u5l1", "title": "Letter — Pe", "pages": "51-53", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l2", "title": "Letter — Sheen", "pages": "53-55", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l3", "title": "Letter — Fe", "pages": "55-57", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l4", "title": "Letter — O", "pages": "57-59", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l5", "title": "Letter — Gaaf", "pages": "59-61", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l6", "title": "Letter — Ghaaf", "pages": "61-64", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l7", "title": "Family Vocabulary", "pages": "122-124", "estMinutes": 90, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u5l8", "title": "This / That (Demonstratives)", "pages": "134", "estMinutes": 90, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u5cp",
+        "title": "Unit 5 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u6",
+      "number": 6,
+      "title": "Describing",
+      "pages": "65-80, 125-126, 141-142",
+      "goal": "Read and write Khe, Che, He (ه), Jeem, Laam, Vaav, and Khaa; use adjectives and ezâfe; learn body and weather vocabulary.",
+      "unlocks": "u7",
+      "lessons": [
+        { "id": "u6l1", "title": "Letter — Khe", "pages": "65-66", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l2", "title": "Letter — Che", "pages": "66-68", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l3", "title": "Letter — He (ه)", "pages": "68-70", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l4", "title": "Letter — Jeem", "pages": "70-72", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l5", "title": "Letter — Laam", "pages": "72-74", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l6", "title": "Letter — Vaav", "pages": "74-76", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l7", "title": "Letter — Khaa", "pages": "76-80", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l8", "title": "Adjectives & Ezâfe", "pages": "125-126", "estMinutes": 110, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u6l9", "title": "Body & Weather Vocabulary", "pages": "141-142", "estMinutes": 110, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u6cp",
+        "title": "Unit 6 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u7",
+      "number": 7,
+      "title": "Out in the World",
+      "pages": "81-90, 127, 143",
+      "goal": "Read and write Zhe, Saad, He (ح), Zaad, Taa, and Zaa; use prepositions; learn grocery and restaurant vocabulary.",
+      "unlocks": "u8",
+      "lessons": [
+        { "id": "u7l1", "title": "Letter — Zhe", "pages": "81-82", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l2", "title": "Letter — Saad", "pages": "82-83", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l3", "title": "Letter — He (ح)", "pages": "83-85", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l4", "title": "Letter — Zaad", "pages": "85-86", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l5", "title": "Letter — Taa", "pages": "86-88", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l6", "title": "Letter — Zaa", "pages": "88-90", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l7", "title": "Prepositions", "pages": "127", "estMinutes": 90, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u7l8", "title": "Grocery & Restaurant Vocabulary", "pages": "143", "estMinutes": 90, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u7cp",
+        "title": "Unit 7 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u8",
+      "number": 8,
+      "title": "Verbs",
+      "pages": "91-99, 144-145",
+      "goal": "Read and write Ein, Ghein, Se, and Zaal; conjugate present-tense verbs from their stems.",
+      "unlocks": "u9",
+      "lessons": [
+        { "id": "u8l1", "title": "Letter — Ein", "pages": "91-92", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u8l2", "title": "Letter — Ghein", "pages": "92-94", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u8l3", "title": "Letter — Se", "pages": "94-96", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u8l4", "title": "Letter — Zaal", "pages": "96-99", "estMinutes": 80, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u8l5", "title": "Present-Tense Endings", "pages": "144", "estMinutes": 140, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u8l6", "title": "Verb Stems & Conjugation Practice", "pages": "145", "estMinutes": 140, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u8cp",
+        "title": "Unit 8 exam",
+        "passMark": 80,
+        "sections": ["letter recognition", "handwriting", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u9",
+      "number": 9,
+      "title": "Marks & Questions",
+      "pages": "100-109, 128, 148",
+      "goal": "Read and write tashdeed, hamze, and tanveen; form WH questions; learn animal vocabulary.",
+      "unlocks": "u10",
+      "lessons": [
+        { "id": "u9l1", "title": "Mark — Tashdeed", "pages": "100-103", "estMinutes": 70, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u9l2", "title": "Mark — Hamze", "pages": "103-106", "estMinutes": 70, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u9l3", "title": "Mark — Tanveen", "pages": "106-109", "estMinutes": 70, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u9l4", "title": "WH Questions", "pages": "128", "estMinutes": 165, "skills": ["speaking", "listening"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u9l5", "title": "Animal Vocabulary", "pages": "148", "estMinutes": 165, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u9cp",
+        "title": "Unit 9 exam",
+        "passMark": 80,
+        "sections": ["mark recognition", "question formation", "dictation", "reading aloud"]
+      }
+    },
+    {
+      "id": "u10",
+      "number": 10,
+      "title": "Reading for Real",
+      "pages": "110-121 + review",
+      "goal": "Read the geography passages aloud, review all four sections, and read unvowelled Farsi text — the actual finish line, since real Farsi mostly drops the diacritics beginners rely on.",
+      "unlocks": null,
+      "lessons": [
+        { "id": "u10l1", "title": "Reading Passage — Geography I", "pages": "110-115", "estMinutes": 150, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u10l2", "title": "Reading Passage — Geography II", "pages": "116-121", "estMinutes": 150, "skills": ["reading", "speaking"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u10l3", "title": "Review — Letters & Words", "pages": "review", "estMinutes": 150, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u10l4", "title": "Review — Grammar & Sentences", "pages": "review", "estMinutes": 150, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] },
+        { "id": "u10l5", "title": "Final Review Session", "pages": "review", "estMinutes": 120, "skills": ["reading", "writing"], "audio": [], "objectives": [], "tasks": [], "vocab": [] }
+      ],
+      "checkpoint": {
+        "id": "u10cp",
+        "title": "Final exam — all four sections",
+        "passMark": 80,
+        "sections": ["reading comprehension", "dictation", "grammar", "reading aloud (unvowelled)"]
+      }
+    }
+  ]
+}

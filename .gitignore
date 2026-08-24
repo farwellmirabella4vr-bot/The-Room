@@ -15,3 +15,13 @@ Thumbs.db
 # vault content synced from a real vault, not project source. Never belongs
 # in version control.
 nest-of-knowledge/
+
+# Curriculum companion audio/PDFs (e.g. get-farsi-audio.ps1's output) --
+# publisher-owned copyrighted content fetched from the publisher's own site,
+# not ours to redistribute via a public repo. Regenerate locally by re-running
+# the matching get-<language>-audio.ps1 script; audio-index.json is its
+# generated manifest, so it's excluded too rather than drifting from the
+# actual downloaded files.
+data/curriculum/*/audio/
+data/curriculum/*/docs/
+data/curriculum/*/audio-index.json

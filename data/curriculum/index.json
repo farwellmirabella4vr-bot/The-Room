@@ -1,0 +1,12 @@
+{
+  "modules": [
+    {
+      "id": "fa-rw-farsi",
+      "languageId": "fa",
+      "title": "Reading & Writing Farsi",
+      "subtitle": "Vil & Ahooie, Tuttle — 192 pages, 10 units",
+      "file": "fa/rw-farsi.json",
+      "addedOn": "2026-08-23"
+    }
+  ]
+}
