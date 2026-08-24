@@ -1,0 +1,1235 @@
+{
+  "id": "ar-arabic-for-dummies",
+  "languageId": "ar",
+  "title": "Arabic For Dummies",
+  "source": {
+    "book": "Arabic For Dummies, 2nd Edition",
+    "authors": "Amine Bouchentouf",
+    "publisher": "Wiley",
+    "isbn": "9781118455104",
+    "pages": 384,
+    "answerKey": null,
+    "flashCards": null
+  },
+  "estTotalHours": 61.1,
+  "units": [
+    {
+      "id": "u1",
+      "number": 1,
+      "title": "The Arabic You Already Know",
+      "pages": "TBD",
+      "goal": "Recognize Arabic loanwords already in English, and get oriented to the Arabic alphabet before studying it in depth.",
+      "unlocks": "u2",
+      "lessons": [
+        {
+          "id": "u1l1",
+          "title": "Arabic Words You Already Know",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "comprehension"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u1l2",
+          "title": "A First Look at the Alphabet",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u1cp",
+        "title": "Unit 1 exam",
+        "passMark": 80,
+        "sections": [
+          "cognate recognition",
+          "alphabet orientation"
+        ]
+      }
+    },
+    {
+      "id": "u2",
+      "number": 2,
+      "title": "Taking a Closer Look at the Arabic Alphabet",
+      "pages": "TBD",
+      "goal": "Read the Arabic script's letter forms and understand how this course's transliteration system represents Arabic sounds in Roman letters.",
+      "unlocks": "u3",
+      "lessons": [
+        {
+          "id": "u2l1",
+          "title": "The Arabic Script",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u2l2",
+          "title": "Transcription & Transliteration Systems",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u2cp",
+        "title": "Unit 2 exam",
+        "passMark": 80,
+        "sections": [
+          "letter recognition",
+          "transliteration reading"
+        ]
+      }
+    },
+    {
+      "id": "u3",
+      "number": 3,
+      "title": "Tackling Basic Arabic Grammar",
+      "pages": "TBD",
+      "goal": "Build simple Arabic sentences using nouns, adjectives, articles, and the core verb tenses, including sentences with no verb at all.",
+      "unlocks": "u4",
+      "lessons": [
+        {
+          "id": "u3l1",
+          "title": "Nouns, Adjectives & Articles",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u3l2",
+          "title": "Verb-Free Sentences",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u3l3",
+          "title": "Past Tense Verbs",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u3l4",
+          "title": "Present Tense Verbs",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u3l5",
+          "title": "Future Tense Verbs",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u3l6",
+          "title": "Irregular Verbs",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u3cp",
+        "title": "Unit 3 exam",
+        "passMark": 80,
+        "sections": [
+          "noun/adjective agreement",
+          "verb conjugation",
+          "sentence construction"
+        ]
+      }
+    },
+    {
+      "id": "u4",
+      "number": 4,
+      "title": "Getting Started with Basic Expressions",
+      "pages": "TBD",
+      "goal": "Greet people, introduce yourself, state your nationality, and make small talk about the weather.",
+      "unlocks": "u5",
+      "lessons": [
+        {
+          "id": "u4l1",
+          "title": "Greetings",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u4l2",
+          "title": "Introducing Yourself",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u4l3",
+          "title": "Nationalities",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u4l4",
+          "title": "Talking About the Weather",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u4cp",
+        "title": "Unit 4 exam",
+        "passMark": 80,
+        "sections": [
+          "greetings dialogue",
+          "self-introduction",
+          "vocabulary recall"
+        ]
+      }
+    },
+    {
+      "id": "u5",
+      "number": 5,
+      "title": "Numbers, Dates, and Measurements",
+      "pages": "TBD",
+      "goal": "Count, tell dates, and describe quantities and measurements in Arabic.",
+      "unlocks": "u6",
+      "lessons": [
+        {
+          "id": "u5l1",
+          "title": "Numbers",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u5l2",
+          "title": "Days, Months & Dates",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u5l3",
+          "title": "Measurements",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u5cp",
+        "title": "Unit 5 exam",
+        "passMark": 80,
+        "sections": [
+          "number reading/writing",
+          "date expressions",
+          "measurement vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "u6",
+      "number": 6,
+      "title": "At the Office and Around the House",
+      "pages": "TBD",
+      "goal": "Name common objects and describe everyday activities at the office and at home.",
+      "unlocks": "u7",
+      "lessons": [
+        {
+          "id": "u6l1",
+          "title": "At the Office",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u6l2",
+          "title": "Around the House",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u6cp",
+        "title": "Unit 6 exam",
+        "passMark": 80,
+        "sections": [
+          "vocabulary recall",
+          "descriptive sentences"
+        ]
+      }
+    },
+    {
+      "id": "u7",
+      "number": 7,
+      "title": "Getting to Know You / Small Talk",
+      "pages": "TBD",
+      "goal": "Carry a small-talk conversation: ask and answer key questions, talk about family and work, and communicate by phone or email.",
+      "unlocks": "u8",
+      "lessons": [
+        {
+          "id": "u7l1",
+          "title": "Key Questions",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u7l2",
+          "title": "Talking About Family",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u7l3",
+          "title": "Talking About Your Job",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u7l4",
+          "title": "Phone Calls & Email",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u7cp",
+        "title": "Unit 7 exam",
+        "passMark": 80,
+        "sections": [
+          "question formation",
+          "conversational dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u8",
+      "number": 8,
+      "title": "Asking Directions",
+      "pages": "TBD",
+      "goal": "Ask where something is, understand and give directions, use command forms, and use ordinal numbers.",
+      "unlocks": "u9",
+      "lessons": [
+        {
+          "id": "u8l1",
+          "title": "Asking ‘Where’ Questions",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u8l2",
+          "title": "Giving & Following Directions",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u8l3",
+          "title": "Command Forms (Imperative)",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u8l4",
+          "title": "Ordinal Numbers",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u8cp",
+        "title": "Unit 8 exam",
+        "passMark": 80,
+        "sections": [
+          "direction vocabulary",
+          "imperative conjugation",
+          "ordinal numbers"
+        ]
+      }
+    },
+    {
+      "id": "u9",
+      "number": 9,
+      "title": "Eating In and Dining Out",
+      "pages": "TBD",
+      "goal": "Talk about mealtimes, read a menu, order food, and pay at a restaurant.",
+      "unlocks": "u10",
+      "lessons": [
+        {
+          "id": "u9l1",
+          "title": "Mealtimes",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u9l2",
+          "title": "Reading a Menu",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u9l3",
+          "title": "Ordering Food",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u9l4",
+          "title": "Paying the Bill",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u9cp",
+        "title": "Unit 9 exam",
+        "passMark": 80,
+        "sections": [
+          "restaurant dialogue",
+          "menu vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "u10",
+      "number": 10,
+      "title": "Going Shopping",
+      "pages": "TBD",
+      "goal": "Shop for merchandise and clothes, compare items, and negotiate buying and selling.",
+      "unlocks": "u11",
+      "lessons": [
+        {
+          "id": "u10l1",
+          "title": "Talking About Merchandise",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u10l2",
+          "title": "Making Comparisons",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u10l3",
+          "title": "Buying & Selling",
+          "pages": "TBD",
+          "estMinutes": 70,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u10l4",
+          "title": "Clothes & Sizes",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u10cp",
+        "title": "Unit 10 exam",
+        "passMark": 80,
+        "sections": [
+          "comparative forms",
+          "shopping dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u11",
+      "number": 11,
+      "title": "Hitting the Town",
+      "pages": "TBD",
+      "goal": "Tell time and talk about a night or day out — museums, movies, and visiting religious sites, including the Hajj.",
+      "unlocks": "u12",
+      "lessons": [
+        {
+          "id": "u11l1",
+          "title": "Telling Time",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u11l2",
+          "title": "Visiting Museums",
+          "pages": "TBD",
+          "estMinutes": 50,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u11l3",
+          "title": "Going to the Movies",
+          "pages": "TBD",
+          "estMinutes": 50,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u11l4",
+          "title": "Visiting Religious Sites",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "comprehension"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u11l5",
+          "title": "The Hajj",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "comprehension"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u11cp",
+        "title": "Unit 11 exam",
+        "passMark": 80,
+        "sections": [
+          "time expressions",
+          "cultural vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "u12",
+      "number": 12,
+      "title": "Business and Telecommunicating",
+      "pages": "TBD",
+      "goal": "Handle basic business conversation and talk about phones, computers, and telecommunication.",
+      "unlocks": "u13",
+      "lessons": [
+        {
+          "id": "u12l1",
+          "title": "Business Vocabulary",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u12l2",
+          "title": "Telecommunicating",
+          "pages": "TBD",
+          "estMinutes": 75,
+          "skills": [
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u12cp",
+        "title": "Unit 12 exam",
+        "passMark": 80,
+        "sections": [
+          "business dialogue",
+          "telecommunication vocabulary"
+        ]
+      }
+    },
+    {
+      "id": "u13",
+      "number": 13,
+      "title": "Recreation, Music, and the Outdoors",
+      "pages": "TBD",
+      "goal": "Talk about hobbies, recreation, music, and outdoor activities.",
+      "unlocks": "u14",
+      "lessons": [
+        {
+          "id": "u13l1",
+          "title": "Recreation & Sports",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u13l2",
+          "title": "Music",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u13l3",
+          "title": "The Outdoors",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u13cp",
+        "title": "Unit 13 exam",
+        "passMark": 80,
+        "sections": [
+          "hobby vocabulary",
+          "descriptive dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u14",
+      "number": 14,
+      "title": "Planning a Trip",
+      "pages": "TBD",
+      "goal": "Plan and prepare for a trip in Arabic.",
+      "unlocks": "u15",
+      "lessons": [
+        {
+          "id": "u14l1",
+          "title": "Planning a Trip",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u14cp",
+        "title": "Unit 14 exam",
+        "passMark": 80,
+        "sections": [
+          "travel-planning vocabulary",
+          "dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u15",
+      "number": 15,
+      "title": "Money in a Foreign Land",
+      "pages": "TBD",
+      "goal": "Handle money, currency exchange, and banking while traveling.",
+      "unlocks": "u16",
+      "lessons": [
+        {
+          "id": "u15l1",
+          "title": "Money in a Foreign Land",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u15cp",
+        "title": "Unit 15 exam",
+        "passMark": 80,
+        "sections": [
+          "banking vocabulary",
+          "numbers in context"
+        ]
+      }
+    },
+    {
+      "id": "u16",
+      "number": 16,
+      "title": "Planes, Trains, Automobiles",
+      "pages": "TBD",
+      "goal": "Talk about air, rail, and road travel.",
+      "unlocks": "u17",
+      "lessons": [
+        {
+          "id": "u16l1",
+          "title": "Planes, Trains, Automobiles",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u16cp",
+        "title": "Unit 16 exam",
+        "passMark": 80,
+        "sections": [
+          "transportation vocabulary",
+          "dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u17",
+      "number": 17,
+      "title": "Finding a Place to Stay",
+      "pages": "TBD",
+      "goal": "Find and book accommodation.",
+      "unlocks": "u18",
+      "lessons": [
+        {
+          "id": "u17l1",
+          "title": "Finding a Place to Stay",
+          "pages": "TBD",
+          "estMinutes": 90,
+          "skills": [
+            "reading",
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u17cp",
+        "title": "Unit 17 exam",
+        "passMark": 80,
+        "sections": [
+          "accommodation vocabulary",
+          "booking dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u18",
+      "number": 18,
+      "title": "Handling Emergencies",
+      "pages": "TBD",
+      "goal": "Handle medical, legal, and safety emergencies in Arabic.",
+      "unlocks": "u19",
+      "lessons": [
+        {
+          "id": "u18l1",
+          "title": "Handling Emergencies",
+          "pages": "TBD",
+          "estMinutes": 100,
+          "skills": [
+            "reading",
+            "listening",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u18cp",
+        "title": "Unit 18 exam",
+        "passMark": 80,
+        "sections": [
+          "emergency vocabulary",
+          "urgent dialogue"
+        ]
+      }
+    },
+    {
+      "id": "u19",
+      "number": 19,
+      "title": "Ten Ways to Pick Up Arabic Quickly",
+      "pages": "TBD",
+      "goal": "Apply ten practical strategies for picking up Arabic faster.",
+      "unlocks": "u20",
+      "lessons": [
+        {
+          "id": "u19l1",
+          "title": "Ten Ways to Pick Up Arabic Quickly",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "comprehension"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u19cp",
+        "title": "Unit 19 exam",
+        "passMark": 80,
+        "sections": [
+          "strategy recall"
+        ]
+      }
+    },
+    {
+      "id": "u20",
+      "number": 20,
+      "title": "Ten Favorite Arabic Expressions",
+      "pages": "TBD",
+      "goal": "Learn ten commonly used Arabic expressions.",
+      "unlocks": "u21",
+      "lessons": [
+        {
+          "id": "u20l1",
+          "title": "Ten Favorite Arabic Expressions",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u20cp",
+        "title": "Unit 20 exam",
+        "passMark": 80,
+        "sections": [
+          "expression recall",
+          "usage in context"
+        ]
+      }
+    },
+    {
+      "id": "u21",
+      "number": 21,
+      "title": "Ten Great Arabic Proverbs",
+      "pages": "TBD",
+      "goal": "Learn ten well-known Arabic proverbs and their meanings.",
+      "unlocks": "u22",
+      "lessons": [
+        {
+          "id": "u21l1",
+          "title": "Ten Great Arabic Proverbs",
+          "pages": "TBD",
+          "estMinutes": 45,
+          "skills": [
+            "reading",
+            "comprehension"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u21cp",
+        "title": "Unit 21 exam",
+        "passMark": 80,
+        "sections": [
+          "proverb recall",
+          "meaning/interpretation"
+        ]
+      }
+    },
+    {
+      "id": "u22",
+      "number": 22,
+      "title": "Appendixes & Reference",
+      "pages": "TBD",
+      "goal": "Use the reference appendixes — verb conjugation tables and the mini-dictionaries — to check work and look up vocabulary.",
+      "unlocks": null,
+      "lessons": [
+        {
+          "id": "u22l1",
+          "title": "Verb Conjugation Tables",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u22l2",
+          "title": "Mini-Dictionary: Arabic–English",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u22l3",
+          "title": "Mini-Dictionary: English–Arabic",
+          "pages": "TBD",
+          "estMinutes": 60,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        },
+        {
+          "id": "u22l4",
+          "title": "Practice Answer Key",
+          "pages": "TBD",
+          "estMinutes": 30,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [],
+          "tasks": [],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u22cp",
+        "title": "Unit 22 exam",
+        "passMark": 80,
+        "sections": [
+          "verb table lookup",
+          "dictionary use"
+        ]
+      }
+    }
+  ]
+}

@@ -7,6 +7,14 @@
       "subtitle": "Vil & Ahooie, Tuttle — 192 pages, 10 units",
       "file": "fa/rw-farsi.json",
       "addedOn": "2026-08-23"
+    },
+    {
+      "id": "ar-arabic-for-dummies",
+      "languageId": "ar",
+      "title": "Arabic For Dummies",
+      "subtitle": "Bouchentouf, Wiley — 384 pages, 22 units",
+      "file": "ar/arabic-for-dummies.json",
+      "addedOn": "2026-08-24"
     }
   ]
 }
