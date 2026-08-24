@@ -31,9 +31,49 @@
             "comprehension"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Recognize a handful of English words that came from Arabic",
+            "Get oriented before the alphabet is introduced in depth"
+          ],
+          "tasks": [
+            {
+              "id": "u1l1t1",
+              "type": "read",
+              "text": "Read through \"Arabic Words You Already Know\" once for the overall idea."
+            },
+            {
+              "id": "u1l1t2",
+              "type": "read",
+              "text": "Read it again, this time noting anything unfamiliar."
+            },
+            {
+              "id": "u1l1t3",
+              "type": "produce",
+              "text": "Summarize what you read in a sentence or two, in your own words."
+            },
+            {
+              "id": "u1l1t4",
+              "type": "review",
+              "text": "Explain out loud what you learned, without looking back at the page."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "قهوة",
+              "translit": "qahwa",
+              "gloss": "coffee (source of the English word)"
+            },
+            {
+              "term": "سكر",
+              "translit": "sukkar",
+              "gloss": "sugar (source of the English word)"
+            },
+            {
+              "term": "صحراء",
+              "translit": "ṣaḥrā",
+              "gloss": "desert (source of \"Sahara\")"
+            }
+          ]
         },
         {
           "id": "u1l2",
@@ -44,9 +84,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Get a first look at the Arabic alphabet's shape and direction",
+            "Notice that Arabic is written right to left"
+          ],
+          "tasks": [
+            {
+              "id": "u1l2t1",
+              "type": "read",
+              "text": "Read through \"A First Look at the Alphabet\"."
+            },
+            {
+              "id": "u1l2t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u1l2t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "حروف",
+              "translit": "ḥurūf",
+              "gloss": "letters"
+            },
+            {
+              "term": "أبجدية",
+              "translit": "abjadiyya",
+              "gloss": "alphabet"
+            },
+            {
+              "term": "كتابة",
+              "translit": "kitāba",
+              "gloss": "writing"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -77,9 +152,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Recognize that most Arabic letters change shape depending on position in a word",
+            "Read a few isolated letters"
+          ],
+          "tasks": [
+            {
+              "id": "u2l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u2l1t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u2l1t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u2l1t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "حرف",
+              "translit": "ḥarf",
+              "gloss": "letter"
+            },
+            {
+              "term": "كلمة",
+              "translit": "kalima",
+              "gloss": "word"
+            },
+            {
+              "term": "جملة",
+              "translit": "jumla",
+              "gloss": "sentence"
+            }
+          ]
         },
         {
           "id": "u2l2",
@@ -90,9 +205,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Understand how this course represents Arabic sounds in Roman letters",
+            "Connect a transliterated word back to its Arabic spelling"
+          ],
+          "tasks": [
+            {
+              "id": "u2l2t1",
+              "type": "read",
+              "text": "Read through \"Transcription & Transliteration Systems\"."
+            },
+            {
+              "id": "u2l2t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u2l2t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "نطق",
+              "translit": "nuṭq",
+              "gloss": "pronunciation"
+            },
+            {
+              "term": "صوت",
+              "translit": "ṣawt",
+              "gloss": "sound"
+            },
+            {
+              "term": "لغة",
+              "translit": "lugha",
+              "gloss": "language"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -123,9 +273,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Identify nouns, adjectives, and the definite article in a simple phrase",
+            "Match an adjective to the noun it describes"
+          ],
+          "tasks": [
+            {
+              "id": "u3l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l1t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l1t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l1t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "اسم",
+              "translit": "ism",
+              "gloss": "noun / name"
+            },
+            {
+              "term": "صفة",
+              "translit": "ṣifa",
+              "gloss": "adjective"
+            },
+            {
+              "term": "كبير",
+              "translit": "kabīr",
+              "gloss": "big"
+            }
+          ]
         },
         {
           "id": "u3l2",
@@ -137,9 +327,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Build a simple sentence with no verb at all",
+            "Recognize why Arabic doesn't need \"is/are\" in the present tense"
+          ],
+          "tasks": [
+            {
+              "id": "u3l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l2t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l2t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l2t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "هو",
+              "translit": "huwa",
+              "gloss": "he"
+            },
+            {
+              "term": "هي",
+              "translit": "hiya",
+              "gloss": "she"
+            },
+            {
+              "term": "في",
+              "translit": "fī",
+              "gloss": "in"
+            }
+          ]
         },
         {
           "id": "u3l3",
@@ -151,9 +381,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Conjugate a regular verb in the past tense",
+            "Say what someone did"
+          ],
+          "tasks": [
+            {
+              "id": "u3l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l3t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l3t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l3t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "كتب",
+              "translit": "kataba",
+              "gloss": "he wrote"
+            },
+            {
+              "term": "ذهب",
+              "translit": "dhahaba",
+              "gloss": "he went"
+            },
+            {
+              "term": "أكل",
+              "translit": "akala",
+              "gloss": "he ate"
+            }
+          ]
         },
         {
           "id": "u3l4",
@@ -165,9 +435,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Conjugate a regular verb in the present tense",
+            "Say what someone does or is doing"
+          ],
+          "tasks": [
+            {
+              "id": "u3l4t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l4t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l4t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l4t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "يكتب",
+              "translit": "yaktubu",
+              "gloss": "he writes"
+            },
+            {
+              "term": "يذهب",
+              "translit": "yadhhabu",
+              "gloss": "he goes"
+            },
+            {
+              "term": "يأكل",
+              "translit": "ya'kulu",
+              "gloss": "he eats"
+            }
+          ]
         },
         {
           "id": "u3l5",
@@ -179,9 +489,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Form the future tense from a present-tense verb",
+            "Talk about something that hasn't happened yet"
+          ],
+          "tasks": [
+            {
+              "id": "u3l5t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l5t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l5t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l5t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "سوف",
+              "translit": "sawfa",
+              "gloss": "will (future marker)"
+            },
+            {
+              "term": "سيذهب",
+              "translit": "sa-yadhhabu",
+              "gloss": "he will go"
+            },
+            {
+              "term": "غدا",
+              "translit": "ghadan",
+              "gloss": "tomorrow"
+            }
+          ]
         },
         {
           "id": "u3l6",
@@ -193,9 +543,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Recognize a few common irregular verbs",
+            "Notice how they diverge from the regular conjugation pattern"
+          ],
+          "tasks": [
+            {
+              "id": "u3l6t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u3l6t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u3l6t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u3l6t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "كان",
+              "translit": "kāna",
+              "gloss": "he was"
+            },
+            {
+              "term": "رأى",
+              "translit": "ra'ā",
+              "gloss": "he saw"
+            },
+            {
+              "term": "جاء",
+              "translit": "jā'a",
+              "gloss": "he came"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -227,9 +617,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Greet someone appropriately in Arabic",
+            "Respond to a greeting"
+          ],
+          "tasks": [
+            {
+              "id": "u4l1t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u4l1t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u4l1t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u4l1t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "السلام عليكم",
+              "translit": "as-salāmu ʿalaykum",
+              "gloss": "peace be upon you (hello)"
+            },
+            {
+              "term": "مرحبا",
+              "translit": "marḥaban",
+              "gloss": "hello / welcome"
+            },
+            {
+              "term": "صباح الخير",
+              "translit": "ṣabāḥ al-khayr",
+              "gloss": "good morning"
+            }
+          ]
         },
         {
           "id": "u4l2",
@@ -241,9 +671,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Introduce yourself by name",
+            "Respond politely to an introduction"
+          ],
+          "tasks": [
+            {
+              "id": "u4l2t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u4l2t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u4l2t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u4l2t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "اسمي",
+              "translit": "ismī",
+              "gloss": "my name is"
+            },
+            {
+              "term": "أنا",
+              "translit": "anā",
+              "gloss": "I"
+            },
+            {
+              "term": "تشرفنا",
+              "translit": "tasharrafnā",
+              "gloss": "pleased to meet you"
+            }
+          ]
         },
         {
           "id": "u4l3",
@@ -255,9 +725,44 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "State your nationality",
+            "Ask someone else theirs"
+          ],
+          "tasks": [
+            {
+              "id": "u4l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u4l3t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u4l3t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u4l3t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "أمريكي",
+              "translit": "amrīkī",
+              "gloss": "American"
+            },
+            {
+              "term": "من أين أنت",
+              "translit": "min ayna anta",
+              "gloss": "where are you from"
+            }
+          ]
         },
         {
           "id": "u4l4",
@@ -269,9 +774,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Describe today's weather",
+            "Ask what the weather is like"
+          ],
+          "tasks": [
+            {
+              "id": "u4l4t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u4l4t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u4l4t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u4l4t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "الطقس",
+              "translit": "aṭ-ṭaqs",
+              "gloss": "the weather"
+            },
+            {
+              "term": "حار",
+              "translit": "ḥārr",
+              "gloss": "hot"
+            },
+            {
+              "term": "بارد",
+              "translit": "bārid",
+              "gloss": "cold"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -303,9 +848,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Count from one upward in Arabic",
+            "Read a simple quantity"
+          ],
+          "tasks": [
+            {
+              "id": "u5l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u5l1t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u5l1t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u5l1t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "واحد",
+              "translit": "wāḥid",
+              "gloss": "one"
+            },
+            {
+              "term": "اثنان",
+              "translit": "ithnān",
+              "gloss": "two"
+            },
+            {
+              "term": "ثلاثة",
+              "translit": "thalātha",
+              "gloss": "three"
+            }
+          ]
         },
         {
           "id": "u5l2",
@@ -317,9 +902,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Say today's day and roughly when in the month it is",
+            "Recognize the words for day and month"
+          ],
+          "tasks": [
+            {
+              "id": "u5l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u5l2t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u5l2t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u5l2t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "يوم",
+              "translit": "yawm",
+              "gloss": "day"
+            },
+            {
+              "term": "شهر",
+              "translit": "shahr",
+              "gloss": "month"
+            },
+            {
+              "term": "اليوم",
+              "translit": "al-yawm",
+              "gloss": "today"
+            }
+          ]
         },
         {
           "id": "u5l3",
@@ -331,9 +956,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Use a basic unit of weight or length in a sentence",
+            "Ask how much something weighs or measures"
+          ],
+          "tasks": [
+            {
+              "id": "u5l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u5l3t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u5l3t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u5l3t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "كيلو",
+              "translit": "kīlū",
+              "gloss": "kilogram / kilo"
+            },
+            {
+              "term": "متر",
+              "translit": "mitr",
+              "gloss": "meter"
+            },
+            {
+              "term": "طول",
+              "translit": "ṭūl",
+              "gloss": "length"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -365,9 +1030,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name common objects found at an office",
+            "Describe what you do at work"
+          ],
+          "tasks": [
+            {
+              "id": "u6l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u6l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u6l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u6l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "مكتب",
+              "translit": "maktab",
+              "gloss": "office / desk"
+            },
+            {
+              "term": "كمبيوتر",
+              "translit": "kombiyūtar",
+              "gloss": "computer"
+            },
+            {
+              "term": "عمل",
+              "translit": "ʿamal",
+              "gloss": "work"
+            }
+          ]
         },
         {
           "id": "u6l2",
@@ -379,9 +1084,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name the rooms of a house",
+            "Describe where something is in the house"
+          ],
+          "tasks": [
+            {
+              "id": "u6l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u6l2t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u6l2t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u6l2t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "بيت",
+              "translit": "bayt",
+              "gloss": "house"
+            },
+            {
+              "term": "غرفة",
+              "translit": "ghurfa",
+              "gloss": "room"
+            },
+            {
+              "term": "مطبخ",
+              "translit": "maṭbakh",
+              "gloss": "kitchen"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -412,9 +1157,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Ask a basic question with what/how/why",
+            "Answer a question someone asks you"
+          ],
+          "tasks": [
+            {
+              "id": "u7l1t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u7l1t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u7l1t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u7l1t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "ماذا",
+              "translit": "mādhā",
+              "gloss": "what"
+            },
+            {
+              "term": "كيف",
+              "translit": "kayfa",
+              "gloss": "how"
+            },
+            {
+              "term": "لماذا",
+              "translit": "limādhā",
+              "gloss": "why"
+            }
+          ]
         },
         {
           "id": "u7l2",
@@ -426,9 +1211,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name close family members",
+            "Describe your own family briefly"
+          ],
+          "tasks": [
+            {
+              "id": "u7l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u7l2t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u7l2t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u7l2t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "عائلة",
+              "translit": "ʿā'ila",
+              "gloss": "family"
+            },
+            {
+              "term": "أخ",
+              "translit": "akh",
+              "gloss": "brother"
+            },
+            {
+              "term": "أخت",
+              "translit": "ukht",
+              "gloss": "sister"
+            }
+          ]
         },
         {
           "id": "u7l3",
@@ -440,9 +1265,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Say what your job is",
+            "Ask someone what they do for work"
+          ],
+          "tasks": [
+            {
+              "id": "u7l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u7l3t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u7l3t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u7l3t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "وظيفة",
+              "translit": "waẓīfa",
+              "gloss": "job"
+            },
+            {
+              "term": "طبيب",
+              "translit": "ṭabīb",
+              "gloss": "doctor"
+            },
+            {
+              "term": "مهندس",
+              "translit": "muhandis",
+              "gloss": "engineer"
+            }
+          ]
         },
         {
           "id": "u7l4",
@@ -454,9 +1319,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Exchange a phone number or email address",
+            "Ask for someone's contact information"
+          ],
+          "tasks": [
+            {
+              "id": "u7l4t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u7l4t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u7l4t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u7l4t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "هاتف",
+              "translit": "hātif",
+              "gloss": "telephone"
+            },
+            {
+              "term": "بريد إلكتروني",
+              "translit": "barīd iliktrūnī",
+              "gloss": "email"
+            },
+            {
+              "term": "رقم",
+              "translit": "raqam",
+              "gloss": "number"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -487,9 +1392,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Ask where something is",
+            "Point out a location"
+          ],
+          "tasks": [
+            {
+              "id": "u8l1t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u8l1t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u8l1t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u8l1t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "أين",
+              "translit": "ayna",
+              "gloss": "where"
+            },
+            {
+              "term": "هنا",
+              "translit": "hunā",
+              "gloss": "here"
+            },
+            {
+              "term": "هناك",
+              "translit": "hunāk",
+              "gloss": "there"
+            }
+          ]
         },
         {
           "id": "u8l2",
@@ -501,9 +1446,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Give a basic direction",
+            "Follow a simple set of directions"
+          ],
+          "tasks": [
+            {
+              "id": "u8l2t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u8l2t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u8l2t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u8l2t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "يمين",
+              "translit": "yamīn",
+              "gloss": "right"
+            },
+            {
+              "term": "يسار",
+              "translit": "yasār",
+              "gloss": "left"
+            },
+            {
+              "term": "مستقيم",
+              "translit": "mustaqīm",
+              "gloss": "straight ahead"
+            }
+          ]
         },
         {
           "id": "u8l3",
@@ -515,9 +1500,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Form a basic command",
+            "Recognize a few common commands"
+          ],
+          "tasks": [
+            {
+              "id": "u8l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u8l3t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u8l3t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u8l3t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "اذهب",
+              "translit": "idhhab",
+              "gloss": "go! (command)"
+            },
+            {
+              "term": "قف",
+              "translit": "qif",
+              "gloss": "stop!"
+            },
+            {
+              "term": "انتظر",
+              "translit": "intaẓir",
+              "gloss": "wait!"
+            }
+          ]
         },
         {
           "id": "u8l4",
@@ -529,9 +1554,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Use ordinal numbers in a sentence",
+            "Give directions using an ordinal (e.g. \"the second street\")"
+          ],
+          "tasks": [
+            {
+              "id": "u8l4t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u8l4t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u8l4t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u8l4t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "أول",
+              "translit": "awwal",
+              "gloss": "first"
+            },
+            {
+              "term": "ثاني",
+              "translit": "thānī",
+              "gloss": "second"
+            },
+            {
+              "term": "ثالث",
+              "translit": "thālith",
+              "gloss": "third"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -563,9 +1628,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name the day's main meals",
+            "Say when you usually eat"
+          ],
+          "tasks": [
+            {
+              "id": "u9l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u9l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u9l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u9l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "فطور",
+              "translit": "faṭūr",
+              "gloss": "breakfast"
+            },
+            {
+              "term": "غداء",
+              "translit": "ghadā'",
+              "gloss": "lunch"
+            },
+            {
+              "term": "عشاء",
+              "translit": "ʿashā'",
+              "gloss": "dinner"
+            }
+          ]
         },
         {
           "id": "u9l2",
@@ -576,9 +1681,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Read a few basic menu terms",
+            "Ask what a dish costs"
+          ],
+          "tasks": [
+            {
+              "id": "u9l2t1",
+              "type": "read",
+              "text": "Read through \"Reading a Menu\"."
+            },
+            {
+              "id": "u9l2t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u9l2t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "قائمة الطعام",
+              "translit": "qā'imat aṭ-ṭaʿām",
+              "gloss": "menu"
+            },
+            {
+              "term": "سعر",
+              "translit": "siʿr",
+              "gloss": "price"
+            },
+            {
+              "term": "طبق",
+              "translit": "ṭabaq",
+              "gloss": "dish"
+            }
+          ]
         },
         {
           "id": "u9l3",
@@ -590,9 +1730,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Order something to eat or drink",
+            "Make a polite request"
+          ],
+          "tasks": [
+            {
+              "id": "u9l3t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u9l3t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u9l3t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u9l3t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "أريد",
+              "translit": "urīd",
+              "gloss": "I want"
+            },
+            {
+              "term": "من فضلك",
+              "translit": "min faḍlik",
+              "gloss": "please"
+            },
+            {
+              "term": "ماء",
+              "translit": "mā'",
+              "gloss": "water"
+            }
+          ]
         },
         {
           "id": "u9l4",
@@ -604,9 +1784,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Ask for the bill",
+            "Thank someone appropriately"
+          ],
+          "tasks": [
+            {
+              "id": "u9l4t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u9l4t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u9l4t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u9l4t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "الحساب",
+              "translit": "al-ḥisāb",
+              "gloss": "the bill"
+            },
+            {
+              "term": "نقود",
+              "translit": "nuqūd",
+              "gloss": "money"
+            },
+            {
+              "term": "شكرا",
+              "translit": "shukran",
+              "gloss": "thank you"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -637,9 +1857,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about a shop or market",
+            "Name a few kinds of merchandise"
+          ],
+          "tasks": [
+            {
+              "id": "u10l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u10l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u10l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u10l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "سوق",
+              "translit": "sūq",
+              "gloss": "market"
+            },
+            {
+              "term": "محل",
+              "translit": "maḥall",
+              "gloss": "shop / store"
+            },
+            {
+              "term": "بضاعة",
+              "translit": "biḍāʿa",
+              "gloss": "merchandise"
+            }
+          ]
         },
         {
           "id": "u10l2",
@@ -651,9 +1911,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Compare two things using a comparative form",
+            "Say which of two options you prefer"
+          ],
+          "tasks": [
+            {
+              "id": "u10l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u10l2t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u10l2t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u10l2t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "أكبر",
+              "translit": "akbar",
+              "gloss": "bigger"
+            },
+            {
+              "term": "أصغر",
+              "translit": "aṣghar",
+              "gloss": "smaller"
+            },
+            {
+              "term": "أفضل",
+              "translit": "afḍal",
+              "gloss": "better"
+            }
+          ]
         },
         {
           "id": "u10l3",
@@ -665,9 +1965,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about buying or selling something",
+            "Negotiate a basic price"
+          ],
+          "tasks": [
+            {
+              "id": "u10l3t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u10l3t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u10l3t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u10l3t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "يشتري",
+              "translit": "yashtarī",
+              "gloss": "he buys"
+            },
+            {
+              "term": "يبيع",
+              "translit": "yabīʿ",
+              "gloss": "he sells"
+            },
+            {
+              "term": "رخيص",
+              "translit": "rakhīṣ",
+              "gloss": "cheap"
+            }
+          ]
         },
         {
           "id": "u10l4",
@@ -679,9 +2019,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name a few articles of clothing",
+            "Ask for a different size"
+          ],
+          "tasks": [
+            {
+              "id": "u10l4t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u10l4t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u10l4t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u10l4t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "ملابس",
+              "translit": "malābis",
+              "gloss": "clothes"
+            },
+            {
+              "term": "قميص",
+              "translit": "qamīṣ",
+              "gloss": "shirt"
+            },
+            {
+              "term": "مقاس",
+              "translit": "maqās",
+              "gloss": "size"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -712,9 +2092,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Tell the time in Arabic",
+            "Say whether something is early or late"
+          ],
+          "tasks": [
+            {
+              "id": "u11l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u11l1t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u11l1t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u11l1t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "الساعة",
+              "translit": "as-sāʿa",
+              "gloss": "the hour / o'clock"
+            },
+            {
+              "term": "الآن",
+              "translit": "al-ān",
+              "gloss": "now"
+            },
+            {
+              "term": "متأخر",
+              "translit": "muta'akhkhir",
+              "gloss": "late"
+            }
+          ]
         },
         {
           "id": "u11l2",
@@ -726,9 +2146,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about visiting a museum",
+            "Ask about buying a ticket"
+          ],
+          "tasks": [
+            {
+              "id": "u11l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u11l2t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u11l2t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u11l2t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "متحف",
+              "translit": "matḥaf",
+              "gloss": "museum"
+            },
+            {
+              "term": "تذكرة",
+              "translit": "tadhkira",
+              "gloss": "ticket"
+            },
+            {
+              "term": "معرض",
+              "translit": "maʿriḍ",
+              "gloss": "exhibition"
+            }
+          ]
         },
         {
           "id": "u11l3",
@@ -740,9 +2200,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about going to see a movie",
+            "Ask for a seat"
+          ],
+          "tasks": [
+            {
+              "id": "u11l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u11l3t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u11l3t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u11l3t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "فيلم",
+              "translit": "fīlm",
+              "gloss": "movie / film"
+            },
+            {
+              "term": "سينما",
+              "translit": "sīnamā",
+              "gloss": "cinema"
+            },
+            {
+              "term": "مقعد",
+              "translit": "maqʿad",
+              "gloss": "seat"
+            }
+          ]
         },
         {
           "id": "u11l4",
@@ -754,9 +2254,49 @@
             "comprehension"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about visiting a religious site respectfully",
+            "Ask about visiting hours or customs"
+          ],
+          "tasks": [
+            {
+              "id": "u11l4t1",
+              "type": "read",
+              "text": "Read through \"Visiting Religious Sites\" once for the overall idea."
+            },
+            {
+              "id": "u11l4t2",
+              "type": "read",
+              "text": "Read it again, this time noting anything unfamiliar."
+            },
+            {
+              "id": "u11l4t3",
+              "type": "produce",
+              "text": "Summarize what you read in a sentence or two, in your own words."
+            },
+            {
+              "id": "u11l4t4",
+              "type": "review",
+              "text": "Explain out loud what you learned, without looking back at the page."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "مسجد",
+              "translit": "masjid",
+              "gloss": "mosque"
+            },
+            {
+              "term": "كنيسة",
+              "translit": "kanīsa",
+              "gloss": "church"
+            },
+            {
+              "term": "زيارة",
+              "translit": "ziyāra",
+              "gloss": "visit"
+            }
+          ]
         },
         {
           "id": "u11l5",
@@ -768,9 +2308,49 @@
             "comprehension"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Recognize the basic vocabulary around the Hajj",
+            "Understand why it comes up in everyday Arabic conversation"
+          ],
+          "tasks": [
+            {
+              "id": "u11l5t1",
+              "type": "read",
+              "text": "Read through \"The Hajj\" once for the overall idea."
+            },
+            {
+              "id": "u11l5t2",
+              "type": "read",
+              "text": "Read it again, this time noting anything unfamiliar."
+            },
+            {
+              "id": "u11l5t3",
+              "type": "produce",
+              "text": "Summarize what you read in a sentence or two, in your own words."
+            },
+            {
+              "id": "u11l5t4",
+              "type": "review",
+              "text": "Explain out loud what you learned, without looking back at the page."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "الحج",
+              "translit": "al-ḥajj",
+              "gloss": "the Hajj (pilgrimage)"
+            },
+            {
+              "term": "مكة",
+              "translit": "makka",
+              "gloss": "Mecca"
+            },
+            {
+              "term": "حاج",
+              "translit": "ḥājj",
+              "gloss": "pilgrim (one who has performed Hajj)"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -801,9 +2381,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Use basic business vocabulary in a sentence",
+            "Talk about a meeting or a company"
+          ],
+          "tasks": [
+            {
+              "id": "u12l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u12l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u12l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u12l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "شركة",
+              "translit": "sharika",
+              "gloss": "company"
+            },
+            {
+              "term": "اجتماع",
+              "translit": "ijtimāʿ",
+              "gloss": "meeting"
+            },
+            {
+              "term": "عقد",
+              "translit": "ʿaqd",
+              "gloss": "contract"
+            }
+          ]
         },
         {
           "id": "u12l2",
@@ -815,9 +2435,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about sending a message or making a call",
+            "Recognize common telecommunication vocabulary"
+          ],
+          "tasks": [
+            {
+              "id": "u12l2t1",
+              "type": "read",
+              "text": "Read through this lesson's phrases before practicing them aloud."
+            },
+            {
+              "id": "u12l2t2",
+              "type": "speak",
+              "text": "Say each phrase out loud several times, focusing on pronunciation."
+            },
+            {
+              "id": "u12l2t3",
+              "type": "produce",
+              "text": "Use today's phrases in a short imagined conversation, speaking both parts."
+            },
+            {
+              "id": "u12l2t4",
+              "type": "review",
+              "text": "Without looking, recall as many of today's phrases as you can."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "إنترنت",
+              "translit": "intarnit",
+              "gloss": "internet"
+            },
+            {
+              "term": "رسالة",
+              "translit": "risāla",
+              "gloss": "message"
+            },
+            {
+              "term": "اتصال",
+              "translit": "ittiṣāl",
+              "gloss": "call / connection"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -848,9 +2508,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about a sport you like",
+            "Say who plays it"
+          ],
+          "tasks": [
+            {
+              "id": "u13l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u13l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u13l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u13l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "رياضة",
+              "translit": "riyāḍa",
+              "gloss": "sport(s)"
+            },
+            {
+              "term": "كرة القدم",
+              "translit": "kurat al-qadam",
+              "gloss": "soccer / football"
+            },
+            {
+              "term": "يلعب",
+              "translit": "yalʿab",
+              "gloss": "he plays"
+            }
+          ]
         },
         {
           "id": "u13l2",
@@ -862,9 +2562,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about music you enjoy",
+            "Say who sings or plays it"
+          ],
+          "tasks": [
+            {
+              "id": "u13l2t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u13l2t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u13l2t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u13l2t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "موسيقى",
+              "translit": "mūsīqā",
+              "gloss": "music"
+            },
+            {
+              "term": "أغنية",
+              "translit": "ughniya",
+              "gloss": "song"
+            },
+            {
+              "term": "يغني",
+              "translit": "yughannī",
+              "gloss": "he sings"
+            }
+          ]
         },
         {
           "id": "u13l3",
@@ -876,9 +2616,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Describe an outdoor place",
+            "Talk about a nature-related activity"
+          ],
+          "tasks": [
+            {
+              "id": "u13l3t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u13l3t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u13l3t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u13l3t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "جبل",
+              "translit": "jabal",
+              "gloss": "mountain"
+            },
+            {
+              "term": "بحر",
+              "translit": "baḥr",
+              "gloss": "sea"
+            },
+            {
+              "term": "طبيعة",
+              "translit": "ṭabīʿa",
+              "gloss": "nature"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -910,9 +2690,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about planning a trip",
+            "Name a couple of things you need before traveling"
+          ],
+          "tasks": [
+            {
+              "id": "u14l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and phrases."
+            },
+            {
+              "id": "u14l1t2",
+              "type": "speak",
+              "text": "Say each new phrase out loud a few times."
+            },
+            {
+              "id": "u14l1t3",
+              "type": "produce",
+              "text": "Role-play the situation this lesson covers, speaking both sides of it."
+            },
+            {
+              "id": "u14l1t4",
+              "type": "review",
+              "text": "Recall today's key vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "رحلة",
+              "translit": "riḥla",
+              "gloss": "trip"
+            },
+            {
+              "term": "جواز سفر",
+              "translit": "jawāz safar",
+              "gloss": "passport"
+            },
+            {
+              "term": "حجز",
+              "translit": "ḥajz",
+              "gloss": "reservation / booking"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -944,9 +2764,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Talk about exchanging money",
+            "Ask where the nearest bank is"
+          ],
+          "tasks": [
+            {
+              "id": "u15l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and phrases."
+            },
+            {
+              "id": "u15l1t2",
+              "type": "speak",
+              "text": "Say each new phrase out loud a few times."
+            },
+            {
+              "id": "u15l1t3",
+              "type": "produce",
+              "text": "Role-play the situation this lesson covers, speaking both sides of it."
+            },
+            {
+              "id": "u15l1t4",
+              "type": "review",
+              "text": "Recall today's key vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "بنك",
+              "translit": "bank",
+              "gloss": "bank"
+            },
+            {
+              "term": "عملة",
+              "translit": "ʿumla",
+              "gloss": "currency"
+            },
+            {
+              "term": "صرف",
+              "translit": "ṣarf",
+              "gloss": "exchange"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -978,9 +2838,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Name the main ways to travel",
+            "Say how you're getting somewhere"
+          ],
+          "tasks": [
+            {
+              "id": "u16l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and phrases."
+            },
+            {
+              "id": "u16l1t2",
+              "type": "speak",
+              "text": "Say each new phrase out loud a few times."
+            },
+            {
+              "id": "u16l1t3",
+              "type": "produce",
+              "text": "Role-play the situation this lesson covers, speaking both sides of it."
+            },
+            {
+              "id": "u16l1t4",
+              "type": "review",
+              "text": "Recall today's key vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "طائرة",
+              "translit": "ṭā'ira",
+              "gloss": "airplane"
+            },
+            {
+              "term": "قطار",
+              "translit": "qiṭār",
+              "gloss": "train"
+            },
+            {
+              "term": "سيارة",
+              "translit": "sayyāra",
+              "gloss": "car"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1012,9 +2912,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Ask about booking a hotel room",
+            "Confirm a reservation"
+          ],
+          "tasks": [
+            {
+              "id": "u17l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and phrases."
+            },
+            {
+              "id": "u17l1t2",
+              "type": "speak",
+              "text": "Say each new phrase out loud a few times."
+            },
+            {
+              "id": "u17l1t3",
+              "type": "produce",
+              "text": "Role-play the situation this lesson covers, speaking both sides of it."
+            },
+            {
+              "id": "u17l1t4",
+              "type": "review",
+              "text": "Recall today's key vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "فندق",
+              "translit": "funduq",
+              "gloss": "hotel"
+            },
+            {
+              "term": "غرفة",
+              "translit": "ghurfa",
+              "gloss": "room"
+            },
+            {
+              "term": "حجز",
+              "translit": "ḥajz",
+              "gloss": "reservation"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1046,9 +2986,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Ask for help in an emergency",
+            "Say you need a hospital or a doctor"
+          ],
+          "tasks": [
+            {
+              "id": "u18l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and phrases."
+            },
+            {
+              "id": "u18l1t2",
+              "type": "speak",
+              "text": "Say each new phrase out loud a few times."
+            },
+            {
+              "id": "u18l1t3",
+              "type": "produce",
+              "text": "Role-play the situation this lesson covers, speaking both sides of it."
+            },
+            {
+              "id": "u18l1t4",
+              "type": "review",
+              "text": "Recall today's key vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "مساعدة",
+              "translit": "musāʿada",
+              "gloss": "help"
+            },
+            {
+              "term": "طوارئ",
+              "translit": "ṭawāri'",
+              "gloss": "emergency"
+            },
+            {
+              "term": "مستشفى",
+              "translit": "mustashfā",
+              "gloss": "hospital"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1079,9 +3059,49 @@
             "comprehension"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Reflect on which practice habits actually fit your routine",
+            "Pick at least one strategy to start using this week"
+          ],
+          "tasks": [
+            {
+              "id": "u19l1t1",
+              "type": "read",
+              "text": "Read through \"Ten Ways to Pick Up Arabic Quickly\" once for the overall idea."
+            },
+            {
+              "id": "u19l1t2",
+              "type": "read",
+              "text": "Read it again, this time noting anything unfamiliar."
+            },
+            {
+              "id": "u19l1t3",
+              "type": "produce",
+              "text": "Summarize what you read in a sentence or two, in your own words."
+            },
+            {
+              "id": "u19l1t4",
+              "type": "review",
+              "text": "Explain out loud what you learned, without looking back at the page."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "يتعلم",
+              "translit": "yataʿallam",
+              "gloss": "he learns"
+            },
+            {
+              "term": "يمارس",
+              "translit": "yumāris",
+              "gloss": "he practices"
+            },
+            {
+              "term": "كل يوم",
+              "translit": "kull yawm",
+              "gloss": "every day"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1111,9 +3131,49 @@
             "speaking"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Recognize these expressions when you hear them in everyday conversation",
+            "Use at least one naturally in a sentence"
+          ],
+          "tasks": [
+            {
+              "id": "u20l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and example phrases."
+            },
+            {
+              "id": "u20l1t2",
+              "type": "speak",
+              "text": "Say each new word or phrase out loud a few times."
+            },
+            {
+              "id": "u20l1t3",
+              "type": "produce",
+              "text": "Describe something using at least two of today's new words."
+            },
+            {
+              "id": "u20l1t4",
+              "type": "review",
+              "text": "Quiz yourself on today's vocabulary from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "إن شاء الله",
+              "translit": "in shā' Allāh",
+              "gloss": "God willing"
+            },
+            {
+              "term": "الحمد لله",
+              "translit": "al-ḥamdu lillāh",
+              "gloss": "praise be to God (also used for \"I'm fine\")"
+            },
+            {
+              "term": "مبروك",
+              "translit": "mabrūk",
+              "gloss": "congratulations"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1144,9 +3204,49 @@
             "comprehension"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Learn a well-known Arabic proverb and its literal meaning",
+            "Explain what it's really saying, in your own words"
+          ],
+          "tasks": [
+            {
+              "id": "u21l1t1",
+              "type": "read",
+              "text": "Read through \"Ten Great Arabic Proverbs\" once for the overall idea."
+            },
+            {
+              "id": "u21l1t2",
+              "type": "read",
+              "text": "Read it again, this time noting anything unfamiliar."
+            },
+            {
+              "id": "u21l1t3",
+              "type": "produce",
+              "text": "Summarize what you read in a sentence or two, in your own words."
+            },
+            {
+              "id": "u21l1t4",
+              "type": "review",
+              "text": "Explain out loud what you learned, without looking back at the page."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "مثل",
+              "translit": "mathal",
+              "gloss": "proverb"
+            },
+            {
+              "term": "حكمة",
+              "translit": "ḥikma",
+              "gloss": "wisdom"
+            },
+            {
+              "term": "الصبر مفتاح الفرج",
+              "translit": "aṣ-ṣabru miftāḥu-l-faraj",
+              "gloss": "patience is the key to relief"
+            }
+          ]
         }
       ],
       "checkpoint": {
@@ -1177,9 +3277,49 @@
             "writing"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Use the verb tables to check a conjugation you're unsure of",
+            "Recognize a verb's three-letter root"
+          ],
+          "tasks": [
+            {
+              "id": "u22l1t1",
+              "type": "read",
+              "text": "Read through this lesson's vocabulary and grammar notes."
+            },
+            {
+              "id": "u22l1t2",
+              "type": "write",
+              "text": "Write each new word or form three times by hand."
+            },
+            {
+              "id": "u22l1t3",
+              "type": "produce",
+              "text": "Use each new word or form in a short sentence of your own."
+            },
+            {
+              "id": "u22l1t4",
+              "type": "review",
+              "text": "Cover the vocabulary and try to recall each word from its English gloss."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "فعل",
+              "translit": "fiʿl",
+              "gloss": "verb"
+            },
+            {
+              "term": "مصدر",
+              "translit": "maṣdar",
+              "gloss": "verbal noun / infinitive"
+            },
+            {
+              "term": "جذر",
+              "translit": "jidhr",
+              "gloss": "root"
+            }
+          ]
         },
         {
           "id": "u22l2",
@@ -1190,9 +3330,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Look up an Arabic word's English meaning",
+            "Get comfortable navigating a dictionary entry"
+          ],
+          "tasks": [
+            {
+              "id": "u22l2t1",
+              "type": "read",
+              "text": "Read through \"Mini-Dictionary: Arabic–English\"."
+            },
+            {
+              "id": "u22l2t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u22l2t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "قاموس",
+              "translit": "qāmūs",
+              "gloss": "dictionary"
+            },
+            {
+              "term": "معنى",
+              "translit": "maʿnā",
+              "gloss": "meaning"
+            },
+            {
+              "term": "ترجمة",
+              "translit": "tarjama",
+              "gloss": "translation"
+            }
+          ]
         },
         {
           "id": "u22l3",
@@ -1203,9 +3378,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Look up an English word's Arabic equivalent",
+            "Use the mini-dictionary as a reference while writing"
+          ],
+          "tasks": [
+            {
+              "id": "u22l3t1",
+              "type": "read",
+              "text": "Read through \"Mini-Dictionary: English–Arabic\"."
+            },
+            {
+              "id": "u22l3t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u22l3t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "بحث",
+              "translit": "baḥth",
+              "gloss": "search"
+            },
+            {
+              "term": "فهرس",
+              "translit": "fihris",
+              "gloss": "index"
+            },
+            {
+              "term": "مرجع",
+              "translit": "marjaʿ",
+              "gloss": "reference"
+            }
+          ]
         },
         {
           "id": "u22l4",
@@ -1216,9 +3426,44 @@
             "reading"
           ],
           "audio": [],
-          "objectives": [],
-          "tasks": [],
-          "vocab": []
+          "objectives": [
+            "Check your own work against the answer key honestly",
+            "Note any pattern in what you got wrong"
+          ],
+          "tasks": [
+            {
+              "id": "u22l4t1",
+              "type": "read",
+              "text": "Read through \"Practice Answer Key\"."
+            },
+            {
+              "id": "u22l4t2",
+              "type": "produce",
+              "text": "Practice using today's material in a sentence of your own."
+            },
+            {
+              "id": "u22l4t3",
+              "type": "review",
+              "text": "Recall today's material from memory."
+            }
+          ],
+          "vocab": [
+            {
+              "term": "إجابة",
+              "translit": "ijāba",
+              "gloss": "answer"
+            },
+            {
+              "term": "تمرين",
+              "translit": "tamrīn",
+              "gloss": "exercise"
+            },
+            {
+              "term": "صحيح",
+              "translit": "ṣaḥīḥ",
+              "gloss": "correct"
+            }
+          ]
         }
       ],
       "checkpoint": {
