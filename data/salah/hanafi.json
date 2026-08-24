@@ -1,0 +1,1127 @@
+{
+  "meta": {
+    "school": "Sunni — Hanafi",
+    "version": 1,
+    "language": "Arabic with transliteration and English meaning",
+    "disclaimer": "This is a study aid following the Hanafi school. It is not a substitute for a teacher. Where the schools differ, the difference is named rather than hidden. Anything marked with a note should be learned from a person, not a screen.",
+    "translationNote": "English meanings here are plain-language renderings written for this project, not a published translation."
+  },
+  "postures": {
+    "qiyam": {
+      "name": "Qiyām",
+      "en": "Standing",
+      "body": "Upright, eyes toward the place of prostration. Hanafi: a man folds his right hand over his left below the navel; a woman folds hers on the chest.",
+      "why": "The posture of attention and address. It is where the Qurʾān is recited, and the longest part of the prayer."
+    },
+    "ruku": {
+      "name": "Rukūʿ",
+      "en": "Bowing",
+      "body": "Bend forward with a flat back, hands gripping the knees, fingers spread. The back and neck level enough that water would not run off.",
+      "why": "Bowing to a person was court protocol in the Persian and Byzantine world this emerged in. Reserving it for God alone was a political act, not only a devotional one."
+    },
+    "qawmah": {
+      "name": "Qawmah",
+      "en": "Straightening up",
+      "body": "Rise from the bow and stand fully upright before going down. Hanafis do not raise the hands here.",
+      "why": "A required pause, not a transition to rush. Early guidance criticised prayer performed so fast the body never settled."
+    },
+    "sujud": {
+      "name": "Sujūd",
+      "en": "Prostrating",
+      "body": "Forehead, nose, both palms, both knees and the toes of both feet on the ground. Hanafi order going down: knees, then hands, then nose, then forehead.",
+      "why": "The lowest posture a body can take, given to God alone. In a status-ordered society, putting the face on the floor was the strongest statement available."
+    },
+    "jalsa": {
+      "name": "Jalsah",
+      "en": "Sitting between the prostrations",
+      "body": "Sit on the left foot with the right foot upright. Settle before going down again.",
+      "why": "The two prostrations are separate acts, not one long one."
+    },
+    "qadah": {
+      "name": "Qaʿdah",
+      "en": "Sitting for the tashahhud",
+      "body": "Hanafi men sit the same way in both sittings — on the left foot, right foot upright. Hanafis do not use tawarruk. Women sit with both feet to the right.",
+      "why": "The audience portion: having bowed and prostrated, you now sit and speak."
+    },
+    "taslim": {
+      "name": "Taslīm",
+      "en": "The closing turn",
+      "body": "Turn the head right, then left, giving the greeting each time.",
+      "why": "The prayer closes by turning back outward to the people beside you."
+    }
+  },
+  "phrases": {
+    "takbir": {
+      "id": "takbir",
+      "arabic": "اللَّهُ أَكْبَرُ",
+      "transliteration": "Allāhu akbar",
+      "meaning": "God is greater.",
+      "where": "Said at the very start and again at every change of posture. At the start, men raise the hands to the ear lobes, women to the shoulders, then fold them.",
+      "wordByWord": [
+        { "arabic": "الله", "translit": "Allāh", "gloss": "God" },
+        { "arabic": "أَكْبَر", "translit": "akbar", "gloss": "greater, bigger" }
+      ],
+      "then": "It is <i>akbar</i>, greater, not <i>kabīr</i>, great — a comparative deliberately left unfinished. Greater than what? In a world of tribal gods, ancestral honour, clan chiefs and two rival empires, the open comparison swallowed all of them at once.",
+      "now": "The first one is <i>takbīrat al-iḥrām</i>, the takbīr of restriction: once said, eating, speaking and walking away are off-limits until the prayer ends. Everything before it was your day.",
+      "varies": "Hanafi men raise the hands to the ear lobes and fold below the navel. Shāfiʿīs raise to the shoulders and fold above the navel.",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "thana": {
+      "id": "thana",
+      "arabic": "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، وَتَبَارَكَ اسْمُكَ، وَتَعَالَىٰ جَدُّكَ، وَلَا إِلَٰهَ غَيْرُكَ",
+      "transliteration": "Subḥānaka-llāhumma wa bi-ḥamdika, wa tabāraka-smuka, wa taʿālā jadduka, wa lā ilāha ghayruk",
+      "meaning": "Glory to You, O God, and praise. Blessed is Your name, exalted is Your majesty, and there is no god but You.",
+      "where": "Standing, silently, straight after the opening takbīr — first unit only.",
+      "wordByWord": [
+        { "arabic": "سُبْحَانَكَ", "translit": "subḥānaka", "gloss": "glory to You" },
+        { "arabic": "وَبِحَمْدِكَ", "translit": "wa bi-ḥamdika", "gloss": "and with Your praise" },
+        { "arabic": "تَبَارَكَ اسْمُكَ", "translit": "tabāraka-smuka", "gloss": "blessed is Your name" },
+        { "arabic": "تَعَالَىٰ جَدُّكَ", "translit": "taʿālā jadduka", "gloss": "exalted is Your majesty" },
+        { "arabic": "وَلَا إِلَٰهَ غَيْرُكَ", "translit": "wa lā ilāha ghayruk", "gloss": "and there is no god but You" }
+      ],
+      "then": "<i>Jadd</i> in older Arabic meant standing, fortune, the grandeur attached to a lineage — exactly what a tribal society tracked most closely. The line assigns it to God.",
+      "now": "A warm-up before the Qurʾān: praise before request. Called the <i>thanāʾ</i> in Hanafi usage.",
+      "varies": "Hanafi and Ḥanbalī wording. Shāfiʿīs commonly open with <i>wajjahtu wajhiya</i> instead.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "taawwudh": {
+      "id": "taawwudh",
+      "arabic": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ",
+      "transliteration": "Aʿūdhu bi-llāhi mina-sh-shayṭāni-r-rajīm",
+      "meaning": "I take refuge with God from Satan, the rejected.",
+      "where": "Standing, silently, after the thanāʾ — first unit only.",
+      "wordByWord": [
+        { "arabic": "أَعُوذُ", "translit": "aʿūdhu", "gloss": "I seek refuge" },
+        { "arabic": "بِاللَّهِ", "translit": "bi-llāh", "gloss": "with God" },
+        { "arabic": "الشَّيْطَان", "translit": "ash-shayṭān", "gloss": "the devil, the adversary" },
+        { "arabic": "الرَّجِيم", "translit": "ar-rajīm", "gloss": "the driven away, the pelted" }
+      ],
+      "then": "<i>Rajīm</i> comes from stoning — being pelted and driven out of the camp. The image is expulsion from the community, not merely dislike.",
+      "now": "Said before reciting the Qurʾān generally, not only in prayer.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "basmalah": {
+      "id": "basmalah",
+      "arabic": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+      "transliteration": "Bismi-llāhi-r-Raḥmāni-r-Raḥīm",
+      "meaning": "In the name of God, the Most Merciful, the Most Compassionate.",
+      "where": "Standing, silently, immediately before al-Fātiḥa in every unit — silently even in the prayers recited aloud.",
+      "wordByWord": [
+        { "arabic": "بِسْمِ", "translit": "bismi", "gloss": "in the name of" },
+        { "arabic": "اللَّه", "translit": "Allāh", "gloss": "God" },
+        { "arabic": "الرَّحْمَٰن", "translit": "ar-Raḥmān", "gloss": "mercy as an overwhelming quality" },
+        { "arabic": "الرَّحِيم", "translit": "ar-Raḥīm", "gloss": "mercy as continuous action" }
+      ],
+      "then": "Both names share the root <i>r-ḥ-m</i>, which also gives <i>raḥim</i>, the womb. Commentators drew the link deliberately: mercy that sustains something helpless without being asked.",
+      "now": "Opens 113 of the Qurʾān's 114 chapters, and is said before ordinary actions too.",
+      "varies": "Hanafis recite it silently always and do not count it as a verse of al-Fātiḥa for recitation. Shāfiʿīs count it as verse one and recite it aloud in the loud prayers.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_1": {
+      "id": "fatiha_1",
+      "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+      "transliteration": "Al-ḥamdu lillāhi Rabbi-l-ʿālamīn",
+      "meaning": "All praise belongs to God, Lord of all the worlds.",
+      "where": "Standing — al-Fātiḥa, verse 1 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "الْحَمْد", "translit": "al-ḥamd", "gloss": "praise given because something deserves it" },
+        { "arabic": "رَبِّ", "translit": "Rabb", "gloss": "Lord, sustainer" },
+        { "arabic": "الْعَالَمِين", "translit": "al-ʿālamīn", "gloss": "the worlds" }
+      ],
+      "then": "<i>ʿĀlamīn</i> is plural — worlds, not world. Early commentators read it as every category of created thing. The opening claim is deliberately not local.",
+      "now": "The sentence has no verb and nobody doing the praising. It states a fact rather than making a promise, which is why it reads the same whoever says it.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_2": {
+      "id": "fatiha_2",
+      "arabic": "الرَّحْمَٰنِ الرَّحِيمِ",
+      "transliteration": "Ar-Raḥmāni-r-Raḥīm",
+      "meaning": "The Most Merciful, the Most Compassionate.",
+      "where": "Standing — al-Fātiḥa, verse 2 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "الرَّحْمَٰن", "translit": "ar-Raḥmān", "gloss": "overwhelming mercy" },
+        { "arabic": "الرَّحِيم", "translit": "ar-Raḥīm", "gloss": "continuous mercy" }
+      ],
+      "then": "<i>Ar-Raḥmān</i> was contested at the time — some Meccans objected to it as a name they did not recognise.",
+      "now": "Authority declared in the previous verse, then immediately qualified by mercy.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_3": {
+      "id": "fatiha_3",
+      "arabic": "مَالِكِ يَوْمِ الدِّينِ",
+      "transliteration": "Māliki yawmi-d-dīn",
+      "meaning": "Master of the Day of Judgement.",
+      "where": "Standing — al-Fātiḥa, verse 3 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "مَالِك", "translit": "mālik", "gloss": "owner, master" },
+        { "arabic": "الدِّين", "translit": "ad-dīn", "gloss": "judgement, reckoning" }
+      ],
+      "then": "<i>Dīn</i> here means reckoning or requital, not religion — it carries the sense of a debt settled. In a society run on obligation and blood-debt that was concrete language.",
+      "now": "Three verses moving outward then forward: praise, mercy, then time.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_4": {
+      "id": "fatiha_4",
+      "arabic": "إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ",
+      "transliteration": "Iyyāka naʿbudu wa iyyāka nastaʿīn",
+      "meaning": "You alone we serve, and You alone we ask for help.",
+      "where": "Standing — al-Fātiḥa, verse 4 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "إِيَّاكَ", "translit": "iyyāka", "gloss": "You, and only You" },
+        { "arabic": "نَعْبُدُ", "translit": "naʿbudu", "gloss": "we serve" },
+        { "arabic": "نَسْتَعِين", "translit": "nastaʿīn", "gloss": "we seek help" }
+      ],
+      "then": "The word order carries the meaning. Ordinary Arabic would be <i>naʿbuduka</i>. Putting the object first makes it exclusive. The verse also switches from speaking about God to speaking to Him.",
+      "now": "The hinge of the surah — praise before it, request after. And it is plural: <i>we</i>, even alone in a room.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_5": {
+      "id": "fatiha_5",
+      "arabic": "اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ",
+      "transliteration": "Ihdinā-ṣ-ṣirāṭa-l-mustaqīm",
+      "meaning": "Guide us along the straight path.",
+      "where": "Standing — al-Fātiḥa, verse 5 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "اهْدِنَا", "translit": "ihdinā", "gloss": "guide us" },
+        { "arabic": "الصِّرَاط", "translit": "aṣ-ṣirāṭ", "gloss": "the path, the road" },
+        { "arabic": "الْمُسْتَقِيم", "translit": "al-mustaqīm", "gloss": "straight, without deviation" }
+      ],
+      "then": "<i>Ṣirāṭ</i> is a loanword, from Latin <i>strata</i> by way of Aramaic — a paved Roman road, not a desert track.",
+      "now": "The one request the whole surah is built to arrive at. Not wealth, not safety — direction.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_6": {
+      "id": "fatiha_6",
+      "arabic": "صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ",
+      "transliteration": "Ṣirāṭa-lladhīna anʿamta ʿalayhim",
+      "meaning": "The path of those You have favoured.",
+      "where": "Standing — al-Fātiḥa, verse 6 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "الَّذِين", "translit": "alladhīna", "gloss": "those who" },
+        { "arabic": "أَنْعَمْتَ", "translit": "anʿamta", "gloss": "You favoured" }
+      ],
+      "then": "The path is defined by the people who walked it, not by a rule list.",
+      "now": "Read as a request to be placed in a lineage rather than handed instructions.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "fatiha_7": {
+      "id": "fatiha_7",
+      "arabic": "غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ",
+      "transliteration": "Ghayri-l-maghḍūbi ʿalayhim wa lā-ḍ-ḍāllīn",
+      "meaning": "Not those who earned anger, nor those who went astray.",
+      "where": "Standing — al-Fātiḥa, verse 7 of 7. Recited in every unit of every prayer.",
+      "wordByWord": [
+        { "arabic": "الْمَغْضُوب عَلَيْهِمْ", "translit": "al-maghḍūbi ʿalayhim", "gloss": "those upon whom anger fell" },
+        { "arabic": "الضَّالِّين", "translit": "aḍ-ḍāllīn", "gloss": "those who wandered off" }
+      ],
+      "then": "Two distinct failures: knowing the way and refusing it, and losing the way. The grammar keeps the anger passive rather than naming who was angry.",
+      "now": "The surah ends by marking the edges of the path; āmīn follows as the response.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "ameen": {
+      "id": "ameen",
+      "arabic": "آمِين",
+      "transliteration": "Āmīn",
+      "meaning": "So let it be.",
+      "where": "Quietly at the end of al-Fātiḥa — silently in the Hanafi school, even in the loud prayers.",
+      "wordByWord": [
+        { "arabic": "آمِين", "translit": "āmīn", "gloss": "affirm it, let it be so" }
+      ],
+      "then": "An old Semitic word shared with Hebrew and Aramaic, from a root meaning firm or reliable — the same root behind <i>īmān</i>, faith. It is not part of the surah.",
+      "now": "Al-Fātiḥa's second half is a request, so āmīn is the amen at the end of the asking.",
+      "varies": "Shāfiʿīs and Ḥanbalīs say it aloud in the loud prayers. Hanafis say it silently.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "surah_slot": {
+      "id": "surah_slot",
+      "arabic": "",
+      "transliteration": "",
+      "meaning": "A further passage of the Qurʾān",
+      "where": "Standing, after al-Fātiḥa — in the first two units only. At least three short verses or one long one.",
+      "wordByWord": [],
+      "then": "",
+      "now": "Pick from the short surahs in this room, or any passage you have memorised.",
+      "varies": "Hanafis treat this additional recitation as wājib in the first two units; other schools generally class it as sunnah.",
+      "repeat": 1,
+      "aloud": null,
+      "note": "placeholder — the room offers a surah picker here",
+      "confidence": "high"
+    },
+    "ruku": {
+      "id": "ruku",
+      "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ",
+      "transliteration": "Subḥāna Rabbiya-l-ʿAẓīm",
+      "meaning": "Glory to my Lord, the Magnificent.",
+      "where": "Bowing, back flat, hands gripping the knees with fingers spread. Said three times, quietly.",
+      "wordByWord": [
+        { "arabic": "سُبْحَان", "translit": "subḥān", "gloss": "glory; declaring God free of any defect" },
+        { "arabic": "رَبِّيَ", "translit": "Rabbiya", "gloss": "my Lord, my sustainer" },
+        { "arabic": "الْعَظِيم", "translit": "al-ʿAẓīm", "gloss": "the immense, the magnificent" }
+      ],
+      "then": "<i>Rabb</i> did not mean a distant deity. It meant the one who owns, feeds and raises — used of a household master or the owner of livestock. It names daily dependence.",
+      "now": "The name chosen is <i>the immense</i>, said in the posture where you have made yourself smaller. Body and sentence make the same claim.",
+      "varies": "Three is the agreed minimum; five or seven are recommended when praying alone.",
+      "repeat": 3,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "sami": {
+      "id": "sami",
+      "arabic": "سَمِعَ اللَّهُ لِمَنْ حَمِدَهُ",
+      "transliteration": "Samiʿa-llāhu li-man ḥamidah",
+      "meaning": "God hears the one who praises Him.",
+      "where": "Said while straightening up from the bow. Praying alone or leading, say this and then the response. Behind an imam, say only the response.",
+      "wordByWord": [
+        { "arabic": "سَمِعَ", "translit": "samiʿa", "gloss": "heard, listened" },
+        { "arabic": "لِمَنْ", "translit": "li-man", "gloss": "for the one who" },
+        { "arabic": "حَمِدَهُ", "translit": "ḥamidah", "gloss": "praised Him" }
+      ],
+      "then": "It is past tense — <i>heard</i>, not <i>hears</i>. Classical readings take this as settled fact rather than hope.",
+      "now": "One of the few points where imam and congregation say different things at once.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "rabbana": {
+      "id": "rabbana",
+      "arabic": "رَبَّنَا لَكَ الْحَمْدُ",
+      "transliteration": "Rabbanā laka-l-ḥamd",
+      "meaning": "Our Lord, to You belongs all praise.",
+      "where": "Said standing fully upright, answering <i>samiʿa-llāhu li-man ḥamidah</i>. Hanafis do not raise the hands here.",
+      "wordByWord": [
+        { "arabic": "رَبَّنَا", "translit": "Rabbanā", "gloss": "our Lord" },
+        { "arabic": "لَكَ", "translit": "laka", "gloss": "to You belongs" },
+        { "arabic": "الْحَمْد", "translit": "al-ḥamd", "gloss": "the praise" }
+      ],
+      "then": "<i>Ḥamd</i> is praise given because something deserves it, distinct from <i>shukr</i>, thanks for something received.",
+      "now": "Plural again — <i>our</i> Lord — even alone.",
+      "varies": "Shāfiʿīs and Ḥanbalīs raise the hands rising from rukūʿ; Hanafis raise them only at the opening takbīr. It is the clearest visual difference between the schools.",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "sujud": {
+      "id": "sujud",
+      "arabic": "سُبْحَانَ رَبِّيَ الْأَعْلَىٰ",
+      "transliteration": "Subḥāna Rabbiya-l-Aʿlā",
+      "meaning": "Glory to my Lord, the Most High.",
+      "where": "In prostration — forehead, nose, both palms, both knees and the toes on the ground. Said three times, quietly. Hanafi order going down: knees, hands, nose, forehead.",
+      "wordByWord": [
+        { "arabic": "سُبْحَان", "translit": "subḥān", "gloss": "glory" },
+        { "arabic": "رَبِّيَ", "translit": "Rabbiya", "gloss": "my Lord" },
+        { "arabic": "الْأَعْلَىٰ", "translit": "al-Aʿlā", "gloss": "the highest, the most exalted" }
+      ],
+      "then": "Deliberately paired with the bowing phrase: <i>the Magnificent</i> when bent, <i>the Most High</i> when lowest to the ground.",
+      "now": "Widely described as the closest point of the prayer — the lowest posture with the highest name.",
+      "varies": "The nose touching alongside the forehead is required in the Hanafi school.",
+      "repeat": 3,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "jalsa": {
+      "id": "jalsa",
+      "arabic": "رَبِّ اغْفِرْ لِي وَارْحَمْنِي",
+      "transliteration": "Rabbi-ghfir lī wa-rḥamnī",
+      "meaning": "My Lord, forgive me and have mercy on me.",
+      "where": "Sitting briefly between the two prostrations, on the left foot with the right foot upright.",
+      "wordByWord": [
+        { "arabic": "اغْفِرْ", "translit": "ighfir", "gloss": "forgive, cover over" },
+        { "arabic": "لِي", "translit": "lī", "gloss": "me" },
+        { "arabic": "وَارْحَمْنِي", "translit": "wa-rḥamnī", "gloss": "and have mercy on me" }
+      ],
+      "then": "<i>Ghafara</i> means to cover or conceal — the same root behind the word for a helmet. Forgiveness as covering, not pretending it never happened.",
+      "now": "The only request inside the physical cycle; everything else in it is praise.",
+      "varies": "Hanafis treat the sitting as required but this supplication as recommended rather than obligatory.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "tashahhud_1": {
+      "id": "tashahhud_1",
+      "arabic": "التَّحِيَّاتُ لِلَّهِ وَالصَّلَوَاتُ وَالطَّيِّبَاتُ",
+      "transliteration": "At-taḥiyyātu lillāhi waṣ-ṣalawātu waṭ-ṭayyibāt",
+      "meaning": "All greetings belong to God, and all prayers, and all good things.",
+      "where": "Sitting for the tashahhud — after the second unit, and again in the final sitting. Hanafi men sit on the left foot with the right foot upright in both sittings.",
+      "wordByWord": [
+        { "arabic": "التَّحِيَّات", "translit": "at-taḥiyyāt", "gloss": "greetings, salutations, honours" },
+        { "arabic": "الصَّلَوَات", "translit": "aṣ-ṣalawāt", "gloss": "prayers" },
+        { "arabic": "الطَّيِّبَات", "translit": "aṭ-ṭayyibāt", "gloss": "the good and pure things" }
+      ],
+      "then": "<i>Taḥiyyāt</i> was court vocabulary — the formal salutations and tributes offered to a king when you came before him. The line takes that whole register of tribute and redirects it.",
+      "now": "Taught as an audience in three turns: greeting God, greeting the Prophet, greeting the righteous — then the declaration of faith.",
+      "varies": "Hanafi and Ḥanbalī use Ibn Masʿūd's narration; Shāfiʿī uses Ibn ʿAbbās's; Mālikī uses ʿUmar's. This is the biggest wording fork in the prayer.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "tashahhud_2": {
+      "id": "tashahhud_2",
+      "arabic": "السَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ",
+      "transliteration": "As-salāmu ʿalayka ayyuha-n-Nabiyyu wa raḥmatu-llāhi wa barakātuh",
+      "meaning": "Peace be upon you, O Prophet, and the mercy of God and His blessings.",
+      "where": "Sitting for the tashahhud — after the second unit, and again in the final sitting. Hanafi men sit on the left foot with the right foot upright in both sittings.",
+      "wordByWord": [
+        { "arabic": "السَّلَام عَلَيْكَ", "translit": "as-salāmu ʿalayka", "gloss": "peace be upon you — singular" },
+        { "arabic": "أَيُّهَا النَّبِيّ", "translit": "ayyuha-n-Nabiyy", "gloss": "O Prophet" },
+        { "arabic": "بَرَكَاتُهُ", "translit": "barakātuh", "gloss": "His blessings" }
+      ],
+      "then": "The direct address was noticed early: the phrasing speaks <i>to</i> the Prophet rather than about him, and was kept unchanged after his death.",
+      "now": "Hanafi manuals teach reciting the wording as narrated.",
+      "varies": "Hanafi and Ḥanbalī use Ibn Masʿūd's narration; Shāfiʿī uses Ibn ʿAbbās's; Mālikī uses ʿUmar's. This is the biggest wording fork in the prayer.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "tashahhud_3": {
+      "id": "tashahhud_3",
+      "arabic": "السَّلَامُ عَلَيْنَا وَعَلَىٰ عِبَادِ اللَّهِ الصَّالِحِينَ",
+      "transliteration": "As-salāmu ʿalaynā wa ʿalā ʿibādi-llāhi-ṣ-ṣāliḥīn",
+      "meaning": "Peace be upon us, and upon the righteous servants of God.",
+      "where": "Sitting for the tashahhud — after the second unit, and again in the final sitting. Hanafi men sit on the left foot with the right foot upright in both sittings.",
+      "wordByWord": [
+        { "arabic": "عَلَيْنَا", "translit": "ʿalaynā", "gloss": "upon us" },
+        { "arabic": "عِبَاد اللَّه", "translit": "ʿibādi-llāh", "gloss": "the servants of God" },
+        { "arabic": "الصَّالِحِين", "translit": "aṣ-ṣāliḥīn", "gloss": "the righteous, the sound" }
+      ],
+      "then": "Deliberately unbounded — no tribe, no era, no named group.",
+      "now": "The widest greeting in the prayer, and it includes the person saying it.",
+      "varies": "Hanafi and Ḥanbalī use Ibn Masʿūd's narration; Shāfiʿī uses Ibn ʿAbbās's; Mālikī uses ʿUmar's. This is the biggest wording fork in the prayer.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "tashahhud_4": {
+      "id": "tashahhud_4",
+      "arabic": "أَشْهَدُ أَن لَّا إِلَٰهَ إِلَّا اللَّهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+      "transliteration": "Ash-hadu an lā ilāha illa-llāhu wa ash-hadu anna Muḥammadan ʿabduhu wa rasūluh",
+      "meaning": "I bear witness that there is no god but God, and that Muhammad is His servant and messenger.",
+      "where": "Sitting for the tashahhud — after the second unit, and again in the final sitting. Hanafi men sit on the left foot with the right foot upright in both sittings.",
+      "wordByWord": [
+        { "arabic": "أَشْهَدُ", "translit": "ash-hadu", "gloss": "I bear witness — legal testimony, not opinion" },
+        { "arabic": "لَّا إِلَٰهَ إِلَّا اللَّه", "translit": "lā ilāha illa-llāh", "gloss": "no god but God" },
+        { "arabic": "عَبْدُهُ", "translit": "ʿabduhu", "gloss": "His servant" },
+        { "arabic": "رَسُولُهُ", "translit": "rasūluh", "gloss": "His messenger" }
+      ],
+      "then": "<i>Ash-hadu</i> is courtroom language, the verb for testifying before a judge. And <i>servant</i> comes before <i>messenger</i>, guarding against elevating the Prophet beyond a human being.",
+      "now": "In the Hanafi school the right index finger is raised at <i>lā ilāha</i> and lowered at <i>illa-llāh</i> — the gesture tracking the sentence.",
+      "varies": "Hanafi and Ḥanbalī use Ibn Masʿūd's narration; Shāfiʿī uses Ibn ʿAbbās's; Mālikī uses ʿUmar's. This is the biggest wording fork in the prayer.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "salawat_1": {
+      "id": "salawat_1",
+      "arabic": "اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+      "transliteration": "Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka Ḥamīdun Majīd",
+      "meaning": "O God, send blessings upon Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are Praiseworthy, Glorious.",
+      "where": "Final sitting only, immediately after the tashahhud.",
+      "wordByWord": [
+        { "arabic": "صَلِّ", "translit": "ṣalli", "gloss": "send blessings" },
+        { "arabic": "آل", "translit": "āl", "gloss": "family, household" },
+        { "arabic": "حَمِيد", "translit": "Ḥamīd", "gloss": "praiseworthy" },
+        { "arabic": "مَجِيد", "translit": "Majīd", "gloss": "glorious" }
+      ],
+      "then": "The comparison to Abraham matters: Arabs traced descent to him through Ishmael, so the link placed the new community inside an existing story rather than starting a new one.",
+      "now": "Followed immediately by the same paragraph with <i>bārik</i> in place of <i>ṣalli</i>.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "salawat_2": {
+      "id": "salawat_2",
+      "arabic": "اللَّهُمَّ بَارِكْ عَلَىٰ مُحَمَّدٍ وَعَلَىٰ آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَىٰ إِبْرَاهِيمَ وَعَلَىٰ آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ",
+      "transliteration": "Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka Ḥamīdun Majīd",
+      "meaning": "O God, bless Muhammad and the family of Muhammad, as You blessed Abraham and the family of Abraham. You are Praiseworthy, Glorious.",
+      "where": "Final sitting, straight after the paragraph above.",
+      "wordByWord": [
+        { "arabic": "بَارِكْ", "translit": "bārik", "gloss": "bless — from <i>barakah</i>, increase that keeps giving" }
+      ],
+      "then": "<i>Barakah</i> is not blessing in the abstract. It means something that yields beyond what it should — a well that does not run dry.",
+      "now": "Learned as one block with the first paragraph; it is mostly the same sentence with one word changed.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "dua_final": {
+      "id": "dua_final",
+      "arabic": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+      "transliteration": "Rabbanā ātinā fi-d-dunyā ḥasanatan wa fi-l-ākhirati ḥasanatan wa qinā ʿadhāba-n-nār",
+      "meaning": "Our Lord, give us good in this world and good in the next, and protect us from the fire.",
+      "where": "Final sitting, after the ṣalawāt and before the salām. Recommended, not obligatory.",
+      "wordByWord": [
+        { "arabic": "الدُّنْيَا", "translit": "ad-dunyā", "gloss": "this world — literally the nearer one" },
+        { "arabic": "الْآخِرَة", "translit": "al-ākhirah", "gloss": "the next — literally the later one" },
+        { "arabic": "حَسَنَة", "translit": "ḥasanah", "gloss": "good, something beautiful" },
+        { "arabic": "قِنَا", "translit": "qinā", "gloss": "shield us" }
+      ],
+      "then": "<i>Dunyā</i> and <i>ākhirah</i> are a matched pair — the nearer and the later — so the verse asks for both halves of existence without treating either as disposable.",
+      "now": "Probably the most widely recited supplication among Muslims.",
+      "varies": "Any lawful supplication is permitted here.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "",
+      "confidence": "high"
+    },
+    "taslim_r": {
+      "id": "taslim_r",
+      "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+      "transliteration": "As-salāmu ʿalaykum wa raḥmatu-llāh",
+      "meaning": "Peace be upon you, and the mercy of God.",
+      "where": "Turn the head fully to the right — far enough that the cheek is visible from behind — and say it.",
+      "wordByWord": [
+        { "arabic": "السَّلَام", "translit": "as-salām", "gloss": "peace, wholeness, safety" },
+        { "arabic": "عَلَيْكُمْ", "translit": "ʿalaykum", "gloss": "upon you — plural" },
+        { "arabic": "وَرَحْمَةُ اللَّه", "translit": "wa raḥmatu-llāh", "gloss": "and the mercy of God" }
+      ],
+      "then": "<i>Salām</i> shares a root with wholeness and with <i>islām</i>. As a greeting it was a guarantee of safety: you are safe from me.",
+      "now": "The prayer opens by leaving the world and closes by turning back to it.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "taslim_l": {
+      "id": "taslim_l",
+      "arabic": "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ",
+      "transliteration": "As-salāmu ʿalaykum wa raḥmatu-llāh",
+      "meaning": "Peace be upon you, and the mercy of God.",
+      "where": "Turn the head fully to the left and say it again. The prayer is now finished.",
+      "wordByWord": [
+        { "arabic": "السَّلَام", "translit": "as-salām", "gloss": "peace" },
+        { "arabic": "عَلَيْكُمْ", "translit": "ʿalaykum", "gloss": "upon you" }
+      ],
+      "then": "Traditionally understood as greeting those beside you and the angels recording on each side.",
+      "now": "This closes the state the opening takbīr began.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": null,
+      "note": "",
+      "confidence": "high"
+    },
+    "qunut": {
+      "id": "qunut",
+      "arabic": "اللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَنَسْتَغْفِرُكَ وَنُؤْمِنُ بِكَ وَنَتَوَكَّلُ عَلَيْكَ وَنُثْنِي عَلَيْكَ الْخَيْرَ وَنَشْكُرُكَ وَلَا نَكْفُرُكَ وَنَخْلَعُ وَنَتْرُكُ مَنْ يَفْجُرُكَ. اللَّهُمَّ إِيَّاكَ نَعْبُدُ وَلَكَ نُصَلِّي وَنَسْجُدُ وَإِلَيْكَ نَسْعَىٰ وَنَحْفِدُ نَرْجُو رَحْمَتَكَ وَنَخْشَىٰ عَذَابَكَ إِنَّ عَذَابَكَ بِالْكُفَّارِ مُلْحِقٌ",
+      "transliteration": "Allāhumma innā nastaʿīnuka wa nastaghfiruka wa nuʾminu bika wa natawakkalu ʿalayka wa nuthnī ʿalayka-l-khayra wa nashkuruka wa lā nakfuruka wa nakhlaʿu wa natruku man yafjuruk. Allāhumma iyyāka naʿbudu wa laka nuṣallī wa nasjudu wa ilayka nasʿā wa naḥfidu narjū raḥmataka wa nakhshā ʿadhābaka inna ʿadhābaka bi-l-kuffāri mulḥiq",
+      "meaning": "O God, we seek Your help and Your forgiveness, we believe in You and rely on You, we praise You for all good and thank You and are not ungrateful, and we cast off and leave whoever disobeys You. O God, You alone we worship, to You we pray and prostrate, to You we strive and hasten. We hope for Your mercy and fear Your punishment — Your punishment surely overtakes those who reject.",
+      "where": "Standing in the third unit of witr, after the recitation. Say Allāhu akbar raising the hands, then fold them and recite this quietly, then bow.",
+      "wordByWord": [
+        { "arabic": "نَسْتَعِينُكَ", "translit": "nastaʿīnuka", "gloss": "we seek Your help" },
+        { "arabic": "نَسْتَغْفِرُكَ", "translit": "nastaghfiruka", "gloss": "we seek Your forgiveness" },
+        { "arabic": "نَتَوَكَّلُ", "translit": "natawakkalu", "gloss": "we rely, we entrust" },
+        { "arabic": "نَخْلَعُ", "translit": "nakhlaʿu", "gloss": "we cast off — literally we take off, as with a garment" },
+        { "arabic": "نَسْعَىٰ", "translit": "nasʿā", "gloss": "we strive, we hurry toward" }
+      ],
+      "then": "<i>Qunūt</i> originally meant standing in sustained, obedient devotion. <i>Nakhlaʿu</i> is the verb for removing a garment or shedding a skin — the image is of stepping out of an allegiance rather than merely disagreeing with it.",
+      "now": "A Hanafi marker: because witr is wājib in this school, the qunūt inside it comes up every night.",
+      "varies": "Shāfiʿīs recite a qunūt in Fajr instead, aloud, with different wording. Hanafis do not recite qunūt in Fajr except in times of public calamity.",
+      "repeat": 1,
+      "aloud": false,
+      "note": "Check this wording against your own teacher or a Hanafi manual before relying on it. Minor variations in the closing phrase exist between printed versions.",
+      "confidence": "verify"
+    },
+    "ayat_kursi": {
+      "id": "ayat_kursi",
+      "arabic": "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+      "transliteration": "Allāhu lā ilāha illā huwa-l-Ḥayyu-l-Qayyūm. Lā taʾkhudhuhu sinatun wa lā nawm. Lahu mā fi-s-samāwāti wa mā fi-l-arḍ. Man dha-lladhī yashfaʿu ʿindahu illā bi-idhnih. Yaʿlamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bi-shayʾin min ʿilmihi illā bimā shāʾ. Wasiʿa kursiyyuhu-s-samāwāti wa-l-arḍ, wa lā yaʾūduhu ḥifẓuhumā, wa huwa-l-ʿAliyyu-l-ʿAẓīm",
+      "meaning": "God — there is no god but He, the Living, the Sustaining. Neither drowsiness nor sleep takes Him. To Him belongs whatever is in the heavens and the earth. Who could intercede with Him except by His permission? He knows what lies before them and behind them, and they grasp nothing of His knowledge except what He wills. His seat extends over the heavens and the earth, and guarding them does not weary Him. He is the Most High, the Magnificent.",
+      "where": "Recited after each obligatory prayer, after the tasbīḥ. Not part of the prayer itself.",
+      "wordByWord": [
+        { "arabic": "الْحَيّ", "translit": "al-Ḥayy", "gloss": "the Living" },
+        { "arabic": "الْقَيُّوم", "translit": "al-Qayyūm", "gloss": "the self-subsisting who sustains everything else" },
+        { "arabic": "سِنَة", "translit": "sinah", "gloss": "drowsiness — the state just before sleep" },
+        { "arabic": "كُرْسِيّ", "translit": "kursī", "gloss": "seat, footstool" },
+        { "arabic": "يَئُودُهُ", "translit": "yaʾūduhu", "gloss": "wearies Him, burdens Him" }
+      ],
+      "then": "One long sentence, Sūrat al-Baqarah verse 255. <i>Sinah</i> and <i>nawm</i> are deliberately paired — not even the drowsiness that precedes sleep. Set against surrounding cultures whose gods slept, tired and needed feeding, the denial is pointed.",
+      "now": "Widely memorised and recited at night and before travel as well as after prayer.",
+      "varies": "",
+      "repeat": 1,
+      "aloud": false,
+      "note": "Long verse. Check it against a muṣḥaf before memorising from a screen.",
+      "confidence": "verify"
+    }
+  },
+  "prayers": {
+    "fajr": {
+      "id": "fajr",
+      "name": "Fajr",
+      "arabic": "الفجر",
+      "rakat": 2,
+      "aloudUnits": [1, 2],
+      "window": "before sunrise",
+      "about": "The day's first prayer, in the dark or half-light before the sun rises. Recited aloud.",
+      "sunnah": { "sunnahBefore": 2, "sunnahAfter": 0 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 2, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": [
+        {
+          "id": "fajr_before",
+          "name": "2 before Fajr",
+          "rakat": 2,
+          "when": "before",
+          "status": "mu'akkadah",
+          "note": "The most emphasised of all the sunnah prayers. Kept short.",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 2, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        }
+      ],
+      "obligation": "farḍ"
+    },
+    "dhuhr": {
+      "id": "dhuhr",
+      "name": "Dhuhr",
+      "arabic": "الظهر",
+      "rakat": 4,
+      "aloudUnits": [],
+      "window": "after the sun passes its peak",
+      "about": "The midday prayer, recited silently — it falls in working hours.",
+      "sunnah": { "sunnahBefore": 4, "sunnahAfter": 2 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+        { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": [
+        {
+          "id": "dhuhr_before",
+          "name": "4 before Dhuhr",
+          "rakat": 4,
+          "when": "before",
+          "status": "mu'akkadah",
+          "note": "Prayed as one set of four, with a sitting after the second unit — not two sets of two.",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+            { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        },
+        {
+          "id": "dhuhr_after",
+          "name": "2 after Dhuhr",
+          "rakat": 2,
+          "when": "after",
+          "status": "mu'akkadah",
+          "note": "",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 2, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        }
+      ],
+      "obligation": "farḍ"
+    },
+    "asr": {
+      "id": "asr",
+      "name": "ʿAsr",
+      "arabic": "العصر",
+      "rakat": 4,
+      "aloudUnits": [],
+      "window": "late afternoon",
+      "about": "The late-afternoon prayer, recited silently. Hanafi timing starts it noticeably later than other schools — at two shadow-lengths rather than one.",
+      "sunnah": { "sunnahBefore": 0, "sunnahAfter": 0 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+        { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": [
+        {
+          "id": "asr_before",
+          "name": "4 before ʿAsr",
+          "rakat": 4,
+          "when": "before",
+          "status": "ghayr mu'akkadah",
+          "note": "Optional. Prayed when you have time, left when you don't.",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+            { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        }
+      ],
+      "obligation": "farḍ"
+    },
+    "maghrib": {
+      "id": "maghrib",
+      "name": "Maghrib",
+      "arabic": "المغرب",
+      "rakat": 3,
+      "aloudUnits": [1, 2],
+      "window": "just after sunset",
+      "about": "Three units, prayed shortly after sunset. The first two are recited aloud, the third silently.",
+      "sunnah": { "sunnahBefore": 0, "sunnahAfter": 2 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+        { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 3, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 3, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": [
+        {
+          "id": "maghrib_after",
+          "name": "2 after Maghrib",
+          "rakat": 2,
+          "when": "after",
+          "status": "mu'akkadah",
+          "note": "",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 2, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        }
+      ],
+      "obligation": "farḍ"
+    },
+    "isha": {
+      "id": "isha",
+      "name": "ʿIshāʾ",
+      "arabic": "العشاء",
+      "rakat": 4,
+      "aloudUnits": [1, 2],
+      "window": "once the twilight has gone",
+      "about": "The night prayer. First two units aloud, the last two silently. Followed by witr in the Hanafi school.",
+      "sunnah": { "sunnahBefore": 0, "sunnahAfter": 2 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": true, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+        { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": [
+        {
+          "id": "isha_before",
+          "name": "4 before ʿIshāʾ",
+          "rakat": 4,
+          "when": "before",
+          "status": "ghayr mu'akkadah",
+          "note": "Optional.",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+            { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 4, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 4, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 4, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 4, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 4, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 4, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 4, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        },
+        {
+          "id": "isha_after",
+          "name": "2 after ʿIshāʾ",
+          "rakat": 2,
+          "when": "after",
+          "status": "mu'akkadah",
+          "note": "",
+          "sequence": [
+            { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+            { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+            { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+            { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+            { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+            { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+            { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+            { "posture": "taslim", "rakah": 2, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+          ]
+        }
+      ],
+      "obligation": "farḍ"
+    },
+    "witr": {
+      "id": "witr",
+      "name": "Witr",
+      "arabic": "الوتر",
+      "rakat": 3,
+      "aloudUnits": [],
+      "window": "after ʿIshāʾ, before Fajr",
+      "obligation": "wājib",
+      "about": "Three units, classed as wājib in the Hanafi school rather than merely sunnah. A surah is recited after al-Fātiḥa in all three units, and a qunūt supplication is recited standing in the third before bowing. The odd number is the point — witr means odd.",
+      "sunnah": { "sunnahBefore": 0, "sunnahAfter": 0 },
+      "sequence": [
+        { "posture": "qiyam", "rakah": 1, "phrases": ["takbir", "thana", "taawwudh", "basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite." },
+        { "posture": "ruku", "rakah": 1, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 1, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 1, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 1, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qiyam", "rakah": 2, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "ruku", "rakah": 2, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 2, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 2, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 2, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 2, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4"], "cue": "Middle sitting. Tashahhud only — then stand for the next unit." },
+        { "posture": "qiyam", "rakah": 3, "phrases": ["basmalah", "fatiha_1", "fatiha_2", "fatiha_3", "fatiha_4", "fatiha_5", "fatiha_6", "fatiha_7", "ameen", "surah_slot"], "recitedAloud": false, "cue": "Stand and recite. No opening supplication this time — straight to al-Fātiḥa." },
+        { "posture": "qiyam", "rakah": 3, "takbirBefore": true, "phrases": ["qunut"], "cue": "Still standing. Say Allāhu akbar raising the hands, fold them again, and recite the qunūt quietly. Then bow." },
+        { "posture": "ruku", "rakah": 3, "takbirBefore": true, "phrases": ["ruku"], "cue": "Say Allāhu akbar as you bow." },
+        { "posture": "qawmah", "rakah": 3, "phrases": ["sami", "rabbana"], "cue": "Stand fully upright. Do not rush this." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Say Allāhu akbar as you go down." },
+        { "posture": "jalsa", "rakah": 3, "takbirBefore": true, "phrases": ["jalsa"], "cue": "Sit up. Settle before going down again." },
+        { "posture": "sujud", "rakah": 3, "takbirBefore": true, "phrases": ["sujud"], "cue": "Second prostration." },
+        { "posture": "qadah", "rakah": 3, "takbirBefore": true, "phrases": ["tashahhud_1", "tashahhud_2", "tashahhud_3", "tashahhud_4", "salawat_1", "salawat_2", "dua_final"], "cue": "Final sitting. Tashahhud, then the ṣalawāt, then a supplication." },
+        { "posture": "taslim", "rakah": 3, "phrases": ["taslim_r", "taslim_l"], "cue": "Turn right, then left. The prayer is complete." }
+      ],
+      "sunnahSets": []
+    }
+  },
+  "surahs": [
+    {
+      "id": "ikhlas",
+      "name": "Al-Ikhlāṣ",
+      "meaning": "Sincerity",
+      "verses": [
+        { "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ", "transliteration": "Qul huwa-llāhu aḥad", "meaning": "Say: He is God, One." },
+        { "arabic": "اللَّهُ الصَّمَدُ", "transliteration": "Allāhu-ṣ-Ṣamad", "meaning": "God, the Eternal Refuge." },
+        { "arabic": "لَمْ يَلِدْ وَلَمْ يُولَدْ", "transliteration": "Lam yalid wa lam yūlad", "meaning": "He did not father, and was not fathered." },
+        { "arabic": "وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ", "transliteration": "Wa lam yakun lahu kufuwan aḥad", "meaning": "And there is nothing comparable to Him." }
+      ],
+      "then": "Four lines answering a direct question the Meccans put to the Prophet: describe your God's lineage. Every Arabian deity had a genealogy. The answer refuses the frame — no parent, no child, no equal.",
+      "now": "Traditionally said to equal a third of the Qurʾān. Usually the first surah anyone learns."
+    },
+    {
+      "id": "asr",
+      "name": "Al-ʿAṣr",
+      "meaning": "Time",
+      "verses": [
+        { "arabic": "وَالْعَصْرِ", "transliteration": "Wa-l-ʿaṣr", "meaning": "By time." },
+        { "arabic": "إِنَّ الْإِنسَانَ لَفِي خُسْرٍ", "transliteration": "Inna-l-insāna la-fī khusr", "meaning": "Humankind is in loss." },
+        { "arabic": "إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ", "transliteration": "Illā-lladhīna āmanū wa ʿamilū-ṣ-ṣāliḥāti wa tawāṣaw bi-l-ḥaqqi wa tawāṣaw bi-ṣ-ṣabr", "meaning": "Except those who believe, do right, and urge each other to truth and to patience." }
+      ],
+      "then": "<i>Khusr</i> is a merchant's word — loss on a transaction, capital gone. Addressed to a trading city, it frames a life as a deal running at a deficit unless four things are present.",
+      "now": "Three verses, and two of the four conditions are about other people, not private belief."
+    },
+    {
+      "id": "kawthar",
+      "name": "Al-Kawthar",
+      "meaning": "Abundance",
+      "verses": [
+        { "arabic": "إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ", "transliteration": "Innā aʿṭaynāka-l-kawthar", "meaning": "We have given you abundance." },
+        { "arabic": "فَصَلِّ لِرَبِّكَ وَانْحَرْ", "transliteration": "Fa-ṣalli li-Rabbika wa-nḥar", "meaning": "So pray to your Lord and offer sacrifice." },
+        { "arabic": "إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ", "transliteration": "Inna shāniʾaka huwa-l-abtar", "meaning": "It is the one who hates you who is cut off." }
+      ],
+      "then": "The shortest chapter in the Qurʾān. <i>Abtar</i> meant a man with no surviving sons — whose line and name would end. Opponents used the word against the Prophet after his sons died. The surah turns it back.",
+      "now": "Widely recited because it is three short verses; the background changes how the last line lands."
+    },
+    {
+      "id": "falaq",
+      "name": "Al-Falaq",
+      "meaning": "Daybreak",
+      "verses": [
+        { "arabic": "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ", "transliteration": "Qul aʿūdhu bi-Rabbi-l-falaq", "meaning": "Say: I take refuge with the Lord of daybreak," },
+        { "arabic": "مِن شَرِّ مَا خَلَقَ", "transliteration": "Min sharri mā khalaq", "meaning": "from the harm of what He created," },
+        { "arabic": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ", "transliteration": "Wa min sharri ghāsiqin idhā waqab", "meaning": "from the harm of darkness as it settles," },
+        { "arabic": "وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ", "transliteration": "Wa min sharri-n-naffāthāti fī-l-ʿuqad", "meaning": "from the harm of those who blow on knots," },
+        { "arabic": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ", "transliteration": "Wa min sharri ḥāsidin idhā ḥasad", "meaning": "and from the harm of the envier when he envies." }
+      ],
+      "then": "Al-Falaq and an-Nās are known together as the two chapters of refuge. Both name the protector first, then list what you are protected from.",
+      "now": "Recited together very commonly, in prayer and outside it."
+    },
+    {
+      "id": "nas",
+      "name": "An-Nās",
+      "meaning": "People",
+      "verses": [
+        { "arabic": "قُلْ أَعُوذُ بِرَبِّ النَّاسِ", "transliteration": "Qul aʿūdhu bi-Rabbi-n-nās", "meaning": "Say: I take refuge with the Lord of people," },
+        { "arabic": "مَلِكِ النَّاسِ", "transliteration": "Maliki-n-nās", "meaning": "the King of people," },
+        { "arabic": "إِلَٰهِ النَّاسِ", "transliteration": "Ilāhi-n-nās", "meaning": "the God of people," },
+        { "arabic": "مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ", "transliteration": "Min sharri-l-waswāsi-l-khannās", "meaning": "from the harm of the whisperer who withdraws," },
+        { "arabic": "الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ", "transliteration": "Alladhī yuwaswisu fī ṣudūri-n-nās", "meaning": "who whispers in the chests of people," },
+        { "arabic": "مِنَ الْجِنَّةِ وَالنَّاسِ", "transliteration": "Mina-l-jinnati wa-n-nās", "meaning": "from among jinn and people." }
+      ],
+      "then": "Three divine names stacked at the start — Lord, King, God — before the threat is named.",
+      "now": "Closes the Qurʾān, paired with al-Falaq."
+    }
+  ],
+  "afterPrayer": [
+    { "arabic": "سُبْحَانَ اللَّهِ", "transliteration": "SubḥānAllāh", "meaning": "Glory to God.", "count": 33 },
+    { "arabic": "الْحَمْدُ لِلَّهِ", "transliteration": "Al-ḥamdu lillāh", "meaning": "All praise belongs to God.", "count": 33 },
+    { "arabic": "اللَّهُ أَكْبَرُ", "transliteration": "Allāhu akbar", "meaning": "God is greater.", "count": 34 }
+  ],
+  "afterPrayerExtra": ["ayat_kursi"],
+  "sunnahNote": "In the Hanafi school a surah is recited after al-Fātiḥa in <em>every</em> unit of a sunnah or voluntary prayer, not only the first two — this is one of the clearest differences between a sunnah prayer and an obligatory one. A four-unit sunnah is prayed as one set of four with a sitting after the second unit.",
+  "differences": [
+    { "topic": "Raising the hands during the prayer", "hanafi": "Only at the opening takbīr, plus the witr qunūt and the Eid takbīrs.", "others": "Shāfiʿī and Ḥanbalī also raise them going into and rising from the bow. The most visible difference if you pray beside someone from another school." },
+    { "topic": "Where the hands are folded when standing", "hanafi": "Men below the navel, women on the chest.", "others": "Shāfiʿī: above the navel. Mālikī: commonly hanging at the sides." },
+    { "topic": "Saying āmīn", "hanafi": "Silently, always.", "others": "Shāfiʿī and Ḥanbalī say it aloud in the loud prayers." },
+    { "topic": "The basmalah before al-Fātiḥa", "hanafi": "Silently in every unit; not counted as a verse of al-Fātiḥa for recitation.", "others": "Shāfiʿī counts it as verse one and recites it aloud in the loud prayers." },
+    { "topic": "Reciting behind an imam", "hanafi": "You do not recite al-Fātiḥa — you listen.", "others": "Shāfiʿī: the follower recites it. Ḥanbalī: during the silent pauses." },
+    { "topic": "The wording of the tashahhud", "hanafi": "Ibn Masʿūd's narration.", "others": "Shāfiʿī uses Ibn ʿAbbās's, Mālikī uses ʿUmar's, Ḥanbalī uses Ibn Masʿūd's like the Hanafis." },
+    { "topic": "The final sitting", "hanafi": "The same as the middle sitting — left foot under, right foot upright.", "others": "Shāfiʿī and Ḥanbalī sit tawarruk, left foot out to the side." },
+    { "topic": "Witr", "hanafi": "Wājib, three units joined, with a qunūt in the third.", "others": "Other schools treat it as a strong sunnah, often structured differently." },
+    { "topic": "The start of ʿAsr", "hanafi": "Two shadow-lengths.", "others": "Shāfiʿī, Mālikī and Ḥanbalī use one. This is why prayer apps have a Hanafi setting." },
+    { "topic": "The prostration of forgetfulness", "hanafi": "One salām, then the two prostrations, then tashahhud and the full salām.", "others": "Shāfiʿī places both prostrations before the salām." },
+    { "topic": "Qunūt in Fajr", "hanafi": "Not recited, except in times of public calamity.", "others": "Shāfiʿīs recite it in Fajr regularly, aloud, after rising from the bow in the second unit." }
+  ]
+}

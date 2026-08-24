@@ -548,6 +548,39 @@
     text-align: center;
   }
 
+  /* active-state styling for whichever prayer's window we're currently
+     in -- distinct (ember) from the upcoming-prayer highlight (gold) so
+     both can be legible on the table at once. */
+  .plaque-row.current {
+    background: rgba(255, 157, 77, 0.16);
+    box-shadow: inset 0 0 0 1px rgba(255, 157, 77, 0.55);
+  }
+  .plaque-row.current .p-name,
+  .plaque-row.current .p-time {
+    color: var(--ember);
+    font-weight: 600;
+  }
+
+  .plaque-guide-btn {
+    margin-top: 0.4rem;
+    padding: 0.32rem 0.9rem;
+    background: rgba(212, 162, 76, 0.15);
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 6px;
+    color: var(--gold-bright);
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .plaque-guide-btn:hover { background: rgba(212, 162, 76, 0.3); }
+  .plaque-guide-btn:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
   footer {
     position: relative;
     z-index: 1;
@@ -571,6 +604,487 @@
   .mat.reveal:nth-of-type(4) { transition-delay: 0.3s; }
   @media (prefers-reduced-motion: reduce) {
     .reveal:not(.in-view) { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ============================================================
+     GUIDED PRAYER OVERLAY — a fifth, full-screen "unrolling" rug.
+     Reuses the .mat rug's corner-motif symbol, the gold-rule/zellij
+     language from .plaque, and the arch-niche mihrab curve for its
+     shape. No new color tokens, no figurative art -- geometric
+     ornament and text only.
+     ============================================================ */
+  .prayer-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(0.5rem, 3vmin, 2rem);
+  }
+  .prayer-overlay[hidden] { display: none; }
+  .prayer-overlay-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 4, 7, 0.84);
+  }
+  .prayer-rug-panel {
+    position: relative;
+    z-index: 1;
+    width: min(700px, 100%);
+    max-height: min(90vh, 920px);
+    display: flex;
+    flex-direction: column;
+    background:
+      var(--pattern-zellij),
+      linear-gradient(165deg, var(--wall-light) 0%, var(--wall) 55%, var(--wall-dark) 100%);
+    background-size: 100px 100px, auto;
+    border-radius: 46% 46% 14px 14px / 20% 20% 14px 14px;
+    box-shadow:
+      0 0 0 2px rgba(212, 162, 76, 0.55),
+      0 0 0 7px rgba(212, 162, 76, 0.16),
+      0 0 0 9px rgba(212, 162, 76, 0.4),
+      0 24px 70px rgba(0, 0, 0, 0.65);
+    color: var(--ivory);
+    overflow: hidden;
+    transform-origin: top center;
+    animation: rug-unroll 0.45s ease;
+  }
+  @keyframes rug-unroll {
+    from { transform: scaleY(0.06); opacity: 0; }
+    to   { transform: scaleY(1); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prayer-rug-panel { animation: none; }
+  }
+  .prayer-rug-corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    color: var(--gold-bright);
+    opacity: 0.85;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .prayer-rug-corner.tl { top: 14px; left: 14px; }
+  .prayer-rug-corner.tr { top: 14px; right: 14px; }
+  .prayer-rug-corner.bl { bottom: 14px; left: 14px; }
+  .prayer-rug-corner.br { bottom: 14px; right: 14px; }
+
+  .prayer-overlay-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    z-index: 3;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    background: rgba(20, 10, 15, 0.55);
+    color: var(--gold-bright);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .prayer-overlay-close:hover { background: rgba(212, 162, 76, 0.25); }
+
+  .prayer-overlay-scroll {
+    overflow-y: auto;
+    overflow-wrap: anywhere;
+    padding: 2.4rem 1.3rem 1.5rem;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .prayer-overlay :focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+  }
+
+  /* -- chooser -- */
+  .po-switcher {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-bottom: 0.9rem;
+  }
+  .po-switcher-btn {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 20px;
+    color: var(--ivory-dim);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-switcher-btn.active {
+    background: rgba(212, 162, 76, 0.22);
+    border-color: rgba(212, 162, 76, 0.7);
+    color: var(--gold-bright);
+  }
+  .po-title {
+    margin: 0 0 0.5rem;
+    text-align: center;
+    font-size: clamp(1.05rem, 3vw, 1.4rem);
+    font-weight: 400;
+    color: var(--gold-bright);
+    letter-spacing: 0.04em;
+  }
+  .po-title-arabic {
+    font-family: "Scheherazade New", "Amiri", "Traditional Arabic", serif;
+    font-size: 1.3em;
+    margin-inline-start: 0.5rem;
+  }
+  .po-about, .po-sunnah-note, .po-disclaimer {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: var(--ivory-dim);
+    text-align: center;
+    max-width: 56ch;
+    margin: 0 auto 0.8rem;
+  }
+  .po-sunnah-note { color: var(--ember); }
+  .po-disclaimer {
+    margin-top: 1.4rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(212, 162, 76, 0.25);
+    font-size: 0.68rem;
+  }
+  .po-chooser-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+  }
+  .po-chooser-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+    padding: 0.6rem 0.8rem;
+    background: rgba(20, 10, 15, 0.35);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 8px;
+    color: var(--ivory);
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    width: 100%;
+  }
+  .po-chooser-item:hover { background: rgba(212, 162, 76, 0.14); }
+  .po-chooser-item-label { font-size: 0.86rem; color: var(--gold-bright); }
+  .po-badge {
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+  }
+  .po-chooser-item-note { font-size: 0.72rem; color: var(--ivory-dim); margin-top: 0.15rem; }
+  .po-ref-menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+  .po-ref-link, .po-back-link {
+    background: none;
+    border: none;
+    color: var(--gold-bright);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0.2rem;
+  }
+  .po-back-link { display: inline-block; margin-bottom: 0.8rem; }
+
+  /* -- guide step -- */
+  .po-guide-progress {
+    text-align: center;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    margin-bottom: 0.3rem;
+  }
+  .po-posture-en { color: var(--ivory-dim); font-size: 0.75em; font-weight: 300; }
+  .po-cue, .po-posture-body {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--ivory-dim);
+    max-width: 50ch;
+    margin: 0 auto 0.6rem;
+  }
+  .po-takbir-cue {
+    text-align: center;
+    color: var(--ember);
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .po-phrase {
+    margin: 1rem 0;
+    padding: 0.9rem 0.8rem;
+    background: rgba(20, 10, 15, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.22);
+  }
+  .po-phrase-arabic {
+    font-family: "Scheherazade New", "Amiri", "Traditional Arabic", serif;
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    line-height: 1.6;
+    color: var(--ivory);
+    text-align: center;
+    margin-bottom: 0.4rem;
+    word-break: break-word;
+  }
+  .po-phrase-translit {
+    text-align: center;
+    font-style: italic;
+    color: var(--gold-bright);
+    font-size: 0.88rem;
+  }
+  .po-phrase-meaning {
+    text-align: center;
+    color: var(--ivory-dim);
+    font-size: 0.8rem;
+    margin-top: 0.15rem;
+  }
+  .po-phrase-repeat {
+    text-align: center;
+    color: var(--ember);
+    font-size: 0.72rem;
+    margin-top: 0.3rem;
+    letter-spacing: 0.05em;
+  }
+  .po-verify-note {
+    margin-top: 0.5rem;
+    padding: 0.4rem 0.5rem;
+    background: rgba(255, 157, 77, 0.14);
+    border: 1px solid rgba(255, 157, 77, 0.4);
+    border-radius: 6px;
+    font-size: 0.7rem;
+    color: var(--ember);
+  }
+  .po-expanders { margin-top: 0.6rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .po-expander {
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+  }
+  .po-expander summary {
+    cursor: pointer;
+    font-size: 0.74rem;
+    color: var(--gold-bright);
+    letter-spacing: 0.03em;
+  }
+  .po-expander-body {
+    margin-top: 0.4rem;
+    font-size: 0.74rem;
+    line-height: 1.5;
+    color: var(--ivory-dim);
+  }
+  .po-expander-body p { margin: 0.3rem 0; }
+  .po-wbw-row {
+    display: grid;
+    grid-template-columns: auto 1fr 1.4fr;
+    gap: 0.5rem;
+    padding: 0.15rem 0;
+    align-items: baseline;
+    border-bottom: 1px dashed rgba(212, 162, 76, 0.15);
+  }
+  .po-wbw-row span:first-child {
+    font-family: "Scheherazade New", "Amiri", "Traditional Arabic", serif;
+    font-size: 1.1rem;
+  }
+  .po-save-phrase-btn {
+    margin-top: 0.6rem;
+    padding: 0.28rem 0.6rem;
+    background: transparent;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 6px;
+    color: var(--ivory-dim);
+    font-size: 0.64rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-save-phrase-btn:hover { color: var(--gold-bright); border-color: rgba(212, 162, 76, 0.6); }
+  .po-save-status { font-size: 0.64rem; color: var(--ivory-dim); margin-top: 0.25rem; min-height: 1em; }
+
+  .po-surah-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin: 0.5rem 0;
+  }
+  .po-surah-chip {
+    padding: 0.28rem 0.6rem;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: transparent;
+    color: var(--ivory-dim);
+    font-size: 0.68rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-surah-chip.active { background: rgba(212, 162, 76, 0.22); color: var(--gold-bright); border-color: rgba(212, 162, 76, 0.7); }
+  .po-surah-label { text-align: center; font-size: 0.7rem; color: var(--ivory-dim); margin-bottom: 0.3rem; }
+  .po-surah-memory-note { text-align: center; font-size: 0.72rem; color: var(--ivory-dim); font-style: italic; }
+  .po-surah-verse { margin-bottom: 0.8rem; }
+
+  .po-steps-toggle {
+    display: block;
+    margin: 0.8rem auto 0.4rem;
+    background: none;
+    border: none;
+    color: var(--gold-bright);
+    font-size: 0.68rem;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-steps-list {
+    max-height: 160px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.4rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+  }
+  .po-steps-list-item {
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0.25rem 0.4rem;
+    font-size: 0.7rem;
+    color: var(--ivory-dim);
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 4px;
+  }
+  .po-steps-list-item.active { color: var(--gold-bright); background: rgba(212, 162, 76, 0.15); }
+
+  .po-nav {
+    position: sticky;
+    bottom: -1px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    padding: 0.6rem 0.2rem 0.2rem;
+    background: linear-gradient(to top, var(--wall) 60%, transparent);
+  }
+  .po-btn, .po-nav-back, .po-nav-next {
+    padding: 0.5rem 0.9rem;
+    background: rgba(212, 162, 76, 0.16);
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 8px;
+    color: var(--gold-bright);
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-btn:hover, .po-nav-back:hover, .po-nav-next:hover { background: rgba(212, 162, 76, 0.3); }
+  .po-nav-progress { font-size: 0.68rem; color: var(--ivory-dim); font-variant-numeric: tabular-nums; }
+
+  .po-error { text-align: center; color: var(--ember); font-size: 0.85rem; padding: 2rem 1rem; }
+
+  /* -- reference views -- */
+  .po-posture-grid { display: flex; flex-direction: column; gap: 0.7rem; }
+  .po-posture-card, .po-diff-item {
+    padding: 0.7rem 0.8rem;
+    background: rgba(20, 10, 15, 0.3);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+  }
+  .po-posture-card h3, .po-diff-item h3 {
+    margin: 0 0 0.35rem;
+    font-size: 0.86rem;
+    color: var(--gold-bright);
+    font-weight: 400;
+  }
+  .po-posture-card p, .po-diff-item p { margin: 0.25rem 0; font-size: 0.76rem; line-height: 1.5; color: var(--ivory-dim); }
+  .po-tasbih-item { margin-bottom: 1.1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(212, 162, 76, 0.18); }
+  .po-tasbih-counter { display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem; flex-wrap: wrap; }
+  .po-tasbih-tap, .po-tasbih-reset {
+    padding: 0.35rem 0.7rem;
+    background: rgba(212, 162, 76, 0.16);
+    border: 1px solid rgba(212, 162, 76, 0.5);
+    border-radius: 6px;
+    color: var(--gold-bright);
+    font-size: 0.72rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  /* -- vault mini-box -- */
+  .po-vault-box {
+    margin: 1.2rem auto 0;
+    max-width: 46ch;
+    padding: 0.7rem 0.8rem;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.25);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    color: var(--ivory-dim);
+  }
+  .po-vault-status { color: var(--ivory); margin-bottom: 0.2rem; }
+  .po-vault-dest { margin-bottom: 0.4rem; }
+  .po-vault-btn-row { display: flex; gap: 0.4rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .po-vault-btn {
+    padding: 0.25rem 0.55rem;
+    background: transparent;
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 6px;
+    color: var(--gold-bright);
+    font-size: 0.66rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .po-vault-path-label { display: block; font-size: 0.66rem; }
+  .po-vault-path-input {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.3rem 0.4rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 5px;
+    color: var(--ivory);
+    font-size: 0.72rem;
+    font-family: inherit;
+  }
+  .po-note-label { display: block; font-size: 0.72rem; color: var(--ivory-dim); text-align: center; margin: 0.8rem 0 0.4rem; }
+  .po-note-input {
+    display: block;
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.4rem 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 6px;
+    color: var(--ivory);
+    font-size: 0.76rem;
+    font-family: inherit;
+    resize: vertical;
+    box-sizing: border-box;
+  }
+  .po-complete-actions { display: flex; gap: 0.6rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+
+  @media (max-width: 480px) {
+    .prayer-rug-panel { border-radius: 30% 30% 10px 10px / 12% 12% 10px 10px; }
+    .po-wbw-row { grid-template-columns: 1fr; gap: 0.1rem; }
   }
 
   /* ---------- mobile: the top-right cell the plaque shares with the
@@ -713,7 +1227,8 @@
         <div class="plaque-row" data-prayer="isha"><span class="p-name">Isha</span><span class="p-time">--:--</span></div>
       </div>
       <div class="plaque-next-note" hidden></div>
-      <div class="plaque-note">Calculated using the ISNA method (15&deg; angle, Shafi&#8217;i Asr) &mdash; may differ slightly from your local mosque&rsquo;s posted schedule.</div>
+      <button type="button" class="plaque-guide-btn" id="guideMeBtn">Guide me</button>
+      <div class="plaque-note">Calculated using the ISNA method (15&deg; angle) with &#7716;anaf&#299; &#703;A&#7779;r (shadow-length factor 2) &mdash; may differ slightly from your local mosque&rsquo;s posted schedule.</div>
     </div>
 
     <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
@@ -886,6 +1401,23 @@
     </button>
   </div>
 
+  <!-- Guided prayer overlay: a fifth, full-screen "unrolling" rug.
+       Hidden by default; opened by the plaque's "Guide me" control.
+       Content (chooser/guide/reference) is rendered entirely by JS
+       from data/salah/hanafi.json -- see the GUIDED PRAYER section
+       of the script below. -->
+  <div class="prayer-overlay" id="prayerOverlay" hidden aria-hidden="true">
+    <div class="prayer-overlay-backdrop" id="prayerOverlayBackdrop"></div>
+    <div class="prayer-rug-panel" role="dialog" aria-modal="true" aria-labelledby="prayerOverlayTitle">
+      <svg class="prayer-rug-corner tl" viewBox="-8 -8 16 16" aria-hidden="true"><use href="#corner-motif"/></svg>
+      <svg class="prayer-rug-corner tr" viewBox="-8 -8 16 16" aria-hidden="true"><use href="#corner-motif"/></svg>
+      <svg class="prayer-rug-corner bl" viewBox="-8 -8 16 16" aria-hidden="true"><use href="#corner-motif"/></svg>
+      <svg class="prayer-rug-corner br" viewBox="-8 -8 16 16" aria-hidden="true"><use href="#corner-motif"/></svg>
+      <button type="button" class="prayer-overlay-close" id="prayerOverlayClose" aria-label="Close guided prayer">&times;</button>
+      <div class="prayer-overlay-scroll" id="prayerOverlayScroll"></div>
+    </div>
+  </div>
+
   <footer>
     Click a mat to mark that agent as active/working. The sky, mountains
     and mosque silhouette shift with your system clock in real time.
@@ -1019,7 +1551,7 @@
   // PRAYER TIMES — Salt Lake City, UT, computed from real solar
   // position astronomy (not hardcoded / not a fixed table).
   // Method: ISNA (Fajr/Isha at 15deg sun depression), Asr per
-  // Shafi'i jurisprudence (shadow-length factor t = 1).
+  // Hanafi jurisprudence (shadow-length factor t = 2). See ASR_METHOD.
   // ------------------------------------------------------------
   const SLC_LAT = 40.7608;
   const SLC_LON = -111.8910; // degrees, west is negative
@@ -1070,6 +1602,12 @@
     return new Date(Date.UTC(year, month - 1, day, 0, totalMinutes, 0));
   }
 
+  // Asr shadow-length method: Hanafi uses factor 2 (shadow = 2x object
+  // height + noon shadow), the majority/Shafi'i position uses factor 1.
+  // Named here rather than left as a buried literal so the choice is
+  // visible and changeable in one place.
+  const ASR_METHOD = "hanafi";
+
   function getPrayerTimes(year, month, day) {
     const jd = julianDay(year, month, day);
     const { decl, eqt } = sunPosition(jd);
@@ -1079,7 +1617,7 @@
     const hFajrIsha = hourAngleForAltitude(SLC_LAT, decl, -15) / 15;   // ISNA angle
     const hMaghrib = hourAngleForAltitude(SLC_LAT, decl, -0.833) / 15; // sunset
 
-    const asrShadowFactor = 1; // Shafi'i
+    const asrShadowFactor = ASR_METHOD === "hanafi" ? 2 : 1;
     const asrAltitude = darctan2(1, asrShadowFactor + dtan(Math.abs(SLC_LAT - decl)));
     const hAsr = hourAngleForAltitude(SLC_LAT, decl, asrAltitude) / 15;
 
@@ -1101,6 +1639,34 @@
   }
 
   const PRAYER_ORDER = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+  const PRAYER_LABELS = { fajr: "Fajr", dhuhr: "Dhuhr", asr: "ʿAsr", maghrib: "Maghrib", isha: "ʿIshāʾ" };
+  // Guide me opens on whichever prayer's window we're currently in --
+  // kept up to date every tick by updatePrayerPanel().
+  let currentGuidePrayerKey = "fajr";
+  // Populated asynchronously by the GUIDED PRAYER section further down
+  // (declared here so early calls to updatePrayerPanel() can safely
+  // check it before that section's fetch() resolves).
+  let SALAH_DATA = null;
+  let salahLoadError = null;
+
+  // Sorted {key, time} list spanning yesterday/today/tomorrow, so "current
+  // prayer" and "time remaining" are correct across midnight without
+  // special-casing the before-Fajr and after-Isha edges separately.
+  function buildPrayerTimeline(centerDate) {
+    const list = [];
+    [-1, 0, 1].forEach((offset) => {
+      const d = new Date(centerDate.getTime() + offset * 24 * 3600 * 1000);
+      const times = getPrayerTimes(d.getFullYear(), d.getMonth() + 1, d.getDate());
+      PRAYER_ORDER.forEach((key) => list.push({ key, time: times[key] }));
+    });
+    list.sort((a, b) => a.time - b.time);
+    return list;
+  }
+  function formatDuration(ms) {
+    const totalMin = Math.max(0, Math.round(ms / 60000));
+    const h = Math.floor(totalMin / 60), m = totalMin % 60;
+    return h > 0 ? h + "h " + m + "m" : m + " min";
+  }
 
   function updatePrayerPanel() {
     const now = new Date();
@@ -1110,21 +1676,35 @@
     PRAYER_ORDER.forEach((key) => {
       const row = document.querySelector('.plaque-row[data-prayer="' + key + '"]');
       row.querySelector(".p-time").textContent = formatLocalSLC(today[key]);
-      row.classList.remove("next");
+      row.classList.remove("next", "current");
       rows[key] = row;
     });
 
-    const noteEl = document.querySelector(".plaque-next-note");
     const nextKey = PRAYER_ORDER.find((key) => today[key] > now);
+    if (nextKey) rows[nextKey].classList.add("next");
 
-    if (nextKey) {
-      rows[nextKey].classList.add("next");
-      noteEl.hidden = true;
-    } else {
-      const tomorrow = new Date(now.getTime() + 24 * 3600 * 1000);
-      const nextDay = getPrayerTimes(tomorrow.getFullYear(), tomorrow.getMonth() + 1, tomorrow.getDate());
-      noteEl.textContent = "Next: Fajr tomorrow at " + formatLocalSLC(nextDay.fajr);
+    // Current prayer + unit count + time remaining, using the existing
+    // .plaque-next-note element -- always shown (not just the after-Isha
+    // fallback the old text-only version used), since a "current" window
+    // is always defined once Isha rolls forward from yesterday.
+    const timeline = buildPrayerTimeline(now);
+    let currentEntry = null, nextEntry = null;
+    for (let i = 0; i < timeline.length; i++) {
+      if (timeline[i].time.getTime() <= now.getTime()) currentEntry = timeline[i];
+      else { nextEntry = timeline[i]; break; }
+    }
+    if (currentEntry && rows[currentEntry.key]) rows[currentEntry.key].classList.add("current");
+    if (currentEntry) currentGuidePrayerKey = currentEntry.key;
+
+    const noteEl = document.querySelector(".plaque-next-note");
+    if (currentEntry && nextEntry) {
+      const rakat = SALAH_DATA ? SALAH_DATA.prayers[currentEntry.key].rakat : null;
+      noteEl.textContent = PRAYER_LABELS[currentEntry.key] +
+        (rakat ? " · " + rakat + " rakʿah" : "") +
+        " · " + formatDuration(nextEntry.time - now) + " until " + PRAYER_LABELS[nextEntry.key];
       noteEl.hidden = false;
+    } else {
+      noteEl.hidden = true;
     }
   }
 
@@ -1160,6 +1740,675 @@
     document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
   } else {
     document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
+  }
+
+  // ============================================================
+  // GUIDED PRAYER — content loaded verbatim from data/salah/hanafi.json.
+  // Nothing in this section generates, translates, expands or paraphrases
+  // prayer content, and nothing here calls any API. Missing content in
+  // the file surfaces as an explicit message, never a silent guess --
+  // see renderPhraseBlock's "Not in the content file" branch. No
+  // streak/tally/percentage/guilt mechanics, no adhan audio, no
+  // notifications, no generated calligraphy or figurative imagery.
+  // ============================================================
+  const SALAH_DATA_URL = "data/salah/hanafi.json";
+  const salahReady = fetch(SALAH_DATA_URL)
+    .then((res) => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+    .then((data) => { SALAH_DATA = data; updatePrayerPanel(); if (overlayState) renderOverlay(); })
+    .catch((err) => {
+      salahLoadError = "Prayer content failed to load (" + err.message + "). If you opened " +
+        "this file directly (a file:// URL), run the local server from this project " +
+        "(Start Local Site.bat, or \"node local-server.js\") and reload.";
+      if (overlayState) renderOverlay();
+    });
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  // ---- Obsidian vault: shared handle store + per-room path map, same
+  // standard as Language Hub / Video Log / Nest of Knowledge / Beat
+  // Maker / Knowledge Center / Finance Hub / The Archive. ----
+  const HANDLE_DB = "life-hub-shared-handles";
+  function getHandleDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(HANDLE_DB, 1);
+      req.onupgradeneeded = () => { req.result.createObjectStore("handles", { keyPath: "id" }); };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function saveHandle(id, handle) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").put({ id, handle });
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  async function loadHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readonly");
+      const req = tx.objectStore("handles").get(id);
+      req.onsuccess = () => resolve(req.result ? req.result.handle : null);
+      req.onerror = () => reject(req.error);
+    });
+  }
+  async function deleteHandle(id) {
+    const db = await getHandleDB();
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction("handles", "readwrite");
+      tx.objectStore("handles").delete(id);
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+  }
+  let roughNotesDirHandle = null;
+  async function ensureWritePermission(handle) {
+    const opts = { mode: "readwrite" };
+    if ((await handle.queryPermission(opts)) === "granted") return true;
+    try { return (await handle.requestPermission(opts)) === "granted"; }
+    catch (e) { return false; }
+  }
+  async function connectRoughNotesFolder() {
+    if (typeof window.showDirectoryPicker !== "function") return false;
+    try {
+      const handle = await window.showDirectoryPicker({ id: "life-hub-rough-notes", mode: "readwrite" });
+      roughNotesDirHandle = handle;
+      await saveHandle("roughNotesFolder", handle);
+      return true;
+    } catch (e) { return false; }
+  }
+  async function tryRestoreRoughNotesFolder() {
+    let handle;
+    try { handle = await loadHandle("roughNotesFolder"); } catch (e) { return; }
+    if (!handle) return;
+    if ((await handle.queryPermission({ mode: "readwrite" })) === "granted") roughNotesDirHandle = handle;
+    if (overlayState) renderVaultBox("poVaultBox");
+  }
+  function sanitizeNoteFilename(name) {
+    return name.replace(/[\\/:*?"<>|]/g, "_").trim().slice(0, 120) + ".md";
+  }
+  function sanitizePathSegment(seg) {
+    return String(seg).replace(/[\\/:*?"<>|]/g, "_").trim();
+  }
+  function bumpObsidianLogCount() {
+    try {
+      const key = "life-hub-obsidian-log-count";
+      localStorage.setItem(key, String(Number(localStorage.getItem(key) || "0") + 1));
+    } catch (e) {}
+  }
+  // Shared project-wide shape: { <roomKey>: { <feature>: "sub/folder/path" } }.
+  // This room owns "theRoom.prayer" but round-trips the whole object so
+  // other rooms' paths survive untouched.
+  const VAULT_PATHS_STORAGE_KEY = "life-hub-vault-paths";
+  const VAULT_PATH_DEFAULTS = { prayer: "The Room/Prayer" };
+  function loadVaultPaths() {
+    let all = {};
+    try { all = JSON.parse(localStorage.getItem(VAULT_PATHS_STORAGE_KEY) || "{}") || {}; } catch (e) { all = {}; }
+    if (typeof all !== "object" || all === null) all = {};
+    const mine = Object.assign({}, VAULT_PATH_DEFAULTS, all.theRoom || {});
+    return { all, mine };
+  }
+  function saveVaultPaths(mine) {
+    const { all } = loadVaultPaths();
+    all.theRoom = mine;
+    try { localStorage.setItem(VAULT_PATHS_STORAGE_KEY, JSON.stringify(all)); } catch (e) {}
+  }
+  async function writeNoteToVault(subpath, filename, content) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      let dirHandle = roughNotesDirHandle;
+      const segments = String(subpath || "").split("/").map(sanitizePathSegment).filter(Boolean);
+      for (const seg of segments) dirHandle = await dirHandle.getDirectoryHandle(seg, { create: true });
+      const fileHandle = await dirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(content);
+      await writable.close();
+      bumpObsidianLogCount();
+      return true;
+    } catch (e) { return false; }
+  }
+  // Same-day prayer notes append a new dated section instead of
+  // overwriting -- e.g. praying the farḍ, then later logging a sunnah
+  // set for the same prayer, both land in one file for the day.
+  async function appendOrCreateNoteInVault(subpath, filename, sectionText, headerIfNew) {
+    if (!roughNotesDirHandle) {
+      const connected = await connectRoughNotesFolder();
+      if (!connected) return false;
+    }
+    if (!(await ensureWritePermission(roughNotesDirHandle))) return false;
+    try {
+      let dirHandle = roughNotesDirHandle;
+      const segments = String(subpath || "").split("/").map(sanitizePathSegment).filter(Boolean);
+      for (const seg of segments) dirHandle = await dirHandle.getDirectoryHandle(seg, { create: true });
+      let existing = "";
+      try {
+        const existingHandle = await dirHandle.getFileHandle(filename, { create: false });
+        existing = await (await existingHandle.getFile()).text();
+      } catch (e) { existing = ""; }
+      const combined = existing
+        ? existing.replace(/\s*$/, "") + "\n\n---\n\n" + sectionText
+        : headerIfNew + "\n\n" + sectionText;
+      const fileHandle = await dirHandle.getFileHandle(filename, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(combined);
+      await writable.close();
+      bumpObsidianLogCount();
+      return true;
+    } catch (e) { return false; }
+  }
+  tryRestoreRoughNotesFolder();
+
+  function renderVaultBox(containerId) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const { mine } = loadVaultPaths();
+    const rootLabel = roughNotesDirHandle ? roughNotesDirHandle.name : "(no folder connected)";
+    const segs = String(mine.prayer || "").split("/").map((s) => s.trim()).filter(Boolean);
+    const dest = [rootLabel].concat(segs).join(" / ") + "/";
+    el.innerHTML =
+      '<div class="po-vault-status">' +
+        (roughNotesDirHandle ? "Connected: <strong>" + escapeHtml(roughNotesDirHandle.name) + "</strong>" : "No vault folder connected yet.") +
+      "</div>" +
+      '<div class="po-vault-dest">Notes save to: ' + escapeHtml(dest) + "</div>" +
+      '<div class="po-vault-btn-row">' +
+        '<button type="button" class="po-vault-btn" data-action="connect">' + (roughNotesDirHandle ? "Change folder" : "Connect folder") + "</button>" +
+        (roughNotesDirHandle ? '<button type="button" class="po-vault-btn" data-action="disconnect">Disconnect</button>' : "") +
+      "</div>" +
+      '<label class="po-vault-path-label">Folder path<input type="text" class="po-vault-path-input" value="' + escapeHtml(mine.prayer) + '"></label>';
+    el.querySelector('[data-action="connect"]').addEventListener("click", async () => {
+      await connectRoughNotesFolder();
+      renderVaultBox(containerId);
+    });
+    const disconnectBtn = el.querySelector('[data-action="disconnect"]');
+    if (disconnectBtn) disconnectBtn.addEventListener("click", async () => {
+      try { await deleteHandle("roughNotesFolder"); } catch (e) {}
+      roughNotesDirHandle = null;
+      renderVaultBox(containerId);
+    });
+    el.querySelector(".po-vault-path-input").addEventListener("change", (e) => {
+      const updated = loadVaultPaths().mine;
+      updated.prayer = e.target.value.trim() || "The Room/Prayer";
+      saveVaultPaths(updated);
+      renderVaultBox(containerId);
+    });
+  }
+
+  function writePrayerCompletionNote(record) {
+    const date = new Date().toISOString().slice(0, 10);
+    const timeLabel = new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+    const label = PRAYER_LABELS[record.prayerKey] || record.prayerKey;
+    const lines = [
+      "### " + timeLabel + " — " + record.itemLabel,
+      "",
+      "**Sets walked:** " + record.setsWalked.join(", "),
+      "",
+    ];
+    if (record.surahLabel) lines.push("**Surah:** " + record.surahLabel, "");
+    if (record.note) lines.push("**Notes:**", "", record.note, "");
+    const filename = sanitizeNoteFilename("Prayer - " + date + " - " + label);
+    return appendOrCreateNoteInVault(
+      loadVaultPaths().mine.prayer,
+      filename,
+      lines.join("\n"),
+      "#baby\n\n# Prayer — " + label + " — " + date
+    );
+  }
+
+  function writeSinglePhraseNote(phrase) {
+    const lines = ["# Salah — " + phrase.transliteration, ""];
+    if (phrase.arabic) lines.push("**Arabic:** " + phrase.arabic, "");
+    lines.push("**Transliteration:** " + phrase.transliteration, "");
+    lines.push("**Meaning:** " + phrase.meaning, "");
+    if (phrase.where) lines.push("**Where:** " + phrase.where, "");
+    if (phrase.wordByWord && phrase.wordByWord.length) {
+      lines.push("## Word by word", "");
+      phrase.wordByWord.forEach((w) => lines.push("- " + w.arabic + " — " + w.translit + " — " + w.gloss));
+      lines.push("");
+    }
+    if (phrase.then) lines.push("## Then", "", phrase.then.replace(/<\/?i>/g, "_"), "");
+    if (phrase.now) lines.push("## Now", "", phrase.now.replace(/<\/?i>/g, "_"), "");
+    if (phrase.varies) lines.push("## Where Muslims differ", "", phrase.varies.replace(/<\/?i>/g, "_"), "");
+    if (phrase.note) lines.push("## Note", "", phrase.note, "");
+    const filename = sanitizeNoteFilename("Salah - " + phrase.transliteration);
+    return writeNoteToVault(loadVaultPaths().mine.prayer, filename, lines.join("\n"));
+  }
+
+  // ---- overlay state machine ----
+  const overlayEl = document.getElementById("prayerOverlay");
+  const overlayScrollEl = document.getElementById("prayerOverlayScroll");
+  let overlayState = null;
+  let lastFocusedBeforeOverlay = null;
+
+  function openPrayerOverlay(prayerKey) {
+    lastFocusedBeforeOverlay = document.activeElement;
+    overlayState = { view: "chooser", prayerKey: prayerKey || currentGuidePrayerKey || "fajr" };
+    overlayEl.hidden = false;
+    overlayEl.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    renderOverlay();
+    const closeBtn = document.getElementById("prayerOverlayClose");
+    if (closeBtn) closeBtn.focus();
+  }
+  function closePrayerOverlay() {
+    overlayEl.hidden = true;
+    overlayEl.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    overlayState = null;
+    if (lastFocusedBeforeOverlay && typeof lastFocusedBeforeOverlay.focus === "function") {
+      lastFocusedBeforeOverlay.focus();
+    }
+  }
+  document.getElementById("prayerOverlayClose").addEventListener("click", closePrayerOverlay);
+  document.getElementById("prayerOverlayBackdrop").addEventListener("click", closePrayerOverlay);
+  document.addEventListener("keydown", (e) => {
+    if (overlayEl.hidden) return;
+    if (e.key === "Escape") { closePrayerOverlay(); return; }
+    if (overlayState && overlayState.view === "guide") {
+      if (e.key === "ArrowRight") { e.preventDefault(); guideNext(); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); guideBack(); }
+    }
+  });
+  document.getElementById("guideMeBtn").addEventListener("click", () => openPrayerOverlay(currentGuidePrayerKey));
+
+  function renderOverlay() {
+    if (!overlayState) return;
+    if (salahLoadError) {
+      overlayScrollEl.innerHTML =
+        '<div class="po-error">' + escapeHtml(salahLoadError) + "</div>" +
+        '<div class="po-complete-actions"><button type="button" class="po-btn" id="poErrorClose">Close</button></div>';
+      document.getElementById("poErrorClose").addEventListener("click", closePrayerOverlay);
+      return;
+    }
+    if (!SALAH_DATA) {
+      overlayScrollEl.innerHTML = '<div class="po-error">Loading prayer content…</div>';
+      return;
+    }
+    if (overlayState.view === "chooser") renderChooser();
+    else if (overlayState.view === "guide") renderGuideStep();
+    else if (overlayState.view === "complete") renderComplete();
+    else if (overlayState.view === "ref-postures") renderRefPostures();
+    else if (overlayState.view === "ref-tasbih") renderRefTasbih();
+    else if (overlayState.view === "ref-differences") renderRefDifferences();
+  }
+
+  function badgeLabel(status) {
+    if (status === "farḍ") return "Farḍ";
+    if (status === "wājib") return "Wājib";
+    if (status === "mu'akkadah") return "Sunnah — muʾakkadah";
+    if (status === "ghayr mu'akkadah") return "Sunnah — ghayr muʾakkadah";
+    return status;
+  }
+  function getChooserItems(prayerKey) {
+    const p = SALAH_DATA.prayers[prayerKey];
+    const items = [];
+    (p.sunnahSets || []).filter((s) => s.when === "before").forEach((s) => items.push({
+      type: "sunnah", id: s.id, label: s.name, rakat: s.rakat, status: s.status, sequence: s.sequence, note: s.note,
+    }));
+    items.push({ type: "fard", id: prayerKey, label: p.name + " (farḍ)", rakat: p.rakat, status: "farḍ", sequence: p.sequence });
+    (p.sunnahSets || []).filter((s) => s.when === "after").forEach((s) => items.push({
+      type: "sunnah", id: s.id, label: s.name, rakat: s.rakat, status: s.status, sequence: s.sequence, note: s.note,
+    }));
+    if (prayerKey === "isha") {
+      const w = SALAH_DATA.prayers.witr;
+      items.push({ type: "witr", id: "witr", label: w.name, rakat: w.rakat, status: w.obligation, sequence: w.sequence, note: w.about });
+    }
+    return items;
+  }
+
+  function renderChooser() {
+    const key = overlayState.prayerKey;
+    const p = SALAH_DATA.prayers[key];
+    const items = getChooserItems(key);
+
+    let html = '<div class="po-switcher">' + PRAYER_ORDER.map((k) =>
+      '<button type="button" class="po-switcher-btn' + (k === key ? " active" : "") + '" data-key="' + k + '">' +
+        PRAYER_LABELS[k] + "</button>").join("") + "</div>";
+
+    html += '<h2 id="prayerOverlayTitle" class="po-title">' + escapeHtml(p.name) +
+      ' <span class="po-title-arabic" dir="rtl" lang="ar">' + p.arabic + "</span></h2>";
+    html += '<p class="po-about">' + escapeHtml(p.about) + "</p>";
+    if (SALAH_DATA.sunnahNote && items.some((it) => it.type === "sunnah")) {
+      html += '<p class="po-sunnah-note">' + SALAH_DATA.sunnahNote + "</p>";
+    }
+    html += '<div class="po-chooser-list">';
+    items.forEach((it) => {
+      html += '<button type="button" class="po-chooser-item" data-item="' + it.id + '">' +
+        '<span class="po-chooser-item-label">' + escapeHtml(it.label) + "</span>" +
+        '<span class="po-badge">' + escapeHtml(badgeLabel(it.status)) + " · " + it.rakat + " rakʿah</span>" +
+        (it.note ? '<span class="po-chooser-item-note">' + escapeHtml(it.note) + "</span>" : "") +
+      "</button>";
+    });
+    html += "</div>";
+
+    html += '<div class="po-ref-menu">' +
+      '<button type="button" class="po-ref-link" data-ref="ref-postures">Postures</button>' +
+      '<button type="button" class="po-ref-link" data-ref="ref-tasbih">After-prayer dhikr</button>' +
+      '<button type="button" class="po-ref-link" data-ref="ref-differences">Where Hanafis differ</button>' +
+      "</div>";
+
+    html += '<div class="po-vault-box" id="poVaultBox"></div>';
+    html += '<p class="po-disclaimer">' + escapeHtml(SALAH_DATA.meta.disclaimer) + "</p>";
+
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+
+    overlayScrollEl.querySelectorAll(".po-switcher-btn").forEach((btn) =>
+      btn.addEventListener("click", () => { overlayState.prayerKey = btn.dataset.key; renderOverlay(); }));
+    overlayScrollEl.querySelectorAll(".po-chooser-item").forEach((btn) =>
+      btn.addEventListener("click", () => startGuide(key, items.find((it) => it.id === btn.dataset.item))));
+    overlayScrollEl.querySelectorAll(".po-ref-link").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        overlayState = { view: btn.dataset.ref, refFrom: { view: "chooser", prayerKey: key } };
+        renderOverlay();
+      }));
+    renderVaultBox("poVaultBox");
+  }
+
+  function startGuide(prayerKey, item) {
+    overlayState = {
+      view: "guide",
+      prayerKey,
+      itemId: item.id,
+      itemLabel: item.label,
+      itemStatus: item.status,
+      sequence: item.sequence,
+      stepIndex: 0,
+      showAllSteps: false,
+    };
+    renderOverlay();
+  }
+  function guideNext() {
+    if (!overlayState || overlayState.view !== "guide") return;
+    if (overlayState.stepIndex < overlayState.sequence.length - 1) {
+      overlayState.stepIndex++;
+      renderOverlay();
+    } else {
+      overlayState.view = "complete";
+      renderOverlay();
+    }
+  }
+  function guideBack() {
+    if (!overlayState || overlayState.view !== "guide") return;
+    if (overlayState.stepIndex > 0) { overlayState.stepIndex--; renderOverlay(); }
+    else { overlayState.view = "chooser"; renderOverlay(); }
+  }
+
+  const SURAH_CHOICE_KEY = "life-hub-prayer-surah-choice";
+  function loadSurahChoices() {
+    try { return JSON.parse(localStorage.getItem(SURAH_CHOICE_KEY) || "{}") || {}; } catch (e) { return {}; }
+  }
+  function saveSurahChoice(prayerKey, surahIdOrMemory) {
+    const all = loadSurahChoices();
+    all[prayerKey] = surahIdOrMemory;
+    try { localStorage.setItem(SURAH_CHOICE_KEY, JSON.stringify(all)); } catch (e) {}
+  }
+
+  function renderSurahSlot(prayerKey) {
+    const choices = loadSurahChoices();
+    const chosen = choices[prayerKey];
+    let html = '<div class="po-phrase po-surah-slot">';
+    html += '<div class="po-surah-label">A further passage (recited after al-Fātiḥa)</div>';
+    html += '<div class="po-surah-chips">';
+    SALAH_DATA.surahs.forEach((s) => {
+      html += '<button type="button" class="po-surah-chip' + (chosen === s.id ? " active" : "") + '" data-surah="' + s.id + '">' + escapeHtml(s.name) + "</button>";
+    });
+    html += '<button type="button" class="po-surah-chip' + (chosen === "memory" ? " active" : "") + '" data-surah="memory">I know it by heart — skip</button>';
+    html += "</div>";
+    if (chosen === "memory") {
+      html += '<div class="po-surah-memory-note">(Reciting from memory — nothing further shown here.)</div>';
+    } else if (chosen) {
+      const s = SALAH_DATA.surahs.find((x) => x.id === chosen);
+      if (s) {
+        html += '<div class="po-surah-verses">';
+        s.verses.forEach((v) => {
+          html += '<div class="po-surah-verse">' +
+            '<div class="po-phrase-arabic" dir="rtl" lang="ar">' + v.arabic + "</div>" +
+            '<div class="po-phrase-translit">' + escapeHtml(v.transliteration) + "</div>" +
+            '<div class="po-phrase-meaning">' + escapeHtml(v.meaning) + "</div>" +
+          "</div>";
+        });
+        html += "</div>";
+        if (s.then || s.now) {
+          html += '<details class="po-expander"><summary>Why this is said</summary><div class="po-expander-body">' +
+            (s.then ? "<p><strong>Then:</strong> " + s.then + "</p>" : "") +
+            (s.now ? "<p><strong>Now:</strong> " + s.now + "</p>" : "") +
+          "</div></details>";
+        }
+      }
+    }
+    html += "</div>";
+    return html;
+  }
+  function wireSurahSlot() {
+    overlayScrollEl.querySelectorAll(".po-surah-chip").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        const scrollPos = overlayScrollEl.scrollTop;
+        saveSurahChoice(overlayState.prayerKey, btn.dataset.surah);
+        renderOverlay();
+        overlayScrollEl.scrollTop = scrollPos;
+      }));
+  }
+
+  function renderPhraseBlock(phraseId, prayerKeyForSurah) {
+    if (phraseId === "surah_slot") return renderSurahSlot(prayerKeyForSurah);
+    const ph = SALAH_DATA.phrases[phraseId];
+    if (!ph) return '<div class="po-phrase po-phrase-missing">Not in the content file: "' + escapeHtml(phraseId) + '" — ask a teacher.</div>';
+    let html = '<div class="po-phrase">';
+    if (ph.arabic) html += '<div class="po-phrase-arabic" dir="rtl" lang="ar">' + ph.arabic + "</div>";
+    html += '<div class="po-phrase-translit">' + escapeHtml(ph.transliteration) + "</div>";
+    html += '<div class="po-phrase-meaning">' + escapeHtml(ph.meaning) + "</div>";
+    if (ph.repeat > 1) html += '<div class="po-phrase-repeat">&times;' + ph.repeat + (ph.aloud === false ? " · quietly" : ph.aloud === true ? " · aloud" : "") + "</div>";
+    if (ph.confidence === "verify" && ph.note) html += '<div class="po-verify-note">&#9888; ' + escapeHtml(ph.note) + "</div>";
+    html += '<div class="po-expanders">';
+    if (ph.wordByWord && ph.wordByWord.length) {
+      html += '<details class="po-expander"><summary>Word by word</summary><div class="po-expander-body">' +
+        ph.wordByWord.map((w) => '<div class="po-wbw-row"><span dir="rtl" lang="ar">' + w.arabic + "</span><span>" + escapeHtml(w.translit) + "</span><span>" + w.gloss + "</span></div>").join("") +
+        "</div></details>";
+    }
+    if (ph.then || ph.now) {
+      html += '<details class="po-expander"><summary>Why this is said</summary><div class="po-expander-body">' +
+        (ph.then ? "<p><strong>Then:</strong> " + ph.then + "</p>" : "") +
+        (ph.now ? "<p><strong>Now:</strong> " + ph.now + "</p>" : "") +
+        "</div></details>";
+    }
+    if (ph.varies) html += '<details class="po-expander"><summary>Where Muslims differ</summary><div class="po-expander-body"><p>' + ph.varies + "</p></div></details>";
+    html += "</div>";
+    html += '<button type="button" class="po-save-phrase-btn" data-phrase="' + phraseId + '">Save this phrase to Obsidian</button>';
+    html += '<div class="po-save-status" data-phrase-status="' + phraseId + '"></div>';
+    html += "</div>";
+    return html;
+  }
+  function wireSavePhraseButtons() {
+    overlayScrollEl.querySelectorAll(".po-save-phrase-btn").forEach((btn) =>
+      btn.addEventListener("click", async () => {
+        const ph = SALAH_DATA.phrases[btn.dataset.phrase];
+        const statusEl = overlayScrollEl.querySelector('[data-phrase-status="' + btn.dataset.phrase + '"]');
+        btn.disabled = true;
+        const ok = ph ? await writeSinglePhraseNote(ph) : false;
+        if (statusEl) statusEl.textContent = ok ? "Saved to Obsidian." : "Not saved — vault folder isn't connected.";
+        btn.disabled = false;
+      }));
+  }
+
+  function renderGuideStep() {
+    const step = overlayState.sequence[overlayState.stepIndex];
+    const posture = SALAH_DATA.postures[step.posture];
+    let html = '<div class="po-guide-progress">Step ' + (overlayState.stepIndex + 1) + " of " + overlayState.sequence.length +
+      " &middot; Rakʿah " + step.rakah + " &middot; " + escapeHtml(overlayState.itemLabel) + "</div>";
+    html += '<h2 id="prayerOverlayTitle" class="po-title">' + escapeHtml(posture ? posture.name : step.posture) +
+      (posture ? ' <span class="po-posture-en">(' + escapeHtml(posture.en) + ")</span>" : "") + "</h2>";
+    if (step.takbirBefore) html += '<div class="po-takbir-cue">Say <em>Allāhu akbar</em> as you move.</div>';
+    if (step.cue) html += '<p class="po-cue">' + escapeHtml(step.cue) + "</p>";
+    if (posture && posture.body) html += '<p class="po-posture-body">' + escapeHtml(posture.body) + "</p>";
+
+    (step.phrases || []).forEach((phraseId) => { html += renderPhraseBlock(phraseId, overlayState.prayerKey); });
+
+    html += '<button type="button" class="po-steps-toggle" id="poStepsToggle">' +
+      (overlayState.showAllSteps ? "Hide" : "Show") + " all steps</button>";
+    if (overlayState.showAllSteps) {
+      html += '<div class="po-steps-list">' + overlayState.sequence.map((s, i) => {
+        const pn = SALAH_DATA.postures[s.posture];
+        return '<button type="button" class="po-steps-list-item' + (i === overlayState.stepIndex ? " active" : "") + '" data-step="' + i + '">' +
+          (i + 1) + ". Rakʿah " + s.rakah + " — " + (pn ? escapeHtml(pn.name) : escapeHtml(s.posture)) + "</button>";
+      }).join("") + "</div>";
+    }
+
+    html += '<div class="po-nav">' +
+      '<button type="button" class="po-nav-back" id="poBack">&larr; Back</button>' +
+      '<span class="po-nav-progress">' + (overlayState.stepIndex + 1) + " / " + overlayState.sequence.length + "</span>" +
+      '<button type="button" class="po-nav-next" id="poNext">' +
+        (overlayState.stepIndex === overlayState.sequence.length - 1 ? "Finish" : "Next &rarr;") + "</button>" +
+      "</div>";
+
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+
+    document.getElementById("poBack").addEventListener("click", guideBack);
+    document.getElementById("poNext").addEventListener("click", guideNext);
+    document.getElementById("poStepsToggle").addEventListener("click", () => { overlayState.showAllSteps = !overlayState.showAllSteps; renderOverlay(); });
+    overlayScrollEl.querySelectorAll(".po-steps-list-item").forEach((btn) =>
+      btn.addEventListener("click", () => { overlayState.stepIndex = Number(btn.dataset.step); renderOverlay(); }));
+    wireSavePhraseButtons();
+    wireSurahSlot();
+  }
+
+  function renderComplete() {
+    let html = '<h2 id="prayerOverlayTitle" class="po-title">Prayer complete</h2>';
+    html += '<p class="po-about">' + escapeHtml(overlayState.itemLabel) + " — " + overlayState.sequence.length + " steps walked.</p>";
+    const choices = loadSurahChoices();
+    const surahId = choices[overlayState.prayerKey];
+    const surahLabel = surahId === "memory" ? "Recited from memory" :
+      surahId ? ((SALAH_DATA.surahs.find((s) => s.id === surahId) || {}).name || "") : "";
+
+    html += '<label class="po-note-label">Notes for this prayer (optional)<textarea class="po-note-input" id="poCompletionNote" rows="3"></textarea></label>';
+    html += '<div class="po-complete-actions"><button type="button" class="po-btn" id="poLogBtn">Log this prayer to Obsidian</button></div>';
+    html += '<div class="po-save-status" id="poLogStatus" style="text-align:center;"></div>';
+    html += '<div class="po-vault-box" id="poVaultBox"></div>';
+
+    html += '<div class="po-complete-actions">' +
+      '<button type="button" class="po-btn" id="poBackToChooser">Choose another set</button>' +
+      '<button type="button" class="po-btn" id="poCloseFromComplete">Close</button>' +
+      "</div>";
+
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+    renderVaultBox("poVaultBox");
+
+    document.getElementById("poBackToChooser").addEventListener("click", () => {
+      overlayState = { view: "chooser", prayerKey: overlayState.prayerKey };
+      renderOverlay();
+    });
+    document.getElementById("poCloseFromComplete").addEventListener("click", closePrayerOverlay);
+    document.getElementById("poLogBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("poLogBtn");
+      const statusEl = document.getElementById("poLogStatus");
+      btn.disabled = true;
+      const note = document.getElementById("poCompletionNote").value.trim();
+      const ok = await writePrayerCompletionNote({
+        prayerKey: overlayState.prayerKey,
+        itemLabel: overlayState.itemLabel,
+        setsWalked: [overlayState.itemLabel],
+        surahLabel: surahLabel,
+        note,
+      });
+      statusEl.textContent = ok ? "Logged to Obsidian." : "Not saved — vault folder isn't connected.";
+      btn.disabled = false;
+    });
+  }
+
+  function refBackButtonHtml() {
+    return '<button type="button" class="po-back-link" id="poRefBack">&larr; Back</button>';
+  }
+  function wireRefBack() {
+    document.getElementById("poRefBack").addEventListener("click", () => {
+      overlayState = overlayState.refFrom || { view: "chooser", prayerKey: currentGuidePrayerKey };
+      renderOverlay();
+    });
+  }
+
+  function renderRefPostures() {
+    let html = refBackButtonHtml();
+    html += '<h2 id="prayerOverlayTitle" class="po-title">The seven postures</h2>';
+    html += '<div class="po-posture-grid">';
+    Object.keys(SALAH_DATA.postures).forEach((key) => {
+      const p = SALAH_DATA.postures[key];
+      html += '<div class="po-posture-card"><h3>' + escapeHtml(p.name) + ' <span class="po-posture-en">(' + escapeHtml(p.en) + ")</span></h3>" +
+        "<p>" + escapeHtml(p.body) + "</p>" +
+        '<p class="po-posture-why"><strong>Why:</strong> ' + escapeHtml(p.why) + "</p></div>";
+    });
+    html += "</div>";
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+    wireRefBack();
+  }
+
+  const TASBIH_COUNTS_KEY = "life-hub-prayer-tasbih-counts";
+  function loadTasbihCounts() {
+    try { return JSON.parse(localStorage.getItem(TASBIH_COUNTS_KEY) || "{}") || {}; } catch (e) { return {}; }
+  }
+  function saveTasbihCounts(counts) {
+    try { localStorage.setItem(TASBIH_COUNTS_KEY, JSON.stringify(counts)); } catch (e) {}
+  }
+  function renderRefTasbih() {
+    const counts = loadTasbihCounts();
+    let html = refBackButtonHtml();
+    html += '<h2 id="prayerOverlayTitle" class="po-title">After-prayer dhikr</h2>';
+    SALAH_DATA.afterPrayer.forEach((t, i) => {
+      const c = counts[i] || 0;
+      html += '<div class="po-tasbih-item">' +
+        '<div class="po-phrase-arabic" dir="rtl" lang="ar">' + t.arabic + "</div>" +
+        '<div class="po-phrase-translit">' + escapeHtml(t.transliteration) + "</div>" +
+        '<div class="po-phrase-meaning">' + escapeHtml(t.meaning) + "</div>" +
+        '<div class="po-tasbih-counter">' +
+          '<button type="button" class="po-tasbih-tap" data-idx="' + i + '">Tap (' + c + " / " + t.count + ")</button>" +
+          '<button type="button" class="po-tasbih-reset" data-idx="' + i + '">Reset</button>' +
+        "</div></div>";
+    });
+    (SALAH_DATA.afterPrayerExtra || []).forEach((phraseId) => { html += renderPhraseBlock(phraseId, null); });
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+    wireRefBack();
+    // Updates the tap counter in place rather than a full renderOverlay() --
+    // this gets tapped up to 34 times in a row, so jumping the scroll
+    // position back to the top on every tap would be unusable.
+    overlayScrollEl.querySelectorAll(".po-tasbih-tap").forEach((btn) => btn.addEventListener("click", () => {
+      const idx = Number(btn.dataset.idx);
+      const c = loadTasbihCounts();
+      c[idx] = (c[idx] || 0) + 1;
+      saveTasbihCounts(c);
+      btn.textContent = "Tap (" + c[idx] + " / " + SALAH_DATA.afterPrayer[idx].count + ")";
+    }));
+    overlayScrollEl.querySelectorAll(".po-tasbih-reset").forEach((btn) => btn.addEventListener("click", () => {
+      const idx = Number(btn.dataset.idx);
+      const c = loadTasbihCounts();
+      c[idx] = 0;
+      saveTasbihCounts(c);
+      const tapBtn = overlayScrollEl.querySelector('.po-tasbih-tap[data-idx="' + idx + '"]');
+      if (tapBtn) tapBtn.textContent = "Tap (0 / " + SALAH_DATA.afterPrayer[idx].count + ")";
+    }));
+    wireSavePhraseButtons();
+  }
+
+  function renderRefDifferences() {
+    let html = refBackButtonHtml();
+    html += '<h2 id="prayerOverlayTitle" class="po-title">Where the schools differ</h2>';
+    html += '<p class="po-about">Framed for understanding, not for scoring — the Hanafi position is what this room walks; the rest is context for praying alongside someone from another school.</p>';
+    SALAH_DATA.differences.forEach((d) => {
+      html += '<div class="po-diff-item"><h3>' + escapeHtml(d.topic) + "</h3>" +
+        "<p><strong>Hanafi:</strong> " + escapeHtml(d.hanafi) + "</p>" +
+        "<p><strong>Others:</strong> " + escapeHtml(d.others) + "</p></div>";
+    });
+    overlayScrollEl.innerHTML = html;
+    overlayScrollEl.scrollTop = 0;
+    wireRefBack();
   }
 })();
 </script>
