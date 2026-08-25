@@ -25,3 +25,10 @@ nest-of-knowledge/
 data/curriculum/*/audio/
 data/curriculum/*/docs/
 data/curriculum/*/audio-index.json
+
+# process-textbook-video.js's output -- real photographs of copyrighted
+# textbook pages (from your own overhead-webcam video) and the
+# classification report describing them. Regenerate locally by re-running
+# the script against the source video; never redistribute via a public repo.
+data/curriculum/*/textbook-images/
+textbook-video-report*.json

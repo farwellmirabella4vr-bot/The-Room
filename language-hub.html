@@ -845,6 +845,149 @@
   .curr-lesson-notes { width: 100%; min-height: 2.2rem; font-size: 0.8rem; margin-top: 0.3rem; }
   .curr-lesson-empty { font-size: 0.78rem; color: var(--text-dim); font-style: italic; }
 
+  /* ---------- real textbook page photos (bookPages) ---------- */
+  .curr-bookpages { margin: 0.5rem 0 0.7rem; }
+
+  /* Materials strip: the "go grab a notebook" cue -- deliberately louder
+     than everything else in the lesson row (solid accent fill, not just
+     an outline) so it reads before the reader sits down to work. */
+  .curr-materials-strip {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    background: var(--secondary);
+    color: #fff;
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 0.7rem;
+    margin-bottom: 0.6rem;
+    font-size: 0.76rem;
+  }
+  .curr-materials-strip-label { font-weight: bold; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.66rem; flex: 0 0 auto; }
+  .curr-materials-strip-items { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .curr-materials-chip { background: rgba(255, 255, 255, 0.22); border-radius: 999px; padding: 0.15rem 0.55rem; }
+
+  /* The photo mat: a bordered "frame" the photo sits inside, with the
+     language's own tiled motif as the mat's texture (same technique the
+     page background already uses), so a photo on this light ground reads
+     as intentionally framed rather than pasted on. */
+  .curr-photo-frame {
+    position: relative;
+    background: var(--motif), var(--bg-alt);
+    background-size: var(--motif-size), auto;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: var(--radius-md);
+    padding: 0.9rem;
+    box-shadow: var(--shadow-soft, 0 4px 10px rgba(0, 0, 0, 0.12));
+  }
+  .curr-photo-img-wrap {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+    cursor: zoom-in;
+    line-height: 0;
+  }
+  .curr-photo-img-wrap img { width: 100%; display: block; border-radius: 2px; }
+  .curr-photo-missing {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    font-style: italic;
+  }
+  .curr-photo-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 0.55rem;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+  }
+  .curr-photo-pager button { font-size: 0.72rem; padding: 0.25rem 0.6rem; }
+  .curr-photo-pager button:disabled { opacity: 0.35; cursor: not-allowed; box-shadow: none; transform: none !important; }
+
+  .curr-page-meta-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+  /* Page-type badges: same solid-pill language throughout, weight and
+     color are the only signal -- exercise (a graded/assessed page) is
+     the heaviest by design: solid, larger, bearing the section's own
+     geometric motif so it visually outranks a plain "study" pill. */
+  .curr-pagetype-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.68rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .curr-pagetype-badge.study { background: rgba(27, 111, 140, 0.15); color: var(--primary-dark); }
+  .curr-pagetype-badge.reference { background: rgba(201, 162, 39, 0.22); color: var(--secondary); }
+  .curr-pagetype-badge.writing_practice { background: rgba(107, 31, 58, 0.14); color: var(--secondary); }
+  .curr-pagetype-badge.mixed { background: linear-gradient(90deg, rgba(27, 111, 140, 0.18), rgba(107, 31, 58, 0.18)); color: var(--text); }
+  .curr-pagetype-badge.exercise {
+    background: var(--secondary);
+    color: #fff;
+    padding: 0.3rem 0.85rem 0.3rem 0.6rem;
+    font-size: 0.72rem;
+    background-image: var(--motif);
+    background-size: 26px 26px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+  .curr-page-title { font-size: 0.8rem; font-weight: bold; color: var(--secondary); flex: 1 1 auto; min-width: 0; }
+
+  .curr-audiotrack-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+  .curr-audiotrack-chip {
+    font-family: "Courier New", monospace;
+    font-size: 0.68rem;
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 0.15rem 0.5rem;
+    color: var(--text);
+  }
+
+  .curr-page-instructions { list-style: decimal; margin: 0.55rem 0 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.3rem; }
+  .curr-page-instructions li { font-size: 0.8rem; line-height: 1.4; }
+
+  /* Lightbox: full-size photo, wheel/pinch zoom, drag to pan when zoomed. */
+  .curr-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(10, 8, 4, 0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+  }
+  .curr-lightbox-img { max-width: 92vw; max-height: 88vh; cursor: grab; user-select: none; transition: transform 0.05s linear; }
+  .curr-lightbox-img.grabbing { cursor: grabbing; }
+  .curr-lightbox-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .curr-lightbox-hint {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.72rem;
+  }
+
   .curr-checkpoint-row {
     margin-top: 0.6rem;
     padding-top: 0.6rem;
@@ -2663,6 +2806,7 @@
   let curriculumView = "shelf"; // "shelf" | "module" | "progress"
   let curriculumActiveModuleId = null;
   const curriculumOpenUnits = new Set(); // in-memory only, not persisted
+  const curriculumBookPageIndex = {}; // lessonId -> which bookPages[] index is showing; in-memory only, not persisted
 
   function defaultModuleProgress() {
     return { displayName: null, startedOn: null, done: {}, lessonDates: {}, checkpoints: {}, notes: {}, sessions: [], srs: {}, worksheets: {} };
@@ -3856,6 +4000,256 @@
     return wrap;
   }
 
+  // ---------- real textbook page photos (bookPages) ----------
+  const PAGETYPE_LABELS = {
+    study: "Study",
+    reference: "Reference",
+    writing_practice: "Writing practice",
+    mixed: "Mixed",
+    exercise: "Exercise",
+  };
+
+  // Lightbox: one shared overlay, opened with a specific image src. Mouse
+  // wheel zooms; two touch pointers pinch-zoom (tracked by pointer id, so
+  // this is real two-finger pinch, not just a wheel handler with a pinch
+  // claim in the hint text); a single pointer pans once zoomed in; double-
+  // click/tap toggles zoom. Escape or the close button dismisses. No
+  // library -- plain pointer events throughout.
+  function openPhotoLightbox(src, alt) {
+    const overlay = document.createElement("div");
+    overlay.className = "curr-lightbox";
+    const img = document.createElement("img");
+    img.className = "curr-lightbox-img";
+    img.src = src;
+    img.alt = alt || "";
+    let scale = 1, tx = 0, ty = 0;
+    let dragging = false, lastX = 0, lastY = 0;
+    const activePointers = new Map(); // pointerId -> {x, y}
+    let pinchStartDist = 0, pinchStartScale = 1;
+
+    function clampScale(s) { return Math.min(4, Math.max(1, s)); }
+    function applyTransform() { img.style.transform = "translate(" + tx + "px," + ty + "px) scale(" + scale + ")"; }
+    function pointerDistance() {
+      const pts = Array.from(activePointers.values());
+      return Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+    }
+
+    img.addEventListener("wheel", (e) => {
+      e.preventDefault();
+      scale = clampScale(scale - e.deltaY * 0.0015 * scale);
+      if (scale === 1) { tx = 0; ty = 0; }
+      applyTransform();
+    }, { passive: false });
+
+    img.addEventListener("pointerdown", (e) => {
+      img.setPointerCapture(e.pointerId);
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (activePointers.size === 2) {
+        dragging = false;
+        pinchStartDist = pointerDistance();
+        pinchStartScale = scale;
+      } else if (activePointers.size === 1 && scale > 1) {
+        dragging = true; lastX = e.clientX; lastY = e.clientY;
+        img.classList.add("grabbing");
+      }
+    });
+    img.addEventListener("pointermove", (e) => {
+      if (!activePointers.has(e.pointerId)) return;
+      activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (activePointers.size === 2) {
+        const dist = pointerDistance();
+        if (pinchStartDist > 0) {
+          scale = clampScale(pinchStartScale * (dist / pinchStartDist));
+          if (scale === 1) { tx = 0; ty = 0; }
+          applyTransform();
+        }
+        return;
+      }
+      if (!dragging) return;
+      tx += e.clientX - lastX; ty += e.clientY - lastY;
+      lastX = e.clientX; lastY = e.clientY;
+      applyTransform();
+    });
+    function endPointer(e) {
+      activePointers.delete(e.pointerId);
+      dragging = false;
+      pinchStartDist = 0;
+      img.classList.remove("grabbing");
+      // resume single-finger panning if one touch is still down and we're zoomed
+      if (activePointers.size === 1 && scale > 1) {
+        const [id, pt] = Array.from(activePointers.entries())[0];
+        dragging = true; lastX = pt.x; lastY = pt.y;
+        img.classList.add("grabbing");
+      }
+    }
+    img.addEventListener("pointerup", endPointer);
+    img.addEventListener("pointercancel", endPointer);
+    img.addEventListener("dblclick", () => { scale = scale > 1 ? 1 : 2; tx = 0; ty = 0; applyTransform(); });
+    overlay.appendChild(img);
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.className = "curr-lightbox-close";
+    closeBtn.setAttribute("aria-label", "Close");
+    closeBtn.textContent = "×";
+    function close() {
+      overlay.remove();
+      document.removeEventListener("keydown", onKey);
+    }
+    closeBtn.addEventListener("click", close);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+    function onKey(e) { if (e.key === "Escape") close(); }
+    document.addEventListener("keydown", onKey);
+    overlay.appendChild(closeBtn);
+
+    const hint = document.createElement("div");
+    hint.className = "curr-lightbox-hint";
+    hint.textContent = "Scroll or pinch to zoom · drag to pan · Esc to close";
+    overlay.appendChild(hint);
+
+    document.body.appendChild(overlay);
+  }
+
+  // Materials strip: union of every bookPage's materials on this lesson,
+  // deduped in first-seen order -- only rendered when there's something to
+  // show, per the "see it before I sit down" requirement.
+  function buildMaterialsStrip(bookPages) {
+    const seen = [];
+    bookPages.forEach((p) => (p.materials || []).forEach((m) => { if (!seen.includes(m)) seen.push(m); }));
+    if (!seen.length) return null;
+    const strip = document.createElement("div");
+    strip.className = "curr-materials-strip";
+    const label = document.createElement("span");
+    label.className = "curr-materials-strip-label";
+    label.textContent = "Grab first:";
+    strip.appendChild(label);
+    const items = document.createElement("span");
+    items.className = "curr-materials-strip-items";
+    seen.forEach((m) => {
+      const chip = document.createElement("span");
+      chip.className = "curr-materials-chip";
+      chip.textContent = m;
+      items.appendChild(chip);
+    });
+    strip.appendChild(items);
+    return strip;
+  }
+
+  function buildBookPagesBlock(mod, lesson) {
+    const bookPages = lesson.bookPages;
+    if (!bookPages || !bookPages.length) return null;
+
+    const wrap = document.createElement("div");
+    wrap.className = "curr-bookpages";
+
+    const materialsStrip = buildMaterialsStrip(bookPages);
+    if (materialsStrip) wrap.appendChild(materialsStrip);
+
+    const frame = document.createElement("div");
+    frame.className = "curr-photo-frame";
+
+    const imgWrapOrMissing = document.createElement("div");
+    frame.appendChild(imgWrapOrMissing);
+
+    const metaRow = document.createElement("div");
+    metaRow.className = "curr-page-meta-row";
+    frame.appendChild(metaRow);
+
+    const audioChips = document.createElement("div");
+    audioChips.className = "curr-audiotrack-chips";
+    frame.appendChild(audioChips);
+
+    const instructionsList = document.createElement("ol");
+    instructionsList.className = "curr-page-instructions";
+    frame.appendChild(instructionsList);
+
+    let pager = null;
+    if (bookPages.length > 1) {
+      pager = document.createElement("div");
+      pager.className = "curr-photo-pager";
+      frame.appendChild(pager);
+    }
+
+    function renderCurrentPage() {
+      const idx = Math.min(curriculumBookPageIndex[lesson.id] || 0, bookPages.length - 1);
+      curriculumBookPageIndex[lesson.id] = idx;
+      const page = bookPages[idx];
+
+      imgWrapOrMissing.innerHTML = "";
+      if (page.image) {
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "curr-photo-img-wrap";
+        const img = document.createElement("img");
+        img.src = page.image;
+        img.alt = "Book page " + page.page + (page.title ? " — " + page.title : "");
+        img.loading = "lazy";
+        img.addEventListener("error", () => {
+          imgWrap.innerHTML = "";
+          const missing = document.createElement("div");
+          missing.className = "curr-photo-missing";
+          missing.textContent = "Photo for page " + page.page + " not found yet — re-run the ingest script once it's copied in.";
+          imgWrap.replaceWith(missing);
+        });
+        imgWrap.addEventListener("click", () => openPhotoLightbox(page.image, img.alt));
+        imgWrap.appendChild(img);
+        imgWrapOrMissing.appendChild(imgWrap);
+      } else {
+        const missing = document.createElement("div");
+        missing.className = "curr-photo-missing";
+        missing.textContent = "Photo for page " + page.page + " not added yet.";
+        imgWrapOrMissing.appendChild(missing);
+      }
+
+      metaRow.innerHTML = "";
+      const badge = document.createElement("span");
+      badge.className = "curr-pagetype-badge " + (PAGETYPE_LABELS[page.pageType] ? page.pageType : "study");
+      badge.textContent = (PAGETYPE_LABELS[page.pageType] || "Study") + (page.isAssessment ? " · graded" : "");
+      metaRow.appendChild(badge);
+      const pTitle = document.createElement("span");
+      pTitle.className = "curr-page-title";
+      pTitle.textContent = "p." + page.page + (page.title ? " — " + page.title : "");
+      metaRow.appendChild(pTitle);
+
+      audioChips.innerHTML = "";
+      (page.audio || []).forEach((trackId) => {
+        const chip = document.createElement("span");
+        chip.className = "curr-audiotrack-chip";
+        chip.textContent = trackId;
+        audioChips.appendChild(chip);
+      });
+
+      instructionsList.innerHTML = "";
+      (page.instructions || []).forEach((step) => {
+        const li = document.createElement("li");
+        li.innerHTML = renderMixedScript(step);
+        instructionsList.appendChild(li);
+      });
+
+      if (pager) {
+        pager.innerHTML = "";
+        const prevBtn = document.createElement("button");
+        prevBtn.type = "button";
+        prevBtn.textContent = "← Prev";
+        prevBtn.disabled = idx === 0;
+        prevBtn.addEventListener("click", () => { curriculumBookPageIndex[lesson.id] = idx - 1; renderCurrentPage(); });
+        pager.appendChild(prevBtn);
+        const counter = document.createElement("span");
+        counter.textContent = (idx + 1) + " / " + bookPages.length;
+        pager.appendChild(counter);
+        const nextBtn = document.createElement("button");
+        nextBtn.type = "button";
+        nextBtn.textContent = "Next →";
+        nextBtn.disabled = idx === bookPages.length - 1;
+        nextBtn.addEventListener("click", () => { curriculumBookPageIndex[lesson.id] = idx + 1; renderCurrentPage(); });
+        pager.appendChild(nextBtn);
+      }
+    }
+    renderCurrentPage();
+
+    wrap.appendChild(frame);
+    return wrap;
+  }
+
   function buildLessonRow(mod, unit, lesson) {
     const row = document.createElement("div");
     const done = isLessonDone(mod.id, lesson);
@@ -3876,6 +4270,9 @@
     skillIcons.textContent = lesson.skills.map((sid) => { const sk = SKILLS.find((s) => s.id === sid); return sk ? sk.icon : ""; }).join(" ");
     head.appendChild(skillIcons);
     row.appendChild(head);
+
+    const bookPagesBlock = buildBookPagesBlock(mod, lesson);
+    if (bookPagesBlock) row.appendChild(bookPagesBlock);
 
     if (lesson.audio.length) row.appendChild(buildAudioRow(mod.languageId, lesson.audio));
 
