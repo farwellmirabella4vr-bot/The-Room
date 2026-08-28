@@ -383,29 +383,6 @@
           "vocab": [],
           "bookPages": [
             {
-              "page": 14,
-              "image": "data/curriculum/fa/textbook-images/section-01/p014.jpg",
-              "pageType": "reference",
-              "title": "Alphabet Overview (Part 2) and Farsi Numbers 0–10",
-              "topics": [
-                "remaining letters",
-                "Farsi digits",
-                "number direction"
-              ],
-              "audio": [],
-              "materials": [],
-              "needsNotebook": false,
-              "estMinutes": 20,
-              "instructions": [
-                "Finish the alphabet table using the same read-and-listen pass you used on page 13.",
-                "Move to the numbers section. The key insight is that digits run left to right just like English — only the shapes change.",
-                "Because of that, you only have to learn ten characters, 0 through 9. Everything larger is built by placing them side by side.",
-                "Look at each Farsi digit next to its English equivalent and find the ones that look confusingly similar to Western digits but mean something else. Those are your error traps.",
-                "Read the digits 0–10 out loud from the page before moving to the writing practice."
-              ],
-              "isAssessment": false
-            },
-            {
               "page": 15,
               "image": "data/curriculum/fa/textbook-images/section-01/p015.jpg",
               "pageType": "writing_practice",
