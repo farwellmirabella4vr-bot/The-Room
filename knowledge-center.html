@@ -425,6 +425,104 @@
   .quran-map-title { font-weight: bold; color: var(--gold-bright); margin-top: 0.15rem; }
   .quran-map-snippet { font-size: 0.8rem; color: var(--ivory-dim); margin-top: 0.3rem; line-height: 1.4; }
 
+  /* ---------- Deen study views (Practice / Belief / Sources / Questions /
+     Resources) — reuses .quran-map-* card styling above for visual
+     consistency; only what's new to these views is defined here. ---------- */
+  .deen-marja-bar {
+    max-width: 680px;
+    margin: 1.4rem auto 0;
+    padding: 0.9rem 1.25rem;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 12px;
+    text-align: center;
+    font-size: 0.82rem;
+  }
+  .deen-marja-bar label { color: var(--ivory-dim); margin-right: 0.5rem; }
+  .deen-marja-bar select {
+    font-size: 0.8rem;
+    background: rgba(0,0,0,0.3);
+    color: var(--ivory);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    border-radius: 6px;
+    padding: 0.3rem 0.5rem;
+  }
+  .deen-marja-note { margin: 0.5rem 0 0; font-size: 0.75rem; color: var(--ivory-dim); }
+  .deen-subheading {
+    max-width: 680px;
+    margin: 1.6rem auto 0.4rem;
+    padding: 0 1.25rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+  }
+  .deen-stage-heading {
+    max-width: 680px;
+    margin: 1.2rem auto 0.2rem;
+    padding: 0 1.25rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.85;
+  }
+  .quran-map-item .deen-source-link { display: inline-block; margin-top: 0.5rem; font-size: 0.75rem; }
+  .quran-map-item .deen-source-link a { color: var(--gold); }
+  .quran-map-item .deen-marja-tag {
+    display: inline-block;
+    font-size: 0.62rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ivory-dim);
+    border: 1px solid rgba(212, 162, 76, 0.3);
+    border-radius: 999px;
+    padding: 0.1rem 0.5rem;
+    margin-top: 0.4rem;
+  }
+  .deen-question-add {
+    max-width: 680px;
+    margin: 0.6rem auto 1rem;
+    padding: 0 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .deen-question-add textarea {
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.82rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 8px;
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    background: rgba(0,0,0,0.25);
+    color: var(--ivory);
+    resize: vertical;
+  }
+  .deen-question-add button, .deen-question-delete {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(212, 162, 76, 0.4);
+    color: var(--ivory-dim);
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .deen-question-add button:hover, .deen-question-delete:hover { color: var(--gold-bright); border-color: var(--gold-bright); }
+  .deen-unconfirmed-details {
+    max-width: 680px;
+    margin: 1rem auto 0;
+    padding: 0 1.25rem;
+    font-size: 0.78rem;
+    color: var(--ivory-dim);
+  }
+  .deen-unconfirmed-details summary { cursor: pointer; color: var(--gold); margin-bottom: 0.5rem; }
+  .deen-disclaimer {
+    max-width: 680px;
+    margin: 0.8rem auto 0;
+    font-style: italic;
+  }
+
   footer {
     max-width: 680px;
     margin: 2rem auto 0;
@@ -465,6 +563,11 @@
   <div class="hub-toolbar">
     <button type="button" id="viewPathBtn" class="active">My Path</button>
     <button type="button" id="viewMapBtn">Quran Map</button>
+    <button type="button" id="viewPracticeBtn">Practice</button>
+    <button type="button" id="viewBeliefBtn">Belief &amp; History</button>
+    <button type="button" id="viewSourcesBtn">Sources</button>
+    <button type="button" id="viewQuestionsBtn">My Questions</button>
+    <button type="button" id="viewResourcesBtn">Utah Resources</button>
     <button type="button" id="exportJsonBtn">Export JSON (backup)</button>
     <button type="button" id="exportMdBtn">Export Markdown (Obsidian-ready)</button>
     <label class="file-btn">Import JSON<input type="file" id="importInput" accept="application/json,.json"></label>
@@ -487,11 +590,83 @@
   </p>
   <div class="quran-map-list" id="quranMapList" hidden></div>
 
+  <!-- ============================================================
+       DEEN STUDY VIEWS — Practice / Belief & History / Sources /
+       Questions / Utah Resources. Content loaded verbatim from
+       data/deen/curriculum.json and data/deen/utah-resources.json;
+       nothing here is generated. Every card either shows a real
+       source citation or, if source.url and source.title are both
+       empty (needs_source:true), refuses to show body text and
+       renders the muted "unverified" placeholder instead — enforced
+       in renderDeenCard(), not just by convention. See DECISIONS.md.
+       ============================================================ -->
+  <div class="deen-marja-bar reveal" id="deenMarjaBar" hidden>
+    <label for="marjaSelect">Your marja (source of religious rulings):</label>
+    <select id="marjaSelect">
+      <option value="">— choose your marja —</option>
+      <option value="sistani">Grand Ayatollah Sistani</option>
+      <option value="khamenei">Ayatollah Khamenei</option>
+      <option value="makarem">Ayatollah Makarem Shirazi</option>
+      <option value="other">Other / not listed here</option>
+    </select>
+    <p class="deen-marja-note" id="deenMarjaNote"></p>
+  </div>
+
+  <p class="quran-map-intro reveal" id="practiceIntro" hidden>
+    Ordered, practical steps — what the shahada is, taharah and wudu, the mechanics of salah,
+    what to do without Arabic yet, fasting, khums and zakat. Each step links to exactly where it
+    comes from.
+  </p>
+  <div class="quran-map-list" id="practiceList" hidden></div>
+
+  <p class="quran-map-intro reveal" id="beliefIntro" hidden>
+    Tawhid, nubuwwah, imamah, adalah, ma'ad; the Ahlul Bayt; Ghadir; Karbala and Ashura; the
+    twelve Imams; and where Shia and Sunni understanding diverges — described fairly, not
+    argued.
+  </p>
+  <div class="quran-map-list" id="beliefList" hidden></div>
+
+  <p class="quran-map-intro reveal" id="sourcesIntro" hidden>
+    Every source cited anywhere in the Practice and Belief tracks, deduplicated, with a working
+    link back to the original.
+  </p>
+  <div class="quran-map-list" id="sourcesList" hidden></div>
+
+  <div id="questionsView" hidden>
+    <p class="quran-map-intro reveal">
+      Things worth asking a real teacher, not a screen — this app's own limits, made explicit
+      rather than papered over.
+    </p>
+    <div class="deen-question-add">
+      <textarea id="questionInput" rows="2" placeholder="A question to ask a real person..."></textarea>
+      <button type="button" id="questionAddBtn">Add</button>
+    </div>
+    <div class="quran-map-list" id="questionsList"></div>
+  </div>
+
+  <div id="resourcesView" hidden>
+    <p class="quran-map-intro reveal" id="resourcesIntro"></p>
+    <h3 class="deen-subheading">Centers &amp; Mosques</h3>
+    <div class="quran-map-list" id="resourcesCenters"></div>
+    <h3 class="deen-subheading">Online Classes (Beginner-Friendly)</h3>
+    <div class="quran-map-list" id="resourcesOnline"></div>
+    <details class="deen-unconfirmed-details">
+      <summary>Checked but not included (why)</summary>
+      <div class="quran-map-list" id="resourcesUnconfirmed"></div>
+    </details>
+  </div>
+
   <footer>
-    Progress and any text you enter are stored only in this browser's local storage.
-    Nothing is sent anywhere. Export makes a copy you control — a JSON backup you can re-import
-    here, or a Markdown file with <code>[[wiki-links]]</code> between related teachings, ready to
-    drop into a tool like Obsidian for your own visual map.
+    Progress and any text you enter are stored only in this browser's local storage (and, if
+    you've connected a sync folder, on the devices you sync to — never sent anywhere else).
+    Export makes a copy you control — a JSON backup you can re-import here, or a Markdown file
+    with <code>[[wiki-links]]</code> between related teachings, ready to drop into a tool like
+    Obsidian for your own visual map.
+    <p class="deen-disclaimer">
+      The Practice and Belief tracks are a study aid, not a fatwa or a teacher. Confirm any
+      ruling against your own marja's risalah before acting on it, and bring real questions —
+      see "My Questions" above — to a qualified teacher.
+    </p>
   </footer>
 
 <script>
@@ -1092,20 +1267,308 @@
     });
   }
 
-  // ---------- view toggle: My Path <-> Quran Map ----------
+  // ---------- view toggle: My Path / Quran Map / Practice / Belief /
+  // Sources / Questions / Utah Resources ----------
+  const VIEW_BTN_IDS = {
+    path: "viewPathBtn", map: "viewMapBtn", practice: "viewPracticeBtn",
+    belief: "viewBeliefBtn", sources: "viewSourcesBtn", questions: "viewQuestionsBtn",
+    resources: "viewResourcesBtn",
+  };
   function setView(view) {
-    const isMap = view === "map";
-    document.getElementById("viewPathBtn").classList.toggle("active", !isMap);
-    document.getElementById("viewMapBtn").classList.toggle("active", isMap);
-    document.getElementById("pathHeading").hidden = isMap;
-    document.getElementById("pathTrack").hidden = isMap;
-    document.getElementById("addStepRow").hidden = isMap;
-    document.getElementById("quranMapIntro").hidden = !isMap;
-    document.getElementById("quranMapList").hidden = !isMap;
-    if (isMap) renderQuranMap();
+    Object.keys(VIEW_BTN_IDS).forEach((v) => {
+      document.getElementById(VIEW_BTN_IDS[v]).classList.toggle("active", v === view);
+    });
+    document.getElementById("pathHeading").hidden = view !== "path";
+    document.getElementById("pathTrack").hidden = view !== "path";
+    document.getElementById("addStepRow").hidden = view !== "path";
+    document.getElementById("quranMapIntro").hidden = view !== "map";
+    document.getElementById("quranMapList").hidden = view !== "map";
+    document.getElementById("deenMarjaBar").hidden = !(view === "practice" || view === "belief");
+    document.getElementById("practiceIntro").hidden = view !== "practice";
+    document.getElementById("practiceList").hidden = view !== "practice";
+    document.getElementById("beliefIntro").hidden = view !== "belief";
+    document.getElementById("beliefList").hidden = view !== "belief";
+    document.getElementById("sourcesIntro").hidden = view !== "sources";
+    document.getElementById("sourcesList").hidden = view !== "sources";
+    document.getElementById("questionsView").hidden = view !== "questions";
+    document.getElementById("resourcesView").hidden = view !== "resources";
+    if (view === "map") renderQuranMap();
+    if (view === "practice") renderDeenTrack("practice");
+    if (view === "belief") renderDeenTrack("belief");
+    if (view === "sources") renderSourceBrowser();
+    if (view === "questions") renderQuestions();
+    if (view === "resources") renderResources();
   }
-  document.getElementById("viewPathBtn").addEventListener("click", () => setView("path"));
-  document.getElementById("viewMapBtn").addEventListener("click", () => setView("map"));
+  Object.keys(VIEW_BTN_IDS).forEach((v) => {
+    document.getElementById(VIEW_BTN_IDS[v]).addEventListener("click", () => setView(v));
+  });
+
+  // ============================================================
+  // DEEN STUDY DATA — fetched once from data/deen/*.json, verbatim.
+  // Nothing here is generated, translated, or paraphrased beyond what
+  // the source files already contain. A card with no source.url and no
+  // source.title (needs_source:true) is never given body text to show;
+  // renderDeenCard() enforces this in code, matching data/salah/hanafi.json's
+  // existing "missing content surfaces as an explicit message" rule.
+  // ============================================================
+  const MARJA_KEY = "life-hub-deen-marja";
+  const QUESTIONS_KEY = "life-hub-deen-questions";
+  const MARJA_LABELS = {
+    sistani: "Grand Ayatollah Sistani", khamenei: "Ayatollah Khamenei",
+    makarem: "Ayatollah Makarem Shirazi", other: "your marja",
+  };
+  let curriculumData = null, curriculumError = null;
+  let resourcesData = null, resourcesError = null;
+
+  const curriculumReady = fetch("data/deen/curriculum.json")
+    .then((res) => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+    .then((data) => { curriculumData = data; })
+    .catch((err) => { curriculumError = "Curriculum content failed to load (" + err.message + "). If you opened this file directly (file://) instead of through the local server, run \"Start Local Site.bat\" first."; });
+
+  const resourcesReady = fetch("data/deen/utah-resources.json")
+    .then((res) => { if (!res.ok) throw new Error("HTTP " + res.status); return res.json(); })
+    .then((data) => { resourcesData = data; })
+    .catch((err) => { resourcesError = "Resources content failed to load (" + err.message + ")."; });
+
+  function getMarja() { return localStorage.getItem(MARJA_KEY) || ""; }
+  function setMarja(v) { try { localStorage.setItem(MARJA_KEY, v); } catch (e) {} }
+
+  function updateMarjaNote() {
+    const marja = getMarja();
+    const note = document.getElementById("deenMarjaNote");
+    if (!marja) {
+      note.textContent = "Not chosen yet — steps marked \"marja-specific\" below are sourced to Sistani's risalah until you pick one; if you follow someone else, check their risalah directly for those steps.";
+    } else if (marja === "sistani") {
+      note.textContent = "Every marja-specific step below is already sourced to " + MARJA_LABELS[marja] + "'s own risalah.";
+    } else {
+      note.textContent = "Marja-specific steps below are currently sourced to Grand Ayatollah Sistani's risalah, not " + MARJA_LABELS[marja] + "'s — treat those as a starting point and confirm against your own marja's risalah.";
+    }
+  }
+  document.getElementById("marjaSelect").addEventListener("change", (e) => {
+    setMarja(e.target.value);
+    updateMarjaNote();
+  });
+
+  // A single curriculum entry -> one .quran-map-item card, or the muted
+  // unverified placeholder if it has no real source at all. This is the
+  // one place that decides that, so every view stays honest the same way.
+  function renderDeenCard(entry) {
+    const card = document.createElement("div");
+    card.className = "quran-map-item";
+    const hasSource = entry.source && (entry.source.url || entry.source.title);
+    const title = document.createElement("div");
+    title.className = "quran-map-title";
+    title.textContent = entry.title || "(untitled)";
+    card.appendChild(title);
+
+    if (entry.needs_source || !hasSource) {
+      const badge = document.createElement("span");
+      badge.className = "placeholder-badge";
+      badge.textContent = "Unverified — needs a real source";
+      card.insertBefore(badge, title);
+      return card; // no body text shown for an unsourced entry, on purpose
+    }
+
+    if (entry.body) {
+      const body = document.createElement("div");
+      body.className = "quran-map-snippet";
+      body.textContent = entry.body;
+      card.appendChild(body);
+    }
+    if (entry.arabic) {
+      const ar = document.createElement("div");
+      ar.className = "quran-map-snippet";
+      ar.style.fontSize = "1rem";
+      ar.dir = "rtl";
+      ar.textContent = entry.arabic;
+      card.appendChild(ar);
+    }
+    if (entry.transliteration) {
+      const tr = document.createElement("div");
+      tr.className = "quran-map-snippet";
+      tr.style.fontStyle = "italic";
+      tr.textContent = entry.transliteration;
+      card.appendChild(tr);
+    }
+    const src = document.createElement("div");
+    src.className = "deen-source-link";
+    const link = document.createElement("a");
+    link.href = entry.source.url || "#";
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = (entry.source.author ? entry.source.author + ", " : "") + (entry.source.title || entry.source.url);
+    src.appendChild(link);
+    card.appendChild(src);
+    if (entry.marja_specific) {
+      const tag = document.createElement("div");
+      tag.className = "deen-marja-tag";
+      tag.textContent = "marja-specific ruling";
+      card.appendChild(tag);
+    }
+    return card;
+  }
+
+  function renderDeenTrack(track) {
+    updateMarjaNote();
+    document.getElementById("marjaSelect").value = getMarja();
+    const listEl = document.getElementById(track === "practice" ? "practiceList" : "beliefList");
+    listEl.innerHTML = "";
+    if (curriculumError) { listEl.innerHTML = '<p class="po-error">' + curriculumError + "</p>"; return; }
+    if (!curriculumData) { curriculumReady.then(() => renderDeenTrack(track)); listEl.innerHTML = "<p>Loading…</p>"; return; }
+    const entries = curriculumData.filter((e) => e.track === track).sort((a, b) => a.stage - b.stage);
+    let lastStage = null;
+    entries.forEach((entry) => {
+      if (entry.stage !== lastStage) {
+        const heading = document.createElement("div");
+        heading.className = "deen-stage-heading";
+        heading.textContent = "Stage " + entry.stage;
+        listEl.appendChild(heading);
+        lastStage = entry.stage;
+      }
+      listEl.appendChild(renderDeenCard(entry));
+    });
+  }
+
+  function renderSourceBrowser() {
+    const listEl = document.getElementById("sourcesList");
+    listEl.innerHTML = "";
+    if (curriculumError) { listEl.innerHTML = '<p class="po-error">' + curriculumError + "</p>"; return; }
+    if (!curriculumData) { curriculumReady.then(renderSourceBrowser); listEl.innerHTML = "<p>Loading…</p>"; return; }
+    const seen = new Map();
+    curriculumData.forEach((e) => {
+      if (!e.source || (!e.source.url && !e.source.title)) return;
+      const key = e.source.url || e.source.title;
+      if (!seen.has(key)) seen.set(key, { source: e.source, count: 0 });
+      seen.get(key).count++;
+    });
+    if (seen.size === 0) { listEl.innerHTML = "<p>No sources yet.</p>"; return; }
+    [...seen.values()].sort((a, b) => (a.source.title || "").localeCompare(b.source.title || "")).forEach(({ source, count }) => {
+      const card = document.createElement("div");
+      card.className = "quran-map-item";
+      const title = document.createElement("div");
+      title.className = "quran-map-title";
+      title.textContent = source.title || source.url;
+      card.appendChild(title);
+      if (source.author) {
+        const author = document.createElement("div");
+        author.className = "quran-map-snippet";
+        author.textContent = source.author;
+        card.appendChild(author);
+      }
+      const src = document.createElement("div");
+      src.className = "deen-source-link";
+      const link = document.createElement("a");
+      link.href = source.url || "#";
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = source.url || "(no link)";
+      src.appendChild(link);
+      src.appendChild(document.createTextNode(" · used in " + count + " step" + (count === 1 ? "" : "s")));
+      card.appendChild(src);
+      listEl.appendChild(card);
+    });
+  }
+
+  // ---------- My Questions: a plain, additive, user-owned list. Synced
+  // like everything else via life-hub-deen-questions (see nest-of-
+  // knowledge.html's SYNC_KEYS), unioned by id across devices. ----------
+  function getQuestions() {
+    try { return JSON.parse(localStorage.getItem(QUESTIONS_KEY)) || []; } catch (e) { return []; }
+  }
+  function saveQuestions(list) {
+    try { localStorage.setItem(QUESTIONS_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+  function renderQuestions() {
+    const listEl = document.getElementById("questionsList");
+    listEl.innerHTML = "";
+    const questions = getQuestions().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    if (!questions.length) { listEl.innerHTML = "<p>Nothing yet — add a question above whenever one comes up.</p>"; return; }
+    questions.forEach((q) => {
+      const card = document.createElement("div");
+      card.className = "quran-map-item";
+      const text = document.createElement("div");
+      text.className = "quran-map-snippet";
+      text.textContent = q.text;
+      card.appendChild(text);
+      const del = document.createElement("button");
+      del.type = "button";
+      del.className = "deen-question-delete";
+      del.textContent = "Remove";
+      del.addEventListener("click", () => {
+        saveQuestions(getQuestions().filter((x) => x.id !== q.id));
+        renderQuestions();
+      });
+      card.appendChild(del);
+      listEl.appendChild(card);
+    });
+  }
+  document.getElementById("questionAddBtn").addEventListener("click", () => {
+    const input = document.getElementById("questionInput");
+    const text = input.value.trim();
+    if (!text) return;
+    const list = getQuestions();
+    list.push({ id: "q-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7), text, createdAt: new Date().toISOString() });
+    saveQuestions(list);
+    input.value = "";
+    renderQuestions();
+  });
+
+  // ---------- Utah Resources: rendered verbatim from data/deen/utah-
+  // resources.json (see DECISIONS-utah.md for how each entry was
+  // verified). Unconfirmed candidates are shown collapsed, with the
+  // reason they were excluded, rather than silently dropped. ----------
+  function renderResourceCard(entry, isUnconfirmed) {
+    const card = document.createElement("div");
+    card.className = "quran-map-item";
+    const title = document.createElement("div");
+    title.className = "quran-map-title";
+    title.textContent = entry.name;
+    card.appendChild(title);
+    if (isUnconfirmed) {
+      const why = document.createElement("div");
+      why.className = "quran-map-snippet";
+      why.textContent = entry.why_unconfirmed;
+      card.appendChild(why);
+      return card;
+    }
+    const details = document.createElement("div");
+    details.className = "quran-map-snippet";
+    details.textContent = [entry.address, entry.phone].filter(Boolean).join(" · ");
+    if (details.textContent) card.appendChild(details);
+    if (entry.notes) {
+      const notes = document.createElement("div");
+      notes.className = "quran-map-snippet";
+      notes.textContent = entry.notes;
+      card.appendChild(notes);
+    }
+    if (entry.url) {
+      const src = document.createElement("div");
+      src.className = "deen-source-link";
+      const link = document.createElement("a");
+      link.href = entry.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = entry.url;
+      src.appendChild(link);
+      card.appendChild(src);
+    }
+    return card;
+  }
+  function renderResources() {
+    const introEl = document.getElementById("resourcesIntro");
+    const centersEl = document.getElementById("resourcesCenters");
+    const onlineEl = document.getElementById("resourcesOnline");
+    const unconfirmedEl = document.getElementById("resourcesUnconfirmed");
+    [centersEl, onlineEl, unconfirmedEl].forEach((el) => (el.innerHTML = ""));
+    if (resourcesError) { introEl.textContent = resourcesError; return; }
+    if (!resourcesData) { resourcesReady.then(renderResources); introEl.textContent = "Loading…"; return; }
+    introEl.textContent = "Verified before listing — see DECISIONS-utah.md for how. Only what was actually confirmed real and current is shown here; nothing padded.";
+    (resourcesData.centers || []).forEach((c) => centersEl.appendChild(renderResourceCard(c, false)));
+    if (!resourcesData.centers || !resourcesData.centers.length) centersEl.innerHTML = "<p>None confirmed yet.</p>";
+    (resourcesData.online_classes || []).forEach((c) => onlineEl.appendChild(renderResourceCard(c, false)));
+    if (!resourcesData.online_classes || !resourcesData.online_classes.length) onlineEl.innerHTML = "<p>None confirmed yet.</p>";
+    (resourcesData.unconfirmed || []).forEach((c) => unconfirmedEl.appendChild(renderResourceCard(c, true)));
+  }
 
   render();
 

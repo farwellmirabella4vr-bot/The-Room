@@ -1,0 +1,60 @@
+{
+  "centers": [
+    {
+      "name": "Al-Rasool Islamic Center (AIC)",
+      "type": "center",
+      "address": "1247 W 4800 S, Taylorsville, UT 84123",
+      "phone": "801-512-0441",
+      "url": "https://aicutah.org/",
+      "verified_via": "https://aicutah.org/about/ (fetched directly; cross-confirmed via active Facebook page facebook.com/Alrasoolislamiccenter/, Instagram @alrasoolcenter, its listing as a participant on National Fund for Sacred Places fundforsacredplaces.org, and a KSL.com news article on Ashura commemorations naming the center)",
+      "notes": "Twelver Shia Islamic center established 1998, current facility since 2008, serving the greater Salt Lake City area. Described in its own materials as a cornerstone for the Muslim community; nominated as a Utah Historic Site in 2023. This is the most established and best-corroborated Shia center found in Utah."
+    },
+    {
+      "name": "Al-Zahra Islamic Center",
+      "type": "center",
+      "address": "3832 S Main St, South Salt Lake, UT 84115",
+      "phone": "(801) 979-7753",
+      "url": "https://www.alzahrautah.org/",
+      "verified_via": "https://www.alzahrautah.org/ (fetched directly; address/phone cross-confirmed via barakahnetwork.com listing; Shia affiliation cross-confirmed via World Council of Shia Centers directory wocoshiac.org)",
+      "notes": "Shia Jafari (Twelver) center in South Salt Lake, established 2013, offers religious education classes and community events; site mentions an active building fundraising campaign. CAUTION: one general mosque directory (Zabihah) mislabels this center's denomination as 'Sunni' -- this contradicts the center's own website ('Learn Shia' section), the Shia-specific WOCOSHIAC directory, and multiple independent descriptions as a 'Shia Jafari Islamic center.' Treat the official site and the Shia-specific directory as authoritative over the generic mosque-finder listing. Also note: the WOCOSHIAC directory lists an older/alternate phone number (+1-801-599-8788) that could not be corroborated elsewhere -- use (801) 979-7753, which matches the official site and two independent directories. Street number also appears as '3823' on the official site itself (likely a typo) vs. '3832' everywhere else (Yelp, Barakah Network, Prayers Connect) -- used the majority-corroborated '3832'."
+    }
+  ],
+  "online_classes": [
+    {
+      "name": "The Mainstay Foundation",
+      "url": "https://www.mainstay.us/category/courses/",
+      "beginner_friendly": true,
+      "notes": "US-based (Dearborn, MI) Twelver Shia educational nonprofit with a physical address and listed phone/office hours. Fetched its Fall 2026 course announcement (published 2026-08-20) directly: offers 'Foundations of Islamic Beliefs' explicitly stating 'No prior formal study is required, only sincerity and a willingness to think,' plus Tafsir, Nahjul Balagha, and Islamic history courses, available both in-person and virtually. No pricing was listed on the page; contact info given (1-313-264-4655, info@mainstay.us) to confirm cost/registration before recommending to a user."
+    },
+    {
+      "name": "Imam Sadiq Academy",
+      "url": "https://imamsadiq.ac/en",
+      "beginner_friendly": true,
+      "notes": "Free, multilingual, explicitly Twelver Shia online seminary/academy (references Imam al-Mahdi and 'the true Shia faith' in its mission). Fetched its free-courses page directly, which lists 'Learning Qur'an for Beginners,' 'Islamic Beliefs (Aqaid),' and 'Practical Islamic Laws' as free, named-instructor video courses. Caveat: the page shows enrollment activity from 2020 and no more-recent update timestamp was visible, so confirm the course library is still actively maintained before relying on it as a primary curriculum."
+    },
+    {
+      "name": "Al-Islam.org (Ahlul Bayt Digital Islamic Library Project)",
+      "url": "https://al-islam.org",
+      "beginner_friendly": true,
+      "notes": "NOT live classes -- a large, well-established (since 1996) free Twelver Shia digital library/reference (Quran with commentary, books, articles, encyclopedia), confirmed active via its Wikipedia entry (direct fetch of the site returned an HTTP 403 to the automated fetch tool, so this was verified via the Wikipedia article on the parent organization rather than the live homepage). Good as a beginner self-study reference/reading list, not a substitute for a class with a teacher; a beginner app should treat this as a reading resource, not enrollment-based instruction."
+    }
+  ],
+  "unconfirmed": [
+    {
+      "name": "Islamic Society of Greater Salt Lake (ISGSL) / utahmuslims.com",
+      "why_unconfirmed": "Could not confirm sectarian orientation (general/mixed community mosque, not established as Shia-specific) and the Facebook page fetch returned no address, phone, or sectarian info -- excluded rather than risk mischaracterizing a non-Shia-specific mosque as a Shia resource."
+    },
+    {
+      "name": "The Islamic Seminary of America (TISA / islamicseminary.us)",
+      "why_unconfirmed": "Real and currently operating (verified 2025-27 catalog, active semesters), but fetched course content did not identify it as Shia-specific -- no mention of Twelver Islam, Ahlul Bayt, or Imamate in course descriptions -- and its available on-demand courses are advanced-level (Aqidah, Akhlaq), not beginner. Excluded for ambiguous sectarian fit and lack of a clear beginner entry point."
+    },
+    {
+      "name": "Zaynab Academy Online",
+      "why_unconfirmed": "Confirmed active and real, but its own description states its curriculum follows the Sunni tradition ('Ahl al-Sunnah wal-Jama'ah'), so it does not meet the Twelver-Shia-or-neutral bar for this list."
+    },
+    {
+      "name": "Cluster of similarly-templated 'Shia Quran Academy' tutoring sites (alshiaquranacademy.com, onlineshiaacademy.com, shiaquranacademyonline.com, ahlulbaytquran.com, learnshiaquran.com, shiaonlinequranclass.com, shiahoza.com, alkosaronlinequranacademy.com, shiaseminary.com, shiaquranteacher.com, hubbealionlinequranclass.com)",
+      "why_unconfirmed": "These surfaced repeatedly in searches and claim to offer Shia Quran/Islamic-studies tutoring for beginners, but they follow an identical commercial template seen across dozens of near-duplicate 'online Quran academy' marketing sites (a pattern also common among generic Sunni tutoring mills), with no independently verifiable institutional backing, named scholarly affiliation, or third-party reviews found. Could not verify reputability, so excluded rather than padding the list with unvetted paid tutoring services."
+    }
+  ]
+}

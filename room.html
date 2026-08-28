@@ -8,6 +8,7 @@
 <title>The Room</title>
 <link rel="stylesheet" href="design-system/tokens.css">
 <link rel="stylesheet" href="design-system/patterns.css">
+<script src="lib/adhan.umd.min.js"></script>
 <style>
 
   /* ============================================================
@@ -38,6 +39,19 @@
        girih pattern from design-system/patterns.css instead. */
     --ivory:     var(--parchment);
     --ivory-dim: var(--parchment-dim);
+  }
+
+  /* MUHARRAM MODE — first ten days of Muharram (Ashura falls on the
+     tenth). Muted trim only, no bright accents, per the palette
+     defined in design-system/tokens.css. Toggled on <html> by
+     isMuharramActive() below (browser-native Hijri date, same source
+     as the date strip). The sky/mountain colors aren't overridden
+     here -- applyTimeOfDay() mixes its live-blended values toward
+     --muharram-black/-green itself, so the real day/night cycle
+     keeps showing through, just dimmed and desaturated. */
+  [data-muharram="on"] {
+    --gold-bright: var(--muharram-gold-muted);
+    --ember: var(--muharram-gold-muted);
   }
 
   /* -------- time-of-day reference palettes (JS blends between these) -------- */
@@ -507,6 +521,29 @@
     color: var(--ivory-dim);
     text-transform: uppercase;
     text-align: center;
+  }
+  .plaque-settings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    margin: 0.15rem 0 0.3rem;
+  }
+  .plaque-settings select {
+    font-size: 0.5rem;
+    background: rgba(0,0,0,0.25);
+    color: var(--ivory);
+    border: 1px solid rgba(212, 162, 76, 0.35);
+    border-radius: 4px;
+    padding: 0.1rem 0.2rem;
+  }
+  .plaque-combined-toggle {
+    font-size: 0.5rem;
+    color: var(--ivory-dim);
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
   }
   .plaque-times {
     width: 100%;
@@ -1130,6 +1167,55 @@
         <polygon points="0,-4 4,0 0,4 -4,0" fill="currentColor"/>
       </g>
 
+      <!-- Real girih (Persian strapwork) construction for the Jafari
+           practice section below -- NOT a fake "mosaic" gradient. Built
+           from the five real girih tiles (Lu & Steinhardt, 2007;
+           traditional names from Wikipedia's Girih tiles article),
+           unit edge length, exact interior angles verified against the
+           polygon interior-angle-sum formula (n-2)*180 before use:
+             Tabl (decagon):        144° x10
+             Pange (pentagon):      108° x5
+             Shesh Band (hexagon):  72,144,144,72,144,144
+             Sormeh Dan (bowtie):   72,72,216,72,72,216
+             Torange (rhombus):     72,108,72,108
+           girih-rosette below is a real edge-matched assembly (one
+           decagon + 5 pentagons + 5 bowties alternating around its
+           edges -- the standard 10-fold girih star motif, as at the
+           Darb-i Imam shrine spandrels): every shared edge verified by
+           exact-coordinate match (max error 3.5e-16, i.e. floating-
+           point exact) at generation time, not eyeballed. Points
+           computed by a turtle-walk generator (unit edge, turn by
+           180-interior at each vertex); see DECISIONS.md for the
+           script. Stroke-only, matching this project's existing rule
+           that girih is a carved/inlaid LINE (see patterns.css),
+           unlike the filled-tile zellij technique. girih-five-tiles is
+           a small labeled reference row showing all five source tiles
+           on their own, for the "how this pattern is built" credit. -->
+      <symbol id="girih-rosette" viewBox="0 0 128.8 122.5">
+        <g fill="none" stroke="var(--shrine-gold, #c9992e)" stroke-width="1.1" stroke-linejoin="round">
+          <polygon points="53.40,33.85 75.40,33.85 93.19,46.79 99.99,67.71 93.19,88.63 75.40,101.56 53.40,101.56 35.60,88.63 28.80,67.71 35.60,46.79"/>
+          <polygon points="75.40,33.85 53.40,33.85 46.60,12.93 64.40,0.00 82.19,12.93"/>
+          <polygon points="93.19,46.79 75.40,33.85 93.19,20.92 99.99,41.85 117.79,54.78 99.99,67.71"/>
+          <polygon points="99.99,67.71 93.19,46.79 110.99,33.85 128.79,46.79 121.99,67.71"/>
+          <polygon points="93.19,88.63 99.99,67.71 117.79,80.64 99.99,93.57 93.19,114.49 75.40,101.56"/>
+          <polygon points="75.40,101.56 93.19,88.63 110.99,101.56 104.19,122.49 82.19,122.49"/>
+          <polygon points="53.40,101.56 75.40,101.56 68.60,122.49 50.80,109.56 28.80,109.56 35.60,88.63"/>
+          <polygon points="35.60,88.63 53.40,101.56 46.60,122.49 24.60,122.49 17.80,101.56"/>
+          <polygon points="28.80,67.71 35.60,88.63 13.60,88.63 20.40,67.71 13.60,46.79 35.60,46.79"/>
+          <polygon points="35.60,46.79 28.80,67.71 6.80,67.71 0.00,46.79 17.80,33.85"/>
+          <polygon points="53.40,33.85 35.60,46.79 28.80,25.86 50.80,25.86 68.60,12.93 75.40,33.85"/>
+        </g>
+      </symbol>
+      <symbol id="girih-five-tiles" viewBox="0 0 210 60">
+        <g fill="none" stroke="var(--shrine-turquoise, #0e7c74)" stroke-width="1">
+          <polygon transform="translate(0,2)" points="20.12,0.00 38.12,0.00 52.69,10.58 58.25,27.70 52.69,44.82 38.12,55.40 20.12,55.40 5.56,44.82 0.00,27.70 5.56,10.58"/>
+          <polygon transform="translate(66,14)" points="5.56,0.00 23.56,0.00 29.12,17.12 14.56,27.70 0.00,17.12"/>
+          <polygon transform="translate(104,14)" points="20.12,0.00 38.12,0.00 32.56,17.12 18.00,27.70 0.00,27.70 5.56,10.58"/>
+          <polygon transform="translate(150,14)" points="20.12,10.58 38.12,10.58 32.56,27.70 18.00,17.12 0.00,17.12 5.56,0.00"/>
+          <polygon transform="translate(188,21)" points="5.56,0.00 23.56,0.00 18.00,17.12 0.00,17.12"/>
+        </g>
+      </symbol>
+
       <!-- subtle woven/stone grain texture, layered over flat fills for depth.
            A tiled speckle pattern instead of an feTurbulence filter — the
            turbulence filter was being rasterized independently on all 4 rugs
@@ -1196,6 +1282,17 @@
 
   <h1>The Room</h1>
 
+  <div class="date-strip reveal" id="dateStrip" style="text-align:center; position:relative; z-index:1; font-size:0.75rem; color: var(--ivory-dim); letter-spacing:0.04em; margin-bottom: 0.6rem;">
+    <span id="gregorianDate"></span>
+    <span aria-hidden="true"> &middot; </span>
+    <span id="hijriDate"></span>
+  </div>
+
+  <div class="today-strip reveal" id="todayStrip" style="max-width: 32rem; margin: 0 auto 1.2rem; padding: 0.6rem 1rem; border: 1px solid rgba(212,162,76,0.3); border-radius: var(--radius-md, 8px); background: rgba(0,0,0,0.2); text-align:center; position:relative; z-index:1;" hidden>
+    <div id="todayObjective" style="font-size:0.85rem; color: var(--ivory);"></div>
+    <div id="whereIAm" style="font-size:0.68rem; color: var(--ivory-dim); margin-top:0.3rem;"></div>
+  </div>
+
   <div class="room">
     <div class="arch-niche" data-pos="top"><div class="lantern"></div></div>
     <div class="arch-niche" data-pos="right"><div class="lantern"></div></div>
@@ -1220,8 +1317,18 @@
         <line x1="29.2" y1="10.8" x2="33.5" y2="6.5" stroke="currentColor" stroke-width="2"/>
       </svg>
       <h2>Prayer Times</h2>
-      <div class="plaque-sub">Salt Lake City, UT</div>
-      <div class="plaque-times">
+      <div class="plaque-settings">
+        <select id="citySelect" aria-label="Location"></select>
+        <select id="schoolSelect" aria-label="Calculation school">
+          <option value="jafari">Jaʿfarī (Twelver Shīʿa)</option>
+          <option value="hanafi">Ḥanafī</option>
+        </select>
+        <label class="plaque-combined-toggle">
+          <input type="checkbox" id="combinedViewToggle"> Combined view
+        </label>
+      </div>
+      <div class="plaque-sub" id="plaqueSub">Salt Lake City, UT</div>
+      <div class="plaque-times" id="plaqueTimes">
         <div class="plaque-row" data-prayer="fajr"><span class="p-name">Fajr</span><span class="p-time">--:--</span></div>
         <div class="plaque-row" data-prayer="dhuhr"><span class="p-name">Dhuhr</span><span class="p-time">--:--</span></div>
         <div class="plaque-row" data-prayer="asr"><span class="p-name">Asr</span><span class="p-time">--:--</span></div>
@@ -1230,7 +1337,7 @@
       </div>
       <div class="plaque-next-note" hidden></div>
       <button type="button" class="plaque-guide-btn" id="guideMeBtn">Guide me</button>
-      <div class="plaque-note">Calculated using the ISNA method (15&deg; angle) with &#7716;anaf&#299; &#703;A&#7779;r (shadow-length factor 2) &mdash; may differ slightly from your local mosque&rsquo;s posted schedule.</div>
+      <div class="plaque-note" id="plaqueNote"></div>
     </div>
 
     <!-- Planner: deep teal rug, diamond-star medallion, rolled scroll -->
@@ -1499,16 +1606,56 @@
     star: 0.25,
   };
 
-  const anchors = [
-    { h: 0,  ...NIGHT },
-    { h: 5,  ...NIGHT },
-    { h: 7,  ...DAWN },
-    { h: 9,  ...DAY },
-    { h: 16, ...DAY },
-    { h: 18, ...DUSK },
-    { h: 20, ...NIGHT },
-    { h: 24, ...NIGHT },
-  ];
+  // Anchors used to be fixed clock hours (5/7/9/16/18/20). They're now
+  // derived from today's real Fajr/sunrise/Maghrib/Isha (via adhan.js,
+  // see the PRAYER TIMES section below) so the sky genuinely tracks
+  // this location's actual prayer times instead of a generic day
+  // cycle -- dawn breaks at Fajr and finishes brightening by sunrise;
+  // dusk begins at Maghrib (sunset) and finishes darkening by Isha.
+  // getPrayerTimes/getLocation/getSchool are function/const declarations
+  // further down this same closure -- safe to call here because function
+  // declarations hoist and this is only ever invoked after the whole
+  // script has run once (see the moved initial call near the bottom of
+  // the PRAYER TIMES section).
+  function localDecimalHours(date) {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Denver", hourCycle: "h23",
+      hour: "2-digit", minute: "2-digit", second: "2-digit",
+    }).formatToParts(date);
+    const get = (t) => Number(parts.find((p) => p.type === t).value);
+    return get("hour") + get("minute") / 60 + get("second") / 3600;
+  }
+
+  function buildAnchors() {
+    const now = new Date();
+    let t;
+    try {
+      t = getPrayerTimes(now.getFullYear(), now.getMonth() + 1, now.getDate());
+    } catch (e) {
+      // adhan.js not loaded yet, or a bad stored location -- fall back to
+      // the original fixed-hour anchors rather than breaking the sky.
+      return [
+        { h: 0, ...NIGHT }, { h: 5, ...NIGHT }, { h: 7, ...DAWN }, { h: 9, ...DAY },
+        { h: 16, ...DAY }, { h: 18, ...DUSK }, { h: 20, ...NIGHT }, { h: 24, ...NIGHT },
+      ];
+    }
+    const fajrH = localDecimalHours(t.fajr);
+    const sunriseH = localDecimalHours(t.sunrise);
+    const maghribH = localDecimalHours(t.maghrib);
+    const ishaH = localDecimalHours(t.isha);
+    const dayStart = sunriseH + 0.75;
+    const dayEnd = Math.max(dayStart + 0.25, maghribH - 0.75);
+    return [
+      { h: 0, ...NIGHT },
+      { h: fajrH, ...NIGHT },
+      { h: sunriseH, ...DAWN },
+      { h: dayStart, ...DAY },
+      { h: dayEnd, ...DAY },
+      { h: maghribH, ...DUSK },
+      { h: ishaH, ...NIGHT },
+      { h: 24, ...NIGHT },
+    ];
+  }
 
   const COLOR_KEYS = [
     "sky-top", "sky-upper", "sky-mid", "sky-lower", "sky-ground",
@@ -1519,21 +1666,68 @@
     const n = parseInt(hex.slice(1), 16);
     return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
   }
+  function rgbStrToRgb(str) {
+    const m = str.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    return [Number(m[1]), Number(m[2]), Number(m[3])];
+  }
+  function anyToRgb(str) { return str[0] === "#" ? hexToRgb(str) : rgbStrToRgb(str); }
   function lerp(a, b, t) { return Math.round(a + (b - a) * t); }
   function lerpColor(hexA, hexB, t) {
     const a = hexToRgb(hexA), b = hexToRgb(hexB);
     return "rgb(" + lerp(a[0], b[0], t) + ", " + lerp(a[1], b[1], t) + ", " + lerp(a[2], b[2], t) + ")";
   }
-  function bucketName(h) {
-    if (h < 5 || h >= 20) return "night";
-    if (h < 9) return "dawn";
-    if (h < 16) return "day";
+  // Mixes an already-computed rgb()/#hex color toward a hex target by
+  // `amount` (0-1). Used to pull the live time-of-day blend toward the
+  // Muharram palette without replacing the day/night cycle outright.
+  function mixToward(colorStr, hexTarget, amount) {
+    const a = anyToRgb(colorStr), b = hexToRgb(hexTarget);
+    return "rgb(" + lerp(a[0], b[0], amount) + ", " + lerp(a[1], b[1], amount) + ", " + lerp(a[2], b[2], amount) + ")";
+  }
+
+  // Mirrors design-system/tokens.css's --muharram-black / --muharram-green
+  // (kept as plain hex here, not read from the CSS var, since the sky/
+  // mountain mix below runs in JS on every tick -- keep these two in sync
+  // with tokens.css by hand if that palette ever changes).
+  const MUHARRAM_SKY_TARGET = "#0a0a0a";
+  const MUHARRAM_LAND_TARGET = "#1c2e22";
+
+  // First ten days of Muharram (Ashura falls on the tenth), read from the
+  // browser's own Hijri calendar (Intl/ICU Umm al-Qura) -- same source and
+  // same moon-sighting caveat as the date strip below. No local table of
+  // Hijri dates is hand-maintained.
+  function isMuharramActive(now) {
+    try {
+      const parts = new Intl.DateTimeFormat("en-US-u-ca-islamic-umalqura", {
+        month: "long", day: "numeric", timeZone: "America/Denver",
+      }).formatToParts(now);
+      const month = parts.find((p) => p.type === "month").value;
+      const day = Number(parts.find((p) => p.type === "day").value);
+      return month === "Muharram" && day >= 1 && day <= 10;
+    } catch (e) {
+      return false;
+    }
+  }
+  function bucketName(h, times) {
+    if (!times) {
+      if (h < 5 || h >= 20) return "night";
+      if (h < 9) return "dawn";
+      if (h < 16) return "day";
+      return "dusk";
+    }
+    const fajrH = localDecimalHours(times.fajr), sunriseH = localDecimalHours(times.sunrise),
+          maghribH = localDecimalHours(times.maghrib), ishaH = localDecimalHours(times.isha);
+    if (h < fajrH || h >= ishaH) return "night";
+    if (h < sunriseH) return "dawn";
+    if (h < maghribH) return "day";
     return "dusk";
   }
 
   function applyTimeOfDay() {
     const now = new Date();
     const h = now.getHours() + now.getMinutes() / 60 + now.getSeconds() / 3600;
+    const anchors = buildAnchors();
+    let times = null;
+    try { times = getPrayerTimes(now.getFullYear(), now.getMonth() + 1, now.getDate()); } catch (e) {}
 
     let i = 0;
     while (i < anchors.length - 2 && h >= anchors[i + 1].h) i++;
@@ -1542,101 +1736,122 @@
     const t = span > 0 ? (h - a.h) / span : 0;
 
     const root = document.documentElement.style;
-    COLOR_KEYS.forEach((key) => root.setProperty("--" + key, lerpColor(a[key], b[key], t)));
+    const muharram = isMuharramActive(now);
+    document.documentElement.dataset.muharram = muharram ? "on" : "off";
+    COLOR_KEYS.forEach((key) => {
+      let color = lerpColor(a[key], b[key], t);
+      if (muharram) {
+        const target = key.indexOf("sky") === 0 ? MUHARRAM_SKY_TARGET : MUHARRAM_LAND_TARGET;
+        color = mixToward(color, target, 0.6);
+      }
+      root.setProperty("--" + key, color);
+    });
     root.setProperty("--star-opacity", String(a.star + (b.star - a.star) * t));
-    document.documentElement.dataset.time = bucketName(h);
+    document.documentElement.dataset.time = bucketName(h, times);
   }
 
-  applyTimeOfDay();
+  // Initial call moved below, after the PRAYER TIMES section defines
+  // getPrayerTimes/getLocation/getSchool (applyTimeOfDay now depends on
+  // them for its real-prayer-time anchors).
 
   // ------------------------------------------------------------
-  // PRAYER TIMES — Salt Lake City, UT, computed from real solar
-  // position astronomy (not hardcoded / not a fixed table).
-  // Method: ISNA (Fajr/Isha at 15deg sun depression), Asr per
-  // Hanafi jurisprudence (shadow-length factor t = 2). See ASR_METHOD.
+  // PRAYER TIMES — real solar-position astronomy via the vendored
+  // adhan.js library (lib/adhan.umd.min.js, batoulapps/adhan-js),
+  // not hand-rolled math. Two selectable schools:
+  //   - "jafari" (default): Fajr 16°, Isha 14°, Maghrib 4° below
+  //     horizon, Asr shadow factor 1 (Madhab.Shafi). This is the
+  //     published "Shia Ithna Ashari, Leva Institute, Qum" method —
+  //     adhan.js has no method literally named "Jafari", so these
+  //     angles are set explicitly via CalculationMethod.Other()
+  //     rather than approximated by a built-in. See DECISIONS.md.
+  //   - "hanafi": CalculationMethod.NorthAmerica (15°/15°, matches
+  //     the ISNA angle the old hand-rolled version used) with
+  //     Madhab.Hanafi (Asr shadow factor 2) — kept numerically
+  //     equivalent to this room's original behavior, since the
+  //     existing Hanafi guided-prayer feature (data/salah/hanafi.json)
+  //     is being left in place, not replaced.
+  // Location is a stored, user-editable Utah city (not hardcoded) —
+  // see LOCATIONS / getLocation() below.
   // ------------------------------------------------------------
-  const SLC_LAT = 40.7608;
-  const SLC_LON = -111.8910; // degrees, west is negative
+  const LOCATIONS = {
+    "Salt Lake City":  { lat: 40.7608, lon: -111.8910 },
+    "West Valley City":{ lat: 40.6916, lon: -112.0011 },
+    "Provo":           { lat: 40.2338, lon: -111.6585 },
+    "Orem":            { lat: 40.2969, lon: -111.6946 },
+    "Sandy":           { lat: 40.5649, lon: -111.8389 },
+    "Ogden":           { lat: 41.2230, lon: -111.9738 },
+    "West Jordan":     { lat: 40.6097, lon: -111.9391 },
+    "Layton":          { lat: 41.0602, lon: -111.9711 },
+    "Lehi":            { lat: 40.3916, lon: -111.8508 },
+    "St. George":      { lat: 37.0965, lon: -113.5684 },
+    "Logan":           { lat: 41.7370, lon: -111.8338 },
+    "Murray":          { lat: 40.6669, lon: -111.8879 },
+  };
+  const LOCATION_KEY = "life-hub-prayer-location";
+  const SCHOOL_KEY = "life-hub-prayer-school";
+  const COMBINED_KEY = "life-hub-prayer-combined-view";
 
-  const d2r = Math.PI / 180, r2d = 180 / Math.PI;
-  const dsin = (d) => Math.sin(d * d2r);
-  const dcos = (d) => Math.cos(d * d2r);
-  const dtan = (d) => Math.tan(d * d2r);
-  const darcsin = (x) => Math.asin(x) * r2d;
-  const darccos = (x) => Math.acos(Math.max(-1, Math.min(1, x))) * r2d;
-  const darctan2 = (y, x) => Math.atan2(y, x) * r2d;
-  const fixAngle = (a) => ((a % 360) + 360) % 360;
-  const fixHour = (h) => ((h % 24) + 24) % 24;
-
-  // Julian Day at 0h UT for a Gregorian calendar date (Meeus algorithm).
-  function julianDay(year, month, day) {
-    if (month <= 2) { year -= 1; month += 12; }
-    const A = Math.floor(year / 100);
-    const B = 2 - A + Math.floor(A / 4);
-    return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + B - 1524.5;
+  function getLocation() {
+    try {
+      const raw = JSON.parse(localStorage.getItem(LOCATION_KEY));
+      if (raw && typeof raw.lat === "number" && typeof raw.lon === "number") return raw;
+    } catch (e) { /* fall through to default */ }
+    return { name: "Salt Lake City", lat: LOCATIONS["Salt Lake City"].lat, lon: LOCATIONS["Salt Lake City"].lon };
+  }
+  function setLocation(name) {
+    const coords = LOCATIONS[name];
+    if (!coords) return;
+    try { localStorage.setItem(LOCATION_KEY, JSON.stringify({ name, lat: coords.lat, lon: coords.lon })); } catch (e) {}
   }
 
-  // Low-precision solar position (sub-minute accuracy): mean anomaly,
-  // mean longitude, ecliptic longitude, obliquity -> declination and
-  // the equation of time, from days-since-J2000 (D).
-  function sunPosition(jd) {
-    const D = jd - 2451545.0;
-    const g = fixAngle(357.529 + 0.98560028 * D);
-    const q = fixAngle(280.459 + 0.98564736 * D);
-    const L = fixAngle(q + 1.915 * dsin(g) + 0.020 * dsin(2 * g));
-    const e = 23.439 - 0.00000036 * D;
-    let RA = fixHour(darctan2(dcos(e) * dsin(L), dcos(L)) / 15);
-    const eqt = q / 15 - RA; // hours
-    const decl = darcsin(dsin(e) * dsin(L)); // degrees
-    return { decl, eqt };
+  function getSchool() {
+    const v = localStorage.getItem(SCHOOL_KEY);
+    return v === "hanafi" ? "hanafi" : "jafari"; // default: jafari
+  }
+  function setSchool(v) {
+    try { localStorage.setItem(SCHOOL_KEY, v === "hanafi" ? "hanafi" : "jafari"); } catch (e) {}
   }
 
-  // Hour angle (degrees) for the sun to reach a given altitude
-  // (negative = below horizon, e.g. -15 for Fajr/Isha; positive =
-  // above horizon, used for the Asr shadow-length altitude).
-  function hourAngleForAltitude(lat, decl, altitude) {
-    const val = (dsin(altitude) - dsin(lat) * dsin(decl)) / (dcos(lat) * dcos(decl));
-    return darccos(val);
+  function getCombinedView() {
+    return localStorage.getItem(COMBINED_KEY) === "1";
+  }
+  function setCombinedView(on) {
+    try { localStorage.setItem(COMBINED_KEY, on ? "1" : "0"); } catch (e) {}
   }
 
-  function toUTCDate(year, month, day, utcHours) {
-    const totalMinutes = Math.round(utcHours * 60);
-    return new Date(Date.UTC(year, month - 1, day, 0, totalMinutes, 0));
+  // Jafari params published as "Shia Ithna Ashari, Leva Institute, Qum" —
+  // confirmed via aladhan.com/calculation-methods and praytimes.org/calculation.
+  function buildCalculationParams(school) {
+    if (school === "hanafi") {
+      const params = adhan.CalculationMethod.NorthAmerica();
+      params.madhab = adhan.Madhab.Hanafi;
+      return params;
+    }
+    const params = adhan.CalculationMethod.Other();
+    params.fajrAngle = 16;
+    params.ishaAngle = 14;
+    params.maghribAngle = 4;
+    params.madhab = adhan.Madhab.Shafi; // Jafari Asr = shadow factor 1
+    return params;
   }
 
-  // Asr shadow-length method: Hanafi uses factor 2 (shadow = 2x object
-  // height + noon shadow), the majority/Shafi'i position uses factor 1.
-  // Named here rather than left as a buried literal so the choice is
-  // visible and changeable in one place.
-  const ASR_METHOD = "hanafi";
-
+  // Returns {fajr, sunrise, dhuhr, asr, maghrib, isha} as JS Date objects
+  // (adhan.js PrayerTimes) for the given calendar date, at the stored
+  // location, using the stored school's calculation params.
   function getPrayerTimes(year, month, day) {
-    const jd = julianDay(year, month, day);
-    const { decl, eqt } = sunPosition(jd);
-
-    const dhuhrUTC = fixHour(12 - SLC_LON / 15 - eqt) + 1 / 60; // +1 min zawal margin
-
-    const hFajrIsha = hourAngleForAltitude(SLC_LAT, decl, -15) / 15;   // ISNA angle
-    const hMaghrib = hourAngleForAltitude(SLC_LAT, decl, -0.833) / 15; // sunset
-
-    const asrShadowFactor = ASR_METHOD === "hanafi" ? 2 : 1;
-    const asrAltitude = darctan2(1, asrShadowFactor + dtan(Math.abs(SLC_LAT - decl)));
-    const hAsr = hourAngleForAltitude(SLC_LAT, decl, asrAltitude) / 15;
-
-    return {
-      fajr: toUTCDate(year, month, day, dhuhrUTC - hFajrIsha),
-      dhuhr: toUTCDate(year, month, day, dhuhrUTC),
-      asr: toUTCDate(year, month, day, dhuhrUTC + hAsr),
-      maghrib: toUTCDate(year, month, day, dhuhrUTC + hMaghrib),
-      isha: toUTCDate(year, month, day, dhuhrUTC + hFajrIsha),
-    };
+    const loc = getLocation();
+    const coordinates = new adhan.Coordinates(loc.lat, loc.lon);
+    const params = buildCalculationParams(getSchool());
+    const date = new Date(year, month - 1, day, 12); // noon local avoids DST-edge date drift
+    const pt = new adhan.PrayerTimes(coordinates, date, params);
+    return { fajr: pt.fajr, sunrise: pt.sunrise, dhuhr: pt.dhuhr, asr: pt.asr, maghrib: pt.maghrib, isha: pt.isha };
   }
 
   function formatLocalSLC(date) {
     return date.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
-      timeZone: "America/Denver", // auto-handles MST/MDT
+      timeZone: "America/Denver", // every stored Utah city is Mountain Time
     });
   }
 
@@ -1670,20 +1885,74 @@
     return h > 0 ? h + "h " + m + "m" : m + " min";
   }
 
+  // Populate the location/school selects once, from the LOCATIONS table
+  // and the current stored choices -- called once at startup.
+  function initPlaqueSettings() {
+    const citySelect = document.getElementById("citySelect");
+    const loc = getLocation();
+    citySelect.innerHTML = Object.keys(LOCATIONS)
+      .map((name) => '<option value="' + name + '"' + (name === loc.name ? " selected" : "") + ">" + name + "</option>")
+      .join("");
+    document.getElementById("schoolSelect").value = getSchool();
+    document.getElementById("combinedViewToggle").checked = getCombinedView();
+
+    citySelect.addEventListener("change", (e) => {
+      setLocation(e.target.value);
+      applyTimeOfDay(); updatePrayerPanel();
+    });
+    document.getElementById("schoolSelect").addEventListener("change", (e) => {
+      setSchool(e.target.value);
+      applyTimeOfDay(); updatePrayerPanel();
+      if (overlayState) renderOverlay();
+    });
+    document.getElementById("combinedViewToggle").addEventListener("change", (e) => {
+      setCombinedView(e.target.checked);
+      updatePrayerPanel();
+    });
+  }
+
   function updatePrayerPanel() {
     const now = new Date();
     const today = getPrayerTimes(now.getFullYear(), now.getMonth() + 1, now.getDate());
     const rows = {};
+    const combined = getCombinedView();
+    const school = getSchool();
+
+    document.getElementById("plaqueSub").textContent = getLocation().name + ", UT";
+    document.getElementById("plaqueNote").innerHTML = school === "jafari"
+      ? "Calculated using the Ja&#703;far&#299; method (Fajr 16&deg;, &#703;Ish&#257;&#8217; 14&deg;, Maghrib 4&deg; &mdash; Shia Ithna Ashari, Leva Institute, Qum) with &#703;A&#7779;r shadow-length factor 1. An estimate &mdash; confirm against your marja&rsquo;s guidance."
+      : "Calculated using the ISNA angle (15&deg;) with &#7716;anaf&#299; &#703;A&#7779;r (shadow-length factor 2) &mdash; may differ slightly from your local mosque&rsquo;s posted schedule.";
 
     PRAYER_ORDER.forEach((key) => {
       const row = document.querySelector('.plaque-row[data-prayer="' + key + '"]');
-      row.querySelector(".p-time").textContent = formatLocalSLC(today[key]);
       row.classList.remove("next", "current");
+      row.hidden = false;
       rows[key] = row;
     });
 
+    if (combined) {
+      rows.dhuhr.querySelector(".p-name").textContent = "Dhuhr + Asr";
+      rows.dhuhr.querySelector(".p-time").textContent = formatLocalSLC(today.dhuhr) + " · " + formatLocalSLC(today.asr);
+      rows.maghrib.querySelector(".p-name").textContent = "Maghrib + ʿIshāʾ";
+      rows.maghrib.querySelector(".p-time").textContent = formatLocalSLC(today.maghrib) + " · " + formatLocalSLC(today.isha);
+      rows.asr.hidden = true;
+      rows.isha.hidden = true;
+    } else {
+      rows.dhuhr.querySelector(".p-name").textContent = "Dhuhr";
+      rows.dhuhr.querySelector(".p-time").textContent = formatLocalSLC(today.dhuhr);
+      rows.maghrib.querySelector(".p-name").textContent = "Maghrib";
+      rows.maghrib.querySelector(".p-time").textContent = formatLocalSLC(today.maghrib);
+      rows.asr.querySelector(".p-time").textContent = formatLocalSLC(today.asr);
+      rows.isha.querySelector(".p-time").textContent = formatLocalSLC(today.isha);
+    }
+    rows.fajr.querySelector(".p-time").textContent = formatLocalSLC(today.fajr);
+
+    // When combined, "next"/"current" highlighting on Asr/Isha (now
+    // hidden) is redirected onto the row it's folded into.
+    const foldedRowFor = (key) => (combined && key === "asr") ? "dhuhr" : (combined && key === "isha") ? "maghrib" : key;
+
     const nextKey = PRAYER_ORDER.find((key) => today[key] > now);
-    if (nextKey) rows[nextKey].classList.add("next");
+    if (nextKey) rows[foldedRowFor(nextKey)].classList.add("next");
 
     // Current prayer + unit count + time remaining, using the existing
     // .plaque-next-note element -- always shown (not just the after-Isha
@@ -1695,7 +1964,7 @@
       if (timeline[i].time.getTime() <= now.getTime()) currentEntry = timeline[i];
       else { nextEntry = timeline[i]; break; }
     }
-    if (currentEntry && rows[currentEntry.key]) rows[currentEntry.key].classList.add("current");
+    if (currentEntry && rows[foldedRowFor(currentEntry.key)]) rows[foldedRowFor(currentEntry.key)].classList.add("current");
     if (currentEntry) currentGuidePrayerKey = currentEntry.key;
 
     const noteEl = document.querySelector(".plaque-next-note");
@@ -1710,7 +1979,59 @@
     }
   }
 
+  // ------------------------------------------------------------
+  // DATE STRIP — Gregorian alongside Hijri. The Hijri date comes from
+  // the browser's own Intl/ICU Islamic calendar (Umm al-Qura), not
+  // hand-rolled arithmetic. Real lunar months are set by moon sighting,
+  // so this is a calculated estimate and can legitimately run a day
+  // ahead or behind any local sighting announcement -- said plainly
+  // in the UI rather than presented as certain.
+  // ------------------------------------------------------------
+  function renderDateStrip() {
+    const now = new Date();
+    document.getElementById("gregorianDate").textContent = now.toLocaleDateString("en-US", {
+      weekday: "long", year: "numeric", month: "long", day: "numeric", timeZone: "America/Denver",
+    });
+    try {
+      const hijri = new Intl.DateTimeFormat("en-US-u-ca-islamic-umalqura", {
+        day: "numeric", month: "long", year: "numeric", timeZone: "America/Denver",
+      }).format(now);
+      document.getElementById("hijriDate").textContent = hijri + " AH (calculated — may run a day off local moon-sighting)";
+    } catch (e) {
+      document.getElementById("hijriDate").textContent = "";
+    }
+  }
+
+  // ------------------------------------------------------------
+  // TODAY'S OBJECTIVE + "where I am" — one concrete next step from
+  // data/deen/curriculum.json's practice track, tracked by a plain
+  // step index (no streaks, no percentage, nothing about prayers
+  // missed). Hidden entirely if the curriculum file isn't there yet.
+  // ------------------------------------------------------------
+  const DEEN_STAGE_KEY = "life-hub-deen-practice-stage";
+  function renderTodayStrip() {
+    fetch("data/deen/curriculum.json")
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((entries) => {
+        const practice = entries.filter((e) => e.track === "practice").sort((a, b) => a.stage - b.stage);
+        if (!practice.length) return;
+        let idx = Number(localStorage.getItem(DEEN_STAGE_KEY) || "0");
+        if (idx < 0 || idx >= practice.length) idx = 0;
+        const current = practice[idx];
+        document.getElementById("todayStrip").hidden = false;
+        document.getElementById("todayObjective").textContent = "Today: " + current.title;
+        document.getElementById("whereIAm").innerHTML = "Step " + (idx + 1) + " of " + practice.length +
+          " on the Practice track — <a href=\"knowledge-center.html#practice\" style=\"color:var(--gold-bright)\">continue in Knowledge Center &rarr;</a>";
+      })
+      .catch(() => { /* curriculum not built/reachable yet -- strip stays hidden */ });
+  }
+
+  initPlaqueSettings();
+  applyTimeOfDay();
   updatePrayerPanel();
+  renderDateStrip();
+  renderTodayStrip();
+  setInterval(renderDateStrip, 60000);
   setInterval(() => {
     applyTimeOfDay();
     updatePrayerPanel();
@@ -2020,8 +2341,29 @@
   });
   document.getElementById("guideMeBtn").addEventListener("click", () => openPrayerOverlay(currentGuidePrayerKey));
 
+  // A full posture-by-posture Jaʿfarī guided walkthrough (matching the
+  // depth of the existing Hanafi one) needs its own careful sourcing
+  // pass -- exact tashahhud/qunut wording, sujūd-on-turbah, arm
+  // position, etc. all carry real school-specific detail that
+  // shouldn't be guessed. Rather than fake that depth, "Guide me"
+  // under Jaʿfarī links out to whatever's actually sourced so far in
+  // the Knowledge Center's Practice track instead of opening a
+  // walkthrough this file doesn't have.
+  function renderJafariPlaceholder() {
+    overlayScrollEl.innerHTML =
+      '<h2 class="po-title">Guided Ja&#703;far&#299; prayer &mdash; not built yet</h2>' +
+      '<p class="po-body">A full step-by-step Ja&#703;far&#299; walkthrough (like the existing &#7716;anaf&#299; one) needs its own careful sourcing pass &mdash; exact wording for tashahhud and qunūt, sujūd on turbah, arm position, and other real school-specific detail. Rather than guess at that, it is left unbuilt for now.</p>' +
+      '<p class="po-body">What is sourced so far lives in the <strong>Knowledge Center</strong>, under the Practice track\'s salah entry &mdash; each one links to where it actually comes from.</p>' +
+      '<div class="po-complete-actions">' +
+      '<a class="po-btn" href="knowledge-center.html#practice">Open Practice track</a>' +
+      '<button type="button" class="po-btn" id="poJafariClose">Close</button>' +
+      "</div>";
+    document.getElementById("poJafariClose").addEventListener("click", closePrayerOverlay);
+  }
+
   function renderOverlay() {
     if (!overlayState) return;
+    if (getSchool() === "jafari") { renderJafariPlaceholder(); return; }
     if (salahLoadError) {
       overlayScrollEl.innerHTML =
         '<div class="po-error">' + escapeHtml(salahLoadError) + "</div>" +

@@ -1,0 +1,686 @@
+[
+  {
+    "id": "practice-s1-shahada-tawhid-meaning",
+    "track": "practice",
+    "stage": 1,
+    "title": "What \"there is no god but God\" means",
+    "body": "The first clause of the shahada, la ilaha illallah, is a declaration of tawhid (God's oneness). Saying it is not just a password into Islam but a claim about how understanding of God's Unity has been worked out across Islamic intellectual history, including Twelver Shia thought. Different believers understand its depth differently, but the act of professing it is described as Islam's first pillar, with everything else in the religion depending on and deriving from it.",
+    "arabic": "",
+    "transliteration": "La ilaha illallah",
+    "source": {
+      "type": "article",
+      "title": "A Shi'ite Anthology - \"On the Unity of God\"",
+      "author": "'Allamah Sayyid Muhammad Husayn Tabataba'i (trans. Sayyid Hossein Nasr)",
+      "url": "https://al-islam.org/shiite-anthology-sayyid-muhammad-husayn-tabatabai/unity-god",
+      "reference": "A Shi'ite Anthology, chapter \"On the Unity of God\""
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s1-shahadatayn-entry-to-islam",
+    "track": "practice",
+    "stage": 1,
+    "title": "Saying the two testimonies is what makes someone Muslim",
+    "body": "In Ayatollah Sistani's risalah, the ruling on how a non-Muslim becomes Muslim is stated directly: pronouncing the shahadatayn (the two testimonies - bearing witness to the oneness of Allah and to the prophethood of Muhammad) in any language is what constitutes becoming Muslim. This is a legal/practical framing from the risalah, not a full theological explanation of the shahada's meaning.",
+    "arabic": "",
+    "transliteration": "Ash-hadu an la ilaha illallah, wa ash-hadu anna Muhammadan rasulullah",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2147/",
+      "reference": "Islamic Laws, Ruling 205"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s1-third-testimony-note",
+    "track": "practice",
+    "stage": 1,
+    "title": "The \"third testimony\" about Ali is not part of the obligatory tashahhud",
+    "body": "Some Twelver Shia add a third clause after the shahadatayn (\"wa ashhadu anna Aliyyan waliyyullah\" - testifying to Ali's wilayah), especially inside the tashahhud during prayer. When asked directly whether this is permissible inside the tashahhud, Sistani's office answered by pointing back to the description of tashahhud given in the Islamic Laws risalah itself - i.e. the third testimony is not listed as part of the obligatory tashahhud formula there. A new Muslim should not assume this addition is a required part of the prayer's wording.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Sistani.org Q&A - \"Tashahhud\"",
+      "author": "Office of Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/qa/01337/",
+      "reference": "Sistani.org Q&A #01337"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s1-new-muslim-guidance-gap",
+    "track": "practice",
+    "stage": 1,
+    "title": "What a new Muslim should specifically do after saying the shahada",
+    "body": "",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "article",
+      "title": "",
+      "author": "",
+      "url": "",
+      "reference": ""
+    },
+    "marja_specific": true,
+    "needs_source": true
+  },
+  {
+    "id": "practice-s2-taharah-concept",
+    "track": "practice",
+    "stage": 2,
+    "title": "What taharah (ritual purity) is",
+    "body": "Taharah is the broader category: being in a state of ritual purity, which is achieved through wudu, ghusl, or tayammum depending on the situation. It is the general precondition-of-purity concept that wudu (ablution before prayer) is one specific instance of. This is a definitional/glossary point rather than a ruling that varies between jurists.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws - Glossary (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/8242/",
+      "reference": "Islamic Laws, Glossary entry \"Taharah\""
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s2-wudu-obligatory-acts",
+    "track": "practice",
+    "stage": 2,
+    "title": "The four obligatory acts of wudu",
+    "body": "According to the risalah, wudu consists of washing (ghusl) the face and arms, and wiping (mash) the front part of the head and the upper part of the feet. The face is washed from the hairline down to the chin, and as wide as the span from the middle finger to the thumb.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2154/",
+      "reference": "Islamic Laws, Rulings 235-236"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s2-wudu-order-and-conditions",
+    "track": "practice",
+    "stage": 2,
+    "title": "Order and conditions for a valid wudu",
+    "body": "The risalah lists conditions for wudu to count as valid: the water must be pure, unmixed, and not usurped/unlawfully obtained; the body parts being washed must themselves be pure at the time; there must be enough time left before prayer; it must be done with the intention of nearness to God; the parts must be washed/wiped in the fixed order (face, right arm, left arm, head, then feet); it must be done in reasonably close succession; and, with some exceptions, a person must perform it on themselves.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/8295/",
+      "reference": "Islamic Laws, \"Conditions for the Validity of Wudu\", Rulings 266-289"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s2-wudu-doubts",
+    "track": "practice",
+    "stage": 2,
+    "title": "What to do about doubts during wudu",
+    "body": "For someone who frequently doubts whether they performed a step of wudu correctly, the risalah's guidance is not to act on those doubts - i.e. a habitual doubter should proceed as though the step was done correctly rather than repeating it every time. This is a practical relief ruling aimed at people (very common for beginners) who get stuck second-guessing each step.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2157/",
+      "reference": "Islamic Laws, Ruling 298"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-obligatory-components-overview",
+    "track": "practice",
+    "stage": 3,
+    "title": "The eleven parts of the prayer, and which five are \"pillars\"",
+    "body": "The risalah lists eleven obligatory components of salah: intention, standing, takbirat al-ihram (the opening \"Allahu akbar\"), bowing, prostrating, recitation, the glorification said while bowing/prostrating, tashahhud, salam, sequence, and doing them without unreasonable gaps. Of these, five are described as rukn (pillars): if a rukn is missed, intentionally or by mistake, the prayer is invalid; the other six are still obligatory but a mistaken omission of them does not by itself invalidate the prayer the same way.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2229/",
+      "reference": "Islamic Laws, Ruling 928"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-niyyah",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 1: Intention (niyyah)",
+    "body": "Prayer must be performed with the intention of qurbah - closeness to God, done in humility and obedience - and that intention must be specific (e.g. specifically dhuhr, not just \"a four-rakah prayer\") and must be sustained from the start of the prayer to its end. Niyyah is not a scripted phrase to say out loud; it is the intention behind the act.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2230/",
+      "reference": "Islamic Laws, Rulings 929-931"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-takbiratul-ihram",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 2: Takbirat al-ihram (opening \"Allahu akbar\")",
+    "body": "Saying \"Allahu akbar\" at the start of every prayer is obligatory and must be pronounced correctly in Arabic while the body is completely still, loud enough for the person to hear themselves. Someone physically unable to speak should attempt the utterance as best they can; someone born unable to speak should move their lips/tongue and gesture instead.",
+    "arabic": "اللهُ أَكْبَر",
+    "transliteration": "Allahu akbar",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2231/",
+      "reference": "Islamic Laws, Rulings 934-939"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-qiyam",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 3: Standing (qiyam)",
+    "body": "Standing while saying takbirat al-ihram, and standing immediately before bowing, is itself a rukn (pillar) of the prayer. While standing and reciting the obligatory parts, the body must stay still - no walking or leaning to one side. Someone unable to stand may sit; someone unable to sit may lie down, standing \"in whatever way he can\" before resorting to that.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2232/",
+      "reference": "Islamic Laws, Rulings 944-956"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-qiraah",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 4: Recitation (qira'ah)",
+    "body": "In the first two rakahs, one recites Surat al-Fatiha (and, in most obligatory prayers, a second surah after it). The Arabic text itself is left blank here rather than reproduced from memory - it should be sourced separately to a Quran text/audio actually fetched, not typed from recollection.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2233/",
+      "reference": "Islamic Laws, Rulings 983-984"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-ruku",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 5: Bowing (ruku)",
+    "body": "One bends forward far enough that the fingertips (including the thumb) could reach the knees, staying still while saying the required glorification, preferably \"subhana rabbiyal azimi wa bihamdih\". The body must be still specifically while the dhikr is being said; standing back up before finishing it, or starting it before the bow is complete, both cause problems for the prayer's validity per the risalah.",
+    "arabic": "سُبْحَانَ رَبِّيَ الْعَظِيمِ وَبِحَمْدِهِ",
+    "transliteration": "Subhana rabbiyal 'azimi wa bihamdih",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2234/",
+      "reference": "Islamic Laws, Rulings 1008, 1014-1019"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-sujud",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 6: Prostration (sujud)",
+    "body": "Two sajdahs are performed after ruku, each placing the forehead on the ground (on something the risalah permits prostrating on) in a particular manner, saying the obligatory dhikr consecutively in correct Arabic. The two sajdahs together count as a single rukn. After the second sajdah, one sits still briefly before standing for the next rakah.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2235/",
+      "reference": "Islamic Laws, Rulings 1031-1061"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-tashahhud",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 7: Tashahhud (sitting testimony)",
+    "body": "After the second sajdah of the second rakah of every prayer (and of the third rakah of maghrib, or fourth of dhuhr/asr/isha), one sits still and recites the tashahhud. The Arabic below and its translation were fetched directly from the risalah page itself, including the phrase blessing the Prophet and his family.",
+    "arabic": "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيْكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُوْلُهُ، اَللّٰهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَآلِ مُحَمَّدٍ",
+    "transliteration": "Ash-hadu an la ilaha illallahu wahdahu la sharika lah, wa ash-hadu anna Muhammadan 'abduhu wa rasuluh. Allahumma salli 'ala Muhammadin wa aali Muhammad.",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2239/",
+      "reference": "Islamic Laws, Rulings 1086-1087 (Tashahhud text and translation as given on the page)"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s3-salah-salam",
+    "track": "practice",
+    "stage": 3,
+    "title": "Step 8: Salam (closing salutation)",
+    "body": "After the tashahhud of the last rakah, the recommended wording of the salam given in the risalah addresses the Prophet, then greets those present. The Arabic below was fetched directly from the risalah page. Salam is one of the eleven obligatory components of the prayer, marking its end.",
+    "arabic": "اَلسَّلَامُ عَلَيْكَ أَيُّهَا النَّبِيُّ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ، اَلسَّلَامُ عَلَيْكُمْ",
+    "transliteration": "As-salamu 'alayka ayyuha an-nabiyyu wa rahmatullahi wa barakatuh, as-salamu 'alaykum",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2240/",
+      "reference": "Islamic Laws, Ruling 1091"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s4-recite-what-you-can",
+    "track": "practice",
+    "stage": 4,
+    "title": "If you can't yet pronounce Al-Fatiha correctly",
+    "body": "The risalah addresses this directly: someone who cannot correctly recite the whole of Surat al-Fatiha should recite as much of it as they can correctly, as long as that correct portion is a meaningful amount. If even that isn't possible, the risalah describes adding other Quran one can recite correctly, or failing that, tasbih (glorification), in its place. This is explicitly a ruling for people still learning, not a permanent substitute.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2233/",
+      "reference": "Islamic Laws, Ruling 983"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s4-obligation-to-learn-and-congregation",
+    "track": "practice",
+    "stage": 4,
+    "title": "You're expected to work toward learning it, and congregation helps",
+    "body": "For someone who does not yet know Surat al-Fatiha well, the risalah describes several acceptable paths at once: actively trying to learn it, following along in a congregational prayer (where the leader's recitation can cover the follower), or repeating the prayer when in doubt about their own recitation's correctness. If time is short before a prayer's window closes, the reduced recitation described above is allowed as a stopgap - but the risalah frames ongoing negligence about learning as something that should push a person toward praying in congregation instead.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2233/",
+      "reference": "Islamic Laws, Ruling 984"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s5-sawm-definition",
+    "track": "practice",
+    "stage": 5,
+    "title": "What fasting (sawm) is",
+    "body": "The risalah defines the fast as abstaining from a specific list of things (eating, drinking, and several other invalidators) from the start of the time of the dawn (subh) prayer until maghrib, done in humility and obedience to God. It's framed as abstention within a defined daily window during the fasting period, not a description of Ramadan as a whole month-long state.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2277/",
+      "reference": "Islamic Laws, chapter introduction; see Rulings 728 and 722 for the legal definitions of subh and maghrib"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s5-sawm-niyyah",
+    "track": "practice",
+    "stage": 5,
+    "title": "Intention for the fast",
+    "body": "It isn't necessary to formally verbalize an intention to fast; it's enough to decide, in humility toward God, to fast. That intention can be made any night of Ramadan for the next day, and the latest a conscious person can still form it is at the time of the subh prayer. A qada (make-up) fast or a fast for kaffarah (expiation) must be specifically identified as such when forming the intention.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2278/",
+      "reference": "Islamic Laws, Rulings 1529-1531, 1534"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s5-sawm-invalidators",
+    "track": "practice",
+    "stage": 5,
+    "title": "The eight things that invalidate a fast",
+    "body": "The risalah lists eight things that break a fast: eating and drinking; sexual intercourse; masturbation; deliberately attributing falsehood to God, the Prophet, or the successors; letting thick dust reach the throat (as an obligatory precaution); remaining in a state of major ritual impurity, menstruation, or postpartum bleeding until the time of subh prayer; using a liquid enema; and intentional vomiting.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2279/",
+      "reference": "Islamic Laws, Ruling 1551"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s5-sawm-exemptions",
+    "track": "practice",
+    "stage": 5,
+    "title": "Who isn't obligated to fast",
+    "body": "The risalah exempts several categories, generally requiring an alternative (fidyah - feeding a poor person for each missed day - and/or making up the fast later) rather than nothing at all: someone for whom fasting is excessively difficult due to old age; someone severely ill in a way that makes fasting excessively difficult (e.g. extreme thirst); a woman near delivery for whom fasting would harm her or the child; and a nursing mother with insufficient milk for whom fasting would cause harm, if there's no other way to feed the child. Details of what's owed (fidyah only vs. fidyah plus qada) differ by category.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2296/",
+      "reference": "Islamic Laws, Rulings 1694, 1696, 1697, 1698"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s5-sawm-menstruation-travel-gap",
+    "track": "practice",
+    "stage": 5,
+    "title": "Fasting rules for menstruation and travel",
+    "body": "",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "",
+      "author": "",
+      "url": "",
+      "reference": ""
+    },
+    "marja_specific": true,
+    "needs_source": true
+  },
+  {
+    "id": "practice-s6-khums-categories",
+    "track": "practice",
+    "stage": 6,
+    "title": "What khums applies to",
+    "body": "The risalah states khums becomes obligatory on seven categories of property: surplus income from earnings/gains, mined products, treasure troves, lawful property that has become mixed with unlawful property, precious stones obtained by diving, spoils of war, and land a dhimmi purchases from a Muslim. For most people's daily life, the first category (surplus income) is the one that actually comes up.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2305/",
+      "reference": "Islamic Laws, Ruling 1768"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s6-khums-surplus-income",
+    "track": "practice",
+    "stage": 6,
+    "title": "Khums on surplus income, and the \"khums year\"",
+    "body": "Property acquired through trade, a craft, or any other form of earning becomes subject to khums once it exceeds a person's living expenses for the year - this also extends to unearned property like gifts that exceed yearly living costs. Dowries, blood money, and ordinary inheritance are excluded, though an unexpected inheritance is not. The risalah describes a \"khums year\": for most earners, khums is due after one year has passed from when the relevant income began, with reasonable business and living expenses (food, housing, clothing, family events) deductible first; khums can be paid as it's earned or deferred to year's end, though paying immediately is described as the more cautious option if the money won't be needed before then.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2306/",
+      "reference": "Islamic Laws, Rulings 1769-1771, 1782-1783, 1791-1792"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s6-zakat-categories",
+    "track": "practice",
+    "stage": 6,
+    "title": "What zakat applies to",
+    "body": "The risalah states zakat is obligatory (as an obligatory precaution) on ten specific things: wheat, barley, dates, raisins, gold, silver, camels, cows, sheep/goats, and business goods. This is a narrower and more specific list than many people expect - zakat in this fiqh is not simply \"a percentage of savings\" the way khums functions; it applies to these named categories under their own conditions.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2314/",
+      "reference": "Islamic Laws, Ruling 1871"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "practice-s6-zakat-conditions",
+    "track": "practice",
+    "stage": 6,
+    "title": "When zakat actually becomes obligatory",
+    "body": "Even for the ten items covered, zakat is only obligatory once the amount reaches the nisab (taxable threshold), is the person's own property, and the person is legally free to dispose of it. For gold, silver and business goods specifically, the owner must have been of sound mind and legal age throughout the year (this particular condition does not apply to the agricultural/livestock items). Ownership generally needs to be held for eleven months before the obligation arises, and someone who has borrowed an eligible item and kept it a full year may owe zakat on it unless the lender already paid it.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "risalah",
+      "title": "Islamic Laws (Sistani.org English edition)",
+      "author": "Grand Ayatollah Sayyid Ali al-Husayni al-Sistani",
+      "url": "https://www.sistani.org/english/book/48/2315/",
+      "reference": "Islamic Laws, Rulings 1872-1874, 1878-1879"
+    },
+    "marja_specific": true,
+    "needs_source": false
+  },
+  {
+    "id": "belief_tawhid",
+    "track": "belief",
+    "stage": 1,
+    "title": "Tawhid — the Oneness of God",
+    "body": "Tawhid is belief in the absolute oneness of Allah: that He is not composed of parts, has no partner in His essence or attributes, and is unlike anything He created. Twelver theology (following this source) distinguishes several 'stages' of Tawhid that build on one another: Unity of Essence (Allah is not divisible the way created things are — not into matter and form, not into moments of time, not into concept and instance), Unity of Essence-and-Attributes (His attributes such as knowledge and power are not separate 'add-ons' to His essence, since anything composed of essence-plus-attributes would need a composer), and then a chain of practical unities that follow from it — Unity of Divinity, of Lordship, of creating, of worship, of command, of sustenance, and of reliance. The source presents rational arguments (e.g., that two independent, unlimited gods is a contradiction in terms) alongside citations from the Qur'an and from sayings attributed to Imam 'Ali and Imam Ja'far al-Sadiq. The practical upshot drawn out is that worshipping or ultimately relying on anything other than Allah is treated as a form of self-abasement, since everything other than Allah is itself dependent and created. This is one of the three roots of religion (usul al-din) that all Muslims, Sunni and Shia, affirm; Twelver Shia theology treats it as the first and foundational root.",
+    "arabic": "",
+    "transliteration": "La ilaha illa Allah",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"Divine Unity (Tawhid)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/divine-unity-tawhid",
+      "reference": "Chapter: Divine Unity (Tawhid)"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_nubuwwah",
+    "track": "belief",
+    "stage": 2,
+    "title": "Nubuwwah — Prophethood",
+    "body": "Nubuwwah is belief that Allah communicates guidance to humanity through chosen human messengers (prophets), because human intellect and desire alone are held to be insufficient to reliably discover, on their own, the full truth about God, the purpose of life, and the details of moral and legal guidance needed for a just society. The source argues that a wise Creator would not leave the purpose of human creation unfulfilled, and that a prophet must therefore be sent to connect the 'high' (the Creator) with the 'low' (creation). Two qualities are emphasized as necessary for a prophet in this account: infallibility ('ismah) — protection from error and sin, since an errant intermediary would defeat the point of sending one — and the capacity for genuine miracles, offered as public, non-natural confirmation that the claim to prophethood comes from God. This 'common prophethood' (nubuwwah 'ammah, belief that prophets in general are necessary and were sent) is one of the three roots of religion shared by Sunni and Shia Muslims alike; a related, distinctly Shia discussion is 'special prophethood' (nubuwwah khassah), which concerns the specific prophethood of Muhammad as the final prophet.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"Common Prophethood (Nabuwwat 'Ammah)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/common-prophethood-nabuwwat-ammah",
+      "reference": "Chapter: Common Prophethood (Nabuwwat 'Ammah)"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_maad",
+    "track": "belief",
+    "stage": 3,
+    "title": "Ma'ad — the Return / Resurrection",
+    "body": "Ma'ad ('the Return') is belief in bodily resurrection, a Day of Judgment, and an eternal afterlife of reward or punishment. The source frames this as a requirement of divine justice and wisdom, not just a separate add-on belief: since the just and the unjust plainly do not receive what they deserve within this life alone, justice demands a further reckoning; and since humans are given intellectual and spiritual capacities that go beyond what a merely animal or 'this-worldly' life would require, it is argued that humans must be made for a purpose beyond this world. The source also addresses the classic objection that bringing decayed bodies back to life is 'unlikely' by arguing from analogy — the same power that first created living things from inanimate matter, or that renews plant life each spring, is described as equally capable of a second creation, which is characterized as 'easier' than the first. Ma'ad is one of the three roots of religion (usul al-din) affirmed by Sunni and Shia Muslims alike; belief in it, together with Tawhid and Nubuwwah, is what this source identifies as making one simply 'Muslim,' while affirming all five roots together (adding 'Adalah and Imamah) is what it calls being Shi'a Ithna 'Ashari (Twelver Shia).",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"The Return (Ma'ad)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/return-maad",
+      "reference": "Chapter: The Return (Ma'ad)"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_adalah",
+    "track": "belief",
+    "stage": 4,
+    "title": "'Adalah — Divine Justice",
+    "body": "'Adalah ('Adl) is the belief that Allah is essentially just and never oppressive or arbitrary toward His creation. The source argues this from ordinary human moral intuition (people instinctively recognize justice as good and oppression as bad, even oppressors themselves resent being wronged) and from the reasoning that injustice only arises from ignorance, incapacity, or pointlessness — none of which can be attributed to an all-knowing, all-powerful, all-wise God. A tradition attributed to Imam Ja'far al-Sadiq is cited summarizing the two foundational roots together in one line: regarding Tawhid, do not describe your Lord the way you describe yourself; regarding 'Adl, do not attribute to your Lord any of the flaws you might excuse in yourself. In Twelver Shia classification, 'Adalah is counted as one of the two 'Roots of Faith' (usul al-iman, alongside Imamah) rather than one of the three 'Roots of Islam' shared with all Muslims — historically this reflects the Shia alignment with Mu'tazili-influenced rational theology on divine justice and free will, in contrast to Ash'ari-influenced Sunni theology, which affirms God's justice but is more cautious about using human reason to define its content independently of revelation.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"Divine Justice ('Adl)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/divine-justice-adl",
+      "reference": "Chapter: Divine Justice ('Adl)"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_imamah",
+    "track": "belief",
+    "stage": 5,
+    "title": "Imamah — Divinely Appointed Leadership",
+    "body": "Imamah is the distinctly Twelver Shia belief that the Prophet Muhammad's successor as leader of the Muslim community had to be designated by Allah (through the Prophet), rather than chosen by the community itself. The source states the core disagreement plainly: 'there is no difference of opinion between the two schools of thought, the Shi'ites and the Sunnis, in the belief of the need of a caliph after the Messenger of Allah… the difference is whether the caliph is appointed by Allah… or by the people.' The Shia case rests on the idea that just as a prophet must be infallible to reliably deliver revelation, the one who protects, interprets, and implements that revelation after him must also be protected from error — and since ordinary people cannot verify infallibility in another person, only Allah's designation (nass) can establish it. As textual support, this source and other Shia sources point to the 'Hadith of the Two Weighty Things' (in which the Prophet is reported to have left behind the Qur'an and his family, the Ahlul Bayt, as inseparable guides) and the event of Ghadir Khumm, where the Prophet is reported to have declared 'whoever I am the master (mawla) of, this 'Ali is also his master.' Sunni scholarship acknowledges these same hadith traditions exist but generally understands 'mawla' at Ghadir Khumm as expressing friendship, closeness, or praise for 'Ali rather than a formal transfer of political-religious authority — see the 'divergence' entry in this track for a fuller, two-sided description of this disagreement.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"The Divine Leadership (Imamat)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/divine-leadership-imamat",
+      "reference": "Chapter: The Divine Leadership (Imamat)"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_ahlul_bayt",
+    "track": "belief",
+    "stage": 6,
+    "title": "Who Are the Ahlul Bayt?",
+    "body": "Ahlul Bayt ('People of the House') refers to the family of the Prophet Muhammad, but Sunni and Shia sources define its membership differently. Most Sunni scholars include the Prophet's wives, and some extend it to all his descendants or even his wider clan. The Twelver Shia position, laid out in this source, restricts it to fourteen people only: the Prophet, his daughter Fatimah, her husband 'Ali, their sons Hasan and Husayn, and the nine Imams descended from Husayn. The source's argument centers on the 'Verse of Purification' (Qur'an 33:33) and the 'Hadith of the Cloak' (Hadith al-Kisa), in which the Prophet is reported to have gathered 'Ali, Fatimah, Hasan, and Husayn under his cloak while reciting that verse — a hadith the source quotes directly from Sahih Muslim and Sunan al-Tirmidhi, noting that in at least one version the Prophet's wife Umm Salama asked to be included and, according to the report, was told she had 'a good future' but was not brought under the cloak. The Shia conclusion drawn from this is that the wives, however respected individually, are not part of the Ahlul Bayt in the specific, protected sense the verse and hadith describe; the source acknowledges this reading is a point of real disagreement with many (not all) Sunni scholars.",
+    "arabic": "إِنَّمَا يُرِيدُ اللَّـهُ لِيُذْهِبَ عَنْكُمُ الرِّجْسَ أَهْلَ الْبَيْتِ وَيُطَهِّرَكُمْ تَطْهِيرًا",
+    "transliteration": "Innama yuridu Allahu li-yudh-hiba 'ankumu-r-rijsa ahla-l-bayti wa yutahhirakum tathira",
+    "source": {
+      "type": "article",
+      "title": "Who Are Ahlul-Bayt? Part 1 (A Shi'ite Encyclopedia)",
+      "author": "Al-Islam.org (Ahlul Bayt Digital Islamic Library Project)",
+      "url": "https://al-islam.org/shiite-encyclopedia/who-are-ahlul-bayt-part-1",
+      "reference": "A Shi'ite Encyclopedia, \"Who Are Ahlul-Bayt?\" Part 1, citing Qur'an 33:33, Sahih Muslim (Book of Virtues of the Companions) and Sunan al-Tirmidhi"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_ghadir_khumm",
+    "track": "belief",
+    "stage": 7,
+    "title": "Ghadir Khumm",
+    "body": "Ghadir Khumm is a pond/watering-place between Mecca and Medina where, on 18 Dhu'l-Hijjah 10 AH (10 March 632 CE), the Prophet Muhammad is reported to have stopped his returning pilgrimage caravan and delivered a sermon to the assembled pilgrims. According to the account on this source, the Prophet first repeated the 'Two Weighty Things' declaration (leaving behind the Qur'an and his Ahlul Bayt as inseparable guides), then asked the crowd, 'Do I not have more right over the believers than what they have over themselves?' and, upon their affirming this, took 'Ali by the hand and said, 'For whoever I am his Leader (mawla), 'Ali is his Leader (mawla).' The source connects this event to Qur'an 5:67 ('deliver what has been sent down to you...'), read as revealed shortly before the sermon, and Qur'an 5:3 ('Today I have perfected your religion...'), read as revealed just after it. Twelver Shia Islam holds this event as the explicit designation of 'Ali as the Prophet's successor (a cornerstone of the doctrine of Imamah); the historical occurrence of the sermon and the 'mawla' declaration is attested in numerous Sunni hadith collections as well, but mainstream Sunni scholarship generally reads the Prophet's statement as praise, affection, or a call for support for 'Ali rather than a formal appointment to political-religious leadership. See the 'divergence' entry for both readings side by side.",
+    "arabic": "",
+    "transliteration": "man kuntu mawlahu fa 'Aliyyun mawlahu",
+    "source": {
+      "type": "article",
+      "title": "Event of Ghadir Khumm in the Qur'an, Hadith, History",
+      "author": "Ahlul Bayt Digital Islamic Library Project",
+      "url": "https://al-islam.org/ghadir/incident.html",
+      "reference": "Al-Islam.org Ghadir Khumm portal, \"Event of Ghadir Khumm\""
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_twelve_imams",
+    "track": "belief",
+    "stage": 8,
+    "title": "The Twelve Imams — Names and Order",
+    "body": "Twelver Shia Islam holds that there were twelve divinely appointed Imams after the Prophet Muhammad, each designated by his predecessor. In order, as listed in this source: (1) 'Ali ibn Abi Talib, 'Commander of the Faithful'; (2) al-Hasan ibn 'Ali, 'the Oldest Grandson'; (3) al-Husayn ibn 'Ali, 'Master of the Martyrs'; (4) 'Ali ibn al-Husayn, 'Zayn al-'Abidin' (Beauty of the Worshippers); (5) Muhammad ibn 'Ali, 'al-Baqir' (the Splitter of Knowledge); (6) Ja'far ibn Muhammad, 'al-Sadiq' (the Truthful); (7) Musa ibn Ja'far, 'al-Kadhim' (the Controller of Anger); (8) 'Ali ibn Musa, 'al-Rida' (the Content); (9) Muhammad ibn 'Ali, 'al-Jawad' (the Generous); (10) 'Ali ibn Muhammad, 'al-Hadi' (the Guide); (11) al-Hasan ibn 'Ali, 'al-'Askari' (the Soldier); (12) Muhammad ibn al-Hasan al-'Askari, 'al-Mahdi' (the Awaited, believed by Twelvers to be in occultation since 874 CE and to return before the Day of Judgment). The source also cites Sunni hadith collections (Sahih al-Bukhari, Sahih Muslim, Sunan al-Tirmidhi, Musnad Ahmad) reporting the Prophet saying there would be 'twelve commanders/successors, all from Quraysh' — a tradition Shia scholars read as pointing specifically to these twelve, while Sunni scholarship generally applies it to the broader early caliphate rather than to this specific line of Imams.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"The Twelve Imams (as)\"",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/twelve-imams",
+      "reference": "Chapter: The Twelve Imams (as), citing Sahih al-Bukhari, Sahih Muslim, Sunan al-Tirmidhi, and Musnad Ahmad ibn Hanbal on the 'twelve successors' traditions"
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_karbala_ashura",
+    "track": "belief",
+    "stage": 9,
+    "title": "Karbala and Why Ashura Matters",
+    "body": "On 10 Muharram 61 AH (680 CE), a day known as Ashura, the Prophet Muhammad's grandson Husayn ibn 'Ali — the third Imam in Shia belief — was killed at Karbala (in present-day Iraq) along with most of his male family members and companions, after refusing to pledge allegiance to the Umayyad caliph Yazid ibn Mu'awiya. According to the account in this source, Husayn had left Medina for Kufa in response to letters inviting him to lead the community there, but Umayyad forces intercepted his caravan, cut off its access to water, and after several days of standoff killed Husayn and the men in his camp, taking the surviving women and children captive. This event is foundational to Shia identity: Husayn's refusal to legitimize what is regarded as an unjust, dynastic caliphate is remembered as a paradigmatic stand for justice and religious integrity against oppression, regardless of the cost, and is commemorated annually during Muharram (mourning gatherings, processions, and retellings of the events) as a defining act of witness rather than merely a historical defeat. Sunni Muslims also regard Husayn's killing as a tragedy and Yazid's role in it as broadly condemned, though Ashura does not carry the same central, defining theological weight in Sunni religious life that it carries in Shia practice and identity.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "article",
+      "title": "Karbala, the Chain of Events",
+      "author": "Ramzan Sabir",
+      "url": "https://al-islam.org/articles/karbala-chain-events",
+      "reference": "Al-Islam.org articles, \"Karbala, the Chain of Events\""
+    },
+    "marja_specific": false,
+    "needs_source": false
+  },
+  {
+    "id": "belief_shia_sunni_divergence",
+    "track": "belief",
+    "stage": 10,
+    "title": "Where Shia and Sunni Understanding Diverges (a Descriptive Comparison)",
+    "body": "The historic split between Shia and Sunni Islam centers on the question of legitimate leadership after the Prophet Muhammad's death in 632 CE, not on the core creed (Tawhid, prophethood, revelation, resurrection), which both share. As one Twelver source puts it plainly, 'there is no difference of opinion between the two schools of thought... in the belief of the need of a caliph after the Messenger of Allah... the difference is whether the caliph is appointed by Allah... or by the people.' The Sunni position, historically, is that the Prophet did not explicitly designate a successor, and that leadership was rightly settled by the community through consultation (shura) and the recognition (bay'ah) that took place at Saqifah, where Abu Bakr was chosen as the first caliph, followed by 'Umar, 'Uthman, and 'Ali as the 'Rightly Guided Caliphs' (al-Khulafa al-Rashidun); on this view, legitimate authority can rest with any qualified, just Muslim the community selects, and rulings are grounded in the consensus (ijma) of the community and its scholars. The Shia position is that leadership is a matter of divine appointment (nass), not human election, because interpreting revelation correctly requires an infallible guide in the way prophethood itself did; Shia scholars point to the Prophet's declaration at Ghadir Khumm and the 'Hadith of the Two Weighty Things' as textual evidence that 'Ali and, through him, eleven of his descendants were explicitly designated. Sunni scholars who accept the same hadith generally read the Ghadir Khumm declaration ('whoever I am the mawla of, 'Ali is his mawla') as an expression of praise, love, or a call to support 'Ali — not a formal transfer of political succession — and read the 'Two Weighty Things' as a general call to hold to the Qur'an and to honor and consult the Prophet's family, rather than as installing a specific line of infallible successors. Both traditions affirm deep love for 'Ali and the Prophet's family (Ahlul Bayt); the disagreement is over exactly who counts as their legitimate successor(s) in religious authority, and whether that succession is established by revelation-backed designation or by the community's own selection. This entry aims to describe both sides' reasoning as each tradition presents it, without adjudicating which is correct.",
+    "arabic": "",
+    "transliteration": "",
+    "source": {
+      "type": "book",
+      "title": "Principles of Faith (Usul al-Din) — \"The Divine Leadership (Imamat)\"; cross-referenced with The Origins and Early Development of Shi'a Islam, Ch. 11: The Doctrine of the Imamate",
+      "author": "Ayatullah Shaykh Husayn Wahid Khorasani; Sayyid Husayn Muhammad Ja'fari",
+      "url": "https://al-islam.org/principles-faith-usul-al-din-husayn-wahid-khorasani/divine-leadership-imamat",
+      "reference": "Primary: Principles of Faith (Usul al-Din), ch. \"The Divine Leadership (Imamat)\" (states the Sunni/Shia disagreement directly). Secondary/historical framing: al-islam.org/origins-and-early-development-shia-islam-sayyid-husayn-muhammad-jafari/chapter-11-doctrine-imamate. The description of the Sunni position (shura, Saqifah, ijma, the Rightly Guided Caliphs) is the author's own historical summary of well-documented mainstream Sunni doctrine, not quoted from a Sunni source fetched during this research pass — see DECISIONS-belief-sources.md."
+    },
+    "marja_specific": false,
+    "needs_source": false
+  }
+]

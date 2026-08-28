@@ -55,6 +55,37 @@
   --iznik-turquoise:  #1f8a83;
   --iznik-turquoise-br: #3fc2b8;
 
+  /* ---------- shrine / Twelver Shia practice rooms (room.html Jafari
+     track, Knowledge Center Track A/B) — 2026-08-25 ----------
+     A fourth, room-scoped register alongside the three above: the gold
+     and turquoise of the domes at Najaf, Karbala, and Kazimayn, plus a
+     deep cobalt night-sky blue. Kept separate from --gold/--jewel-*
+     above (which stay generic/shared) so this palette reads as
+     specific to these rooms rather than a silent retheme of the whole
+     design system. NOTE: the shared system's rule above is "no
+     figurative imagery, no calligraphy/religious text" -- these rooms
+     are a scoped, deliberate exception: calligraphic linework and
+     verified-source Arabic text are permitted here specifically (see
+     DECISIONS.md), but the figural-imagery ban (no depictions of the
+     Prophet or any Imam) is absolute and applies everywhere, no
+     exception. */
+  --shrine-gold:        #c9992e;
+  --shrine-gold-br:     #e8bc5c;
+  --shrine-turquoise:   #0e7c74;
+  --shrine-turquoise-br: #2bab9f;
+  --shrine-cobalt:      #16305c;
+  --shrine-cobalt-br:   #2d4f8a;
+
+  /* Muharram mode: mourning palette, first 10 days of Muharram peaking
+     on Ashura. Black ground, deep green (Karbala/Ahlul Bayt green, not
+     the shrine gold/turquoise above), muted gold trim only -- no bright
+     accents. Toggled via [data-muharram="on"] on <html>; see room.html. */
+  --muharram-black:     #0a0a0a;
+  --muharram-black-2:   #161616;
+  --muharram-green:     #1c2e22;
+  --muharram-green-br:  #33503d;
+  --muharram-gold-muted: #8a7038;
+
   /* ---------- spacing scale ---------- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
