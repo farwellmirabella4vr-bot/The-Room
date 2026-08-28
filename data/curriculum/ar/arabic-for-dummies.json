@@ -1237,14 +1237,14 @@
       "id": "u6",
       "number": 6,
       "title": "At the Office and Around the House",
-      "pages": "TBD",
+      "pages": "79-94",
       "goal": "Name common objects and describe everyday activities at the office and at home.",
       "unlocks": "u7",
       "lessons": [
         {
           "id": "u6l1",
           "title": "At the Office",
-          "pages": "TBD",
+          "pages": "79-89",
           "estMinutes": 70,
           "skills": [
             "reading",
@@ -1293,12 +1293,283 @@
               "translit": "ʿamal",
               "gloss": "work"
             }
+          ],
+          "bookPages": [
+            {
+              "page": 79,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p079.jpg",
+              "pageType": "study",
+              "title": "Chapter Opener — Managing the Office Environment",
+              "topics": [
+                "chapter overview",
+                "work and home vocabulary",
+                "workweek culture"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 15,
+              "instructions": [
+                "Read the 'In This Chapter' box first — three bullets telling you what you're accountable for.",
+                "Read the opening section straight through. You're orienting, not memorizing.",
+                "Note the two anchor words for house and office. Nearly everything in this chapter hangs off one or the other.",
+                "Read the Cultural Wisdom box properly. The workweek in most Arabic-speaking countries runs on different days than you're used to, and that detail shows up in conversation constantly.",
+                "Move on once you can say which two settings this chapter covers and name each in Arabic."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 80,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p080.jpg",
+              "pageType": "reference",
+              "title": "Office Vocabulary",
+              "topics": [
+                "office objects",
+                "workplace nouns"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 20,
+              "instructions": [
+                "Work down the list saying each item out loud with its pronunciation.",
+                "Mark the items that are physically near you right now. Those are the ones you'll actually retain, so drill them first.",
+                "Write the rest in your notebook grouped by where they live — desk, room, building.",
+                "Point at real objects around you and name them in Arabic. Anything you can't name, circle in your notebook.",
+                "Come back to the circled ones tomorrow rather than grinding them now."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 81,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p081.jpg",
+              "pageType": "study",
+              "title": "Interacting with Your Colleagues",
+              "topics": [
+                "job titles",
+                "workplace roles",
+                "gendered forms"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 25,
+              "instructions": [
+                "Read the intro paragraph before touching the lists — it frames why role vocabulary matters more in Arabic workplaces than you'd expect.",
+                "Notice that most role words come in masculine and feminine pairs. Learn both together; learning one and guessing the other will get you wrong endings.",
+                "Write out the pairs side by side in your notebook so the pattern between them is visible on the page.",
+                "Pick the five roles that describe people you actually deal with and say a sentence about each out loud.",
+                "Self-check: cover the Arabic and produce both gender forms from the English."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 82,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p082.jpg",
+              "pageType": "mixed",
+              "title": "Workplace Phrases and Talkin' the Talk",
+              "topics": [
+                "workplace phrases",
+                "dialogue"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 20,
+              "instructions": [
+                "Finish the phrase list from the previous page, reading each aloud.",
+                "Move to the Talkin' the Talk dialogue. Read it once silently for the gist — don't stop at unknown words.",
+                "Read it a second time out loud, taking both parts.",
+                "On the third pass, underline any phrase you'd actually use at work. Those are worth memorizing; the rest is context.",
+                "Dialogues are where isolated vocabulary turns into usable speech, so don't skip past them to get to the next list."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 83,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p083.jpg",
+              "pageType": "study",
+              "title": "Talkin' the Talk — Conference Report Dialogue",
+              "topics": [
+                "workplace dialogue",
+                "reporting",
+                "asking for status"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 20,
+              "instructions": [
+                "Read the whole exchange through once without looking anything up.",
+                "Read it again out loud, switching between the speakers so you hear both sides.",
+                "Find the question forms — asking whether something is ready or finished is the most reusable pattern on this page.",
+                "Cover the English and work through the Arabic alone. Check only where you stall.",
+                "Try replacing the subject of the conversation with something from your own work and say the exchange again."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 84,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p084.jpg",
+              "pageType": "reference",
+              "title": "Words to Know — Office Terms",
+              "topics": [
+                "vocabulary consolidation",
+                "office terms"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 25,
+              "instructions": [
+                "This box collects the chapter's office vocabulary in one place. Treat it as your checkpoint, not new material.",
+                "Cover the English column and work down the list. Mark anything you can't produce.",
+                "Copy only the marked items into your notebook. Copying words you already know wastes the session.",
+                "Note the masculine and feminine markers — several entries change form depending on who you're describing.",
+                "Repeat the cover-and-test until you can clear the full list twice in a row."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 85,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p085.jpg",
+              "pageType": "study",
+              "title": "Giving Orders — The Imperative",
+              "topics": [
+                "imperative mood",
+                "command forms",
+                "verb roots"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 30,
+              "instructions": [
+                "This is the grammar core of the chapter. Slow down — the vocabulary pages were warm-up.",
+                "Read the explanation of how the imperative is built from the regular verb before looking at any table.",
+                "The key idea: commands are derived from a form you already know, not learned separately. Make sure that's clear before continuing.",
+                "Write out the derivation for two or three verbs in your notebook, showing the regular form and the command form side by side.",
+                "Say each command out loud. Imperatives are spoken forms — reading them silently doesn't build the reflex."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 86,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p086.jpg",
+              "pageType": "reference",
+              "title": "Imperative Tables and Supplying Your Office",
+              "topics": [
+                "imperative conjugation",
+                "office supplies"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 30,
+              "instructions": [
+                "Work through the imperative tables one pronoun at a time. Look across the row: pronoun, regular form, command form.",
+                "The pattern repeats across verbs. Once you see it in the first table, the second should confirm rather than surprise you.",
+                "Copy one full table into your notebook by hand. Copying a conjugation table is one of the few times rote writing genuinely helps.",
+                "Move to the office supplies list and read each item aloud.",
+                "Combine the two halves of the page: give yourself commands about supplies out loud. That pairing is the point of putting them together."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 87,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p087.jpg",
+              "pageType": "mixed",
+              "title": "Computer and Equipment Terms",
+              "topics": [
+                "technology vocabulary",
+                "office equipment",
+                "pronoun forms"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 25,
+              "instructions": [
+                "Read the equipment list, noting how many terms are borrowed from English and just adapted to Arabic sounds.",
+                "Those borrowed ones need recognition only. Give them one pass and spend your time on the native terms.",
+                "Study the pronoun table at the bottom carefully — this is the scaffolding for talking about who owns or uses what.",
+                "Write five sentences in your notebook pairing a pronoun with a piece of equipment.",
+                "Say each sentence out loud before moving on."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 88,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p088.jpg",
+              "pageType": "study",
+              "title": "Pronoun Forms and Talkin' the Talk",
+              "topics": [
+                "pronouns",
+                "possession",
+                "workplace dialogue"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 20,
+              "instructions": [
+                "Finish the pronoun table, reading each row across so the pronoun and its form stay linked.",
+                "Move into the dialogue. First pass silently for gist.",
+                "Second pass out loud, taking both speakers.",
+                "Find the pronouns in the dialogue and connect each back to the table you just read. Seeing them used is what makes the table stick.",
+                "Note how the exchange opens and closes — greetings and sign-offs transfer to almost any workplace conversation."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 89,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p089.jpg",
+              "pageType": "mixed",
+              "title": "Words to Know, and Life at Home",
+              "topics": [
+                "apology phrases",
+                "transition to home vocabulary"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 20,
+              "instructions": [
+                "Finish the dialogue at the top of the page.",
+                "Work the Words to Know box — it's short. Note that the apology form changes depending on whether a man or a woman is speaking.",
+                "Say both forms out loud and use the one that applies to you until it's automatic.",
+                "The Life at Home section starts the chapter's second half. Read the intro and mentally switch settings from office to house.",
+                "Good stopping point if you're running low on focus. The home vocabulary deserves a fresh session."
+              ],
+              "isAssessment": false
+            }
           ]
         },
         {
           "id": "u6l2",
           "title": "Around the House",
-          "pages": "TBD",
+          "pages": "90-94",
           "estMinutes": 70,
           "skills": [
             "reading",
@@ -1346,6 +1617,133 @@
               "term": "مطبخ",
               "translit": "maṭbakh",
               "gloss": "kitchen"
+            }
+          ],
+          "bookPages": [
+            {
+              "page": 90,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p090.jpg",
+              "pageType": "reference",
+              "title": "Rooms of the House",
+              "topics": [
+                "rooms",
+                "household spaces",
+                "prepositions of place"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 25,
+              "instructions": [
+                "Read the room list aloud, then walk through your actual home naming each room in Arabic as you enter it.",
+                "That physical walkthrough does more for retention than three passes at the list.",
+                "Note the words for items that live in specific rooms — they're grouped that way on purpose.",
+                "Write each room in your notebook with two things that belong in it.",
+                "Self-check: name every room in your home in Arabic without looking."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 91,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p091.jpg",
+              "pageType": "mixed",
+              "title": "Family Life in a Middle Eastern Home",
+              "topics": [
+                "family vocabulary",
+                "cultural context",
+                "dialogue"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 25,
+              "instructions": [
+                "Read the cultural section properly rather than skimming to the dialogue. It explains household norms that make the vocabulary make sense.",
+                "Note which family relationships get their own specific word where English uses a general one. Those distinctions matter and have no English shortcut.",
+                "Read the Talkin' the Talk dialogue once silently, then once out loud taking every part.",
+                "Map each speaker to their family role as you read.",
+                "Try describing your own household using the vocabulary from this page."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 92,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p092.jpg",
+              "pageType": "study",
+              "title": "Talkin' the Talk — Around the House",
+              "topics": [
+                "household dialogue",
+                "requests",
+                "locating objects"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 20,
+              "instructions": [
+                "Read the exchange through once for gist.",
+                "Read it again out loud taking every speaker.",
+                "Find the question about where something is. That pattern is one of the highest-value structures in the whole chapter — you'll use it daily.",
+                "Notice the imperatives appearing naturally in the household requests. That's the grammar from page 85 showing up in real speech.",
+                "Cover the English and work the Arabic alone before moving on."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 93,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p093.jpg",
+              "pageType": "reference",
+              "title": "Words to Know — Household Terms",
+              "topics": [
+                "household vocabulary",
+                "consolidation"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 25,
+              "instructions": [
+                "Second checkpoint box of the chapter — this one covers the home half.",
+                "Cover the English and work down the list. Mark what you can't produce.",
+                "Copy only the marked items into your notebook.",
+                "Then do the reverse: cover the Arabic and produce it from the English. That direction is harder and is what the exercise on the next page will test.",
+                "Clear the list twice in a row before attempting Fun & Games."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 94,
+              "image": "data/curriculum/ar/textbook-images/chapter-06/p094.jpg",
+              "pageType": "exercise",
+              "title": "Fun & Games — Label the Household Scene",
+              "topics": [
+                "household vocabulary",
+                "picture labelling",
+                "review"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil",
+                "Appendix C for answers"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 20,
+              "instructions": [
+                "Write answers in your notebook, not in the book, so you can retake this later.",
+                "Work from the illustration to the word, not the other way round. That direction is what recall actually looks like.",
+                "Attempt every item before checking anything. Guess rather than skip — a wrong guess you then correct sticks better than a blank.",
+                "Check against Appendix C at the back of the book.",
+                "Anything you missed, go back to the Words to Know box on page 93, redrill just those items, and retake this tomorrow.",
+                "Bar for finishing Chapter 6: you can name the rooms of a house, the main office objects, and form a command from a regular verb without looking it up."
+              ],
+              "isAssessment": true
             }
           ]
         }
