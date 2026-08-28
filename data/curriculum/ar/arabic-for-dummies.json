@@ -834,14 +834,14 @@
       "id": "u5",
       "number": 5,
       "title": "Numbers, Dates, and Measurements",
-      "pages": "TBD",
+      "pages": "71-77",
       "goal": "Count, tell dates, and describe quantities and measurements in Arabic.",
       "unlocks": "u6",
       "lessons": [
         {
           "id": "u5l1",
           "title": "Numbers",
-          "pages": "TBD",
+          "pages": "71-73",
           "estMinutes": 75,
           "skills": [
             "reading",
@@ -890,12 +890,105 @@
               "translit": "thalātha",
               "gloss": "three"
             }
+          ],
+          "bookPages": [
+            {
+              "page": 71,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p071.jpg",
+              "pageType": "study",
+              "title": "Chapter Opener — Talking Numbers",
+              "topics": [
+                "chapter overview",
+                "why numbers matter",
+                "number vocabulary intro"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 10,
+              "thingsToRemember": [
+                "Numbers are not a side topic in Arabic — they feed directly into days, months, prices, and weather, so this chapter unlocks a lot of ordinary conversation.",
+                "The single biggest thing to hold onto from this page: Arabic script runs right to left, but Arabic numerals run left to right, the same direction as English."
+              ],
+              "instructions": [
+                "Read the 'In This Chapter' box first. It's three lines and it tells you exactly what you're accountable for by the end.",
+                "Read the opening section straight through without taking notes. You're orienting, not studying.",
+                "Slow down at the paragraph explaining number direction. This is the one idea on the page that will save you confusion on every page after it.",
+                "Move on as soon as you can state out loud, in your own words, why numbers run the opposite direction from the script."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 72,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p072.jpg",
+              "pageType": "reference",
+              "title": "Arabic Numerals 0–10 and 11–20",
+              "topics": [
+                "numerals 0-10",
+                "numerals 11-20",
+                "pronunciation"
+              ],
+              "audio": [
+                "AR-CH05-01"
+              ],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 30,
+              "thingsToRemember": [
+                "Learn 0 through 10 cold before you touch the teens. The teens are built out of them, so time spent here pays twice.",
+                "Read each numeral, its pronunciation, and its value as one unit. Learning the shape without the sound leaves you unable to use it in speech."
+              ],
+              "instructions": [
+                "Cover the English column and work down the first table, saying each numeral out loud. Uncover to check.",
+                "Write the numerals 0 through 10 in your notebook, one line each, until the shapes come without hesitation.",
+                "Only then move to the second table. Notice the teens follow a repeating construction rather than being ten new words to memorise.",
+                "Play the chapter audio and shadow the pronunciations — say them at the same time as the recording, not after.",
+                "Self-check before moving on: have someone call out a number 0 to 20 in English and write the Arabic numeral from memory."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 73,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p073.jpg",
+              "pageType": "reference",
+              "title": "Numerals 20–100, and the Days of the Week",
+              "topics": [
+                "numerals 20-100",
+                "tens suffix",
+                "days of the week"
+              ],
+              "audio": [
+                "AR-CH05-01"
+              ],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 30,
+              "thingsToRemember": [
+                "The tens work like the English '-ty' ending — one suffix does the job across the whole range, so this is a pattern to learn once, not nine words to memorise.",
+                "The days of the week are derived from the numbers. If you know the numerals, you already have most of the week for free.",
+                "Spotting the number root inside a day name is the skill being trained here, not raw memorisation."
+              ],
+              "instructions": [
+                "Read the tip about the tens suffix before you look at the table. Going in with the pattern makes the table read as confirmation instead of a list.",
+                "Go down the 20–100 table and say each one out loud, listening for the shared ending.",
+                "Move to the days section. For each day, find the number hiding inside it and write the pair in your notebook — the day and the number it comes from.",
+                "Say the days in order, from memory, twice.",
+                "If a day feels arbitrary, you've probably missed its number root. Go back and find it before continuing."
+              ],
+              "isAssessment": false
+            }
           ]
         },
         {
           "id": "u5l2",
           "title": "Days, Months & Dates",
-          "pages": "TBD",
+          "pages": "74-75",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -944,12 +1037,74 @@
               "translit": "al-yawm",
               "gloss": "today"
             }
+          ],
+          "bookPages": [
+            {
+              "page": 74,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p074.jpg",
+              "pageType": "study",
+              "title": "The Remaining Days, and the Two Calendars",
+              "topics": [
+                "Friday and Saturday",
+                "Gregorian calendar",
+                "Islamic calendar",
+                "cultural note"
+              ],
+              "audio": [],
+              "materials": [],
+              "needsNotebook": false,
+              "estMinutes": 20,
+              "thingsToRemember": [
+                "Two of the days break the number pattern — those are the ones that need separate attention, and they carry the cultural weight of the week.",
+                "Arabic speakers work with more than one calendar system, so knowing month names in only one of them leaves real gaps.",
+                "The Gregorian month names will feel familiar. Read them as a light pass, not a memorisation drill."
+              ],
+              "instructions": [
+                "Read the top of the page and note which days are not derived from numbers, and why.",
+                "Read the Cultural Wisdom box properly rather than skipping it. It explains the meaning behind a day name, and meaning is what makes vocabulary stick.",
+                "Read the explanation of the two calendar systems and be able to state the difference between them in one sentence.",
+                "Skim the Gregorian month table — these are close enough to English that you only need recognition, not drilling.",
+                "Do not try to memorise both calendars in one sitting. Gregorian today, Islamic on the next page."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 75,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p075.jpg",
+              "pageType": "reference",
+              "title": "The Islamic Calendar and the Seasons",
+              "topics": [
+                "Islamic months",
+                "lunar vs solar",
+                "seasons"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 30,
+              "thingsToRemember": [
+                "The Islamic months are genuinely new vocabulary — unlike the Gregorian ones, nothing here is guessable from English.",
+                "Because the Islamic calendar follows the lunar cycle, its months do not line up with Gregorian months. Trying to map them one-to-one will mislead you.",
+                "You already know several of these month names from the religious calendar, so lean on what you have rather than starting from zero."
+              ],
+              "instructions": [
+                "Work down the Islamic calendar table slowly, saying each month out loud.",
+                "Mark the months you already recognise from religious practice. Those are done — spend your time on the rest.",
+                "Write the unfamiliar months in your notebook, grouped in threes. Three at a time is a manageable memorisation chunk; twelve at once is not.",
+                "Read the note on why the two calendars drift apart, and make sure you understand that a given Islamic month is not fixed to any Gregorian one.",
+                "Finish with the four seasons at the bottom of the page — a short, easy win to close the session on."
+              ],
+              "isAssessment": false
+            }
           ]
         },
         {
           "id": "u5l3",
           "title": "Measurements",
-          "pages": "TBD",
+          "pages": "76-77",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -997,6 +1152,72 @@
               "term": "طول",
               "translit": "ṭūl",
               "gloss": "length"
+            }
+          ],
+          "bookPages": [
+            {
+              "page": 76,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p076.jpg",
+              "pageType": "study",
+              "title": "Size Matters — Measuring in Arabic",
+              "topics": [
+                "units of measurement",
+                "length",
+                "weight",
+                "practical vocabulary"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 15,
+              "thingsToRemember": [
+                "This is a short list of high-frequency, immediately usable words — shopping, cooking, directions, describing anything.",
+                "Several units are borrowed from the metric system and will sound close to their English equivalents, so the list is smaller than it first looks.",
+                "Measurement words pair naturally with the numbers you just learned. Practising them together is more efficient than practising either alone."
+              ],
+              "instructions": [
+                "Read the list once and separate it into two groups: the units that sound close to English and the ones that don't.",
+                "The near-English ones need recognition only. Give them one pass.",
+                "Write the remaining units in your notebook with a real-world example beside each.",
+                "Combine what you know: say several measurements out loud pairing a number from earlier in the chapter with a unit from this page.",
+                "Test yourself by describing three objects near you using a number plus a unit."
+              ],
+              "isAssessment": false
+            },
+            {
+              "page": 77,
+              "image": "data/curriculum/ar/textbook-images/chapter-05/p077.jpg",
+              "pageType": "exercise",
+              "title": "Fun & Games — Name the Four Seasons",
+              "topics": [
+                "seasons",
+                "picture matching",
+                "review"
+              ],
+              "audio": [],
+              "materials": [
+                "Practice notebook",
+                "Pen or pencil",
+                "Appendix C for answers"
+              ],
+              "needsNotebook": true,
+              "estMinutes": 15,
+              "thingsToRemember": [
+                "Write answers in your notebook, not in the book, so you can retake this later.",
+                "This checks recall of the seasons from page 75. If it feels hard, the gap is on that page, not this one."
+              ],
+              "instructions": [
+                "Label your notebook A through D to match the four illustrations.",
+                "Work out each season from the picture and write it in Arabic. Attempt all four before checking anything.",
+                "Resist flipping back to page 75 mid-exercise — testing yourself is what moves the vocabulary into memory, and looking it up skips that.",
+                "Check your answers against Appendix C at the back of the book.",
+                "Anything you missed, return to page 75, redrill just that season, and retake the exercise tomorrow.",
+                "Bar for finishing Chapter 5: you can count 0 to 100, name the days and both sets of months, and use a handful of measurement units in a sentence."
+              ],
+              "isAssessment": true
             }
           ]
         }

@@ -5,6 +5,7 @@
   Takes a folder shaped like:
     <section-folder>/
       pages/           real photographs of textbook pages
+      audio/           (optional) the audio files named in manifest.audioTracksAvailable
       manifest.json    per-page metadata (see the format below)
 
   ...and:
@@ -13,13 +14,20 @@
        A page whose image file is missing from pages/ is NOT skipped silently --
        its metadata still merges in (so you can review instructions/topics
        before the photo exists), but it's called out clearly at the end.
-    2. Matches each page to an EXISTING lesson in the target curriculum file by
+    2. If manifest.audioTracksAvailable is present, copies audio/*.mp3 into
+       data/curriculum/<lang>/audio/<audioDir>/ and merges each track's id/file
+       into data/curriculum/<lang>/audio-index.json (created fresh if it
+       doesn't exist yet; existing tracks and sections are preserved, not
+       overwritten -- safe to re-run, and safe to run again for a later
+       section of the same book).
+    3. Matches each page to an EXISTING lesson in the target curriculum file by
        page-number containment against that lesson's own `pages` range. This
        script never invents or renames a lesson -- if a page doesn't fall in
        any existing lesson's range, it's reported as unmatched, not guessed.
-    3. Merges into each matched lesson's new `bookPages` array (one entry per
-       photographed page, in book order) -- every other existing field on
-       that lesson is left exactly as it was.
+    4. Merges into each matched lesson's new `bookPages` array (one entry per
+       photographed page, in book order, including `thingsToRemember` if the
+       manifest provides it) -- every other existing field on that lesson is
+       left exactly as it was.
 
   Boundary pages (a book page that falls inside TWO existing lessons' ranges,
   e.g. page 14 is inside both u2l2's "13-14" and u2l3's "14-15") are
@@ -34,6 +42,10 @@
                          Default: data/curriculum/fa/rw-farsi.json
     --section-id ID     Used for the destination image folder name.
                          Default: the section folder's own directory name.
+    --audio-dir NAME    Used for the destination audio folder name
+                         (data/curriculum/<lang>/audio/<NAME>/).
+                         Default: the curriculum's own id with its language
+                         prefix stripped (e.g. "ar-arabic-for-dummies" -> "arabic-for-dummies").
     --override P:L      Force page P to lesson id L (repeatable), for
                          boundary pages more than one lesson's range claims.
     --dry-run           Report the mapping without writing anything.
@@ -50,6 +62,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (a === "--curriculum") args.curriculum = argv[++i];
     else if (a === "--section-id") args.sectionId = argv[++i];
+    else if (a === "--audio-dir") args.audioDir = argv[++i];
     else if (a === "--dry-run") args.dryRun = true;
     else if (a === "--override") {
       const [page, lessonId] = String(argv[++i]).split(":");
@@ -182,6 +195,55 @@ function main() {
     console.log("  Metadata for these still merges below -- re-run this script once the photos are in place to pick up the images.");
   }
 
+  // ---- Step 2b: copy audio + merge audio-index.json (only if the manifest names any tracks) ----
+  const audioTracks = Array.isArray(manifest.audioTracksAvailable) ? manifest.audioTracksAvailable : [];
+  if (audioTracks.length) {
+    const audioDirName = args.audioDir || String(curriculum.id || "").replace(new RegExp("^" + languageId + "-"), "");
+    const audioDestDir = path.resolve(ROOT, "data/curriculum/" + languageId + "/audio/" + audioDirName);
+    const audioIndexPath = path.resolve(ROOT, "data/curriculum/" + languageId + "/audio-index.json");
+    fs.mkdirSync(audioDestDir, { recursive: true });
+
+    const missingAudio = [];
+    const copiedAudio = [];
+    audioTracks.forEach((t) => {
+      const srcPath = path.join(sectionFolder, "audio", t.file);
+      const destPath = path.join(audioDestDir, t.file);
+      if (!fs.existsSync(srcPath)) { missingAudio.push(t.file); return; }
+      if (!fs.existsSync(destPath) || fs.statSync(srcPath).size !== fs.statSync(destPath).size) {
+        fs.copyFileSync(srcPath, destPath);
+        copiedAudio.push(t.file);
+      }
+    });
+    console.log("\nAudio: " + copiedAudio.length + " copied, " +
+      (audioTracks.length - copiedAudio.length - missingAudio.length) + " already present, " +
+      missingAudio.length + " missing from " + path.join(sectionFolder, "audio") + "/.");
+    if (missingAudio.length) console.log("  Missing: " + missingAudio.join(", "));
+
+    let audioIndex;
+    if (fs.existsSync(audioIndexPath)) {
+      audioIndex = JSON.parse(fs.readFileSync(audioIndexPath, "utf8"));
+      audioIndex.tracks = audioIndex.tracks || {};
+      audioIndex.sections = audioIndex.sections || {};
+    } else {
+      audioIndex = {
+        book: (manifest.source && manifest.source.book) || curriculum.title,
+        generatedOn: new Date().toISOString().slice(0, 10),
+        audioPath: "audio/" + audioDirName + "/",
+        sections: {},
+        tracks: {},
+      };
+    }
+    let tracksAdded = 0;
+    audioTracks.forEach((t) => {
+      if (!audioIndex.tracks[t.id]) tracksAdded++;
+      audioIndex.tracks[t.id] = t.file;
+    });
+    audioIndex.sections[sectionId] = audioTracks.map((t) => t.id);
+    audioIndex.generatedOn = new Date().toISOString().slice(0, 10);
+    fs.writeFileSync(audioIndexPath, JSON.stringify(audioIndex, null, 2) + "\n", "utf8");
+    console.log("Audio index: " + tracksAdded + " new track(s) merged into " + audioIndexPath);
+  }
+
   // ---- Step 3: merge into the curriculum file, grouped by lesson ----
   const byLesson = {};
   resolved.forEach((r) => { (byLesson[r.lessonId] = byLesson[r.lessonId] || []).push(r); });
@@ -205,6 +267,7 @@ function main() {
           materials: Array.isArray(p.materials) ? p.materials : [],
           needsNotebook: !!p.needsNotebook,
           estMinutes: typeof p.estMinutes === "number" ? p.estMinutes : null,
+          thingsToRemember: Array.isArray(p.thingsToRemember) ? p.thingsToRemember : [],
           instructions: Array.isArray(p.instructions) ? p.instructions : [],
           isAssessment: !!p.isAssessment,
         };

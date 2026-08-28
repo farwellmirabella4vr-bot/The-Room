@@ -952,6 +952,29 @@
     color: var(--text);
   }
 
+  /* Things to Remember: retention notes, not steps -- a quieter callout
+     card (same left-border language as .curr-objective-card elsewhere in
+     this file) sitting above the numbered instructions so "what to hold
+     onto" reads as a distinct kind of content from "what to do next". */
+  .curr-things-remember {
+    margin-top: 0.6rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.8rem;
+  }
+  .curr-things-remember:empty { display: none; }
+  .curr-things-remember-eyebrow {
+    font-size: 0.66rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary-dark);
+    margin-bottom: 0.25rem;
+  }
+  .curr-things-remember-list { list-style: disc; margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.25rem; }
+  .curr-things-remember-list li { font-size: 0.78rem; line-height: 1.4; color: var(--text); }
+
   .curr-page-instructions { list-style: decimal; margin: 0.55rem 0 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.3rem; }
   .curr-page-instructions li { font-size: 0.8rem; line-height: 1.4; }
 
@@ -2930,7 +2953,7 @@
   }
   // Returns a track's file path, or null when it isn't playable yet -- the
   // manifest hasn't loaded, or the track just isn't in it (e.g. the mp3s
-  // haven't been downloaded via get-farsi-audio.ps1 yet). Callers use null
+  // aren't in that language's audio-index.json yet). Callers use null
   // to disable the button rather than ever failing silently.
   function resolveAudioPath(languageId, trackId) {
     const idx = audioIndexByLang[languageId];
@@ -2994,7 +3017,7 @@
       btn.textContent = (playing ? "⏸ " : "▶ ") + trackId;
       if (!path) {
         btn.disabled = true;
-        btn.title = 'Track "' + trackId + '" isn\'t downloaded yet — run get-farsi-audio.ps1, then reload this page.';
+        btn.title = 'Track "' + trackId + '" isn\'t available yet — add it to this language\'s audio-index.json, then reload this page.';
       } else {
         anyResolved = true;
         btn.addEventListener("click", () => toggleTrack(languageId, trackId));
@@ -4159,6 +4182,10 @@
     audioChips.className = "curr-audiotrack-chips";
     frame.appendChild(audioChips);
 
+    const thingsToRememberBlock = document.createElement("div");
+    thingsToRememberBlock.className = "curr-things-remember";
+    frame.appendChild(thingsToRememberBlock);
+
     const instructionsList = document.createElement("ol");
     instructionsList.className = "curr-page-instructions";
     frame.appendChild(instructionsList);
@@ -4217,6 +4244,23 @@
         chip.textContent = trackId;
         audioChips.appendChild(chip);
       });
+
+      thingsToRememberBlock.innerHTML = "";
+      const remember = page.thingsToRemember || [];
+      if (remember.length) {
+        const eyebrow = document.createElement("div");
+        eyebrow.className = "curr-things-remember-eyebrow";
+        eyebrow.textContent = "Things to remember";
+        thingsToRememberBlock.appendChild(eyebrow);
+        const list = document.createElement("ul");
+        list.className = "curr-things-remember-list";
+        remember.forEach((note) => {
+          const li = document.createElement("li");
+          li.innerHTML = renderMixedScript(note);
+          list.appendChild(li);
+        });
+        thingsToRememberBlock.appendChild(list);
+      }
 
       instructionsList.innerHTML = "";
       (page.instructions || []).forEach((step) => {
