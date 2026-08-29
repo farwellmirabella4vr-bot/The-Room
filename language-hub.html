@@ -1020,6 +1020,44 @@
   }
   .curr-checkpoint-row strong { color: var(--secondary); }
 
+  /* ---------- curriculum: SPANISH 1 book dividers + on-demand practice ---------- */
+  .curr-book-divider {
+    margin: 1.5rem 0 0.7rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.3rem;
+  }
+  .curr-book-divider > span {
+    display: inline-block;
+    background: var(--secondary);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.05rem 0.45rem;
+    margin-right: 0.45rem;
+    font-size: 0.78rem;
+  }
+  .curr-book-divider .curr-book-pages {
+    background: transparent;
+    color: var(--text-dim);
+    font-weight: 400;
+    font-size: 0.78rem;
+    margin-left: 0.4rem;
+  }
+  .curr-appendix-sections { margin: 0.3rem 0 0.2rem 1.1rem; font-size: 0.8rem; color: var(--text-dim); }
+  .curr-gen-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+  .curr-gen { flex: 1 1 100%; }
+  .curr-gen-host { margin-top: 0.5rem; }
+  .curr-gen-note, .curr-gen-error { font-size: 0.75rem; color: var(--text-dim); margin: 0.2rem 0 0.5rem; }
+  .curr-gen-error { color: #b3261e; }
+  .curr-gen-item { border-left: 3px solid rgba(0, 0, 0, 0.15); padding: 0.3rem 0 0.3rem 0.6rem; margin-bottom: 0.5rem; }
+  .curr-gen-q { font-size: 0.85rem; }
+  .curr-gen-tag { font-size: 0.68rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.03em; margin-left: 0.3rem; }
+  .curr-gen-meta { font-size: 0.72rem; color: var(--secondary); margin-top: 0.15rem; }
+  .curr-gen-reveal { font-size: 0.72rem; margin-top: 0.3rem; padding: 0.1rem 0.45rem; }
+  .curr-gen-a { font-size: 0.82rem; margin-top: 0.3rem; padding: 0.35rem 0.55rem; background: rgba(0, 0, 0, 0.05); border-radius: 4px; white-space: pre-wrap; }
+
   .curr-progress-stats { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-bottom: 1rem; }
   .curr-progress-stats > div { display: flex; flex-direction: column; gap: 0.1rem; }
 
@@ -4375,6 +4413,234 @@
     return row;
   }
 
+  // ============================================================
+  // SPANISH 1 — on-demand practice generator
+  // Homework and chapter tests are generated fresh via the Anthropic API when
+  // you click a button. The model is given ONLY the topic label and page range
+  // from the module JSON — never any text from the book — and is told not to
+  // recall or reconstruct the book. Every generated item cites a page to check
+  // against your physical copy. Nothing is persisted: each click is a new set.
+  // Reuses the API key + model already used by the video "native breakdown".
+  // ============================================================
+  const curriculumPractice = {}; // `${refId}:${mode}` -> { loading } | { error } | { items } — in-memory only
+
+  async function fetchPracticeItems(spec) {
+    const key = getAnthropicKey();
+    if (!key) {
+      return { ok: false, error: 'No Anthropic API key saved yet. Open the Video diary tab → "Native breakdown — AI settings" and paste one in (the same key is used here).' };
+    }
+    const isTest = spec.mode === "test";
+    const count = isTest ? 12 : 8;
+    const system =
+      "You generate original Spanish practice for a self-studying adult learner. You are given ONLY a " +
+      "topic label and a page range from the table of contents of a Spanish textbook. You do NOT have " +
+      "the book. Do not recall, quote, paraphrase, or reconstruct the book's explanations, examples, " +
+      "exercises, word lists, or passages. Write your own fresh items on the topic, pitched at a learner " +
+      "who has just read those pages. Never reproduce copyrighted text. Output STRICT JSON only — no " +
+      "markdown fence, no commentary.";
+    const user =
+      "Make " + (isTest ? "a chapter test" : "a homework set") + ": " + count + " items on the topic \"" + spec.topic + "\".\n" +
+      "Calibration context (do NOT try to match the book's wording): Book " + spec.bookNumber + " \"" + spec.bookTitle +
+      "\", " + spec.chapterLabel + " \"" + spec.title + "\", pages " + spec.pageStart + "-" + spec.pageEnd + ".\n" +
+      "Mix item types: fill-in-the-blank, conjugate the verb, translate a short phrase (either direction), " +
+      "correct the error, short answer. The learner writes answers by hand in a notebook — no multiple choice, " +
+      "nothing that needs a screen.\n" +
+      'Return JSON exactly: {"items":[{"n":1,"type":"...","skill":"grammar|vocabulary|reading|writing",' +
+      '"prompt":"...","answer":"...","checkPage":<integer ' + spec.pageStart + "-" + spec.pageEnd + '>}]}. ' +
+      "Every checkPage must be within " + spec.pageStart + "-" + spec.pageEnd + ".";
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "x-api-key": key,
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
+        },
+        body: JSON.stringify({
+          model: ANTHROPIC_MODEL,
+          max_tokens: 1600,
+          system: system,
+          messages: [{ role: "user", content: user }],
+        }),
+      });
+      if (!res.ok) {
+        const detail = await res.text().catch(() => "");
+        return { ok: false, error: "Request failed (" + res.status + "). " + (detail ? detail.slice(0, 200) : "Check the API key.") };
+      }
+      const data = await res.json();
+      const text = (data.content || []).map((c) => c.text || "").join("").trim();
+      const match = text.match(/\{[\s\S]*\}/);
+      if (!match) return { ok: false, error: "The model didn't return usable JSON — try again." };
+      let parsed;
+      try { parsed = JSON.parse(match[0]); } catch (e) { return { ok: false, error: "The model's JSON didn't parse — try again." }; }
+      const items = (Array.isArray(parsed.items) ? parsed.items : [])
+        .map((it, i) => ({
+          n: i + 1,
+          type: String(it.type || "").slice(0, 40),
+          skill: String(it.skill || "").slice(0, 20),
+          prompt: String(it.prompt || "").slice(0, 700),
+          answer: String(it.answer || "").slice(0, 700),
+          checkPage: Number.isInteger(it.checkPage) && it.checkPage >= spec.pageStart && it.checkPage <= spec.pageEnd ? it.checkPage : null,
+        }))
+        .filter((it) => it.prompt);
+      if (!items.length) return { ok: false, error: "No items came back — try again." };
+      return { ok: true, items: items };
+    } catch (e) {
+      return { ok: false, error: "Network/request error: " + e.message };
+    }
+  }
+
+  function renderPracticeItems(host, state, spec) {
+    host.innerHTML = "";
+    if (!state) return;
+    if (state.loading) { host.textContent = "Generating…"; return; }
+    if (state.error) {
+      const p = document.createElement("p");
+      p.className = "curr-gen-error";
+      p.textContent = state.error;
+      host.appendChild(p);
+      return;
+    }
+    if (!state.items) return;
+    const note = document.createElement("p");
+    note.className = "curr-gen-note";
+    note.textContent =
+      "Fresh set — write these out by hand in your notebook, then check each answer against the page it cites. " +
+      "Regenerate any time for a different set; nothing here is saved.";
+    host.appendChild(note);
+    state.items.forEach((it) => {
+      const row = document.createElement("div");
+      row.className = "curr-gen-item";
+      const q = document.createElement("div");
+      q.className = "curr-gen-q";
+      q.innerHTML = "<strong>" + it.n + ".</strong> " + escapeHtml(it.prompt) +
+        (it.type || it.skill ? ' <span class="curr-gen-tag">' + escapeHtml(it.type || it.skill) + "</span>" : "");
+      row.appendChild(q);
+      const meta = document.createElement("div");
+      meta.className = "curr-gen-meta";
+      meta.textContent = it.checkPage ? "check p. " + it.checkPage : "check pp. " + spec.pageStart + "-" + spec.pageEnd;
+      row.appendChild(meta);
+      if (it.answer) {
+        const revealBtn = document.createElement("button");
+        revealBtn.type = "button";
+        revealBtn.className = "curr-gen-reveal";
+        revealBtn.textContent = "show answer";
+        const ans = document.createElement("div");
+        ans.className = "curr-gen-a";
+        ans.hidden = true;
+        ans.textContent = it.answer;
+        revealBtn.addEventListener("click", () => {
+          ans.hidden = !ans.hidden;
+          revealBtn.textContent = ans.hidden ? "show answer" : "hide answer";
+        });
+        row.appendChild(revealBtn);
+        row.appendChild(ans);
+      }
+      host.appendChild(row);
+    });
+  }
+
+  // Adds a "Generate …" button + results area for one (refId, mode) pair.
+  function attachPracticeGenerator(container, opts) {
+    const wrap = document.createElement("div");
+    wrap.className = "curr-gen";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "filter-pill";
+    const cacheKey = opts.refId + ":" + opts.spec.mode;
+    btn.textContent = curriculumPractice[cacheKey] && curriculumPractice[cacheKey].items ? "Regenerate" : opts.buttonLabel;
+    const host = document.createElement("div");
+    host.className = "curr-gen-host";
+    renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
+    btn.addEventListener("click", async () => {
+      curriculumPractice[cacheKey] = { loading: true };
+      btn.disabled = true;
+      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
+      const result = await fetchPracticeItems(opts.spec);
+      curriculumPractice[cacheKey] = result.ok ? { items: result.items } : { error: result.error };
+      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
+      btn.disabled = false;
+      btn.textContent = result.ok ? "Regenerate" : opts.buttonLabel;
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(host);
+    container.appendChild(wrap);
+  }
+
+  function attachUnitPractice(details, unit) {
+    if (!unit.topic) return;
+    const parts = String(unit.pages).split("-");
+    const spec = {
+      bookNumber: unit.bookNumber,
+      bookTitle: unit.bookTitle || "",
+      chapterLabel: unit.chapterNumber != null ? "Chapter " + unit.chapterNumber : (unit.appendix ? "Appendix " + unit.appendix : "Chapter"),
+      title: unit.title,
+      topic: unit.topic,
+      pageStart: Number(parts[0]),
+      pageEnd: Number(parts[1] || parts[0]),
+    };
+    const row = document.createElement("div");
+    row.className = "curr-gen-row";
+    attachPracticeGenerator(row, { refId: unit.id, buttonLabel: "Generate homework", spec: Object.assign({}, spec, { mode: "homework" }) });
+    attachPracticeGenerator(row, { refId: unit.id, buttonLabel: "Generate chapter test", spec: Object.assign({}, spec, { mode: "test" }) });
+    details.appendChild(row);
+  }
+
+  function buildAppendixesSection(mod) {
+    const box = document.createElement("div");
+    const refBook = (mod.books || []).find((b) => b.reference);
+    const head = document.createElement("div");
+    head.className = "curr-book-divider";
+    head.innerHTML = "<span>Book 5</span>" + escapeHtml((refBook && refBook.title) || "Appendixes") +
+      '<span class="curr-book-pages">reference — not gated, no tests</span>';
+    box.appendChild(head);
+    (mod.appendixes || []).forEach((ap) => {
+      const d = document.createElement("details");
+      d.className = "curr-unit";
+      const s = document.createElement("summary");
+      s.innerHTML = "Appendix " + escapeHtml(ap.appendix) + " — " + escapeHtml(ap.title) +
+        '<span class="curr-unit-pages">pp. ' + escapeHtml(ap.pages) + "</span>";
+      d.appendChild(s);
+      const g = document.createElement("p");
+      g.className = "curr-unit-goal";
+      g.textContent = (ap.topic ? "Reference material: " + ap.topic + ". " : "Reference material. ") +
+        "Use it for lookup while you work through the chapters — there's nothing to complete or pass here.";
+      d.appendChild(g);
+      if (Array.isArray(ap.sections) && ap.sections.length) {
+        const ul = document.createElement("ul");
+        ul.className = "curr-appendix-sections";
+        ap.sections.forEach((sec) => {
+          const li = document.createElement("li");
+          li.textContent = sec.title + " (p. " + sec.page + ")";
+          ul.appendChild(li);
+        });
+        d.appendChild(ul);
+      }
+      if (ap.drill) {
+        const row = document.createElement("div");
+        row.className = "curr-gen-row";
+        attachPracticeGenerator(row, {
+          refId: "appendix-" + ap.appendix,
+          buttonLabel: "Generate conjugation drill",
+          spec: {
+            mode: "homework",
+            bookNumber: 5,
+            bookTitle: (refBook && refBook.title) || "Appendixes",
+            chapterLabel: "Appendix " + ap.appendix,
+            title: ap.title,
+            topic: ap.drill.topic,
+            pageStart: ap.drill.pageStart,
+            pageEnd: ap.drill.pageEnd,
+          },
+        });
+        d.appendChild(row);
+      }
+      box.appendChild(d);
+    });
+    return box;
+  }
+
   function buildUnitSection(mod, unit, index) {
     const locked = unitLocked(mod, index);
     const details = document.createElement("details");
@@ -4407,7 +4673,16 @@
     goal.innerHTML = renderMixedScript(unit.goal);
     details.appendChild(goal);
 
+    if (unit.reviewNote) {
+      const rn = document.createElement("p");
+      rn.className = "curr-gen-note";
+      rn.textContent = "Note from the source capture: " + unit.reviewNote;
+      details.appendChild(rn);
+    }
+
     unit.lessons.forEach((lesson) => details.appendChild(buildLessonRow(mod, unit, lesson)));
+
+    attachUnitPractice(details, unit);
 
     const cpRow = document.createElement("div");
     cpRow.className = "curr-checkpoint-row";
@@ -4485,8 +4760,24 @@
     header.appendChild(source);
     wrap.appendChild(header);
 
-    mod.units.forEach((unit, i) => wrap.appendChild(buildUnitSection(mod, unit, i)));
+    let lastBook = null;
+    mod.units.forEach((unit, i) => {
+      if (Array.isArray(mod.books) && unit.bookNumber != null && unit.bookNumber !== lastBook) {
+        lastBook = unit.bookNumber;
+        const bk = mod.books.find((b) => b.bookNumber === unit.bookNumber);
+        const divider = document.createElement("div");
+        divider.className = "curr-book-divider";
+        divider.innerHTML = "<span>Book " + escapeHtml(String(unit.bookNumber)) + "</span>" +
+          escapeHtml((bk && bk.title) || unit.bookTitle || "") +
+          (bk && bk.pages ? '<span class="curr-book-pages">pp. ' + escapeHtml(bk.pages) + "</span>" : "");
+        wrap.appendChild(divider);
+      }
+      wrap.appendChild(buildUnitSection(mod, unit, i));
+    });
     wrap.appendChild(buildWorksheetsSection(mod));
+    if (Array.isArray(mod.appendixes) && mod.appendixes.length) {
+      wrap.appendChild(buildAppendixesSection(mod));
+    }
     return wrap;
   }
 

@@ -15,6 +15,14 @@
       "subtitle": "Bouchentouf, Wiley — 384 pages, 22 units",
       "file": "ar/arabic-for-dummies.json",
       "addedOn": "2026-08-24"
+    },
+    {
+      "id": "es-spanish-1",
+      "languageId": "es",
+      "title": "SPANISH 1",
+      "subtitle": "Gail Stein et al., Wiley (For Dummies) — 534 pages, 5 books / 31 chapter-units",
+      "file": "es/spanish-1.json",
+      "addedOn": "2026-08-29"
     }
   ]
 }

@@ -32,3 +32,15 @@ data/curriculum/*/audio-index.json
 # the script against the source video; never redistribute via a public repo.
 data/curriculum/*/textbook-images/
 textbook-video-report*.json
+
+# tools/book-video (video -> curriculum pipeline) -- all local intermediates.
+# frames/ are stills of copyrighted textbook pages from your own video; ocr/ is
+# the text read off them; the rest are derived working files. Regenerate locally
+# by re-running the numbered stage scripts. The finished module is written to
+# data/curriculum/es/ and IS committed.
+tools/book-video/frames/
+tools/book-video/ocr/
+tools/book-video/.batches/
+tools/book-video/pages.json
+tools/book-video/page-sequence-report.txt
+tools/book-video/book-structure*.json

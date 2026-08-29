@@ -1,0 +1,2092 @@
+{
+  "id": "es-spanish-1",
+  "languageId": "es",
+  "title": "SPANISH 1",
+  "source": {
+    "book": "Spanish All-In-One For Dummies",
+    "edition": "2nd Edition",
+    "authors": "Gail Stein, MA & Cecie Kraynak, MA",
+    "publisher": "Wiley (For Dummies)",
+    "isbn": "9781394385201",
+    "pages": 534
+  },
+  "estTotalHours": 46,
+  "pace": {
+    "mode": "flexible",
+    "targetDates": false,
+    "note": "No target dates. Study whenever you can, for as long as you can. The per-unit minute figures and the ~46h total are rough sizing only, not a schedule. Passing each chapter test is what moves you forward, not the calendar."
+  },
+  "notebookOnly": true,
+  "practiceGeneration": {
+    "onDemand": true,
+    "note": "Homework and chapter tests are generated fresh by language-hub.html at request time, from only the topic label and page range below. No exercises, passages, or book text are stored in this file or sent to the generator. Every generated item cites a source page to check against the physical book."
+  },
+  "generatedFrom": "tools/book-video/book-structure.json (hand-verified from Contents photographs)",
+  "generatedAt": "2026-08-29T23:05:34.533Z",
+  "books": [
+    {
+      "bookNumber": 1,
+      "title": "Getting Started with Spanish",
+      "pages": "5-124",
+      "unitIds": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "u5",
+        "u6",
+        "u7"
+      ]
+    },
+    {
+      "bookNumber": 2,
+      "title": "Grasping Basic Grammar",
+      "pages": "125-240",
+      "unitIds": [
+        "u8",
+        "u9",
+        "u10",
+        "u11",
+        "u12",
+        "u13",
+        "u14",
+        "u15"
+      ]
+    },
+    {
+      "bookNumber": 3,
+      "title": "Mastering More Advanced Grammar",
+      "pages": "241-336",
+      "unitIds": [
+        "u16",
+        "u17",
+        "u18",
+        "u19",
+        "u20",
+        "u21",
+        "u22",
+        "u23"
+      ]
+    },
+    {
+      "bookNumber": 4,
+      "title": "Spanish at Work",
+      "pages": "337-474",
+      "unitIds": [
+        "u24",
+        "u25",
+        "u26",
+        "u27",
+        "u28",
+        "u29",
+        "u30",
+        "u31"
+      ]
+    },
+    {
+      "bookNumber": 5,
+      "title": "Appendixes",
+      "pages": "475-534",
+      "reference": true
+    }
+  ],
+  "units": [
+    {
+      "id": "u1",
+      "number": 1,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 1,
+      "title": "Sounding Like a Native Speaker",
+      "pages": "7-18",
+      "topic": "pronunciation, stress and accents, cognates",
+      "goal": "Read pages 7–18 of Spanish All-In-One For Dummies — Book 1, Chapter 1 “Sounding Like a Native Speaker”: pronunciation, stress and accents, cognates.",
+      "unlocks": "u2",
+      "lessons": [
+        {
+          "id": "u1l1",
+          "title": "Read Book 1 · Ch 1 — Sounding Like a Native Speaker",
+          "pages": "7-18",
+          "estMinutes": 78,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 7–18 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 1.",
+            "Sections covered (check each page as you reach it):",
+            "Pronouncing Properly (p. 8)",
+            "Understanding Stress and Accent Marks (p. 10)",
+            "Tackling Upside Down Punctuation (p. 11)",
+            "Recognizing Cognates (p. 12)",
+            "Using Almost Exact Cognates (p. 13)",
+            "Being Aware of False Amigos (p. 17)"
+          ],
+          "tasks": [
+            {
+              "id": "u1l1t1",
+              "type": "read",
+              "text": "Read pages 7–18 (Book 1, Chapter 1: “Sounding Like a Native Speaker”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u1l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u1l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u1cp",
+        "title": "Book 1 · Ch 1 test — Sounding Like a Native Speaker",
+        "passMark": 80,
+        "sections": [
+          "pronunciation",
+          "stress and accents",
+          "cognates"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u2",
+      "number": 2,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 2,
+      "title": "Talking Numbers, Time, and the Weather",
+      "pages": "19-34",
+      "topic": "numbers, telling time, dates, weather",
+      "goal": "Read pages 19–34 of Spanish All-In-One For Dummies — Book 1, Chapter 2 “Talking Numbers, Time, and the Weather”: numbers, telling time, dates, weather.",
+      "unlocks": "u3",
+      "lessons": [
+        {
+          "id": "u2l1",
+          "title": "Read Book 1 · Ch 2 — Talking Numbers, Time, and the Weather",
+          "pages": "19-34",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 19–34 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 2.",
+            "Sections covered (check each page as you reach it):",
+            "Counting to Your Heart's Content (p. 19)",
+            "Telling Time (p. 25)",
+            "Making Dates (p. 28)"
+          ],
+          "tasks": [
+            {
+              "id": "u2l1t1",
+              "type": "read",
+              "text": "Read pages 19–34 (Book 1, Chapter 2: “Talking Numbers, Time, and the Weather”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u2l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u2l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u2cp",
+        "title": "Book 1 · Ch 2 test — Talking Numbers, Time, and the Weather",
+        "passMark": 80,
+        "sections": [
+          "numbers",
+          "telling time",
+          "dates",
+          "weather"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u3",
+      "number": 3,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 3,
+      "title": "Updating Your Personal Profile",
+      "pages": "35-58",
+      "topic": "greetings, ser vs estar, family, nationality, occupations, describing yourself",
+      "goal": "Read pages 35–58 of Spanish All-In-One For Dummies — Book 1, Chapter 3 “Updating Your Personal Profile”: greetings, ser vs estar, family, nationality, occupations, describing yourself.",
+      "unlocks": "u4",
+      "lessons": [
+        {
+          "id": "u3l1",
+          "title": "Read Book 1 · Ch 3 — Updating Your Personal Profile",
+          "pages": "35-58",
+          "estMinutes": 126,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 35–58 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 3.",
+            "Sections covered (check each page as you reach it):",
+            "Expressing Greetings and Salutations (p. 36)",
+            "Introducing Family Members (p. 40)",
+            "Expressing Your Nationality (p. 44)",
+            "Stating What You Do for a Living (p. 45)",
+            "Uncovering Your Social Media Presence (p. 48)",
+            "Making Suggestions (p. 55)",
+            "Forming the Let's Command (p. 56)",
+            "Connecting on Social Media (p. 57)"
+          ],
+          "tasks": [
+            {
+              "id": "u3l1t1",
+              "type": "read",
+              "text": "Read pages 35–58 (Book 1, Chapter 3: “Updating Your Personal Profile”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u3l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u3l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u3cp",
+        "title": "Book 1 · Ch 3 test — Updating Your Personal Profile",
+        "passMark": 80,
+        "sections": [
+          "greetings",
+          "ser vs estar",
+          "family",
+          "nationality",
+          "occupations",
+          "describing yourself"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u4",
+      "number": 4,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 4,
+      "title": "Satisfying Your Appetite",
+      "pages": "59-78",
+      "topic": "restaurants, ordering, food vocabulary, weights and volumes",
+      "goal": "Read pages 59–78 of Spanish All-In-One For Dummies — Book 1, Chapter 4 “Satisfying Your Appetite”: restaurants, ordering, food vocabulary, weights and volumes.",
+      "unlocks": "u5",
+      "lessons": [
+        {
+          "id": "u4l1",
+          "title": "Read Book 1 · Ch 4 — Satisfying Your Appetite",
+          "pages": "59-78",
+          "estMinutes": 110,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 59–78 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 4.",
+            "Sections covered (check each page as you reach it):",
+            "Getting Up to Speed on Table Talk (p. 59)",
+            "Ordering Your Meal (p. 62)",
+            "Going to Specialty Stores (p. 73)",
+            "Knowing Your Weights and Volumes (p. 75)"
+          ],
+          "tasks": [
+            {
+              "id": "u4l1t1",
+              "type": "read",
+              "text": "Read pages 59–78 (Book 1, Chapter 4: “Satisfying Your Appetite”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u4l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u4l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u4cp",
+        "title": "Book 1 · Ch 4 test — Satisfying Your Appetite",
+        "passMark": 80,
+        "sections": [
+          "restaurants",
+          "ordering",
+          "food vocabulary",
+          "weights and volumes"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u5",
+      "number": 5,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 5,
+      "title": "Shopping Until You Drop",
+      "pages": "79-94",
+      "topic": "stores, clothing, colors, fabrics, jewelry, gifts, transactions",
+      "goal": "Read pages 79–94 of Spanish All-In-One For Dummies — Book 1, Chapter 5 “Shopping Until You Drop”: stores, clothing, colors, fabrics, jewelry, gifts, transactions.",
+      "unlocks": "u6",
+      "lessons": [
+        {
+          "id": "u5l1",
+          "title": "Read Book 1 · Ch 5 — Shopping Until You Drop",
+          "pages": "79-94",
+          "estMinutes": 94,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 79–94 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 5.",
+            "Sections covered (check each page as you reach it):",
+            "Identifying the Types of Stores (p. 79)",
+            "Getting Help (p. 81)",
+            "Shopping for Clothing and Footwear (p. 82)",
+            "Shopping at the Jewelry Store (p. 89)",
+            "Buying Gifts and Souvenirs (p. 90)",
+            "Sealing the Deal (p. 91)"
+          ],
+          "tasks": [
+            {
+              "id": "u5l1t1",
+              "type": "read",
+              "text": "Read pages 79–94 (Book 1, Chapter 5: “Shopping Until You Drop”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u5l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u5l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u5cp",
+        "title": "Book 1 · Ch 5 test — Shopping Until You Drop",
+        "passMark": 80,
+        "sections": [
+          "stores",
+          "clothing",
+          "colors",
+          "fabrics",
+          "jewelry",
+          "gifts",
+          "transactions"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u6",
+      "number": 6,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 6,
+      "title": "Going Places: Planes, Trains, Taxis, & More",
+      "pages": "95-110",
+      "topic": "airports, car rental, directions, public transport, cruises",
+      "goal": "Read pages 95–110 of Spanish All-In-One For Dummies — Book 1, Chapter 6 “Going Places: Planes, Trains, Taxis, & More”: airports, car rental, directions, public transport, cruises.",
+      "unlocks": "u7",
+      "lessons": [
+        {
+          "id": "u6l1",
+          "title": "Read Book 1 · Ch 6 — Going Places: Planes, Trains, Taxis, & More",
+          "pages": "95-110",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 95–110 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 6.",
+            "Sections covered (check each page as you reach it):",
+            "Getting By at the Airport (p. 95)",
+            "Renting a Car (p. 102)",
+            "Using Public Transportation (p. 106)",
+            "Cruising on the Open Seas (p. 109)"
+          ],
+          "tasks": [
+            {
+              "id": "u6l1t1",
+              "type": "read",
+              "text": "Read pages 95–110 (Book 1, Chapter 6: “Going Places: Planes, Trains, Taxis, & More”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u6l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u6l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u6cp",
+        "title": "Book 1 · Ch 6 test — Going Places: Planes, Trains, Taxis, & More",
+        "passMark": 80,
+        "sections": [
+          "airports",
+          "car rental",
+          "directions",
+          "public transport",
+          "cruises"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u7",
+      "number": 7,
+      "bookNumber": 1,
+      "bookTitle": "Getting Started with Spanish",
+      "chapterNumber": 7,
+      "title": "Finding a Place to Stay",
+      "pages": "111-124",
+      "topic": "hotels, check-in and check-out, amenities, problems",
+      "goal": "Read pages 111–124 of Spanish All-In-One For Dummies — Book 1, Chapter 7 “Finding a Place to Stay”: hotels, check-in and check-out, amenities, problems.",
+      "unlocks": "u8",
+      "lessons": [
+        {
+          "id": "u7l1",
+          "title": "Read Book 1 · Ch 7 — Finding a Place to Stay",
+          "pages": "111-124",
+          "estMinutes": 86,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 111–124 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 7.",
+            "Sections covered (check each page as you reach it):",
+            "Checking In (p. 111)",
+            "Considering Amenities, Facilities, and Services (p. 114)",
+            "Addressing Special Needs (p. 116)",
+            "Replacing Missing Items (p. 118)",
+            "Knowing How to Handle Problems (p. 119)",
+            "Eating Breakfast at Your Hotel (p. 120)",
+            "Getting Help from the Concierge (p. 122)",
+            "Checking Out ¡Hasta la Vista! (p. 123)"
+          ],
+          "tasks": [
+            {
+              "id": "u7l1t1",
+              "type": "read",
+              "text": "Read pages 111–124 (Book 1, Chapter 7: “Finding a Place to Stay”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u7l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u7l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u7cp",
+        "title": "Book 1 · Ch 7 test — Finding a Place to Stay",
+        "passMark": 80,
+        "sections": [
+          "hotels",
+          "check-in and check-out",
+          "amenities",
+          "problems"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u8",
+      "number": 8,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 1,
+      "title": "Flipping Through the Dictionary",
+      "pages": "127-138",
+      "topic": "parts of speech, using a bilingual dictionary",
+      "goal": "Read pages 127–138 of Spanish All-In-One For Dummies — Book 2, Chapter 1 “Flipping Through the Dictionary”: parts of speech, using a bilingual dictionary.",
+      "unlocks": "u9",
+      "lessons": [
+        {
+          "id": "u8l1",
+          "title": "Read Book 2 · Ch 1 — Flipping Through the Dictionary",
+          "pages": "127-138",
+          "estMinutes": 78,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 127–138 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 1.",
+            "Sections covered (check each page as you reach it):",
+            "Getting to Know the Parts of Speech (p. 128)",
+            "Using a Bilingual Dictionary (p. 136)"
+          ],
+          "tasks": [
+            {
+              "id": "u8l1t1",
+              "type": "read",
+              "text": "Read pages 127–138 (Book 2, Chapter 1: “Flipping Through the Dictionary”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u8l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u8l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u8cp",
+        "title": "Book 2 · Ch 1 test — Flipping Through the Dictionary",
+        "passMark": 80,
+        "sections": [
+          "parts of speech",
+          "using a bilingual dictionary"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u9",
+      "number": 9,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 2,
+      "title": "Addressing Gender Issues",
+      "pages": "139-154",
+      "topic": "definite and indefinite articles, noun gender, plurals, possession",
+      "goal": "Read pages 139–154 of Spanish All-In-One For Dummies — Book 2, Chapter 2 “Addressing Gender Issues”: definite and indefinite articles, noun gender, plurals, possession.",
+      "unlocks": "u10",
+      "lessons": [
+        {
+          "id": "u9l1",
+          "title": "Read Book 2 · Ch 2 — Addressing Gender Issues",
+          "pages": "139-154",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 139–154 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 2.",
+            "Sections covered (check each page as you reach it):",
+            "Being Specific with Definite Articles (p. 140)",
+            "Being General with Indefinite Articles (p. 143)",
+            "Being Demonstrative with Adjectives (p. 145)",
+            "Explaining Gender (p. 146)",
+            "Forming Plural Nouns (p. 150)",
+            "Showing Possession (p. 151)"
+          ],
+          "tasks": [
+            {
+              "id": "u9l1t1",
+              "type": "read",
+              "text": "Read pages 139–154 (Book 2, Chapter 2: “Addressing Gender Issues”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u9l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u9l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u9cp",
+        "title": "Book 2 · Ch 2 test — Addressing Gender Issues",
+        "passMark": 80,
+        "sections": [
+          "definite and indefinite articles",
+          "noun gender",
+          "plurals",
+          "possession"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u10",
+      "number": 10,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 3,
+      "title": "Navigating Pronouns",
+      "pages": "155-176",
+      "topic": "subject, object, demonstrative, interrogative, reflexive, relative pronouns",
+      "goal": "Read pages 155–176 of Spanish All-In-One For Dummies — Book 2, Chapter 3 “Navigating Pronouns”: subject, object, demonstrative, interrogative, reflexive, relative pronouns.",
+      "unlocks": "u11",
+      "lessons": [
+        {
+          "id": "u10l1",
+          "title": "Read Book 2 · Ch 3 — Navigating Pronouns",
+          "pages": "155-176",
+          "estMinutes": 118,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 155–176 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 3.",
+            "Sections covered (check each page as you reach it):",
+            "Getting the Lowdown on Subject Pronouns (p. 155)",
+            "Being Direct with Direct Object Pronouns (p. 160)",
+            "Using Indirect Object Pronouns (p. 161)",
+            "Picking the Right Object Pronoun for the Job (p. 163)",
+            "Putting Object Pronouns in Their Place (p. 165)",
+            "Doubling Up with Object Pronouns (p. 166)",
+            "Getting Particular with Demonstrative Pronouns (p. 167)",
+            "Showing Possession with Pronouns Possessive (p. 168)",
+            "Asking Questions with Interrogative Pronouns (p. 169)",
+            "Understanding Reflexive Pronouns (p. 170)",
+            "Focusing on Pronouns That Follow Prepositions (p. 171)",
+            "Coping with Relative Pronouns (p. 173)"
+          ],
+          "tasks": [
+            {
+              "id": "u10l1t1",
+              "type": "read",
+              "text": "Read pages 155–176 (Book 2, Chapter 3: “Navigating Pronouns”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u10l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u10l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u10cp",
+        "title": "Book 2 · Ch 3 test — Navigating Pronouns",
+        "passMark": 80,
+        "sections": [
+          "subject",
+          "object",
+          "demonstrative",
+          "interrogative",
+          "reflexive",
+          "relative pronouns"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u11",
+      "number": 11,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 4,
+      "title": "Dealing with the Here and Now: Present Tense Verbs",
+      "pages": "177-194",
+      "topic": "present tense conjugation, irregular and stem-changing verbs, gustar",
+      "goal": "Read pages 177–194 of Spanish All-In-One For Dummies — Book 2, Chapter 4 “Dealing with the Here and Now: Present Tense Verbs”: present tense conjugation, irregular and stem-changing verbs, gustar.",
+      "unlocks": "u12",
+      "lessons": [
+        {
+          "id": "u11l1",
+          "title": "Read Book 2 · Ch 4 — Dealing with the Here and Now: Present Tense Verbs",
+          "pages": "177-194",
+          "estMinutes": 102,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 177–194 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 4.",
+            "Sections covered (check each page as you reach it):",
+            "Conjugating Verbs in the Present Tense (p. 177)",
+            "Dealing with Irregulars (p. 181)"
+          ],
+          "tasks": [
+            {
+              "id": "u11l1t1",
+              "type": "read",
+              "text": "Read pages 177–194 (Book 2, Chapter 4: “Dealing with the Here and Now: Present Tense Verbs”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u11l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u11l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u11cp",
+        "title": "Book 2 · Ch 4 test — Dealing with the Here and Now: Present Tense Verbs",
+        "passMark": 80,
+        "sections": [
+          "present tense conjugation",
+          "irregular and stem-changing verbs",
+          "gustar"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u12",
+      "number": 12,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 5,
+      "title": "Reflecting on Reflexive Verbs",
+      "pages": "195-202",
+      "topic": "reflexive verbs and pronoun placement",
+      "goal": "Read pages 195–202 of Spanish All-In-One For Dummies — Book 2, Chapter 5 “Reflecting on Reflexive Verbs”: reflexive verbs and pronoun placement.",
+      "unlocks": "u13",
+      "lessons": [
+        {
+          "id": "u12l1",
+          "title": "Read Book 2 · Ch 5 — Reflecting on Reflexive Verbs",
+          "pages": "195-202",
+          "estMinutes": 62,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 195–202 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 5.",
+            "Sections covered (check each page as you reach it):",
+            "Grasping the Concept of Reflexive Verbs (p. 195)",
+            "Enlisting the Aid of Reflexive Pronouns (p. 196)",
+            "Doing More with Reflexive Verbs (p. 198)",
+            "Reflexivity Not Always Required (p. 199)",
+            "Putting Reflexive Pronouns in Their Places (p. 201)"
+          ],
+          "tasks": [
+            {
+              "id": "u12l1t1",
+              "type": "read",
+              "text": "Read pages 195–202 (Book 2, Chapter 5: “Reflecting on Reflexive Verbs”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u12l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u12l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u12cp",
+        "title": "Book 2 · Ch 5 test — Reflecting on Reflexive Verbs",
+        "passMark": 80,
+        "sections": [
+          "reflexive verbs and pronoun placement"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u13",
+      "number": 13,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 6,
+      "title": "Using the Present Progressive",
+      "pages": "203-210",
+      "topic": "present participles and the present progressive",
+      "goal": "Read pages 203–210 of Spanish All-In-One For Dummies — Book 2, Chapter 6 “Using the Present Progressive”: present participles and the present progressive.",
+      "unlocks": "u14",
+      "lessons": [
+        {
+          "id": "u13l1",
+          "title": "Read Book 2 · Ch 6 — Using the Present Progressive",
+          "pages": "203-210",
+          "estMinutes": 62,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 203–210 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 6.",
+            "Sections covered (check each page as you reach it):",
+            "Focusing on Present Participles: It's an “ing” Thing (p. 203)",
+            "Expressing Progress with the Present Progressive (p. 207)"
+          ],
+          "tasks": [
+            {
+              "id": "u13l1t1",
+              "type": "read",
+              "text": "Read pages 203–210 (Book 2, Chapter 6: “Using the Present Progressive”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u13l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u13l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u13cp",
+        "title": "Book 2 · Ch 6 test — Using the Present Progressive",
+        "passMark": 80,
+        "sections": [
+          "present participles and the present progressive"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u14",
+      "number": 14,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 7,
+      "title": "Spicing It Up with Adjectives and Adverbs",
+      "pages": "211-226",
+      "topic": "adjective agreement and placement, adverbs, comparatives and superlatives",
+      "goal": "Read pages 211–226 of Spanish All-In-One For Dummies — Book 2, Chapter 7 “Spicing It Up with Adjectives and Adverbs”: adjective agreement and placement, adverbs, comparatives and superlatives.",
+      "unlocks": "u15",
+      "lessons": [
+        {
+          "id": "u14l1",
+          "title": "Read Book 2 · Ch 7 — Spicing It Up with Adjectives and Adverbs",
+          "pages": "211-226",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 211–226 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 7.",
+            "Sections covered (check each page as you reach it):",
+            "Describing Stuff with Adjectives (p. 211)",
+            "Describing Actions with Adverbs (p. 219)",
+            "Comparing Stuff (p. 223)"
+          ],
+          "tasks": [
+            {
+              "id": "u14l1t1",
+              "type": "read",
+              "text": "Read pages 211–226 (Book 2, Chapter 7: “Spicing It Up with Adjectives and Adverbs”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u14l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u14l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u14cp",
+        "title": "Book 2 · Ch 7 test — Spicing It Up with Adjectives and Adverbs",
+        "passMark": 80,
+        "sections": [
+          "adjective agreement and placement",
+          "adverbs",
+          "comparatives and superlatives"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u15",
+      "number": 15,
+      "bookNumber": 2,
+      "bookTitle": "Grasping Basic Grammar",
+      "chapterNumber": 8,
+      "title": "Asking Questions: Being Positive and Negative",
+      "pages": "227-240",
+      "topic": "forming questions, answering yes and no, negation, exclamations",
+      "goal": "Read pages 227–240 of Spanish All-In-One For Dummies — Book 2, Chapter 8 “Asking Questions: Being Positive and Negative”: forming questions, answering yes and no, negation, exclamations.",
+      "unlocks": "u16",
+      "lessons": [
+        {
+          "id": "u15l1",
+          "title": "Read Book 2 · Ch 8 — Asking Questions: Being Positive and Negative",
+          "pages": "227-240",
+          "estMinutes": 86,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 227–240 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 8.",
+            "Sections covered (check each page as you reach it):",
+            "Facing the Spanish Inquisitions (p. 227)",
+            "Yes, Sir/No, Ma'am: Answering Questions in Spanish (p. 234)",
+            "Making Exclamations (p. 239)"
+          ],
+          "tasks": [
+            {
+              "id": "u15l1t1",
+              "type": "read",
+              "text": "Read pages 227–240 (Book 2, Chapter 8: “Asking Questions: Being Positive and Negative”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u15l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u15l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u15cp",
+        "title": "Book 2 · Ch 8 test — Asking Questions: Being Positive and Negative",
+        "passMark": 80,
+        "sections": [
+          "forming questions",
+          "answering yes and no",
+          "negation",
+          "exclamations"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u16",
+      "number": 16,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 1,
+      "title": "Understanding Prepositions and Conjunctions",
+      "pages": "243-258",
+      "topic": "prepositions, por vs para, prepositions with infinitives, conjunctions",
+      "goal": "Read pages 243–258 of Spanish All-In-One For Dummies — Book 3, Chapter 1 “Understanding Prepositions and Conjunctions”: prepositions, por vs para, prepositions with infinitives, conjunctions.",
+      "unlocks": "u17",
+      "lessons": [
+        {
+          "id": "u16l1",
+          "title": "Read Book 3 · Ch 1 — Understanding Prepositions and Conjunctions",
+          "pages": "243-258",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 243–258 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 1.",
+            "Sections covered (check each page as you reach it):",
+            "Meeting the Most Common Spanish Prepositions (p. 244)",
+            "Telling the Difference between Prepositions (p. 245)",
+            "Combining Prepositions with Infinitives (p. 249)",
+            "Brushing Up on Prepositional Pronouns (p. 252)",
+            "Connecting with Conjunctions (p. 253)"
+          ],
+          "tasks": [
+            {
+              "id": "u16l1t1",
+              "type": "read",
+              "text": "Read pages 243–258 (Book 3, Chapter 1: “Understanding Prepositions and Conjunctions”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u16l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u16l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u16cp",
+        "title": "Book 3 · Ch 1 test — Understanding Prepositions and Conjunctions",
+        "passMark": 80,
+        "sections": [
+          "prepositions",
+          "por vs para",
+          "prepositions with infinitives",
+          "conjunctions"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u17",
+      "number": 17,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 2,
+      "title": "Been There, Done That: Past (Preterit) Tense",
+      "pages": "259-270",
+      "topic": "preterit conjugation, irregulars, verbs that change meaning",
+      "goal": "Read pages 259–270 of Spanish All-In-One For Dummies — Book 3, Chapter 2 “Been There, Done That: Past (Preterit) Tense”: preterit conjugation, irregulars, verbs that change meaning.",
+      "unlocks": "u18",
+      "lessons": [
+        {
+          "id": "u17l1",
+          "title": "Read Book 3 · Ch 2 — Been There, Done That: Past (Preterit) Tense",
+          "pages": "259-270",
+          "estMinutes": 78,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 259–270 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 2.",
+            "Sections covered (check each page as you reach it):",
+            "Conjugating Regular Verbs in the Preterit (p. 260)",
+            "Facing Some Irregularities (p. 261)",
+            "Using the Preterit (p. 267)",
+            "Looking at Verbs That Change Meaning in the Preterit (p. 268)"
+          ],
+          "tasks": [
+            {
+              "id": "u17l1t1",
+              "type": "read",
+              "text": "Read pages 259–270 (Book 3, Chapter 2: “Been There, Done That: Past (Preterit) Tense”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u17l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u17l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u17cp",
+        "title": "Book 3 · Ch 2 test — Been There, Done That: Past (Preterit) Tense",
+        "passMark": 80,
+        "sections": [
+          "preterit conjugation",
+          "irregulars",
+          "verbs that change meaning"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u18",
+      "number": 18,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 3,
+      "title": "Continuing in the Past with the Imperfect Tense",
+      "pages": "271-278",
+      "topic": "imperfect tense, preterit vs imperfect",
+      "goal": "Read pages 271–278 of Spanish All-In-One For Dummies — Book 3, Chapter 3 “Continuing in the Past with the Imperfect Tense”: imperfect tense, preterit vs imperfect.",
+      "unlocks": "u19",
+      "lessons": [
+        {
+          "id": "u18l1",
+          "title": "Read Book 3 · Ch 3 — Continuing in the Past with the Imperfect Tense",
+          "pages": "271-278",
+          "estMinutes": 62,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 271–278 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 3.",
+            "Sections covered (check each page as you reach it):",
+            "Perfecting the Imperfect (p. 272)",
+            "Comparing the Preterit and the Imperfect (p. 275)",
+            "Finding Clues to the Preterit and the Imperfect (p. 276)"
+          ],
+          "tasks": [
+            {
+              "id": "u18l1t1",
+              "type": "read",
+              "text": "Read pages 271–278 (Book 3, Chapter 3: “Continuing in the Past with the Imperfect Tense”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u18l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u18l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u18cp",
+        "title": "Book 3 · Ch 3 test — Continuing in the Past with the Imperfect Tense",
+        "passMark": 80,
+        "sections": [
+          "imperfect tense",
+          "preterit vs imperfect"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u19",
+      "number": 19,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 4,
+      "title": "Getting That Subjunctive Feeling",
+      "pages": "279-298",
+      "topic": "present subjunctive formation and uses, imperfect subjunctive",
+      "goal": "Read pages 279–298 of Spanish All-In-One For Dummies — Book 3, Chapter 4 “Getting That Subjunctive Feeling”: present subjunctive formation and uses, imperfect subjunctive.",
+      "unlocks": "u20",
+      "lessons": [
+        {
+          "id": "u19l1",
+          "title": "Read Book 3 · Ch 4 — Getting That Subjunctive Feeling",
+          "pages": "279-298",
+          "estMinutes": 110,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 279–298 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 4.",
+            "Sections covered (check each page as you reach it):",
+            "Forming the Present Subjunctive (p. 280)",
+            "Spanning the Uses of the Present Subjunctive (p. 286)",
+            "Focusing On the Imperfect Subjunctive (p. 295)"
+          ],
+          "tasks": [
+            {
+              "id": "u19l1t1",
+              "type": "read",
+              "text": "Read pages 279–298 (Book 3, Chapter 4: “Getting That Subjunctive Feeling”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u19l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u19l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u19cp",
+        "title": "Book 3 · Ch 4 test — Getting That Subjunctive Feeling",
+        "passMark": 80,
+        "sections": [
+          "present subjunctive formation and uses",
+          "imperfect subjunctive"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u20",
+      "number": 20,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 5,
+      "title": "Being Bossy with the Imperative Mood",
+      "pages": "299-312",
+      "topic": "formal and informal commands, object pronouns in commands",
+      "goal": "Read pages 299–312 of Spanish All-In-One For Dummies — Book 3, Chapter 5 “Being Bossy with the Imperative Mood”: formal and informal commands, object pronouns in commands.",
+      "unlocks": "u21",
+      "lessons": [
+        {
+          "id": "u20l1",
+          "title": "Read Book 3 · Ch 5 — Being Bossy with the Imperative Mood",
+          "pages": "299-312",
+          "estMinutes": 86,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 299–312 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 5.",
+            "Sections covered (check each page as you reach it):",
+            "Defining the Imperative Mood (p. 299)",
+            "Forming Formal Commands (p. 300)",
+            "Issuing Informal Commands (p. 304)",
+            "Using Object Pronouns in Commands (p. 311)"
+          ],
+          "tasks": [
+            {
+              "id": "u20l1t1",
+              "type": "read",
+              "text": "Read pages 299–312 (Book 3, Chapter 5: “Being Bossy with the Imperative Mood”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u20l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u20l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u20cp",
+        "title": "Book 3 · Ch 5 test — Being Bossy with the Imperative Mood",
+        "passMark": 80,
+        "sections": [
+          "formal and informal commands",
+          "object pronouns in commands"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u21",
+      "number": 21,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 6,
+      "title": "Preparing for the Future and the Conditional",
+      "pages": "313-320",
+      "topic": "future tense, conditional tense, conditional sentences",
+      "goal": "Read pages 313–320 of Spanish All-In-One For Dummies — Book 3, Chapter 6 “Preparing for the Future and the Conditional”: future tense, conditional tense, conditional sentences.",
+      "unlocks": "u22",
+      "lessons": [
+        {
+          "id": "u21l1",
+          "title": "Read Book 3 · Ch 6 — Preparing for the Future and the Conditional",
+          "pages": "313-320",
+          "estMinutes": 62,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 313–320 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 6.",
+            "Sections covered (check each page as you reach it):",
+            "Forming and Expressing the Future (p. 313)",
+            "Using the Future Tense to Foretell, Predict, and Wonder (p. 316)",
+            "Forming The Conditional Tense (p. 317)",
+            "Creating Conditional Sentences (p. 319)"
+          ],
+          "tasks": [
+            {
+              "id": "u21l1t1",
+              "type": "read",
+              "text": "Read pages 313–320 (Book 3, Chapter 6: “Preparing for the Future and the Conditional”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u21l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u21l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u21cp",
+        "title": "Book 3 · Ch 6 test — Preparing for the Future and the Conditional",
+        "passMark": 80,
+        "sections": [
+          "future tense",
+          "conditional tense",
+          "conditional sentences"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u22",
+      "number": 22,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 7,
+      "title": "Forming the Compound Tenses",
+      "pages": "321-332",
+      "topic": "past participles, present perfect, pluperfect, future and conditional perfect, perfect subjunctives",
+      "goal": "Read pages 321–332 of Spanish All-In-One For Dummies — Book 3, Chapter 7 “Forming the Compound Tenses”: past participles, present perfect, pluperfect, future and conditional perfect, perfect subjunctives.",
+      "unlocks": "u23",
+      "lessons": [
+        {
+          "id": "u22l1",
+          "title": "Read Book 3 · Ch 7 — Forming the Compound Tenses",
+          "pages": "321-332",
+          "estMinutes": 78,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 321–332 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 7.",
+            "Sections covered (check each page as you reach it):",
+            "Laying the Groundwork (p. 322)",
+            "Forming the Present Perfect (p. 324)",
+            "Tackling the Pluperfect (p. 325)",
+            "Creating the Future Perfect and Conditional Perfect (p. 326)",
+            "Encountering the Present Perfect Subjunctive (p. 329)",
+            "Doubting the Past with the Pluperfect Subjunctive (p. 330)"
+          ],
+          "tasks": [
+            {
+              "id": "u22l1t1",
+              "type": "read",
+              "text": "Read pages 321–332 (Book 3, Chapter 7: “Forming the Compound Tenses”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u22l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u22l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u22cp",
+        "title": "Book 3 · Ch 7 test — Forming the Compound Tenses",
+        "passMark": 80,
+        "sections": [
+          "past participles",
+          "present perfect",
+          "pluperfect",
+          "future and conditional perfect",
+          "perfect subjunctives"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u23",
+      "number": 23,
+      "bookNumber": 3,
+      "bookTitle": "Mastering More Advanced Grammar",
+      "chapterNumber": 8,
+      "title": "Being Passive",
+      "pages": "333-336",
+      "topic": "passive voice with ser, avoiding the passive",
+      "goal": "Read pages 333–336 of Spanish All-In-One For Dummies — Book 3, Chapter 8 “Being Passive”: passive voice with ser, avoiding the passive.",
+      "unlocks": "u24",
+      "lessons": [
+        {
+          "id": "u23l1",
+          "title": "Read Book 3 · Ch 8 — Being Passive",
+          "pages": "333-336",
+          "estMinutes": 46,
+          "skills": [
+            "reading",
+            "writing"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 333–336 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 8.",
+            "Sections covered (check each page as you reach it):",
+            "Defining the Passive Voice (p. 333)",
+            "Avoiding the Passive Voice (p. 336)"
+          ],
+          "tasks": [
+            {
+              "id": "u23l1t1",
+              "type": "read",
+              "text": "Read pages 333–336 (Book 3, Chapter 8: “Being Passive”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u23l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u23l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u23cp",
+        "title": "Book 3 · Ch 8 test — Being Passive",
+        "passMark": 80,
+        "sections": [
+          "passive voice with ser",
+          "avoiding the passive"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u24",
+      "number": 24,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 1,
+      "title": "Spanish for Domestic Workers",
+      "pages": "339-358",
+      "topic": "interviewing, household directions, cleaning vocabulary",
+      "goal": "Read pages 339–358 of Spanish All-In-One For Dummies — Book 4, Chapter 1 “Spanish for Domestic Workers”: interviewing, household directions, cleaning vocabulary.",
+      "unlocks": "u25",
+      "lessons": [
+        {
+          "id": "u24l1",
+          "title": "Read Book 4 · Ch 1 — Spanish for Domestic Workers",
+          "pages": "339-358",
+          "estMinutes": 110,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 339–358 in your copy of the book — Book 4 (Spanish at Work), Chapter 1.",
+            "Sections covered (check each page as you reach it):",
+            "Interviewing Applicants (p. 339)",
+            "Issuing General Directions (p. 345)",
+            "Telling Your Employees What to Do (p. 348)",
+            "Focusing on Cleaning (p. 353)",
+            "Recognizing Phrases for Renters (p. 357)",
+            "Praising Your Employee (p. 358)"
+          ],
+          "tasks": [
+            {
+              "id": "u24l1t1",
+              "type": "read",
+              "text": "Read pages 339–358 (Book 4, Chapter 1: “Spanish for Domestic Workers”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u24l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u24l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u24cp",
+        "title": "Book 4 · Ch 1 test — Spanish for Domestic Workers",
+        "passMark": 80,
+        "sections": [
+          "interviewing",
+          "household directions",
+          "cleaning vocabulary"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u25",
+      "number": 25,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 2,
+      "title": "Spanish for Caregivers",
+      "pages": "359-374",
+      "topic": "hiring a nanny, childcare, elder care",
+      "goal": "Read pages 359–374 of Spanish All-In-One For Dummies — Book 4, Chapter 2 “Spanish for Caregivers”: hiring a nanny, childcare, elder care.",
+      "unlocks": "u26",
+      "lessons": [
+        {
+          "id": "u25l1",
+          "title": "Read Book 4 · Ch 2 — Spanish for Caregivers",
+          "pages": "359-374",
+          "estMinutes": 94,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 359–374 in your copy of the book — Book 4 (Spanish at Work), Chapter 2.",
+            "Sections covered (check each page as you reach it):",
+            "Interviewing a Nanny (p. 359)",
+            "Taking Care of Children (p. 363)",
+            "Caring for the Elderly (p. 368)"
+          ],
+          "tasks": [
+            {
+              "id": "u25l1t1",
+              "type": "read",
+              "text": "Read pages 359–374 (Book 4, Chapter 2: “Spanish for Caregivers”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u25l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u25l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u25cp",
+        "title": "Book 4 · Ch 2 test — Spanish for Caregivers",
+        "passMark": 80,
+        "sections": [
+          "hiring a nanny",
+          "childcare",
+          "elder care"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u26",
+      "number": 26,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 3,
+      "title": "Spanish for Healthcare Workers",
+      "pages": "375-400",
+      "topic": "medical appointments, symptoms, body parts, exams, diagnosis, dentistry",
+      "goal": "Read pages 375–400 of Spanish All-In-One For Dummies — Book 4, Chapter 3 “Spanish for Healthcare Workers”: medical appointments, symptoms, body parts, exams, diagnosis, dentistry.",
+      "unlocks": "u27",
+      "lessons": [
+        {
+          "id": "u26l1",
+          "title": "Read Book 4 · Ch 3 — Spanish for Healthcare Workers",
+          "pages": "375-400",
+          "estMinutes": 134,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 375–400 in your copy of the book — Book 4 (Spanish at Work), Chapter 3.",
+            "Sections covered (check each page as you reach it):",
+            "Speaking at the Doctor's Office (p. 376)",
+            "Offering Care at the Dentist's Office (p. 398)"
+          ],
+          "tasks": [
+            {
+              "id": "u26l1t1",
+              "type": "read",
+              "text": "Read pages 375–400 (Book 4, Chapter 3: “Spanish for Healthcare Workers”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u26l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u26l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u26cp",
+        "title": "Book 4 · Ch 3 test — Spanish for Healthcare Workers",
+        "passMark": 80,
+        "sections": [
+          "medical appointments",
+          "symptoms",
+          "body parts",
+          "exams",
+          "diagnosis",
+          "dentistry"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u27",
+      "number": 27,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 4,
+      "title": "Spanish for Gardeners and Landscapers",
+      "pages": "401-412",
+      "topic": "tools, lawn care, planting, simple instructions",
+      "goal": "Read pages 401–412 of Spanish All-In-One For Dummies — Book 4, Chapter 4 “Spanish for Gardeners and Landscapers”: tools, lawn care, planting, simple instructions.",
+      "unlocks": "u28",
+      "lessons": [
+        {
+          "id": "u27l1",
+          "title": "Read Book 4 · Ch 4 — Spanish for Gardeners and Landscapers",
+          "pages": "401-412",
+          "estMinutes": 78,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 401–412 in your copy of the book — Book 4 (Spanish at Work), Chapter 4.",
+            "Sections covered (check each page as you reach it):",
+            "Using the Tools of the Trade (p. 401)",
+            "Directing the Crew (p. 404)",
+            "Mastering Lawn Care Lingo (p. 404)",
+            "An Abridged Version for Homeowners — Pointing Out Important Vocab (p. 406)"
+          ],
+          "tasks": [
+            {
+              "id": "u27l1t1",
+              "type": "read",
+              "text": "Read pages 401–412 (Book 4, Chapter 4: “Spanish for Gardeners and Landscapers”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u27l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u27l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u27cp",
+        "title": "Book 4 · Ch 4 test — Spanish for Gardeners and Landscapers",
+        "passMark": 80,
+        "sections": [
+          "tools",
+          "lawn care",
+          "planting",
+          "simple instructions"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u28",
+      "number": 28,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 5,
+      "title": "Spanish for Law Enforcement Pros",
+      "pages": "413-426",
+      "topic": "investigations, witness statements, traffic stops",
+      "goal": "Read pages 413–426 of Spanish All-In-One For Dummies — Book 4, Chapter 5 “Spanish for Law Enforcement Pros”: investigations, witness statements, traffic stops.",
+      "unlocks": "u29",
+      "lessons": [
+        {
+          "id": "u28l1",
+          "title": "Read Book 4 · Ch 5 — Spanish for Law Enforcement Pros",
+          "pages": "413-426",
+          "estMinutes": 86,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 413–426 in your copy of the book — Book 4 (Spanish at Work), Chapter 5.",
+            "Sections covered (check each page as you reach it):",
+            "Conducting an Investigation (p. 413)",
+            "Dealing with Traffic Violations (p. 421)"
+          ],
+          "tasks": [
+            {
+              "id": "u28l1t1",
+              "type": "read",
+              "text": "Read pages 413–426 (Book 4, Chapter 5: “Spanish for Law Enforcement Pros”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u28l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u28l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u28cp",
+        "title": "Book 4 · Ch 5 test — Spanish for Law Enforcement Pros",
+        "passMark": 80,
+        "sections": [
+          "investigations",
+          "witness statements",
+          "traffic stops"
+        ],
+        "mode": "generated-self-marked"
+      },
+      "reviewNote": "sections after page 422 not visible in captured photos"
+    },
+    {
+      "id": "u29",
+      "number": 29,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 6,
+      "title": "Spanish for Educators and Administrators",
+      "pages": "427-442",
+      "topic": "student admissions, communicating with students and parents",
+      "goal": "Read pages 427–442 of Spanish All-In-One For Dummies — Book 4, Chapter 6 “Spanish for Educators and Administrators”: student admissions, communicating with students and parents.",
+      "unlocks": "u30",
+      "lessons": [
+        {
+          "id": "u29l1",
+          "title": "Read Book 4 · Ch 6 — Spanish for Educators and Administrators",
+          "pages": "427-442",
+          "estMinutes": 94,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 427–442 in your copy of the book — Book 4 (Spanish at Work), Chapter 6.",
+            "Sections covered (check each page as you reach it):",
+            "Admitting New Students (p. 427)",
+            "Communicating with Students (p. 432)",
+            "Communicating with Parents (p. 437)"
+          ],
+          "tasks": [
+            {
+              "id": "u29l1t1",
+              "type": "read",
+              "text": "Read pages 427–442 (Book 4, Chapter 6: “Spanish for Educators and Administrators”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u29l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u29l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u29cp",
+        "title": "Book 4 · Ch 6 test — Spanish for Educators and Administrators",
+        "passMark": 80,
+        "sections": [
+          "student admissions",
+          "communicating with students and parents"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u30",
+      "number": 30,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 7,
+      "title": "Spanish for Office Managers",
+      "pages": "443-458",
+      "topic": "job interviews, compensation and benefits, office vocabulary, training",
+      "goal": "Read pages 443–458 of Spanish All-In-One For Dummies — Book 4, Chapter 7 “Spanish for Office Managers”: job interviews, compensation and benefits, office vocabulary, training.",
+      "unlocks": "u31",
+      "lessons": [
+        {
+          "id": "u30l1",
+          "title": "Read Book 4 · Ch 7 — Spanish for Office Managers",
+          "pages": "443-458",
+          "estMinutes": 94,
+          "skills": [
+            "reading",
+            "speaking"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 443–458 in your copy of the book — Book 4 (Spanish at Work), Chapter 7.",
+            "Sections covered (check each page as you reach it):",
+            "Interviewing Job Candidates (p. 443)",
+            "Explaining Compensation and Benefits (p. 447)",
+            "Describing Buildings, Furniture, Equipment, and Supplies (p. 451)",
+            "Training New Hires (p. 455)"
+          ],
+          "tasks": [
+            {
+              "id": "u30l1t1",
+              "type": "read",
+              "text": "Read pages 443–458 (Book 4, Chapter 7: “Spanish for Office Managers”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u30l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u30l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u30cp",
+        "title": "Book 4 · Ch 7 test — Spanish for Office Managers",
+        "passMark": 80,
+        "sections": [
+          "job interviews",
+          "compensation and benefits",
+          "office vocabulary",
+          "training"
+        ],
+        "mode": "generated-self-marked"
+      }
+    },
+    {
+      "id": "u31",
+      "number": 31,
+      "bookNumber": 4,
+      "bookTitle": "Spanish at Work",
+      "chapterNumber": 8,
+      "title": "Spanish for Hotel and Restaurant Personnel",
+      "pages": "459-474",
+      "topic": "reception, housekeeping, laundry, kitchen staff",
+      "goal": "Read pages 459–474 of Spanish All-In-One For Dummies — Book 4, Chapter 8 “Spanish for Hotel and Restaurant Personnel”: reception, housekeeping, laundry, kitchen staff.",
+      "unlocks": null,
+      "lessons": [
+        {
+          "id": "u31l1",
+          "title": "Read Book 4 · Ch 8 — Spanish for Hotel and Restaurant Personnel",
+          "pages": "459-474",
+          "estMinutes": 94,
+          "skills": [
+            "reading"
+          ],
+          "audio": [],
+          "objectives": [
+            "Read pages 459–474 in your copy of the book — Book 4 (Spanish at Work), Chapter 8.",
+            "Sections covered (check each page as you reach it):",
+            "Using Spanish at Reception (p. 460)",
+            "Instructing the Housekeeping Staff (p. 461)",
+            "Training the Laundry Room Staff (p. 466)",
+            "Communicating with the Kitchen Staff (p. 469)"
+          ],
+          "tasks": [
+            {
+              "id": "u31l1t1",
+              "type": "read",
+              "text": "Read pages 459–474 (Book 4, Chapter 8: “Spanish for Hotel and Restaurant Personnel”) in your copy of Spanish All-In-One For Dummies."
+            },
+            {
+              "id": "u31l1t2",
+              "type": "practice",
+              "text": "Click “Generate homework” below, work the items by hand in your notebook, and check each one against the book page it cites."
+            },
+            {
+              "id": "u31l1t3",
+              "type": "review",
+              "text": "When the chapter feels solid, generate the chapter test, do it in your notebook, self-mark it, then click “Mark unit reviewed” to unlock the next chapter."
+            }
+          ],
+          "vocab": []
+        }
+      ],
+      "checkpoint": {
+        "id": "u31cp",
+        "title": "Book 4 · Ch 8 test — Spanish for Hotel and Restaurant Personnel",
+        "passMark": 80,
+        "sections": [
+          "reception",
+          "housekeeping",
+          "laundry",
+          "kitchen staff"
+        ],
+        "mode": "generated-self-marked"
+      }
+    }
+  ],
+  "appendixes": [
+    {
+      "appendix": "A",
+      "title": "Spanish Verbs",
+      "pages": "477-488",
+      "pagesLabel": "477–488",
+      "topic": "reference tables: regular, stem-changing, spelling-change, and irregular verbs",
+      "reference": true,
+      "sections": [
+        {
+          "title": "Regular Verbs",
+          "page": 477
+        },
+        {
+          "title": "Stem-Changing Verbs",
+          "page": 479
+        },
+        {
+          "title": "Spelling-Change Verbs",
+          "page": 482
+        },
+        {
+          "title": "Irregular Verbs",
+          "page": 484
+        }
+      ],
+      "drill": {
+        "topic": "regular, stem-changing, spelling-change, and irregular verb conjugation",
+        "pageStart": 477,
+        "pageEnd": 488
+      }
+    },
+    {
+      "appendix": "B",
+      "title": "Spanish-English Mini Dictionary",
+      "pages": "489-506",
+      "pagesLabel": "489–506",
+      "topic": "reference",
+      "reference": true
+    },
+    {
+      "appendix": "C",
+      "title": "English-Spanish Mini Dictionary",
+      "pages": "507-526",
+      "pagesLabel": "507–526",
+      "topic": "reference",
+      "reference": true
+    },
+    {
+      "appendix": "D",
+      "title": "Spanish Words That Change from Country to Country",
+      "pages": "527-534",
+      "pagesLabel": "527–534",
+      "topic": "regional variation reference",
+      "reference": true
+    }
+  ]
+}

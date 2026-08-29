@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Book structure review</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #1c2330; background: #f4f6f9; }
+  header {
+    position: sticky; top: 0; z-index: 10; background: #1c2330; color: #fff;
+    padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  }
+  header h1 { font-size: 15px; margin: 0; font-weight: 600; }
+  header .src { font-size: 12px; opacity: .75; }
+  header .spacer { flex: 1; }
+  button {
+    font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid #b9c2d0;
+    background: #fff; color: #1c2330; cursor: pointer;
+  }
+  button:hover { background: #eef1f6; }
+  button.primary { background: #2f6feb; border-color: #2f6feb; color: #fff; }
+  button.primary:hover { background: #245ad0; }
+  button.danger { color: #b3261e; border-color: #e2b6b3; }
+  button.small { padding: 3px 8px; font-size: 12px; }
+  #status { font-size: 12px; }
+  main { display: grid; grid-template-columns: 1fr 460px; gap: 0; align-items: start; }
+  @media (max-width: 1100px) { main { grid-template-columns: 1fr; } #viewer { position: static !important; height: auto !important; } }
+
+  #structure { padding: 16px; }
+  .chapter { background: #fff; border: 1px solid #dce1e9; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .chapter > .head { background: #eef2f8; padding: 10px 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .chapter > .body { padding: 12px; }
+  .section { border: 1px solid #e3e7ee; border-radius: 8px; padding: 10px; margin-bottom: 10px; background: #fbfcfe; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 6px; }
+  label.f { display: flex; flex-direction: column; font-size: 11px; color: #5a6472; gap: 2px; }
+  label.f input, label.f select { font: inherit; padding: 5px 7px; border: 1px solid #c4ccd8; border-radius: 5px; background: #fff; }
+  input.title { min-width: 280px; font-weight: 600; }
+  input.pg { width: 74px; text-align: center; }
+  input.topic { min-width: 260px; }
+  .ex-table { width: 100%; border-collapse: collapse; margin: 4px 0; }
+  .ex-table th { font-size: 10px; text-transform: uppercase; letter-spacing: .04em; color: #7a8494; text-align: left; padding: 2px 4px; }
+  .ex-table td { padding: 2px 4px; }
+  .ex-table input { font: inherit; padding: 3px 5px; border: 1px solid #c4ccd8; border-radius: 4px; }
+  .ex-table input.t { width: 150px; }
+  .ex-table input.n { width: 52px; text-align: center; }
+  .notes { width: 100%; font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace; border: 1px solid #e6c98a;
+    background: #fff8e8; border-radius: 5px; padding: 6px; min-height: 46px; resize: vertical; }
+  .notes-wrap { margin-top: 6px; }
+  .notes-wrap .lbl { font-size: 11px; color: #8a6d1f; }
+  .muted { color: #7a8494; font-size: 12px; }
+  .sec-tools, .ch-tools { display: flex; gap: 6px; margin-top: 6px; }
+
+  #viewer { position: sticky; top: 52px; height: calc(100vh - 52px); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  #viewer .frame-box { flex: 1; background: #10151f; border-radius: 10px; overflow: auto; display: flex; align-items: flex-start; justify-content: center; }
+  #viewer img { max-width: 100%; display: block; }
+  #viewer .cap { font-size: 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  #viewer .cap strong { font-size: 13px; }
+  #jump { width: 70px; text-align: center; padding: 4px; border: 1px solid #c4ccd8; border-radius: 5px; font: inherit; }
+  .pill { background: #e7ecf4; border-radius: 20px; padding: 2px 10px; font-size: 12px; }
+  .warn { color: #b3261e; }
+  #confirmBar { display: none; background: #fff3cd; border-top: 1px solid #e6c98a; padding: 10px 16px; gap: 10px; align-items: center; }
+  #confirmBar.show { display: flex; }
+  #doneBar { display: none; background: #e6f4ea; border-top: 1px solid #9bd0ac; padding: 12px 16px; }
+  #doneBar.show { display: block; }
+  code { background: #eceff4; padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Book structure review</h1>
+  <span class="src" id="srcLabel">loading…</span>
+  <span class="spacer"></span>
+  <span id="status" class="muted"></span>
+  <button id="saveDraftBtn">Save draft</button>
+  <button id="confirmBtn" class="primary">Confirm &amp; write confirmed file</button>
+</header>
+
+<div id="confirmBar">
+  <span>This writes <code>book-structure.confirmed.json</code> and unlocks Stage 6. Your edits become the source of truth.</span>
+  <span class="spacer" style="flex:1"></span>
+  <button id="confirmYes" class="primary">Write confirmed file</button>
+  <button id="confirmNo">Cancel</button>
+</div>
+
+<div id="doneBar">
+  <strong>Confirmed.</strong> Wrote <code>book-structure.confirmed.json</code>.
+  Next, in PowerShell:
+  <div style="margin-top:6px"><code id="nextCmd">node tools\book-video\6-build-module.js --name "Your module name"</code></div>
+</div>
+
+<main>
+  <div id="structure"></div>
+  <div id="viewer">
+    <div class="cap">
+      <button id="prevFrame" class="small">◀ prev</button>
+      <button id="nextFrame" class="small">next ▶</button>
+      <span>go to page <input id="jump" type="number" min="0" /></span>
+      <span id="frameCap" class="pill"></span>
+    </div>
+    <div class="frame-box"><img id="frameImg" alt="source frame" /></div>
+    <div class="muted" id="frameHint">Click into any page-number box on the left and this jumps to that page's frame.</div>
+  </div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var raw = null;          // full loaded object
+  var pages = [];          // pages.json
+  var frames = [];         // page-*.jpg filenames in order
+  var pageList = [];       // [{page, frame}] sorted, for nearest lookup
+  var elStruct = document.getElementById("structure");
+
+  var $ = function (id) { return document.getElementById(id); };
+  function setStatus(msg, isWarn) { var s = $("status"); s.textContent = msg || ""; s.className = isWarn ? "warn" : "muted"; }
+
+  // ---------- frame viewer ----------
+  var curFrameIdx = 0;
+  function showFrameByIndex(i) {
+    if (!frames.length) return;
+    curFrameIdx = Math.max(0, Math.min(frames.length - 1, i));
+    var fname = frames[curFrameIdx];
+    $("frameImg").src = "/frames/" + fname;
+    var pg = "";
+    var rec = pages.find(function (p) { return p.frame === fname; });
+    if (rec && rec.detectedPage != null) pg = " · OCR read page " + rec.detectedPage;
+    else if (rec) pg = " · no page number read";
+    $("frameCap").textContent = "frame " + (curFrameIdx + 1) + " / " + frames.length + " (" + fname + ")" + pg;
+  }
+  function showFrameForPage(page) {
+    if (page == null || isNaN(page)) return;
+    page = Number(page);
+    // exact frame for this page?
+    var exact = pageList.find(function (x) { return x.page === page; });
+    var target;
+    if (exact) target = exact.frame;
+    else {
+      // nearest detected page
+      var best = null, bestD = Infinity;
+      pageList.forEach(function (x) { var d = Math.abs(x.page - page); if (d < bestD) { bestD = d; best = x; } });
+      target = best ? best.frame : null;
+    }
+    if (!target) return;
+    var idx = frames.indexOf(target);
+    if (idx >= 0) showFrameByIndex(idx);
+  }
+  $("prevFrame").onclick = function () { showFrameByIndex(curFrameIdx - 1); };
+  $("nextFrame").onclick = function () { showFrameByIndex(curFrameIdx + 1); };
+  $("jump").oninput = function () { showFrameForPage(this.value); };
+
+  // ---------- build editable DOM ----------
+  function pgInput(value, onchange) {
+    var i = document.createElement("input");
+    i.type = "number"; i.className = "pg"; i.min = "0";
+    i.value = value == null ? "" : value;
+    i.addEventListener("focus", function () { if (i.value !== "") showFrameForPage(i.value); });
+    i.addEventListener("input", function () { if (i.value !== "") showFrameForPage(i.value); onchange(i.value === "" ? null : Number(i.value)); });
+    return i;
+  }
+  function field(labelText, inputEl) {
+    var l = document.createElement("label"); l.className = "f";
+    var s = document.createElement("span"); s.textContent = labelText;
+    l.appendChild(s); l.appendChild(inputEl); return l;
+  }
+  function textInput(value, cls, onchange) {
+    var i = document.createElement("input");
+    i.type = "text"; i.className = cls || ""; i.value = value == null ? "" : value;
+    i.addEventListener("input", function () { onchange(i.value.trim() === "" ? null : i.value); });
+    return i;
+  }
+
+  function renderExercises(section, host) {
+    host.innerHTML = "";
+    var table = document.createElement("table"); table.className = "ex-table";
+    table.innerHTML = "<thead><tr><th>exercise type</th><th>count</th><th>page</th><th></th></tr></thead>";
+    var tb = document.createElement("tbody");
+    (section.exercises || []).forEach(function (ex, i) {
+      var tr = document.createElement("tr");
+      var tdT = document.createElement("td");
+      var t = document.createElement("input"); t.className = "t"; t.type = "text"; t.value = ex.type == null ? "" : ex.type;
+      t.oninput = function () { ex.type = t.value.trim() || null; };
+      tdT.appendChild(t);
+      var tdC = document.createElement("td");
+      var c = document.createElement("input"); c.className = "n"; c.type = "number"; c.min = "0"; c.value = ex.count == null ? "" : ex.count;
+      c.oninput = function () { ex.count = c.value === "" ? null : Number(c.value); };
+      tdC.appendChild(c);
+      var tdP = document.createElement("td");
+      tdP.appendChild(pgInput(ex.page, function (v) { ex.page = v; }));
+      var tdX = document.createElement("td");
+      var x = document.createElement("button"); x.className = "small danger"; x.textContent = "×";
+      x.onclick = function () { section.exercises.splice(i, 1); renderExercises(section, host); };
+      tdX.appendChild(x);
+      tr.appendChild(tdT); tr.appendChild(tdC); tr.appendChild(tdP); tr.appendChild(tdX);
+      tb.appendChild(tr);
+    });
+    table.appendChild(tb);
+    host.appendChild(table);
+    var add = document.createElement("button"); add.className = "small"; add.textContent = "+ exercise group";
+    add.onclick = function () { section.exercises = section.exercises || []; section.exercises.push({ type: null, count: null, page: null }); renderExercises(section, host); };
+    host.appendChild(add);
+  }
+
+  function renderSection(chapter, section, sIdx, host) {
+    var box = document.createElement("div"); box.className = "section";
+
+    var r1 = document.createElement("div"); r1.className = "row";
+    r1.appendChild(field("section heading", textInput(section.heading, "title", function (v) { section.heading = v; })));
+    r1.appendChild(field("heading pg", pgInput(section.headingPage, function (v) { section.headingPage = v; })));
+    r1.appendChild(field("start pg", pgInput(section.startPage, function (v) { section.startPage = v; })));
+    r1.appendChild(field("end pg", pgInput(section.endPage, function (v) { section.endPage = v; })));
+    box.appendChild(r1);
+
+    var r2 = document.createElement("div"); r2.className = "row";
+    var sel = document.createElement("select");
+    ["", "grammar", "vocabulary", "mixed", "other"].forEach(function (o) {
+      var op = document.createElement("option"); op.value = o; op.textContent = o || "(none)";
+      if ((section.topicType || "") === o) op.selected = true; sel.appendChild(op);
+    });
+    sel.onchange = function () { section.topicType = sel.value || null; };
+    r2.appendChild(field("topic type", sel));
+    r2.appendChild(field("topic label (short)", textInput(section.topic, "topic", function (v) { section.topic = v; })));
+    box.appendChild(r2);
+
+    var exHost = document.createElement("div");
+    box.appendChild(exHost);
+    renderExercises(section, exHost);
+
+    var nw = document.createElement("div"); nw.className = "notes-wrap";
+    var nl = document.createElement("div"); nl.className = "lbl"; nl.textContent = "unresolved notes (things the OCR didn't support — clear a line once you've checked it against the frame)";
+    var ta = document.createElement("textarea"); ta.className = "notes";
+    ta.value = (section.unresolved || []).join("\n");
+    ta.oninput = function () { section.unresolved = ta.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean); };
+    nw.appendChild(nl); nw.appendChild(ta);
+    box.appendChild(nw);
+
+    var tools = document.createElement("div"); tools.className = "sec-tools";
+    var del = document.createElement("button"); del.className = "small danger"; del.textContent = "delete section";
+    del.onclick = function () { chapter.sections.splice(sIdx, 1); renderAll(); };
+    var jump = document.createElement("button"); jump.className = "small"; jump.textContent = "show start-page frame";
+    jump.onclick = function () { showFrameForPage(section.startPage != null ? section.startPage : section.headingPage); };
+    tools.appendChild(jump); tools.appendChild(del);
+    box.appendChild(tools);
+
+    host.appendChild(box);
+  }
+
+  function renderChapter(chapter, cIdx) {
+    var card = document.createElement("div"); card.className = "chapter";
+    var head = document.createElement("div"); head.className = "head";
+    head.appendChild(field("chapter title", textInput(chapter.title, "title", function (v) { chapter.title = v; })));
+    head.appendChild(field("title pg", pgInput(chapter.titlePage, function (v) { chapter.titlePage = v; })));
+    var chTools = document.createElement("div"); chTools.className = "ch-tools";
+    var addSec = document.createElement("button"); addSec.className = "small"; addSec.textContent = "+ section";
+    addSec.onclick = function () {
+      chapter.sections = chapter.sections || [];
+      chapter.sections.push({ heading: null, headingPage: null, startPage: null, endPage: null, topicType: null, topic: null, exercises: [], unresolved: [] });
+      renderAll();
+    };
+    var delCh = document.createElement("button"); delCh.className = "small danger"; delCh.textContent = "delete chapter";
+    delCh.onclick = function () { raw.structure.chapters.splice(cIdx, 1); renderAll(); };
+    chTools.appendChild(addSec); chTools.appendChild(delCh);
+    head.appendChild(chTools);
+    card.appendChild(head);
+
+    var body = document.createElement("div"); body.className = "body";
+    if (chapter.unresolved && chapter.unresolved.length) {
+      var cw = document.createElement("div"); cw.className = "notes-wrap";
+      var cl = document.createElement("div"); cl.className = "lbl"; cl.textContent = "chapter-level unresolved notes";
+      var cta = document.createElement("textarea"); cta.className = "notes";
+      cta.value = chapter.unresolved.join("\n");
+      cta.oninput = function () { chapter.unresolved = cta.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean); };
+      cw.appendChild(cl); cw.appendChild(cta); body.appendChild(cw);
+    }
+    (chapter.sections || []).forEach(function (s, i) { renderSection(chapter, s, i, body); });
+    card.appendChild(body);
+    return card;
+  }
+
+  function renderAll() {
+    elStruct.innerHTML = "";
+    var chs = raw.structure.chapters || [];
+    var summary = document.createElement("div"); summary.className = "muted";
+    var nSec = chs.reduce(function (a, c) { return a + (c.sections ? c.sections.length : 0); }, 0);
+    var nUn = (raw.structure.unresolved || []).length + chs.reduce(function (a, c) {
+      return a + (c.unresolved || []).length + (c.sections || []).reduce(function (x, s) { return x + (s.unresolved || []).length; }, 0);
+    }, 0);
+    summary.textContent = chs.length + " chapters · " + nSec + " sections · " + nUn + " unresolved notes  ·  frames available: " + frames.length;
+    elStruct.appendChild(summary);
+
+    if (raw.structure.unresolved && raw.structure.unresolved.length) {
+      var tw = document.createElement("div"); tw.className = "notes-wrap";
+      var tl = document.createElement("div"); tl.className = "lbl"; tl.textContent = "book-level unresolved notes";
+      var tta = document.createElement("textarea"); tta.className = "notes";
+      tta.value = raw.structure.unresolved.join("\n");
+      tta.oninput = function () { raw.structure.unresolved = tta.value.split("\n").map(function (s) { return s.trim(); }).filter(Boolean); };
+      tw.appendChild(tl); tw.appendChild(tta); elStruct.appendChild(tw);
+    }
+
+    chs.forEach(function (c, i) { elStruct.appendChild(renderChapter(c, i)); });
+
+    var addCh = document.createElement("button"); addCh.textContent = "+ add chapter";
+    addCh.onclick = function () {
+      raw.structure.chapters.push({ title: null, titlePage: null, sections: [], unresolved: [] });
+      renderAll();
+    };
+    elStruct.appendChild(addCh);
+  }
+
+  // ---------- save / confirm ----------
+  function post(path) {
+    setStatus("saving…");
+    return fetch(path, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(raw.structure) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok) { setStatus(res.j.error || "save failed", true); throw new Error(res.j.error); }
+        return res.j;
+      });
+  }
+  $("saveDraftBtn").onclick = function () {
+    post("/api/save-draft").then(function () { setStatus("draft saved to book-structure.json  ·  " + new Date().toLocaleTimeString()); });
+  };
+  $("confirmBtn").onclick = function () { $("confirmBar").classList.add("show"); };
+  $("confirmNo").onclick = function () { $("confirmBar").classList.remove("show"); };
+  $("confirmYes").onclick = function () {
+    $("confirmBar").classList.remove("show");
+    post("/api/confirm").then(function () {
+      setStatus("confirmed  ·  " + new Date().toLocaleTimeString());
+      $("doneBar").classList.add("show");
+      $("srcLabel").textContent = "editing book-structure.confirmed.json";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
+  // ---------- boot ----------
+  fetch("/api/data").then(function (r) { return r.json(); }).then(function (d) {
+    raw = d;
+    pages = d.pages || [];
+    frames = d.frames || [];
+    pageList = pages.filter(function (p) { return p.detectedPage != null; })
+      .map(function (p) { return { page: p.detectedPage, frame: p.frame }; })
+      .sort(function (a, b) { return a.page - b.page; });
+    $("srcLabel").textContent = "editing " + d.loadedFrom + (d.hasConfirmed ? " (already confirmed once — re-confirm to update)" : "");
+    if (pageList.length) $("jump").placeholder = pageList[0].page + "–" + pageList[pageList.length - 1].page;
+    renderAll();
+    showFrameByIndex(0);
+  }).catch(function (e) { setStatus("could not load data: " + e.message, true); });
+})();
+</script>
+</body>
+</html>
