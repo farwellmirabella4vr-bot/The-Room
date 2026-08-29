@@ -41,6 +41,9 @@ textbook-video-report*.json
 tools/book-video/frames/
 tools/book-video/ocr/
 tools/book-video/.batches/
+tools/book-video/tessdata/
+tools/book-video/_*/
 tools/book-video/pages.json
 tools/book-video/page-sequence-report.txt
+tools/book-video/scene-scores.txt
 tools/book-video/book-structure*.json

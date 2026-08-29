@@ -41,14 +41,23 @@
 // is kept when the score is ABOVE this number.
 //
 //   TOO FEW frames (pages missing, count came out low)  -> LOWER this
-//        e.g. 0.030 -> 0.020 -> 0.012   (more sensitive, catches smaller changes)
+//        e.g. 0.11 -> 0.08 -> 0.05   (more sensitive, catches smaller changes)
 //   TOO MANY frames (lots of duplicates, count came out high)  -> RAISE this
-//        e.g. 0.030 -> 0.045 -> 0.070   (less sensitive, ignores small changes)
+//        e.g. 0.11 -> 0.15 -> 0.20   (less sensitive, ignores small changes)
 //
-// Sensible range is about 0.010 (very twitchy) to 0.150 (only big changes).
-// Change it in steps and re-run; 0.03 is a good starting point for a steady
-// overhead flip with even lighting.
-const SCENE_THRESHOLD = 0.03;
+// For handheld / phone footage, values below ~0.08 mostly pick up camera
+// shake and sensor noise, not page turns -- a real page flip is a big change
+// and scores ~0.10-0.20. Steady tripod/overhead footage can go lower.
+// Sensible range is about 0.05 (twitchy) to 0.30 (only big changes).
+const SCENE_THRESHOLD = 0.11;
+
+// Also require at least this many seconds since the last kept frame. A page
+// flip takes a fraction of a second but trips the scene filter on several
+// consecutive frames; this keeps just one per flip without relying on the
+// dedupe pass. Set it a bit below your fastest real page-hold time.
+//   Two frames of the SAME spread getting through -> raise it (1.0 -> 1.5)
+//   A fast flip being skipped entirely            -> lower it (1.0 -> 0.6)
+const MIN_SECONDS_BETWEEN_FRAMES = 1.0;
 
 // Pass 2 -- the dedupe pass (ffmpeg mpdecimate). These decide when a frame
 // counts as "basically the same as the previous one" and gets dropped.
@@ -131,14 +140,18 @@ function main() {
   fs.mkdirSync(RAW_DIR, { recursive: true });
 
   // ---- Pass 1: scene-change extraction ------------------------------------
-  console.log("Pass 1/2  scene-change extraction (threshold " + SCENE_THRESHOLD + ")");
+  console.log("Pass 1/2  scene-change extraction (threshold " + SCENE_THRESHOLD +
+    ", min " + MIN_SECONDS_BETWEEN_FRAMES + "s apart)");
   console.log("  Decoding the whole video once -- this can take several minutes for a long clip.\n");
   const rawPattern = path.join(RAW_DIR, "raw-%06d.jpg");
   const p1 = ffmpeg([
     "-y",
     "-i", videoPath,
-    // eq(n,0) forces the very first frame (page 1) in; gt(scene,N) catches every flip after that.
-    "-vf", "select='eq(n\\,0)+gt(scene\\," + SCENE_THRESHOLD + ")',scale='min(2000,iw)':-2",
+    // eq(n,0) forces the very first frame (page 1) in. Otherwise: keep a frame only
+    // when the picture changed a lot (gt(scene,N)) AND at least MIN seconds have
+    // passed since the last kept frame -- so one clean frame per page flip.
+    "-vf", "select='eq(n\\,0)+gt(scene\\," + SCENE_THRESHOLD +
+      ")*gt(t-prev_selected_t\\," + MIN_SECONDS_BETWEEN_FRAMES + ")',scale='min(2000,iw)':-2",
     "-fps_mode", "vfr",
     "-q:v", String(JPEG_QUALITY),
     rawPattern,

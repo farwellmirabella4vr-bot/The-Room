@@ -62,18 +62,37 @@ const ff = run("ffmpeg", ["-version"]);
 record("ffmpeg", ff.ok, ff.ok ? firstLine(ff.out) : "not found on PATH");
 
 section("Tesseract OCR  (Stage 3 -- reading text off each frame)");
-const ts = run("tesseract", ["--version"]);
-record("tesseract", ts.ok, ts.ok ? firstLine(ts.out) : "not found on PATH");
-
-let hasSpanish = false;
-if (ts.ok) {
-  const langs = run("tesseract", ["--list-langs"]);
-  hasSpanish = /(^|\s)spa(\s|$)/m.test(langs.out || "");
-  record("Spanish language pack (spa)", hasSpanish,
-    hasSpanish ? "found" : "installed languages: " + firstLine(langs.out.replace(/^List of available.*$/m, "").trim()));
-} else {
-  record("Spanish language pack (spa)", false, "can't check until Tesseract is installed");
+// Look for tesseract on PATH first, then the usual install folders (a fresh
+// install often isn't on PATH until the terminal is restarted).
+const path = require("path");
+const TESS_CANDIDATES = [
+  "tesseract",
+  "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+  "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe",
+  path.join(process.env.LOCALAPPDATA || "", "Programs", "Tesseract-OCR", "tesseract.exe"),
+];
+let tessBin = null;
+let ts = { ok: false, out: "" };
+for (const c of TESS_CANDIDATES) {
+  const r = run(c, ["--version"]);
+  if (r.ok) { tessBin = c; ts = r; break; }
 }
+record("tesseract", ts.ok,
+  ts.ok ? firstLine(ts.out) + (tessBin !== "tesseract" ? "  (found at " + tessBin + ", not on PATH)" : "") : "not found on PATH or the usual install folders");
+
+// spa can be in the system tessdata, or in tools/book-video/tessdata/ (which
+// the OCR script picks up via --tessdata-dir when it can't be dropped into
+// Program Files without admin rights).
+const LOCAL_SPA = path.join(__dirname, "tessdata", "spa.traineddata");
+const localSpa = require("fs").existsSync(LOCAL_SPA);
+let hasSpanish = localSpa;
+if (tessBin) {
+  const ld = run(tessBin, ["--list-langs"].concat(localSpa ? ["--tessdata-dir", path.join(__dirname, "tessdata")] : []));
+  hasSpanish = hasSpanish || /(^|\s)spa(\s|$)/m.test(ld.out || "");
+}
+record("Spanish language pack (spa)", hasSpanish,
+  hasSpanish ? (localSpa ? "found in tools/book-video/tessdata/" : "found in the system tessdata")
+             : (tessBin ? "not installed -- see below" : "can't check until Tesseract is found"));
 
 section("Anthropic API key  (Stage 4 -- structure extraction)");
 const key = process.env.ANTHROPIC_API_KEY;

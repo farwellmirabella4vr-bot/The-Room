@@ -22,7 +22,7 @@
     "note": "Homework and chapter tests are generated fresh by language-hub.html at request time, from only the topic label and page range below. No exercises, passages, or book text are stored in this file or sent to the generator. Every generated item cites a source page to check against the physical book."
   },
   "generatedFrom": "tools/book-video/book-structure.json (hand-verified from Contents photographs)",
-  "generatedAt": "2026-08-29T23:05:34.533Z",
+  "generatedAt": "2026-08-29T23:53:53.728Z",
   "books": [
     {
       "bookNumber": 1,
@@ -241,14 +241,14 @@
           "objectives": [
             "Read pages 35–58 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 3.",
             "Sections covered (check each page as you reach it):",
-            "Expressing Greetings and Salutations (p. 36)",
-            "Introducing Family Members (p. 40)",
-            "Expressing Your Nationality (p. 44)",
-            "Stating What You Do for a Living (p. 45)",
-            "Uncovering Your Social Media Presence (p. 48)",
-            "Making Suggestions (p. 55)",
-            "Forming the Let's Command (p. 56)",
-            "Connecting on Social Media (p. 57)"
+            "Expressing Greetings and Salutations (p. 35)",
+            "Introducing Family Members (p. 38)",
+            "Expressing Your Nationality (p. 40)",
+            "Stating What You Do for a Living (p. 44)",
+            "Uncovering Your Social Media Presence (p. 45)",
+            "Making Suggestions (p. 53)",
+            "Forming the Let's Command (p. 55)",
+            "Connecting on Social Media (p. 56)"
           ],
           "tasks": [
             {
@@ -311,9 +311,9 @@
             "Read pages 59–78 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 4.",
             "Sections covered (check each page as you reach it):",
             "Getting Up to Speed on Table Talk (p. 59)",
-            "Ordering Your Meal (p. 62)",
-            "Going to Specialty Stores (p. 73)",
-            "Knowing Your Weights and Volumes (p. 75)"
+            "Ordering Your Meal (p. 61)",
+            "Going to Specialty Stores (p. 70)",
+            "Knowing Your Weights and Volumes (p. 73)"
           ],
           "tasks": [
             {
@@ -373,8 +373,8 @@
             "Read pages 79–94 in your copy of the book — Book 1 (Getting Started with Spanish), Chapter 5.",
             "Sections covered (check each page as you reach it):",
             "Identifying the Types of Stores (p. 79)",
-            "Getting Help (p. 81)",
-            "Shopping for Clothing and Footwear (p. 82)",
+            "Getting Help (p. 79)",
+            "Shopping for Clothing and Footwear (p. 81)",
             "Shopping at the Jewelry Store (p. 89)",
             "Buying Gifts and Souvenirs (p. 90)",
             "Sealing the Deal (p. 91)"
@@ -630,12 +630,12 @@
           "objectives": [
             "Read pages 139–154 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 2.",
             "Sections covered (check each page as you reach it):",
-            "Being Specific with Definite Articles (p. 140)",
+            "Being Specific with Definite Articles (p. 139)",
             "Being General with Indefinite Articles (p. 143)",
-            "Being Demonstrative with Adjectives (p. 145)",
-            "Explaining Gender (p. 146)",
-            "Forming Plural Nouns (p. 150)",
-            "Showing Possession (p. 151)"
+            "Being Demonstrative with Adjectives (p. 144)",
+            "Explaining Gender (p. 145)",
+            "Forming Plural Nouns (p. 149)",
+            "Showing Possession (p. 150)"
           ],
           "tasks": [
             {
@@ -696,16 +696,16 @@
             "Read pages 155–176 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 3.",
             "Sections covered (check each page as you reach it):",
             "Getting the Lowdown on Subject Pronouns (p. 155)",
-            "Being Direct with Direct Object Pronouns (p. 160)",
-            "Using Indirect Object Pronouns (p. 161)",
-            "Picking the Right Object Pronoun for the Job (p. 163)",
-            "Putting Object Pronouns in Their Place (p. 165)",
-            "Doubling Up with Object Pronouns (p. 166)",
-            "Getting Particular with Demonstrative Pronouns (p. 167)",
-            "Showing Possession with Pronouns Possessive (p. 168)",
-            "Asking Questions with Interrogative Pronouns (p. 169)",
-            "Understanding Reflexive Pronouns (p. 170)",
-            "Focusing on Pronouns That Follow Prepositions (p. 171)",
+            "Being Direct with Direct Object Pronouns (p. 159)",
+            "Using Indirect Object Pronouns (p. 160)",
+            "Picking the Right Object Pronoun for the Job (p. 161)",
+            "Putting Object Pronouns in Their Place (p. 164)",
+            "Doubling Up with Object Pronouns (p. 165)",
+            "Getting Particular with Demonstrative Pronouns (p. 166)",
+            "Showing Possession with Pronouns Possessive (p. 167)",
+            "Asking Questions with Interrogative Pronouns (p. 168)",
+            "Understanding Reflexive Pronouns (p. 169)",
+            "Focusing on Pronouns That Follow Prepositions (p. 170)",
             "Coping with Relative Pronouns (p. 173)"
           ],
           "tasks": [
@@ -948,7 +948,7 @@
             "Read pages 211–226 in your copy of the book — Book 2 (Grasping Basic Grammar), Chapter 7.",
             "Sections covered (check each page as you reach it):",
             "Describing Stuff with Adjectives (p. 211)",
-            "Describing Actions with Adverbs (p. 219)",
+            "Describing Actions with Adverbs (p. 218)",
             "Comparing Stuff (p. 223)"
           ],
           "tasks": [
@@ -1074,7 +1074,7 @@
             "Telling the Difference between Prepositions (p. 245)",
             "Combining Prepositions with Infinitives (p. 249)",
             "Brushing Up on Prepositional Pronouns (p. 252)",
-            "Connecting with Conjunctions (p. 253)"
+            "Connecting with Conjunctions (p. 252)"
           ],
           "tasks": [
             {
@@ -1317,8 +1317,8 @@
             "Read pages 299–312 in your copy of the book — Book 3 (Mastering More Advanced Grammar), Chapter 5.",
             "Sections covered (check each page as you reach it):",
             "Defining the Imperative Mood (p. 299)",
-            "Forming Formal Commands (p. 300)",
-            "Issuing Informal Commands (p. 304)",
+            "Forming Formal Commands (p. 299)",
+            "Issuing Informal Commands (p. 302)",
             "Using Object Pronouns in Commands (p. 311)"
           ],
           "tasks": [
@@ -1687,7 +1687,7 @@
           "objectives": [
             "Read pages 375–400 in your copy of the book — Book 4 (Spanish at Work), Chapter 3.",
             "Sections covered (check each page as you reach it):",
-            "Speaking at the Doctor's Office (p. 376)",
+            "Speaking at the Doctor's Office (p. 375)",
             "Offering Care at the Dentist's Office (p. 398)"
           ],
           "tasks": [
@@ -1844,8 +1844,7 @@
           "traffic stops"
         ],
         "mode": "generated-self-marked"
-      },
-      "reviewNote": "sections after page 422 not visible in captured photos"
+      }
     },
     {
       "id": "u29",

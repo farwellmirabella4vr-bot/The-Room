@@ -45,6 +45,33 @@ const FRAMES_DIR = path.join(DIR, "frames");
 const OCR_DIR = path.join(DIR, "ocr");
 const PAGES_JSON = path.join(DIR, "pages.json");
 const SEQ_REPORT = path.join(DIR, "page-sequence-report.txt");
+const LOCAL_TESSDATA = path.join(DIR, "tessdata"); // holds spa.traineddata when it's not in the system tessdata
+
+// Find the tesseract executable even when it isn't on PATH (a fresh install
+// often isn't, until the terminal is restarted).
+function resolveTesseract() {
+  const candidates = [
+    "tesseract",
+    "C:\\Program Files\\Tesseract-OCR\\tesseract.exe",
+    "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe",
+    path.join(process.env.LOCALAPPDATA || "", "Programs", "Tesseract-OCR", "tesseract.exe"),
+  ];
+  for (const c of candidates) {
+    const r = spawnSync(c, ["--version"], { encoding: "utf8" });
+    if (!r.error && r.status === 0) return c;
+  }
+  return null;
+}
+const TESSERACT = resolveTesseract();
+// If spa.traineddata lives in our local tessdata/ folder, tell tesseract to
+// look there (used when it couldn't be dropped into the system tessdata,
+// which needs admin rights).
+const TESSDATA_ARGS =
+  fs.existsSync(path.join(LOCAL_TESSDATA, "spa.traineddata")) ? ["--tessdata-dir", LOCAL_TESSDATA] : [];
+
+function tess(args, opts) {
+  return spawnSync(TESSERACT, args.concat(TESSDATA_ARGS), Object.assign({ encoding: "utf8" }, opts || {}));
+}
 
 function fail(msg) {
   console.error("\nStage 3 stopped: " + msg + "\n");
@@ -87,11 +114,10 @@ function detectPageNumber(text) {
 function main() {
   const args = parseArgs(process.argv.slice(2));
 
-  const check = spawnSync("tesseract", ["--version"], { encoding: "utf8" });
-  if (check.error || check.status !== 0) fail("tesseract isn't on PATH. Run Stage 1 for install steps.");
-  const langs = spawnSync("tesseract", ["--list-langs"], { encoding: "utf8" });
+  if (!TESSERACT) fail("can't find the tesseract executable (checked PATH and the usual install folders). Run Stage 1 for install steps.");
+  const langs = tess(["--list-langs"]);
   if (!/(^|\s)spa(\s|$)/m.test((langs.stdout || "") + (langs.stderr || ""))) {
-    fail('the Spanish pack ("spa") isn\'t installed for Tesseract. Run Stage 1 for the fix.');
+    fail('the Spanish pack ("spa") isn\'t available to Tesseract. Run Stage 1 for the fix.');
   }
 
   if (!fs.existsSync(FRAMES_DIR)) fail("no frames\\ folder. Run Stage 2 first.");
@@ -113,11 +139,7 @@ function main() {
     if (fs.existsSync(txtPath) && !args.force) {
       ocrReused++;
     } else {
-      const res = spawnSync(
-        "tesseract",
-        [path.join(FRAMES_DIR, frame), outBase, "-l", TESS_LANG, "--psm", TESS_PSM],
-        { encoding: "utf8" }
-      );
+      const res = tess([path.join(FRAMES_DIR, frame), outBase, "-l", TESS_LANG, "--psm", TESS_PSM]);
       if (res.error || res.status !== 0) {
         console.log("  [" + (i + 1) + "/" + frames.length + "] " + frame + "  OCR FAILED: " +
           (res.error ? res.error.message : (res.stderr || "").split(/\r?\n/).slice(-2).join(" ")));

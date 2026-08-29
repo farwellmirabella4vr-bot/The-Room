@@ -46,27 +46,27 @@ machine right now: **ffmpeg and Node are already installed**; you need
 
 ### Install Tesseract OCR + Spanish
 
-1. Download the latest `tesseract-ocr-w64-setup-….exe` from
-   <https://github.com/UB-Mannheim/tesseract/wiki>
-2. Run it. Keep the default location: `C:\Program Files\Tesseract-OCR`
-3. On the **Select components** screen, expand **“Additional language data
-   (download)”** and tick **Spanish**.
-4. Finish, then add it to PATH (PowerShell):
-   ```powershell
-   [Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\Program Files\Tesseract-OCR", "User")
-   ```
-5. **Close PowerShell, open a new one**, then verify:
-   ```powershell
-   tesseract --version
-   tesseract --list-langs
-   ```
-   You should see `spa` in the language list.
+Fastest (no admin prompt for the engine):
+```powershell
+winget install --id UB-Mannheim.TesseractOCR -e --accept-package-agreements --accept-source-agreements
+```
+This installs the engine to `C:\Program Files\Tesseract-OCR` but **without**
+the Spanish data. The Stage 3 script auto-finds `tesseract.exe` even if it's
+not on PATH, and it looks for Spanish in `tools\book-video\tessdata\` — so
+just drop the language file there (no admin needed):
+```powershell
+mkdir tools\book-video\tessdata
+curl.exe -L -o tools\book-video\tessdata\spa.traineddata https://github.com/tesseract-ocr/tessdata_best/raw/main/spa.traineddata
+```
 
-If you already installed Tesseract without Spanish: download
-`spa.traineddata` from
-<https://github.com/tesseract-ocr/tessdata_best/raw/main/spa.traineddata>
-and copy it into `C:\Program Files\Tesseract-OCR\tessdata\` (needs an
-Administrator prompt). Then `tesseract --list-langs` again.
+Or use the GUI installer from <https://github.com/UB-Mannheim/tesseract/wiki>
+and tick **Spanish** under "Additional language data" during setup; then add
+`C:\Program Files\Tesseract-OCR` to PATH and restart the terminal.
+
+Verify either way:
+```powershell
+node tools\book-video\1-check-setup.js
+```
 
 ### Set your Anthropic API key (Stage 4 only — you can do this later)
 
@@ -96,14 +96,15 @@ node tools\book-video\2-extract-frames.js "C:\path\to\your-spanish-book-video.mp
 ```
 
 - **Pass 1** uses ffmpeg's scene-change filter to grab a frame at every page
-  flip (plus the very first frame).
-- **Pass 2** runs a dedupe (ffmpeg `mpdecimate`) that drops any frame nearly
-  identical to the one before it — page flips often trip the scene filter
-  twice.
+  flip (plus the very first frame), keeping only one frame per flip via a
+  minimum time gap (`MIN_SECONDS_BETWEEN_FRAMES`).
+- **Pass 2** runs a dedupe (ffmpeg `mpdecimate`) as a safety net for any
+  near-identical frames that still slip through.
 - Output: `frames\page-000001.jpg`, `page-000002.jpg`, …
 - It prints the **final frame count**. **Compare that to the real page count
   of the physical book** (flip to the last page, read the number, add any
-  unnumbered front matter you filmed).
+  unnumbered front matter you filmed). Note: books are usually filmed as
+  two-page spreads, so expect roughly *half* the page count in frames.
 
 ### If the count is wrong
 
@@ -111,9 +112,11 @@ Open `2-extract-frames.js` and edit the variables at the top, then re-run
 with `--force`:
 
 - **Too few frames / pages missing** → lower `SCENE_THRESHOLD`
-  (`0.03` → `0.02` → `0.012`).
+  (`0.11` → `0.08` → `0.05`), or lower `MIN_SECONDS_BETWEEN_FRAMES` if fast
+  flips are being skipped.
 - **Too many frames / duplicates** → raise `SCENE_THRESHOLD`
-  (`0.03` → `0.045` → `0.07`), and/or raise `DEDUPE_HI` / `DEDUPE_LO`.
+  (`0.11` → `0.15` → `0.20`), or raise `MIN_SECONDS_BETWEEN_FRAMES`.
+  Handheld/phone footage below ~0.08 mostly catches camera shake, not flips.
 - Each variable has a comment saying which way to move it.
 
 A few blurry mid-flip frames are fine — you'll delete those by hand in
