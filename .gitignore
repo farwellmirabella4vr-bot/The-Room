@@ -33,6 +33,14 @@ data/curriculum/*/audio-index.json
 data/curriculum/*/textbook-images/
 textbook-video-report*.json
 
+# Source flip-through videos of copyrighted textbooks (overhead recordings
+# from Trey's own copies). Local input only -- never commit these; they're
+# large and copyrighted. Keep alongside the repo, feed them to the scripts.
+*.mkv
+*.mp4
+*.mov
+*.m4v
+
 # tools/book-video (video -> curriculum pipeline) -- all local intermediates.
 # frames/ are stills of copyrighted textbook pages from your own video; ocr/ is
 # the text read off them; the rest are derived working files. Regenerate locally
