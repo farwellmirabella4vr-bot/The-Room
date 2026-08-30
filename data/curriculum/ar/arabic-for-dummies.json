@@ -17,14 +17,14 @@
       "id": "u1",
       "number": 1,
       "title": "The Arabic You Already Know",
-      "pages": "TBD",
+      "pages": "9-18",
       "goal": "Recognize Arabic loanwords already in English, and get oriented to the Arabic alphabet before studying it in depth.",
       "unlocks": "u2",
       "lessons": [
         {
           "id": "u1l1",
           "title": "Arabic Words You Already Know",
-          "pages": "TBD",
+          "pages": "9-12",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -78,7 +78,7 @@
         {
           "id": "u1l2",
           "title": "A First Look at the Alphabet",
-          "pages": "TBD",
+          "pages": "13-18",
           "estMinutes": 60,
           "skills": [
             "reading"
@@ -138,14 +138,14 @@
       "id": "u2",
       "number": 2,
       "title": "Taking a Closer Look at the Arabic Alphabet",
-      "pages": "TBD",
+      "pages": "19-30",
       "goal": "Read the Arabic script's letter forms and understand how this course's transliteration system represents Arabic sounds in Roman letters.",
       "unlocks": "u3",
       "lessons": [
         {
           "id": "u2l1",
           "title": "The Arabic Script",
-          "pages": "TBD",
+          "pages": "19-25",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -199,7 +199,7 @@
         {
           "id": "u2l2",
           "title": "Transcription & Transliteration Systems",
-          "pages": "TBD",
+          "pages": "26-30",
           "estMinutes": 60,
           "skills": [
             "reading"
@@ -259,14 +259,14 @@
       "id": "u3",
       "number": 3,
       "title": "Tackling Basic Arabic Grammar",
-      "pages": "TBD",
+      "pages": "31-54",
       "goal": "Build simple Arabic sentences using nouns, adjectives, articles, and the core verb tenses, including sentences with no verb at all.",
       "unlocks": "u4",
       "lessons": [
         {
           "id": "u3l1",
           "title": "Nouns, Adjectives & Articles",
-          "pages": "TBD",
+          "pages": "31-34",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -320,7 +320,7 @@
         {
           "id": "u3l2",
           "title": "Verb-Free Sentences",
-          "pages": "TBD",
+          "pages": "35-37",
           "estMinutes": 70,
           "skills": [
             "reading",
@@ -374,7 +374,7 @@
         {
           "id": "u3l3",
           "title": "Past Tense Verbs",
-          "pages": "TBD",
+          "pages": "38-41",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -428,7 +428,7 @@
         {
           "id": "u3l4",
           "title": "Present Tense Verbs",
-          "pages": "TBD",
+          "pages": "42-45",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -482,7 +482,7 @@
         {
           "id": "u3l5",
           "title": "Future Tense Verbs",
-          "pages": "TBD",
+          "pages": "46-49",
           "estMinutes": 70,
           "skills": [
             "reading",
@@ -536,7 +536,7 @@
         {
           "id": "u3l6",
           "title": "Irregular Verbs",
-          "pages": "TBD",
+          "pages": "50-54",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -603,14 +603,14 @@
       "id": "u4",
       "number": 4,
       "title": "Getting Started with Basic Expressions",
-      "pages": "TBD",
+      "pages": "55-70",
       "goal": "Greet people, introduce yourself, state your nationality, and make small talk about the weather.",
       "unlocks": "u5",
       "lessons": [
         {
           "id": "u4l1",
           "title": "Greetings",
-          "pages": "TBD",
+          "pages": "55-59",
           "estMinutes": 60,
           "skills": [
             "listening",
@@ -664,7 +664,7 @@
         {
           "id": "u4l2",
           "title": "Introducing Yourself",
-          "pages": "TBD",
+          "pages": "60-64",
           "estMinutes": 60,
           "skills": [
             "listening",
@@ -718,7 +718,7 @@
         {
           "id": "u4l3",
           "title": "Nationalities",
-          "pages": "TBD",
+          "pages": "65-67",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -767,7 +767,7 @@
         {
           "id": "u4l4",
           "title": "Talking About the Weather",
-          "pages": "TBD",
+          "pages": "68-70",
           "estMinutes": 45,
           "skills": [
             "listening",
@@ -1762,14 +1762,14 @@
       "id": "u7",
       "number": 7,
       "title": "Getting to Know You / Small Talk",
-      "pages": "TBD",
+      "pages": "95-114",
       "goal": "Carry a small-talk conversation: ask and answer key questions, talk about family and work, and communicate by phone or email.",
       "unlocks": "u8",
       "lessons": [
         {
           "id": "u7l1",
           "title": "Key Questions",
-          "pages": "TBD",
+          "pages": "95-99",
           "estMinutes": 60,
           "skills": [
             "listening",
@@ -1823,7 +1823,7 @@
         {
           "id": "u7l2",
           "title": "Talking About Family",
-          "pages": "TBD",
+          "pages": "100-104",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -1877,7 +1877,7 @@
         {
           "id": "u7l3",
           "title": "Talking About Your Job",
-          "pages": "TBD",
+          "pages": "105-109",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -1931,7 +1931,7 @@
         {
           "id": "u7l4",
           "title": "Phone Calls & Email",
-          "pages": "TBD",
+          "pages": "110-114",
           "estMinutes": 60,
           "skills": [
             "listening",
@@ -1997,14 +1997,14 @@
       "id": "u8",
       "number": 8,
       "title": "Asking Directions",
-      "pages": "TBD",
+      "pages": "115-132",
       "goal": "Ask where something is, understand and give directions, use command forms, and use ordinal numbers.",
       "unlocks": "u9",
       "lessons": [
         {
           "id": "u8l1",
           "title": "Asking ‘Where’ Questions",
-          "pages": "TBD",
+          "pages": "115-117",
           "estMinutes": 45,
           "skills": [
             "listening",
@@ -2058,7 +2058,7 @@
         {
           "id": "u8l2",
           "title": "Giving & Following Directions",
-          "pages": "TBD",
+          "pages": "118-123",
           "estMinutes": 75,
           "skills": [
             "listening",
@@ -2112,7 +2112,7 @@
         {
           "id": "u8l3",
           "title": "Command Forms (Imperative)",
-          "pages": "TBD",
+          "pages": "124-129",
           "estMinutes": 75,
           "skills": [
             "reading",
@@ -2166,7 +2166,7 @@
         {
           "id": "u8l4",
           "title": "Ordinal Numbers",
-          "pages": "TBD",
+          "pages": "130-132",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -2233,14 +2233,14 @@
       "id": "u9",
       "number": 9,
       "title": "Eating In and Dining Out",
-      "pages": "TBD",
+      "pages": "133-150",
       "goal": "Talk about mealtimes, read a menu, order food, and pay at a restaurant.",
       "unlocks": "u10",
       "lessons": [
         {
           "id": "u9l1",
           "title": "Mealtimes",
-          "pages": "TBD",
+          "pages": "133-136",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -2294,7 +2294,7 @@
         {
           "id": "u9l2",
           "title": "Reading a Menu",
-          "pages": "TBD",
+          "pages": "137-141",
           "estMinutes": 60,
           "skills": [
             "reading"
@@ -2342,7 +2342,7 @@
         {
           "id": "u9l3",
           "title": "Ordering Food",
-          "pages": "TBD",
+          "pages": "142-146",
           "estMinutes": 60,
           "skills": [
             "listening",
@@ -2396,7 +2396,7 @@
         {
           "id": "u9l4",
           "title": "Paying the Bill",
-          "pages": "TBD",
+          "pages": "147-150",
           "estMinutes": 45,
           "skills": [
             "listening",
@@ -2462,14 +2462,14 @@
       "id": "u10",
       "number": 10,
       "title": "Going Shopping",
-      "pages": "TBD",
+      "pages": "151-170",
       "goal": "Shop for merchandise and clothes, compare items, and negotiate buying and selling.",
       "unlocks": "u11",
       "lessons": [
         {
           "id": "u10l1",
           "title": "Talking About Merchandise",
-          "pages": "TBD",
+          "pages": "151-155",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -2523,7 +2523,7 @@
         {
           "id": "u10l2",
           "title": "Making Comparisons",
-          "pages": "TBD",
+          "pages": "156-160",
           "estMinutes": 70,
           "skills": [
             "reading",
@@ -2577,7 +2577,7 @@
         {
           "id": "u10l3",
           "title": "Buying & Selling",
-          "pages": "TBD",
+          "pages": "161-165",
           "estMinutes": 70,
           "skills": [
             "listening",
@@ -2631,7 +2631,7 @@
         {
           "id": "u10l4",
           "title": "Clothes & Sizes",
-          "pages": "TBD",
+          "pages": "166-170",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -2697,14 +2697,14 @@
       "id": "u11",
       "number": 11,
       "title": "Hitting the Town",
-      "pages": "TBD",
+      "pages": "171-192",
       "goal": "Tell time and talk about a night or day out — museums, movies, and visiting religious sites, including the Hajj.",
       "unlocks": "u12",
       "lessons": [
         {
           "id": "u11l1",
           "title": "Telling Time",
-          "pages": "TBD",
+          "pages": "171-176",
           "estMinutes": 75,
           "skills": [
             "reading",
@@ -2758,7 +2758,7 @@
         {
           "id": "u11l2",
           "title": "Visiting Museums",
-          "pages": "TBD",
+          "pages": "177-180",
           "estMinutes": 50,
           "skills": [
             "reading",
@@ -2812,7 +2812,7 @@
         {
           "id": "u11l3",
           "title": "Going to the Movies",
-          "pages": "TBD",
+          "pages": "181-184",
           "estMinutes": 50,
           "skills": [
             "reading",
@@ -2866,7 +2866,7 @@
         {
           "id": "u11l4",
           "title": "Visiting Religious Sites",
-          "pages": "TBD",
+          "pages": "185-188",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -2920,7 +2920,7 @@
         {
           "id": "u11l5",
           "title": "The Hajj",
-          "pages": "TBD",
+          "pages": "189-192",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -2986,14 +2986,14 @@
       "id": "u12",
       "number": 12,
       "title": "Business and Telecommunicating",
-      "pages": "TBD",
+      "pages": "193-206",
       "goal": "Handle basic business conversation and talk about phones, computers, and telecommunication.",
       "unlocks": "u13",
       "lessons": [
         {
           "id": "u12l1",
           "title": "Business Vocabulary",
-          "pages": "TBD",
+          "pages": "193-199",
           "estMinutes": 75,
           "skills": [
             "reading",
@@ -3047,7 +3047,7 @@
         {
           "id": "u12l2",
           "title": "Telecommunicating",
-          "pages": "TBD",
+          "pages": "200-206",
           "estMinutes": 75,
           "skills": [
             "listening",
@@ -3113,14 +3113,14 @@
       "id": "u13",
       "number": 13,
       "title": "Recreation, Music, and the Outdoors",
-      "pages": "TBD",
+      "pages": "207-222",
       "goal": "Talk about hobbies, recreation, music, and outdoor activities.",
       "unlocks": "u14",
       "lessons": [
         {
           "id": "u13l1",
           "title": "Recreation & Sports",
-          "pages": "TBD",
+          "pages": "207-212",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -3174,7 +3174,7 @@
         {
           "id": "u13l2",
           "title": "Music",
-          "pages": "TBD",
+          "pages": "213-216",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -3228,7 +3228,7 @@
         {
           "id": "u13l3",
           "title": "The Outdoors",
-          "pages": "TBD",
+          "pages": "217-222",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -3294,14 +3294,14 @@
       "id": "u14",
       "number": 14,
       "title": "Planning a Trip",
-      "pages": "TBD",
+      "pages": "223-232",
       "goal": "Plan and prepare for a trip in Arabic.",
       "unlocks": "u15",
       "lessons": [
         {
           "id": "u14l1",
           "title": "Planning a Trip",
-          "pages": "TBD",
+          "pages": "223-232",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -3368,14 +3368,14 @@
       "id": "u15",
       "number": 15,
       "title": "Money in a Foreign Land",
-      "pages": "TBD",
+      "pages": "233-242",
       "goal": "Handle money, currency exchange, and banking while traveling.",
       "unlocks": "u16",
       "lessons": [
         {
           "id": "u15l1",
           "title": "Money in a Foreign Land",
-          "pages": "TBD",
+          "pages": "233-242",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -3442,14 +3442,14 @@
       "id": "u16",
       "number": 16,
       "title": "Planes, Trains, Automobiles",
-      "pages": "TBD",
+      "pages": "243-254",
       "goal": "Talk about air, rail, and road travel.",
       "unlocks": "u17",
       "lessons": [
         {
           "id": "u16l1",
           "title": "Planes, Trains, Automobiles",
-          "pages": "TBD",
+          "pages": "243-254",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -3516,14 +3516,14 @@
       "id": "u17",
       "number": 17,
       "title": "Finding a Place to Stay",
-      "pages": "TBD",
+      "pages": "255-266",
       "goal": "Find and book accommodation.",
       "unlocks": "u18",
       "lessons": [
         {
           "id": "u17l1",
           "title": "Finding a Place to Stay",
-          "pages": "TBD",
+          "pages": "255-266",
           "estMinutes": 90,
           "skills": [
             "reading",
@@ -3590,14 +3590,14 @@
       "id": "u18",
       "number": 18,
       "title": "Handling Emergencies",
-      "pages": "TBD",
+      "pages": "267-280",
       "goal": "Handle medical, legal, and safety emergencies in Arabic.",
       "unlocks": "u19",
       "lessons": [
         {
           "id": "u18l1",
           "title": "Handling Emergencies",
-          "pages": "TBD",
+          "pages": "267-280",
           "estMinutes": 100,
           "skills": [
             "reading",
@@ -3664,14 +3664,14 @@
       "id": "u19",
       "number": 19,
       "title": "Ten Ways to Pick Up Arabic Quickly",
-      "pages": "TBD",
+      "pages": "283-288",
       "goal": "Apply ten practical strategies for picking up Arabic faster.",
       "unlocks": "u20",
       "lessons": [
         {
           "id": "u19l1",
           "title": "Ten Ways to Pick Up Arabic Quickly",
-          "pages": "TBD",
+          "pages": "283-288",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -3736,14 +3736,14 @@
       "id": "u20",
       "number": 20,
       "title": "Ten Favorite Arabic Expressions",
-      "pages": "TBD",
+      "pages": "289-294",
       "goal": "Learn ten commonly used Arabic expressions.",
       "unlocks": "u21",
       "lessons": [
         {
           "id": "u20l1",
           "title": "Ten Favorite Arabic Expressions",
-          "pages": "TBD",
+          "pages": "289-294",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -3809,14 +3809,14 @@
       "id": "u21",
       "number": 21,
       "title": "Ten Great Arabic Proverbs",
-      "pages": "TBD",
+      "pages": "295-300",
       "goal": "Learn ten well-known Arabic proverbs and their meanings.",
       "unlocks": "u22",
       "lessons": [
         {
           "id": "u21l1",
           "title": "Ten Great Arabic Proverbs",
-          "pages": "TBD",
+          "pages": "295-300",
           "estMinutes": 45,
           "skills": [
             "reading",
@@ -3882,14 +3882,14 @@
       "id": "u22",
       "number": 22,
       "title": "Appendixes & Reference",
-      "pages": "TBD",
+      "pages": "301-352",
       "goal": "Use the reference appendixes — verb conjugation tables and the mini-dictionaries — to check work and look up vocabulary.",
       "unlocks": null,
       "lessons": [
         {
           "id": "u22l1",
           "title": "Verb Conjugation Tables",
-          "pages": "TBD",
+          "pages": "301-315",
           "estMinutes": 60,
           "skills": [
             "reading",
@@ -3943,7 +3943,7 @@
         {
           "id": "u22l2",
           "title": "Mini-Dictionary: Arabic–English",
-          "pages": "TBD",
+          "pages": "316-330",
           "estMinutes": 60,
           "skills": [
             "reading"
@@ -3991,7 +3991,7 @@
         {
           "id": "u22l3",
           "title": "Mini-Dictionary: English–Arabic",
-          "pages": "TBD",
+          "pages": "331-345",
           "estMinutes": 60,
           "skills": [
             "reading"
@@ -4039,7 +4039,7 @@
         {
           "id": "u22l4",
           "title": "Practice Answer Key",
-          "pages": "TBD",
+          "pages": "346-352",
           "estMinutes": 30,
           "skills": [
             "reading"
@@ -4095,5 +4095,6 @@
         ]
       }
     }
-  ]
+  ],
+  "pageRangesNote": "Chapter page ranges: Ch 5 (71-77) and Ch 6 (79-94) are verified against the book. All other chapters are ESTIMATED from the 2nd-edition structure and the 384-page count - bounded by those anchors, in order, sized by lesson count. Open the book to a chapter and fix its range with the pencil-edit button if it is off."
 }
