@@ -73,7 +73,8 @@
               "translit": "ṣaḥrā",
               "gloss": "desert (source of \"Sahara\")"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u1l2",
@@ -121,7 +122,8 @@
               "translit": "kitāba",
               "gloss": "writing"
             }
-          ]
+          ],
+          "pageImages": []
         }
       ],
       "checkpoint": {
@@ -194,6 +196,9 @@
               "translit": "jumla",
               "gloss": "sentence"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000786s.jpg"
           ]
         },
         {
@@ -242,7 +247,8 @@
               "translit": "lugha",
               "gloss": "language"
             }
-          ]
+          ],
+          "pageImages": []
         }
       ],
       "checkpoint": {
@@ -315,7 +321,8 @@
               "translit": "kabīr",
               "gloss": "big"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u3l2",
@@ -369,7 +376,8 @@
               "translit": "fī",
               "gloss": "in"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u3l3",
@@ -423,7 +431,8 @@
               "translit": "akala",
               "gloss": "he ate"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u3l4",
@@ -477,7 +486,8 @@
               "translit": "ya'kulu",
               "gloss": "he eats"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u3l5",
@@ -531,7 +541,8 @@
               "translit": "ghadan",
               "gloss": "tomorrow"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u3l6",
@@ -585,7 +596,8 @@
               "translit": "jā'a",
               "gloss": "he came"
             }
-          ]
+          ],
+          "pageImages": []
         }
       ],
       "checkpoint": {
@@ -659,7 +671,8 @@
               "translit": "ṣabāḥ al-khayr",
               "gloss": "good morning"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u4l2",
@@ -713,7 +726,8 @@
               "translit": "tasharrafnā",
               "gloss": "pleased to meet you"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u4l3",
@@ -762,7 +776,8 @@
               "translit": "min ayna anta",
               "gloss": "where are you from"
             }
-          ]
+          ],
+          "pageImages": []
         },
         {
           "id": "u4l4",
@@ -816,6 +831,9 @@
               "translit": "bārid",
               "gloss": "cold"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000003s.jpg"
           ]
         }
       ],
@@ -983,6 +1001,11 @@
               ],
               "isAssessment": false
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000008s.jpg",
+            "data/curriculum/ar/textbook-images/page-000013s.jpg",
+            "data/curriculum/ar/textbook-images/page-000016s.jpg"
           ]
         },
         {
@@ -1099,6 +1122,9 @@
               ],
               "isAssessment": false
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000023s.jpg"
           ]
         },
         {
@@ -1219,6 +1245,9 @@
               ],
               "isAssessment": true
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000029s.jpg"
           ]
         }
       ],
@@ -1564,6 +1593,16 @@
               ],
               "isAssessment": false
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000044s.jpg",
+            "data/curriculum/ar/textbook-images/page-000051s.jpg",
+            "data/curriculum/ar/textbook-images/page-000055s.jpg",
+            "data/curriculum/ar/textbook-images/page-000061s.jpg",
+            "data/curriculum/ar/textbook-images/page-000069s.jpg",
+            "data/curriculum/ar/textbook-images/page-000073s.jpg",
+            "data/curriculum/ar/textbook-images/page-000080s.jpg",
+            "data/curriculum/ar/textbook-images/page-000082s.jpg"
           ]
         },
         {
@@ -1745,6 +1784,12 @@
               ],
               "isAssessment": true
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000090s.jpg",
+            "data/curriculum/ar/textbook-images/page-000093s.jpg",
+            "data/curriculum/ar/textbook-images/page-000099s.jpg",
+            "data/curriculum/ar/textbook-images/page-000105s.jpg"
           ]
         }
       ],
@@ -1818,6 +1863,10 @@
               "translit": "limādhā",
               "gloss": "why"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000116s.jpg",
+            "data/curriculum/ar/textbook-images/page-000119s.jpg"
           ]
         },
         {
@@ -1872,6 +1921,13 @@
               "translit": "ukht",
               "gloss": "sister"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000125s.jpg",
+            "data/curriculum/ar/textbook-images/page-000128s.jpg",
+            "data/curriculum/ar/textbook-images/page-000134s.jpg",
+            "data/curriculum/ar/textbook-images/page-000139s.jpg",
+            "data/curriculum/ar/textbook-images/page-000148s.jpg"
           ]
         },
         {
@@ -1926,6 +1982,11 @@
               "translit": "muhandis",
               "gloss": "engineer"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000154s.jpg",
+            "data/curriculum/ar/textbook-images/page-000157s.jpg",
+            "data/curriculum/ar/textbook-images/page-000162s.jpg"
           ]
         },
         {
@@ -1980,6 +2041,12 @@
               "translit": "raqam",
               "gloss": "number"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000168s.jpg",
+            "data/curriculum/ar/textbook-images/page-000173s.jpg",
+            "data/curriculum/ar/textbook-images/page-000181s.jpg",
+            "data/curriculum/ar/textbook-images/page-000184s.jpg"
           ]
         }
       ],
@@ -2053,6 +2120,9 @@
               "translit": "hunāk",
               "gloss": "there"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000189s.jpg"
           ]
         },
         {
@@ -2107,6 +2177,13 @@
               "translit": "mustaqīm",
               "gloss": "straight ahead"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000194s.jpg",
+            "data/curriculum/ar/textbook-images/page-000197s.jpg",
+            "data/curriculum/ar/textbook-images/page-000204s.jpg",
+            "data/curriculum/ar/textbook-images/page-000208s.jpg",
+            "data/curriculum/ar/textbook-images/page-000210s.jpg"
           ]
         },
         {
@@ -2161,6 +2238,11 @@
               "translit": "intaẓir",
               "gloss": "wait!"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000217s.jpg",
+            "data/curriculum/ar/textbook-images/page-000226s.jpg",
+            "data/curriculum/ar/textbook-images/page-000236s.jpg"
           ]
         },
         {
@@ -2215,6 +2297,11 @@
               "translit": "thālith",
               "gloss": "third"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000241s.jpg",
+            "data/curriculum/ar/textbook-images/page-000245s.jpg",
+            "data/curriculum/ar/textbook-images/page-000251s.jpg"
           ]
         }
       ],
@@ -2289,6 +2376,10 @@
               "translit": "ʿashā'",
               "gloss": "dinner"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000258s.jpg",
+            "data/curriculum/ar/textbook-images/page-000264s.jpg"
           ]
         },
         {
@@ -2337,6 +2428,10 @@
               "translit": "ṭabaq",
               "gloss": "dish"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000270s.jpg",
+            "data/curriculum/ar/textbook-images/page-000277s.jpg"
           ]
         },
         {
@@ -2391,6 +2486,12 @@
               "translit": "mā'",
               "gloss": "water"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000283s.jpg",
+            "data/curriculum/ar/textbook-images/page-000290s.jpg",
+            "data/curriculum/ar/textbook-images/page-000296s.jpg",
+            "data/curriculum/ar/textbook-images/page-000299s.jpg"
           ]
         },
         {
@@ -2445,6 +2546,9 @@
               "translit": "shukran",
               "gloss": "thank you"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000310s.jpg"
           ]
         }
       ],
@@ -2518,6 +2622,11 @@
               "translit": "biḍāʿa",
               "gloss": "merchandise"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000318s.jpg",
+            "data/curriculum/ar/textbook-images/page-000324s.jpg",
+            "data/curriculum/ar/textbook-images/page-000329s.jpg"
           ]
         },
         {
@@ -2572,6 +2681,13 @@
               "translit": "afḍal",
               "gloss": "better"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000337s.jpg",
+            "data/curriculum/ar/textbook-images/page-000342s.jpg",
+            "data/curriculum/ar/textbook-images/page-000345s.jpg",
+            "data/curriculum/ar/textbook-images/page-000350s.jpg",
+            "data/curriculum/ar/textbook-images/page-000352s.jpg"
           ]
         },
         {
@@ -2626,6 +2742,11 @@
               "translit": "rakhīṣ",
               "gloss": "cheap"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000356s.jpg",
+            "data/curriculum/ar/textbook-images/page-000358s.jpg",
+            "data/curriculum/ar/textbook-images/page-000368s.jpg"
           ]
         },
         {
@@ -2680,6 +2801,11 @@
               "translit": "maqās",
               "gloss": "size"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000373s.jpg",
+            "data/curriculum/ar/textbook-images/page-000379s.jpg",
+            "data/curriculum/ar/textbook-images/page-000383s.jpg"
           ]
         }
       ],
@@ -2753,6 +2879,12 @@
               "translit": "muta'akhkhir",
               "gloss": "late"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000390s.jpg",
+            "data/curriculum/ar/textbook-images/page-000391s.jpg",
+            "data/curriculum/ar/textbook-images/page-000397s.jpg",
+            "data/curriculum/ar/textbook-images/page-000402s.jpg"
           ]
         },
         {
@@ -2807,6 +2939,12 @@
               "translit": "maʿriḍ",
               "gloss": "exhibition"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000409s.jpg",
+            "data/curriculum/ar/textbook-images/page-000413s.jpg",
+            "data/curriculum/ar/textbook-images/page-000419s.jpg",
+            "data/curriculum/ar/textbook-images/page-000421s.jpg"
           ]
         },
         {
@@ -2861,6 +2999,10 @@
               "translit": "maqʿad",
               "gloss": "seat"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000428s.jpg",
+            "data/curriculum/ar/textbook-images/page-000433s.jpg"
           ]
         },
         {
@@ -2915,6 +3057,10 @@
               "translit": "ziyāra",
               "gloss": "visit"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000439s.jpg",
+            "data/curriculum/ar/textbook-images/page-000447s.jpg"
           ]
         },
         {
@@ -2969,6 +3115,10 @@
               "translit": "ḥājj",
               "gloss": "pilgrim (one who has performed Hajj)"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000454s.jpg",
+            "data/curriculum/ar/textbook-images/page-000460s.jpg"
           ]
         }
       ],
@@ -3042,6 +3192,11 @@
               "translit": "ʿaqd",
               "gloss": "contract"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000466s.jpg",
+            "data/curriculum/ar/textbook-images/page-000474s.jpg",
+            "data/curriculum/ar/textbook-images/page-000482s.jpg"
           ]
         },
         {
@@ -3096,6 +3251,12 @@
               "translit": "ittiṣāl",
               "gloss": "call / connection"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000490s.jpg",
+            "data/curriculum/ar/textbook-images/page-000497s.jpg",
+            "data/curriculum/ar/textbook-images/page-000503s.jpg",
+            "data/curriculum/ar/textbook-images/page-000508s.jpg"
           ]
         }
       ],
@@ -3169,6 +3330,10 @@
               "translit": "yalʿab",
               "gloss": "he plays"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000512s.jpg",
+            "data/curriculum/ar/textbook-images/page-000525s.jpg"
           ]
         },
         {
@@ -3223,6 +3388,10 @@
               "translit": "yughannī",
               "gloss": "he sings"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000532s.jpg",
+            "data/curriculum/ar/textbook-images/page-000538s.jpg"
           ]
         },
         {
@@ -3277,6 +3446,11 @@
               "translit": "ṭabīʿa",
               "gloss": "nature"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000545s.jpg",
+            "data/curriculum/ar/textbook-images/page-000550s.jpg",
+            "data/curriculum/ar/textbook-images/page-000557s.jpg"
           ]
         }
       ],
@@ -3351,6 +3525,13 @@
               "translit": "ḥajz",
               "gloss": "reservation / booking"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000568s.jpg",
+            "data/curriculum/ar/textbook-images/page-000570s.jpg",
+            "data/curriculum/ar/textbook-images/page-000574s.jpg",
+            "data/curriculum/ar/textbook-images/page-000584s.jpg",
+            "data/curriculum/ar/textbook-images/page-000589s.jpg"
           ]
         }
       ],
@@ -3425,6 +3606,13 @@
               "translit": "ṣarf",
               "gloss": "exchange"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000594s.jpg",
+            "data/curriculum/ar/textbook-images/page-000599s.jpg",
+            "data/curriculum/ar/textbook-images/page-000604s.jpg",
+            "data/curriculum/ar/textbook-images/page-000611s.jpg",
+            "data/curriculum/ar/textbook-images/page-000619s.jpg"
           ]
         }
       ],
@@ -3499,6 +3687,14 @@
               "translit": "sayyāra",
               "gloss": "car"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000518s.jpg",
+            "data/curriculum/ar/textbook-images/page-000625s.jpg",
+            "data/curriculum/ar/textbook-images/page-000630s.jpg",
+            "data/curriculum/ar/textbook-images/page-000636s.jpg",
+            "data/curriculum/ar/textbook-images/page-000643s.jpg",
+            "data/curriculum/ar/textbook-images/page-000650s.jpg"
           ]
         }
       ],
@@ -3573,6 +3769,14 @@
               "translit": "ḥajz",
               "gloss": "reservation"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000613s.jpg",
+            "data/curriculum/ar/textbook-images/page-000662s.jpg",
+            "data/curriculum/ar/textbook-images/page-000673s.jpg",
+            "data/curriculum/ar/textbook-images/page-000680s.jpg",
+            "data/curriculum/ar/textbook-images/page-000684s.jpg",
+            "data/curriculum/ar/textbook-images/page-000687s.jpg"
           ]
         }
       ],
@@ -3647,6 +3851,12 @@
               "translit": "mustashfā",
               "gloss": "hospital"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000697s.jpg",
+            "data/curriculum/ar/textbook-images/page-000702s.jpg",
+            "data/curriculum/ar/textbook-images/page-000712s.jpg",
+            "data/curriculum/ar/textbook-images/page-000722s.jpg"
           ]
         }
       ],
@@ -3720,6 +3930,11 @@
               "translit": "kull yawm",
               "gloss": "every day"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000739s.jpg",
+            "data/curriculum/ar/textbook-images/page-000744s.jpg",
+            "data/curriculum/ar/textbook-images/page-000746s.jpg"
           ]
         }
       ],
@@ -3792,6 +4007,11 @@
               "translit": "mabrūk",
               "gloss": "congratulations"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000750s.jpg",
+            "data/curriculum/ar/textbook-images/page-000755s.jpg",
+            "data/curriculum/ar/textbook-images/page-000760s.jpg"
           ]
         }
       ],
@@ -3865,6 +4085,9 @@
               "translit": "aṣ-ṣabru miftāḥu-l-faraj",
               "gloss": "patience is the key to relief"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000781s.jpg"
           ]
         }
       ],
@@ -3938,6 +4161,14 @@
               "translit": "jidhr",
               "gloss": "root"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000791s.jpg",
+            "data/curriculum/ar/textbook-images/page-000803s.jpg",
+            "data/curriculum/ar/textbook-images/page-000805s.jpg",
+            "data/curriculum/ar/textbook-images/page-000811s.jpg",
+            "data/curriculum/ar/textbook-images/page-000817s.jpg",
+            "data/curriculum/ar/textbook-images/page-000828s.jpg"
           ]
         },
         {
@@ -3986,6 +4217,10 @@
               "translit": "tarjama",
               "gloss": "translation"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000855s.jpg",
+            "data/curriculum/ar/textbook-images/page-000859s.jpg"
           ]
         },
         {
@@ -4034,6 +4269,12 @@
               "translit": "marjaʿ",
               "gloss": "reference"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000888s.jpg",
+            "data/curriculum/ar/textbook-images/page-000897s.jpg",
+            "data/curriculum/ar/textbook-images/page-000909s.jpg",
+            "data/curriculum/ar/textbook-images/page-000913s.jpg"
           ]
         },
         {
@@ -4082,6 +4323,10 @@
               "translit": "ṣaḥīḥ",
               "gloss": "correct"
             }
+          ],
+          "pageImages": [
+            "data/curriculum/ar/textbook-images/page-000917s.jpg",
+            "data/curriculum/ar/textbook-images/page-000926s.jpg"
           ]
         }
       ],
@@ -4096,5 +4341,6 @@
       }
     }
   ],
-  "pageRangesNote": "Chapter page ranges: Ch 5 (71-77) and Ch 6 (79-94) are verified against the book. All other chapters are ESTIMATED from the 2nd-edition structure and the 384-page count - bounded by those anchors, in order, sized by lesson count. Open the book to a chapter and fix its range with the pencil-edit button if it is off."
+  "pageRangesNote": "Chapter page ranges: Ch 5 (71-77) and Ch 6 (79-94) are verified against the book. All other chapters are ESTIMATED from the 2nd-edition structure and the 384-page count - bounded by those anchors, in order, sized by lesson count. Open the book to a chapter and fix its range with the pencil-edit button if it is off.",
+  "activityPages": []
 }
