@@ -10,89 +10,89 @@
 <style>
 
   /* ============================================================
-     LANGUAGE HUB — tweakable theme variables.
-     Aesthetic: 2000s "Web 2.0" glossy UI (rounded pill buttons,
-     gradient sheen, drop shadows) as the shared throughline, with
-     each language's own period-appropriate regional palette/motif/
-     font stack layered on top via [data-lang-theme="xx"].
+     LANGUAGE HUB — Luxury Dari / Afghan-Persian study salon.
+     Shared aesthetic across every language: warm parchment grounds,
+     lapis + antique-gold + walnut, elegant serif display type, a
+     barely-there khatam (8-point star) tile watermark. Each
+     [data-lang-theme="xx"] only shifts the accent family a little
+     (Spanish warmer, Arabic greener, Dari deep lapis) so the room
+     always reads as one continuous salon, never a different site.
 
-     TO ADD A THIRD LANGUAGE: add a [data-lang-theme="xx"] block
-     here with the same variable set, then add a matching entry to
-     the LANGUAGES array in the <script> below (id must match).
+     TO ADD A LANGUAGE: add a [data-lang-theme="xx"] block here with
+     the same variable set, then add a matching entry to the
+     LANGUAGES array in the <script> below (id must match). A new
+     language needs no schedule — the hub asks what you're studying,
+     it never assigns days.
      ============================================================ */
   :root {
-    --radius-lg: 18px;
+    --radius-lg: 16px;
     --radius-md: 12px;
     --radius-sm: 8px;
-    --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.25);
-  }
+    --shadow-soft: 0 14px 34px rgba(43, 30, 16, 0.16);
+    --shadow-lift: 0 20px 44px rgba(43, 30, 16, 0.22);
+    --hairline: rgba(120, 92, 46, 0.28);
 
-  /* -------- Spanish (2000s warm Latin palette: terracotta, sangria,
-     Mediterranean teal + gold, Trebuchet-forward web-safe type) -------- */
-  [data-lang-theme="es"] {
-    --bg: #fdf1de;
-    --bg-alt: #fbe4c2;
-    --primary: #c1440e;
-    --primary-light: #e35f1f;
-    --primary-dark: #8a2f0a;
-    --secondary: #7a1f2b;
-    --accent: #1f7a6c;
-    --gold: #e8a33d;
-    --text: #4a2a12;
-    --text-dim: #8a6a4a;
-    --panel-bg: #fffaf0;
-    --font-display: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
-    --font-body: "Verdana", "Segoe UI", sans-serif;
-    --motif-size: 48px 48px;
-    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cg fill='none' stroke='%231f7a6c' stroke-width='1' opacity='0.35'%3E%3Ccircle cx='24' cy='24' r='7'/%3E%3Ccircle cx='0' cy='0' r='7'/%3E%3Ccircle cx='48' cy='0' r='7'/%3E%3Ccircle cx='0' cy='48' r='7'/%3E%3Ccircle cx='48' cy='48' r='7'/%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  /* -------- Farsi / Persian (2000s Iranian web palette: Persian
-     turquoise + wine + gold, Tahoma — the defining Persian-web font
-     of the era) -------- */
-  [data-lang-theme="fa"] {
-    --bg: #fbf3e3;
-    --bg-alt: #f0e0bd;
-    --primary: #1b6f8c;
-    --primary-light: #2a8fb0;
-    --primary-dark: #124b5e;
-    --secondary: #6b1f3a;
-    --accent: #c9a227;
-    --gold: #c9a227;
-    --text: #2e2418;
-    --text-dim: #7a6a52;
-    --panel-bg: #fffdf6;
-    --font-display: "Tahoma", "Segoe UI", sans-serif;
-    --font-body: "Tahoma", "Segoe UI", sans-serif;
-    --motif-size: 40px 40px;
-    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M20 6 C28 6 32 14 28 22 C25 28 18 30 14 26 C10 22 12 14 20 6 Z' fill='none' stroke='%236b1f3a' stroke-width='1' opacity='0.32'/%3E%3C/svg%3E");
-  }
-
-  /* -------- Arabic (2000s Arabic-web palette: pan-Arab green + Gulf
-     maroon + brass gold, Tahoma -- the one font that actually shaped
-     Arabic script correctly on 2000s Windows, same reasoning as Farsi's
-     block above). Motif is an 8-point star polygon, stroked rather than
-     filled like the other two themes' motifs -- the same {8/3}
-     star-polygon construction already used for the Room's girih
-     pattern (center 50,50, outer r=26, inner r=10.5, 16 points
-     alternating every 22.5°). No crescent, no calligraphy, matching the
-     constraint already established in design-system/patterns.css. -------- */
-  [data-lang-theme="ar"] {
-    --bg: #f7f0dc;
-    --bg-alt: #efe0b8;
-    --primary: #0f7a3d;
-    --primary-light: #2ea862;
-    --primary-dark: #0a5228;
-    --secondary: #7a1220;
-    --accent: #c9922e;
-    --gold: #c9922e;
-    --text: #2b2013;
-    --text-dim: #7a6a4a;
-    --panel-bg: #fffcf3;
-    --font-display: "Tahoma", "Segoe UI", Arial, sans-serif;
-    --font-body: "Tahoma", Arial, sans-serif;
+    /* Shared luxury base — every theme inherits these, then overrides
+       only the accent trio (primary / secondary / accent). */
+    --bg: #f4ebd6;
+    --bg-alt: #e9dcbe;
+    --panel-bg: #fbf6e8;
+    --text: #2c2216;
+    --text-dim: #7c6a4f;
+    --gold: #b8912e;
+    --gold-soft: rgba(184, 145, 46, 0.16);
+    --primary: #1f4a8f;
+    --primary-light: #2f66b4;
+    --primary-dark: #16366a;
+    --secondary: #4a3021;
+    --accent: #146b60;
+    --font-display: "Iowan Old Style", "Palatino Linotype", "Palatino", "Book Antiqua", "Noto Serif", Georgia, "Times New Roman", serif;
+    --font-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
     --motif-size: 46px 46px;
-    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46'%3E%3Cpath d='M23,10.9 L24.85,18.5 L31.4,14.5 L27.4,21.05 L35,23 L27.4,24.95 L31.4,31.5 L24.85,27.5 L23,35 L21.15,27.5 L14.6,31.5 L18.6,24.95 L11,23 L18.6,21.05 L14.6,14.5 L21.15,18.5 Z' fill='none' stroke='%237a1220' stroke-width='1' opacity='0.4'/%3E%3C/svg%3E");
+    /* Khatam 8-point star, antique gold, whisper-faint — texture, not pattern. */
+    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46'%3E%3Cpath d='M23,6 L26,17.4 L37.4,14.4 L29,23 L37.4,31.6 L26,28.6 L23,40 L20,28.6 L8.6,31.6 L17,23 L8.6,14.4 L20,17.4 Z' fill='none' stroke='%23b8912e' stroke-width='0.8' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
+  /* -------- Spanish — warm Herat brick + wine, kept in the salon palette -------- */
+  [data-lang-theme="es"] {
+    --primary: #a8482a;
+    --primary-light: #c25f3c;
+    --primary-dark: #7c3018;
+    --secondary: #6a2433;
+    --accent: #1f7a6c;
+    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46'%3E%3Cpath d='M23,6 L26,17.4 L37.4,14.4 L29,23 L37.4,31.6 L26,28.6 L23,40 L20,28.6 L8.6,31.6 L17,23 L8.6,14.4 L20,17.4 Z' fill='none' stroke='%23a8482a' stroke-width='0.8' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
+  /* -------- Dari / Persian — the hero theme: deep lapis lazuli + aubergine -------- */
+  [data-lang-theme="fa"] {
+    --primary: #1f4a8f;
+    --primary-light: #2f66b4;
+    --primary-dark: #142f5e;
+    --secondary: #5b2a44;
+    --accent: #146b60;
+    --font-display: "Tahoma", "Segoe UI", serif;
+    --font-body: "Tahoma", "Segoe UI", sans-serif;
+  }
+
+  /* -------- Arabic — deep emerald + Gulf maroon -------- */
+  [data-lang-theme="ar"] {
+    --primary: #1a6a4b;
+    --primary-light: #2a8a64;
+    --primary-dark: #0f4a33;
+    --secondary: #6a2130;
+    --accent: #1c5f8f;
+    --font-display: "Tahoma", "Segoe UI", Arial, serif;
+    --font-body: "Tahoma", Arial, sans-serif;
+    --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='46'%3E%3Cpath d='M23,6 L26,17.4 L37.4,14.4 L29,23 L37.4,31.6 L26,28.6 L23,40 L20,28.6 L8.6,31.6 L17,23 L8.6,14.4 L20,17.4 Z' fill='none' stroke='%231a6a4b' stroke-width='0.8' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
+  /* -------- Portuguese — deep viridian + walnut -------- */
+  [data-lang-theme="pt"] {
+    --primary: #1a6a5f;
+    --primary-light: #2a8a7c;
+    --primary-dark: #0f4a42;
+    --secondary: #5a2f2a;
+    --accent: #1c528f;
   }
 
   * { box-sizing: border-box; }
@@ -105,11 +105,16 @@
   body {
     font-family: var(--font-body);
     color: var(--text);
-    background: var(--motif), linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
-    background-size: var(--motif-size), auto;
+    background:
+      var(--motif),
+      radial-gradient(1200px 620px at 50% -8%, rgba(184, 145, 46, 0.10), rgba(184, 145, 46, 0) 70%),
+      linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+    background-size: var(--motif-size), auto, auto;
+    background-attachment: fixed, fixed, fixed;
     transition: background 0.6s ease, color 0.6s ease;
     min-height: 100vh;
     padding-bottom: 3rem;
+    line-height: 1.55;
   }
 
   a { color: var(--primary-dark); }
@@ -117,14 +122,27 @@
   h1, h2, h3 {
     font-family: var(--font-display);
     color: var(--secondary);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     margin: 0 0 0.5rem;
+    letter-spacing: 0.01em;
   }
 
   /* ---------- header ---------- */
   .hub-header {
     text-align: center;
-    padding: 2rem 1rem 1rem;
+    padding: 2.4rem 1rem 1.2rem;
+    position: relative;
+  }
+  /* A slim woven carpet-border rule under the header. */
+  .hub-header::after {
+    content: "";
+    display: block;
+    max-width: 460px;
+    height: 8px;
+    margin: 1rem auto 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8'%3E%3Cpath d='M12,0 L14,3.2 L18,3.2 L14.8,5.4 L16,8.6 L12,6.4 L8,8.6 L9.2,5.4 L6,3.2 L10,3.2 Z' fill='%23b8912e' opacity='0.5'/%3E%3C/svg%3E");
+    background-size: 24px 8px;
+    background-repeat: repeat-x;
+    opacity: 0.8;
   }
   .back-link {
     display: inline-block;
@@ -136,28 +154,39 @@
   .back-link:hover { color: var(--primary-dark); }
 
   .hub-title {
-    font-size: clamp(1.9rem, 5vw, 2.7rem);
-    letter-spacing: 0.02em;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.9rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--secondary); /* fallback if background-clip:text unsupported */
-    background: linear-gradient(180deg, var(--gold) 0%, var(--primary) 60%, var(--primary-dark) 100%);
+    background: linear-gradient(180deg, var(--gold) 0%, var(--primary) 78%, var(--primary-dark) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 0;
   }
 
-  .theme-badge {
-    margin-top: 0.6rem;
-    font-size: 0.85rem;
-    color: var(--text-dim);
-  }
-  .theme-badge strong { color: var(--secondary); }
-  .greeting {
+  .hub-accent {
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    color: var(--primary);
-    margin-top: 0.3rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--gold);
+    margin-top: 0.5rem;
+    line-height: 1.2;
   }
+  .hub-subline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+  }
+  .hub-meta {
+    margin-top: 0.55rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    letter-spacing: 0.02em;
+  }
+  .hub-meta strong { color: var(--secondary); }
 
   /* ---------- language selector ---------- */
   .language-selector {
@@ -165,39 +194,46 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding: 0.5rem 1rem 1.5rem;
   }
   .selector-label {
-    font-size: 0.8rem;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: var(--text-dim);
     margin-right: 0.3rem;
   }
 
-  /* ---------- shared 2000s "Web 2.0" glossy control styling ---------- */
+  /* ---------- shared control styling: refined, tactile, gold-lined ---------- */
   button, .lang-pill, .filter-pill {
     font-family: var(--font-body);
     font-size: 0.82rem;
-    border: none;
+    border: 1px solid var(--primary-dark);
     border-radius: 999px;
-    padding: 0.5rem 1.1rem;
+    padding: 0.5rem 1.15rem;
     cursor: pointer;
-    color: #fff;
-    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 55%, var(--primary-dark) 100%);
-    box-shadow:
-      0 3px 0 var(--primary-dark),
-      0 6px 12px rgba(0, 0, 0, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.55);
-    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    color: #fdf7e7;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 68%, var(--primary-dark) 100%);
+    box-shadow: 0 2px 6px rgba(43, 30, 16, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
   }
-  button:hover, .lang-pill:hover, .filter-pill:hover { transform: translateY(-1px); }
+  button:hover, .lang-pill:hover, .filter-pill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(43, 30, 16, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    filter: brightness(1.04);
+  }
   button:active, .lang-pill:active, .filter-pill:active {
     transform: translateY(1px);
-    box-shadow: 0 1px 0 var(--primary-dark), inset 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.28);
   }
-  .lang-pill.active, .filter-pill.active {
+  button:focus-visible, .lang-pill:focus-visible, .filter-pill:focus-visible {
     outline: 2px solid var(--gold);
     outline-offset: 2px;
+  }
+  .lang-pill.active, .filter-pill.active {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--panel-bg), 0 0 0 4px var(--gold), 0 2px 6px rgba(43, 30, 16, 0.18);
   }
 
   input, select, textarea {
@@ -205,10 +241,15 @@
     font-size: 0.85rem;
     padding: 0.45rem 0.7rem;
     border-radius: var(--radius-sm);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    background: #fff;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--hairline);
+    background: #fffdf5;
+    box-shadow: inset 0 1px 3px rgba(43, 30, 16, 0.10);
     color: var(--text);
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: inset 0 1px 3px rgba(43, 30, 16, 0.10), 0 0 0 3px var(--gold-soft);
   }
   textarea { width: 100%; resize: vertical; }
 
@@ -218,35 +259,56 @@
     margin: 0 auto;
     padding: 0 1.25rem;
   }
+  .tab-panel > .panel { margin-bottom: 1.5rem; }
 
-  /* ---------- tab bar (reuses .lang-pill styling exactly) ---------- */
+  /* ---------- tab bar ---------- */
   .tab-bar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     padding: 0 1rem 1.5rem;
+  }
+  /* Tabs read as a quiet index, not a row of loud buttons. */
+  .tab-bar .tab-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--hairline);
+    box-shadow: none;
+  }
+  .tab-bar .tab-btn:hover { color: var(--secondary); filter: none; background: var(--gold-soft); }
+  .tab-bar .tab-btn.active {
+    color: #fdf7e7;
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 68%, var(--primary-dark) 100%);
+    border-color: var(--primary-dark);
+    box-shadow: 0 0 0 2px var(--panel-bg), 0 0 0 4px var(--gold);
   }
 
   .panel {
     position: relative;
     overflow: hidden;
-    background: var(--panel-bg);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 120px),
+      var(--panel-bg);
     border-radius: var(--radius-lg);
-    padding: 1.4rem 1.6rem 1.6rem;
-    box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-top: 6px solid var(--gold);
+    padding: 1.5rem 1.7rem 1.7rem;
+    box-shadow: var(--shadow-soft);
+    border: 1px solid var(--hairline);
+    border-top: 3px solid var(--gold);
   }
   .panel::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 45%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 100%);
+    top: 3px; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.5;
     pointer-events: none;
   }
-  .panel h2 { font-size: 1.2rem; }
+  .panel h2 {
+    font-size: 1.25rem;
+    letter-spacing: 0.04em;
+  }
   .panel h3 {
     font-size: 0.85rem;
     text-transform: uppercase;
@@ -1331,6 +1393,179 @@
   .vault-path-input { width: 100%; max-width: 420px; display: block; margin: 0.3rem 0 0.4rem; }
   .vault-dest-line { font-size: 0.76rem; color: var(--text-dim); font-family: "Courier New", monospace; }
 
+  /* ============================================================
+     DAILY CHECK-IN — the centerpiece. "What are you learning today?"
+     Premium, tactile language cards; you pick, it records. No schedule.
+     ============================================================ */
+  .checkin-panel { text-align: center; }
+  .checkin-greeting {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 6vw, 2.8rem);
+    color: var(--gold);
+    line-height: 1.15;
+    margin-bottom: 0.15rem;
+  }
+  .checkin-greeting[dir="rtl"] { direction: rtl; }
+  .checkin-date {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+  }
+  .checkin-question {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+  }
+  .checkin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+    margin: 0 auto 0.4rem;
+    max-width: 780px;
+  }
+  .checkin-card {
+    appearance: none;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.32rem;
+    padding: 1.35rem 1rem 1.15rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--hairline);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
+      var(--panel-bg);
+    box-shadow: 0 6px 16px rgba(43, 30, 16, 0.10);
+    color: var(--text);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .checkin-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--gold);
+    filter: none;
+  }
+  .checkin-card:active { transform: translateY(-1px); }
+  .checkin-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+  .checkin-card.selected {
+    border-color: var(--gold);
+    box-shadow: inset 0 0 0 2px var(--gold), 0 10px 24px rgba(43, 30, 16, 0.16);
+    background:
+      linear-gradient(180deg, var(--gold-soft), rgba(255, 255, 255, 0) 70%),
+      var(--panel-bg);
+  }
+  .checkin-card.current { border-color: var(--gold); }
+  .checkin-card-flag { font-size: 2.1rem; line-height: 1; }
+  .checkin-card-name {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.95rem;
+    color: var(--secondary);
+  }
+  .checkin-card-native { font-size: 1.05rem; color: var(--text); }
+  .checkin-card-native[dir="rtl"] { direction: rtl; }
+  .checkin-card-tag { font-size: 0.72rem; color: var(--text-dim); font-style: italic; min-height: 1.1em; }
+  /* When selected, hide the tagline text and show the confirmation instead. */
+  .checkin-card.selected .checkin-card-tag { font-size: 0; font-style: normal; }
+  .checkin-card.selected .checkin-card-tag::after {
+    content: "✓ Studying today";
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .checkin-todays {
+    margin: 1.1rem auto 0;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .checkin-today-chip {
+    background: var(--gold-soft);
+    border: 1px solid var(--gold);
+    color: var(--secondary);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.76rem;
+  }
+  .checkin-start-btn { margin-top: 1.2rem; font-size: 0.9rem; padding: 0.6rem 1.6rem; letter-spacing: 0.06em; }
+
+  .checkin-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.4rem 2.4rem;
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--hairline);
+  }
+  .checkin-stat { display: flex; flex-direction: column; align-items: center; gap: 0.1rem; min-width: 72px; }
+  .checkin-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--secondary);
+  }
+  .checkin-stat-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-dim);
+  }
+
+  @keyframes checkinFlash {
+    0% { box-shadow: inset 0 0 0 2px var(--gold), 0 0 0 6px var(--gold-soft); }
+    100% { box-shadow: inset 0 0 0 2px var(--gold), 0 10px 24px rgba(43, 30, 16, 0.16); }
+  }
+  .checkin-card.just-logged { animation: checkinFlash 0.9s ease; }
+
+  /* ---------- activity archive: "Your Learning Journey" ---------- */
+  .archive-empty { color: var(--text-dim); font-style: italic; font-size: 0.88rem; }
+  .archive-day {
+    border-left: 2px solid var(--gold);
+    padding: 0.1rem 0 0.2rem 0.95rem;
+    margin-bottom: 1.25rem;
+  }
+  .archive-day-date {
+    font-family: var(--font-display);
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.98rem;
+    margin-bottom: 0.4rem;
+  }
+  .archive-day-date .archive-day-total {
+    font-family: var(--font-body);
+    font-weight: normal;
+    font-size: 0.74rem;
+    color: var(--text-dim);
+    margin-left: 0.5rem;
+  }
+  .archive-lang-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+  }
+  .archive-lang-flag { font-size: 1rem; flex: 0 0 auto; }
+  .archive-lang-name {
+    font-weight: bold;
+    color: var(--secondary);
+    font-size: 0.85rem;
+    flex: 0 0 auto;
+  }
+  .archive-lang-detail { font-size: 0.8rem; color: var(--text-dim); }
+
   /* ---------- calendar tab ---------- */
   .cal-toolbar {
     display: flex;
@@ -1370,23 +1605,37 @@
 
   .cal-day {
     position: relative;
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(74, 48, 33, 0.045);
+    border: 1px solid var(--hairline);
     border-radius: var(--radius-sm);
     padding: 0.5rem 0.4rem;
-    min-height: 64px;
+    min-height: 68px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.3rem;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
-  .cal-day.clickable { cursor: pointer; }
-  .cal-day.clickable:hover { background: rgba(0, 0, 0, 0.07); }
+  .cal-day.clickable { cursor: pointer; transition: background 0.15s ease, border-color 0.15s ease; }
+  .cal-day.clickable:hover { background: var(--gold-soft); border-color: var(--gold); }
   .cal-day.muted { opacity: 0.4; }
-  .cal-day.today { outline: 2px solid var(--gold); outline-offset: -2px; }
+  .cal-day.today {
+    border-color: var(--gold);
+    box-shadow: inset 0 0 0 2px var(--gold);
+  }
+  .cal-day.studied { background: rgba(184, 145, 46, 0.10); }
 
   .cal-day-num { font-family: var(--font-display); font-weight: bold; font-size: 0.85rem; color: var(--text); }
   .cal-day-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .cal-day-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.82rem;
+    line-height: 1;
+    min-height: 1em;
+  }
   .cal-day-total { font-size: 0.6rem; color: var(--text-dim); min-height: 1em; }
 
   /* Arabic theme only: the grid stays a clean grid -- ornament moves to
@@ -1484,17 +1733,18 @@
     <a class="back-link" href="room.html" style="margin-left:0.8rem;">Back to the Room</a>
     <a class="back-link" href="#vaultPathsPanel" id="vaultPathsJumpLink" style="margin-left:0.8rem;" title="Jump to Vault &amp; Paths">📁 Vault &amp; Paths</a>
     <h1 class="hub-title">Language Hub</h1>
-    <div class="theme-badge">Today's theme: <strong id="themeLabel">&hellip;</strong> <span id="autoTag"></span></div>
-    <div class="greeting" id="greetingText"></div>
+    <div class="hub-accent" id="hubAccent" dir="rtl">خوش آمدید</div>
+    <div class="hub-subline">Welcome back. What will you explore today?</div>
+    <div class="hub-meta"><span id="hubDate">&hellip;</span> &nbsp;·&nbsp; <span id="hubStreak"></span></div>
   </header>
 
-  <nav class="language-selector" aria-label="Active language override">
-    <span class="selector-label">Studying now:</span>
+  <nav class="language-selector" aria-label="Language you are studying now">
+    <span class="selector-label">Studying now</span>
     <div class="lang-pills" id="langPills"></div>
   </nav>
 
   <nav class="tab-bar" id="tabBar" aria-label="Hub sections">
-    <button type="button" class="lang-pill tab-btn active" data-tab="calendar">Calendar</button>
+    <button type="button" class="lang-pill tab-btn active" data-tab="calendar">Today</button>
     <button type="button" class="lang-pill tab-btn" data-tab="study">Study Modes</button>
     <button type="button" class="lang-pill tab-btn" data-tab="curriculum">Curriculum</button>
     <button type="button" class="lang-pill tab-btn" data-tab="resources">Resources</button>
@@ -1505,8 +1755,24 @@
   <main>
 
     <section class="tab-panel" id="tabCalendar" data-tab-panel="calendar">
+
+      <section class="panel checkin-panel reveal" id="checkinPanel">
+        <div class="checkin-greeting" id="checkinGreeting" dir="rtl">خوش آمدید</div>
+        <div class="checkin-date" id="checkinDate"></div>
+        <div class="checkin-question">What are you learning today?</div>
+        <div class="checkin-cards" id="checkinCards"></div>
+        <div class="checkin-todays" id="checkinTodays"></div>
+        <button type="button" class="checkin-start-btn" id="checkinStartBtn">Start Today's Session &rarr;</button>
+        <div class="checkin-stats" id="checkinStats"></div>
+      </section>
+
+      <section class="panel archive-panel reveal">
+        <h2>Your Learning Journey</h2>
+        <div id="archiveRoot"></div>
+      </section>
+
       <section class="panel reveal">
-        <h2>Calendar</h2>
+        <h2>Activity Calendar</h2>
         <div class="cal-toolbar">
           <div class="cal-nav">
             <button type="button" id="calPrevBtn">&larr;</button>
@@ -1728,18 +1994,16 @@
 <script>
 (() => {
   // ------------------------------------------------------------
-  // LANGUAGES — add a new language by pushing another object here
-  // (id must match a [data-lang-theme="xx"] CSS block above) and
-  // assigning it some days of the week. days uses JS Date.getDay()
-  // convention: 0=Sun,1=Mon,2=Tue,3=Wed,4=Thu,5=Fri,6=Sat.
+  // LANGUAGES — add a new language by pushing another object here.
+  // id must match a [data-lang-theme="xx"] CSS block above.
+  // There is NO schedule: the hub asks what you're studying each day
+  // and records it. `tagline` shows on the daily check-in card.
   // ------------------------------------------------------------
-  // days: which day-of-week (0=Sun..6=Sat) each language gets as the
-  // default "today's auto theme" -- must partition the week with no
-  // overlaps, since the lookup below takes the first array match.
   const LANGUAGES = [
-    { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", days: [1, 2, 3] },
-    { id: "fa", name: "Farsi", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", days: [4, 5], rtl: true },
-    { id: "ar", name: "Arabic", native: "العربية", flag: "🇸🇦", greeting: "مرحباً", days: [6, 0], rtl: true },
+    { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", tagline: "Continue exploring" },
+    { id: "fa", name: "Dari", native: "فارسی دری", flag: "🇦🇫", greeting: "خوش آمدید", tagline: "Continue your journey", rtl: true },
+    { id: "ar", name: "Arabic", native: "العربية", flag: "🇸🇦", greeting: "مرحباً", tagline: "Continue learning", rtl: true },
+    { id: "pt", name: "Portuguese", native: "Português", flag: "🇵🇹", greeting: "Bem-vindo!", tagline: "Continue your journey" },
   ];
   // Central place to ask "is this language's script right-to-left" --
   // used instead of repeating === "fa" checks everywhere, so adding a
@@ -2293,10 +2557,17 @@
           curriculum: (parsed.curriculum && typeof parsed.curriculum === "object") ? parsed.curriculum : {},
           plainMode: !!parsed.plainMode,
           curriculumActiveSession: parsed.curriculumActiveSession || null,
+          // dayLog: { "YYYY-MM-DD": ["es","fa", ...] } — languages you
+          // actually checked in / logged activity for on that date. This
+          // is the calendar's record; nothing here dictates a schedule.
+          dayLog: (parsed.dayLog && typeof parsed.dayLog === "object") ? parsed.dayLog : {},
+          // todayChoice: { date, langId } — the language you picked on the
+          // daily check-in. Only honoured while date === today.
+          todayChoice: (parsed.todayChoice && parsed.todayChoice.date && parsed.todayChoice.langId) ? parsed.todayChoice : null,
         };
       }
     } catch (e) { /* corrupt storage, fall through to defaults */ }
-    return { sessions: [], activeTimer: null, library: [], videoJournal: [], groups: [], override: null, curriculum: {}, plainMode: false, curriculumActiveSession: null };
+    return { sessions: [], activeTimer: null, library: [], videoJournal: [], groups: [], override: null, curriculum: {}, plainMode: false, curriculumActiveSession: null, dayLog: {}, todayChoice: null };
   }
 
   const state = loadState();
@@ -2304,19 +2575,115 @@
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
   }
 
-  function languageForDate(date) {
-    const dow = date.getDay();
-    return LANGUAGES.find((l) => l.days.includes(dow)) || LANGUAGES[0];
+  // One-time migration: an old sticky `override` becomes today's choice
+  // so a returning user lands on the language they last pinned.
+  if (state.override && !state.todayChoice && LANGUAGES.some((l) => l.id === state.override)) {
+    state.todayChoice = { date: todayISODate(), langId: state.override };
   }
-  function todaysAutoLanguage() {
-    return languageForDate(new Date());
+
+  // ------------------------------------------------------------
+  // WHICH LANGUAGE IS ACTIVE — driven by your choice, never by the
+  // day of the week. Priority: today's explicit check-in choice →
+  // the last language you actually studied → the first language.
+  // ------------------------------------------------------------
+  function lastStudiedLanguageId() {
+    let best = null, bestDate = "";
+    const consider = (iso, langId) => {
+      if (iso && langId && iso >= bestDate && LANGUAGES.some((l) => l.id === langId)) { bestDate = iso; best = langId; }
+    };
+    (state.sessions || []).forEach((r) => consider(r.date, r.languageId));
+    (state.videoJournal || []).forEach((r) => consider(r.date, r.languageId));
+    Object.keys(state.dayLog || {}).forEach((iso) => {
+      const ids = state.dayLog[iso];
+      if (Array.isArray(ids) && ids.length) consider(iso, ids[ids.length - 1]);
+    });
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions)) p.sessions.forEach((se) => consider(se.date, langIdForModuleId(mid)));
+    });
+    return best;
   }
   function activeLanguage() {
-    if (state.override) {
-      const l = LANGUAGES.find((x) => x.id === state.override);
+    if (state.todayChoice && state.todayChoice.date === todayISODate()) {
+      const l = LANGUAGES.find((x) => x.id === state.todayChoice.langId);
       if (l) return l;
     }
-    return todaysAutoLanguage();
+    const last = lastStudiedLanguageId();
+    if (last) return LANGUAGES.find((l) => l.id === last) || LANGUAGES[0];
+    return LANGUAGES[0];
+  }
+
+  // Record that a language was studied / chosen on a given date.
+  function noteLanguageStudied(langId, iso) {
+    if (!langId || !LANGUAGES.some((l) => l.id === langId)) return;
+    const day = iso || todayISODate();
+    if (!state.dayLog[day]) state.dayLog[day] = [];
+    if (!state.dayLog[day].includes(langId)) {
+      state.dayLog[day].push(langId);
+      saveState();
+    }
+    if (typeof refreshTodayViews === "function") refreshTodayViews();
+  }
+
+  // The language ids studied on a date, from every source: explicit
+  // check-ins, timed/manual study sessions, video-diary entries, and
+  // curriculum sessions. Returned in LANGUAGES order for stable display.
+  function langIdForModuleId(moduleId) {
+    const entry = (typeof curriculumIndex !== "undefined" && curriculumIndex && curriculumIndex.modules)
+      ? curriculumIndex.modules.find((m) => m.id === moduleId) : null;
+    if (entry && entry.languageId) return entry.languageId;
+    const prefix = String(moduleId || "").split("-")[0];
+    return LANGUAGES.some((l) => l.id === prefix) ? prefix : null;
+  }
+  function languagesStudiedOn(iso) {
+    const set = new Set();
+    (state.dayLog[iso] || []).forEach((id) => set.add(id));
+    state.sessions.forEach((s) => { if (s.date === iso && s.languageId) set.add(s.languageId); });
+    state.videoJournal.forEach((j) => { if (j.date === iso && j.languageId) set.add(j.languageId); });
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions) && p.sessions.some((se) => se.date === iso)) {
+        const lid = langIdForModuleId(mid);
+        if (lid) set.add(lid);
+      }
+    });
+    return LANGUAGES.map((l) => l.id).filter((id) => set.has(id));
+  }
+  function anyActivityOn(iso) {
+    return languagesStudiedOn(iso).length > 0 || secondsForDate(iso) > 0;
+  }
+  function computeStreak() {
+    let streak = 0;
+    const d = new Date();
+    if (!anyActivityOn(dateToISO(d))) d.setDate(d.getDate() - 1);
+    while (anyActivityOn(dateToISO(d))) { streak++; d.setDate(d.getDate() - 1); }
+    return streak;
+  }
+
+  // Pick a language on the daily check-in: makes it active AND records
+  // it under today's date. Choosing another later simply adds an entry.
+  function chooseTodayLanguage(langId) {
+    if (!LANGUAGES.some((l) => l.id === langId)) return;
+    state.todayChoice = { date: todayISODate(), langId };
+    state.override = langId; // keep legacy field roughly aligned
+    saveState();
+    noteLanguageStudied(langId, todayISODate());
+    applyTheme();
+    renderLangPills();
+    populateLangSelects(true);
+    renderStudyModes();
+    if (typeof curriculumIndex !== "undefined" && curriculumIndex) {
+      curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot();
+    }
+    refreshTodayViews();
+  }
+
+  // Re-render everything on the Today tab that depends on activity data.
+  function refreshTodayViews() {
+    if (typeof renderCheckin === "function") renderCheckin();
+    if (typeof renderActivityArchive === "function") renderActivityArchive();
+    if (typeof renderHubMeta === "function") renderHubMeta();
+    if (typeof renderCalendar === "function") renderCalendar();
   }
 
   // ------------------------------------------------------------
@@ -2330,16 +2697,28 @@
     return []; // not implemented in the static version
   }
 
+  const WEEKDAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
   function applyTheme() {
-    const lang = activeLanguage();
-    document.documentElement.setAttribute("data-lang-theme", lang.id);
-    document.getElementById("themeLabel").textContent = lang.name + " (" + lang.native + ")";
-    document.getElementById("autoTag").textContent = state.override
-      ? "— manual override"
-      : "— today's auto theme";
-    const greetEl = document.getElementById("greetingText");
-    greetEl.textContent = lang.greeting;
-    greetEl.dir = isRtlLanguageId(lang.id) ? "rtl" : "ltr";
+    // Only the accent palette shifts per language. The Dari welcome in
+    // the header and check-in stays fixed — it's the salon, not a label.
+    document.documentElement.setAttribute("data-lang-theme", activeLanguage().id);
+  }
+
+  function renderHubMeta() {
+    const now = new Date();
+    const dateEl = document.getElementById("hubDate");
+    if (dateEl) {
+      dateEl.innerHTML = WEEKDAY_NAMES[now.getDay()] + ", <strong>" +
+        MONTH_NAMES[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear() + "</strong>";
+    }
+    const streakEl = document.getElementById("hubStreak");
+    if (streakEl) {
+      const s = computeStreak();
+      streakEl.innerHTML = s > 0
+        ? "🔥 <strong>" + s + "</strong> day" + (s === 1 ? "" : "s") + " in a row"
+        : "Start a streak today";
+    }
   }
 
   function makePill(label, active, onClick) {
@@ -2354,24 +2733,10 @@
   function renderLangPills() {
     const wrap = document.getElementById("langPills");
     wrap.innerHTML = "";
-    wrap.appendChild(makePill("Auto (" + todaysAutoLanguage().name + ")", !state.override, () => {
-      state.override = null;
-      saveState();
-      applyTheme();
-      renderLangPills();
-      populateLangSelects(true);
-      renderStudyModes();
-      if (curriculumIndex) { curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot(); }
-    }));
+    const activeId = activeLanguage().id;
     LANGUAGES.forEach((l) => {
-      wrap.appendChild(makePill(l.flag + " " + l.name, state.override === l.id, () => {
-        state.override = l.id;
-        saveState();
-        applyTheme();
-        renderLangPills();
-        populateLangSelects(true);
-        renderStudyModes();
-        if (curriculumIndex) { curriculumView = "shelf"; curriculumActiveModuleId = null; renderCurriculumRoot(); }
+      wrap.appendChild(makePill(l.flag + " " + l.name, activeId === l.id, () => {
+        chooseTodayLanguage(l.id);
       }));
     });
   }
@@ -2471,24 +2836,29 @@
     if (!state.activeTimer) return;
     const t = state.activeTimer;
     const seconds = Math.max(1, Math.round((Date.now() - t.startedAt) / 1000));
-    state.sessions.push({ id: genId(), languageId: t.languageId, skill: t.skill, seconds, resourceNote: t.note || "", date: todayISODate() });
+    const date = todayISODate();
+    state.sessions.push({ id: genId(), languageId: t.languageId, skill: t.skill, seconds, resourceNote: t.note || "", date });
     state.activeTimer = null;
     saveState();
+    noteLanguageStudied(t.languageId, date);
   }
   // Manual entry for time studied outside the app (a class, a book, an
   // in-person conversation) -- same session shape stopTimer() writes, so
   // it counts toward today/this-week totals identically either way.
   function logManualStudySession(skillId, minutes, dateISO, note) {
     const seconds = Math.max(60, Math.round(minutes * 60));
+    const langId = activeLanguage().id;
+    const date = dateISO || todayISODate();
     state.sessions.push({
       id: genId(),
-      languageId: activeLanguage().id,
+      languageId: langId,
       skill: skillId,
       seconds,
       resourceNote: note || "",
-      date: dateISO || todayISODate(),
+      date,
     });
     saveState();
+    noteLanguageStudied(langId, date);
   }
 
   let expandedSkill = state.activeTimer ? state.activeTimer.skill : null;
@@ -3891,9 +4261,11 @@
     const minutes = Math.max(1, Math.round((Date.now() - sess.startedAt) / 60000));
     const progress = ensureModuleProgress(sess.moduleId);
     const tasksDone = Math.max(0, Object.keys(progress.done).length - sess.doneSnapshot);
-    progress.sessions.push({ date: todayISODate(), minutes, lessonId: sess.lessonId, tasksDone });
+    const date = todayISODate();
+    progress.sessions.push({ date, minutes, lessonId: sess.lessonId, tasksDone });
     state.curriculumActiveSession = null;
     saveState();
+    noteLanguageStudied(langIdForModuleId(sess.moduleId), date);
   }
 
   function toggleTask(mod, lesson, task, checked) {
@@ -5225,6 +5597,7 @@
       const progress = ensureModuleProgress(mod.id);
       progress.sessions.push({ date, minutes, lessonId: lesson.id, tasksDone });
       saveState();
+      noteLanguageStudied(langIdForModuleId(mod.id), date);
       renderCurriculumRoot();
     });
     form.appendChild(btn);
@@ -5391,19 +5764,6 @@
   }, 1000);
 
   // ---------- calendar ----------
-  const langColorCache = {};
-  function primaryColorForLanguage(langId) {
-    if (langColorCache[langId]) return langColorCache[langId];
-    const probe = document.createElement("div");
-    probe.setAttribute("data-lang-theme", langId);
-    probe.style.cssText = "position:absolute; visibility:hidden; pointer-events:none; width:0; height:0; overflow:hidden;";
-    document.body.appendChild(probe);
-    const color = getComputedStyle(probe).getPropertyValue("--primary").trim();
-    document.body.removeChild(probe);
-    langColorCache[langId] = color || "#999999";
-    return langColorCache[langId];
-  }
-
   const MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   let calendarMode = "week"; // "week" | "month"
@@ -5416,11 +5776,11 @@
 
   function buildDayCell(date, isMuted) {
     const iso = dateToISO(date);
-    const lang = languageForDate(date);
+    const studied = languagesStudiedOn(iso);
     const isClickable = iso <= todayISODate();
 
     const cell = document.createElement("div");
-    cell.className = "cal-day" + (isMuted ? " muted" : "") + (isClickable ? " clickable" : "");
+    cell.className = "cal-day" + (isMuted ? " muted" : "") + (isClickable ? " clickable" : "") + (studied.length ? " studied" : "");
     if (iso === todayISODate()) cell.classList.add("today");
 
     const num = document.createElement("div");
@@ -5428,11 +5788,21 @@
     num.textContent = String(date.getDate());
     cell.appendChild(num);
 
-    const dot = document.createElement("div");
-    dot.className = "cal-day-dot";
-    dot.style.background = primaryColorForLanguage(lang.id);
-    dot.title = lang.name;
-    cell.appendChild(dot);
+    // Flags of the languages actually studied that day — a record, not a plan.
+    const flags = document.createElement("div");
+    flags.className = "cal-day-flags";
+    studied.forEach((id) => {
+      const l = LANGUAGES.find((x) => x.id === id);
+      if (!l) return;
+      const span = document.createElement("span");
+      span.textContent = l.flag;
+      span.title = l.name;
+      flags.appendChild(span);
+    });
+    flags.setAttribute("aria-label", studied.length
+      ? "Studied: " + studied.map((id) => (LANGUAGES.find((l) => l.id === id) || {}).name).join(", ")
+      : "");
+    cell.appendChild(flags);
 
     const totalSec = secondsForDate(iso);
     const totalEl = document.createElement("div");
@@ -5490,32 +5860,273 @@
     document.getElementById("calMonthViewBtn").classList.toggle("active", calendarMode === "month");
   }
 
+  // ============================================================
+  // DAILY CHECK-IN + ACTIVITY ARCHIVE
+  // ============================================================
+  function curriculumMinutesOn(iso, langId) {
+    let mins = 0;
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      if (langId && langIdForModuleId(mid) !== langId) return;
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions)) {
+        p.sessions.forEach((se) => { if (se.date === iso) mins += Math.max(0, se.minutes || 0); });
+      }
+    });
+    return mins;
+  }
+  function minutesStudiedInRange(fromISO) {
+    let mins = 0;
+    state.sessions.forEach((s) => { if (s.date >= fromISO) mins += s.seconds / 60; });
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions)) {
+        p.sessions.forEach((se) => { if (se.date >= fromISO) mins += Math.max(0, se.minutes || 0); });
+      }
+    });
+    return Math.round(mins);
+  }
+  function allActivityDatesDesc() {
+    const set = new Set();
+    state.sessions.forEach((s) => s.date && set.add(s.date));
+    state.videoJournal.forEach((j) => j.date && set.add(j.date));
+    Object.keys(state.dayLog || {}).forEach((iso) => { if ((state.dayLog[iso] || []).length) set.add(iso); });
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions)) p.sessions.forEach((se) => se.date && set.add(se.date));
+    });
+    return Array.from(set).sort().reverse();
+  }
+  function distinctLanguagesEverStudied() {
+    const set = new Set();
+    allActivityDatesDesc().forEach((iso) => languagesStudiedOn(iso).forEach((id) => set.add(id)));
+    return set.size;
+  }
+  function totalSessionCount() {
+    let n = state.sessions.length + state.videoJournal.length;
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (p && Array.isArray(p.sessions)) n += p.sessions.length;
+    });
+    return n;
+  }
+
+  function renderCheckin() {
+    const today = todayISODate();
+    const active = activeLanguage();
+
+    const dateEl = document.getElementById("checkinDate");
+    const now = new Date();
+    if (dateEl) {
+      dateEl.textContent = WEEKDAY_NAMES[now.getDay()] + ", " + MONTH_NAMES[now.getMonth()] + " " + now.getDate() + ", " + now.getFullYear();
+    }
+
+    const cardsWrap = document.getElementById("checkinCards");
+    if (cardsWrap) {
+      cardsWrap.innerHTML = "";
+      const studiedToday = languagesStudiedOn(today);
+      LANGUAGES.forEach((l) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        const isActive = active.id === l.id;
+        const isStudied = studiedToday.includes(l.id);
+        // "selected" = actually studied/checked-in today. "current" = the
+        // language in focus (from history) but not yet logged today.
+        btn.className = "checkin-card" + (isStudied ? " selected" : (isActive ? " current" : ""));
+        const flag = document.createElement("div");
+        flag.className = "checkin-card-flag";
+        flag.textContent = l.flag;
+        const name = document.createElement("div");
+        name.className = "checkin-card-name";
+        name.textContent = l.name;
+        const native = document.createElement("div");
+        native.className = "checkin-card-native";
+        native.textContent = l.native;
+        if (isRtlLanguageId(l.id)) native.dir = "rtl";
+        const tag = document.createElement("div");
+        tag.className = "checkin-card-tag";
+        tag.textContent = l.tagline || "Continue your journey";
+        btn.append(flag, name, native, tag);
+        btn.addEventListener("click", () => {
+          const firstTimeToday = !languagesStudiedOn(today).includes(l.id);
+          chooseTodayLanguage(l.id); // re-renders these cards
+          if (firstTimeToday) {
+            const match = Array.from(document.querySelectorAll('#checkinCards .checkin-card'))
+              .find((el) => {
+                const n = el.querySelector('.checkin-card-name');
+                return n && n.textContent === l.name;
+              });
+            if (match) { match.classList.add("just-logged"); setTimeout(() => match.classList.remove("just-logged"), 950); }
+          }
+        });
+        cardsWrap.appendChild(btn);
+      });
+    }
+
+    const todaysWrap = document.getElementById("checkinTodays");
+    if (todaysWrap) {
+      todaysWrap.innerHTML = "";
+      const studiedToday = languagesStudiedOn(today);
+      if (studiedToday.length) {
+        const label = document.createElement("span");
+        label.textContent = "Today so far:";
+        todaysWrap.appendChild(label);
+        studiedToday.forEach((id) => {
+          const l = LANGUAGES.find((x) => x.id === id);
+          if (!l) return;
+          const chip = document.createElement("span");
+          chip.className = "checkin-today-chip";
+          chip.textContent = l.flag + " " + l.name;
+          todaysWrap.appendChild(chip);
+        });
+      } else {
+        const label = document.createElement("span");
+        label.textContent = "Pick a language above to begin — you can add more later today.";
+        todaysWrap.appendChild(label);
+      }
+    }
+
+    const statsWrap = document.getElementById("checkinStats");
+    if (statsWrap) {
+      const weekStart = dateToISO(startOfWeek(new Date()));
+      const stats = [
+        ["🔥", computeStreak(), "Day streak"],
+        ["📚", totalSessionCount(), "Total sessions"],
+        ["🌍", distinctLanguagesEverStudied(), "Active languages"],
+        ["⏱", formatDuration(minutesStudiedInRange(weekStart) * 60), "This week"],
+      ];
+      statsWrap.innerHTML = "";
+      stats.forEach(([icon, value, label]) => {
+        const box = document.createElement("div");
+        box.className = "checkin-stat";
+        const v = document.createElement("div");
+        v.className = "checkin-stat-value";
+        v.textContent = icon + " " + value;
+        const l = document.createElement("div");
+        l.className = "checkin-stat-label";
+        l.textContent = label;
+        box.append(v, l);
+        statsWrap.appendChild(box);
+      });
+    }
+  }
+
+  function renderActivityArchive() {
+    const root = document.getElementById("archiveRoot");
+    if (!root) return;
+    root.innerHTML = "";
+    const dates = allActivityDatesDesc().slice(0, 14);
+    if (!dates.length) {
+      root.innerHTML = '<p class="archive-empty">Your logged study will appear here. Pick a language above and start a session — the calendar records what you actually did, it never tells you what to do.</p>';
+      return;
+    }
+    dates.forEach((iso) => {
+      const langs = languagesStudiedOn(iso);
+      if (!langs.length) return;
+      const d = new Date(iso + "T00:00:00");
+      const dayEl = document.createElement("div");
+      dayEl.className = "archive-day";
+      const head = document.createElement("div");
+      head.className = "archive-day-date";
+      head.textContent = WEEKDAY_NAMES[d.getDay()] + " · " + MONTH_NAMES[d.getMonth()] + " " + d.getDate();
+      const totalSec = secondsForDate(iso) + curriculumMinutesOn(iso) * 60;
+      if (totalSec > 0) {
+        const t = document.createElement("span");
+        t.className = "archive-day-total";
+        t.textContent = formatDuration(totalSec);
+        head.appendChild(t);
+      }
+      dayEl.appendChild(head);
+
+      langs.forEach((id) => {
+        const l = LANGUAGES.find((x) => x.id === id);
+        if (!l) return;
+        const parts = [];
+        const skillNames = [];
+        state.sessions.filter((s) => s.date === iso && s.languageId === id).forEach((s) => {
+          const sk = SKILLS.find((x) => x.id === s.skill);
+          if (sk && skillNames.indexOf(sk.name) === -1) skillNames.push(sk.name);
+        });
+        if (skillNames.length) parts.push(skillNames.join(" · "));
+        if (state.videoJournal.some((j) => j.date === iso && j.languageId === id)) parts.push("Video diary");
+        const cm = curriculumMinutesOn(iso, id);
+        if (cm > 0) parts.push("Curriculum");
+        if (!parts.length) parts.push("Checked in");
+
+        const row = document.createElement("div");
+        row.className = "archive-lang-row";
+        const f = document.createElement("span");
+        f.className = "archive-lang-flag";
+        f.textContent = l.flag;
+        const n = document.createElement("span");
+        n.className = "archive-lang-name";
+        n.textContent = l.name;
+        const det = document.createElement("span");
+        det.className = "archive-lang-detail";
+        det.textContent = parts.join("  ·  ");
+        row.append(f, n, det);
+        dayEl.appendChild(row);
+      });
+      root.appendChild(dayEl);
+    });
+  }
+
+  function addPopoverRow(list, headline, meta) {
+    const li = document.createElement("li");
+    li.className = "day-popover-row";
+    const a = document.createElement("div");
+    a.className = "dp-skill";
+    a.textContent = headline;
+    li.appendChild(a);
+    if (meta) {
+      const b = document.createElement("div");
+      b.className = "dp-meta";
+      b.textContent = meta;
+      li.appendChild(b);
+    }
+    list.appendChild(li);
+  }
+
   function openDayPopover(iso) {
-    const sessions = state.sessions.filter((s) => s.date === iso);
     const overlay = document.getElementById("dayPopoverOverlay");
     const title = document.getElementById("dayPopoverTitle");
     const list = document.getElementById("dayPopoverList");
     const d = new Date(iso + "T00:00:00");
-    title.textContent = MONTH_NAMES[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+    title.textContent = WEEKDAY_NAMES[d.getDay()] + " · " + MONTH_NAMES[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
     list.innerHTML = "";
-    if (!sessions.length) {
-      list.innerHTML = '<li class="empty-note">No sessions logged this day.</li>';
-    } else {
-      sessions.forEach((s) => {
-        const skill = SKILLS.find((sk) => sk.id === s.skill);
-        const lang = LANGUAGES.find((l) => l.id === s.languageId);
-        const li = document.createElement("li");
-        li.className = "day-popover-row";
-        const skillLine = document.createElement("div");
-        skillLine.className = "dp-skill";
-        skillLine.textContent = (skill ? skill.icon + " " + skill.name : s.skill) + " — " + formatDuration(s.seconds);
-        const metaLine = document.createElement("div");
-        metaLine.className = "dp-meta";
-        metaLine.textContent = (lang ? lang.flag + " " + lang.name : s.languageId) + (s.resourceNote ? " · " + escapeHtml(s.resourceNote) : "");
-        li.appendChild(skillLine);
-        li.appendChild(metaLine);
-        list.appendChild(li);
+
+    const langName = (id) => { const l = LANGUAGES.find((x) => x.id === id); return l ? l.flag + " " + l.name : id; };
+    let rows = 0;
+
+    state.sessions.filter((s) => s.date === iso).forEach((s) => {
+      const skill = SKILLS.find((sk) => sk.id === s.skill);
+      addPopoverRow(list,
+        (skill ? skill.icon + " " + skill.name : s.skill) + " — " + formatDuration(s.seconds),
+        langName(s.languageId) + (s.resourceNote ? " · " + s.resourceNote : ""));
+      rows++;
+    });
+
+    state.videoJournal.filter((j) => j.date === iso).forEach((j) => {
+      addPopoverRow(list, "🎥 Video diary", langName(j.languageId) + (j.prompt ? " · " + j.prompt : ""));
+      rows++;
+    });
+
+    Object.keys(state.curriculum || {}).forEach((mid) => {
+      const p = state.curriculum[mid];
+      if (!p || !Array.isArray(p.sessions)) return;
+      p.sessions.filter((se) => se.date === iso).forEach((se) => {
+        addPopoverRow(list, "📚 Curriculum — " + Math.max(1, se.minutes || 0) + "m",
+          langName(langIdForModuleId(mid)) + (se.tasksDone ? " · " + se.tasksDone + " task" + (se.tasksDone === 1 ? "" : "s") : ""));
+        rows++;
       });
+    });
+
+    if (!rows) {
+      const checkedIn = state.dayLog[iso] || [];
+      if (checkedIn.length) {
+        addPopoverRow(list, "Checked in", checkedIn.map(langName).join(", "));
+      } else {
+        list.innerHTML = '<li class="empty-note">Nothing logged this day.</li>';
+      }
     }
     overlay.hidden = false;
   }
@@ -5567,17 +6178,18 @@
     document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.tab === tabId);
     });
-    if (tabId === "calendar") renderCalendar();
+    if (tabId === "calendar") { renderCheckin(); renderActivityArchive(); renderHubMeta(); renderCalendar(); }
     if (tabId === "resources") { renderQuickLinks(); renderLibrary(); renderVaultPanel(); }
     if (tabId === "groups") renderGroups();
     if (tabId === "curriculum") {
       renderCurriculumRoot();
-      if (!curriculumIndex && !curriculumLoadError) loadCurriculumIndex().then(renderCurriculumRoot);
+      if (!curriculumIndex && !curriculumLoadError) loadCurriculumIndex().then(() => { renderCurriculumRoot(); refreshTodayViews(); });
     }
   }
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => switchTab(btn.dataset.tab));
   });
+  document.getElementById("checkinStartBtn").addEventListener("click", () => switchTab("study"));
 
   // ---------- video diary: prompt bank navigation ----------
   let currentLevel = "beginner";
@@ -5876,10 +6488,13 @@
   document.getElementById("vdDownloadBtn").addEventListener("click", downloadRecording);
   document.getElementById("vdSaveLogBtn").addEventListener("click", () => {
     const note = document.getElementById("vdNote").value.trim();
+    const langId = activeLanguage().id;
+    const date = todayISODate();
     state.videoJournal.push({
-      id: genId(), languageId: activeLanguage().id, level: currentLevel, prompt: currentPromptText, note, date: todayISODate(),
+      id: genId(), languageId: langId, level: currentLevel, prompt: currentPromptText, note, date,
     });
     saveState();
+    noteLanguageStudied(langId, date);
     document.getElementById("vdNote").value = "";
     renderJournal();
   });
@@ -5898,12 +6513,20 @@
   renderPrompt();
   renderJournal();
   syncCalendarViewToggle();
+  renderHubMeta();
+  renderCheckin();
+  renderActivityArchive();
   renderCalendar();
 
-  // Keep the day-based auto theme in sync if the page is left open;
-  // doesn't touch in-progress form selections or the study timer.
+  // Keep the date, streak and check-in fresh if the page is left open
+  // past midnight; never overrides the language you chose.
   setInterval(() => {
     applyTheme();
+    renderHubMeta();
+    if (!document.getElementById("tabCalendar").hidden) {
+      renderCheckin();
+      renderActivityArchive();
+    }
     renderLangPills();
   }, 60000);
 
@@ -5918,7 +6541,13 @@
         }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+    document.querySelectorAll(".reveal").forEach((el) => {
+      // If the page loads already scrolled past (or level with) an element,
+      // it will never intersect — reveal it immediately so it can't get
+      // stuck invisible. Only genuinely below-the-fold elements animate in.
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add("in-view");
+      else revealObserver.observe(el);
+    });
   } else {
     document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in-view"));
   }
