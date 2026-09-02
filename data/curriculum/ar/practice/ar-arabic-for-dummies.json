@@ -1,0 +1,3978 @@
+{
+  "moduleId": "ar-arabic-for-dummies",
+  "languageId": "ar",
+  "note": "Pre-generated practice. Original items written for this topic label and page range only -- no text, exercises, or examples from the book are stored here. Rebuild with tools/build-practice-bank.js.",
+  "model": "claude-sonnet-5",
+  "setsPerMode": 1,
+  "generatedAt": "2026-09-02",
+  "units": {
+    "u1": {
+      "homework": [
+        {
+          "id": "u1-homework-1",
+          "pageLabel": "9-18",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Give one English word that came from Arabic meaning a fluffy fabric popular for towels: قُطْن (quṭn). What is the English loanword derived from this Arabic root?",
+              "answer": "Cotton",
+              "checkPage": 10
+            },
+            {
+              "n": 2,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "The English word 'algebra' comes from an Arabic phrase الجبر (al-jabr). What does al-jabr literally refer to in mathematics (the general concept)?",
+              "answer": "Reunion of broken parts / restoration — referring to solving equations by combining terms.",
+              "checkPage": 11
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct English loanword from Arabic: The night sky word 'zenith' comes from Arabic سَمْت (samt), meaning ______ (a directional/path concept).",
+              "answer": "way, direction, or path (samt means 'direction/path' — zenith derives from 'the path over one's head')",
+              "checkPage": 12
+            },
+            {
+              "n": 4,
+              "type": "correct the error",
+              "skill": "vocabulary",
+              "prompt": "A student claims: 'The English word \"sugar\" comes from Arabic صفر (ṣifr).' Correct this statement, since ṣifr actually gives us a different English word. Which word did صفر (ṣifr) actually give English, and what does ṣifr mean in Arabic?",
+              "answer": "صفر (ṣifr) means 'zero' and gave English the word 'zero' (via Italian 'zefiro'/'zero'), not 'sugar'. 'Sugar' comes from سُكَّر (sukkar).",
+              "checkPage": 11
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: قَهْوَة (qahwa) — this Arabic word gave English a very popular drink name. What is the English word?",
+              "answer": "Coffee",
+              "checkPage": 10
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Arabic is written and read in which direction (left-to-right or right-to-left)? Also state how many letters are typically counted in the Arabic alphabet.",
+              "answer": "Right-to-left; the Arabic alphabet has 28 letters.",
+              "checkPage": 14
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "True or false, with a one-sentence justification: 'Arabic letters always look identical whether they are at the beginning, middle, or end of a word.'",
+              "answer": "False — most Arabic letters change shape depending on their position (initial, medial, final, or isolated) in a word.",
+              "checkPage": 15
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the blank: Arabic script does not distinguish between uppercase and lowercase letters; instead, letters connect to form ______ within a word, similar to cursive handwriting in English.",
+              "answer": "connected/joined letters (a continuous cursive chain)",
+              "checkPage": 16
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u1-test-1",
+          "pageLabel": "9-18",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Give one English word that comes from Arabic and relates to mathematics (e.g., a number system or algebra-related term). Write the English word and name its Arabic root word with transliteration.",
+              "answer": "Example: 'algebra' from الجبر (al-jabr), meaning 'the reunion of broken parts.'",
+              "checkPage": 10
+            },
+            {
+              "n": 2,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Give one English word borrowed from Arabic that relates to food or drink. Name the word and its Arabic source with transliteration.",
+              "answer": "Example: 'coffee' from قهوة (qahwa).",
+              "checkPage": 10
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank: The English word 'admiral' comes from the Arabic phrase أمير البحر (amir al-bahr), meaning '____ of the sea.'",
+              "answer": "commander/prince",
+              "checkPage": 11
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: قطن (qutn) — this Arabic word gave English a common fabric name.",
+              "answer": "cotton",
+              "checkPage": 11
+            },
+            {
+              "n": 5,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Arabic is written and read in which direction? Answer in one short sentence.",
+              "answer": "From right to left.",
+              "checkPage": 13
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "How many letters are in the Arabic alphabet? Give the number.",
+              "answer": "28",
+              "checkPage": 13
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "True or false, with one sentence explanation: Arabic script has separate uppercase and lowercase letter forms like English.",
+              "answer": "False — Arabic has no uppercase/lowercase distinction; letters change shape based on position in a word instead.",
+              "checkPage": 14
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the blank: In Arabic, most letters connect to form words, but a small group of letters never connect to the letter that follows them, only to the one _____ them.",
+              "answer": "before",
+              "checkPage": 15
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Name the three basic short vowel marks used in Arabic (you may describe them by shape/sound rather than write them in script), and state whether they normally appear in everyday printed text.",
+              "answer": "Fatha (a-sound), kasra (i-sound), damma (u-sound); they are usually omitted in everyday printed text.",
+              "checkPage": 16
+            },
+            {
+              "n": 10,
+              "type": "correct the error",
+              "skill": "reading",
+              "prompt": "A student writes: \"Arabic has 28 letters and is read left to right, same as English.\" Correct the false part of this statement.",
+              "answer": "Arabic is read right to left, not left to right.",
+              "checkPage": 13
+            },
+            {
+              "n": 11,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: سكر (sukkar) — this Arabic word became a very common English word for a sweet substance.",
+              "answer": "sugar",
+              "checkPage": 10
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Why do many Arabic letters look different depending on whether they appear at the beginning, middle, or end of a word? Answer in one sentence.",
+              "answer": "Because most Arabic letters change shape to connect with neighboring letters depending on their position (initial, medial, final, or isolated) in a word.",
+              "checkPage": 15
+            }
+          ]
+        }
+      ]
+    },
+    "u2": {
+      "test": [
+        {
+          "id": "u2-test-1",
+          "pageLabel": "19-30",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Name the four possible position-forms a connecting Arabic letter can take in a word (in English).",
+              "answer": "Isolated (standalone), initial, medial, and final forms.",
+              "checkPage": 21
+            },
+            {
+              "n": 2,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "The letter ب (bāʼ) appears in the word كتاب (kitāb, 'book'). Which position-form does the ب take at the end of this word: initial, medial, or final?",
+              "answer": "Final form.",
+              "checkPage": 21
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank: Letters like ا (alif), د (dāl), ذ (dhāl), ر (rāʼ), ز (zāy), and و (wāw) are called ____ letters because they cannot connect to the letter that follows them.",
+              "answer": "non-connecting (letters that only connect on the right side, not the left)",
+              "checkPage": 22
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "True or false: Because د (dāl) is a non-connecting letter, a letter written immediately after it in the same word must appear in its isolated or initial form, not its medial form.",
+              "answer": "True.",
+              "checkPage": 22
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "reading",
+              "prompt": "A student claims that the letter م (mīm) has only one shape used in every word position. Correct this statement.",
+              "answer": "This is false — م (mīm) changes shape depending on position: isolated (م), initial (مـ), medial (ـمـ), and final (ـم).",
+              "checkPage": 21
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "What is the general purpose of a 'transliteration' or 'transcription' system, as used for Arabic in this book?",
+              "answer": "It represents the sounds of Arabic words using Latin letters, so learners can read pronunciation without yet knowing Arabic script.",
+              "checkPage": 23
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In common transliteration systems, a straight apostrophe (') or the symbol ء is used to represent which Arabic consonant sound, which is a brief closing of the throat?",
+              "answer": "The hamza (glottal stop) sound.",
+              "checkPage": 24
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In transliteration, the symbol ʻ (a reversed apostrophe, sometimes written as '3' informally) usually stands for which distinct Arabic letter?",
+              "answer": "ع (ʻayn), a voiced pharyngeal sound with no English equivalent.",
+              "checkPage": 24
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank: A macron or bar over a vowel in transliteration, such as in kitāb (كتاب, 'book'), signals that the vowel is ____ rather than short.",
+              "answer": "long",
+              "checkPage": 25
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: What does the transliterated Arabic word 'baytun' (بَيْتٌ) mean, and what does the doubled consonant/vowel marks tell you about how it should be pronounced?",
+              "answer": "It means 'a house.' The vowel marks show short vowels (fatha, sukun, damma/tanwīn) rather than long vowels, so each vowel is pronounced briefly.",
+              "checkPage": 25
+            },
+            {
+              "n": 11,
+              "type": "correct the error",
+              "skill": "reading",
+              "prompt": "A learner transliterates the Arabic word سلام (peace) as 'salam' with no long vowel marked. Correct the transliteration to properly show vowel length.",
+              "answer": "salām — the 'a' before the final م should carry a macron (ā) since it is a long vowel.",
+              "checkPage": 25
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Why do different textbooks and websites sometimes use different transliteration symbols for the same Arabic letter (for example ḥ vs. 7 for ح)?",
+              "answer": "Because there is no single official standard; transliteration is only an approximate reading aid, so authors choose their own conventions to represent Arabic sounds that have no exact English letter equivalent.",
+              "checkPage": 26
+            }
+          ]
+        }
+      ],
+      "homework": [
+        {
+          "id": "u2-homework-1",
+          "pageLabel": "19-30",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "The Arabic letter ب (bāʼ) changes shape depending on its position in a word. Name the four positional forms it can take (e.g., 'isolated, initial, medial, final') and briefly describe how the tooth/dot shape differs between isolated and medial position.",
+              "answer": "The four forms are: isolated (ب), initial (بـ), medial (ـبـ), final (ـب). In isolated form the letter has a full tooth-like curve with the dot underneath and stands alone. In medial form the curve becomes a small connecting stroke joined to both the previous and following letters, with the dot still underneath, but the shape is flatter/shorter since it connects on both sides.",
+              "checkPage": 21
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Complete the sentence: Arabic is written and read from ___ to ___ (give the direction in English).",
+              "answer": "right to left",
+              "checkPage": 19
+            },
+            {
+              "n": 3,
+              "type": "correct the error",
+              "skill": "vocabulary",
+              "prompt": "A student transliterated the Arabic letter خ (khāʼ) as 'k' in Latin script. Explain why this is incorrect and give the correct transliteration convention used for خ (as commonly written in Romanization, e.g., in this course).",
+              "answer": "خ is a distinct sound (a voiceless uvular/velar fricative, like the 'ch' in Scottish 'loch'), different from ك (kāf, plain 'k'). The correct transliteration is 'kh', not 'k', to distinguish it from ك.",
+              "checkPage": 23
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Name two Arabic letters that are never connected to the letter following them (i.e., they only connect to the letter before them, not after), and explain what effect this has on the word's shape.",
+              "answer": "Examples include د (dāl), ذ (dhāl), ر (rāʼ), ز (zāy), و (wāw), and ا (alif). Because these letters don't connect forward, the next letter in the word must start a new isolated or initial form, creating a visible break in the connected script within the word.",
+              "checkPage": 22
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: the Arabic letter name \"عين\" (ʿayn).",
+              "answer": "The letter 'ayn (a voiced pharyngeal fricative with no equivalent sound in English, often transliterated with the symbol ʿ)",
+              "checkPage": 24
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank: In the Latin transliteration system used for Arabic, a straight apostrophe-like symbol (ء or ʼ) is used to represent the sound called the ___ , a brief catch in the throat similar to the sound in the middle of 'uh-oh'.",
+              "answer": "hamza (glottal stop)",
+              "checkPage": 25
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Explain why the same English letter 's' might be used to transliterate two different Arabic letters, س (sīn) and ص (ṣād). What symbol is typically added to distinguish ص from س in careful transliteration?",
+              "answer": "Both س and ص sound similar to an English 's', but ص is a 'heavier' or emphatic (pharyngealized) version of the sound. To distinguish them, careful transliteration adds a dot beneath the letter: ṣ for ص, while س remains plain s.",
+              "checkPage": 26
+            },
+            {
+              "n": 8,
+              "type": "correct the error",
+              "skill": "writing",
+              "prompt": "A learner wrote the word for 'house' as connecting the letters ب - ي - ت (b-y-t) but drew the ي (yāʼ) in its isolated form even though it appears in the middle of the word. What is wrong with this, and how should the medial form of ي differ from its isolated form?",
+              "answer": "The error is using the isolated form of ي in a medial position; since ي connects on both sides, it must use its medial form. The isolated form of ي has a full curved tail with two dots underneath, while the medial form is a smaller connecting stroke without the tail, keeping the two dots underneath, joined smoothly to the letters before and after it.",
+              "checkPage": 21
+            }
+          ]
+        }
+      ]
+    },
+    "u3": {
+      "homework": [
+        {
+          "id": "u3-homework-1",
+          "pageLabel": "31-54",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the nominal sentence (no verb needed) meaning 'The house is big': البيت ___ (al-baytu ___). Fill in the correct adjective form of كبير (kabeer, 'big') agreeing with the noun.",
+              "answer": "كبيرٌ (kabeerun) — البيت كبيرٌ (al-baytu kabeerun) = 'The house is big.' The adjective follows the noun and agrees in gender/number/definiteness in case ending.",
+              "checkPage": 33
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (write in Arabic script + transliteration): 'The new car' (using definite article on both noun and adjective).",
+              "answer": "السيارة الجديدة (as-sayyāra al-jadīda) — both noun and adjective take the definite article 'al-' because the adjective describes a definite noun.",
+              "checkPage": 34
+            },
+            {
+              "n": 3,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and fix the mistake: طالب جديد اسمه أحمد (ṭālibun jadīdun ismuhu Aḥmad) is meant to say 'A/the new student's name is Ahmad' but as written it's ambiguous/incorrect for definiteness. Rewrite so 'the new student' is clearly definite.",
+              "answer": "الطالب الجديد اسمه أحمد (aṭ-ṭālibu al-jadīdu ismuhu Aḥmad) — add الـ (al-) to both طالب and جديد to make 'the new student' definite.",
+              "checkPage": 34
+            },
+            {
+              "n": 4,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the past-tense verb كتب (kataba, 'he wrote') for 'she wrote' and 'they (masc. pl.) wrote'.",
+              "answer": "هي: كتبت (kataba+t = katabat, 'she wrote'); هم: كتبوا (katabū, 'they wrote')",
+              "checkPage": 40
+            },
+            {
+              "n": 5,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the present-tense verb يكتب (yaktubu, 'he writes') for 'I write' and 'you (fem. sing.) write'.",
+              "answer": "أنا: أكتب (aktubu, 'I write'); أنتِ: تكتبين (taktubīna, 'you (f.) write')",
+              "checkPage": 42
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the future-tense sentence: 'I will study Arabic tomorrow' — سـ___ العربية غداً (sa-___ al-'arabiyya ghadan). Fill in the correct future verb form of درس/يدرس (darasa/yadrusu, 'to study').",
+              "answer": "سأدرس (sa-adrusu) — سأدرس العربية غداً (sa-adrusu al-'arabiyya ghadan) = 'I will study Arabic tomorrow.' The prefix سـ (sa-) attaches to the present tense to mark future.",
+              "checkPage": 45
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "The verb ذهب (dhahaba, 'he went') is an irregular (hollow) verb because of its middle weak letter. In your own words, briefly explain what makes a verb 'irregular/weak' in Arabic and why it can change spelling in conjugation.",
+              "answer": "A weak (irregular) verb contains a weak letter (و, ي, or أ) as one of its three root letters, often in the middle or final position. During conjugation, this weak letter may shift, drop, or merge with vowels, causing spelling changes that don't follow the regular sound-verb pattern (e.g., ذهب → أذهب, يذهب stays fairly regular here, but hollow/defective verbs like قال or رأى show more dramatic shifts).",
+              "checkPage": 50
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English: أنا طالبٌ وهي طالبةٌ (anā ṭālibun wa hiya ṭāliba). Then identify: is this a verb-free (nominal) sentence or a verbal sentence?",
+              "answer": "'I am a (male) student and she is a (female) student.' This is a nominal (verb-free) sentence — no verb 'to be' is used; the sentence structure alone conveys 'is/am.'",
+              "checkPage": 32
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u3-test-1",
+          "pageLabel": "31-54",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Add the definite article to make this noun definite: بيت (bayt) → ____ (house / the house)",
+              "answer": "البيت (al-bayt) - the house",
+              "checkPage": 32
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: البيت الكبير (al-bayt al-kabīr)",
+              "answer": "the big house",
+              "checkPage": 34
+            },
+            {
+              "n": 3,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the agreement error: بيت كبيرة (bayt kabīrah) 'a big house' — the noun بيت (bayt) is masculine.",
+              "answer": "بيت كبير (bayt kabīr) - the adjective must be masculine to match the masculine noun",
+              "checkPage": 35
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "grammar",
+              "prompt": "Translate to Arabic (write a verb-free/nominal sentence, no verb 'to be' needed): 'The teacher is tired.' (masculine subject: المعلم al-muʿallim, tired: تعبان taʿbān)",
+              "answer": "المعلم تعبان (al-muʿallim taʿbān)",
+              "checkPage": 38
+            },
+            {
+              "n": 5,
+              "type": "short-answer",
+              "skill": "grammar",
+              "prompt": "In Arabic nominal (verb-free) sentences describing present states, what verb is typically omitted that English requires?",
+              "answer": "The verb 'to be' (is/am/are) — Arabic has no present-tense equivalent of 'to be' in simple sentences.",
+              "checkPage": 37
+            },
+            {
+              "n": 6,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the past-tense verb كَتَبَ (kataba, 'he wrote') for the pronoun أنتِ (anti, 'you' feminine singular).",
+              "answer": "كَتَبْتِ (katabti) - you (f.) wrote",
+              "checkPage": 42
+            },
+            {
+              "n": 7,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the present-tense verb يَكْتُبُ (yaktubu, 'he writes') for the pronoun نحن (naḥnu, 'we').",
+              "answer": "نَكْتُبُ (naktubu) - we write",
+              "checkPage": 44
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the future-tense sentence using the future prefix سَـ (sa-): ____ يذهب إلى السوق (____ yadhhabu ilā as-sūq) meaning 'He will go to the market.'",
+              "answer": "سَيَذْهَبُ (sayadhhabu) - he will go",
+              "checkPage": 46
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate to Arabic using the future prefix: 'I will study Arabic.' (I study: أدرس adrus, Arabic: العربية al-ʿarabiyyah)",
+              "answer": "سأدرس العربية (sa-adrusu al-ʿarabiyyah)",
+              "checkPage": 47
+            },
+            {
+              "n": 10,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "This is an irregular (hollow) verb: قالَ (qāla, 'he said'). Conjugate it in the past tense for أنا (anā, 'I').",
+              "answer": "قُلْتُ (qultu) - I said",
+              "checkPage": 50
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "grammar",
+              "prompt": "What makes a verb like ذهب (dhahaba, 'he went') or قال (qāla, 'he said') 'irregular' in Arabic grammar, compared to a regular verb like كتب (kataba, 'he wrote')?",
+              "answer": "They contain a weak letter (و or ي) in the root that changes or disappears in certain conjugations, unlike the three fully consonantal (sound) roots of regular verbs.",
+              "checkPage": 49
+            },
+            {
+              "n": 12,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the verb tense error: The sentence 'Yesterday, I go to school' is rendered as أنا أذهب إلى المدرسة أمس (anā adhhabu ilā al-madrasah amsi) — but 'yesterday' requires the past tense.",
+              "answer": "أنا ذهبتُ إلى المدرسة أمس (anā dhahabtu ilā al-madrasah amsi) - I went to school yesterday",
+              "checkPage": 41
+            }
+          ]
+        }
+      ]
+    },
+    "u4": {
+      "homework": [
+        {
+          "id": "u4-homework-1",
+          "pageLabel": "55-70",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: السَّلامُ عَلَيْكُم (as-salāmu ʿalaykum)",
+              "answer": "Peace be upon you (a common greeting, 'Hello')",
+              "checkPage": 56
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the introduction with the correct word: اِسْمِي أَحْمَد، أَنَا ___ الجِنْسِيَّة (ismī Aḥmad, anā ___ al-jinsiyyah) — fill in a nationality adjective meaning 'Egyptian' (masculine form).",
+              "answer": "مِصْرِيّ (miṣrī)",
+              "checkPage": 60
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'What is your name?' (asking a woman, informal)",
+              "answer": "ما اسْمُكِ؟ (mā ismuki?)",
+              "checkPage": 58
+            },
+            {
+              "n": 4,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the mistake: أَنا أمريكي مِن هي (anā amrīkī min hiya) — meant to say 'I am American, from there/that place'.",
+              "answer": "أَنا أمريكيّ مِن هُناك (anā amrīkī min hunāk) — 'هي' (hiya, 'she') should be 'هُناك' (hunāk, 'there').",
+              "checkPage": 61
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سَكَنَ (sakana, 'to live/reside') in the present tense (المُضارِع) for أَنا (anā, 'I') and هِيَ (hiya, 'she').",
+              "answer": "أَنا أَسْكُنُ (anā askunu) — I live; هِيَ تَسْكُنُ (hiya taskunu) — she lives",
+              "checkPage": 59
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In Arabic, write one full sentence answering: كَيْفَ الطَّقْسُ اليَوْم؟ (kayfa aṭ-ṭaqsu al-yawm? — 'How is the weather today?') describing it as hot.",
+              "answer": "الطَّقْسُ حارٌّ اليَوْم (aṭ-ṭaqsu ḥārrun al-yawm) — 'The weather is hot today.'",
+              "checkPage": 65
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: الجَوُّ بارِدٌ جِدًّا وَتُمْطِرُ (al-jawwu bāridun jiddan wa-tumṭir)",
+              "answer": "The weather is very cold and it is raining.",
+              "checkPage": 66
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the polite closing exchange: أ: تَشَرَّفْنا (tasharrafnā) ب: وَ___ (wa-___) — fill in the response meaning 'and we are honored too/likewise'.",
+              "answer": "وَنَحْنُ أَيْضًا (wa-naḥnu ayḍan) — 'and us too'",
+              "checkPage": 57
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u4-test-1",
+          "pageLabel": "55-70",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: السَّلامُ عَلَيْكُم (as-salāmu ʿalaykum)",
+              "answer": "Peace be upon you (a common greeting meaning 'Hello')",
+              "checkPage": 56
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the greeting exchange: أ: صَباحُ الخَيْر (ṣabāḥu l-khayr) ب: صَباحُ ___ (ṣabāḥu ___)",
+              "answer": "النُّور (an-nūr)",
+              "checkPage": 57
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'My name is Sarah.'",
+              "answer": "اِسْمي سارة (ismī Sārah)",
+              "checkPage": 58
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "How would you ask someone 'How are you?' when speaking to a male? Write the Arabic phrase and its transliteration.",
+              "answer": "كَيْفَ حالُكَ؟ (kayfa ḥāluka?)",
+              "checkPage": 58
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Fix the mistake in this sentence meaning 'I am American' (spoken by a woman): أَنا أَمريكي (anā amrīkī)",
+              "answer": "أَنا أَمريكيّة (anā amrīkiyyah) — the feminine ending -ة (-ah) is needed for a woman describing her nationality.",
+              "checkPage": 62
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct nationality adjective: هُوَ مِن مِصْر، هُوَ ___ (huwa min Miṣr, huwa ___) 'He is from Egypt, he is ___.'",
+              "answer": "مِصْريّ (miṣrī)",
+              "checkPage": 62
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'Where are you from?' (to a woman)",
+              "answer": "مِن أَيْنَ أَنْتِ؟ (min ayna anti?)",
+              "checkPage": 60
+            },
+            {
+              "n": 8,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سَكَنَ (sakana, 'to live/reside') in the present tense for أَنا (anā, 'I') and هِيَ (hiya, 'she').",
+              "answer": "أَنا أَسْكُن (anā askun) — I live; هِيَ تَسْكُن (hiya taskun) — she lives",
+              "checkPage": 59
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "In Arabic, what do you say to respond politely when someone says شُكْرًا (shukran, 'thank you') to you?",
+              "answer": "عَفْوًا (ʿafwan) — 'you're welcome'",
+              "checkPage": 57
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: الجَوُّ حارّ اليَوْم (al-jaww ḥārr al-yawm)",
+              "answer": "The weather is hot today.",
+              "checkPage": 66
+            },
+            {
+              "n": 11,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the weather sentence: في الشِّتاء، الجَوُّ ___ (fī sh-shitāʾ, al-jaww ___) 'In winter, the weather is ___.' (use a word meaning 'cold')",
+              "answer": "بارِد (bārid)",
+              "checkPage": 67
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "writing",
+              "prompt": "Write a short 2-sentence self-introduction in Arabic: give your name and your nationality (any nationality you like), including transliteration.",
+              "answer": "Example: اِسْمي أَحْمَد. أَنا مِن كَنَدا، أَنا كَنَديّ. (Ismī Aḥmad. Anā min Kanadā, anā kanadī.) — 'My name is Ahmad. I am from Canada, I am Canadian.'",
+              "checkPage": 63
+            }
+          ]
+        }
+      ]
+    },
+    "u5": {
+      "homework": [
+        {
+          "id": "u5-homework-1",
+          "pageLabel": "71-77",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: يَوْمُ الْخَمِيسِ (yawm al-khamīs)",
+              "answer": "Thursday",
+              "checkPage": 72
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct Arabic day: بَعْدَ يَوْمِ الْأَحَدِ يَأْتِي يَوْمُ ___ (ba‘da yawm al-aḥad ya’tī yawm ___) 'After Sunday comes ___'",
+              "answer": "الاثنين (al-ithnayn) — Monday",
+              "checkPage": 72
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'the month of Ramadan'",
+              "answer": "شَهْرُ رَمَضَانَ (shahru ramaḍān)",
+              "checkPage": 74
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct number word: عِنْدِي ___ كُتُبٍ (‘indī ___ kutubin) 'I have three books'",
+              "answer": "ثَلاَثَةُ (thalāthatu) — using the feminine-form number for a masculine plural noun",
+              "checkPage": 73
+            },
+            {
+              "n": 5,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "Explain in one sentence: why does the Arabic number for 'three' (ثَلاَثَة / thalātha) take the feminine ending -ة when counting masculine nouns like كُتُب (kutub, 'books')?",
+              "answer": "Numbers 3–10 reverse gender agreement with the noun they count, so a masculine plural noun takes the feminine form of the number (and vice versa).",
+              "checkPage": 73
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the date expression if wrong: اليوم هو الخمسة عشر يناير (al-yawm huwa al-khamsata ‘ashar yanāyir) intended to mean 'Today is the fifteenth of January.'",
+              "answer": "اليوم هو الخامس عشر من يناير (al-yawm huwa al-khāmis ‘ashar min yanāyir) — ordinal 'fifteenth' (al-khāmis ‘ashar) with 'min' before the month, not the cardinal number.",
+              "checkPage": 75
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كِيلُوغْرَامٌ وَنِصْفٌ مِنَ اللَّحْمِ (kīlūghrāmun wa niṣfun min al-laḥm)",
+              "answer": "a kilogram and a half of meat",
+              "checkPage": 76
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "writing",
+              "prompt": "Write in Arabic (with transliteration) a full sentence stating your birth year using a four-digit number, e.g. 'I was born in the year 1990.'",
+              "answer": "وُلِدْتُ فِي سَنَةِ أَلْفٍ وَتِسْعِ مِئَةٍ وَتِسْعِينَ (wulidtu fī sanati alfin wa tis‘i mi’atin wa tis‘īn) — 'I was born in the year 1990' (or the learner's own year, formed similarly).",
+              "checkPage": 77
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u5-test-1",
+          "pageLabel": "71-77",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: خَمْسَة (khamsah)",
+              "answer": "five",
+              "checkPage": 71
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic script with transliteration: 'seven books' (use the number seven + كِتاب (kitāb) 'book')",
+              "answer": "سَبْعَة كُتُب (sab‘at kutub)",
+              "checkPage": 72
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct Arabic word for the day: اليوم هو يوم ____ (al-yawm huwa yawm ____) 'Today is ____.' (write the Arabic for 'Monday' with transliteration)",
+              "answer": "الإثنين (al-ithnayn)",
+              "checkPage": 73
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Name the Arabic word (with transliteration) for the day that comes right after يوم الجمعة (yawm al-jum‘ah) 'Friday' in the Arabic week.",
+              "answer": "يوم السبت (yawm as-sabt) 'Saturday'",
+              "checkPage": 73
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: شَهْر رَمَضان (shahr Ramaḍān)",
+              "answer": "the month of Ramadan",
+              "checkPage": 74
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Give the Arabic word (with transliteration) for the third month of the Gregorian calendar as commonly used in Arabic media (i.e., 'March').",
+              "answer": "مارس (māris)",
+              "checkPage": 74
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the date phrase: اليوم هو الثلاثاء، ____ مايو (al-yawm huwa ath-thulāthā’, ____ māyū) 'Today is Tuesday, the ____ of May' — fill in the Arabic word for 'first' (ordinal, masculine) with transliteration.",
+              "answer": "الأوّل (al-awwal)",
+              "checkPage": 75
+            },
+            {
+              "n": 8,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error in this date sentence: وُلِدْتُ في سَنة ألف وتِسعة مئة وسَبعون (wulidtu fī sanat alf wa-tis‘ah mi’ah wa-sab‘ūn) 'I was born in the year 1970' — one number-agreement word is wrong; rewrite the sentence correctly.",
+              "answer": "وُلِدْتُ في سَنة ألف وتِسعة مئة وسَبعين (wulidtu fī sanat alf wa-tis‘ah mi’ah wa-sab‘īn) — سَبعين (sab‘īn) not سَبعون (sab‘ūn), since it follows a preposition/genitive construction",
+              "checkPage": 75
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic script with transliteration: 'two kilometers' (use كيلومتر (kīlūmitr) 'kilometer')",
+              "answer": "كيلومتران (kīlūmitrān)",
+              "checkPage": 76
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct measurement word: أحتاج إلى ____ من الحليب (aḥtāju ilā ____ min al-ḥalīb) 'I need a liter of milk' (write the Arabic word for 'liter' with transliteration).",
+              "answer": "لِتْر (litr)",
+              "checkPage": 76
+            },
+            {
+              "n": 11,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Read and answer in English: كان عمره خمسة وعشرين عاماً عندما تزوّج (kāna ‘umruhu khamsah wa-‘ishrīn ‘āmān ‘indamā tazawwaj). How old was he when he got married?",
+              "answer": "25 years old",
+              "checkPage": 77
+            },
+            {
+              "n": 12,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate وُلِدَ (wulida) 'was born' (passive form) for أنا (anā) 'I' in the past tense, and use it in a full sentence stating you were born in 1990 (استخدم/use سَنة (sanah) 'year' + ألف وتِسعمئة وتسعين (alf wa-tis‘mi’ah wa-tis‘īn) '1990').",
+              "answer": "وُلِدْتُ في سَنة ألف وتِسعمئة وتسعين (wulidtu fī sanat alf wa-tis‘mi’ah wa-tis‘īn) 'I was born in 1990.'",
+              "checkPage": 77
+            }
+          ]
+        }
+      ]
+    },
+    "u6": {
+      "homework": [
+        {
+          "id": "u6-homework-1",
+          "pageLabel": "79-94",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: مَكْتَب (maktab)",
+              "answer": "desk / office",
+              "checkPage": 80
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (with transliteration): 'computer'",
+              "answer": "حاسوب (ḥāsūb)",
+              "checkPage": 81
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct household item: أَنَا أَجْلِسُ عَلَى ___ فِي غُرْفَةِ الجُلُوسِ (ʾanā ʾajlisu ʿalā ___ fī ghurfat al-julūs) 'I sit on the ___ in the living room.'",
+              "answer": "الكُرْسِيّ (al-kursī) 'chair' or الأَرِيكَة (al-ʾarīkah) 'sofa'",
+              "checkPage": 85
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَكْتُبُ (yaktubu, 'to write') in the present tense for أَنَا (ʾanā, 'I') and هِيَ (hiya, 'she').",
+              "answer": "أَنَا أَكْتُبُ (ʾanā ʾaktubu) - 'I write'; هِيَ تَكْتُبُ (hiya taktubu) - 'she writes'",
+              "checkPage": 88
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the error: هُوَ تَعْمَلُ فِي المَكْتَبِ (huwa taʿmalu fī al-maktab) 'He works in the office.'",
+              "answer": "هُوَ يَعْمَلُ فِي المَكْتَبِ (huwa yaʿmalu fī al-maktab) — the verb prefix should match masculine 'he' (يَـ ya-), not feminine (تَـ ta-)",
+              "checkPage": 89
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in a full Arabic sentence with transliteration: مَاذَا تَسْتَعْمِلُ لِلطَّبْخِ فِي المَطْبَخِ؟ (mādhā tastaʿmilu lil-ṭabkh fī al-maṭbakh?) 'What do you use for cooking in the kitchen?'",
+              "answer": "Sample: أَسْتَعْمِلُ الفُرْنَ وَالطَنجَرَة (ʾastaʿmilu al-furn wa-al-ṭanjarah) 'I use the oven and the pot.'",
+              "checkPage": 91
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the correct possessive pronoun suffix: هَذَا كِتَابُ___ (hādhā kitābu___) 'This is my book.'",
+              "answer": "هَذَا كِتَابِي (hādhā kitābī) — suffix ي (-ī) for 'my'",
+              "checkPage": 83
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (with transliteration): 'I clean the house every day.'",
+              "answer": "أُنَظِّفُ البَيْتَ كُلَّ يَوْمٍ (ʾunaẕẕifu al-bayta kulla yawmin)",
+              "checkPage": 93
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u6-test-1",
+          "pageLabel": "79-94",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct word for 'desk': القلم على ال___ (al-qalam 'ala al-___) - 'The pen is on the desk.'",
+              "answer": "مكتب (maktab)",
+              "checkPage": 80
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'The computer is on the table.'",
+              "answer": "الكمبيوتر على الطاولة (al-kombiyootar 'ala al-taawila)",
+              "checkPage": 81
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: البيت فيه مطبخ وغرفة نوم وحمام (al-bayt feehi matbakh wa-ghurfat nawm wa-hammaam)",
+              "answer": "The house has a kitchen, a bedroom, and a bathroom.",
+              "checkPage": 83
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يعمل (ya'malu - 'to work') in the present tense for هي (hiya - 'she').",
+              "answer": "تعمل (ta'malu)",
+              "checkPage": 85
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يكتب (yaktubu - 'to write') in the present tense for أنتم (antum - 'you, masc. pl.').",
+              "answer": "تكتبون (taktuboona)",
+              "checkPage": 85
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error in gender agreement: الطاولة كبير (al-taawila kabeer) - meant to say 'the table is big.'",
+              "answer": "الطاولة كبيرة (al-taawila kabeera) - 'kabeer' must become feminine 'kabeera' to agree with the feminine noun 'taawila'.",
+              "checkPage": 80
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "vocabulary",
+              "prompt": "Name three household objects in Arabic (with transliteration) that you might find in a bedroom or kitchen.",
+              "answer": "Example: سرير (sareer - bed), ثلاجة (thallaaja - refrigerator), كرسي (kursi - chair) - any three correct household nouns accepted.",
+              "checkPage": 83
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the sentence with the correct present-tense form of يطبخ (yatbakhu - 'to cook'): أمي ___ الطعام كل يوم (ummi ___ al-ta'aam kull yawm) - 'My mother cooks food every day.'",
+              "answer": "تطبخ (tatbakhu)",
+              "checkPage": 86
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'I clean the kitchen every day.'",
+              "answer": "أنظف المطبخ كل يوم (unazzifu al-matbakh kull yawm)",
+              "checkPage": 88
+            },
+            {
+              "n": 10,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the verb conjugation error: هم يعمل في المكتب (hum ya'malu fil-maktab) - meant to say 'they (masc. pl.) work in the office.'",
+              "answer": "هم يعملون في المكتب (hum ya'maloona fil-maktab) - the verb must take the masculine plural ending '-oona'.",
+              "checkPage": 85
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write one full sentence in Arabic describing what you do at the office, using the verb يعمل (ya'malu) or another work-related verb.",
+              "answer": "Example: أنا أعمل على الكمبيوتر في المكتب (ana a'malu 'ala al-kombiyootar fil-maktab) - 'I work on the computer in the office.' Any grammatically correct sentence with a work verb accepted.",
+              "checkPage": 90
+            },
+            {
+              "n": 12,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يقرأ (yaqra'u - 'to read') in the present tense for نحن (nahnu - 'we').",
+              "answer": "نقرأ (naqra'u)",
+              "checkPage": 85
+            }
+          ]
+        }
+      ]
+    },
+    "u7": {
+      "homework": [
+        {
+          "id": "u7-homework-1",
+          "pageLabel": "95-114",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: مَا اسْمُكَ؟ (mā ismuka?)",
+              "answer": "What is your name? (to a male)",
+              "checkPage": 96
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct possessive suffix meaning 'my': هَذِهِ أُسْرَت___ (hādhihi usrat___) — 'This is my family.'",
+              "answer": "ي (i) → أُسْرَتِي (usratī)",
+              "checkPage": 98
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَعْمَلُ (ya'malu, 'to work') in the present tense for 'أَنَا' (anā, I) and 'هِيَ' (hiya, she).",
+              "answer": "أَنَا أَعْمَلُ (anā a'malu) / هِيَ تَعْمَلُ (hiya ta'malu)",
+              "checkPage": 102
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'I work as a teacher.'",
+              "answer": "أَعْمَلُ مُعَلِّمًا (a'malu mu'alliman) — for a female speaker: أَعْمَلُ مُعَلِّمَةً (a'malu mu'allimatan)",
+              "checkPage": 103
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the error: عِنْدهُ أَخَوَات وَأَخ (ʿindhu akhawāt wa akh) — meant to say 'He has sisters and a brother.'",
+              "answer": "عِنْدَهُ أَخَوَاتٌ وَأَخٌ (ʿindahu akhawātun wa akhun) — missing the short vowel 'a' on عِنْدَ and correct tanwīn endings",
+              "checkPage": 97
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in Arabic with a short sentence: كَمْ أَخًا وَأُخْتًا لَدَيْكَ؟ (kam akhan wa ukhtan ladayka? — 'How many brothers and sisters do you have?')",
+              "answer": "Any grammatically correct sentence, e.g., لَدَيَّ أَخٌ وَأُخْتَانِ (ladayya akhun wa ukhtān) — 'I have one brother and two sisters.'",
+              "checkPage": 99
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the phone greeting: أَ-َلُو، مَنْ ___؟ (alū, man ___? — 'Hello, who is speaking?')",
+              "answer": "يَتَكَلَّمُ (yatakallamu) → مَنْ يَتَكَلَّمُ؟ (man yatakallamu?)",
+              "checkPage": 108
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'I will send you an email tomorrow.'",
+              "answer": "سَأُرْسِلُ لَكَ رِسَالَةَ بَرِيدٍ إِلِكْتْرُونِيّ غَدًا (sa-ursilu laka risālata barīdin iliktrūnī ghadan)",
+              "checkPage": 111
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u7-test-1",
+          "pageLabel": "95-114",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: من أنتَ؟ (man anta?)",
+              "answer": "Who are you? (to a male)",
+              "checkPage": 96
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct question word: ...... عمرك؟ (______ 'umruka?) — meaning 'How old are you?'",
+              "answer": "كم (kam)",
+              "checkPage": 97
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'What is your job?' (to a man)",
+              "answer": "ما هي مهنتك؟ (mā hiya mihnatuka?)",
+              "checkPage": 100
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the missing family word: أخي و ...... يعيشان في القاهرة (akhī wa ______ ya'īshān fī al-Qāhira) — 'My brother and my sister live in Cairo.'",
+              "answer": "أختي (ukhtī)",
+              "checkPage": 102
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَعْمَلُ (ya'malu, 'to work') in the present tense for أنتِ (anti, 'you' fem. sing.)",
+              "answer": "تَعْمَلينَ (ta'malīna)",
+              "checkPage": 103
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error: هل انتي طبيبة؟ (hal antī ṭabība?) — intended: 'Are you (fem.) a doctor?'",
+              "answer": "هل أنتِ طبيبة؟ (hal anti ṭabība?) — corrected spelling of أنتِ",
+              "checkPage": 98
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'I have three children.'",
+              "answer": "لدي ثلاثة أولاد (ladayya thalāthat awlād)",
+              "checkPage": 104
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in Arabic with a full sentence: أين تعمل؟ (ayna ta'mal? — 'Where do you work?') Give any plausible answer.",
+              "answer": "Any correct sentence, e.g. أعمل في مكتب (a'malu fī maktab) — 'I work in an office.'",
+              "checkPage": 101
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the phone phrase: ...... من فضلك (______ min faḍlik) — 'Hold on, please' (used when answering a call)",
+              "answer": "لحظة (laḥẕa)",
+              "checkPage": 108
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English: هل يمكنني ترك رسالة؟ (hal yumkinunī tark risāla?)",
+              "answer": "Can I leave a message?",
+              "checkPage": 109
+            },
+            {
+              "n": 11,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error: أرسلت لك بريد إلكتروني بالأمس مساءً (arsaltu laka barīd 'elektrōnī bi-l-amsi masā'an) — the verb tense should show past feminine agreement if 'I' is a woman speaking. Fix if the speaker is female and the verb form is wrong: أرسلت (arsaltu) should stay the same or change?",
+              "answer": "أرسلتُ (arsaltu) is correct for both genders in first person; no change needed — this item highlights that first-person past tense doesn't change by gender.",
+              "checkPage": 110
+            },
+            {
+              "n": 12,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write one short sentence in Arabic asking a friend for their email address.",
+              "answer": "Example: ما هو بريدك الإلكتروني؟ (mā huwa barīduka al-elektrōnī?) — 'What is your email address?'",
+              "checkPage": 112
+            }
+          ]
+        }
+      ]
+    },
+    "u8": {
+      "homework": [
+        {
+          "id": "u8-homework-1",
+          "pageLabel": "115-132",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'Where is the bank?'",
+              "answer": "أَيْنَ البَنْكُ؟ (ayna al-banku?)",
+              "checkPage": 116
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct imperative verb meaning 'go' (masculine singular command): اِذْهَبْ إلى المَطْعَمِ (___ ilā al-maṭ‘am) — 'Go to the restaurant.'",
+              "answer": "اِذْهَبْ (idhhab)",
+              "checkPage": 120
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the imperative of the verb دَخَلَ (dakhala, 'to enter') for: 1) أَنْتَ (anta, you m.), 2) أَنْتِ (anti, you f.), 3) أَنْتُمْ (antum, you pl. m.)",
+              "answer": "1) اُدْخُلْ (udkhul) 2) اُدْخُلِي (udkhulī) 3) اُدْخُلُوا (udkhulū)",
+              "checkPage": 121
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: اِلتَفِتْ يَمِينًا عِنْدَ الإِشَارَةِ (iltafit yamīnan ‘inda al-ishārah)",
+              "answer": "'Turn right at the traffic light.'",
+              "checkPage": 123
+            },
+            {
+              "n": 5,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct ordinal number: هٰذَا هُوَ الشَّارِعُ ___ (hādhā huwa ash-shāri‘ ___) — 'This is the third street.' (شارع is masculine)",
+              "answer": "الثّالِثُ (ath-thālith)",
+              "checkPage": 128
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error in this command sentence: اِذْهَبِي مُبَاشَرَةً ثُمَّ يَسَار (idh-habī mubāsharatan thumma yasār) — meant to say 'Go straight, then turn left' (feminine command).",
+              "answer": "Missing verb 'turn'; should be: اِذْهَبِي مُبَاشَرَةً ثُمَّ اِلْتَفِتِي يَسَارًا (idh-habī mubāsharatan thumma iltafitī yasāran)",
+              "checkPage": 122
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Someone asks: أَيْنَ المَكْتَبَةُ؟ هَلْ هِيَ قَرِيبَةٌ مِنْ هُنَا؟ (ayna al-maktabah? hal hiya qarībah min hunā?) — What two things is the person asking?",
+              "answer": "They are asking where the library is, and whether it is near here.",
+              "checkPage": 117
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'The second door is on the left, and the fourth door is on the right.'",
+              "answer": "البَابُ الثّانِي عَلَى اليَسَارِ، والبَابُ الرّابِعُ عَلَى اليَمِينِ (al-bābu ath-thānī ‘alā al-yasār, wa-al-bābu ar-rābi‘ ‘alā al-yamīn)",
+              "checkPage": 129
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u8-test-1",
+          "pageLabel": "115-132",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'Where is the bank?'",
+              "answer": "أَيْنَ البَنْكُ؟ (ayna al-bank?)",
+              "checkPage": 116
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: أَيْنَ المَحَطَّةُ؟ (ayna al-maHaTTa?)",
+              "answer": "Where is the station?",
+              "checkPage": 116
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct imperative (command to a male 'you'): ____ (turn) يَمِينًا (right)! Root: د-و-ر (d-w-r)",
+              "answer": "دُرْ يَمِينًا (dur yamīnan) - 'Turn right!'",
+              "checkPage": 120
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Give the imperative form of the verb ذَهَبَ (dhahaba, 'to go') for: (a) أَنْتَ (anta, 'you' masc. sing.) (b) أَنْتِ (anti, 'you' fem. sing.) (c) أَنْتُمْ (antum, 'you' masc. pl.)",
+              "answer": "(a) اِذْهَبْ (idhhab) (b) اِذْهَبِي (idhhabī) (c) اِذْهَبُوا (idhhabū)",
+              "checkPage": 121
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the error in this command to a woman: اُكْتُبْ اسْمَكِ هُنَا (uktub ismaki hunā) - 'Write your name here.'",
+              "answer": "Should be اُكْتُبِي اسْمَكِ هُنَا (uktubī ismaki hunā) - feminine imperative ending needs ي (ī), not the masculine form.",
+              "checkPage": 121
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the direction phrase: سِرْ إِلَى ____ (sir ilā ____) meaning 'Go straight ahead.'",
+              "answer": "سِرْ إِلَى الأَمَامِ (sir ilā al-amām)",
+              "checkPage": 118
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "vocabulary",
+              "prompt": "In Arabic, how do you say 'next to the mosque'? (give the phrase, using بِجَانِبِ or قُرْبَ)",
+              "answer": "بِجَانِبِ المَسْجِدِ (bijānibi al-masjid) or قُرْبَ المَسْجِدِ (qurba al-masjid)",
+              "checkPage": 117
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "grammar",
+              "prompt": "Translate into Arabic (command to a group of men): 'Cross the street!'",
+              "answer": "اُعْبُرُوا الشَّارِعَ! (u'burū ash-shāri'a!)",
+              "checkPage": 121
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the ordinal number: الشَّارِعُ ____ عَلَى اليَمِينِ (ash-shāri' ____ 'alā al-yamīn) meaning 'The third street on the right.'",
+              "answer": "الشَّارِعُ الثَّالِثُ (ash-shāri' ath-thālith)",
+              "checkPage": 124
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: الطَّابِقُ الخَامِسُ (aT-Tābiq al-khāmis)",
+              "answer": "The fifth floor",
+              "checkPage": 124
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "grammar",
+              "prompt": "Give the negative imperative (command not to do something) for 'Don't turn left!' addressed to a man, using the verb دَارَ (dāra, 'to turn').",
+              "answer": "لا تَدُرْ يَسَارًا! (lā tadur yasāran!)",
+              "checkPage": 122
+            },
+            {
+              "n": 12,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Someone asks: كَيْفَ أَذْهَبُ إِلَى المَكْتَبَةِ؟ (kayfa adhhabu ilā al-maktaba?). Write a short direction reply in Arabic telling them to go straight, then turn left at the second street.",
+              "answer": "Sample answer: سِرْ إِلَى الأَمَامِ ثُمَّ دُرْ يَسَارًا عِنْدَ الشَّارِعِ الثَّانِي (sir ilā al-amām thumma dur yasāran 'inda ash-shāri' ath-thānī) - 'Go straight then turn left at the second street.'",
+              "checkPage": 125
+            }
+          ]
+        }
+      ]
+    },
+    "u9": {
+      "homework": [
+        {
+          "id": "u9-homework-1",
+          "pageLabel": "133-150",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "vocabulary fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the sentence: أنا أتناول (...) في الصباح باكراً. (ana atanāwalu (...) fī aṣ-ṣabāḥ bākiran) — 'I eat (...) early in the morning.' Fill in the Arabic word for 'breakfast'.",
+              "answer": "فطور (fuṭūr / faṭūr) — 'أنا أتناول الفطور في الصباح باكراً.'",
+              "checkPage": 134
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: هل يمكنني أن أرى قائمة الطعام من فضلك؟ (hal yumkinunī an ara qāʾimat aṭ-ṭaʿām min faḍlik?)",
+              "answer": "'May I see the menu, please?'",
+              "checkPage": 138
+            },
+            {
+              "n": 3,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb طَلَبَ (ṭalaba, 'to order/request') in the present tense (المضارع) for: أنا (anā), أنتَ (anta), هي (hiya), نحن (naḥnu).",
+              "answer": "أنا أطلب (anā aṭlubu); أنتَ تطلب (anta taṭlubu); هي تطلب (hiya taṭlubu); نحن نطلب (naḥnu naṭlubu)",
+              "checkPage": 140
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'I would like a cup of tea and a piece of cake.'",
+              "answer": "أريد كوب شاي وقطعة كعك. (urīdu kūb shāy wa-qiṭʿat kaʿk)",
+              "checkPage": 141
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the grammatical error: النادل تعطيني الفاتورة. (an-nādilu tuʿṭīnī al-fātūrah) — intended meaning: 'The waiter gives me the bill.'",
+              "answer": "النادل يعطيني الفاتورة. (an-nādilu yuʿṭīnī al-fātūrah) — the verb must agree with the masculine subject النادل, so it should be يعطيني (yuʿṭīnī), not تعطيني (tuʿṭīnī).",
+              "checkPage": 145
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Read this short exchange and answer in English: الزبون: الحساب من فضلك. النادل: بالطبع، المجموع خمسون ريالاً. هل تدفع نقداً أم بالبطاقة؟ الزبون: بالبطاقة. (az-zabūn: al-ḥisāb min faḍlik. an-nādil: bi-ṭ-ṭabʿ, al-majmūʿ khamsūn riyālan. hal tadfaʿ naqdan am bi-l-biṭāqah? az-zabūn: bi-l-biṭāqah.) Question: How is the customer paying, and how much is the total?",
+              "answer": "The customer is paying by card (بالبطاقة / bi-l-biṭāqah), and the total is fifty riyals (خمسون ريالاً / khamsūn riyālan).",
+              "checkPage": 148
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct preposition: نأكل الغداء (...) الساعة الواحدة ظهراً. (naʾkulu al-ghadāʾ (...) as-sāʿah al-wāḥidah ẓuhran) — 'We eat lunch at one o'clock in the afternoon.'",
+              "answer": "في (fī) — 'نأكل الغداء في الساعة الواحدة ظهراً.'",
+              "checkPage": 135
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'The food is delicious, but the bill is expensive.'",
+              "answer": "الطعام لذيذ، لكن الفاتورة غالية. (aṭ-ṭaʿām ladhīdh, lākin al-fātūrah ghāliyah)",
+              "checkPage": 149
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u9-test-1",
+          "pageLabel": "133-150",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "vocabulary translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: الفَطور (al-faṭūr)",
+              "answer": "breakfast",
+              "checkPage": 134
+            },
+            {
+              "n": 2,
+              "type": "vocabulary translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic (with transliteration): 'dinner'",
+              "answer": "العَشاء (al-‘ashā’)",
+              "checkPage": 134
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the sentence: أريدُ أن أطلبَ ______ (urīdu an aṭluba ______) meaning 'I want to order a cup of tea.'",
+              "answer": "كوبَ شاي (kūba shāy)",
+              "checkPage": 140
+            },
+            {
+              "n": 4,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb أَكَلَ (akala, 'to eat') in the present tense (المضارع) for 'هو' (huwa, he) and 'هي' (hiya, she).",
+              "answer": "هو يأكل (huwa ya’kulu) — he eats; هي تأكل (hiya ta’kulu) — she eats",
+              "checkPage": 136
+            },
+            {
+              "n": 5,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb شَرِبَ (shariba, 'to drink') in the present tense for 'أنا' (anā, I) and 'نحن' (naḥnu, we).",
+              "answer": "أنا أشرب (anā ashrabu) — I drink; نحن نشرب (naḥnu nashrabu) — we drink",
+              "checkPage": 136
+            },
+            {
+              "n": 6,
+              "type": "translate short phrase",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (give transliteration too): 'Can I have the menu, please?'",
+              "answer": "هل يمكنني أن أرى قائمةَ الطعام، من فضلك؟ (hal yumkinunī an arā qā’imata aṭ-ṭa‘āmi, min faḍlik?)",
+              "checkPage": 138
+            },
+            {
+              "n": 7,
+              "type": "reading comprehension",
+              "skill": "reading",
+              "prompt": "Read: النادل قال: 'ماذا تريد أن تشرب؟' فقالت الزبونة: 'أريد عصير برتقال، من فضلك.' (an-nādil qāla: 'mādhā turīdu an tashrab?' fa-qālat az-zabūnah: 'urīdu ‘aṣīr burtuqāl, min faḍlik.') Question: What did the customer order to drink?",
+              "answer": "Orange juice (عصير برتقال / ‘aṣīr burtuqāl)",
+              "checkPage": 141
+            },
+            {
+              "n": 8,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and fix the mistake: أنا يأكل الخبز كل صباح (anā ya’kulu al-khubz kulla ṣabāḥ) — 'I eat bread every morning.'",
+              "answer": "أنا آكل الخبز كل صباح (anā ākulu al-khubz kulla ṣabāḥ) — the verb must agree with 'أنا' (I), so it should be آكل (ākulu), not يأكل (ya’kulu).",
+              "checkPage": 136
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: عندما ننتهي من الأكل، نطلب من النادل ______ (‘indamā nantahī min al-akl, naṭlubu min an-nādil ______) meaning 'the bill/check.'",
+              "answer": "الحساب (al-ḥisāb)",
+              "checkPage": 146
+            },
+            {
+              "n": 10,
+              "type": "translate short phrase",
+              "skill": "writing",
+              "prompt": "Translate into English: هل الحساب يشمل الخدمة؟ (hal al-ḥisāb yashmulu al-khidmah?)",
+              "answer": "Does the bill include the service (tip)?",
+              "checkPage": 147
+            },
+            {
+              "n": 11,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In Arabic, write one full sentence asking a waiter for a table for two people. (Give transliteration.)",
+              "answer": "Example: هل يمكن أن نحصل على طاولة لشخصين؟ (hal yumkin an naḥṣula ‘alā ṭāwilah li-shakhṣayn?) — 'Can we get a table for two?'",
+              "checkPage": 135
+            },
+            {
+              "n": 12,
+              "type": "correct the error",
+              "skill": "vocabulary",
+              "prompt": "Find and fix the mistake: الزبون يأكل في المطبخ لأنه لا يجد طاولة. (az-zabūn ya’kulu fī al-maṭbakh li-annahu lā yajidu ṭāwilah) — 'The customer eats in the kitchen because he can't find a table.' (Wrong word for the dining area is used.)",
+              "answer": "الزبون يأكل في المطعم لأنه لا يجد طاولة. (az-zabūn ya’kulu fī al-maṭ‘am ...) — 'restaurant' (المطعم / al-maṭ‘am) is correct, not 'kitchen' (المطبخ / al-maṭbakh).",
+              "checkPage": 133
+            },
+            {
+              "n": 13,
+              "type": "short answer",
+              "skill": "writing",
+              "prompt": "Write a short Arabic sentence (with transliteration) saying you would like to pay by credit card.",
+              "answer": "Example: أريد أن أدفعَ ببطاقة الائتمان (urīdu an adfa‘a bi-biṭāqat al-i’timān) — 'I want to pay with a credit card.'",
+              "checkPage": 148
+            }
+          ]
+        }
+      ]
+    },
+    "u10": {
+      "homework": [
+        {
+          "id": "u10-homework-1",
+          "pageLabel": "151-170",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'This shirt is expensive.' (use قَمِيص for shirt, غَالِي for expensive)",
+              "answer": "هَذَا الْقَمِيصُ غَالِي (haadhaa al-qamiisu ghaalii)",
+              "checkPage": 153
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct comparative form of رخيص (rakhiis, cheap): هَذَا الْحِذَاءُ ____ مِنْ ذَلِكَ الْحِذَاءِ (haadhaa al-hidhaa'u ____ min dhaalika al-hidhaa'i) — 'This shoe is cheaper than that shoe.'",
+              "answer": "أَرْخَص (arkhas)",
+              "checkPage": 158
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb اِشْتَرَى (ishtaraa, 'to buy') in the past tense for 'she' (هِيَ, hiya) and 'they' (هُمْ, hum).",
+              "answer": "هِيَ اِشْتَرَتْ (hiya ishtarat) — she bought; هُمْ اِشْتَرَوْا (hum ishtarau) — they bought",
+              "checkPage": 155
+            },
+            {
+              "n": 4,
+              "type": "short-answer",
+              "skill": "vocabulary",
+              "prompt": "In a clothing store, how would you ask a salesperson in Arabic: 'Do you have this in a bigger size?' (use حَجْم for size, أَكْبَر for bigger)",
+              "answer": "هَلْ لَدَيْكَ هَذَا بِحَجْمٍ أَكْبَر؟ (hal ladayka haadhaa bi-hajmin akbar?)",
+              "checkPage": 162
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the grammatical error in this sentence: هَذَا الْبَيْت أَجْمَل مِن ذَلِك الْبَيْتِ الْكَبِير (haadhaa al-baytu ajmal min dhaalika al-baytu al-kabiir) — 'This house is more beautiful than that big house.'",
+              "answer": "The word after مِن (min) must be in the genitive case (majrur), not nominative: ...مِنْ ذَلِكَ الْبَيْتِ الْكَبِيرِ (min dhaalika al-bayti al-kabiiri) — the final ت needs kasra (بَيْتِ), not damma (بَيْتُ)",
+              "checkPage": 159
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كَمْ سِعْرُ هَذِهِ الْحَقِيبَةِ؟ (kam si'ru haadhihi al-haqiibati?)",
+              "answer": "How much does this bag cost? / What is the price of this bag?",
+              "checkPage": 151
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the appropriate word for 'small' (as in clothing size) to complete: أُرِيدُ حَجْمًا ____ ، هَذَا كَبِيرٌ جِدًّا عَلَيَّ (uriidu hajman ____, haadhaa kabiirun jiddan 'alayya) — 'I want a small size, this is too big for me.'",
+              "answer": "صَغِيرًا (saghiiran)",
+              "checkPage": 162
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write one short sentence in Arabic comparing the price of two items, using أَغْلَى (aghlaa, 'most expensive/more expensive'). For example, compare a watch (سَاعَة, saa'ah) and a ring (خَاتَم, khaatam).",
+              "answer": "Example: السَّاعَةُ أَغْلَى مِنَ الْخَاتَمِ (al-saa'atu aghlaa mina al-khaatami) — 'The watch is more expensive than the ring.'",
+              "checkPage": 158
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u10-test-1",
+          "pageLabel": "151-170",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: هَذَا الْقَمِيصُ رَخِيصٌ وَذَلِكَ غَالٍ (hādhā al-qamīṣu rakhīṣun wa-dhālika ghālin)",
+              "answer": "This shirt is cheap and that one is expensive.",
+              "checkPage": 153
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the comparative form of كَبِير (kabīr, 'big'): هَذَا الْمَقَاسُ ___ مِنْ ذَلِكَ (hādhā al-maqāsu ___ min dhālika) = 'This size is bigger than that one.'",
+              "answer": "أَكْبَرُ (akbaru)",
+              "checkPage": 158
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb اِشْتَرَى (ishtarā, 'to buy') in the past tense for هِيَ (hiya, 'she').",
+              "answer": "اِشْتَرَتْ (ishtarat)",
+              "checkPage": 155
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb بَاعَ (bāʿa, 'to sell') in the present tense for نَحْنُ (naḥnu, 'we').",
+              "answer": "نَبِيعُ (nabīʿu)",
+              "checkPage": 156
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic: 'What is the price of this dress?'",
+              "answer": "مَا ثَمَنُ هَذَا الْفُسْتَانِ؟ (mā thamanu hādhā al-fustāni?)",
+              "checkPage": 152
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct comparative: هَذَا الْحِذَاءُ ___ (jayyid, 'good') مِنَ الآخَرِ (min al-ākhar) = 'This shoe is better than the other.'",
+              "answer": "أَجْوَدُ (ajwadu)",
+              "checkPage": 159
+            },
+            {
+              "n": 7,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error: أَنَا يَشْتَرِي قَمِيصًا جَدِيدًا (anā yashtarī qamīṣan jadīdan) — intended meaning: 'I am buying a new shirt.'",
+              "answer": "أَنَا أَشْتَرِي قَمِيصًا جَدِيدًا (anā ashtarī qamīṣan jadīdan) — the verb must agree with 'I' (أَنَا), so it should be أَشْتَرِي (ashtarī), not يَشْتَرِي (yashtarī).",
+              "checkPage": 155
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "vocabulary",
+              "prompt": "In Arabic, write the word for 'size' (as in clothing size) and give its plural form.",
+              "answer": "مَقَاس (maqās), plural: مَقَاسَات (maqāsāt)",
+              "checkPage": 158
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic: 'Do you have a smaller size?' (asking a male shopkeeper)",
+              "answer": "هَلْ عِنْدَكَ مَقَاسٌ أَصْغَرُ؟ (hal ʿindaka maqāsun aṣgharu?)",
+              "checkPage": 158
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the sentence with the correct form of the verb لَبِسَ (labisa, 'to wear') for أَنْتِ (anti, 'you', feminine singular) in the present tense: أَنْتِ ___ فُسْتَانًا جَمِيلًا (anti ___ fustānan jamīlan) = 'You are wearing a beautiful dress.'",
+              "answer": "تَلْبَسِينَ (talbasīna)",
+              "checkPage": 160
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "A shopkeeper says: هَذَا أَرْخَصُ مِنْ ذَلِكَ وَلَكِنَّهُ أَقَلُّ جَوْدَةً (hādhā arkhaṣu min dhālika wa-lākinnahu aqallu jawdatan). What is he telling the customer about the two items, in your own English words?",
+              "answer": "He is saying this item is cheaper than that one, but it is of lower quality.",
+              "checkPage": 159
+            },
+            {
+              "n": 12,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate to English: كُنْتُ أَبِيعُ الْمَلَابِسَ فِي هَذَا السُّوقِ (kuntu abīʿu al-malābisa fī hādhā as-sūqi)",
+              "answer": "I used to sell clothes in this market.",
+              "checkPage": 156
+            }
+          ]
+        }
+      ]
+    },
+    "u11": {
+      "homework": [
+        {
+          "id": "u11-homework-1",
+          "pageLabel": "171-192",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كَمِ السَّاعَةُ الآن؟ (kam is-sā‘atu al-ān?)",
+              "answer": "What time is it now?",
+              "checkPage": 173
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct Arabic word for 'half' to say 'It's 3:30' — السَّاعَةُ الثَّالِثَةُ و____ (as-sā‘atu ath-thālithatu wa____)",
+              "answer": "نِصْف (niṣf)",
+              "checkPage": 174
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb زَارَ (zāra, 'to visit') in the present tense (يَزُورُ - yazūru pattern) for 'we': نَحْنُ ____ المَسْجِدَ (naḥnu ____ al-masjida) 'We visit the mosque'",
+              "answer": "نَزُورُ (nazūru)",
+              "checkPage": 180
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'The museum is closed on Friday.'",
+              "answer": "المَتْحَفُ مُغْلَقٌ يَوْمَ الجُمُعَةِ (al-mat-ḥafu mughlaqun yawma al-jum‘ah)",
+              "checkPage": 178
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the grammatical error in this sentence: أَنَا يَذْهَبُ إلى السِّينَما (anā yadh-habu ilā as-sīnamā) — intended meaning: 'I go to the cinema.'",
+              "answer": "أَنَا أَذْهَبُ إلى السِّينَما (anā adh-habu ilā as-sīnamā) — the verb must match the first person 'I' (أَذْهَبُ), not the third person masculine (يَذْهَبُ).",
+              "checkPage": 182
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In Arabic, write one full sentence answering: مَتَى تَذْهَبُ إلى المَسْجِدِ؟ (matā tadh-habu ilā al-masjid? 'When do you go to the mosque?') Use a time expression like يَوْمَ الجُمُعَةِ (yawm al-jum‘ah, 'on Friday') or فِي الصَّباحِ (fī aṣ-ṣabāḥ, 'in the morning').",
+              "answer": "Any grammatically correct sentence such as: أَذْهَبُ إلى المَسْجِدِ يَوْمَ الجُمُعَةِ (adh-habu ilā al-masjidi yawma al-jum‘ah) — 'I go to the mosque on Friday.'",
+              "checkPage": 181
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the Arabic word for 'pilgrimage/Hajj': يَذْهَبُ المُسْلِمُونَ إلى مَكَّةَ لِأَداءِ ____ (yadh-habu al-muslimūna ilā makkata li-adā’i ____) 'Muslims go to Mecca to perform the ____.'",
+              "answer": "الحَجّ (al-ḥajj)",
+              "checkPage": 185
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'We are watching a film at eight o'clock in the evening.'",
+              "answer": "نُشاهِدُ فِيلْمًا فِي السَّاعَةِ الثَّامِنَةِ مَساءً (nushāhidu fīlman fī as-sā‘ati ath-thāminati masā’an)",
+              "checkPage": 176
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u11-test-1",
+          "pageLabel": "171-192",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كَمِ السَّاعَةُ؟ (kam is-sāʿah?)",
+              "answer": "What time is it?",
+              "checkPage": 172
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'It is three o'clock.'",
+              "answer": "السَّاعَةُ الثَّالِثَةُ (is-sāʿah ath-thālithah)",
+              "checkPage": 173
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct word for 'half': السَّاعَةُ الخَامِسَةُ وَ___ (is-sāʿah al-khāmisah wa___) = 'It is half past five.'",
+              "answer": "نِصْف (niṣf)",
+              "checkPage": 174
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank: أُحِبُّ زِيَارَةَ ___ لِأَنَّ فِيهِ آثَارًا قَدِيمَةً (uḥibbu ziyārata ___ li'anna fīhi āthāran qadīmah) — 'I like visiting the ___ because it has ancient artifacts.'",
+              "answer": "المَتْحَف (al-matḥaf) - the museum",
+              "checkPage": 178
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb ذَهَبَ (dhahaba, 'to go') in the past tense for 'we': نَحْنُ ___ إِلَى السِّينَما (naḥnu ___ ilā s-sīnamā) — 'We went to the cinema.'",
+              "answer": "ذَهَبْنَا (dhahabnā)",
+              "checkPage": 180
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence: هِيَ يَذْهَبُ إِلَى المَسْجِدِ كُلَّ يَوْمٍ جُمْعَةٍ (hiya yadhhabu ilā l-masjidi kulla yawmi jumʿah) — 'She goes to the mosque every Friday.'",
+              "answer": "هِيَ تَذْهَبُ إِلَى المَسْجِدِ كُلَّ يَوْمِ جُمْعَةٍ (hiya tadhhabu ilā l-masjidi kulla yawmi jumʿah) — verb must agree with feminine subject",
+              "checkPage": 183
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In Arabic, name one thing a Muslim pilgrim does during الحَجّ (al-ḥajj, 'the Hajj') — write a short phrase in Arabic with transliteration.",
+              "answer": "Example: الطَّوَافُ حَوْلَ الكَعْبَةِ (aṭ-ṭawāf ḥawla l-kaʿbah) — 'circling the Kaaba'",
+              "checkPage": 186
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'The film starts at seven o'clock.'",
+              "answer": "يَبْدَأُ الفِيلْمُ السَّاعَةَ السَّابِعَةَ (yabda'u l-fīlmu s-sāʿata s-sābiʿah)",
+              "checkPage": 181
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct preposition: سَنَذْهَبُ ___ الكَنِيسَةِ يَوْمَ الأَحَدِ (sanadhhabu ___ l-kanīsati yawma l-aḥad) — 'We will go to the church on Sunday.'",
+              "answer": "إِلَى (ilā)",
+              "checkPage": 184
+            },
+            {
+              "n": 10,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb زَارَ (zāra, 'to visit') in the present tense for 'you (masc. singular)': أَنْتَ ___ المَتْحَفَ غَدًا (anta ___ l-matḥafa ghadan) — 'You will visit the museum tomorrow.'",
+              "answer": "تَزُورُ (tazūru)",
+              "checkPage": 179
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write a short sentence in Arabic (with transliteration) saying what time your favorite movie usually starts, using a specific time.",
+              "answer": "Example: يَبْدَأُ فِيلْمِي المُفَضَّلُ السَّاعَةَ الثَّامِنَةَ (yabda'u fīlmī l-mufaḍḍalu s-sāʿata th-thāminah) — 'My favorite movie starts at eight o'clock.'",
+              "checkPage": 175
+            },
+            {
+              "n": 12,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error: نَحْنُ زُرْتُ الحَرَمَ الشَّرِيفَ فِي مَكَّةَ (naḥnu zurtu l-ḥarama sh-sharīfa fī makkah) — 'We visited the Sacred Mosque in Mecca.'",
+              "answer": "نَحْنُ زُرْنَا الحَرَمَ الشَّرِيفَ فِي مَكَّةَ (naḥnu zurnā l-ḥarama sh-sharīfa fī makkah) — verb must agree with 'we' (نَحْنُ)",
+              "checkPage": 187
+            }
+          ]
+        }
+      ]
+    },
+    "u12": {
+      "homework": [
+        {
+          "id": "u12-homework-1",
+          "pageLabel": "193-206",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct word: أنا ___ في شركة كبيرة (ana ___ fī sharikatin kabīrah) — 'I work in a big company.' (use the correct form of 'to work')",
+              "answer": "أعملُ (a'malu) — 'أنا أعملُ في شركة كبيرة' (ana a'malu fī sharikatin kabīrah)",
+              "checkPage": 195
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb اتصل (ittaṣala — 'to call/contact') in the present tense for أنتِ (anti — 'you', feminine singular).",
+              "answer": "تتصلينَ (tattaṣilīna) — 'أنتِ تتصلينَ' (anti tattaṣilīna) — 'you (f.) call'",
+              "checkPage": 198
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'Please call me on my cell phone.'",
+              "answer": "من فضلك، اتصل بي على هاتفي المحمول (min faḍlik, ittaṣil bī 'alā hātifī al-maḥmūl)",
+              "checkPage": 200
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: هل لديك بريد إلكتروني؟ (hal ladayka barīd iliktrōnī?)",
+              "answer": "'Do you have an email (address)?'",
+              "checkPage": 197
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and fix the mistake: المديرة ذهبَ إلى المكتب (al-mudīrah dhahaba ilā al-maktab) — 'The (female) manager went to the office.'",
+              "answer": "المديرة ذهبَتْ إلى المكتب (al-mudīrah dhahabat ilā al-maktab) — the verb must agree in gender with the feminine subject 'المديرة'",
+              "checkPage": 194
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "What is the Arabic word for 'computer'? Give the word and its transliteration.",
+              "answer": "حاسوب (ḥāsūb) — also commonly كمبيوتر (kombyūtar)",
+              "checkPage": 202
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: أرسلتُ لكَ ___ عبر البريد الإلكتروني (arsaltu laka ___ 'abra al-barīd al-iliktrōnī) — 'I sent you a message via email.'",
+              "answer": "رسالة (risālah) — 'أرسلتُ لكَ رسالة عبر البريد الإلكتروني'",
+              "checkPage": 197
+            },
+            {
+              "n": 8,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يعملُ (ya'malu — 'to work') in the present tense for نحن (naḥnu — 'we').",
+              "answer": "نعملُ (na'malu) — 'نحن نعملُ' (naḥnu na'malu) — 'we work'",
+              "checkPage": 195
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u12-test-1",
+          "pageLabel": "193-206",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic: \"office\" (as in workplace)",
+              "answer": "مكتب (maktab)",
+              "checkPage": 193
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic: \"telephone number\"",
+              "answer": "رقم الهاتف (raqam al-hātif)",
+              "checkPage": 194
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: أنا أعمل في ___ كبيرة (ʾanā aʿmalu fī ___ kabīrah) — \"I work at a big company.\"",
+              "answer": "شركة (sharikah)",
+              "checkPage": 195
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the sentence with the correct preposition: أتصل ___ الهاتف بصديقي (ʾattaṣilu ___ al-hātif bi-ṣadīqī) — \"I call my friend by phone.\"",
+              "answer": "عن طريق / بواسطة الهاتف — but simplest: أتصل بصديقي عبر الهاتف — accepted answer: عبر (ʿabra) or بـ (bi-) — Standard idiom: أتصل بـ (attaṣilu bi-) + person, so correct fill is بصديقي already uses bi-; the blank should be omitted — Accept: بـ (bi-)",
+              "checkPage": 196
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb أرسل (ʾarsala, \"to send\") in the present tense (المضارع) for هي (hiya, \"she\"): تُرسل رسالة إلكترونية (___ risālah ʾiliktrūniyyah) — \"She sends an email.\"",
+              "answer": "تُرسل (tursilu)",
+              "checkPage": 197
+            },
+            {
+              "n": 6,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate طبع (ṭabaʿa, \"to print\") in the present tense for نحن (naḥnu, \"we\"): ___ الأوراق الآن (___ al-ʾawrāq al-ʾān) — \"We are printing the papers now.\"",
+              "answer": "نطبع (naṭbaʿu)",
+              "checkPage": 198
+            },
+            {
+              "n": 7,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error: أنا يتكلم في الهاتف مع المدير (ʾanā yatakallamu fī al-hātif maʿa al-mudīr) — \"I am talking on the phone with the manager.\"",
+              "answer": "أنا أتكلم في الهاتف مع المدير (ʾanā ʾatakallamu fī al-hātif maʿa al-mudīr) — the verb must agree with أنا, so أتكلم not يتكلم",
+              "checkPage": 199
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: البريد الإلكتروني (al-barīd al-ʾiliktrūnī)",
+              "answer": "email / electronic mail",
+              "checkPage": 200
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "In Arabic, what word means \"computer\"? Give the word and its transliteration.",
+              "answer": "حاسوب (ḥāsūb) or كمبيوتر (kombyūtar)",
+              "checkPage": 201
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: هل يمكنني ترك ___؟ (hal yumkinunī tark ___?) — \"May I leave a message?\"",
+              "answer": "رسالة (risālah)",
+              "checkPage": 202
+            },
+            {
+              "n": 11,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate to Arabic: \"The internet connection is slow today.\"",
+              "answer": "الاتصال بالإنترنت بطيء اليوم (al-ittiṣāl bi-al-ʾintarnit baṭīʾ al-yawm)",
+              "checkPage": 203
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Read: اجتماع العمل سيبدأ الساعة العاشرة صباحًا في قاعة المؤتمرات (ijtimāʿ al-ʿamal sa-yabdaʾu al-sāʿah al-ʿāshirah ṣabāḥan fī qāʿat al-muʾtamarāt). What time does the meeting start, and where?",
+              "answer": "At 10:00 AM, in the conference room/hall",
+              "checkPage": 205
+            }
+          ]
+        }
+      ]
+    },
+    "u13": {
+      "homework": [
+        {
+          "id": "u13-homework-1",
+          "pageLabel": "207-222",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كُرَةُ القَدَم (kurat al-qadam)",
+              "answer": "Soccer/football",
+              "checkPage": 208
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (with transliteration): 'I like to swim in the sea.'",
+              "answer": "أُحِبُّ أَنْ أَسْبَحَ فِي البَحْرِ (uḥibbu an asbaḥa fī al-baḥr)",
+              "checkPage": 210
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct present-tense verb form: أَنَا ___ الْمُوسِيقَى كُلَّ يَوْمٍ (I listen to music every day) — أَنَا ___ الْمُوسِيقَى (anā ___ al-mūsīqā)",
+              "answer": "أَسْتَمِعُ إِلَى (astamiʿu ilā)",
+              "checkPage": 214
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb لَعِبَ (laʿiba, 'to play') in the present tense for هُوَ (huwa, 'he') and هِيَ (hiya, 'she').",
+              "answer": "هُوَ يَلْعَبُ (huwa yalʿabu); هِيَ تَلْعَبُ (hiya talʿabu)",
+              "checkPage": 209
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the grammatical error: أَنَا يَذْهَبُ إِلَى الجَبَلِ فِي الصَّيْفِ (anā yadhhabu ilā al-jabal fī al-ṣayf) — 'I go to the mountain in summer.'",
+              "answer": "Should be أَنَا أَذْهَبُ إِلَى الجَبَلِ فِي الصَّيْفِ (anā adhhabu ilā al-jabal fī al-ṣayf) — the verb must agree with 'I' (أَذْهَبُ), not the 'he' form (يَذْهَبُ).",
+              "checkPage": 211
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in Arabic (one short sentence) using transliteration: مَاذَا تُفَضِّلُ، الجَبَلُ أَمِ البَحْرُ؟ (mādhā tufaḍḍilu, al-jabal am al-baḥr? — 'What do you prefer, the mountain or the sea?')",
+              "answer": "Any grammatically correct sentence such as: أُفَضِّلُ البَحْرَ (ufaḍḍilu al-baḥr) — 'I prefer the sea.'",
+              "checkPage": 216
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct Arabic word for 'guitar': هُوَ يَعْزِفُ عَلَى الـ___ (huwa yaʿzifu ʿalā al-___)",
+              "answer": "جِيتَار (jītār)",
+              "checkPage": 215
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (with transliteration): 'We are going hiking in the forest this weekend.'",
+              "answer": "سَنَقُومُ بِرِحْلَةٍ إِلَى الغَابَةِ فِي عُطْلَةِ نِهَايَةِ الأُسْبُوعِ (sanaqūmu bi-riḥlatin ilā al-ghābati fī ʿuṭlati nihāyati al-usbūʿ)",
+              "checkPage": 219
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u13-test-1",
+          "pageLabel": "207-222",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: كُرَة القَدَم (kurat al-qadam)",
+              "answer": "soccer/football",
+              "checkPage": 208
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'swimming pool'",
+              "answer": "حَمَّام سِباحة (hammam sibaha)",
+              "checkPage": 210
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: أنا أُحِبُّ أن ______ (asma' al-musiqa) في المساء. (I like to listen to music in the evening.)",
+              "answer": "أَسْمَعَ الموسيقى (asma' al-musiqa)",
+              "checkPage": 215
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَلْعَب (yal'ab, 'to play') in the present tense for 'هي' (hiya, she).",
+              "answer": "تَلْعَب (tal'ab)",
+              "checkPage": 209
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَسْبَح (yasbah, 'to swim') in the present tense for 'نحن' (nahnu, we).",
+              "answer": "نَسْبَح (nasbah)",
+              "checkPage": 210
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error: أنا يلعب كرة السلة كل يوم. (I play basketball every day.)",
+              "answer": "أنا أَلْعَب كرة السلة كل يوم. (ana al'ab kurat as-salla kulla yawm) — verb must agree with 'أنا' (ana) subject, using أَلْعَب not يلعب.",
+              "checkPage": 209
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'mountain'",
+              "answer": "جَبَل (jabal)",
+              "checkPage": 218
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: الغِناء (al-ghina')",
+              "answer": "singing",
+              "checkPage": 214
+            },
+            {
+              "n": 9,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in Arabic with a full sentence: ماذا تُحِبُّ أن تفعل في عُطلة نهاية الأسبوع؟ (What do you like to do on the weekend?) — Use at least one recreation vocabulary word.",
+              "answer": "Answers vary; example: أنا أُحِبُّ أن أَمْشِيَ في الجَبَل. (ana uhibbu an amshiya fi al-jabal) — 'I like to hike in the mountain.'",
+              "checkPage": 220
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct present-tense verb form: هم ______ (يعزف - ya'zif, 'to play an instrument') الجيتار كل مساء. (They play guitar every evening.)",
+              "answer": "يَعْزِفون (ya'zifun)",
+              "checkPage": 216
+            },
+            {
+              "n": 11,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: نَتَنَزَّه في الغابة (natanazzah fi al-ghaba)",
+              "answer": "We take a walk/stroll in the forest",
+              "checkPage": 219
+            },
+            {
+              "n": 12,
+              "type": "correct-the-error",
+              "skill": "vocabulary",
+              "prompt": "Correct the error in this sentence: أنا أَسْمَع الموسيقى بِعَيْني. (I listen to music with my eyes.)",
+              "answer": "أنا أَسْمَع الموسيقى بِأُذُني. (ana asma' al-musiqa bi-udhuni) — should be 'ear' (أُذُن, udhun) not 'eye' (عَيْن, 'ayn) since listening uses ears.",
+              "checkPage": 215
+            }
+          ]
+        }
+      ]
+    },
+    "u15": {
+      "homework": [
+        {
+          "id": "u15-homework-1",
+          "pageLabel": "233-242",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct word: أريد أن أُبَدِّلَ مئة دولار إلى ______ (I want to exchange one hundred dollars into ______, meaning 'dinars').",
+              "answer": "دنانير (danānīr)",
+              "checkPage": 234
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: سعر الصرف (si‘r aṣ-ṣarf)",
+              "answer": "exchange rate",
+              "checkPage": 235
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb بَدَّلَ (baddala, 'to exchange/change') in the past tense for أنا (anā, 'I') and نحن (naḥnu, 'we').",
+              "answer": "أنا بَدَّلْتُ (anā baddaltu) — I exchanged; نحن بَدَّلْنَا (naḥnu baddalnā) — we exchanged",
+              "checkPage": 236
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'Where is the nearest bank?'",
+              "answer": "أين أقرب بنك؟ (ayna aqrabu bank?)",
+              "checkPage": 237
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: أين يمكنني أن أصرف شيكاً سياحياً؟ (ayna yumkinunī an aṣrifa shīkan siyāḥiyyan?)",
+              "answer": "Where can I cash a traveler's check?",
+              "checkPage": 238
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the grammatical error: البنك مفتوحة كل يوم ما عدا الجمعة (al-bank maftūḥah kull yawm mā ‘adā al-jum‘ah) — 'The bank is open every day except Friday.'",
+              "answer": "البنك مفتوحٌ كل يوم ما عدا الجمعة (al-bank maftūḥ...) — بنك is masculine, so the adjective must be مفتوح, not مفتوحة.",
+              "checkPage": 233
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "In Arabic, write one full sentence asking a bank clerk what documents (وثائق, wathā’iq) you need to open an account (حساب, ḥisāb).",
+              "answer": "Sample answer: ما هي الوثائق التي أحتاجها لفتح حساب؟ (mā hiya al-wathā’iq allatī aḥtājuhā li-fatḥ ḥisāb?)",
+              "checkPage": 240
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct word: هل يمكنني أن أستخدم ______ لسحب النقود من الآلة؟ (Can I use my ______ to withdraw cash from the machine? — meaning 'card')",
+              "answer": "بطاقتي (biṭāqatī)",
+              "checkPage": 241
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u15-test-1",
+          "pageLabel": "233-242",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "أريد أن أُغَيِّرَ الدولارات إلى ...... (I want to exchange dollars into ______ - fill in the Arabic word for 'currency').",
+              "answer": "عُملة (‘umla) - 'currency'. Full sentence: أريد أن أغيّر الدولارات إلى عملة أخرى (I want to exchange the dollars for another currency).",
+              "checkPage": 234
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: أين أقرب صرّاف آلي؟ (Ayna aqrab ṣarrāf ālī?)",
+              "answer": "Where is the nearest ATM?",
+              "checkPage": 236
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'I would like to open a bank account.'",
+              "answer": "أريد أن أفتح حسابًا في البنك (Urīdu an aftaḥa ḥisāban fī al-bank).",
+              "checkPage": 238
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct preposition: صرفتُ نقودي ...... دولارات (Ṣaraftu nuqūdī ______ dūlārāt) - 'I exchanged my money into dollars.'",
+              "answer": "إلى (ilā) - 'into/to'. Full sentence: صرفتُ نقودي إلى دولارات.",
+              "checkPage": 234
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb صَرَفَ (ṣarafa, 'to exchange/spend') in the present tense (المضارع) for: هو (huwa), هي (hiya), نحن (naḥnu).",
+              "answer": "هو يَصرِف (huwa yaṣrifu) - he exchanges; هي تَصرِف (hiya taṣrifu) - she exchanges; نحن نَصرِف (naḥnu naṣrifu) - we exchange.",
+              "checkPage": 235
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the error: أنا يصرف نقود في البنك (Anā yaṣrifu nuqūd fī al-bank) - intended meaning: 'I exchange money at the bank.'",
+              "answer": "The verb should agree with the first-person subject: أنا أَصرِف نقودًا في البنك (Anā aṣrifu nuqūdan fī al-bank).",
+              "checkPage": 235
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "You see a sign at a currency exchange counter: سعر الصرف اليوم: دولار واحد يساوي عشرة جنيهات (Si‘r al-ṣarf al-yawm: dūlār wāḥid yusāwī ‘asharat junayhāt). Question: how many local pounds does one dollar equal, according to this sign?",
+              "answer": "Ten pounds (عشرة جنيهات, ‘asharat junayhāt).",
+              "checkPage": 237
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the Arabic word for 'credit card': هل تقبلون الدفع بـ ...... ؟ (Hal taqbalūna al-daf‘a bi- ______ ? - 'Do you accept payment by credit card?')",
+              "answer": "بطاقة الائتمان (biṭāqat al-i’timān) - 'credit card'.",
+              "checkPage": 239
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'Can I pay in cash?'",
+              "answer": "هل يمكنني الدفع نقدًا؟ (Hal yumkinunī al-daf‘u naqdan?)",
+              "checkPage": 239
+            },
+            {
+              "n": 10,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write one full Arabic sentence (with transliteration) asking a bank teller what the exchange rate is today.",
+              "answer": "Example: ما هو سعر الصرف اليوم؟ (Mā huwa si‘r al-ṣarf al-yawm? - 'What is the exchange rate today?')",
+              "checkPage": 237
+            },
+            {
+              "n": 11,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the gender agreement error: البنك مفتوحة يوم السبت (Al-bank maftūḥa yawm al-sabt) - intended: 'The bank is open on Saturday.'",
+              "answer": "البنك is masculine, so it should be: البنك مفتوح يوم السبت (Al-bank maftūḥ yawm al-sabt).",
+              "checkPage": 233
+            },
+            {
+              "n": 12,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: وقّعتُ الـ ...... قبل أن أستلم النقود (Waqqa‘tu al- ______ qabla an astalima al-nuqūd) - 'I signed the ______ before I received the money.' (fill with 'check' in Arabic)",
+              "answer": "شيك (shīk) - 'check'. Full sentence: وقّعتُ الشيك قبل أن أستلم النقود.",
+              "checkPage": 240
+            }
+          ]
+        }
+      ]
+    },
+    "u14": {
+      "homework": [
+        {
+          "id": "u14-homework-1",
+          "pageLabel": "223-232",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct form of يُخَطِّط (yukhaTTiT, 'to plan'): نَحنُ ___ لِرِحلةٍ إلى مِصر الأسبوعَ القادِم (naHnu ___ li-riHlatin ila miSr al-usbū'a al-qādim) — 'We are planning a trip to Egypt next week.'",
+              "answer": "نُخَطِّط (nukhaTTiT) — نَحنُ نُخَطِّط لِرِحلةٍ إلى مِصر الأسبوعَ القادِم",
+              "checkPage": 224
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate يَحجُز (yaHjiz, 'to book/reserve') in the present tense for هِي (hiya, 'she'). Write the full sentence: هِي ___ فُندُقًا في القاهِرة (hiya ___ funduqan fī al-qāhira) — 'She books/is booking a hotel in Cairo.'",
+              "answer": "تَحجُز (taHjiz) — هِي تَحجُز فُندُقًا في القاهِرة",
+              "checkPage": 225
+            },
+            {
+              "n": 3,
+              "type": "translate a short phrase",
+              "skill": "reading",
+              "prompt": "Translate into English: هَل حَجَزتَ الفُندُق وتَذكِرة الطائِرة؟ (hal Hajazta al-funduq wa-tadhkirat aT-Tā'ira?)",
+              "answer": "Did you book the hotel and the plane ticket?",
+              "checkPage": 226
+            },
+            {
+              "n": 4,
+              "type": "translate a short phrase",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'I need a passport and a ticket before the trip.'",
+              "answer": "أحتاجُ إلى جَوازِ سَفَرٍ وتَذكِرةٍ قَبلَ الرِحلة (aHtāju ilā jawāzi safarin wa-tadhkiratin qabla ar-riHla)",
+              "checkPage": 227
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and fix the grammatical error: أنا سَوفَ يُسافِر غَدًا إلى بَيروت (anā sawfa yusāfir ghadan ilā beirūt) — meant to say 'I will travel tomorrow to Beirut.'",
+              "answer": "أنا سَوفَ أُسافِرُ غَدًا إلى بَيروت (anā sawfa usāfiru ghadan ilā beirūt) — the verb must match the first-person subject 'أنا' (anā), so يُسافِر becomes أُسافِر.",
+              "checkPage": 228
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "In Arabic, name three items you should pack in your حَقيبة السَفَر (Haqibat as-safar, 'suitcase') before a trip.",
+              "answer": "Any three reasonable travel items, e.g.: جَوازُ سَفَر (jawāzu safar, passport)، مَلابِس (malābis, clothes)، تَذكِرة (tadhkira, ticket)، فُرشاةُ أسنان (furshātu asnān, toothbrush)",
+              "checkPage": 229
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete with the correct verb: يَجِبُ أن ___ جَوازَ السَفَرِ قَبلَ الرِحلة (yajibu an ___ jawāza as-safari qabla ar-riHla) — 'You must renew your passport before the trip.' (verb: يُجَدِّد, yujaddid, 'to renew')",
+              "answer": "تُجَدِّدَ (tujaddida) — يَجِبُ أن تُجَدِّدَ جَوازَ السَفَرِ قَبلَ الرِحلة",
+              "checkPage": 230
+            },
+            {
+              "n": 8,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate يُخَطِّط (yukhaTTiT, 'to plan') in the present tense for هُم (hum, 'they'). Write the full sentence: هُم ___ لِرِحلةٍ طَويلة (hum ___ li-riHlatin Tawīla) — 'They are planning a long trip.'",
+              "answer": "يُخَطِّطون (yukhaTTiTūn) — هُم يُخَطِّطون لِرِحلةٍ طَويلة",
+              "checkPage": 231
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u14-test-1",
+          "pageLabel": "223-232",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "vocabulary",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: الحقيبة (al-ḥaqībah)",
+              "answer": "the suitcase/bag",
+              "checkPage": 224
+            },
+            {
+              "n": 2,
+              "type": "vocabulary",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic (with transliteration): 'passport'",
+              "answer": "جواز السفر (jawāz as-safar)",
+              "checkPage": 225
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct preposition: سَأُسافِرُ ___ مِصْرَ الأُسْبوعَ القادِمَ (sa-usāfiru ___ Miṣra al-usbūʿa al-qādima) 'I will travel to Egypt next week.'",
+              "answer": "إلى (ilā)",
+              "checkPage": 226
+            },
+            {
+              "n": 4,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb حَجَزَ (ḥajaza, 'to book/reserve') in the present tense (يَحْجِزُ / yaḥjizu) for 'we': نَحْنُ ___ (naḥnu ___) الفُنْدُقَ (al-funduqa)",
+              "answer": "نَحْجِزُ (naḥjizu)",
+              "checkPage": 227
+            },
+            {
+              "n": 5,
+              "type": "translate a short phrase",
+              "skill": "reading",
+              "prompt": "Translate to English: أَحْتاجُ إلى تَذْكِرَةِ طائِرَةٍ (aḥtāju ilā tadhkirati ṭāʾirah)",
+              "answer": "I need an airplane ticket.",
+              "checkPage": 225
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error: أَنا سَوْفَ يَذْهَبُ إلى المَطار (anā sawfa yadhhabu ilā al-maṭār) 'I will go to the airport.'",
+              "answer": "أَنا سَوْفَ أَذْهَبُ إلى المَطار (anā sawfa adhhabu ilā al-maṭār) — the verb must agree with 'I' (أَذْهَبُ / adhhabu), not the 'he' form (يَذْهَبُ)",
+              "checkPage": 228
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: قَبْلَ السَّفَرِ، يَجِبُ أَنْ أُحَضِّرَ ___ (qabla as-safar, yajibu an uḥaḍḍira ___) 'Before the trip, I must prepare ___' (use the word for 'the luggage/bags')",
+              "answer": "الحَقائِب (al-ḥaqāʾib)",
+              "checkPage": 224
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "writing",
+              "prompt": "In Arabic, write one full sentence saying you need to reserve a hotel room. Use حَجَزَ (ḥajaza) or a form of it.",
+              "answer": "Sample: أَحْتاجُ أَنْ أَحْجِزَ غُرْفَةً فِي الفُنْدُقِ (aḥtāju an aḥjiza ghurfatan fī al-funduqi) 'I need to reserve a room in the hotel.'",
+              "checkPage": 227
+            },
+            {
+              "n": 9,
+              "type": "translate a short phrase",
+              "skill": "writing",
+              "prompt": "Translate to Arabic (with transliteration): 'When does the plane leave?'",
+              "answer": "مَتى تُقْلِعُ الطائِرَةُ؟ (matā tuqliʿu aṭ-ṭāʾirah?)",
+              "checkPage": 229
+            },
+            {
+              "n": 10,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سافَرَ (sāfara, 'to travel') in the past tense for 'they' (masculine plural): هُمْ ___ (hum ___) إلى لُبْنانَ (ilā Lubnān)",
+              "answer": "سافَروا (sāfarū)",
+              "checkPage": 226
+            },
+            {
+              "n": 11,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct question word: ___ سَتُسافِرُ؟ (___ satusāfiru?) 'When will you (m.) travel?'",
+              "answer": "مَتى (matā)",
+              "checkPage": 229
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Read and answer in English: تَحْتاجُ سارَة إلى تَأشيرَةٍ لِلسَّفَرِ إلى الهِنْد، لِذا ذَهَبَتْ إلى السِّفارَةِ (taḥtāju Sārah ilā taʾshiratin lis-safar ilā al-Hind, lidhā dhahabat ilā as-sifārah). Why did Sarah go to the embassy?",
+              "answer": "Because she needs a visa to travel to India.",
+              "checkPage": 230
+            }
+          ]
+        }
+      ]
+    },
+    "u16": {
+      "homework": [
+        {
+          "id": "u16-homework-1",
+          "pageLabel": "243-254",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: المطار (al-maṭār)",
+              "answer": "the airport",
+              "checkPage": 244
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (with transliteration): 'train station'",
+              "answer": "محطة القطار (maḥaṭṭat al-qiṭār)",
+              "checkPage": 246
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct preposition: أنا أسافر ___ الطائرة إلى القاهرة (anā usāfir ___ aṭ-ṭā'ira ilā al-Qāhira) — 'I travel by plane to Cairo.'",
+              "answer": "بـ (bi-) → أسافر بالطائرة (usāfir bi-ṭ-ṭā'ira)",
+              "checkPage": 247
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سافر (sāfara, 'to travel') in the present tense (يفعل form) for هي (hiya, 'she').",
+              "answer": "تُسَافِر (tusāfir) — 'she travels'",
+              "checkPage": 248
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb وصل (waṣala, 'to arrive') in the past tense for نحن (naḥnu, 'we').",
+              "answer": "وَصَلْنَا (waṣalnā) — 'we arrived'",
+              "checkPage": 249
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the mistake: القطار يصل إلى محطة في الساعة خمسة (al-qiṭār yaṣil ilā maḥaṭṭa fī as-sā‘a khamsa) — meant to say 'The train arrives at the station at five o'clock.'",
+              "answer": "Missing definite article: should be إلى المحطة (ilā al-maḥaṭṭa) — 'to the station', since 'station' here refers to a specific, known station.",
+              "checkPage": 250
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Answer in Arabic (one short sentence) with transliteration: أين تشتري تذكرة القطار؟ (Ayna tashtarī tadhkarat al-qiṭār? — 'Where do you buy a train ticket?')",
+              "answer": "أشتري تذكرة القطار في المحطة (Ashtarī tadhkarat al-qiṭār fī al-maḥaṭṭa) — 'I buy the train ticket at the station.'",
+              "checkPage": 251
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (with transliteration): 'The taxi will take us to the airport tomorrow.'",
+              "answer": "التاكسي سيأخذنا إلى المطار غدًا (at-tāksī sa-ya'khudhunā ilā al-maṭār ghadan)",
+              "checkPage": 253
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u16-test-1",
+          "pageLabel": "243-254",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: مطار (maTaar)",
+              "answer": "Airport",
+              "checkPage": 244
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (with transliteration): 'train station'",
+              "answer": "محطة القطار (maHaTTat al-qiTaar)",
+              "checkPage": 246
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: أنا أسافر بـ ____ (ana usaafir bi-____) meaning 'I travel by plane.' Fill in the blank with the correct word for 'plane'.",
+              "answer": "الطائرة (aT-Taa'ira)",
+              "checkPage": 244
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سافر (saafara, 'to travel') in the past tense for 'he' (huwa) and 'they' (masc. plural, hum).",
+              "answer": "هو سافرَ (huwa saafara) — 'he traveled'; هم سافروا (hum saafaruu) — 'they traveled'",
+              "checkPage": 247
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence: أنا يذهب إلى المحطة بالسيارة (ana yadh-hab ilaa al-maHaTTa bis-sayyaara) — intended meaning: 'I go to the station by car.'",
+              "answer": "أنا أذهب إلى المحطة بالسيارة (ana adh-hab ilaa al-maHaTTa bis-sayyaara) — the verb must match the subject 'I' (أذهب/adh-hab), not 'he' (يذهب/yadh-hab)",
+              "checkPage": 248
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the sentence: أريد تذكرة ____ إلى القاهرة (ureedu tadhkara ____ ilaa al-qaahira) meaning 'I want a one-way ticket to Cairo.' Fill in the missing word for 'one-way'.",
+              "answer": "ذهاب فقط (dhahaab faqaT)",
+              "checkPage": 245
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: رصيف القطار (raSeef al-qiTaar)",
+              "answer": "Train platform",
+              "checkPage": 246
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In Arabic, what word means 'boarding pass' (used at the airport before flying)? Give the Arabic word with transliteration.",
+              "answer": "بطاقة الصعود (biTaaqat aS-Su'uud)",
+              "checkPage": 244
+            },
+            {
+              "n": 9,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb وصل (waSala, 'to arrive') in the present tense for 'I' (ana) and 'we' (naHnu).",
+              "answer": "أنا أصِل (ana aSil) — 'I arrive'; نحن نصِل (naHnu naSil) — 'we arrive'",
+              "checkPage": 249
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (with transliteration): 'The bus is late.'",
+              "answer": "الحافلة متأخرة (al-Haafila muta'akh-khira)",
+              "checkPage": 250
+            },
+            {
+              "n": 11,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence: هم سافرت بالقطار أمس (hum saafarat bil-qiTaar amsi) — intended meaning: 'They traveled by train yesterday.'",
+              "answer": "هم سافروا بالقطار أمس (hum saafaruu bil-qiTaar amsi) — the verb must agree with the plural subject 'هم' (hum), using سافروا (saafaruu), not the feminine singular سافرت (saafarat)",
+              "checkPage": 247
+            },
+            {
+              "n": 12,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "What is the Arabic word for 'passport,' commonly needed when boarding a plane? Give the word with transliteration.",
+              "answer": "جواز السفر (jawaaz as-safar)",
+              "checkPage": 244
+            }
+          ]
+        }
+      ]
+    },
+    "u17": {
+      "homework": [
+        {
+          "id": "u17-homework-1",
+          "pageLabel": "255-266",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the question with the correct Arabic word for 'vacant/free': هل عندكم غرفة ___؟ (Hal ‘indakum ghurfa ____؟) — 'Do you have a vacant room?'",
+              "answer": "شاغرة (shāghira) — e.g. هل عندكم غرفة شاغرة؟ (Hal ‘indakum ghurfa shāghira?)",
+              "checkPage": 256
+            },
+            {
+              "n": 2,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb حجز (ḥajaza, 'to reserve/book') in the present tense for أنا (I) and هي (she).",
+              "answer": "أنا أحجز (anā aḥjuzu) — I reserve; هي تحجز (hiya taḥjuzu) — she reserves",
+              "checkPage": 258
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'I want to book a room for three nights.'",
+              "answer": "أريد أن أحجز غرفة لثلاث ليالٍ (Urīdu an aḥjuza ghurfatan lithalāthi layālin)",
+              "checkPage": 259
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: كم تكلفة الليلة الواحدة؟ (Kam taklifat al-layla al-wāḥida?)",
+              "answer": "How much does one night cost?",
+              "checkPage": 260
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the agreement mistake: أنا حجزت غرفتين كبير (Anā ḥajazt ghurfatayn kabīr) — 'I booked two big rooms.'",
+              "answer": "أنا حجزت غرفتين كبيرتين (Anā ḥajazt ghurfatayn kabīratayn) — the adjective must agree in dual/feminine form.",
+              "checkPage": 261
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "What is the Arabic word for the hotel 'reception/front desk'?",
+              "answer": "الاستقبال (al-istiqbāl)",
+              "checkPage": 257
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the question with the word for 'breakfast': هل السعر يشمل ___؟ (Hal as-si‘r yashmalu ____؟) — 'Does the price include breakfast?'",
+              "answer": "الفطور (al-futūr) — هل السعر يشمل الفطور؟ (Hal as-si‘r yashmalu al-futūr?)",
+              "checkPage": 262
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'Is there Wi-Fi in the room?'",
+              "answer": "هل يوجد واي فاي في الغرفة؟ (Hal yūjad wāy fāy fī al-ghurfa?)",
+              "checkPage": 264
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u17-test-1",
+          "pageLabel": "255-266",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "vocabulary",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'hotel'",
+              "answer": "فُنْدُق (funduq)",
+              "checkPage": 255
+            },
+            {
+              "n": 2,
+              "type": "vocabulary",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'reservation'",
+              "answer": "حَجْز (ḥajz)",
+              "checkPage": 256
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: أُرِيدُ ____ غُرْفَةً لِلَيْلَتَيْنِ (urīdu ____ ghurfatan lilaylatayn) — 'I want to book a room for two nights.'",
+              "answer": "أَحْجِزَ (aḥjiza)",
+              "checkPage": 257
+            },
+            {
+              "n": 4,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb حَجَزَ (ḥajaza, 'to book/reserve') in the present tense (المضارع) for أنا (anā, I), أنتَ (anta, you m.), and هي (hiya, she).",
+              "answer": "أنا أَحْجِزُ (anā aḥjizu), أنتَ تَحْجِزُ (anta taḥjizu), هي تَحْجِزُ (hiya taḥjizu)",
+              "checkPage": 257
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English: هَلْ يُوجَدُ حَمَّامٌ خَاصٌّ فِي الغُرْفَةِ؟ (hal yūjadu ḥammāmun khāṣṣun fī al-ghurfa?)",
+              "answer": "Is there a private bathroom in the room?",
+              "checkPage": 259
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'How much does the room cost per night?'",
+              "answer": "كَمْ تُكَلِّفُ الغُرْفَةُ فِي اللَّيْلَةِ؟ (kam tukallifu al-ghurfatu fī al-layla?)",
+              "checkPage": 259
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete: الغُرْفَةُ فِيهَا سَرِيرَانِ، فَهِيَ غُرْفَةٌ ____ (al-ghurfatu fīhā sarīrān, fahiya ghurfatun ____) — 'The room has two beds, so it's a double room.'",
+              "answer": "مُزْدَوِجَة (muzdawija)",
+              "checkPage": 260
+            },
+            {
+              "n": 8,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence: أَنَا أُرِيدُ حَجَزَ غُرْفَةً (anā urīdu ḥajaza ghurfatan) — intended meaning: 'I want to reserve a room.'",
+              "answer": "أَنَا أُرِيدُ أَنْ أَحْجِزَ غُرْفَةً (anā urīdu an aḥjiza ghurfatan) — need أَنْ + subjunctive verb after urīdu, not the past tense form.",
+              "checkPage": 257
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In Arabic, write one full sentence asking the receptionist (المُوَظَّف, al-muwaẓẓaf) whether breakfast is included in the price.",
+              "answer": "Sample correct answer: هَلْ الإِفْطَارُ مَشْمُولٌ فِي السِّعْرِ؟ (hal al-ifṭāru mashmūlun fī as-siʿr?)",
+              "checkPage": 261
+            },
+            {
+              "n": 10,
+              "type": "vocabulary",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic: 'key' and 'floor (story of a building)'",
+              "answer": "مِفْتَاح (miftāḥ) and طَابِق (ṭābiq)",
+              "checkPage": 262
+            },
+            {
+              "n": 11,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb وَصَلَ (waṣala, 'to arrive') in the past tense (الماضي) for نَحْنُ (naḥnu, we) and هُم (hum, they).",
+              "answer": "نَحْنُ وَصَلْنَا (naḥnu waṣalnā), هُم وَصَلُوا (hum waṣalū)",
+              "checkPage": 263
+            },
+            {
+              "n": 12,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic: 'We would like to check out tomorrow morning.'",
+              "answer": "نُرِيدُ أَنْ نُغَادِرَ الفُنْدُقَ صَبَاحَ غَدٍ (nurīdu an nughādira al-funduqa ṣabāḥa ghadin)",
+              "checkPage": 264
+            }
+          ]
+        }
+      ]
+    },
+    "u18": {
+      "homework": [
+        {
+          "id": "u18-homework-1",
+          "pageLabel": "267-280",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: النَّجدة! اتَّصِل بِالإسْعاف! (an-najda! ittasil bil-is‘āf!)",
+              "answer": "Help! Call an ambulance!",
+              "checkPage": 268
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct word for 'police': اتَّصِلي بِـ ___ حالًا! (ittasilī bi-___ ḥālan!) — meaning 'Call the police immediately!' (feminine command)",
+              "answer": "الشُّرْطة (ash-shurṭa)",
+              "checkPage": 270
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سَرَقَ (saraqa, 'to steal') in the past tense for 'he' and 'they (masc. pl.)': رَجُلٌ ___ حَقيبَتي وَهَرَبَ (rajulun ___ ḥaqībatī wa haraba) = 'A man ___ my bag and fled.' Then give the form for 'they stole'.",
+              "answer": "he: سَرَقَ (saraqa); they: سَرَقوا (saraqū)",
+              "checkPage": 274
+            },
+            {
+              "n": 4,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and fix the grammatical error in this sentence: أنا مُحتاجٌ إلى طَبيب حالًا لِأنَّني مَريضة (anā muḥtājun ilā ṭabīb ḥālan li’annanī marīḍa) — intended meaning: 'I (fem.) need a doctor right now because I am sick.'",
+              "answer": "مُحتاجٌ (masc.) should be مُحتاجةٌ (muḥtājatun) to agree with the feminine speaker (marīḍa).",
+              "checkPage": 269
+            },
+            {
+              "n": 5,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Read this sentence and answer in English: تَعَرَّضَتِ السَّيّارةُ لِحادِثٍ خَطيرٍ، وَنُقِلَ السّائِقُ إلى المُستَشفى بِسَيّارةِ الإسْعاف (ta‘arraḍatis-sayyāratu li-ḥādithin khaṭīrin, wa nuqila as-sā’iqu ilā al-mustashfā bi-sayyāratil-is‘āf). Question: What happened to the driver?",
+              "answer": "He was seriously injured in a car accident and was taken to the hospital by ambulance.",
+              "checkPage": 272
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (with transliteration in your answer): 'There is a fire! Get out of the building!'",
+              "answer": "هُناكَ حَريقٌ! اُخرُجْ مِنَ المَبْنى! (hunāka ḥarīqun! ukhruj mina al-mabnā!)",
+              "checkPage": 271
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct preposition: أنا في حاجةٍ ___ مُحامٍ لِأنَّني اُتُّهِمْتُ ظُلمًا (anā fī ḥājatin ___ muḥāmin li’annanī uttuhimtu ẕulman) = 'I need a lawyer because I was falsely accused.'",
+              "answer": "إلى (ilā)",
+              "checkPage": 278
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "In Arabic, write one short sentence (3-5 words) telling someone to call the fire department, using an imperative verb. Include transliteration.",
+              "answer": "Example: اتَّصِلْ بِالمَطافِئ! (ittasil bil-maṭāfi’!) = 'Call the fire department!'",
+              "checkPage": 270
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u18-test-1",
+          "pageLabel": "267-280",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: النجدة! (an-najda!)",
+              "answer": "Help! (a distress call, like 'Help!' or 'Mayday!')",
+              "checkPage": 268
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic script (with transliteration): 'Call an ambulance!'",
+              "answer": "اتصل بسيارة الإسعاف! (ittasil bi-sayyārat al-isʿāf!)",
+              "checkPage": 269
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank: أنا بحاجة إلى ___ لأن يدي تنزف. (anā bi-ḥāja ilā ___ li-anna yadī tanzif.) — 'I need a ___ because my hand is bleeding.' (word for 'bandage')",
+              "answer": "ضمادة (ḍimāda)",
+              "checkPage": 270
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb اتصل (ittaṣala, 'to call/contact') in the past tense for أنتِ (anti, 'you' fem. sing.).",
+              "answer": "اتصلتِ (ittaṣalti)",
+              "checkPage": 271
+            },
+            {
+              "n": 5,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سرق (saraqa, 'to steal') in the present tense for هم (hum, 'they' masc. plural).",
+              "answer": "يسرقون (yasriqūn)",
+              "checkPage": 272
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the grammatical error: أنا رأيت حادثة أمس في الشارع. (anā ra'aytu ḥādithatan ams fī ash-shāriʿ.) — the speaker is male, but the verb form used is meant for a different subject. Find and fix the mismatch between the pronoun أنا and the verb form (it should show 1st person singular past correctly formatted; the sentence as given already looks correct except that ams needs no tanwīn on حادثة). Fix the incorrect tanwīn.",
+              "answer": "أنا رأيت حادثةً أمس في الشارع should be أنا رأيت حادثة أمس في الشارع (ḥādithatan is incorrect here since the noun is definite in context of a specific past event; remove the extra fatḥatayn) — corrected: أنا رأيت الحادثة أمس في الشارع (anā ra'aytu al-ḥāditha ams fī ash-shāriʿ) 'I saw the accident yesterday in the street.'",
+              "checkPage": 273
+            },
+            {
+              "n": 7,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In Arabic, write one short sentence (3-5 words) telling someone to call the police. Use the word شرطة (shurṭa, 'police').",
+              "answer": "Example: اتصل بالشرطة! (ittaṣil bish-shurṭa!) 'Call the police!'",
+              "checkPage": 274
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: أنا بحاجة إلى محامٍ. (anā bi-ḥāja ilā muḥāmin.)",
+              "answer": "I need a lawyer.",
+              "checkPage": 275
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct form of the imperative verb 'run' (هرب/يهرب - to flee/run away) addressing a group of men: ___ من هنا الآن! (___ min hunā al-ān!) — 'Run from here now!'",
+              "answer": "اهربوا (ihrubū)",
+              "checkPage": 276
+            },
+            {
+              "n": 10,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write a full sentence in Arabic (with transliteration) explaining that there is a fire in the building. Use the word حريق (ḥarīq, 'fire').",
+              "answer": "Example: هناك حريق في المبنى! (hunāka ḥarīq fī al-mabnā!) 'There is a fire in the building!'",
+              "checkPage": 277
+            },
+            {
+              "n": 11,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb كسر (kasara, 'to break') in the past tense for هي (hiya, 'she') — as in 'she broke her leg.'",
+              "answer": "كسرت (kasarat)",
+              "checkPage": 278
+            },
+            {
+              "n": 12,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic script (with transliteration): 'Where is the nearest hospital?'",
+              "answer": "أين أقرب مستشفى؟ (ayna aqrab mustashfā?)",
+              "checkPage": 279
+            }
+          ]
+        }
+      ]
+    },
+    "u19": {
+      "homework": [
+        {
+          "id": "u19-homework-1",
+          "pageLabel": "283-288",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: مَرْحَبًا، كَيْفَ حَالُكَ؟ (marHaban, kayfa Haaluka?)",
+              "answer": "Hello, how are you? (spoken to a male)",
+              "checkPage": 283
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill the blank with the correct word for 'thank you': ...، هَذَا لَذِيذٌ جِدًّا (___, haadhaa ladheedhun jiddan) meaning 'Thank you, this is very delicious.'",
+              "answer": "شُكْرًا (shukran)",
+              "checkPage": 284
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb تَعَلَّمَ (ta'allama, 'to learn') in the present tense (المضارع) for أَنَا (ana, 'I').",
+              "answer": "أَتَعَلَّمُ (ata'allamu) - 'I learn/am learning'",
+              "checkPage": 285
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سَافَرَ (saafara, 'to travel') in the past tense (الماضي) for هُمْ (hum, 'they, masc. plural').",
+              "answer": "سَافَرُوا (saafaruu) - 'they traveled'",
+              "checkPage": 285
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and fix the mistake in this sentence meant to say 'I practice Arabic every day': أَنَا يُمَارِسُ العَرَبِيَّةَ كُلَّ يَوْمٍ (ana yumaarisu al-'arabiyyata kulla yawmin)",
+              "answer": "أَنَا أُمَارِسُ العَرَبِيَّةَ كُلَّ يَوْمٍ (ana umaarisu al-'arabiyyata kulla yawmin) - the verb must agree with 'I' (أُمَارِسُ), not the 'he' form (يُمَارِسُ)",
+              "checkPage": 286
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (with transliteration): 'I listen to Arabic songs to improve my listening.'",
+              "answer": "أَسْتَمِعُ إِلَى الأَغَانِي العَرَبِيَّةِ لِأُحَسِّنَ اسْتِمَاعِي (astami'u ilaa al-aghaani al-'arabiyyati li-uHassina istimaa'ii)",
+              "checkPage": 286
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In your own words (English is fine), name one practical daily habit mentioned in this unit's theme that could help a learner absorb Arabic faster, and explain briefly why it works.",
+              "answer": "Answers vary; a valid example: watching Arabic TV shows/movies with subtitles helps train the ear to recognize sounds and rhythm of spoken Arabic in context.",
+              "checkPage": 287
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct possessive suffix meaning 'my friend' (male friend): صَدِيق___ (Sadiiq___)",
+              "answer": "صَدِيقِي (Sadiiqii) - 'my friend'",
+              "checkPage": 288
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u19-test-1",
+          "pageLabel": "283-288",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: مرحبا، كيف حالك؟ (marHaban, kayfa Haaluka?)",
+              "answer": "Hello, how are you? (to a male)",
+              "checkPage": 283
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct possessive suffix meaning 'my': هذا كتاب_____ (haadhaa kitaab___) = 'This is my book'",
+              "answer": "ي (-ii) → كتابي (kitaabii)",
+              "checkPage": 284
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb تَعَلَّمَ (ta'allama, 'he learned') in the present tense for أنا (anaa, 'I'): أنا _____ اللغة العربية (anaa ___ al-lughah al-'arabiyyah)",
+              "answer": "أتعلّم (ata'allamu) — 'I am learning/I learn'",
+              "checkPage": 284
+            },
+            {
+              "n": 4,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Name one everyday strategy mentioned for picking up Arabic quickly that involves listening to native speakers regularly (in English, one sentence).",
+              "answer": "Answers vary; acceptable example: Watch or listen to Arabic media (news, songs, shows) daily to train your ear.",
+              "checkPage": 285
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the grammatical error: أنا يذهب إلى السوق (anaa yadh-habu ilaa as-suuq) — intended meaning: 'I go to the market.'",
+              "answer": "أنا أذهب إلى السوق (anaa adhhabu ilaa as-suuq) — the verb must agree with 'I', not 'he'.",
+              "checkPage": 284
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate to Arabic: 'I practice Arabic every day.'",
+              "answer": "أتدرّب على العربية كل يوم (atadarrabu 'alaa al-'arabiyyah kulla yawm)",
+              "checkPage": 285
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the missing word: من المفيد أن تكتب _____ جديدة كل يوم (min al-mufiid an taktuba ___ jadiidah kulla yawm) = 'It's useful to write new vocabulary every day.'",
+              "answer": "كلمات (kalimaat) — 'words/vocabulary'",
+              "checkPage": 286
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In one sentence (English), explain why finding a language partner is considered a helpful strategy for learning Arabic quickly.",
+              "answer": "Answers vary; acceptable example: A language partner gives you real conversation practice and immediate feedback.",
+              "checkPage": 286
+            },
+            {
+              "n": 9,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb سَمِعَ (sami'a, 'he heard/listened') in the present tense for نحن (naHnu, 'we'): نحن _____ إلى الأخبار العربية (naHnu ___ ilaa al-akhbaar al-'arabiyyah)",
+              "answer": "نسمع (nasma'u) — 'we listen'",
+              "checkPage": 285
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate to English: من الأفضل أن تسافر إلى بلد عربي لتتعلّم اللغة بسرعة (min al-afDal an tusaafira ilaa balad 'arabiyy litata'allama al-lughah bisur'ah).",
+              "answer": "It's better to travel to an Arabic-speaking country to learn the language quickly.",
+              "checkPage": 287
+            },
+            {
+              "n": 11,
+              "type": "correct-the-error",
+              "skill": "vocabulary",
+              "prompt": "Correct the error in word choice: أحب أن أقرأ الجرائد لأتحسّن نطقي (uHibbu an aqra'a al-jaraa'id li-ataHassana nuTqii) — intended meaning: 'I like to read newspapers to improve my listening.'",
+              "answer": "The sentence describes 'pronunciation' (نطق, nuTq), not listening. Should use استماعي (istimaa'ii) — 'my listening': لأتحسّن استماعي (li-ataHassana istimaa'ii)",
+              "checkPage": 286
+            },
+            {
+              "n": 12,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write one full Arabic sentence (with transliteration) describing a daily habit you could use to pick up Arabic quickly, e.g. listening, writing, or speaking practice.",
+              "answer": "Answers vary; acceptable example: أستمع إلى الأغاني العربية كل صباح (astami'u ilaa al-aghaanii al-'arabiyyah kulla SabaaH) — 'I listen to Arabic songs every morning.'",
+              "checkPage": 288
+            }
+          ]
+        }
+      ]
+    },
+    "u20": {
+      "homework": [
+        {
+          "id": "u20-homework-1",
+          "pageLabel": "289-294",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: إن شاء الله (in shā' allāh)",
+              "answer": "God willing / hopefully",
+              "checkPage": 289
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic script with transliteration: 'Thank God' (used when things are fine or after finishing something)",
+              "answer": "الحمد لله (al-ḥamdu lillāh)",
+              "checkPage": 289
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct expression: When someone sneezes, you say ___ (al-ḥamdu lillāh / yislamū / al-ḥamdu lillāh) — actually to the sneezer you say 'yarḥamuka Allāh' (يرحمك الله). Fill in: You would respond to 'يرحمك الله' (yarḥamuka allāh) by saying ___.",
+              "answer": "يهديكم الله (yahdīkum allāh) - 'may God guide you', a common response",
+              "checkPage": 290
+            },
+            {
+              "n": 4,
+              "type": "short-answer",
+              "skill": "vocabulary",
+              "prompt": "In your own words (English), explain when an Arabic speaker would say مع السلامة (ma'a as-salāma) rather than إلى اللقاء (ilā al-liqā').",
+              "answer": "مع السلامة (ma'a as-salāma) means 'go with safety/peace' and is used specifically when someone is leaving or departing, wishing them a safe journey/farewell; إلى اللقاء (ilā al-liqā') is a more neutral 'see you later/until we meet again' used in any parting.",
+              "checkPage": 291
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence. The learner wrote: إن شاء الله (in shā' allāh) meaning 'thank God' after finishing a task. What is wrong, and what expression should be used instead?",
+              "answer": "إن شاء الله (in shā' allāh) means 'God willing' and refers to future hope/intention, not thanks. After finishing a task, the correct expression is الحمد لله (al-ḥamdu lillāh), 'thank God/praise be to God'.",
+              "checkPage": 289
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank: When you want to compliment someone's new possession or achievement, Arabic speakers often say ما شاء الله (___ shā' allāh) to ward off the evil eye/jealousy.",
+              "answer": "ما (mā)",
+              "checkPage": 290
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic script with transliteration: 'No problem / you're welcome' (a common polite response after being thanked or after helping someone)",
+              "answer": "عفواً (‘afwan) or لا شكر على واجب (lā shukr ‘alā wājib)",
+              "checkPage": 292
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Read this short exchange and answer in English: أحمد: شكراً جزيلاً! (Aḥmad: shukran jazīlan!) — سارة: عفواً، لا شكر على واجب. (Sāra: ‘afwan, lā shukr ‘alā wājib.) What is Ahmad doing, and what is the sense of Sara's reply?",
+              "answer": "Ahmad is thanking Sara profusely ('thank you very much'), and Sara is politely dismissing the need for thanks, saying essentially 'you're welcome, no thanks needed for a duty/obligation' — i.e., it was nothing.",
+              "checkPage": 292
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u20-test-1",
+          "pageLabel": "289-294",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate this expression into English and describe a situation when you'd use it: إن شاء الله (in shā' Allāh)",
+              "answer": "'God willing' — used when talking about future plans or hopes, expressing that the outcome depends on God's will (e.g., 'I'll see you tomorrow, in shā' Allāh').",
+              "checkPage": 289
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic script with transliteration: 'Thank God' (used after saying you are well or after finishing something safely)",
+              "answer": "الحمد لله (al-ḥamdu lillāh)",
+              "checkPage": 289
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct expression: When someone says الحمد لله (al-ḥamdu lillāh) after sneezing, the appropriate response is ______ (يرحمكم الله / ...).",
+              "answer": "يرحمك الله (yarḥamuka Allāh) — 'God have mercy on you'",
+              "checkPage": 290
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "In your own words (English), explain the difference in usage between إن شاء الله (in shā' Allāh) and الحمد لله (al-ḥamdu lillāh). Give one example sentence context for each.",
+              "answer": "إن شاء الله is used for future hopes/plans ('God willing, I will pass the exam'); الحمد لله is used to express gratitude or acknowledge a good outcome ('I finished the exam, thank God').",
+              "checkPage": 289
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: ما شاء الله (mā shā' Allāh)",
+              "answer": "'What God has willed' — an expression of admiration or to ward off the evil eye when complimenting someone or something.",
+              "checkPage": 290
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "vocabulary",
+              "prompt": "A learner wrote: 'To say welcome to a guest, you should say مع السلامة (ma‘a as-salāma).' Correct the mistake and give the right expression for welcoming a guest.",
+              "answer": "مع السلامة (ma‘a as-salāma) means 'goodbye/go safely,' used when someone is leaving. To welcome a guest, you say أهلاً وسهلاً (ahlan wa sahlan) — 'welcome.'",
+              "checkPage": 291
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the exchange: Person A: كيف الحال؟ (kayf al-ḥāl?) Person B: ______ (bism, meaning 'fine, thank God')",
+              "answer": "الحمد لله، بخير (al-ḥamdu lillāh, bikhayr) — 'Thank God, I'm fine.'",
+              "checkPage": 289
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic script with transliteration: 'Welcome!' (said to someone arriving at your home)",
+              "answer": "أهلاً وسهلاً (ahlan wa sahlan)",
+              "checkPage": 291
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "When would you say إن شاء الله (in shā' Allāh) instead of directly promising something, and why might this be culturally important in Arabic-speaking contexts?",
+              "answer": "It's used when discussing future actions/plans to acknowledge that outcomes ultimately depend on God's will, reflecting humility and religious/cultural custom rather than making an absolute promise.",
+              "checkPage": 289
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: مع السلامة (ma‘a as-salāma)",
+              "answer": "'Go with safety/peace' — a farewell expression said to someone who is leaving.",
+              "checkPage": 291
+            },
+            {
+              "n": 11,
+              "type": "correct the error",
+              "skill": "vocabulary",
+              "prompt": "A learner wrote: 'ما شاء الله (mā shā' Allāh) is used to say goodbye when someone leaves a party.' Identify the error and explain the correct meaning and usage.",
+              "answer": "This is incorrect. ما شاء الله is an expression of admiration or praise (often to protect against the evil eye when complimenting someone), not a farewell. The correct farewell is مع السلامة (ma‘a as-salāma).",
+              "checkPage": 290
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "List three of the common expressions covered (with transliteration) and briefly state one context for each: greeting a guest, expressing gratitude for good health, and admiring something without jinxing it.",
+              "answer": "أهلاً وسهلاً (ahlan wa sahlan) — greeting a guest; الحمد لله (al-ḥamdu lillāh) — expressing gratitude, e.g. for good health; ما شاء الله (mā shā' Allāh) — admiring something/someone while warding off envy or the evil eye.",
+              "checkPage": 291
+            }
+          ]
+        }
+      ]
+    },
+    "u21": {
+      "homework": [
+        {
+          "id": "u21-homework-1",
+          "pageLabel": "295-300",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate this proverb into English and explain its meaning in one sentence: الصبر مفتاح الفرج (as-sabru miftāḥu al-faraj)",
+              "answer": "'Patience is the key to relief/deliverance.' Meaning: enduring hardship patiently eventually leads to a solution or relief.",
+              "checkPage": 296
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the proverb with the missing word: من ___ يحصد (man ___ yaḥṣud) — 'He who sows, reaps.' Fill in the blank with the Arabic word for 'sows' (transliteration: yazra').",
+              "answer": "يزرع (yazra')",
+              "checkPage": 295
+            },
+            {
+              "n": 3,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "The proverb الصبر مفتاح الفرج (as-sabru miftāḥu al-faraj) uses the noun صبر (ṣabr, 'patience'). Conjugate the verb صَبَرَ (ṣabara, 'he was patient') in the present tense (يفعل form) for: أنا (anā, I), أنتَ (anta, you m.), هي (hiya, she).",
+              "answer": "أنا أصبر (anā aṣbir) - I am patient/endure; أنتَ تصبر (anta taṣbir) - you (m.) are patient; هي تصبر (hiya taṣbir) - she is patient",
+              "checkPage": 296
+            },
+            {
+              "n": 4,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Find and correct the grammatical error in this rendering of the proverb 'The eye does not rise above the eyebrow': العين ما تعلو على الحاجب (al-'aynu mā ta'lā 'alā al-ḥājib). The learner wrote تعلو (ta'lū) as تعلا (ta'lā) by mistake — identify the correct verb form and explain why.",
+              "answer": "The correct form is تعلو (ta'lū), not تعلا (ta'lā), because علا (ʿalā, 'to rise') is a defective verb ending in a weak letter that becomes و (wāw) in the present tense (تعلو) for feminine singular subjects like العين (al-'ayn), not ا (alif).",
+              "checkPage": 297
+            },
+            {
+              "n": 5,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "In your own words (English is fine), explain the practical life lesson behind the proverb القرد في عين أمه غزال (al-qirdu fī 'ayni ummihi ghazāl) — literally 'The monkey in his mother's eye is a gazelle.'",
+              "answer": "It means that a mother (or anyone who loves someone) sees them as beautiful/perfect regardless of how they appear to others — love is blind to flaws, similar to the English idiom 'beauty is in the eye of the beholder.'",
+              "checkPage": 298
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate this English proverb meaning into Arabic script with transliteration: 'Actions speak louder than words' — using the concept 'الأفعال أبلغ من الأقوال' (al-af'ālu ablaghu min al-aqwāl). Write it out and give a literal word-for-word gloss of الأفعال (al-af'āl) and الأقوال (al-aqwāl).",
+              "answer": "الأفعال أبلغ من الأقوال (al-af'ālu ablaghu min al-aqwāl) — 'Actions are more eloquent than words.' الأفعال (al-af'āl) = 'the actions/deeds'; الأقوال (al-aqwāl) = 'the sayings/words'.",
+              "checkPage": 299
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete the comparative structure in this proverb: الأفعال ___ من الأقوال (al-af'ālu ___ min al-aqwāl) meaning 'Actions are more eloquent than words.' Fill in the comparative adjective form (transliteration: ablaghu).",
+              "answer": "أبلغ (ablaghu)",
+              "checkPage": 299
+            },
+            {
+              "n": 8,
+              "type": "short-answer",
+              "skill": "writing",
+              "prompt": "Write two full Arabic sentences (with transliteration) using the proverb الصبر مفتاح الفرج (as-sabru miftāḥu al-faraj) in a short original context, e.g., advising a friend who is struggling. Include an English translation of your sentences.",
+              "answer": "Answers vary; example: يا صديقي، لا تقلق، الصبر مفتاح الفرج (yā ṣadīqī, lā taqlaq, aṣ-ṣabru miftāḥu al-faraj) - 'My friend, don't worry, patience is the key to relief.' أنا أعرف أن هذا صعب، لكن كل شيء سيتحسن (anā a'rifu anna hādhā ṣa'b, lākinna kulla shay'in sayataḥassan) - 'I know this is hard, but everything will improve.' Learner's sentences should correctly use the proverb in context.",
+              "checkPage": 300
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u21-test-1",
+          "pageLabel": "295-300",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the proverb: الصبر ____ الفرج (as-sabru ____ al-faraj) — 'Patience is the ____ to relief.' Fill in the missing word (meaning 'key').",
+              "answer": "مفتاح (miftah) — 'Patience is the key to relief.'",
+              "checkPage": 295
+            },
+            {
+              "n": 2,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate this proverb into natural English: من جد وجد (man jadda wajad)",
+              "answer": "Whoever strives (works hard) succeeds. (He who seeks, finds.)",
+              "checkPage": 296
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (write the proverb in Arabic script plus transliteration): 'Time is gold.'",
+              "answer": "الوقت من ذهب (al-waqtu min dhahab)",
+              "checkPage": 296
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "The verb جدّ (jadda, 'to strive/work hard') is a past-tense verb in the proverb من جد وجد. Conjugate جدّ (jadda) in the past tense for أنتِ (anti, 'you' f.sg.) and هم (hum, 'they' m.pl.).",
+              "answer": "أنتِ جددتِ (anti jadadti); هم جدّوا (hum jaddu)",
+              "checkPage": 296
+            },
+            {
+              "n": 5,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "This proverb has a wrong word. Find and correct it: العقل السليم في القلب السليم (al-'aqlu as-salimu fi al-qalbi as-salim) — 'A sound mind in a sound heart.'",
+              "answer": "القلب (al-qalb, 'heart') should be الجسم (al-jism, 'body'): العقل السليم في الجسم السليم (al-'aqlu as-salimu fi al-jismi as-salim) — 'A sound mind in a sound body.'",
+              "checkPage": 297
+            },
+            {
+              "n": 6,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Explain in one English sentence what this proverb means and give a situation where you'd use it: لا يلدغ المؤمن من جحر مرتين (la yuldaghu al-mu'minu min juhrin marratayn)",
+              "answer": "It means a wise/faithful person doesn't make the same mistake twice (a believer isn't bitten from the same hole twice); used when someone learns from a past mistake and avoids repeating it.",
+              "checkPage": 297
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the proverb: كما ____ تدان (kama ____ tudan) — 'As you judge, so shall you be judged.' Fill in the missing verb (meaning 'you judge').",
+              "answer": "تدين (tudin) — كما تدين تدان (kama tudinu tudan)",
+              "checkPage": 298
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: الجار قبل الدار (al-jaru qabla ad-dar)",
+              "answer": "The neighbor (comes) before the house. (Choose your neighbor before you choose your house.)",
+              "checkPage": 298
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Arabic (script + transliteration): 'Sometimes harm brings benefit.'",
+              "answer": "رب ضارة نافعة (rubba dharratin nafi'ah)",
+              "checkPage": 299
+            },
+            {
+              "n": 10,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "This proverb has its two halves swapped. Correct it: في العجلة السلامة وفي التأني الندامة (fi al-'ajalati as-salamah wa fi at-ta'ani an-nadamah) — 'In haste is safety, in deliberation is regret.'",
+              "answer": "Should be swapped: في التأني السلامة وفي العجلة الندامة (fi at-ta'ani as-salamah wa fi al-'ajalati an-nadamah) — 'In deliberation is safety, in haste is regret.'",
+              "checkPage": 299
+            },
+            {
+              "n": 11,
+              "type": "short-answer",
+              "skill": "reading",
+              "prompt": "Give the English equivalent proverb (with similar meaning) for: عصفور في اليد خير من عشرة على الشجرة (usfurun fil yad khayrun min 'asharatin 'ala ash-shajarah), and explain the literal meaning.",
+              "answer": "Literal: 'A bird in the hand is better than ten on the tree.' English equivalent: 'A bird in the hand is worth two in the bush.'",
+              "checkPage": 300
+            },
+            {
+              "n": 12,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "The verb أحسنت (ahsanta, 'you did good') comes from يُحسن (yuhsinu, 'to do good/be kind'). Conjugate يُحسن (yuhsinu) in the present tense for هي (hiya, 'she') and نحن (nahnu, 'we').",
+              "answer": "هي تُحسن (hiya tuhsinu); نحن نُحسن (nahnu nuhsinu)",
+              "checkPage": 300
+            }
+          ]
+        }
+      ]
+    },
+    "u22": {
+      "homework": [
+        {
+          "id": "u22-homework-1",
+          "pageLabel": "301-352",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb كَتَبَ (kataba - 'he wrote') in the past tense for the pronoun أنتِ (anti - 'you, feminine singular'). Write the full Arabic form with transliteration.",
+              "answer": "كَتَبْتِ (katabti) - 'you (f.) wrote'",
+              "checkPage": 305
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb يَذْهَبُ (yadhhabu - 'he goes/is going') in the present tense for the pronoun نَحْنُ (naḥnu - 'we'). Write the full Arabic form with transliteration.",
+              "answer": "نَذْهَبُ (nadhhabu) - 'we go/are going'",
+              "checkPage": 305
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct present-tense form of شَرِبَ (shariba - 'to drink') for the subject هِيَ (hiya - 'she'): هِيَ ___ الْقَهْوَةَ (hiya ___ al-qahwata - 'She drinks the coffee').",
+              "answer": "تَشْرَبُ (tashrabu)",
+              "checkPage": 306
+            },
+            {
+              "n": 4,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the conjugation error: أَنْتُم يَكْتُبُ الرِّسَالَةَ (antum yaktubu al-risālata) - intended meaning: 'You all write the letter.'",
+              "answer": "Should be أَنْتُم تَكْتُبُونَ الرِّسَالَةَ (antum taktubūna al-risālata) - the verb must agree with the plural 'you' subject using the تَ- ...-ونَ (ta-...-ūna) pattern, not the يَ- (ya-) prefix used for 'he'.",
+              "checkPage": 307
+            },
+            {
+              "n": 5,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "Translate into Arabic (write the Arabic script with transliteration): 'They (masculine plural) study Arabic.'",
+              "answer": "هُمْ يَدْرُسُونَ الْعَرَبِيَّةَ (hum yadrusūna al-‘arabiyyata)",
+              "checkPage": 308
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "When looking up the verb يَشْرَبُ (yashrabu - 'he drinks') in an Arabic-English mini-dictionary organized by root letters, which three root consonants would you search under? Write them in Arabic with transliteration.",
+              "answer": "ش ر ب (sh-r-b), the root of شَرِبَ (shariba - 'to drink')",
+              "checkPage": 315
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In an English-Arabic dictionary, you look up 'to open.' You find the entry: فَتَحَ (fataḥa) - 'he opened' (past tense, 3rd person masculine singular, the dictionary citation form). What present-tense form would you derive for 'she opens'? Write it with transliteration.",
+              "answer": "تَفْتَحُ (taftaḥu) - 'she opens'",
+              "checkPage": 312
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct Arabic word after looking up 'book' in an English-Arabic mini-dictionary: قَرَأْتُ ___ (qara'tu ___) - 'I read the book.' (use the definite form)",
+              "answer": "الْكِتَابَ (al-kitāba)",
+              "checkPage": 320
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u22-test-1",
+          "pageLabel": "301-352",
+          "pagesEstimated": true,
+          "items": [
+            {
+              "n": 1,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb كَتَبَ (kataba - to write) in the present tense (المضارع) for these pronouns: أنا (ana - I), أنتَ (anta - you, masc.), هي (hiya - she). Write each full form.",
+              "answer": "أنا أكتُبُ (ana aktubu - I write); أنتَ تكتُبُ (anta taktubu - you write); هي تكتُبُ (hiya taktubu - she writes)",
+              "checkPage": 305
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb ذَهَبَ (dhahaba - to go) in the past tense (الماضي) for: نحن (nahnu - we), أنتم (antum - you all, masc.), هم (hum - they, masc.).",
+              "answer": "نحن ذَهَبْنا (nahnu dhahabnaa - we went); أنتم ذَهَبْتُم (antum dhahabtum - you all went); هم ذَهَبوا (hum dhahaboo - they went)",
+              "checkPage": 305
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct present-tense form of شَرِبَ (shariba - to drink) for 'هي' (hiya - she): هي ____ الماء (hiya ____ al-maa' - she drinks the water).",
+              "answer": "تشرَبُ (tashrabu)",
+              "checkPage": 307
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In a verb conjugation table, what does the root form usually listed at the top (like كَتَبَ kataba) represent grammatically, and which pronoun's past tense form is it identical to?",
+              "answer": "It is the base/root form (3rd person masc. singular past tense, 'he'), identical to the هو (huwa - he) past tense form.",
+              "checkPage": 304
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the conjugation error: أنتِ يَكتُبُ الرسالة (anti yaktubu ar-risaala - you [fem.] write the letter).",
+              "answer": "أنتِ تَكتُبينَ الرسالة (anti taktubeena ar-risaala)",
+              "checkPage": 306
+            },
+            {
+              "n": 6,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "Translate to Arabic: 'They (fem.) studied yesterday.'",
+              "answer": "هُنَّ دَرَسْنَ بالأمس (hunna darasna bi-l-amsi)",
+              "checkPage": 308
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "When using an Arabic-English mini-dictionary, entries are typically alphabetized by the root letters, not the surface word. What is the root of the word مكتوب (maktoob - written) that you would search for?",
+              "answer": "ك ت ب (k-t-b)",
+              "checkPage": 312
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Using dictionary lookup skills, what English meaning would you expect to find under the root د ر س (d-r-s) in an Arabic-English dictionary?",
+              "answer": "to study / lesson (related meanings like 'to learn, study, lesson')",
+              "checkPage": 313
+            },
+            {
+              "n": 9,
+              "type": "translate a short phrase",
+              "skill": "reading",
+              "prompt": "Translate to English: أنا لا أفهمُ هذه الكلمة (ana laa afhamu hadhihi al-kalima).",
+              "answer": "I do not understand this word.",
+              "checkPage": 315
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "You look up 'to eat' in an English-Arabic mini-dictionary and find أكَلَ (akala). Fill in the blank with the present-tense form for 'نحن' (nahnu - we): نحن ____ الطعام (nahnu ____ al-ta'aam - we eat the food).",
+              "answer": "نأكُلُ (na'kulu)",
+              "checkPage": 307
+            },
+            {
+              "n": 11,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb فَهِمَ (fahima - to understand) in the present tense for: أنتما (antumaa - you two), هما (humaa - they two, masc.).",
+              "answer": "أنتما تفهَمانِ (antumaa tafhamaani - you two understand); هما يفهَمانِ (humaa yafhamaani - they two understand)",
+              "checkPage": 309
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "In a verb conjugation table with columns for الماضي (al-maadi - past) and المضارع (al-mudaari' - present), which column would you check to find the correct form for 'سَتَذهَبُ' (sa-tadhhabu - she will go), and what element added to the present tense form creates the future meaning?",
+              "answer": "You check the المضارع (present tense) column; adding the prefix سَـ (sa-) or the word سوف (sawfa) to the present tense form creates the future meaning.",
+              "checkPage": 310
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -12,12 +12,18 @@
     "flashCards": "docs/flash-cards.pdf"
   },
   "estTotalHours": 105,
+  "practiceLanguageName": "Farsi (Persian)",
+  "practiceGeneration": {
+    "onDemand": true,
+    "note": "Homework and chapter tests are generated fresh by language-hub.html at request time, from only the topic label and page range below. No exercises, passages, or book text are stored in this file or sent to the generator. Every generated item cites a source page to check against the physical book."
+  },
   "units": [
     {
       "id": "u1",
       "number": 1,
       "title": "Orientation & the Sound System",
       "pages": "5-10",
+      "topic": "the Farsi sound system (kh, zh, gh, ein), stress and rhythm, formal vs. colloquial forms",
       "goal": "Produce the four sounds English doesn't have (kh, zh, gh, ein), hear how much flatter Farsi stress is than English, and recognize when the book is showing formal vs. colloquial forms.",
       "unlocks": "u2",
       "lessons": [
@@ -170,6 +176,7 @@
       "number": 2,
       "title": "Vowels, Consonants & Numbers",
       "pages": "11-18",
+      "topic": "short vowels, long vowels and diphthongs, the consonant inventory, Farsi numerals 0–9 and multi-digit numbers",
       "goal": "Name every vowel type in the Farsi vowel system, and read and write the Farsi numerals 0-9 and multi-digit numbers.",
       "unlocks": "u3",
       "lessons": [
@@ -580,6 +587,7 @@
       "number": 3,
       "title": "First Letters",
       "pages": "20-34, 131-132",
+      "topic": "the letters Alef, Be, Noon, Daal, Re, long A (آ), Meem and Seen; greetings; basic Farsi sentence order (subject–object–verb)",
       "goal": "Read and write Alef, Be, Noon, Daal, Re, long A (آ), Meem, and Seen; greet someone in Farsi; recognize basic subject-verb-object word order.",
       "unlocks": "u4",
       "lessons": [
@@ -1130,6 +1138,7 @@
       "number": 4,
       "title": "Building Words",
       "pages": "35-50, 133, 138",
+      "topic": "the letters Te, Ze, E, Kaaf, Ee, Ye and Oo; personal pronouns; forming plurals",
       "goal": "Read and write Te, Ze, E, Kaaf, Ee, Ye, and Oo; use personal pronouns; form plurals.",
       "unlocks": "u5",
       "lessons": [
@@ -1277,6 +1286,7 @@
       "number": 5,
       "title": "People & Things",
       "pages": "51-64, 122-124, 134",
+      "topic": "the letters Pe, Sheen, Fe, O, Gaaf and Ghaaf; family vocabulary; this/that demonstratives",
       "goal": "Read and write Pe, Sheen, Fe, O, Gaaf, and Ghaaf; learn family vocabulary; use this/that.",
       "unlocks": "u6",
       "lessons": [
@@ -1410,6 +1420,7 @@
       "number": 6,
       "title": "Describing",
       "pages": "65-80, 125-126, 141-142",
+      "topic": "the letters Khe, Che, He (ه), Jeem, Laam, Vaav and Khaa; adjectives and ezâfe; body and weather vocabulary",
       "goal": "Read and write Khe, Che, He (ه), Jeem, Laam, Vaav, and Khaa; use adjectives and ezâfe; learn body and weather vocabulary.",
       "unlocks": "u7",
       "lessons": [
@@ -1557,6 +1568,7 @@
       "number": 7,
       "title": "Out in the World",
       "pages": "81-90, 127, 143",
+      "topic": "the letters Zhe, Saad, He (ح), Zaad, Taa and Zaa; prepositions; grocery and restaurant vocabulary",
       "goal": "Read and write Zhe, Saad, He (ح), Zaad, Taa, and Zaa; use prepositions; learn grocery and restaurant vocabulary.",
       "unlocks": "u8",
       "lessons": [
@@ -1690,6 +1702,7 @@
       "number": 8,
       "title": "Verbs",
       "pages": "91-99, 144-145",
+      "topic": "the letters Ein, Ghein, Se and Zaal; present-tense endings; verb stems and conjugation",
       "goal": "Read and write Ein, Ghein, Se, and Zaal; conjugate present-tense verbs from their stems.",
       "unlocks": "u9",
       "lessons": [
@@ -1795,6 +1808,7 @@
       "number": 9,
       "title": "Marks & Questions",
       "pages": "100-109, 128, 148",
+      "topic": "the marks tashdeed, hamze and tanveen; WH questions; animal vocabulary",
       "goal": "Read and write tashdeed, hamze, and tanveen; form WH questions; learn animal vocabulary.",
       "unlocks": "u10",
       "lessons": [
@@ -1886,6 +1900,7 @@
       "number": 10,
       "title": "Reading for Real",
       "pages": "110-121 + review",
+      "topic": "reading the geography passages, cumulative review of letters, words, grammar and sentences, and reading unvowelled Farsi",
       "goal": "Read the geography passages aloud, review all four sections, and read unvowelled Farsi text — the actual finish line, since real Farsi mostly drops the diacritics beginners rely on.",
       "unlocks": null,
       "lessons": [

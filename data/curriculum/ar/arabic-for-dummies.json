@@ -12,12 +12,17 @@
     "flashCards": null
   },
   "estTotalHours": 61.1,
+  "practiceGeneration": {
+    "onDemand": true,
+    "note": "Homework and chapter tests are generated fresh by language-hub.html at request time, from only the topic label and page range below. No exercises, passages, or book text are stored in this file or sent to the generator. Every generated item cites a source page to check against the physical book."
+  },
   "units": [
     {
       "id": "u1",
       "number": 1,
       "title": "The Arabic You Already Know",
       "pages": "9-18",
+      "topic": "Arabic loanwords already in English, and a first orientation to the Arabic alphabet",
       "goal": "Recognize Arabic loanwords already in English, and get oriented to the Arabic alphabet before studying it in depth.",
       "unlocks": "u2",
       "lessons": [
@@ -141,6 +146,7 @@
       "number": 2,
       "title": "Taking a Closer Look at the Arabic Alphabet",
       "pages": "19-30",
+      "topic": "the Arabic script's letter forms, and transcription/transliteration systems",
       "goal": "Read the Arabic script's letter forms and understand how this course's transliteration system represents Arabic sounds in Roman letters.",
       "unlocks": "u3",
       "lessons": [
@@ -266,6 +272,7 @@
       "number": 3,
       "title": "Tackling Basic Arabic Grammar",
       "pages": "31-54",
+      "topic": "nouns, adjectives and articles; verb-free (nominal) sentences; past, present and future tense verbs; irregular verbs",
       "goal": "Build simple Arabic sentences using nouns, adjectives, articles, and the core verb tenses, including sentences with no verb at all.",
       "unlocks": "u4",
       "lessons": [
@@ -616,6 +623,7 @@
       "number": 4,
       "title": "Getting Started with Basic Expressions",
       "pages": "55-70",
+      "topic": "greetings, introducing yourself, nationalities, talking about the weather",
       "goal": "Greet people, introduce yourself, state your nationality, and make small talk about the weather.",
       "unlocks": "u5",
       "lessons": [
@@ -853,6 +861,7 @@
       "number": 5,
       "title": "Numbers, Dates, and Measurements",
       "pages": "71-77",
+      "topic": "numbers, days, months and dates, measurements",
       "goal": "Count, tell dates, and describe quantities and measurements in Arabic.",
       "unlocks": "u6",
       "lessons": [
@@ -1267,6 +1276,7 @@
       "number": 6,
       "title": "At the Office and Around the House",
       "pages": "79-94",
+      "topic": "office vocabulary, household objects, and everyday activities at work and at home",
       "goal": "Name common objects and describe everyday activities at the office and at home.",
       "unlocks": "u7",
       "lessons": [
@@ -1808,6 +1818,7 @@
       "number": 7,
       "title": "Getting to Know You / Small Talk",
       "pages": "95-114",
+      "topic": "key questions, talking about family and about your job, phone calls and email",
       "goal": "Carry a small-talk conversation: ask and answer key questions, talk about family and work, and communicate by phone or email.",
       "unlocks": "u8",
       "lessons": [
@@ -2065,6 +2076,7 @@
       "number": 8,
       "title": "Asking Directions",
       "pages": "115-132",
+      "topic": "asking where something is, giving and following directions, command (imperative) forms, ordinal numbers",
       "goal": "Ask where something is, understand and give directions, use command forms, and use ordinal numbers.",
       "unlocks": "u9",
       "lessons": [
@@ -2321,6 +2333,7 @@
       "number": 9,
       "title": "Eating In and Dining Out",
       "pages": "133-150",
+      "topic": "mealtimes, reading a menu, ordering food, paying the bill",
       "goal": "Talk about mealtimes, read a menu, order food, and pay at a restaurant.",
       "unlocks": "u10",
       "lessons": [
@@ -2567,6 +2580,7 @@
       "number": 10,
       "title": "Going Shopping",
       "pages": "151-170",
+      "topic": "talking about merchandise, making comparisons, buying and selling, clothes and sizes",
       "goal": "Shop for merchandise and clothes, compare items, and negotiate buying and selling.",
       "unlocks": "u11",
       "lessons": [
@@ -2824,6 +2838,7 @@
       "number": 11,
       "title": "Hitting the Town",
       "pages": "171-192",
+      "topic": "telling time, museums, movies, visiting religious sites, the Hajj",
       "goal": "Tell time and talk about a night or day out — museums, movies, and visiting religious sites, including the Hajj.",
       "unlocks": "u12",
       "lessons": [
@@ -3137,6 +3152,7 @@
       "number": 12,
       "title": "Business and Telecommunicating",
       "pages": "193-206",
+      "topic": "business vocabulary, and telecommunicating — phones and computers",
       "goal": "Handle basic business conversation and talk about phones, computers, and telecommunication.",
       "unlocks": "u13",
       "lessons": [
@@ -3275,6 +3291,7 @@
       "number": 13,
       "title": "Recreation, Music, and the Outdoors",
       "pages": "207-222",
+      "topic": "recreation and sports, music, the outdoors",
       "goal": "Talk about hobbies, recreation, music, and outdoor activities.",
       "unlocks": "u14",
       "lessons": [
@@ -3469,6 +3486,7 @@
       "number": 14,
       "title": "Planning a Trip",
       "pages": "223-232",
+      "topic": "planning and preparing for a trip",
       "goal": "Plan and prepare for a trip in Arabic.",
       "unlocks": "u15",
       "lessons": [
@@ -3550,6 +3568,7 @@
       "number": 15,
       "title": "Money in a Foreign Land",
       "pages": "233-242",
+      "topic": "money, currency exchange and banking while traveling",
       "goal": "Handle money, currency exchange, and banking while traveling.",
       "unlocks": "u16",
       "lessons": [
@@ -3631,6 +3650,7 @@
       "number": 16,
       "title": "Planes, Trains, Automobiles",
       "pages": "243-254",
+      "topic": "air, rail and road travel",
       "goal": "Talk about air, rail, and road travel.",
       "unlocks": "u17",
       "lessons": [
@@ -3713,6 +3733,7 @@
       "number": 17,
       "title": "Finding a Place to Stay",
       "pages": "255-266",
+      "topic": "finding and booking a place to stay",
       "goal": "Find and book accommodation.",
       "unlocks": "u18",
       "lessons": [
@@ -3795,6 +3816,7 @@
       "number": 18,
       "title": "Handling Emergencies",
       "pages": "267-280",
+      "topic": "medical, legal and safety emergencies",
       "goal": "Handle medical, legal, and safety emergencies in Arabic.",
       "unlocks": "u19",
       "lessons": [
@@ -3875,6 +3897,7 @@
       "number": 19,
       "title": "Ten Ways to Pick Up Arabic Quickly",
       "pages": "283-288",
+      "topic": "mixed light review, framed as practical everyday strategies for picking up Arabic quickly",
       "goal": "Apply ten practical strategies for picking up Arabic faster.",
       "unlocks": "u20",
       "lessons": [
@@ -3952,6 +3975,7 @@
       "number": 20,
       "title": "Ten Favorite Arabic Expressions",
       "pages": "289-294",
+      "topic": "ten commonly used Arabic expressions and when to use them",
       "goal": "Learn ten commonly used Arabic expressions.",
       "unlocks": "u21",
       "lessons": [
@@ -4030,6 +4054,7 @@
       "number": 21,
       "title": "Ten Great Arabic Proverbs",
       "pages": "295-300",
+      "topic": "well-known Arabic proverbs and what they mean",
       "goal": "Learn ten well-known Arabic proverbs and their meanings.",
       "unlocks": "u22",
       "lessons": [
@@ -4106,6 +4131,7 @@
       "number": 22,
       "title": "Appendixes & Reference",
       "pages": "301-352",
+      "topic": "verb conjugation tables and Arabic–English / English–Arabic mini-dictionary lookup practice",
       "goal": "Use the reference appendixes — verb conjugation tables and the mini-dictionaries — to check work and look up vocabulary.",
       "unlocks": null,
       "lessons": [

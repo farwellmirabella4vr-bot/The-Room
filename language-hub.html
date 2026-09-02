@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#150b12">
 <title>Language Hub</title>
 <script src="design-system/utils.js"></script>
+<script src="practice-prompt.js"></script>
 <style>
 
   /* ============================================================
@@ -1110,6 +1111,8 @@
   .curr-appendix-sections { margin: 0.3rem 0 0.2rem 1.1rem; font-size: 0.8rem; color: var(--text-dim); }
   .curr-gen-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
   .curr-gen { flex: 1 1 100%; }
+  .curr-gen-head { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); margin-bottom: 0.35rem; }
+  .curr-gen-actions { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .curr-gen-host { margin-top: 0.5rem; }
   .curr-gen-note, .curr-gen-error { font-size: 0.75rem; color: var(--text-dim); margin: 0.2rem 0 0.5rem; }
   .curr-gen-error { color: #b3261e; }
@@ -1119,6 +1122,9 @@
   .curr-gen-meta { font-size: 0.72rem; color: var(--secondary); margin-top: 0.15rem; }
   .curr-gen-reveal { font-size: 0.72rem; margin-top: 0.3rem; padding: 0.1rem 0.45rem; }
   .curr-gen-a { font-size: 0.82rem; margin-top: 0.3rem; padding: 0.35rem 0.55rem; background: rgba(0, 0, 0, 0.05); border-radius: 4px; white-space: pre-wrap; }
+  .curr-gen-key { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: 0.4rem; }
+  .curr-gen-key input { flex: 1 1 14rem; min-width: 0; font-size: 0.82rem; padding: 0.35rem 0.5rem; }
+  .curr-gen-key .curr-gen-note { flex: 1 1 100%; margin: 0; }
 
   .curr-progress-stats { display: flex; flex-wrap: wrap; gap: 1.6rem; margin-bottom: 1rem; }
   .curr-progress-stats > div { display: flex; flex-direction: column; gap: 0.1rem; }
@@ -3327,9 +3333,15 @@
   function ensureModuleLoaded(moduleId) {
     if (curriculumModules[moduleId] || curriculumLoadingSet.has(moduleId)) return;
     curriculumLoadingSet.add(moduleId);
-    loadCurriculumModule(moduleId).then((mod) => {
+    loadCurriculumModule(moduleId).then(async (mod) => {
       curriculumLoadingSet.delete(moduleId);
-      if (mod) { loadAudioIndexForLanguage(mod.languageId); ensureWorksheetsLoaded(mod); }
+      if (mod) {
+        loadAudioIndexForLanguage(mod.languageId);
+        ensureWorksheetsLoaded(mod);
+        // Awaited, unlike the other two, so the first render of a unit already has
+        // its banked homework in hand instead of flashing an empty generator.
+        await loadPracticeBank(mod);
+      }
       renderCurriculumRoot();
     });
   }
@@ -4786,40 +4798,109 @@
   }
 
   // ============================================================
-  // SPANISH 1 — on-demand practice generator
+  // ON-DEMAND PRACTICE GENERATOR -- every language module whose units carry a `topic`
   // Homework and chapter tests are generated fresh via the Anthropic API when
   // you click a button. The model is given ONLY the topic label and page range
   // from the module JSON — never any text from the book — and is told not to
   // recall or reconstruct the book. Every generated item cites a page to check
   // against your physical copy. Nothing is persisted: each click is a new set.
-  // Reuses the API key + model already used by the video "native breakdown".
+  // Reuses the API key + model already used by the video "native breakdown"; the key
+  // can also be pasted inline here, since local storage is per-browser and per-device.
   // ============================================================
   const curriculumPractice = {}; // `${refId}:${mode}` -> { loading } | { error } | { items } — in-memory only
+
+  // How a set is asked for lives in practice-prompt.js, shared with
+  // tools/build-practice-bank.js so a banked set and a set generated live here are
+  // asked for in exactly the same words. Loaded by the <script> tag in <head>.
+  const parsePageRanges = PracticePrompt.parsePageRanges;
+  const pageInRanges = PracticePrompt.pageInRanges;
+  const rangesLabel = PracticePrompt.rangesLabel;
+
+  // ---------- pre-generated practice bank ----------
+  // data/curriculum/<lang>/practice/<moduleId>.json, built once on the PC by
+  // tools/build-practice-bank.js and committed. Reading it means a unit's homework is
+  // on screen the moment you open it -- no API key on this device, no network call,
+  // nothing that can fail while you're trying to study.
+  const practiceBanks = {}; // moduleId -> bank JSON, or "none"
+  const practiceBankLoadingSet = new Set();
+
+  async function loadPracticeBank(mod) {
+    if (practiceBanks[mod.id] || practiceBankLoadingSet.has(mod.id)) return;
+    practiceBankLoadingSet.add(mod.id);
+    try {
+      const res = await fetch("data/curriculum/" + mod.languageId + "/practice/" + mod.id + ".json");
+      practiceBanks[mod.id] = res.ok ? await res.json() : "none";
+    } catch (e) {
+      practiceBanks[mod.id] = "none"; // a module with no bank yet just falls back to generating live
+    } finally {
+      practiceBankLoadingSet.delete(mod.id);
+    }
+  }
+
+  // Every banked set for one (unit, mode), first variant first. Sparse slots -- a set
+  // that failed during the build -- are dropped rather than shown as an empty set.
+  function bankedSetsFor(moduleId, unitId, mode) {
+    const bank = practiceBanks[moduleId];
+    if (!bank || bank === "none" || !bank.units) return [];
+    const forUnit = bank.units[unitId];
+    if (!forUnit || !Array.isArray(forUnit[mode])) return [];
+    return forUnit[mode].filter((s) => s && Array.isArray(s.items) && s.items.length);
+  }
+
+  // The same key and the same storage as the Video diary tab's "AI settings" panel --
+  // this is just a second place to paste it. Local storage is per-browser, and the key
+  // is deliberately excluded from the device sync bundle, so a phone needs its own copy
+  // and shouldn't have to go hunting in another tab to enter one.
+  function buildInlineKeyForm(onSaved) {
+    const box = document.createElement("div");
+    box.className = "curr-gen-key";
+    const input = document.createElement("input");
+    input.type = "password";
+    input.autocomplete = "off";
+    input.placeholder = "Anthropic API key (sk-ant-...)";
+    const save = document.createElement("button");
+    save.type = "button";
+    save.className = "filter-pill";
+    save.textContent = "Save key";
+    const hint = document.createElement("p");
+    hint.className = "curr-gen-note";
+    hint.textContent =
+      "Saved only in this browser's local storage \u2014 never committed to this project and never included " +
+      "in the cross-device sync bundle. Get one at console.anthropic.com, and set a spend limit on it there.";
+    save.addEventListener("click", () => {
+      const value = input.value.trim();
+      if (!value) return;
+      setAnthropicKey(value);
+      input.value = "";
+      renderApiKeyStatus();
+      if (onSaved) onSaved();
+    });
+    input.addEventListener("keydown", (e) => { if (e.key === "Enter") save.click(); });
+    box.appendChild(input);
+    box.appendChild(save);
+    box.appendChild(hint);
+    return box;
+  }
 
   async function fetchPracticeItems(spec) {
     const key = getAnthropicKey();
     if (!key) {
-      return { ok: false, error: 'No Anthropic API key saved yet. Open the Video diary tab → "Native breakdown — AI settings" and paste one in (the same key is used here).' };
+      return {
+        ok: false,
+        needsKey: true,
+        error: "This needs an Anthropic API key. It's stored per-browser, so each device needs its own \u2014 " +
+               "paste one below and it saves for next time.",
+      };
     }
     const isTest = spec.mode === "test";
-    const count = isTest ? 12 : 8;
-    const system =
-      "You generate original Spanish practice for a self-studying adult learner. You are given ONLY a " +
-      "topic label and a page range from the table of contents of a Spanish textbook. You do NOT have " +
-      "the book. Do not recall, quote, paraphrase, or reconstruct the book's explanations, examples, " +
-      "exercises, word lists, or passages. Write your own fresh items on the topic, pitched at a learner " +
-      "who has just read those pages. Never reproduce copyrighted text. Output STRICT JSON only — no " +
-      "markdown fence, no commentary.";
-    const user =
-      "Make " + (isTest ? "a chapter test" : "a homework set") + ": " + count + " items on the topic \"" + spec.topic + "\".\n" +
-      "Calibration context (do NOT try to match the book's wording): Book " + spec.bookNumber + " \"" + spec.bookTitle +
-      "\", " + spec.chapterLabel + " \"" + spec.title + "\", pages " + spec.pageStart + "-" + spec.pageEnd + ".\n" +
-      "Mix item types: fill-in-the-blank, conjugate the verb, translate a short phrase (either direction), " +
-      "correct the error, short answer. The learner writes answers by hand in a notebook — no multiple choice, " +
-      "nothing that needs a screen.\n" +
+    // Same wording the banked sets were built with. The one thing added here is the
+    // "return strict JSON" instruction -- the Node builder gets that for free from
+    // structured output, which this direct-from-the-browser call doesn't use.
+    const msg = PracticePrompt.buildMessages(spec);
+    const system = msg.system + " Output STRICT JSON only \u2014 no markdown fence, no commentary.";
+    const user = msg.user + "\n" +
       'Return JSON exactly: {"items":[{"n":1,"type":"...","skill":"grammar|vocabulary|reading|writing",' +
-      '"prompt":"...","answer":"...","checkPage":<integer ' + spec.pageStart + "-" + spec.pageEnd + '>}]}. ' +
-      "Every checkPage must be within " + spec.pageStart + "-" + spec.pageEnd + ".";
+      '"prompt":"...","answer":"...","checkPage":<integer>}]}.';
     try {
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
@@ -4831,7 +4912,7 @@
         },
         body: JSON.stringify({
           model: ANTHROPIC_MODEL,
-          max_tokens: 1600,
+          max_tokens: isTest ? 2600 : 1800,
           system: system,
           messages: [{ role: "user", content: user }],
         }),
@@ -4843,27 +4924,18 @@
       const data = await res.json();
       const text = (data.content || []).map((c) => c.text || "").join("").trim();
       const match = text.match(/\{[\s\S]*\}/);
-      if (!match) return { ok: false, error: "The model didn't return usable JSON — try again." };
+      if (!match) return { ok: false, error: "The model didn't return usable JSON \u2014 try again." };
       let parsed;
-      try { parsed = JSON.parse(match[0]); } catch (e) { return { ok: false, error: "The model's JSON didn't parse — try again." }; }
-      const items = (Array.isArray(parsed.items) ? parsed.items : [])
-        .map((it, i) => ({
-          n: i + 1,
-          type: String(it.type || "").slice(0, 40),
-          skill: String(it.skill || "").slice(0, 20),
-          prompt: String(it.prompt || "").slice(0, 700),
-          answer: String(it.answer || "").slice(0, 700),
-          checkPage: Number.isInteger(it.checkPage) && it.checkPage >= spec.pageStart && it.checkPage <= spec.pageEnd ? it.checkPage : null,
-        }))
-        .filter((it) => it.prompt);
-      if (!items.length) return { ok: false, error: "No items came back — try again." };
+      try { parsed = JSON.parse(match[0]); } catch (e) { return { ok: false, error: "The model's JSON didn't parse \u2014 try again." }; }
+      const items = PracticePrompt.normalizeItems(parsed, spec);
+      if (!items.length) return { ok: false, error: "No items came back \u2014 try again." };
       return { ok: true, items: items };
     } catch (e) {
       return { ok: false, error: "Network/request error: " + e.message };
     }
   }
 
-  function renderPracticeItems(host, state, spec) {
+  function renderPracticeItems(host, state, spec, onKeySaved) {
     host.innerHTML = "";
     if (!state) return;
     if (state.loading) { host.textContent = "Generating…"; return; }
@@ -4872,14 +4944,19 @@
       p.className = "curr-gen-error";
       p.textContent = state.error;
       host.appendChild(p);
+      if (state.needsKey) host.appendChild(buildInlineKeyForm(onKeySaved));
       return;
     }
     if (!state.items) return;
     const note = document.createElement("p");
     note.className = "curr-gen-note";
     note.textContent =
-      "Fresh set — write these out by hand in your notebook, then check each answer against the page it cites. " +
-      "Regenerate any time for a different set; nothing here is saved.";
+      (state.source === "bank"
+        ? "Write these out by hand in your notebook, then check each answer against the page it cites. " +
+          "This set is saved with the project, so it's here every time — on any device, with or without a connection."
+        : "Fresh set — write these out by hand in your notebook, then check each answer against the page it cites. " +
+          "This one was generated just now and isn't saved; regenerate any time for a different set.") +
+      (spec.pagesEstimated ? " Page numbers for this book are estimates, so treat each citation as a starting point." : "");
     host.appendChild(note);
     state.items.forEach((it) => {
       const row = document.createElement("div");
@@ -4891,7 +4968,7 @@
       row.appendChild(q);
       const meta = document.createElement("div");
       meta.className = "curr-gen-meta";
-      meta.textContent = it.checkPage ? "check p. " + it.checkPage : "check pp. " + spec.pageStart + "-" + spec.pageEnd;
+      meta.textContent = it.checkPage ? "check p. " + it.checkPage : "check pp. " + spec.pageLabel;
       row.appendChild(meta);
       if (it.answer) {
         const revealBtn = document.createElement("button");
@@ -4913,49 +4990,127 @@
     });
   }
 
-  // Adds a "Generate …" button + results area for one (refId, mode) pair.
+  // Adds one practice block -- heading, controls, results -- for a (refId, mode) pair.
+  // A banked set is shown straight away with nothing to click; the buttons are for
+  // moving to another banked set, or spending an API call on a brand new one.
   function attachPracticeGenerator(container, opts) {
     const wrap = document.createElement("div");
     wrap.className = "curr-gen";
+    const cacheKey = opts.refId + ":" + opts.spec.mode;
+    const banked = bankedSetsFor(opts.moduleId, opts.refId, opts.spec.mode);
+
+    // First look at this unit: put the banked set on screen unprompted.
+    if (banked.length && !curriculumPractice[cacheKey]) {
+      curriculumPractice[cacheKey] = { items: banked[0].items, source: "bank", bankIndex: 0 };
+    }
+
+    if (opts.heading) {
+      const head = document.createElement("div");
+      head.className = "curr-gen-head";
+      head.textContent = banked.length > 1
+        ? opts.heading + " (" + banked.length + " sets)"
+        : opts.heading;
+      wrap.appendChild(head);
+    }
+
+    const actions = document.createElement("div");
+    actions.className = "curr-gen-actions";
+    const host = document.createElement("div");
+    host.className = "curr-gen-host";
+
+    // Cycles the banked variants -- free, offline, and the button most people want.
+    let nextBtn = null;
+    if (banked.length > 1) {
+      nextBtn = document.createElement("button");
+      nextBtn.type = "button";
+      nextBtn.className = "filter-pill";
+      const syncNextLabel = () => {
+        const state = curriculumPractice[cacheKey];
+        const at = state && state.source === "bank" ? state.bankIndex : -1;
+        nextBtn.textContent = "Another set (" + (((at + 1) % banked.length) + 1) + " of " + banked.length + ")";
+      };
+      nextBtn.addEventListener("click", () => {
+        const state = curriculumPractice[cacheKey];
+        const at = state && state.source === "bank" ? state.bankIndex : -1;
+        const idx = (at + 1) % banked.length;
+        curriculumPractice[cacheKey] = { items: banked[idx].items, source: "bank", bankIndex: idx };
+        renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec, run);
+        syncNextLabel();
+      });
+      syncNextLabel();
+      actions.appendChild(nextBtn);
+    }
+
+    // Spends an API call. Only worth it once the banked sets are used up, so it's
+    // worded as the secondary option whenever there's anything banked.
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "filter-pill";
-    const cacheKey = opts.refId + ":" + opts.spec.mode;
-    btn.textContent = curriculumPractice[cacheKey] && curriculumPractice[cacheKey].items ? "Regenerate" : opts.buttonLabel;
-    const host = document.createElement("div");
-    host.className = "curr-gen-host";
-    renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
-    btn.addEventListener("click", async () => {
+    const liveLabel = banked.length ? "Generate a new one" : opts.buttonLabel;
+    const cached = curriculumPractice[cacheKey];
+    btn.textContent = cached && cached.items && cached.source !== "bank" ? "Regenerate" : liveLabel;
+
+    // Handed to the inline key form as its "saved" callback too, so pasting a key
+    // into the error state goes straight on to generate the set you asked for.
+    const run = async () => {
       curriculumPractice[cacheKey] = { loading: true };
       btn.disabled = true;
-      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
-      const result = await fetchPracticeItems(opts.spec);
-      curriculumPractice[cacheKey] = result.ok ? { items: result.items } : { error: result.error };
-      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec);
+      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec, run);
+      // Told which variant it is so a new set doesn't retread the banked ones.
+      const result = await fetchPracticeItems(Object.assign({}, opts.spec, { variant: banked.length + 1 }));
+      curriculumPractice[cacheKey] = result.ok
+        ? { items: result.items, source: "live" }
+        : { error: result.error, needsKey: !!result.needsKey };
+      renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec, run);
       btn.disabled = false;
-      btn.textContent = result.ok ? "Regenerate" : opts.buttonLabel;
-    });
-    wrap.appendChild(btn);
+      btn.textContent = result.ok ? "Regenerate" : liveLabel;
+      if (nextBtn) nextBtn.textContent = "Back to set 1 of " + banked.length;
+    };
+    btn.addEventListener("click", run);
+    actions.appendChild(btn);
+
+    renderPracticeItems(host, curriculumPractice[cacheKey], opts.spec, run);
+    wrap.appendChild(actions);
     wrap.appendChild(host);
     container.appendChild(wrap);
   }
 
-  function attachUnitPractice(details, unit) {
-    if (!unit.topic) return;
-    const parts = String(unit.pages).split("-");
-    const spec = {
-      bookNumber: unit.bookNumber,
-      bookTitle: unit.bookTitle || "",
-      chapterLabel: unit.chapterNumber != null ? "Chapter " + unit.chapterNumber : (unit.appendix ? "Appendix " + unit.appendix : "Chapter"),
+  // Everything the generator learns about a unit comes from the module's own
+  // metadata -- topic label, chapter title, page range. Never the scanned pages.
+  function practiceSpecForUnit(mod, unit) {
+    const ranges = parsePageRanges(unit.pages);
+    if (!ranges.length) return null;
+    const lang = LANGUAGES.find((l) => l.id === mod.languageId);
+    return {
+      languageId: mod.languageId,
+      languageName: mod.practiceLanguageName || (lang ? lang.name : mod.languageId),
+      bookNumber: unit.bookNumber != null ? unit.bookNumber : null,
+      bookTitle: unit.bookTitle || (mod.source && mod.source.book) || mod.title || "",
+      chapterLabel: unit.chapterNumber != null
+        ? "Chapter " + unit.chapterNumber
+        : (unit.appendix ? "Appendix " + unit.appendix : "Unit " + unit.number),
       title: unit.title,
       topic: unit.topic,
-      pageStart: Number(parts[0]),
-      pageEnd: Number(parts[1] || parts[0]),
+      pageLabel: rangesLabel(ranges),
+      ranges: ranges,
+      pagesEstimated: !!mod.pageRangesNote,
     };
+  }
+
+  function attachUnitPractice(mod, details, unit) {
+    if (!unit.topic) return;
+    const spec = practiceSpecForUnit(mod, unit);
+    if (!spec) return;
     const row = document.createElement("div");
     row.className = "curr-gen-row";
-    attachPracticeGenerator(row, { refId: unit.id, buttonLabel: "Generate homework", spec: Object.assign({}, spec, { mode: "homework" }) });
-    attachPracticeGenerator(row, { refId: unit.id, buttonLabel: "Generate chapter test", spec: Object.assign({}, spec, { mode: "test" }) });
+    attachPracticeGenerator(row, {
+      moduleId: mod.id, refId: unit.id, heading: "Homework",
+      buttonLabel: "Generate homework", spec: Object.assign({}, spec, { mode: "homework" }),
+    });
+    attachPracticeGenerator(row, {
+      moduleId: mod.id, refId: unit.id, heading: "Chapter test",
+      buttonLabel: "Generate chapter test", spec: Object.assign({}, spec, { mode: "test" }),
+    });
     details.appendChild(row);
   }
 
@@ -4992,18 +5147,25 @@
       if (ap.drill) {
         const row = document.createElement("div");
         row.className = "curr-gen-row";
+        const drillRanges = [{ start: ap.drill.pageStart, end: ap.drill.pageEnd }];
+        const drillLang = LANGUAGES.find((l) => l.id === mod.languageId);
         attachPracticeGenerator(row, {
+          moduleId: mod.id,
           refId: "appendix-" + ap.appendix,
+          heading: "Conjugation drill",
           buttonLabel: "Generate conjugation drill",
           spec: {
             mode: "homework",
+            languageId: mod.languageId,
+            languageName: mod.practiceLanguageName || (drillLang ? drillLang.name : mod.languageId),
             bookNumber: 5,
             bookTitle: (refBook && refBook.title) || "Appendixes",
             chapterLabel: "Appendix " + ap.appendix,
             title: ap.title,
             topic: ap.drill.topic,
-            pageStart: ap.drill.pageStart,
-            pageEnd: ap.drill.pageEnd,
+            pageLabel: rangesLabel(drillRanges),
+            ranges: drillRanges,
+            pagesEstimated: false,
           },
         });
         d.appendChild(row);
@@ -5054,7 +5216,7 @@
 
     unit.lessons.forEach((lesson) => details.appendChild(buildLessonRow(mod, unit, lesson)));
 
-    attachUnitPractice(details, unit);
+    attachUnitPractice(mod, details, unit);
 
     const cpRow = document.createElement("div");
     cpRow.className = "curr-checkpoint-row";

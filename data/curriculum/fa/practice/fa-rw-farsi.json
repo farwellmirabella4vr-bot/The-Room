@@ -1,0 +1,1810 @@
+{
+  "moduleId": "fa-rw-farsi",
+  "languageId": "fa",
+  "note": "Pre-generated practice. Original items written for this topic label and page range only -- no text, exercises, or examples from the book are stored here. Rebuild with tools/build-practice-bank.js.",
+  "model": "claude-sonnet-5",
+  "setsPerMode": 1,
+  "generatedAt": "2026-09-02",
+  "units": {
+    "u1": {
+      "homework": [
+        {
+          "id": "u1-homework-1",
+          "pageLabel": "5-10",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which Farsi letter represents the sound 'kh' (like the 'ch' in Scottish 'loch')? Write the letter and its name.",
+              "answer": "خ (khe) — pronounced like the 'ch' in 'loch'",
+              "checkPage": 6
+            },
+            {
+              "n": 2,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Name the Farsi letter that makes the 'zh' sound (like the 's' in English 'measure'), and give one Farsi word that contains it.",
+              "answer": "ژ (zhe), e.g. ژاله (zhāleh, 'dew')",
+              "checkPage": 6
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the missing letter to complete the word for 'expensive': گ_ران (g___ān) — the missing letter makes the deep, throaty 'gh' sound.",
+              "answer": "غ — گران (gerān)",
+              "checkPage": 7
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the blank with the correct letter for the 'ein' sound (a throat-catching sound with no English equivalent) in the word for 'Arabic': _َرَبی (___abi)",
+              "answer": "ع — عَرَبی (arabi)",
+              "checkPage": 7
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "A student wrote that stress in Farsi words usually falls on the FIRST syllable, as in English. Correct this statement about Farsi stress placement.",
+              "answer": "Stress in Farsi usually falls on the LAST syllable of a word (e.g., ایران - irān, stress on 'rān').",
+              "checkPage": 8
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English, paying attention to which syllable is stressed: کتاب (ketāb)",
+              "answer": "book (stress falls on the last syllable: ke-TĀB)",
+              "checkPage": 8
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Colloquial spoken Farsi often shortens the formal ending. Fill in the colloquial form: Formal: می‌روم (mi-ravam, 'I go') → Colloquial: می‌___ (mi-___)",
+              "answer": "می‌رم (mi-ram)",
+              "checkPage": 9
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "In casual spoken Farsi, the formal word نمی‌دانم (nemidānam, 'I don't know') is often shortened. Write the common colloquial pronunciation.",
+              "answer": "نمی‌دونم (nemidoonam)",
+              "checkPage": 10
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u1-test-1",
+          "pageLabel": "5-10",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which Farsi letter represents the sound 'kh' (a raspy sound like in Scottish 'loch')? Write the letter and one example word containing it.",
+              "answer": "خ (kh) — example: خانه (khāneh) meaning 'house'",
+              "checkPage": 6
+            },
+            {
+              "n": 2,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which Farsi letter represents the sound 'zh' (like the 's' in 'measure')? Write the letter and one example word containing it.",
+              "answer": "ژ (zh) — example: ژاله (zhāleh) meaning 'dew'",
+              "checkPage": 6
+            },
+            {
+              "n": 3,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which Farsi letter represents the sound 'gh' (a guttural sound produced at the back of the throat)? Write the letter and one example word containing it.",
+              "answer": "غ (gh) — example: باغ (bāgh) meaning 'garden'",
+              "checkPage": 6
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "The letter ع (ein) represents a sound not found in English. Describe briefly (in your own words) how it is typically pronounced by learners, and give one example word containing it.",
+              "answer": "It is a tight constriction in the throat (a glottal/pharyngeal stop); example: عصر (asr) meaning 'afternoon'",
+              "checkPage": 7
+            },
+            {
+              "n": 5,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct letter (خ, ژ, or غ) to complete the word for 'newspaper': رو____نامه (rū____nāmeh)",
+              "answer": "ز — روزنامه (rūznāmeh) — wait, correct letter is ز not from the given set; use ژورنال instead: ژورنال (zhūrnāl) meaning 'journal'",
+              "checkPage": 6
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "A student wrote the word for 'garden' as باق (bāq) using ق (q) instead of the correct throat-sound letter. Write the correct spelling using غ.",
+              "answer": "باغ (bāgh)",
+              "checkPage": 6
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "In Farsi words, which syllable usually carries the main stress: the first, middle, or last syllable?",
+              "answer": "The last syllable",
+              "checkPage": 8
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Mark the stressed syllable (underline it) in the word خانه (khāneh, 'house'), which has two syllables: خا-نه (khā-neh).",
+              "answer": "نه (neh) is stressed — خا-نه (khā-NEH)",
+              "checkPage": 8
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English: «من دانشجو هستم» (man dāneshjū hastam) — this is the formal/written form.",
+              "answer": "I am a student.",
+              "checkPage": 9
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Give the informal/colloquial spoken equivalent of the formal sentence «من دانشجو هستم» (man dāneshjū hastam, 'I am a student'), which typically shortens 'hastam' to 'am'.",
+              "answer": "من دانشجو ام (man dāneshjū-am)",
+              "checkPage": 9
+            },
+            {
+              "n": 11,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "A learner wrote the colloquial contraction of «می‌روم» (mīravam, 'I go/am going') as «میرم» but misspelled it as «میروم» in casual speech style. Write the correct colloquial spoken form.",
+              "answer": "میرم (mīram)",
+              "checkPage": 9
+            },
+            {
+              "n": 12,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the formal written verb form: او به مدرسه می‌____. (ū be madreseh mī-____.) — 'He/she goes to school.' (use formal 'ravad' form: می‌رود)",
+              "answer": "رود — می‌رود (mīravad)",
+              "checkPage": 9
+            }
+          ]
+        }
+      ]
+    },
+    "u2": {
+      "homework": [
+        {
+          "id": "u2-homework-1",
+          "pageLabel": "11-18",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Write the three short vowel signs (اِعراب - e'rāb) used in Farsi and name the sound each represents (e.g., َ = a).",
+              "answer": "َ (zebar) = a, ِ (zir) = e, ُ (pish) = o",
+              "checkPage": 12
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct long vowel letter to complete the word meaning 'wind': ب__د (b__d) — بـ_د = باد (bād)",
+              "answer": "ا (ā)",
+              "checkPage": 13
+            },
+            {
+              "n": 3,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Name the two diphthongs in Farsi and give one example word for each (write the Farsi word with transliteration and English meaning).",
+              "answer": "او (ow) as in نَو (now) 'new'; ای (ey) as in کِی (key) 'when'",
+              "checkPage": 14
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi numerals (not words): the number 47.",
+              "answer": "۴۷",
+              "checkPage": 16
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: عدد ۱۰۲ (adad-e sad-o-do)",
+              "answer": "the number 102",
+              "checkPage": 17
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the mistake in this transliteration of the Farsi digit ۶: the learner wrote 'shesh' as 'shash'. Write the correct transliteration.",
+              "answer": "shesh",
+              "checkPage": 15
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the missing short vowel sign to make the word سَر (sar, meaning 'head'): س _ ر",
+              "answer": "َ (zebar, the 'a' sound)",
+              "checkPage": 11
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Write out in Farsi numerals the multi-digit number for 'nine hundred and thirteen' (نهصد و سیزده - noh-sad-o sizdah).",
+              "answer": "۹۱۳",
+              "checkPage": 18
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u2-test-1",
+          "pageLabel": "11-18",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Write the Persian (Eastern Arabic-Indic) numeral for the number ۵ Five (5).",
+              "answer": "۵",
+              "checkPage": 16
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Write the Persian numeral for the number Zero (0).",
+              "answer": "۰",
+              "checkPage": 16
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Write the number 47 (forty-seven) using Persian digits.",
+              "answer": "۴۷",
+              "checkPage": 17
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Convert the Persian numeral ۹۸ into ordinary English (Arabic) digits.",
+              "answer": "98",
+              "checkPage": 17
+            },
+            {
+              "n": 5,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Name the three short-vowel diacritics used in Farsi (give the Farsi terms for the 'a', 'e', and 'o' vowel marks).",
+              "answer": "فَتحه (fatheh), کِسره (kasreh), ضَمّه (zamme)",
+              "checkPage": 11
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "Persian has two diphthongs. Give one example word for each: the /ey/ diphthong and the /ow/ diphthong.",
+              "answer": "/ey/: می (mey, 'wine'); /ow/: نو (now, 'new')",
+              "checkPage": 12
+            },
+            {
+              "n": 7,
+              "type": "correct the error",
+              "skill": "writing",
+              "prompt": "A student wrote the number 34 (thirty-four) in Persian digits as ۴۳. Write the corrected numeral.",
+              "answer": "۳۴",
+              "checkPage": 18
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "The letters ز (ze), ذ (zâl), ض (zâd), and ___ all represent the same sound /z/ in Modern Persian. Fill in the missing letter.",
+              "answer": "ظ (zoe)",
+              "checkPage": 14
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi script (write the word, not the digit): 'one hundred'.",
+              "answer": "صد (sad)",
+              "checkPage": 18
+            },
+            {
+              "n": 10,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "Which letter of the Persian alphabet has no sound of its own and is used only as a 'seat' for a vowel or glottal stop at the start of a word, as in اَب (ab, 'water')?",
+              "answer": "ا (alef)",
+              "checkPage": 15
+            },
+            {
+              "n": 11,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "The consonant skeleton م ر د (m-r-d) can be read two ways depending on the short vowel used. Write the vowel-marked form that means 'died' (past tense of 'to die').",
+              "answer": "مُرد (mord)",
+              "checkPage": 13
+            },
+            {
+              "n": 12,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Convert the multi-digit Persian numeral ۱۳۷۵ into ordinary English digits.",
+              "answer": "1375",
+              "checkPage": 18
+            }
+          ]
+        }
+      ]
+    },
+    "u3": {
+      "test": [
+        {
+          "id": "u3-test-1",
+          "pageLabel": "20-34, 131-132",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "What is the name of the Persian letter \"ر\"? (Answer in Latin transliteration or Farsi)",
+              "answer": "ré (ر)",
+              "checkPage": 21
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Write the Persian letter that makes the sound \"m\" as in \"مادر\" (mâdar, mother): ___",
+              "answer": "م",
+              "checkPage": 23
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Using only the letters ا (alef), ب (be), د (dâl), ر (re) — with no vowels added — write the Persian word for \"rain\": بـ ا ر ا ن → ___",
+              "answer": "باران",
+              "checkPage": 30
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Combine م، ا، د، ر to spell the Persian word for \"mother\": ___",
+              "answer": "مادر (mâdar)",
+              "checkPage": 28
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: سَلام (salâm)",
+              "answer": "hello",
+              "checkPage": 131
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: \"goodbye\"",
+              "answer": "خداحافظ (khodâhâfez)",
+              "checkPage": 132
+            },
+            {
+              "n": 7,
+              "type": "reorder / correct the error",
+              "skill": "grammar",
+              "prompt": "Rearrange these three words into a correct Persian sentence (Subject–Object–Verb order): می‌خورم (mikhoram, I eat) / نان (nân, bread) / من (man, I)",
+              "answer": "من نان می‌خورم (man nân mikhoram) – \"I eat bread.\"",
+              "checkPage": 132
+            },
+            {
+              "n": 8,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "This sentence has the wrong word order for Persian. Rewrite it correctly:\nمن می‌خورم نان (man mikhoram nân)",
+              "answer": "من نان می‌خورم (man nân mikhoram)",
+              "checkPage": 132
+            },
+            {
+              "n": 9,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "In basic Persian sentences, what is the standard word order called (in English)? (Give the three-letter abbreviation)",
+              "answer": "SOV (Subject–Object–Verb)",
+              "checkPage": 132
+            },
+            {
+              "n": 10,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Farsi: \"I am Sara.\" (use the verb هستم, hastam)",
+              "answer": "من سارا هستم (man Sârâ hastam)",
+              "checkPage": 131
+            },
+            {
+              "n": 11,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct form of \"to be\" for او (u, he/she): او دانشجو ___ (u dâneshju ___, \"He/she is a student.\")",
+              "answer": "است (ast)",
+              "checkPage": 131
+            },
+            {
+              "n": 12,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Using only the letters ا، س، م، ن، آ (alef, seen, meem, noon, âlef-madd), spell the Persian word for \"sky\": ___",
+              "answer": "آسمان (âsemân)",
+              "checkPage": 26
+            }
+          ]
+        }
+      ],
+      "homework": [
+        {
+          "id": "u3-homework-1",
+          "pageLabel": "20-34, 131-132",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter identification",
+              "skill": "vocabulary",
+              "prompt": "این حروف را به ترتیب الفبا بنویسید (نام هر حرف را هم بگویید): س، ب، آ، ن (Write these letters in alphabetical order and name each one): س (seen), ب (be), آ (alef-e boland), ن (noon)",
+              "answer": "آ (alef-e boland), ب (be), ن (noon), س (seen)",
+              "checkPage": 22
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با یکی از حروف «د، ر، م» پر کنید تا کلمه‌ی «مادر» (mādar - mother) کامل شود: ما___ر (Fill in the blank with one of the letters د, ر, م to complete the word ماد‌ر 'mādar' - mother): ما___ر",
+              "answer": "د",
+              "checkPage": 24
+            },
+            {
+              "n": 3,
+              "type": "translate (Farsi to English)",
+              "skill": "reading",
+              "prompt": "این عبارت سلام را به انگلیسی ترجمه کنید (Translate this greeting into English): «سلام، حالِ شما چطور است؟» (salām, hāl-e shomā chetor ast?)",
+              "answer": "Hello, how are you? (formal)",
+              "checkPage": 131
+            },
+            {
+              "n": 4,
+              "type": "translate (English to Farsi)",
+              "skill": "writing",
+              "prompt": "این جمله را به فارسی ترجمه کنید (Translate into Farsi): \"Good morning.\"",
+              "answer": "صبح بخیر (sobh bekheyr)",
+              "checkPage": 131
+            },
+            {
+              "n": 5,
+              "type": "word order correction",
+              "skill": "grammar",
+              "prompt": "ترتیب کلمات این جمله اشتباه است. آن را به ترتیب درستِ فارسی (فاعل-مفعول-فعل) بازنویسی کنید (This word order is wrong for Farsi SOV order; rewrite it correctly): «می‌بیند مریم کتاب را» (mibinad Maryam ketāb rā) - meant to mean \"Maryam sees the book.\"",
+              "answer": "مریم کتاب را می‌بیند (Maryam ketāb rā mibinad)",
+              "checkPage": 132
+            },
+            {
+              "n": 6,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «دیدن» (didan - to see) را برای ضمیر «من» (man - I) در زمان حال ساده بنویسید (Conjugate 'didan' - to see - for 'man' - I - in the simple present)",
+              "answer": "می‌بینم (mibinam)",
+              "checkPage": 132
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "در الفبای فارسی، کدام حرف صدای «n» می‌دهد: ب، ن، د، یا س؟ (In the Farsi alphabet, which letter makes the 'n' sound: ب, ن, د, or س?)",
+              "answer": "ن (noon)",
+              "checkPage": 21
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "جای خالی را با کلمه‌ی مناسب سلام و خداحافظی پر کنید (Fill in the blank with the appropriate farewell word): وقتی از دوستم جدا می‌شوم می‌گویم: «___» (When I part from my friend, I say: ___) — hint: means 'goodbye'",
+              "answer": "خداحافظ (khodāhāfez)",
+              "checkPage": 131
+            }
+          ]
+        }
+      ]
+    },
+    "u4": {
+      "homework": [
+        {
+          "id": "u4-homework-1",
+          "pageLabel": "35-50, 133, 138",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "Write the isolated, initial, medial, and final forms of the letter «ک» (kāf).",
+              "answer": "Isolated: ک — Initial: کـ — Medial: ـکـ — Final: ـک",
+              "checkPage": 37
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct letter «ز» (ze) to complete the word for 'life': ندگی (____ندگی) (zendegi, 'life')",
+              "answer": "زندگی (zendegi)",
+              "checkPage": 39
+            },
+            {
+              "n": 3,
+              "type": "personal pronouns",
+              "skill": "grammar",
+              "prompt": "Translate into Farsi: 'we' and 'they' (write both pronouns).",
+              "answer": "ما (mā) = we, آنها (ānhā) = they",
+              "checkPage": 42
+            },
+            {
+              "n": 4,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb «بودن» (budan, 'to be') in the present tense for the pronoun «تو» (to, 'you' singular).",
+              "answer": "تو هستی (to hasti) — 'you are'",
+              "checkPage": 43
+            },
+            {
+              "n": 5,
+              "type": "plural formation",
+              "skill": "grammar",
+              "prompt": "Form the plural of «کتاب» (ketāb, 'book') using the plural suffix «ها» (hā).",
+              "answer": "کتاب‌ها (ketāb-hā) — 'books'",
+              "checkPage": 45
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this plural form: «دوست‌ان» (dust-ān) meant to mean 'friends'.",
+              "answer": "دوستان (dustān) — no extra hyphen/space needed; correct form is دوستان",
+              "checkPage": 46
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "reading",
+              "prompt": "Translate into English: «او دانشجو است» (u dāneshju ast).",
+              "answer": "'He/she is a student.'",
+              "checkPage": 133
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "writing",
+              "prompt": "Write the Farsi word for 'water' using the letter «و» (v/o/u) correctly: آ_ (āb, 'water') — fill in the missing letter.",
+              "answer": "آب (āb) — the missing letter is «ب» (b), and «و» is not needed here; write the full word: آب",
+              "checkPage": 138
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u4-test-1",
+          "pageLabel": "35-50, 133, 138",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "identify",
+              "skill": "vocabulary",
+              "prompt": "Write the isolated form and name of the letter that makes the \"t\" sound covered in this unit: تـ ت (te). What is its name?",
+              "answer": "تِ (te)",
+              "checkPage": 35
+            },
+            {
+              "n": 2,
+              "type": "identify",
+              "skill": "vocabulary",
+              "prompt": "Name this letter and give the sound it makes: ز (zе).",
+              "answer": "زِ (ze) — makes the \"z\" sound",
+              "checkPage": 37
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Fill in the blank with the correct letter (ع): م___نی (m_ni) meaning \"meaning\".",
+              "answer": "معنی (ma'ni)",
+              "checkPage": 39
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "writing",
+              "prompt": "Complete the word with the letter ک (kaaf): ___تاب (_tāb) meaning \"book\".",
+              "answer": "کتاب (ketāb)",
+              "checkPage": 41
+            },
+            {
+              "n": 5,
+              "type": "identify",
+              "skill": "vocabulary",
+              "prompt": "This unit covers two letters that can represent vowel sounds as well as consonants: ی and و. Give the consonant sound of each.",
+              "answer": "ی = \"y\" as in یار (yār); و = \"v\" as in وارد (vāred)",
+              "checkPage": 45
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: \"I\" (personal pronoun).",
+              "answer": "مَن (man)",
+              "checkPage": 133
+            },
+            {
+              "n": 7,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: \"they\" (personal pronoun).",
+              "answer": "آنها (ānhā) / ایشان (ishān)",
+              "checkPage": 133
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the missing personal pronoun: ___ دانشجو هستم (___ dāneshju hastam) meaning \"I am a student\".",
+              "answer": "من (man)",
+              "checkPage": 133
+            },
+            {
+              "n": 9,
+              "type": "conjugate",
+              "skill": "grammar",
+              "prompt": "Give the correct present-tense form of «هستن» to be for «تو» (to = you, singular): تو ___ (to ___) meaning \"you are\".",
+              "answer": "تو هستی (to hasti)",
+              "checkPage": 133
+            },
+            {
+              "n": 10,
+              "type": "plural-formation",
+              "skill": "grammar",
+              "prompt": "Form the plural of کتاب (ketāb, \"book\") using the regular ها ending.",
+              "answer": "کتاب‌ها (ketāb-hā)",
+              "checkPage": 138
+            },
+            {
+              "n": 11,
+              "type": "plural-formation",
+              "skill": "grammar",
+              "prompt": "Form the plural of دوست (dust, \"friend\") using the regular ان ending (for animate nouns).",
+              "answer": "دوستان (dustān)",
+              "checkPage": 138
+            },
+            {
+              "n": 12,
+              "type": "correct-error",
+              "skill": "grammar",
+              "prompt": "Correct the error in this sentence: «ما کتاب‌ان داریم» (mā ketāb-ān dārim) meaning \"We have books.\" (The plural ending is wrong for this noun.)",
+              "answer": "ما کتاب‌ها داریم (mā ketāb-hā dārim)",
+              "checkPage": 138
+            }
+          ]
+        }
+      ]
+    },
+    "u5": {
+      "homework": [
+        {
+          "id": "u5-homework-1",
+          "pageLabel": "51-64, 122-124, 134",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter recognition",
+              "skill": "reading",
+              "prompt": "Write the isolated forms of the six letters پ (p), ش (sh), ف (f), و (v/o), گ (g), ق (gh) in their correct order, left to right.",
+              "answer": "پ ش ف و گ ق",
+              "checkPage": 52
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the word for 'father' by filling in the missing letter: پ_ر (p_r)",
+              "answer": "پدر (pedar) — fill in 'د' (d)",
+              "checkPage": 56
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: 'my mother' (use مادر (mādar) and the possessive ـم suffix)",
+              "answer": "مادرم (mādaram)",
+              "checkPage": 57
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "grammar",
+              "prompt": "Translate into English: این پسر (in pesar)",
+              "answer": "this boy",
+              "checkPage": 60
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "grammar",
+              "prompt": "Translate into Farsi: 'that girl' (use دختر (dokhtar))",
+              "answer": "آن دختر (ān dokhtar)",
+              "checkPage": 61
+            },
+            {
+              "n": 6,
+              "type": "correct-the-error",
+              "skill": "grammar",
+              "prompt": "Correct the demonstrative error in this sentence: این کتاب‌ها آن جالب است. (in ketāb-hā ān jāleb ast.) — intended meaning: 'These books are interesting.'",
+              "answer": "این کتاب‌ها جالب است. (in ketāb-hā jāleb ast.) — remove the extra 'آن'",
+              "checkPage": 62
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the correct family word: برادر من و _______ من در خانه هستند. (barādar-e man va _______-e man dar khāne hastand.) — meaning: 'My brother and my sister are at home.'",
+              "answer": "خواهر (khāhar)",
+              "checkPage": 58
+            },
+            {
+              "n": 8,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which of the six letters پ ش ف و گ ق changes shape most drastically between its isolated and initial forms — name that letter and briefly describe the difference (one sentence, in English).",
+              "answer": "گ (g) — in its isolated/final form it has a tall loop, while in initial/medial form the loop flattens and connects directly to the next letter.",
+              "checkPage": 53
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u5-test-1",
+          "pageLabel": "51-64, 122-124, 134",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "بنویسید: حرف «پ» (pe) را در حالت آغازی، میانی، و پایانی بنویسید. (Write the letter پ in initial, medial, and final forms.)",
+              "answer": "پـ / ـپـ / ـپ",
+              "checkPage": 52
+            },
+            {
+              "n": 2,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "بنویسید: حرف «ق» (qāf) را در حالت آغازی، میانی، و پایانی بنویسید. (Write the letter ق in initial, medial, and final forms.)",
+              "answer": "قـ / ـقـ / ـق",
+              "checkPage": 58
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با حرف درست پر کنید: ___ َدَر (father) — کلمه‌ی «پدر» را کامل کنید با اولین حرف. (Fill in the blank with the correct letter to complete the word for 'father': ___دَر)",
+              "answer": "پ (پدَر)",
+              "checkPage": 51
+            },
+            {
+              "n": 4,
+              "type": "translate (Farsi→English)",
+              "skill": "vocabulary",
+              "prompt": "این کلمه را به انگلیسی ترجمه کنید: «مادَر» (mādar)",
+              "answer": "mother",
+              "checkPage": 51
+            },
+            {
+              "n": 5,
+              "type": "translate (English→Farsi)",
+              "skill": "vocabulary",
+              "prompt": "این کلمه را به فارسی ترجمه کنید: 'brother'",
+              "answer": "برادَر (barādar)",
+              "checkPage": 51
+            },
+            {
+              "n": 6,
+              "type": "translate (English→Farsi)",
+              "skill": "vocabulary",
+              "prompt": "این کلمه را به فارسی ترجمه کنید: 'sister'",
+              "answer": "خواهَر (khāhar)",
+              "checkPage": 51
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "جای خالی را با «این» یا «آن» پر کنید (اشاره به چیزی نزدیک): ___ کتاب خوب است. (Fill the blank with 'این' or 'آن' — pointing to something near: ___ ketāb khub ast. 'This book is good.')",
+              "answer": "این (in)",
+              "checkPage": 63
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "جای خالی را با «این» یا «آن» پر کنید (اشاره به چیزی دور): ___ خانه بزرگ است. (Fill the blank pointing to something far: ___ khāne bozorg ast. 'That house is big.')",
+              "answer": "آن (ān)",
+              "checkPage": 63
+            },
+            {
+              "n": 9,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله را تصحیح کنید (اشاره به چیزی نزدیک است): «آن کتاب اینجاست.» (Correct this sentence — it points to something near: 'Ān ketāb injāst.' meaning 'This book is here.')",
+              "answer": "این کتاب اینجاست. (in ketāb injāst)",
+              "checkPage": 63
+            },
+            {
+              "n": 10,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "به فارسی بنویسید: کلمه‌ی «پسر» (پ + س + ر) به چه معناست؟ (What does the word پسر mean?)",
+              "answer": "son / boy",
+              "checkPage": 51
+            },
+            {
+              "n": 11,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "بنویسید: حرف «گ» (gāf) را در حالت آغازی، میانی، و پایانی بنویسید. (Write the letter گ in initial, medial, and final forms.)",
+              "answer": "گـ / ـگـ / ـگ",
+              "checkPage": 57
+            },
+            {
+              "n": 12,
+              "type": "translate (Farsi→English)",
+              "skill": "reading",
+              "prompt": "این جمله را به انگلیسی ترجمه کنید: «این دُخْتَر خواهَر مَن است.» (in dokhtar khāhar-e man ast.)",
+              "answer": "This girl is my sister.",
+              "checkPage": 64
+            }
+          ]
+        }
+      ]
+    },
+    "u6": {
+      "homework": [
+        {
+          "id": "u6-homework-1",
+          "pageLabel": "65-80, 125-126, 141-142",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "Write the isolated and initial forms of the letter «چ» (che) and give one Farsi word that begins with it (e.g., a word for 'umbrella' or similar).",
+              "answer": "چ (isolated), چـ (initial); example: چَتر (chatr) = umbrella",
+              "checkPage": 66
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct ezâfe construction: خانه‌یِ ___ (khâne-ye ___) meaning 'the house of the teacher' — use the word مُعَلِّم (mo'allem, teacher).",
+              "answer": "خانه‌یِ معلّم (khâne-ye mo'allem)",
+              "checkPage": 126
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: 'cold weather' (use هوا for weather and سرد for cold, with correct adjective order).",
+              "answer": "هوایِ سرد (havâ-ye sard)",
+              "checkPage": 141
+            },
+            {
+              "n": 4,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error in this ezâfe phrase: کتاب مُعَلِّم (kitâb mo'allem) meaning 'the teacher's book'.",
+              "answer": "کتابِ معلّم (kitâb-e mo'allem) — the ezâfe vowel -e was missing.",
+              "checkPage": 126
+            },
+            {
+              "n": 5,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Name three Farsi words for parts of the body that you learned, and write them with their English meanings (e.g., دست = hand).",
+              "answer": "Example: دَست (dast) = hand, سَر (sar) = head, چِشم (cheshm) = eye",
+              "checkPage": 141
+            },
+            {
+              "n": 6,
+              "type": "letter recognition",
+              "skill": "writing",
+              "prompt": "The letter «خ» (khe) and «ح» (he) look similar to «ج» (jeem) in shape but differ by dots. Write all three letters in their isolated forms and label which has no dot, one dot below, and one dot above.",
+              "answer": "ح (no dot), ج (one dot below), خ (one dot above)",
+              "checkPage": 65
+            },
+            {
+              "n": 7,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb بودن (budan, 'to be') in the present tense for او (u, he/she) describing weather: 'It is hot.' Use گرم (garm, hot) + هوا (havâ, weather).",
+              "answer": "هوا گرم است (havâ garm ast)",
+              "checkPage": 141
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into English: چِشمِ آبی (cheshm-e âbi)",
+              "answer": "blue eye",
+              "checkPage": 142
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u6-test-1",
+          "pageLabel": "65-80, 125-126, 141-142",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "writing",
+              "skill": "reading",
+              "prompt": "Write the isolated form of the Persian letter \"che\" (که در فارسی چ نامیده می‌شود) and give one Persian word that begins with it.",
+              "answer": "چ — چای (chây, \"tea\")",
+              "checkPage": 66
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the missing first letter to complete the word for \"forest\": ___نگل (____angal)",
+              "answer": "ج (so the word is جنگل, jangal)",
+              "checkPage": 68
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "Fill in the missing letter to complete the word for \"tall/long\": ب___ند (b___land)",
+              "answer": "ل (so the word is بلند, boland)",
+              "checkPage": 70
+            },
+            {
+              "n": 4,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Which two of the letters you studied in this unit (خ, چ, ه, ج, ل, و) look almost identical in their isolated forms except for the number of dots, one being written with no dot and the other with one dot below?",
+              "answer": "ج (jeem, no dot shown alone but takes dot below) and چ (che, three dots below) — but specifically ح-like comparison: the pair with the clearest dot difference is چ (che, three dots) vs ج (jeem, one dot)",
+              "checkPage": 68
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: چشمِ آبی (cheshm-e âbi)",
+              "answer": "blue eye",
+              "checkPage": 142
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Persian using ezâfe: \"the color of the sky\"",
+              "answer": "رنگِ آسمان (rang-e âsemân)",
+              "checkPage": 125
+            },
+            {
+              "n": 7,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the word order in this Persian adjective phrase: بزرگ دست (bozorg dast) — meant to say \"big hand\"",
+              "answer": "دستِ بزرگ (dast-e bozorg)",
+              "checkPage": 126
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct ezâfe form: مادرِ ___ (using «من» to mean \"my mother\")",
+              "answer": "مادرِ من (mâdar-e man)",
+              "checkPage": 126
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Persian: \"It is cold today.\"",
+              "answer": "امروز هوا سرد است (emrooz havâ sard ast)",
+              "checkPage": 141
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the blank with the Persian word for \"sunny\": هوای امروز ___ است (havâ-ye emrooz ___ ast)",
+              "answer": "آفتابی (âftâbi)",
+              "checkPage": 141
+            },
+            {
+              "n": 11,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate «بودن» (to be) in the simple present for «ما» in the sentence: ما ___ سرد ___. (We are cold.)",
+              "answer": "ما سرد هستیم (mâ sard hastim)",
+              "checkPage": 126
+            },
+            {
+              "n": 12,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Correct the mistaken use of ezâfe in this phrase (a pronoun already shows possession, so no extra ezâfe vowel should be written): کتاب‌ِ من (ketâb-e man) meant to say \"my book\"",
+              "answer": "کتاب من (ketâb man) — no ezâfe vowel is written before a pronoun of possession",
+              "checkPage": 126
+            }
+          ]
+        }
+      ]
+    },
+    "u7": {
+      "homework": [
+        {
+          "id": "u7-homework-1",
+          "pageLabel": "81-90, 127, 143",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter recognition",
+              "skill": "reading",
+              "prompt": "Write the isolated form and name of the letter «ژ» and give one Farsi word that contains it (e.g., a color word).",
+              "answer": "ژ (zhe) - example: ژاکت (zhāket) = jacket",
+              "checkPage": 82
+            },
+            {
+              "n": 2,
+              "type": "letter recognition",
+              "skill": "reading",
+              "prompt": "The letters «ص» (sād) and «س» (sin) sound identical in modern Farsi. Write one word using «ص» and one word using «س».",
+              "answer": "Example: صابون (sābun) = soap; سیب (sib) = apple",
+              "checkPage": 83
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Complete the sentence with the correct preposition: من ___ رستوران غذا می‌خورم. (man ___ resturān ghazā mikhoram) = 'I eat food ___ the restaurant.'",
+              "answer": "در (dar) - در رستوران (dar resturān) = in the restaurant",
+              "checkPage": 86
+            },
+            {
+              "n": 4,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to Farsi: 'bread and cheese' (use the words نان and پنیر)",
+              "answer": "نان و پنیر (nān o panir)",
+              "checkPage": 85
+            },
+            {
+              "n": 5,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb خریدن (kharidan, 'to buy') in the simple past tense for the third person singular (او): او ___ (u ___) 'he/she bought'",
+              "answer": "او خرید (u kharid)",
+              "checkPage": 88
+            },
+            {
+              "n": 6,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error in this sentence: من از مغازه نان خریدم. (man az maghāzeh nān kharidam) - the preposition is wrong for 'from the store', it should mean 'to the store'.",
+              "answer": "من به مغازه رفتم و نان خریدم (man be maghāzeh raftam va nān kharidam) - 'از' should be 'به' if meaning going to the store, or the sentence is correct if meaning 'I bought bread from the store' (از = from is actually correct here); revised: the original sentence is grammatically fine, no error - if error intended, correct preposition for 'from' is 'از' which was already used correctly.",
+              "checkPage": 86
+            },
+            {
+              "n": 7,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "Write the Farsi word for 'restaurant' using the letter ط (ت) properly, and give its transliteration.",
+              "answer": "رستوران (resturān) = restaurant",
+              "checkPage": 90
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate to English: میوه و سبزی در بازار ارزان است. (mive o sabzi dar bāzār arzān ast)",
+              "answer": "Fruit and vegetables are cheap in the market.",
+              "checkPage": 127
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u7-test-1",
+          "pageLabel": "81-90, 127, 143",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "letter identification",
+              "skill": "reading",
+              "prompt": "Name the Persian letter and give its transliteration: ژ",
+              "answer": "ژ (zhe) — pronounced like English 'zh' as in 'measure'",
+              "checkPage": 82
+            },
+            {
+              "n": 2,
+              "type": "letter identification",
+              "skill": "reading",
+              "prompt": "Name the Persian letter and give its transliteration: ص",
+              "answer": "ص (sād) — pronounced like English 's'",
+              "checkPage": 83
+            },
+            {
+              "n": 3,
+              "type": "letter identification",
+              "skill": "reading",
+              "prompt": "Name the Persian letter and give its transliteration: ح",
+              "answer": "ح (he) — a throaty 'h' sound, pronounced like English 'h'",
+              "checkPage": 84
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the missing letter to complete the word for 'watermelon': هند‌_انه (hend-___āneh) — use و or ز؟",
+              "answer": "هندوانه (hendevāneh)",
+              "checkPage": 85
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: رستوران (restorān)",
+              "answer": "restaurant",
+              "checkPage": 86
+            },
+            {
+              "n": 6,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: 'grocery store'",
+              "answer": "مغازه‌ی خواربارفروشی (maghāze-ye khvārbār-forūshi) or بقالی (baghāli)",
+              "checkPage": 86
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the correct preposition: من ___ رستوران می‌روم (man ___ restorān mi-ravam) — 'I am going to the restaurant.'",
+              "answer": "به (be)",
+              "checkPage": 127
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the correct preposition: کتاب ___ میز است (ketāb ___ miz ast) — 'The book is on the table.'",
+              "answer": "روی (ruye)",
+              "checkPage": 127
+            },
+            {
+              "n": 9,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate خریدن (kharidan, 'to buy') in the simple past for 'او' (u, 'he/she'): او نان ___ (u nān ___).",
+              "answer": "خرید (kharid)",
+              "checkPage": 143
+            },
+            {
+              "n": 10,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the error: من از مغازه پنیر خریدم و به آن گوشت هم خریدم. (man az maghāze panir kharidam va be ān gūsht ham kharidam.) — intended meaning: 'I bought cheese from the store and also bought meat there.'",
+              "answer": "من از مغازه پنیر خریدم و از آن گوشت هم خریدم. (az ān, not be ān)",
+              "checkPage": 127
+            },
+            {
+              "n": 11,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "Write the Farsi word for 'menu' (as used in a restaurant) with its transliteration.",
+              "answer": "منو (menu)",
+              "checkPage": 86
+            },
+            {
+              "n": 12,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Farsi: 'The waiter brought the food to the table.'",
+              "answer": "گارسون غذا را به میز آورد. (gārson ghazā rā be miz āvard.)",
+              "checkPage": 90
+            }
+          ]
+        }
+      ]
+    },
+    "u8": {
+      "homework": [
+        {
+          "id": "u8-homework-1",
+          "pageLabel": "91-99, 144-145",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "identify letter",
+              "skill": "reading",
+              "prompt": "Look at the word عَکس (aks, 'photo'). Which of the four target letters (ع، غ، ث، ذ) appears at the beginning of this word? Write the letter and its name.",
+              "answer": "ع (ein) — the word begins with ع (ein).",
+              "checkPage": 92
+            },
+            {
+              "n": 2,
+              "type": "identify letter",
+              "skill": "reading",
+              "prompt": "The word ذِهن (zehn, 'mind') starts with a letter that is often confused with د (dâl). Write which of the four target letters begins this word and give its name.",
+              "answer": "ذ (zâl/zaal) — the word begins with ذ (zaal).",
+              "checkPage": 93
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "Fill in the missing letter to complete the word for 'thick' — غَلی_ظ (gh_ liz). Choose from ع، غ، ث، ذ to fill the first blank (the very first letter of the word).",
+              "answer": "غ — غَلیظ (ghaliz, 'thick')",
+              "checkPage": 94
+            },
+            {
+              "n": 4,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb رفتن (raftan, 'to go') in the present tense for او (u, 'he/she'). The present stem is رو (row).",
+              "answer": "او می‌رَوَد (u miravad) — 'he/she goes'",
+              "checkPage": 97
+            },
+            {
+              "n": 5,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb خوردن (khordan, 'to eat') in the present tense for ما (mâ, 'we'). The present stem is خور (khor).",
+              "answer": "ما می‌خوریم (mâ mikhorim) — 'we eat'",
+              "checkPage": 97
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "What is the present-tense stem of the verb دیدن (didan, 'to see')? Give just the stem, not the full conjugated verb.",
+              "answer": "بین (bin)",
+              "checkPage": 95
+            },
+            {
+              "n": 7,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the mistake in this conjugation: تو می‌نویسَند (to minevisand) — meaning 'you (singular) write'.",
+              "answer": "تو می‌نویسی (to minevisi) — the ending باید 'ی-' برای دومّ‌شخص مفرد باشد، نه '-َند'.",
+              "checkPage": 98
+            },
+            {
+              "n": 8,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "Translate into Farsi: 'They write letters.' Use the verb نوشتن (neveshtan, 'to write'), present stem نویس (nevis).",
+              "answer": "آن‌ها نامه می‌نویسند (ânhâ nâme minevisand)",
+              "checkPage": 99
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u8-test-1",
+          "pageLabel": "91-99, 144-145",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "vocabulary",
+              "prompt": "در کلمهٔ «عَکس» (aks – photo), حرف اول چه نام دارد؟ (What is the name of the first letter in the word عکس (aks – photo)?)",
+              "answer": "عین (Ein)",
+              "checkPage": 91
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با حرف درست پُر کنید: غ_ذا (___azâ – food) → کلمهٔ کامل چیست؟",
+              "answer": "غذا (ghazâ)",
+              "checkPage": 92
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با حرف «ث» یا «س» پُر کنید: ثانیه/سانیه (___âniye – second, unit of time) — کدام درست است؟",
+              "answer": "ثانیه (sâniye)",
+              "checkPage": 93
+            },
+            {
+              "n": 4,
+              "type": "correct the error",
+              "skill": "writing",
+              "prompt": "این کلمه غلط نوشته شده است، آن را درست کنید: «زوق» (zoогh – taste/enthusiasm)",
+              "answer": "ذوق (zoq)",
+              "checkPage": 94
+            },
+            {
+              "n": 5,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با حرف درست پُر کنید: ذ_ره (___arre – particle) → کلمهٔ کامل چیست؟",
+              "answer": "ذره (zarre)",
+              "checkPage": 95
+            },
+            {
+              "n": 6,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «رفتن» (raftan – to go) را برای «او» (u – he/she) در زمان حال بنویسید.",
+              "answer": "او می‌رود (u miravad)",
+              "checkPage": 96
+            },
+            {
+              "n": 7,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «خوردن» (khordan – to eat) را برای «ما» (mâ – we) در زمان حال بنویسید.",
+              "answer": "ما می‌خوریم (mâ mikhorim)",
+              "checkPage": 97
+            },
+            {
+              "n": 8,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "جای خالی را با پایانهٔ درست فعل حال پُر کنید: من می‌نویس___ (man minevis___ – I write)",
+              "answer": "م (am) → می‌نویسم (minevisam)",
+              "checkPage": 98
+            },
+            {
+              "n": 9,
+              "type": "translate a short phrase",
+              "skill": "writing",
+              "prompt": "این جمله را به فارسی ترجمه کنید: \"You (plural) write.\"",
+              "answer": "شما می‌نویسید (shomâ minevisid)",
+              "checkPage": 99
+            },
+            {
+              "n": 10,
+              "type": "translate a short phrase",
+              "skill": "reading",
+              "prompt": "این جمله را به انگلیسی ترجمه کنید: «او می‌رود.» (u miravad)",
+              "answer": "He/she goes.",
+              "checkPage": 144
+            },
+            {
+              "n": 11,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "ستاک حال فعل «خواندن» (khândan – to read) چیست؟",
+              "answer": "خوان (khân)",
+              "checkPage": 145
+            },
+            {
+              "n": 12,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله غلط است، آن را درست کنید: «تو می‌روم.» (to miravam)",
+              "answer": "تو می‌روی (to miravi)",
+              "checkPage": 98
+            }
+          ]
+        }
+      ]
+    },
+    "u9": {
+      "homework": [
+        {
+          "id": "u9-homework-1",
+          "pageLabel": "100-109, 128, 148",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "توضیح بدهید علامت تشدید (tashdid) روی حرف چه کاری انجام می‌دهد؟ مثال بزنید با کلمه‌ی «مُدَرِّس» (mo-dar-res, 'teacher').",
+              "answer": "تشدید نشان می‌دهد که یک حرف باید دو بار (با یک صدا) تلفظ شود، بدون آنکه دوباره نوشته شود. مثلاً «مُدَرِّس» یعنی mo-dar-res، که «ر» دو بار تلفظ می‌شود.",
+              "checkPage": 101
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "علامت تشدید را روی حرف درست در کلمه‌ی «حَمّام» (hammâm, 'bathroom') بگذارید: حَ_ام (haم باید دوبار تلفظ شود).",
+              "answer": "حَمّام (ح-َ-م-ّ-ا-م)",
+              "checkPage": 101
+            },
+            {
+              "n": 3,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "همزه (hamze) در کلمه‌ی «سؤال» (so'âl, 'question') روی چه حرفی نوشته می‌شود و چه صدایی نشان می‌دهد؟",
+              "answer": "همزه روی «و» نوشته می‌شود و یک توقف صوتی کوتاه (glottal stop) بین دو هجا نشان می‌دهد: so-'âl.",
+              "checkPage": 103
+            },
+            {
+              "n": 4,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "تنوین (tanvin) را به کلمه‌ی «مثلاً» اضافه کنید تا معنی «for example» بدهد: مث_ ـاً (mesalan).",
+              "answer": "مثلاً (mesalan) — تنوین نصب روی الف نوشته می‌شود.",
+              "checkPage": 105
+            },
+            {
+              "n": 5,
+              "type": "translate",
+              "skill": "vocabulary",
+              "prompt": "این جمله را به فارسی ترجمه کنید: 'What is this animal?' (با استفاده از کلمه‌ی پرسشی «چه»)",
+              "answer": "این چه حیوانی است؟ (in che heyvâni ast?)",
+              "checkPage": 128
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "جای خالی را با کلمه‌ی پرسشی مناسب پر کنید: «___ گربه در باغ است؟» (Why is the cat in the garden?)",
+              "answer": "چرا (cherâ)",
+              "checkPage": 128
+            },
+            {
+              "n": 7,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله اشتباه نوشته شده؛ آن را تصحیح کنید: «کجا سگ شما است؟» (منظور: Where is your dog?)",
+              "answer": "سگ شما کجا است؟ (sag-e shomâ kojâ ast?)",
+              "checkPage": 128
+            },
+            {
+              "n": 8,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «دیدن» (didan, 'to see') را در زمان حال ساده برای «او» (u, 'he/she') در جمله‌ی «او اسب را ___» (He sees the horse) بنویسید.",
+              "answer": "می‌بیند (mibinad)",
+              "checkPage": 148
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u9-test-1",
+          "pageLabel": "100-109, 128, 148",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "What does the mark تشدید (tashdid) indicate when placed above a letter? Answer in English.",
+              "answer": "It indicates that the consonant is doubled (pronounced twice / geminated).",
+              "checkPage": 101
+            },
+            {
+              "n": 2,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Add the تشدید (tashdid) mark to show the doubled consonant in the word مدرسه (madrese, 'school') is NOT needed here — instead, write the correct tashdid version of دیشب no... Rewrite this word with tashdid correctly placed: علی معلم است و درسش سخت است. Which word needs tashdid to mean 'his lesson' pronounced with a doubled 's'? Write درس with the doubled -s ending: درس___ (dars__).",
+              "answer": "درسّش (darassh) — note: doubling shown by tashdid over the س before ش",
+              "checkPage": 101
+            },
+            {
+              "n": 3,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with a hamze (ء) carrying word: رئیس ما مرد خوبی است. What does رئیس (ra'is) mean in English? _____",
+              "answer": "boss / chief / president",
+              "checkPage": 103
+            },
+            {
+              "n": 4,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "Find and correct the mistake in the use of hamze in this word: سوال written incorrectly as سوآل. Write the correct form.",
+              "answer": "سؤال (so'āl, 'question')",
+              "checkPage": 103
+            },
+            {
+              "n": 5,
+              "type": "short answer",
+              "skill": "grammar",
+              "prompt": "What does the mark تنوین (tanvin), specifically تنوین نصب (an), typically signal about a borrowed Arabic word's grammatical function? Answer in English.",
+              "answer": "It shows the word is being used as an adverb (often equivalent to '-ly' in English), like مثلاً (masalan, 'for example').",
+              "checkPage": 105
+            },
+            {
+              "n": 6,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Complete with the correct tanvin ending: او همیشه اتفاق_____ (etefāq__, 'accidentally/by chance') به من زنگ می‌زند.",
+              "answer": "اتفاقاً (etefāqan)",
+              "checkPage": 105
+            },
+            {
+              "n": 7,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: 'The cat is chasing the dog.' (گربه = cat, سگ = dog)",
+              "answer": "گربه سگ را دنبال می‌کند (gorbe sag rā donbāl mikonad)",
+              "checkPage": 128
+            },
+            {
+              "n": 8,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "Translate into English: اسب و گاو در مزرعه هستند (asb o gāv dar mazrae hastand)",
+              "answer": "The horse and the cow are in the farm.",
+              "checkPage": 128
+            },
+            {
+              "n": 9,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct WH question word: _____ (___) این کتاب را نوشته است؟ (Who wrote this book?)",
+              "answer": "چه کسی (che kasi)",
+              "checkPage": 107
+            },
+            {
+              "n": 10,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "Fill in the blank with the correct WH question word: تو _____ (___) به مدرسه می‌روی؟ (When do you go to school?)",
+              "answer": "کِی (key)",
+              "checkPage": 107
+            },
+            {
+              "n": 11,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "Conjugate the verb پرسیدن (porsidan, 'to ask') in the simple past for 'she asked': او _____ .",
+              "answer": "او پرسید (u porsid)",
+              "checkPage": 109
+            },
+            {
+              "n": 12,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "Translate into Farsi: 'Why is the bird flying?' (پرنده = bird, پرواز کردن = to fly)",
+              "answer": "چرا پرنده پرواز می‌کند؟ (cherā parande parvāz mikonad?)",
+              "checkPage": 148
+            }
+          ]
+        }
+      ]
+    },
+    "u10": {
+      "homework": [
+        {
+          "id": "u10-homework-1",
+          "pageLabel": "110-121",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "vocabulary",
+              "prompt": "جای خالی را با کلمه‌ی مناسب پر کنید (واژه‌ی فارسی برای «آسیا» را بنویسید):\nایران در قارّه‌ی ____ قرار دارد.\n(Irān dar qārre-ye ____ qarār dārad.) — \"Iran is located on the continent of ____.\"",
+              "answer": "آسیا (Āsiā)",
+              "checkPage": 111
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «داشتن» (dāshtan, to have) را در زمان حال، سوم شخص مفرد، در جای خالی بنویسید:\nاین کشور جمعیت زیادی ____ .\n(In keshvar jam'iyyat-e ziādi ____.) — \"This country has a large population.\"",
+              "answer": "دارد (dārad)",
+              "checkPage": 113
+            },
+            {
+              "n": 3,
+              "type": "translate a short phrase",
+              "skill": "vocabulary",
+              "prompt": "این عبارت را به فارسی ترجمه کنید: \"the capital of Iran\"",
+              "answer": "پایتخت ایران (pāytakht-e Irān)",
+              "checkPage": 112
+            },
+            {
+              "n": 4,
+              "type": "translate a short phrase",
+              "skill": "reading",
+              "prompt": "این جمله‌ی بدون اعراب را به انگلیسی ترجمه کنید:\nاین رودخانه از کوه سرچشمه میگیرد.",
+              "answer": "\"This river originates from the mountain.\" (In rudkhāne az kuh sarcheshme mīgirad.)",
+              "checkPage": 115
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله دارای یک خطای دستوری (عدم تطابق فعل با فاعل جمع) است. آن را اصلاح کنید:\nاین کشورها منابع طبیعی زیادی دارد.\n(In keshvarhā manābe'-e tabi'i-ye ziādi dārad.)",
+              "answer": "این کشورها منابع طبیعی زیادی دارند. (In keshvarhā manābe'-e tabi'i-ye ziādi dārand.)",
+              "checkPage": 117
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "متن بدون اعراب زیر را بخوانید و به سؤال پاسخ دهید:\nایران کشوری بزرگ در خاورمیانه است. پایتخت آن تهران است. جمعیت ایران حدود هشتاد و پنج میلیون نفر است.\nسؤال: پایتخت ایران چیست؟ (Pāytakht-e Irān chist?) — \"What is the capital of Iran?\"",
+              "answer": "تهران (Tehrān)",
+              "checkPage": 118
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "حرف اضافه‌ی مناسب را در جای خالی بنویسید:\nشهر شیراز ____ جنوب ایران قرار دارد.\n(Shahr-e Shirāz ____ jonub-e Irān qarār dārad.) — \"The city of Shiraz is located ____ the south of Iran.\"",
+              "answer": "در (dar)",
+              "checkPage": 114
+            },
+            {
+              "n": 8,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «بودن» (budan, to be) را در زمان حال، سوم شخص جمع، در جای خالی بنویسید:\nکوه‌های زاگرس در غرب ایران ____ .\n(Kuh-hā-ye Zāgros dar gharb-e Irān ____.) — \"The Zagros mountains are in the west of Iran.\"",
+              "answer": "هستند (hastand)",
+              "checkPage": 119
+            }
+          ]
+        }
+      ],
+      "test": [
+        {
+          "id": "u10-test-1",
+          "pageLabel": "110-121",
+          "pagesEstimated": false,
+          "items": [
+            {
+              "n": 1,
+              "type": "fill-in-the-blank",
+              "skill": "reading",
+              "prompt": "جای خالی را با کلمهٔ مناسب پُر کنید: تهران پایتختِ ____ است. (Fill in the blank: Tehrān is the capital of ____.) Options implied by context: ایران",
+              "answer": "ایران (Irān) — 'Tehran is the capital of Iran.'",
+              "checkPage": 112
+            },
+            {
+              "n": 2,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «رفتن» (raftan - to go) را برای «ما» در زمان حال ساده در این جمله بنویسید: ما هر سال به شیراز ____. (We go to Shiraz every year.)",
+              "answer": "می‌رویم (mi-ravim)",
+              "checkPage": 114
+            },
+            {
+              "n": 3,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "این جمله را به فارسی ترجمه کنید: 'The city of Isfahan is in the center of Iran.'",
+              "answer": "شهرِ اصفهان در مرکزِ ایران است. (shahr-e Esfahān dar markaz-e Irān ast.)",
+              "checkPage": 111
+            },
+            {
+              "n": 4,
+              "type": "translate unvowelled text",
+              "skill": "reading",
+              "prompt": "این جملهٔ بی‌اعراب را بخوانید و به انگلیسی ترجمه کنید: ایران کشوری در خاورمیانه است",
+              "answer": "Iran is a country in the Middle East. (with vowels: ایران کشوری در خاورمیانه است — Irān kešvari dar khāvar-e miyāne ast.)",
+              "checkPage": 110
+            },
+            {
+              "n": 5,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله اشتباه است، آن را درست کنید: من و دوستم به کوه‌های البرز رفتم. (I and my friend went to the Alborz mountains.)",
+              "answer": "من و دوستم به کوه‌های البرز رفتیم. (man va doostam be kuh-hā-ye Alborz raftim.) — the verb must agree with the plural subject 'ما'.",
+              "checkPage": 115
+            },
+            {
+              "n": 6,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "این متنِ کوتاه را بخوانید و به سؤال پاسخ دهید: «رودِ کارون بزرگ‌ترین رودِ ایران است و در جنوب‌غربیِ کشور جریان دارد.» سؤال: بزرگ‌ترین رودِ ایران چه نام دارد؟",
+              "answer": "رودِ کارون (rud-e Kārun)",
+              "checkPage": 117
+            },
+            {
+              "n": 7,
+              "type": "fill-in-the-blank",
+              "skill": "grammar",
+              "prompt": "حرفِ اضافهٔ درست را در جای خالی بنویسید: مشهد ____ شمال‌شرقیِ ایران قرار دارد. (Mashhad is located ____ the northeast of Iran.)",
+              "answer": "در (dar)",
+              "checkPage": 112
+            },
+            {
+              "n": 8,
+              "type": "conjugate the verb",
+              "skill": "grammar",
+              "prompt": "فعل «بودن» (budan - to be) را برای «آن‌ها» در زمان گذشته در این جمله بنویسید: آن‌ها دیروز در کوهستان ____. (They were in the mountains yesterday.)",
+              "answer": "بودند (budand)",
+              "checkPage": 114
+            },
+            {
+              "n": 9,
+              "type": "translate",
+              "skill": "writing",
+              "prompt": "این عبارت را به فارسی ترجمه کنید: 'north, south, east, and west'",
+              "answer": "شمال، جنوب، شرق و غرب (shomāl, jonub, shargh va gharb)",
+              "checkPage": 111
+            },
+            {
+              "n": 10,
+              "type": "read unvowelled text and add vowels",
+              "skill": "reading",
+              "prompt": "این جملهٔ بی‌اعراب را با علامت‌های اعرابیِ درست بازنویسی کنید: دریای خزر در شمال ایران است",
+              "answer": "دَریایِ خَزَر دَر شُمالِ ایران اَست. (daryā-ye Khazar dar shomāl-e Irān ast.)",
+              "checkPage": 110
+            },
+            {
+              "n": 11,
+              "type": "correct the error",
+              "skill": "grammar",
+              "prompt": "این جمله اشتباه است، آن را درست کنید: کویر لوت یکی از خشک‌ترین جاها در دنیا هستند.",
+              "answer": "کویر لوت یکی از خشک‌ترین جاها در دنیا است. (kavir-e Lut yeki az khoshktarin jāhā dar donyā ast.) — subject 'کویر لوت' is singular, so the verb must be singular «است», not «هستند».",
+              "checkPage": 115
+            },
+            {
+              "n": 12,
+              "type": "short answer",
+              "skill": "reading",
+              "prompt": "این متن را بخوانید و به سؤال پاسخ دهید: «جمعیتِ ایران بیش از هشتاد و پنج میلیون نفر است و بیشترِ مردم در شهرها زندگی می‌کنند.» سؤال: بیشترِ مردمِ ایران کجا زندگی می‌کنند؟",
+              "answer": "در شهرها (dar shahr-hā) — most people live in cities.",
+              "checkPage": 118
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
