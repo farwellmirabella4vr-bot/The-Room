@@ -1137,8 +1137,8 @@
               "n": 6,
               "type": "correct the error",
               "skill": "grammar",
-              "prompt": "Find and correct the error in this sentence: من از مغازه نان خریدم. (man az maghāzeh nān kharidam) - the preposition is wrong for 'from the store', it should mean 'to the store'.",
-              "answer": "من به مغازه رفتم و نان خریدم (man be maghāzeh raftam va nān kharidam) - 'از' should be 'به' if meaning going to the store, or the sentence is correct if meaning 'I bought bread from the store' (از = from is actually correct here); revised: the original sentence is grammatically fine, no error - if error intended, correct preposition for 'from' is 'از' which was already used correctly.",
+              "prompt": "A student wanted to say 'I bought bread from the store' and wrote: من به مغازه نان خریدم (man be maghāzeh nān kharidam). The preposition is wrong. Write the corrected sentence.",
+              "answer": "من از مغازه نان خریدم (man az maghāzeh nān kharidam) — از (az) is 'from'; به (be) means 'to', which is what made the original say 'to the store'.",
               "checkPage": 86
             },
             {

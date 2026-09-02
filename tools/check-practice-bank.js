@@ -19,8 +19,16 @@ const REPO = path.resolve(__dirname, "..");
 // looser drafts of this list flagged sixteen healthy items -- any answer with the
 // word "wait" in it, any two-option translation ending in "?" -- and buried the
 // three real breakages, so it is deliberately narrow now.
+//
+// A bare /\bactually\b/ was in that narrow list and still cried wolf once, on
+// "'embarazada' looks like 'embarrassed' but actually means 'pregnant'" -- an
+// ordinary English intensifier in a perfectly good item. What marks a real
+// self-correction is the model ruling on its OWN item's validity, or visibly
+// restarting the answer, so match those shapes rather than the word alone.
 const SELF_CORRECTION = [
-  /\bactually\b/i, /\bthe intended (target|word|answer)\b/i, /\bI mean\b/i, /\bignore (that|the above)\b/i,
+  /\bactually (correct|fine|right|wrong|incorrect|the same)\b/i,
+  /\brevised\s*:/i, /\bno error\b/i, /\bif (an )?error (is |was )?intended\b/i,
+  /\bthe intended (target|word|answer)\b/i, /\bI mean\b/i, /\bignore (that|the above)\b/i,
 ];
 
 function problems(item) {
