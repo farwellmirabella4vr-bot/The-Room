@@ -2007,7 +2007,8 @@
   // ------------------------------------------------------------
   const LANGUAGES = [
     { id: "es", name: "Spanish", native: "Español", flag: "🇪🇸", greeting: "¡Bienvenido!", tagline: "Continue exploring" },
-    { id: "fa", name: "Dari", native: "فارسی دری", flag: "🇦🇫", greeting: "خوش آمدید", tagline: "Continue your journey", rtl: true },
+    { id: "fa", name: "Farsi (Persian)", native: "فارسی", flag: "🇮🇷", greeting: "خوش آمدید", tagline: "Continue your journey", rtl: true },
+    { id: "prs", name: "Dari", native: "دری", flag: "🇦🇫", greeting: "خوش آمدید", tagline: "Continue your journey", rtl: true },
     { id: "ar", name: "Arabic", native: "العربية", flag: "🇸🇦", greeting: "مرحباً", tagline: "Continue learning", rtl: true },
     { id: "pt", name: "Portuguese", native: "Português", flag: "🇵🇹", greeting: "Bem-vindo!", tagline: "Continue your journey" },
   ];
@@ -4039,6 +4040,16 @@
       { rank: 5, name: "Travels independently", afterCheckpoint: "u18cp" },
       { rank: 6, name: "Speaks idiomatically", afterCheckpoint: "u21cp" },
     ],
+    "prs-dari-intro": [
+      { rank: 0, name: "Just starting out", afterCheckpoint: null },
+      { rank: 1, name: "Alphabet & survival phrases", afterCheckpoint: "u1cp" },
+      { rank: 2, name: "Can meet and greet", afterCheckpoint: "u2cp" },
+      { rank: 3, name: "Talks about family & work", afterCheckpoint: "u3cp" },
+      { rank: 4, name: "Discusses society & traditions", afterCheckpoint: "u4cp" },
+      { rank: 5, name: "Describes leisure time", afterCheckpoint: "u5cp" },
+      { rank: 6, name: "Shops around the city", afterCheckpoint: "u6cp" },
+      { rank: 7, name: "Handles housing & chores", afterCheckpoint: "u7cp" },
+    ],
   };
   const SRS_INTERVAL_STEPS = [1, 3, 7, 16, 35]; // days; halved on a lapse instead of stepping back
 
@@ -5447,7 +5458,7 @@
   // to the others") -- languageId -> that theme's own accent hex, since
   // this view shows multiple languages at once and can't lean on a
   // single active [data-lang-theme] the way everything else does. ----
-  const LANGUAGE_COLOR = { es: "#c1440e", fa: "#1b6f8c", ar: "#0f7a3d" };
+  const LANGUAGE_COLOR = { es: "#c1440e", fa: "#1b6f8c", prs: "#7a4fb5", ar: "#0f7a3d" };
   function buildCompareView() {
     const wrap = document.createElement("div");
     wrap.className = "curr-compare";

@@ -23,6 +23,14 @@
       "subtitle": "Gail Stein et al., Wiley (For Dummies) — 534 pages, 5 books / 31 chapter-units",
       "file": "es/spanish-1.json",
       "addedOn": "2026-08-29"
+    },
+    {
+      "id": "prs-dari-intro",
+      "languageId": "prs",
+      "title": "Dari: An Introductory Course",
+      "subtitle": "Language Mentors International, 2023 — 400 pages, 7 chapters / 14 lessons",
+      "file": "prs/dari-intro.json",
+      "addedOn": "2026-09-05"
     }
   ]
 }
