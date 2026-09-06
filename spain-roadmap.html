@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#150b12">
+<title>Spain Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     SPAIN ROADMAP — a personal, step-by-step relocation plan.
+     Ported from a standalone checklist into The Room: same warm
+     terracotta / parchment look, but it now saves to THIS browser
+     (localStorage key "room-spain-roadmap-v1") and rides the
+     "Sync Across Devices" bundle in nest-of-knowledge.html, so it
+     travels PC <-> phone like the other rooms.
+
+     The idea is a game: one clear next move at a time. The first
+     unchecked step anywhere in the list is marked "NEXT". Check it
+     off, the next one lights up. Every line is editable; add or
+     remove steps and whole phases freely.
+     ============================================================ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 28px 18px 72px;
+    background: #F7F1E6;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #2B2620;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #A79C89;
+    text-decoration: none;
+  }
+  .back-link:hover { color: #B5563A; }
+
+  .eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #B5563A;
+    margin-bottom: 6px;
+  }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 28px;
+    margin: 0 0 6px;
+    color: #23201A;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #7A7264;
+    margin: 0 0 20px;
+    line-height: 1.55;
+  }
+
+  .clocks {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .clock {
+    flex: 1;
+    min-width: 150px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 10px rgba(43,38,32,0.06);
+  }
+  .clock-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #A79C89; }
+  .clock-value { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; color: #B5563A; margin-top: 3px; }
+  .clock-sub { font-size: 11.5px; color: #A79C89; margin-top: 1px; }
+
+  .progress-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(43,38,32,0.06);
+  }
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .progress-label { font-size: 13px; color: #7A7264; font-weight: 500; }
+  .progress-pct { font-family: 'Fraunces', serif; font-size: 20px; font-weight: 600; color: #B5563A; }
+  .progress-track {
+    height: 8px;
+    background: #F0E9DA;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #C1502E, #D98B3F);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .phase {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 10px rgba(43,38,32,0.06);
+  }
+  .phase.done { opacity: 0.72; }
+  .phase-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .phase-num {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C1502E, #A8542F);
+    color: #fff;
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .phase.done .phase-num { background: linear-gradient(135deg, #6FA03F, #4F8A2F); }
+  .phase-titles { flex: 1; min-width: 0; }
+  .phase-title {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    font-weight: 600;
+    border: none;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    width: 100%;
+    padding: 2px 0;
+    color: #23201A;
+  }
+  .phase-title:focus { border-bottom: 1px solid #C1502E; outline: none; }
+  .phase-when {
+    font-size: 12.5px;
+    color: #A79C89;
+    border: none;
+    background: transparent;
+    width: 100%;
+    padding: 2px 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.02em;
+  }
+  .phase-when:focus { outline: none; color: #B5563A; }
+  .icon-btn {
+    border: none;
+    background: transparent;
+    color: #C8BFAC;
+    padding: 4px 6px;
+    cursor: pointer;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .icon-btn:hover { color: #B5563A; }
+
+  .items { margin-left: 42px; }
+  .item-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 0;
+    border-top: 1px solid #F3EDE1;
+  }
+  .item-row:first-child { border-top: none; }
+  .item-row.next-up {
+    background: #FBF3E4;
+    border-radius: 8px;
+    border-top-color: transparent;
+    padding: 8px 10px;
+    margin: 2px 0;
+    box-shadow: inset 3px 0 0 #C1502E;
+  }
+  .next-pill {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: #C1502E;
+    border-radius: 999px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+  }
+  .item-row input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    accent-color: #C1502E;
+    flex-shrink: 0;
+  }
+  .item-label {
+    flex: 1;
+    min-width: 0;
+    font-size: 14.5px;
+    line-height: 1.5;
+    border: none;
+    background: transparent;
+    padding: 2px 0;
+    font-family: 'Inter', sans-serif;
+    color: #3A342B;
+  }
+  .item-label:focus { outline: none; }
+  .item-label.checked {
+    color: #C8BFAC;
+    text-decoration: line-through;
+  }
+
+  .add-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #EDE4D2;
+  }
+  .add-input {
+    flex: 1;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid #EDE4D2;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    background: #FDFBF6;
+  }
+  .add-input:focus { outline: none; border-color: #C1502E; }
+  .add-btn {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    background: #C1502E;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  .add-phase-btn {
+    width: 100%;
+    padding: 14px;
+    border: 1.5px dashed #D9CBAF;
+    border-radius: 14px;
+    background: transparent;
+    color: #A8542F;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .note {
+    font-size: 12.5px;
+    color: #A79C89;
+    margin-top: 26px;
+    line-height: 1.7;
+    text-align: center;
+  }
+  .note a { color: #B5563A; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="back-link" href="room.html">&larr; The Room</a>
+
+  <div class="eyebrow">The plan</div>
+  <h1>Spain Roadmap</h1>
+  <p class="subtitle">One move at a time. The first unchecked step is marked <strong>NEXT</strong> &mdash; do that, and the one after it lights up. Edit any line, add steps, add phases. Saves to this device and syncs through the Nest of Knowledge sync panel.</p>
+
+  <div class="clocks">
+    <div class="clock">
+      <div class="clock-label">Day one</div>
+      <div class="clock-value" id="clockStart">&mdash;</div>
+      <div class="clock-sub">Sept 29, 2026 &middot; go all in</div>
+    </div>
+    <div class="clock">
+      <div class="clock-label">Birthday checkpoint</div>
+      <div class="clock-value" id="clockBday">&mdash;</div>
+      <div class="clock-sub">May 17, 2027 &middot; in Spain or school locked</div>
+    </div>
+  </div>
+
+  <div class="progress-card">
+    <div class="progress-row">
+      <span class="progress-label">Overall progress</span>
+      <span class="progress-pct" id="pct">0%</span>
+    </div>
+    <div class="progress-track"><div class="progress-bar" id="bar"></div></div>
+  </div>
+
+  <div id="phases"></div>
+  <button class="add-phase-btn" id="addPhaseBtn">+ Add a new phase</button>
+
+  <p class="note">
+    Everything here is editable and private to you.
+    <a id="resetBtn">Reset to the starting plan</a>
+  </p>
+
+</div>
+
+<script>
+const defaults = [
+  { title: 'Foundation', when: 'Sept 29, 2026 → spring 2027', items: [
+    'Open a dedicated Spain savings account; target about $12,000–15,000 (visa proof-of-funds is €600/month, plus a real cushion)',
+    'Check your passport covers your first year in Spain plus 3 months — renew now if it does not',
+    'Choose the city with the DEGREE in mind too, so you do not move mid-plan. Finalists: Alicante (has the real RRII degree + a uni language centre + warmest winters + city beaches), Malaga (biggest Muslim community + city, but no RRII degree = a move later), Granada (best IR + Arabic academics + cheapest + deepest community, but no beach)',
+    'Rule to hold onto: enrol at a UNIVERSITY language centre, never a private academy — that keeps the 30h/week work right and the route to university and staying (RD 1155/2024, May 2025)',
+    'Email the language centres of your top 2 cities the same 3 questions (higher-ed stream? do you issue the visa enrolment letter? annual price + start dates): Alicante Centro Superior de Idiomas, Malaga cie@uma.es, Granada CLM',
+    'Pick the city and the language centre once the answers are in',
+    'Enrol, pay the deposit, get the enrolment + payment certificate (carta de admisión)',
+    'Order the FBI Identity History Summary (12+ weeks; must be under 3 months old on appointment day — time it to the appointment), then apostille it at the US Dept of State and get it translated to Spanish'
+  ]},
+  { title: 'The student visa', when: 'Consulate General of Spain, Los Angeles — apply via BLS (Utah is in its district)', items: [
+    'Read the LA consulate + BLS student-visa checklist top to bottom (BLS Visa Application Center, 5455 Wilshire Blvd, Los Angeles) and note how appointments are booked',
+    'Buy Spain-compliant private health insurance: full coverage nationwide, no co-pays, no waiting period, no spending cap',
+    'Get the medical certificate from a doctor (standard wording the consulate specifies)',
+    'Show proof of funds: 100% of IPREM — €600/month in 2026 — times the months of your stay; aim to show around $10,000 for a full year',
+    'Get every non-English document officially translated to Spanish and apostilled',
+    'Book the BLS appointment the moment every document is in hand — submit at least 2 months before the course starts',
+    'Submit in person in Los Angeles and track the decision'
+  ]},
+  { title: 'Land in Spain', when: 'within weeks of approval', items: [
+    'Book the flight once the visa is stamped in your passport',
+    'Line up the first month of housing before you fly',
+    'Arrive and register at the town hall (empadronamiento)',
+    'Apply for the TIE foreigner ID card within 30 days of arrival',
+    'Open a Spanish bank account and get a local SIM',
+    'Find your mosque(s) and community'
+  ]},
+  { title: 'Build Spanish', when: 'through 2027', items: [
+    'Start the intensive course — near-perfect attendance (the visa depends on it)',
+    'Reach A2',
+    'Reach B1',
+    'Take a mock DELE B1, then book the real DELE or SIELE',
+    'Keep a daily Arabic habit running alongside from day one'
+  ]},
+  { title: 'Apply to university', when: '2027 → autumn 2028', items: [
+    'Confirm exact admission requirements for International Relations at 2–3 target universities',
+    'Get your high school transcript and diploma apostilled and officially translated',
+    'Do the UNEDasiss credential recognition and any PCE subject exams required of non-EU applicants',
+    'Reach the Spanish level the degree asks for (usually B2–C1)',
+    'Submit the application in the spring 2028 window',
+    'Renew your stay as a university student (same visa family, new enrolment)',
+    'Start the degree, autumn 2028'
+  ]},
+  { title: 'The degree years', when: '2028 → 2032', items: [
+    'Finish first-year coursework',
+    'Get Arabic to a testable level (ACTFL / ILR); look at a Casa Árabe course or internship',
+    'Choose a focus: international relations vs a global-policy track',
+    'Line up a summer internship each year'
+  ]},
+  { title: 'Career and beyond', when: '2032 onward', items: [
+    'Research US Foreign Service entry (the FSOT), think tanks, and roles that reward Spanish + Arabic',
+    'Apply to roles matching the language set',
+    'Decide: build from Spain or move back to the US — with real offers in hand'
+  ]}
+];
+
+let phases = null;
+const root = document.getElementById('phases');
+const STORAGE_KEY = 'room-spain-roadmap-v1';
+
+function makePhase(title, when, labels) {
+  return { title: title, when: when, items: labels.map(function(l) { return { label: l, checked: false }; }) };
+}
+
+function countdown(iso) {
+  var target = new Date(iso + 'T00:00:00');
+  var now = new Date();
+  var days = Math.round((target - now) / 86400000);
+  if (days > 1)  return { value: days + ' days', sub: 'to go' };
+  if (days === 1) return { value: 'Tomorrow', sub: '' };
+  if (days === 0) return { value: 'Today', sub: '' };
+  return { value: 'Day ' + (1 - days), sub: 'since' };
+}
+
+function renderClocks() {
+  var s = countdown('2026-09-29');
+  document.getElementById('clockStart').textContent = s.value;
+  var b = countdown('2027-05-17');
+  document.getElementById('clockBday').textContent = b.value;
+}
+
+function render() {
+  root.innerHTML = '';
+  var done = 0, total = 0;
+  var nextAssigned = false;
+
+  phases.forEach(function(phase, pIdx) {
+    var phaseTotal = phase.items.length;
+    var phaseDone = phase.items.filter(function(it) { return it.checked; }).length;
+
+    var card = document.createElement('div');
+    card.className = 'phase' + (phaseTotal > 0 && phaseDone === phaseTotal ? ' done' : '');
+
+    var head = document.createElement('div');
+    head.className = 'phase-head';
+
+    var num = document.createElement('div');
+    num.className = 'phase-num';
+    num.textContent = (phaseTotal > 0 && phaseDone === phaseTotal) ? '✓' : (pIdx + 1);
+
+    var titleWrap = document.createElement('div');
+    titleWrap.className = 'phase-titles';
+
+    var title = document.createElement('input');
+    title.className = 'phase-title';
+    title.value = phase.title;
+    title.addEventListener('change', function() { phase.title = title.value || phase.title; save(); });
+
+    var when = document.createElement('input');
+    when.className = 'phase-when';
+    when.value = phase.when;
+    when.addEventListener('change', function() { phase.when = when.value; save(); });
+
+    titleWrap.appendChild(title);
+    titleWrap.appendChild(when);
+
+    var delPhase = document.createElement('button');
+    delPhase.className = 'icon-btn';
+    delPhase.setAttribute('aria-label', 'Delete phase');
+    delPhase.textContent = '✕';
+    delPhase.addEventListener('click', function() {
+      if (!confirm('Delete the "' + phase.title + '" phase and all its steps?')) return;
+      phases.splice(pIdx, 1);
+      save();
+      render();
+    });
+
+    head.appendChild(num);
+    head.appendChild(titleWrap);
+    head.appendChild(delPhase);
+    card.appendChild(head);
+
+    var list = document.createElement('div');
+    list.className = 'items';
+
+    phase.items.forEach(function(item, i) {
+      total++;
+      if (item.checked) done++;
+
+      var row = document.createElement('div');
+      row.className = 'item-row';
+
+      var isNext = false;
+      if (!item.checked && !nextAssigned) { isNext = true; nextAssigned = true; row.className += ' next-up'; }
+
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = item.checked;
+      cb.addEventListener('change', function() {
+        item.checked = cb.checked;
+        save();
+        render();
+      });
+
+      var text = document.createElement('input');
+      text.className = 'item-label' + (item.checked ? ' checked' : '');
+      text.value = item.label;
+      text.addEventListener('change', function() { item.label = text.value || item.label; save(); });
+
+      var del = document.createElement('button');
+      del.className = 'icon-btn';
+      del.setAttribute('aria-label', 'Remove step');
+      del.textContent = '✕';
+      del.addEventListener('click', function() {
+        phase.items.splice(i, 1);
+        save();
+        render();
+      });
+
+      row.appendChild(cb);
+      if (isNext) {
+        var pill = document.createElement('span');
+        pill.className = 'next-pill';
+        pill.textContent = 'NEXT';
+        row.appendChild(pill);
+      }
+      row.appendChild(text);
+      row.appendChild(del);
+      list.appendChild(row);
+    });
+
+    var addRow = document.createElement('div');
+    addRow.className = 'add-row';
+    var addInput = document.createElement('input');
+    addInput.className = 'add-input';
+    addInput.placeholder = 'Add a step';
+    var addBtn = document.createElement('button');
+    addBtn.className = 'add-btn';
+    addBtn.textContent = 'Add';
+    function addItem() {
+      var val = addInput.value.trim();
+      if (!val) return;
+      phase.items.push({ label: val, checked: false });
+      addInput.value = '';
+      save();
+      render();
+    }
+    addBtn.addEventListener('click', addItem);
+    addInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') addItem(); });
+    addRow.appendChild(addInput);
+    addRow.appendChild(addBtn);
+    list.appendChild(addRow);
+
+    card.appendChild(list);
+    root.appendChild(card);
+  });
+
+  var pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('pct').textContent = pct + '%';
+  document.getElementById('bar').style.width = pct + '%';
+}
+
+document.getElementById('addPhaseBtn').addEventListener('click', function() {
+  phases.push(makePhase('New phase', 'add a timeframe', []));
+  save();
+  render();
+});
+
+document.getElementById('resetBtn').addEventListener('click', function() {
+  if (!confirm('Reset the whole roadmap back to the starting plan? Anything you have added or checked off will be lost.')) return;
+  phases = defaults.map(function(d) { return makePhase(d.title, d.when, d.items); });
+  save();
+  render();
+});
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(phases)); } catch (e) {}
+}
+
+function load() {
+  var raw = null;
+  try { raw = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  if (raw) {
+    try { phases = JSON.parse(raw); } catch (e) { phases = null; }
+  }
+  if (!Array.isArray(phases) || !phases.length) {
+    phases = defaults.map(function(d) { return makePhase(d.title, d.when, d.items); });
+    save();
+  }
+  renderClocks();
+  render();
+}
+
+load();
+</script>
+</body>
+</html>
